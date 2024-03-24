@@ -1,0 +1,6 @@
+.env
+output
+test.py
+test.json
+__pycache__
+venv

@@ -1,0 +1,1859 @@
+{
+    "artists": {
+        "experiment": {
+            "mix": [
+                ["{mafuyu (chibi21)},{{rurudo,gusha s,hiro (dismaless),wlop,yoneyama mai,mikami mika}},[[murata range]],", 1],
+                ["naga_u,[tyakomes],henreader,baku-p,", -1],
+                ["{{{{chibi}}}},1 girl,{amaichi esora},zhibuji loom,[artist:WANKE],[artist:ciloranko],[artist:amashiro.natsuki], {artist:rubi-sama}}{{asanagi}},[[toraishi 666]] [[mvv]] {artist:zuizi},{artist:taitai,artist:chen bin},[artist:sho (sho lwlw),chibi,", -1],
+                ["[artist:kedama milk],artist:ciloranko,artist:ke-ta,artist:Hiten,[artist:ask(askzy],[artist:nekoda],[artist:As109],", 1],
+                ["[artist:kedama milk],artist:momoco,artist:ke-ta,artist:chen_bin,artist:mignon,artist:nekoda,[artist:As109],artist:Happoubi_jin,year_2022,", 1],
+                ["{{artist:ikeuchi_tanuma}},{{{{{mignon,ATDAN}}}}},{{{{{anmi}}}}},{{ogipote}},{{sy4}},{hiten_(hitenkei)},yuno385,[[[[momoko_(momopoco)]]]],[[[ke-ta]]],", 1],
+                ["artist:rhasta,artist:onineko,artist:potg(piotegu),artist:yuuhagi_(amaretto-no-natsu),artist:bow (bhp),doujinshi doujin,", 0],
+                ["{{artist:miyase_mahiro}},[ke-ta],jyt,himitsu_(hi_mi_tsu_2),hiten,", -1],
+                ["[[tianliang duohe fangdongye]],{{artist:mikozin}},{{{artist:daizu}}},[[[artist:kani-biimu]]],[[matanukinuki]],[kanikama],,1girl,", 0],
+                ["[yumenouchi chiharu],sakura_(39ra),{naga_u,tyakomes},henreader,baku-p,daizu_(melon-lemon),year 2023,1girl,", 1],
+                ["artist:wlop,artist:aki99,[[{{artist:mochizuki_kei}}, [[[artist:as109]]], {{artist:asakuraf}},artist:shion(mirudakemann)]],", 0],
+                ["[[{{artist:mochizuki_kei}},[[[artist:as109,artist:wlop]]],{{artist:asakuraf}},artist:shion(mirudakemann)]],", 1],
+                ["artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]],[[artist:rhasta]],", -1],
+                ["[[artist:ciloranko]],[artist:rhasta],artist:tidsean, [artist:ke-ta],{{chiaroscuro}},[artist:sho_(sho_lwlw)]],{artist:ningen_mame},", -1],
+                ["{{toosaka asagi}},[[ningen mame],ciloranko,[sho (sho lwlw)],[[tianliang duohe fangdongye]],[rhasta]],", 0],
+                ["[artist:ningen_mame],artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]] ,[[[[[nibiiro shizuka]]]]], year 2023,", 1],
+                ["artist:kedama milk,rucaco,kanda_done,[[artist:chen_bin]],[[[[mignon]]]],[ningen mame],[[[[anmi]]]],1girl", -1],
+                ["artist:shiratama_(shiratamaco),", -1],
+                ["[artist:ningen_mame], [artist:sho_(sho_lwlw)], [artist:ke-ta], [artist:nixeu], [artist:tianliang_duohe_fangdongye], [[artist:rhasta]],", -1],
+                ["[artist:ningen_mame], [artist:sho_(sho_lwlw)], [artist:ke-ta], [artist:nixeu], [artist:tianliang_duohe_fangdongye], [[artist:onineko]], year 2023,", -1],
+                ["[artist:sho_(sho_lwlw)], [artist:ke-ta], [artist:wlop], [artist:beni_shake], [artist:sho_(sho_lwlw)], [[artist:omone_hokoma_agm]], [[artist:tianliang_duohe_fangdongye]], year 2023", -1],
+                ["[artist:ningen_mame], [artist:sho_(sho_lwlw)], [artist:omone_hokoma_agm], [artist:wlop], [[artist:tianliang_duohe_fangdongye]], year 2023,", -1],
+                ["[artist:wlop], [[artist:tianliang_duohe_fangdongye]], [artist:sho_(sho_lwlw)],", -1],
+                ["artist:ke-ta,[[[artist:kedama milk]]],artist:ciloranko,artist:Hiten,[[artist:ask(askzy)]],artist:chen bin,year 2023,", 0],
+                ["artist:kedama milk, ((artist:chen_bin)),[[[[[tianliang duohe fangdongye]]]]],[artist:ke-ta],artist:jyt,artist:himitsu_(hi_mi_tsu_2),", 0]
+            ],
+            "single": [
+                "tianliang duohe fangdongye",
+                "onineko",
+                "anmi",
+                "binggong asylum",
+                "tokkyu",
+                "jyt",
+                "tyakomes",
+                "momoco",
+                "Torino",
+                "miyase mahiro",
+                "baku-p",
+                "piyodera mucha",
+                "tsubasa tsubasa",
+                "quan (kurisu tina)",
+                "rukako",
+                "hoshi (snacherubi)",
+                "shiratama (shiratamaco)",
+                "romi_(346_ura)",
+                "topia",
+                "deyui"
+                ]
+        },
+        "belief": [
+            "artist:kedama milk,{artist:nishiki_koi},sekiya_asami,artist:chen_bin,[[[[[artist:jyt]]]]],artist:ke-ta,artist:ATDAN,artist:bigxixi,",
+            "artist:ke-ta,[[[artist:kedama milk]]],artist:ciloranko,artist:Hiten,[[artist:ask(askzy)]],artist:chen bin,year 2023,",
+            "artist:kedama milk, ((artist:chen_bin)),[[[[[tianliang duohe fangdongye]]]]],[artist:ke-ta],artist:jyt,artist:himitsu_(hi_mi_tsu_2),"
+        ]
+    },
+    "quality_pref": {
+        "experiment": [
+            "best quality, amazing quality, very aesthetic,",
+            "best quality,"
+        ],
+        "belief" : [
+            ""
+        ]
+    },
+    "negative_prompt": {
+        "experiment": [
+            "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], mutated hands,poorly drawn hands,{{{missing toes}}},extra fingers,fused fingers,{{{extra toes}}}, {{{fused toes}}},{{{mutated toes}}},{{{bad foot}}}, {{{mutated foot}}},lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits,username, scan, [abstract], lowres, {bad},fewer, extra,{{{{worst quality}}}},",
+            "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], lowres, {bad}, error, fewer, extra, missing, {worst quality}, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],{{weibo_username}},female_pubic_hair, teeth,",
+            "ugly,lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],",
+            "{worst detail:1.4},{low detail:1.4},{normal detail:1.1},{worst quality:1.4},{low quality:1.4},{monochrome:1.1},{normal quality:1.1},bad anatomy,bad hands,text,logo,watermark,error,missing fingers,extra arms,extra legs,bad feet,{extra digit:1.4},fewer digits,cropped,bad artist,outlines,jpeg artifacts,username,blurry,"
+        ],
+        "belief": [
+            "lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],mosaic censoring,bar censor,censored,{{{{{chibi,doll}}}}},silhouette,"
+        ]
+    },
+    "character": {
+        "GenshinImpact": {
+            "甘雨": [
+                "ganyu_(genshin_impact)",
+                "purple eyes",
+                "blue hair",
+                "huge breasts"
+            ],
+            "胡桃": [
+                "hu_tao_(genshin_impact)",
+                "red eyes",
+                "twintails",
+                "flower-shaped pupils",
+                "medium breasts"
+            ],
+            "雷电将军": [
+                "raiden_shogun",
+                "purple eyes",
+                "purple hair",
+                "huge breasts"
+            ],
+            "荧": [
+                "lumine_(genshin_impact)",
+                "blonde hair",
+                "yellow eyes",
+                "medium breasts"
+            ],
+            "神子": [
+                "yae_miko",
+                "pink hair",
+                "purple eyes",
+                "huge breasts"
+            ],
+            "莫娜": [
+                "mona_(genshin_impact)",
+                "green eyes",
+                "twintails",
+                "medium breasts"
+            ],
+            "刻晴": [
+                "keqing_(genshin_impact)",
+                "purple hair",
+                "purple eyes",
+                "medium breasts"
+            ],
+            "芭芭拉": [
+                "barbara_(genshin_impact)",
+                "twin drills",
+                "twintails",
+                "blonde hair"
+            ],
+            "七七": [
+                "qiqi_(genshin_impact)",
+                "purple eyes",
+                "purple hair"
+            ],
+            "可莉": [
+                "klee_(genshin_impact)",
+                "red eyes",
+                "blonde hair"
+            ],
+            "申鹤": [
+                "shenhe_(genshin_impact)",
+                "blue eyes",
+                "braided ponytail",
+                "huge breasts"
+            ],
+            "神里凌华": [
+                "kamisato_ayaka",
+                "blue eyes",
+                "ponytail",
+                "blue hair",
+                "medium breasts"
+            ],
+            "妮露": [
+                "nilou_(genshin_impact)",
+                "aqua eyes",
+                "red hair",
+                "medium breasts"
+            ],
+            "心海": [
+                "sangonomiya_kokomi",
+                "pink hair",
+                "multicolored hair",
+                "blue horns",
+                "medium breasts"
+            ],
+            "纳西妲": [
+                "nahida_(genshin_impact)",
+                "green eyes",
+                "cross-shaped pupils",
+                "side ponytail"
+            ],
+            "菲谢尔": [
+                "fischl_(genshin_impact)",
+                "green eyes",
+                "blonde hair",
+                "medium breasts"
+            ],
+            "凝光": [
+                "ningguang_(genshin_impact)",
+                "red eyes",
+                "white hair",
+                "huge breasts"
+            ]
+        },
+        "AzureLane": {
+            "塔什干": [
+                "tashkent_(azur lane)",
+                "purple hair"
+            ],
+            "埃尔德里奇": [
+                "eldridge_(azur_lane)",
+                "twintails",
+                "blonde hair",
+                "red eyes"
+            ],
+            "拉菲": [
+                "laffey_(azur_lane)",
+                "white hair",
+                "red eyes",
+                "twintails"
+            ],
+            "恶毒": [
+                "le_malin_(azur_lane)",
+                "blue eyes",
+                "cross-shaped pupils",
+                "white hair",
+                "double bun",
+                "very long hair"
+            ],
+            "信浓": [
+                "shinano_(azur_lane)",
+                "grey hair",
+                "blue eyes",
+                "multiple tails",
+                "fox ears",
+                "fox tail",
+                "huge breasts"
+            ],
+            "可畏": [
+                "formidable_(azur_lane)",
+                "grey hair",
+                "red eyes",
+                "twintails",
+                "huge breasts"
+            ],
+            "z46": [
+                "z46_(azur_lane)",
+                "yellow eyes",
+                "grey hair",
+                "long hair"
+            ],
+            "英仙座": [
+                "perseus_(azur_lane)",
+                "twintails",
+                "pink eyes",
+                "pink hair",
+                "huge breasts"
+            ],
+            "伊丽莎白女王": [
+                "queen_elizabeth_(azur_lane)",
+                "blonde hair",
+                "drill hair",
+                "blue eyes"
+            ],
+            "能代": [
+                "noshiro_(azur_lane)",
+                "purple eyes",
+                "black hair",
+                "long hair",
+                "horns"
+            ],
+            "安克雷奇": [
+                "anchorage_(azur_lane)",
+                "twintails",
+                "red eyes",
+                "brown hair",
+                "large breasts"
+            ],
+            "黛朵": [
+                "dido_(azur_lane)",
+                "blue hair",
+                "pink eyes",
+                "huge breasts"
+            ],
+            "长门": [
+                "nagato_(azur_lane)",
+                "black hair",
+                "long hair",
+                "yellow eyes"
+            ],
+            "天狼星": [
+                "sirius_(azur_lane)",
+                "red eyes",
+                "medium hair",
+                "white hair",
+                "huge breasts"
+            ],
+            "光辉": [
+                "illustrious_(azur_lane)",
+                "white hair",
+                "tri tails",
+                "blue eyes",
+                "long hair",
+                "huge breasts"
+            ],
+            "赤城": [
+                "akagi_(azur_lane)",
+                "fox ears",
+                "brown hair",
+                "red eyes",
+                "multiple tails",
+                "huge breasts"
+            ],
+            "加贺": [
+                "kaga_(azur_lane)",
+                "fox ears",
+                "white hair",
+                "blue eyes",
+                "medium hair",
+                "medium breasts"
+            ]
+        },
+        "BlueArchive": {
+            "才羽モモイ": [
+                "momoi_(blue_archive)",
+                "animal_ears",
+                "blonde_hair",
+                "fake_animal_ears",
+                "headphones",
+                "animal_ear_headphones",
+                "bow",
+                "cat_ear_headphones",
+                "halo",
+                "bangs",
+                "hair_bow",
+                "short_hair",
+                "pink_eyes",
+                "tail",
+                "cat_tail",
+                "red_bow",
+                "red_eyes",
+                "cat_ears"
+            ],
+            "羽川ハスミ": [
+                "hasumi_(blue_archive)",
+                "black_hair",
+                "breasts",
+                "long_hair",
+                "hair_between_eyes",
+                "red_eyes",
+                "halo",
+                "mole",
+                "wings",
+                "very_long_hair",
+                "mole_under_eye",
+                "black_wings",
+                "large_breasts",
+                "ponytail",
+                "huge_breasts",
+                "low_wings",
+                "feathered_wings",
+                "bangs"
+            ],
+            "和纱": [
+                "kazusa_(blue_archive)",
+                "animal_ears",
+                "black_hair",
+                "short_hair",
+                "halo",
+                "bangs",
+                "colored_inner_hair",
+                "multicolored_hair",
+                "pink_hair",
+                "cat_ears",
+                "two-tone_hair",
+                "hair_ornament",
+                "hairclip",
+                "red_eyes",
+                "pink_eyes",
+                "breasts"
+            ],
+            "无月": [
+                "mutsuki_(blue_archive)",
+                "long_hair",
+                "bangs",
+                "halo",
+                "hair_ornament",
+                "white_hair",
+                "purple_eyes",
+                "side_ponytail",
+                "hair_flower",
+                "grey_hair",
+                "very_long_hair",
+                "pointy_ears"
+            ],
+            "诺亚": [
+                "noa_(blue_archive)",
+                "long_hair",
+                "purple_eyes",
+                "halo",
+                "bangs",
+                "breasts",
+                "grey_hair",
+                "very_long_hair",
+                "white_hair",
+                "large_breasts",
+                "mechanical_halo",
+                "headphones",
+                "sidelocks"
+            ],
+            "才羽ミドリ": [
+                "midori_(blue_archive)",
+                "blonde_hair",
+                "green_eyes",
+                "animal_ear_headphones",
+                "animal_ears",
+                "bow",
+                "fake_animal_ears",
+                "halo",
+                "headphones",
+                "cat_ear_headphones",
+                "bangs",
+                "hair_bow",
+                "tail",
+                "cat_tail",
+                "short_hair",
+                "sidelocks"
+            ]
+        }
+    },
+    "R18": {
+        "去码": "uncensored,nsfw,clothed female nude male,fake animal ears,white pantyhose,crotchless pantyhose,",
+        "打码": "{{censored}}, {{{mosaic}}}, {{{{mosaic censored}}}",
+        "服装": [
+            "blue headwear,hat,"
+        ],
+        "动作": {
+            "巨乳动作": {
+                "按压乳交": [
+                    "1boy",
+                    "breasts squeezed together",
+                    "paizuri",
+                    "hetero",
+                    "penis",
+                    "solo focus",
+                    "pov",
+                    "pov crotch"
+                ],
+                "乳交": [
+                    "1boy",
+                    "handsfree paizuri",
+                    "paizuri",
+                    "hetero",
+                    "penis",
+                    "solo focus",
+                    "pov",
+                    "pov crotch"
+                ],
+                "乳交舔阴": [
+                    "1boy",
+                    "handsfree paizuri",
+                    "paizuri",
+                    "hetero",
+                    "penis",
+                    "solo focus",
+                    "pov",
+                    "pov crotch",
+                    "fellatio",
+                    "licking",
+                    "licking penis",
+                    "oral",
+                    "solo focus",
+                    "tongue",
+                    "tongue out"
+                ],
+                "口乳并用": [
+                    "1boy",
+                    "handsfree paizuri",
+                    "paizuri",
+                    "hetero",
+                    "penis",
+                    "solo focus",
+                    "pov",
+                    "pov crotch",
+                    "fellatio",
+                    "oral",
+                    "solo focus"
+                ],
+                "躺下乳交": [
+                    "1boy",
+                    "penis",
+                    "facial",
+                    "lying",
+                    "on back",
+                    "paizuri",
+                    "pov",
+                    "solo focus",
+                    "straddling paizuri",
+                    "breasts squeezed together",
+                    "grabbing another's breast"
+                ],
+                "侧面乳交": [
+                    "1boy",
+                    "from side",
+                    "hetero",
+                    "paizuri",
+                    "perpendicular paizuri",
+                    "solo focus",
+                    "erection",
+                    "penis"
+                ],
+                "POV口交（正）": [
+                    "1boy",
+                    "penis",
+                    "oral",
+                    "pov",
+                    "erection",
+                    "hetero",
+                    "fellatio",
+                    ":>=",
+                    "solo focus"
+                ],
+                "POV口交射精（正）": [
+                    "1boy",
+                    "penis",
+                    "oral",
+                    "pov",
+                    "cum",
+                    "nude man",
+                    "cum inside",
+                    "erection",
+                    "hetero",
+                    "fellatio",
+                    ":>=",
+                    "solo focus"
+                ],
+                "侧面口交（侧）": [
+                    "1boy",
+                    "penis",
+                    "oral",
+                    "from side",
+                    "deepthroat",
+                    "kneeling",
+                    "erection",
+                    "solo focus",
+                    "testicles",
+                    "hetero",
+                    "hand on another's leg",
+                    "motion lines",
+                    "saliva"
+                ],
+                "侧面舔阴茎（侧）": [
+                    "1boy",
+                    "penis",
+                    "oral",
+                    "from side",
+                    "licking penis",
+                    "tongue out",
+                    "tongue",
+                    "erection",
+                    "testicles",
+                    "hetero",
+                    "saliva",
+                    "hand on another's leg",
+                    "upper body"
+                ],
+                "手淫颜射（正）": [
+                    "1boy",
+                    "penis",
+                    "pov",
+                    "handjob",
+                    "solo focus",
+                    "cum",
+                    "cum on hair"
+                ],
+                "POV足交（正）": [
+                    "1boy",
+                    "footjob",
+                    "penis"
+                ],
+                "POV狗爬式（反）": [
+                    "doggystyle",
+                    "1boy",
+                    "ass",
+                    "sex",
+                    "sex from behind",
+                    "pov",
+                    "penis",
+                    "all fours"
+                ],
+                "POV反向乘骑（反）": [
+                    "1boy",
+                    "pov",
+                    "sex from behind",
+                    "ass focus",
+                    "anus",
+                    "sex",
+                    "sitting on person"
+                ],
+                "POV女上体位（正）": [
+                    "1boy",
+                    "pov",
+                    "from below",
+                    "hetero",
+                    "girl on top",
+                    "cowgirl position",
+                    "pussy",
+                    "sex",
+                    "solo focus",
+                    "spread legs",
+                    "straddling",
+                    "penis"
+                ],
+                "POV正常（正）": [
+                    "missionarypose",
+                    "1boy",
+                    "penis",
+                    "lying",
+                    "missionary",
+                    "sex",
+                    "1man",
+                    "spread legs",
+                    "pov",
+                    "pussy"
+                ],
+                "跨坐式（侧）": [
+                    "upright straddle",
+                    "leg lock",
+                    "hetero",
+                    "sex",
+                    "sitting",
+                    "sitting on person",
+                    "straddling",
+                    "girl on top",
+                    "solo focus",
+                    "arms around neck",
+                    "hug",
+                    "from side",
+                    "twitching"
+                ],
+                "反向摩擦阴茎（反）": [
+                    "buttjob",
+                    "pov",
+                    "{{penis}}",
+                    "from behind",
+                    "ass focus",
+                    "nude boy",
+                    "pussy juice trail",
+                    "sitting on person"
+                ],
+                "站立腿交摸乳头（正）": [
+                    "grinding",
+                    "hetero",
+                    "penis",
+                    "thigh sex",
+                    "grabbing another's breast",
+                    "grabbing from behind",
+                    "groping",
+                    "nipple rub",
+                    "standing",
+                    "standing sex",
+                    "trembling"
+                ],
+                "侧面KISS（正）": [
+                    "lying",
+                    "leg lift",
+                    "1boy",
+                    "sex",
+                    "sex from behind",
+                    "kiss",
+                    "faceless male",
+                    "penis",
+                    "pussy"
+                ],
+                "POV靠墙站立（反）": [
+                    "1boy",
+                    "against wall",
+                    "ass",
+                    "ass grab",
+                    "from behind",
+                    "hand on wall",
+                    "hetero",
+                    "no panties",
+                    "sex from behind",
+                    "solo focus",
+                    "standing sex",
+                    "penis",
+                    "pov"
+                ],
+                "站立后入侧面视角（侧）": [
+                    "from side",
+                    "arched back",
+                    "arm grab",
+                    "arm held back",
+                    "grabbing another's arm",
+                    "hetero",
+                    "leaning forward",
+                    "sex",
+                    "sex from behind",
+                    "solo focus",
+                    "standing",
+                    "sex from behind"
+                ],
+                "站立劈叉（正）": [
+                    "sex from behind",
+                    "1boy",
+                    "penis",
+                    "sex",
+                    "{{standing split}}",
+                    "erection",
+                    "flexible",
+                    "hetero",
+                    "highleg",
+                    "kneepits",
+                    "leg hold",
+                    "penis",
+                    "split",
+                    "standing",
+                    "standing on one leg"
+                ],
+                "站立抱起（正）": [
+                    "1boy",
+                    "penis",
+                    "standing",
+                    "reverse suspended congress",
+                    "sex from behind",
+                    "spread legs",
+                    "vaginal"
+                ],
+                "POV面对面站立性交（正）": [
+                    "hetero",
+                    "looking at viewer",
+                    "penis",
+                    "pov",
+                    "pov crotch",
+                    "pov hands",
+                    "sex",
+                    "{{standing sex}}",
+                    "torso grab",
+                    "from above"
+                ],
+                "反向乘骑（正）": [
+                    "reverse cowgirl",
+                    "sitting on lap",
+                    "sitting",
+                    "1boy",
+                    "sex",
+                    "sitting on person",
+                    "pussy",
+                    "penis"
+                ],
+                "按头后入（正）": [
+                    "1girl",
+                    "nsfw",
+                    "nude",
+                    "sex from behind",
+                    "hand on another's head",
+                    "vaginal",
+                    "top down bottom-up",
+                    "arm behind back"
+                ],
+                "趴在桌上后入（反）": [
+                    "doggystyle",
+                    "1boy",
+                    "ass",
+                    "sex",
+                    "sex from behind",
+                    "pov",
+                    "penis",
+                    "all fours",
+                    "standing",
+                    "hand on table"
+                ],
+                "站立抱起（侧）": [
+                    "1boy",
+                    "ass grab",
+                    "grabbing another's ass",
+                    "hetero",
+                    "leg lock",
+                    "sex",
+                    "standing",
+                    "standing sex",
+                    "arm around neck",
+                    "suspended congress"
+                ],
+                "反向火车便当式（正）": [
+                    "{{reverse suspended congress}}",
+                    "1boy",
+                    "penis",
+                    "pussy",
+                    "sex from behind",
+                    "sex",
+                    "leg grab",
+                    "lifting person",
+                    "erection",
+                    "folded",
+                    "hetero",
+                    "solo focus",
+                    "spread legs",
+                    "testicles",
+                    "veiny penis"
+                ],
+                "单腿站立后入（正）": [
+                    "hetero",
+                    "holding legs",
+                    "holding own leg",
+                    "leg grab",
+                    "leg lift",
+                    "leg up",
+                    "penis",
+                    "presenting pussy",
+                    "sex from behind",
+                    "spread legs",
+                    "standing",
+                    "standing on one leg",
+                    "standing sex",
+                    "wide spread legs",
+                    "flexible"
+                ],
+                "按压sex（正）": [
+                    "1boy",
+                    "1girl",
+                    "anus",
+                    "ass",
+                    "blush",
+                    "cum",
+                    "cum in pussy",
+                    "cum overflow",
+                    "folded",
+                    "hetero",
+                    "large penis",
+                    "lying",
+                    "mating press",
+                    "nipples",
+                    "on back",
+                    "penis",
+                    "pussy",
+                    "sex",
+                    "sweat",
+                    "testicles",
+                    "uncensored",
+                    "vaginal"
+                ],
+                "蹲式女上（正）": [
+                    "1boy",
+                    "penis",
+                    "hetero",
+                    "cowgirl position",
+                    "girl on top",
+                    "all fours",
+                    "looking at viewer",
+                    "sex",
+                    "straddling",
+                    "pov",
+                    "hunched over",
+                    "motion lines",
+                    "solo focus",
+                    "squatting cowgirl position",
+                    "vaginal"
+                ],
+                "颠倒传道士（正）": [
+                    "hetero",
+                    "lying",
+                    "missionary",
+                    "penis",
+                    "pussy",
+                    "sex",
+                    "solo focus",
+                    "upside-down"
+                ],
+                "躺着抬腿侧面（正）": [
+                    "1boy",
+                    "hetero",
+                    "lying",
+                    "sex",
+                    "{{{on side}}}",
+                    "{{{penis",
+                    "pussy}}}",
+                    "spread legs",
+                    "testicles",
+                    "erection",
+                    "muscle",
+                    "on side",
+                    "solo focus",
+                    "thigh grab",
+                    "leg up"
+                ],
+                "侧面狗爬抓手（侧）": [
+                    "hetero",
+                    "sex",
+                    "arm held back",
+                    "doggystyle",
+                    "holding another's wrist",
+                    "sex from behind",
+                    "from side"
+                ]
+            },
+            "普通动作": {
+                "POV口交（正）": [
+                    "1boy",
+                    "penis",
+                    "oral",
+                    "pov",
+                    "erection",
+                    "hetero",
+                    "fellatio",
+                    ":>=",
+                    "solo focus"
+                ],
+                "POV口交射精（正）": [
+                    "1boy",
+                    "penis",
+                    "oral",
+                    "pov",
+                    "cum",
+                    "nude man",
+                    "cum inside",
+                    "erection",
+                    "hetero",
+                    "fellatio",
+                    ":>=",
+                    "solo focus"
+                ],
+                "侧面口交（侧）": [
+                    "1boy",
+                    "penis",
+                    "oral",
+                    "from side",
+                    "deepthroat",
+                    "kneeling",
+                    "erection",
+                    "solo focus",
+                    "testicles",
+                    "hetero",
+                    "hand on another's leg",
+                    "motion lines",
+                    "saliva"
+                ],
+                "侧面舔阴茎（侧）": [
+                    "1boy",
+                    "penis",
+                    "oral",
+                    "from side",
+                    "licking penis",
+                    "tongue out",
+                    "tongue",
+                    "erection",
+                    "testicles",
+                    "hetero",
+                    "saliva",
+                    "hand on another's leg",
+                    "upper body"
+                ],
+                "手淫颜射（正）": [
+                    "1boy",
+                    "penis",
+                    "pov",
+                    "handjob",
+                    "solo focus",
+                    "cum",
+                    "cum on hair"
+                ],
+                "POV足交（正）": [
+                    "1boy",
+                    "footjob",
+                    "penis"
+                ],
+                "POV狗爬式（反）": [
+                    "doggystyle",
+                    "1boy",
+                    "ass",
+                    "sex",
+                    "sex from behind",
+                    "pov",
+                    "penis",
+                    "all fours"
+                ],
+                "POV反向乘骑（反）": [
+                    "1boy",
+                    "pov",
+                    "sex from behind",
+                    "ass focus",
+                    "anus",
+                    "sex",
+                    "sitting on person"
+                ],
+                "POV女上体位（正）": [
+                    "1boy",
+                    "pov",
+                    "from below",
+                    "hetero",
+                    "girl on top",
+                    "cowgirl position",
+                    "pussy",
+                    "sex",
+                    "solo focus",
+                    "spread legs",
+                    "straddling",
+                    "penis"
+                ],
+                "POV正常（正）": [
+                    "missionarypose",
+                    "1boy",
+                    "penis",
+                    "lying",
+                    "missionary",
+                    "sex",
+                    "1man",
+                    "spread legs",
+                    "pov",
+                    "pussy"
+                ],
+                "跨坐式（侧）": [
+                    "upright straddle",
+                    "leg lock",
+                    "hetero",
+                    "sex",
+                    "sitting",
+                    "sitting on person",
+                    "straddling",
+                    "girl on top",
+                    "solo focus",
+                    "arms around neck",
+                    "hug",
+                    "from side",
+                    "twitching"
+                ],
+                "反向摩擦阴茎（反）": [
+                    "buttjob",
+                    "pov",
+                    "{{penis}}",
+                    "from behind",
+                    "ass focus",
+                    "nude boy",
+                    "pussy juice trail",
+                    "sitting on person"
+                ],
+                "站立腿交摸乳头（正）": [
+                    "grinding",
+                    "hetero",
+                    "penis",
+                    "thigh sex",
+                    "grabbing another's breast",
+                    "grabbing from behind",
+                    "groping",
+                    "nipple rub",
+                    "standing",
+                    "standing sex",
+                    "trembling"
+                ],
+                "侧面KISS（正）": [
+                    "lying",
+                    "leg lift",
+                    "1boy",
+                    "sex",
+                    "sex from behind",
+                    "kiss",
+                    "faceless male",
+                    "penis",
+                    "pussy"
+                ],
+                "POV靠墙站立（反）": [
+                    "1boy",
+                    "against wall",
+                    "ass",
+                    "ass grab",
+                    "from behind",
+                    "hand on wall",
+                    "hetero",
+                    "no panties",
+                    "sex from behind",
+                    "solo focus",
+                    "standing sex",
+                    "penis",
+                    "pov"
+                ],
+                "站立后入侧面视角（侧）": [
+                    "from side",
+                    "arched back",
+                    "arm grab",
+                    "arm held back",
+                    "grabbing another's arm",
+                    "hetero",
+                    "leaning forward",
+                    "sex",
+                    "sex from behind",
+                    "solo focus",
+                    "standing",
+                    "sex from behind"
+                ],
+                "站立劈叉（正）": [
+                    "sex from behind",
+                    "1boy",
+                    "penis",
+                    "sex",
+                    "{{standing split}}",
+                    "erection",
+                    "flexible",
+                    "hetero",
+                    "highleg",
+                    "kneepits",
+                    "leg hold",
+                    "penis",
+                    "split",
+                    "standing",
+                    "standing on one leg"
+                ],
+                "站立抱起（正）": [
+                    "1boy",
+                    "penis",
+                    "standing",
+                    "reverse suspended congress",
+                    "sex from behind",
+                    "spread legs",
+                    "vaginal"
+                ],
+                "POV面对面站立性交（正）": [
+                    "hetero",
+                    "looking at viewer",
+                    "penis",
+                    "pov",
+                    "pov crotch",
+                    "pov hands",
+                    "sex",
+                    "{{standing sex}}",
+                    "torso grab",
+                    "from above"
+                ],
+                "反向乘骑（正）": [
+                    "reverse cowgirl",
+                    "sitting on lap",
+                    "sitting",
+                    "1boy",
+                    "sex",
+                    "sitting on person",
+                    "pussy",
+                    "penis"
+                ],
+                "按头后入（正）": [
+                    "1girl",
+                    "nsfw",
+                    "nude",
+                    "sex from behind",
+                    "hand on another's head",
+                    "vaginal",
+                    "top down bottom-up",
+                    "arm behind back"
+                ],
+                "趴在桌上后入（反）": [
+                    "doggystyle",
+                    "1boy",
+                    "ass",
+                    "sex",
+                    "sex from behind",
+                    "pov",
+                    "penis",
+                    "all fours",
+                    "standing",
+                    "hand on table"
+                ],
+                "站立抱起（侧）": [
+                    "1boy",
+                    "ass grab",
+                    "grabbing another's ass",
+                    "hetero",
+                    "leg lock",
+                    "sex",
+                    "standing",
+                    "standing sex",
+                    "arm around neck",
+                    "suspended congress"
+                ],
+                "反向火车便当式（正）": [
+                    "{{reverse suspended congress}}",
+                    "1boy",
+                    "penis",
+                    "pussy",
+                    "sex from behind",
+                    "sex",
+                    "leg grab",
+                    "lifting person",
+                    "erection",
+                    "folded",
+                    "hetero",
+                    "solo focus",
+                    "spread legs",
+                    "testicles",
+                    "veiny penis"
+                ],
+                "单腿站立后入（正）": [
+                    "hetero",
+                    "holding legs",
+                    "holding own leg",
+                    "leg grab",
+                    "leg lift",
+                    "leg up",
+                    "penis",
+                    "presenting pussy",
+                    "sex from behind",
+                    "spread legs",
+                    "standing",
+                    "standing on one leg",
+                    "standing sex",
+                    "wide spread legs",
+                    "flexible"
+                ],
+                "按压sex（正）": [
+                    "1boy",
+                    "1girl",
+                    "anus",
+                    "ass",
+                    "blush",
+                    "cum",
+                    "cum in pussy",
+                    "cum overflow",
+                    "folded",
+                    "hetero",
+                    "large penis",
+                    "lying",
+                    "mating press",
+                    "nipples",
+                    "on back",
+                    "penis",
+                    "pussy",
+                    "sex",
+                    "sweat",
+                    "testicles",
+                    "uncensored",
+                    "vaginal"
+                ],
+                "蹲式女上（正）": [
+                    "1boy",
+                    "penis",
+                    "hetero",
+                    "cowgirl position",
+                    "girl on top",
+                    "all fours",
+                    "looking at viewer",
+                    "sex",
+                    "straddling",
+                    "pov",
+                    "hunched over",
+                    "motion lines",
+                    "solo focus",
+                    "squatting cowgirl position",
+                    "vaginal"
+                ],
+                "颠倒传道士（正）": [
+                    "hetero",
+                    "lying",
+                    "missionary",
+                    "penis",
+                    "pussy",
+                    "sex",
+                    "solo focus",
+                    "upside-down"
+                ],
+                "躺着抬腿侧面（正）": [
+                    "1boy",
+                    "hetero",
+                    "lying",
+                    "sex",
+                    "{{{on side}}}",
+                    "{{{penis",
+                    "pussy}}}",
+                    "spread legs",
+                    "testicles",
+                    "erection",
+                    "muscle",
+                    "on side",
+                    "solo focus",
+                    "thigh grab",
+                    "leg up"
+                ],
+                "侧面狗爬抓手（侧）": [
+                    "hetero",
+                    "sex",
+                    "arm held back",
+                    "doggystyle",
+                    "holding another's wrist",
+                    "sex from behind",
+                    "from side"
+                ],
+                "肉棒挡眼睛(after sex)": [
+                    "{{penis_on_face,penis over eyes}}",
+                    "1boy", 
+                    "fat_man",
+                    "{{{{ovum,sperm cell}}}}",
+                    "{{lying}}",
+                    "dirty_penis",
+                    "used_condom_on_body",
+                    "{{{after_sex,after fellatio}}}",
+                    "bath_on_{{white_fluid}}",
+                    "{{{{semen, white_fluid, saliva, caressing testicles, cum_on_body, penis_juice,steam}}}}",
+                    "fat_man",
+                    "lying_on_side",
+                    "on_bed",
+                    "{{{torn}}}_pantyhose",
+                    "trembling", 
+                    "suggestive_fluid",
+                    "legs_together",
+                    "no_eyes", 
+                    "tear", 
+                    "heavy_breath",
+                    "cum_drip",
+                    "nsfw",
+                    "uncensored",
+                    "nude",
+                    "cum_on_face",
+                    "headpat"
+                ],
+                "肉棒挡眼睛（半蹲比v": [
+                    "{{penis_on_face,penis covering eyes}}, 1boy, {{fat_man, squatting, v}}, used_condom in clothes, {{{{semen, white_fluid, saliva, spread_legs, peace sign, steam}}}}, after fellatio, dark_skinned male, suggestive_fluid, stomach, heavy_breath, pussy juice drip through clothes, pussy juice trail, nude, huge penis, cum_on_body"
+                ],
+                "捧着精液": [
+                    "{{no_eyes}},{{kneeling, hands up, cum_pool}}, {{{after fellatio}}},{{white_fluid}},{{{{semen, white_fluid, saliva,steam}}}}, solo,smile,suggestive_fluid,heavy_breath, nude, from_above, cum_on_face,cum_on_hair,cum_on_body,white_fluid"
+                ],
+                "掰穴": [
+                    "solo,spread pussy,spread legs,"
+                ],
+                "pov摇乳跨骑": [
+                    "1boy,upright straddle,bouncing breasts,pov,arm support,sitting,unaligned breasts,sex,"
+                ],
+                "pov跨骑抓胸": [
+                    "1boy,upright straddle,pov,pov hands,arm support,sitting,unaligned breasts,sex,nipple rub,grabbing another's breast,"
+                ]
+            }
+        },
+        "表情": {
+            "口交表情": {
+                "害羞口交": [
+                    "blush",
+                    "looking at viewer",
+                    "frown",
+                    "v-shaped eyebrows",
+                    "steam"
+                ],
+                "闭眼口交": [
+                    "closed eyes",
+                    "blush",
+                    "steam"
+                ],
+                "半闭眼口交": [
+                    "half-closed eyes",
+                    "blush",
+                    "steam"
+                ]
+            },
+            "普通表情": {
+                "张嘴": [
+                    "{breath",
+                    "heavy breathing",
+                    "steam}",
+                    "half-closed eyes",
+                    "open mouth"
+                ],
+                "嘟嘴": [
+                    "shy",
+                    "blush",
+                    "pout",
+                    "puckered lips"
+                ],
+                "闭嘴笑": [
+                    "{breath",
+                    "heavy breathing",
+                    "steam}",
+                    "smile",
+                    "half-closed eyes",
+                    "closed mouth"
+                ],
+                "张嘴笑": [
+                    "{breath",
+                    "heavy breathing",
+                    "steam}",
+                    "smile",
+                    "half-closed eyes",
+                    "open mouth"
+                ],
+                "高潮吐舌": [
+                    "blush",
+                    "open mouth",
+                    "female orgasm",
+                    "saliva",
+                    "tongue",
+                    "half-closed eyes"
+                ],
+                "高潮张嘴": [
+                    "blush",
+                    "open mouth",
+                    "female orgasm",
+                    "saliva",
+                    "half-closed eyes"
+                ],
+                "闭眼闭嘴": [
+                    "closed eyes",
+                    "closed mouth",
+                    "blush"
+                ],
+                "闭眼张嘴": [
+                    "closed eyes",
+                    "open mouth",
+                    "blush",
+                    "frown",
+                    "blush"
+                ],
+                "波浪张嘴": [
+                    "blush",
+                    "frown",
+                    "wavy mouth",
+                    "open mouth",
+                    "{breath",
+                    "heavy breathing",
+                    "steam}",
+                    "half-closed eyes"
+                ],
+                "波浪闭嘴": [
+                    "blush",
+                    "frown",
+                    "wavy mouth",
+                    "closed mouth",
+                    "half-closed eyes"
+                ],
+                "嘴唇微张": [
+                    "half-closed eyes",
+                    "parted lips",
+                    "blush"
+                ],
+                "单闭眼咬紧牙关": [
+                    "one eye closed",
+                    "steam",
+                    "clenched teeth",
+                    "blush"
+                ],
+                "咬紧牙关": [
+                    "steam",
+                    "clenched teeth",
+                    "blush",
+                    "half-closed eyes",
+                    "frown"
+                ],
+                "咬嘴唇": [
+                    "biting own lip",
+                    "frown",
+                    "half-closed eyes",
+                    "blush",
+                    "closed mouth"
+                ]
+            }
+        },
+        "场景": {
+            "仅场景": {
+                "在床上": [
+                    "on bed",
+                    "indoor"
+                ],
+                "室内": [
+                    "indoors"
+                ],
+                "森林中": [
+                    "outdoors",
+                    "forest",
+                    "nature",
+                    "blurry foreground"
+                ],
+                "教室": [
+                    "indoor",
+                    "classroom"
+                ],
+                "海边": [
+                    "outdoors",
+                    "sea",
+                    "sunlight"
+                ],
+                "合室晚上": [
+                    "Japanese Housing",
+                    "indoors",
+                    "blurry foreground",
+                    "night"
+                ],
+                "温室": [
+                    "greenhouse",
+                    "plant",
+                    "garden"
+                ],
+                "草原": [
+                    "outdoors",
+                    "on grass",
+                    "day",
+                    "nature"
+                ],
+                "厕所隔间": [
+                    "toilet stall",
+                    "tiles"
+                ],
+                "教堂": [
+                    "church",
+                    "depth of field"
+                ],
+                "摩天轮内部": [
+                    "ferris wheel interior",
+                    "ferris wheel",
+                    "cityscape",
+                    "city lights",
+                    "night"
+                ],
+                "公园": [
+                    "park",
+                    "tree",
+                    "park bench"
+                ],
+                "简单背景": [
+                    "bedroom",
+                    "white background",
+                    "simple background"
+                ],
+                "列车内部": [
+                    "train interior"
+                ]
+            },
+            "单独场景": {
+                "卧室": [
+                    "bedroom",
+                    "winter",
+                    "window",
+                    "snow"
+                ]
+            },
+            "场景": {
+                "在床上": [
+                    "nude",
+                    "simple background",
+                    "on bed",
+                    "indoor"
+                ],
+                "室内裸体围裙": [
+                    "white naked apron",
+                    "maid headdress",
+                    "nude",
+                    "bare shoulders",
+                    "indoors"
+                ],
+                "穿着透明披肩在森林中": [
+                    "nude",
+                    "outdoors",
+                    "forest",
+                    "nature",
+                    "blurry foreground",
+                    "shawl",
+                    "hair flower",
+                    "off shoulder",
+                    "{{see-through silhouette}}",
+                    "wet hair",
+                    "loose hair"
+                ],
+                "在教室穿着校服": [
+                    "school uniform",
+                    "indoor",
+                    "classroom",
+                    "nude boy",
+                    "1boy"
+                ],
+                "穿着比基尼在海边": [
+                    "outdoors",
+                    "sea",
+                    "sunlight",
+                    "collarbone",
+                    "Sun hat",
+                    "white bikini top",
+                    "no panties",
+                    "{{see-through silhouette}}",
+                    "shawl"
+                ],
+                "在浴缸中": [
+                    "nude",
+                    "bathroom",
+                    "bathtub",
+                    "water",
+                    "Bubbles",
+                    "indoors",
+                    "steam",
+                    "wet hair",
+                    "loose hair"
+                ],
+                "穿着粉色和服在室内": [
+                    "pink kimono",
+                    "open kimono",
+                    "nude",
+                    "bare shoulders",
+                    "Japanese Housing",
+                    "indoors",
+                    "blurry foreground"
+                ],
+                "在温泉中": [
+                    "onsen",
+                    "outdoors",
+                    "night",
+                    "steam",
+                    "blurry foreground",
+                    "wet hair",
+                    "loose hair",
+                    "water",
+                    "wet",
+                    "cherry blossoms",
+                    "nude"
+                ],
+                "室内旗袍": [
+                    "bare shoulders",
+                    "china dress",
+                    "chinese clothes",
+                    "pelvic curtain",
+                    "sleeveless dress",
+                    "drago _print",
+                    "indoors",
+                    "plant",
+                    "bay"
+                ],
+                "温室": [
+                    "greenhouse",
+                    "plant",
+                    "garden"
+                ],
+                "草原": [
+                    "outdoors",
+                    "on grass",
+                    "day",
+                    "nature"
+                ],
+                "厕所隔间": [
+                    "toilet stall",
+                    "tiles",
+                    "nude"
+                ],
+                "舞娘室内": [
+                    "jewelry",
+                    "veil",
+                    "revealing clothes",
+                    "bare shoulders",
+                    "armlet",
+                    "breast curtains",
+                    "circlet",
+                    "cross-laced clothes",
+                    "gold chain",
+                    "hair ornament",
+                    "dancer",
+                    "harem outfit",
+                    "arabian clothes",
+                    "neck ring",
+                    "navel",
+                    "stomach",
+                    "no panties",
+                    "indoors"
+                ],
+                "室内红丝带": [
+                    "red naked ribbon",
+                    "{{nude}}",
+                    "bare shoulders",
+                    "naked ribbon",
+                    "red bow",
+                    "on bed",
+                    "indoor"
+                ],
+                "森林精灵": [
+                    "white clothes",
+                    "navel",
+                    "stomach",
+                    "armlet",
+                    "bangle",
+                    "bracelet",
+                    "gold choker",
+                    "harem outfit",
+                    "o-ring",
+                    "revealing clothes",
+                    "breast curtains",
+                    "{{see-through}}",
+                    "off-shoulder",
+                    "bridal gauntlets",
+                    "outdoors",
+                    "forest"
+                ],
+                "室内晚礼服": [
+                    "bare arms",
+                    "{{evening gown}}",
+                    "revealing clothes",
+                    "plunging neckline",
+                    "bare shoulders",
+                    "center opening",
+                    "hoop earrings",
+                    "backless dress",
+                    "pelvic curtain"
+                ],
+                "床上兔女郎": [
+                    "bowtie",
+                    "bare shoulders",
+                    "playboy bunny",
+                    "torn pantyhose",
+                    "white leotard",
+                    "rabbit ears",
+                    "white pantyhose",
+                    "leotard aside",
+                    "pussy",
+                    "clothing aside",
+                    "detached collar",
+                    "hair ribbon",
+                    "fishnet legwear",
+                    "indoors",
+                    "on bed"
+                ],
+                "晚上恶魔": [
+                    "bare shoulders",
+                    "demon tail",
+                    "demon wings",
+                    "revealing clothes",
+                    "black horns",
+                    "jewelry",
+                    "no panties",
+                    "armband",
+                    "black bra",
+                    "sleeveless",
+                    "chain leash",
+                    "spiked collar",
+                    "o-ring",
+                    "indoors",
+                    "night"
+                ],
+                "白天天使": [
+                    "bare shoulders",
+                    "angel wings",
+                    "revealing clothes",
+                    "jewelry",
+                    "no panties",
+                    "armband",
+                    "white bra",
+                    "sleeveless",
+                    "chain leash",
+                    "spiked collar",
+                    "o-ring",
+                    "indoors",
+                    "day"
+                ],
+                "护士室内": [
+                    "white apron",
+                    "pink dress",
+                    "detached sleeves",
+                    "nurse cap",
+                    "maid",
+                    "puffy sleeves",
+                    "waist apron",
+                    "wrist cuffs",
+                    "bare shoulders",
+                    "white garter straps",
+                    "pleated dress",
+                    "heart cutout",
+                    "frills",
+                    "bow",
+                    "double-breasted",
+                    "collared dress",
+                    "no panties",
+                    "indoors",
+                    "day"
+                ],
+                "教堂婚纱": [
+                    "bride",
+                    "white dress",
+                    "elbow gloves",
+                    "wedding dress",
+                    "white thighhighs",
+                    "bridal veil",
+                    "white rose",
+                    "garter straps",
+                    "hair flower",
+                    "lace trim",
+                    "layered dress",
+                    "jewelry",
+                    "necklace",
+                    "tiara",
+                    "church",
+                    "rose petals",
+                    "depth of field"
+                ],
+                "摩天轮内部": [
+                    "ferris wheel interior",
+                    "ferris wheel",
+                    "cityscape",
+                    "city lights",
+                    "night"
+                ],
+                "公园": [
+                    "nude",
+                    "park",
+                    "tree",
+                    "park bench"
+                ],
+                "简单背景": [
+                    "bedroom",
+                    "white background",
+                    "simple background"
+                ],
+                "列车内部": [
+                    "train interior",
+                    "multiple boys"
+                ]
+            }
+        },
+        "射精": [
+            "cum",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "装饰": [
+            "{{{heart,speed lines,trembling}}},"
+        ]
+    },
+    "labels:": {
+        "ganyu_(genshin_impact)": ["甘雨", "甘雨(原神)", "ganyu", "Ganyu"],
+        "hu_tao_(genshin_impact)": ["胡桃", "胡桃(原神)", "HuTao"],
+        "raiden_shogun": ["雷电将军", "雷電将軍", "雷電将軍(原神)"],
+        "lumine_(genshin_impact)": ["荧", "蛍(原神)", "蛍"],
+        "yae_miko": ["八重神子", "YaeMiko"],
+        "mona_(genshin_impact)": ["莫娜", "モナ(原神)"],
+        "keqing_(genshin_impact)": ["刻晴", "刻晴(原神)", "keqing"],
+        "barbara_(genshin_impact)": ["芭芭拉", "バーバラ(原神)"],
+        "qiqi_(genshin_impact)": ["七七", "七七(原神)", "qiqi"],
+        "klee_(genshin_impact)": ["可莉", "クレー(原神)", "Klee"],
+        "shenhe_(genshin_impact)": ["申鹤", "申鶴", "このおっぱいで仙女は無理でしょ"],
+        "kamisato_ayaka": ["神里绫华", "神里綾華(原神)", "神里綾華"],
+        "nilou_(genshin_impact)": ["妮露", "ニィロウ", "Nilou"],
+        "sangonomiya_kokomi": ["心海", "珊瑚宮心海", "珊瑚宫心海"],
+        "nahida_(genshin_impact)": ["纳西妲", "Nahida", "草神"],
+        "fischl_(genshin_impact)": ["菲谢尔", "フィッシュル(原神)", "フィッシュル"],
+        "ningguang_(genshin_impact)": ["凝光", "凝光(原神)", "Ningguang"],
+        "kafka_(honkai:_star_rail)": ["卡芙卡", "Kafka", "カフカ(スターレイル)"],
+        "march_7th_(honkai:_star_rail)": ["三月七", "三月なのか", "March7th"],
+        "silver_wolf_(honkai:_star_rail)": ["银狼", "銀狼(スターレイル)", "SilverWolf"],
+        "stelle_(honkai:_star_rail)": ["開拓者(スターレイル)", "Stelle", "星(スターレイル)"],
+        "himeko_(honkai:_star_rail)": ["姬子", "姫子(スターレイル)", "无量塔姬子"],
+        "herta_(honkai:_star_rail)": ["黑塔", "ヘルタ(スターレイル)", "ヘルタ"],
+        "bailu_(honkai:_star_rail)": ["白露", "白露(スターレイル)"],
+        "fu_xuan_(honkai:_star_rail)": ["符玄"],
+        
+        "eldridge_(azur_lane)": ["埃尔德里奇", "エルドリッジ(アズールレーン)"],
+        "tashkent_(azur_lane)": ["塔什干", "タシュケント(アズールレーン)"],
+        "laffey_(azur_lane)": ["拉菲", "ラフィー(アズールレーン)", "ラフィー"],
+        "le_malin_(azur_lane)": ["恶毒", "ル・マラン(アズールレーン)"],
+        "shinano_(azur_lane)": ["信浓", "信濃(アズールレーン)"],
+        "formidable_(azur_lane)": ["可畏", "フォーミダブル(アズールレーン)"],
+        "z46_(azur_lane)": ["z46", "Z46(アズールレーン)"],
+        "perseus_(azur_lane)": ["英仙座", "パーシュース(アズールレーン)"],
+        "queen_elizabeth_(azur_lane)": ["伊丽莎白女王", "クイーン・エリザベス(アズールレーン)"],
+        "noshiro_(azur_lane)": ["能代", "能代(アズールレーン)"],
+        "anchorage_(azur_lane)": ["安克雷奇", "アンカレッジ(アズールレーン)", "アンカレッジ"],
+        "dido_(azur_lane)": ["黛朵", "ダイドー(アズールレーン)"],
+        "nagato_(azur_lane)": ["長門", "長門(アズールレーン)"],
+        "sirius_(azur_lane)": ["天狼星", "シリアス シリアス(アズールレーン)"],
+        "illustrious_(azur_lane)": ["光辉", "イラストリアス(アズールレーン)"],
+        "akagi_(azur_lane)": ["赤城", "赤城(アズールレーン)"],
+        "kaga_(azur_lane)": ["加贺", "加賀(アズールレーン)"],
+        "wedding dress": ["婚纱", "ウェディングドレス"],
+
+        "sex": ["sex"],
+        "oral": ["フェラチオ"],
+        "pussy": ["舐め回したい穴"],
+        "handjob": ["手コキ"],
+        "footjob": ["足コキ"],
+        "doggystyle": ["後背位", "アナルの造詣が深い", "ねじ込みたい尻"],
+        "sex from behind": ["後背位", "アナルの造詣が深い", "ねじ込みたい尻", "魅惑のふともも"],
+        "girl on top": ["騎乗位"],
+        "huge breasts": ["揉みしだきたい乳", "極上の乳"],
+        "missionary": ["正常位", "魅惑のふともも", "揉みしだきたい乳"],
+        "paizuri": ["パイズリ"],
+        "lactation": ["乳液狂飙", "噴乳"],
+        "cum on hair": ["顔射"],
+        "peeing": ["放尿", "おもらし"],
+        "after fellatio": ["事後"],
+        "spread pussy": ["舐め回したい穴"]
+    }
+}
