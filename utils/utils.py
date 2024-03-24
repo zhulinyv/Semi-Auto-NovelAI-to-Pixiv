@@ -54,7 +54,40 @@ json_for_t2i = {
         "negative_prompt": str,
     },
 }
-
+json_for_i2i = {
+    "input": str,
+    "model": "nai-diffusion-3",
+    "action": "img2img",
+    "parameters": {
+        "width": int,
+        "height": int,
+        "scale": float,
+        "sampler": str,
+        "steps": int,
+        "n_samples": 1,
+        "strength": float,
+        "noise": 0,
+        "ucPreset": 3,
+        "qualityToggle": True,
+        "sm": bool,
+        "sm_dyn": bool,
+        "dynamic_thresholding": False,
+        "controlnet_strength": 1,
+        "legacy": False,
+        "add_original_image": True,
+        "uncond_scale": 1,
+        "cfg_rescale": 0,
+        "noise_schedule": str,
+        "legacy_v3_extend": False,
+        "params_version": 1,
+        "reference_information_extracted": 1,
+        "reference_strength": 0.6,
+        "seed": int,
+        "image": str,
+        "extra_noise_seed": int,
+        "negative_prompt": str
+    }
+}
 
 
 def list_to_str(str_list: list) -> str:
@@ -68,3 +101,10 @@ def format_str(str_: str):
     str_ = str_.replace(",", ', ')
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
+
+def save_image(img_data, seed, choose_game, choose_character):
+    if img_data != None:
+        with open(f"./output/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
+            file.write(img_data)
+    else:
+        pass

@@ -66,8 +66,8 @@ def prepare_json(input_, negetive):
     json_for_t2i["parameters"]["sm"] = env.sm
     json_for_t2i["parameters"]["sm_dyn"] = env.sm_dyn if env.sm and env.sm_dyn else False
     json_for_t2i["parameters"]["noise_schedule"] = env.noise_schedule
-    seed = random.randint(0, 2147483647) if env.seed == -1 else env.seed
-    json_for_t2i["parameters"]["seef"] = seed
+    seed = random.randint(1000000000, 9999999999) if env.seed == -1 else env.seed
+    json_for_t2i["parameters"]["seed"] = seed
     json_for_t2i["parameters"]["negative_prompt"] = negetive
 
     return json_for_t2i, seed
@@ -87,13 +87,6 @@ def generate_image(json_for_t2i):
         return None
 
 
-def save_image_from_binary(img_data, seed, choose_game, choose_character):
-    if img_data != None:
-        with open(f"./output/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
-            file.write(img_data)
-    else:
-        pass
-
 
 times = 0
 while 1:
@@ -103,7 +96,7 @@ while 1:
         input_, negative, choose_game, choose_character = prepare_input()
         json_for_t2i, seed = prepare_json(input_, negative)
         img_data = generate_image(json_for_t2i)
-        save_image_from_binary(img_data, seed, choose_game, choose_character)
+        save_image(img_data, seed, choose_game, choose_character)
         sleep_time = round(random.uniform(8, 24), 3)
         logger.info(f"等待 {sleep_time} 后继续...")
         time.sleep(sleep_time)

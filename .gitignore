@@ -1,6 +1,5 @@
 .env
 output
-test.py
-test.json
+test.*
 __pycache__
 venv

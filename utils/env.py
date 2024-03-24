@@ -4,16 +4,20 @@ from typing import Union
 
 
 class Settings(BaseSettings):
-    token: str
-    img_size: Union[int, list]
-    scale: float
-    censor: bool
-    sampler: str
-    steps: int
-    sm: bool
-    sm_dyn: bool
-    noise_schedule: str
-    seed: int
+    token: str = None
+    img_size: Union[int, list] = -1
+    scale: float = 5
+    censor: bool = False
+    sampler: str = "k_euler"
+    steps: int = 28
+    sm: bool = False
+    sm_dyn: bool = False
+    noise_schedule: str = "native"
+    seed: int = -1
+    magnification: float = 1.5
+    hires_strength: float = 0.5
+    upscale_path: str = "./output/upscale"
+    pixiv_path: str = "./output/pixiv"
 
     class Config:
         env_file = '.env'
