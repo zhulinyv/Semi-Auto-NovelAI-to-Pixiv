@@ -10,8 +10,8 @@ assignees: ''
 ### 确认
 
 - 我的版本已更新到最新，且已尝试运行 `pip install -r requirements.txt` 更新依赖库
-- 我已查阅[文档-常见问题](https://github.com/zhulinyv/NJS#readme)，无相关解决方案
-- 我已确认[issue](https://github.com/zhulinyv/NJS/issues)中没有类似的问题或仍然得不到解决
+- 我已查阅[文档-常见问题](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#readme)，无相关解决方案
+- 我已确认[issue](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/issues)中没有类似的问题或仍然得不到解决
 
 ### 环境信息
 
