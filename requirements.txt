@@ -1,0 +1,5 @@
+pydantic[doenv]
+pillow
+requests
+loguru
+ujson
