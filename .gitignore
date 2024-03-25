@@ -1,5 +1,6 @@
 .env
 output
 test.*
+test
 __pycache__
 venv
