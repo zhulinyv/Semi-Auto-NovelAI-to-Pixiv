@@ -24,7 +24,7 @@ headers = {
     'Accept': '*/*',
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'en-GB,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-US;q=0.6',
-    'Authorization': f'Bearer {env.token}',
+    'Authorization': f'Bearer {env.token if env.token != "xxx" else logger.error("未配置 token!")}',
     'Referer': 'https://novelai.net',
     'Sec-Ch-Ua': '"Chromium";v="122", "Not(A:Brand";v="24", "Microsoft Edge";v="122"',
     'Sec-Ch-Ua-mobile': '?0',
