@@ -5,7 +5,7 @@ from typing import Union
 
 class Settings(BaseSettings):
     token: str = None
-    img_size: Union[int, list] = -1
+    img_size: Union[int, list[int]] = -1
     scale: float = 5
     censor: bool = False
     sampler: str = "k_euler"
