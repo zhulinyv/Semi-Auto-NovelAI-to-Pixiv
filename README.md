@@ -152,7 +152,7 @@ python pixiv.py
 + [ ] 批量局部重绘
 + [ ] 批量 vibe
 + [ ] 批量打码
-+ [] ...
++ [ ] ...
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
