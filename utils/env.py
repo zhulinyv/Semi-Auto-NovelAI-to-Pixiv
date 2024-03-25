@@ -16,8 +16,9 @@ class Settings(BaseSettings):
     seed: int = -1
     magnification: float = 1.5
     hires_strength: float = 0.5
-    upscale_path: str = "./output/upscale"
-    pixiv_path: str = "./output/pixiv"
+    pixiv_cookie: str = None
+    pixiv_token: str = None
+    allow_tag_edit: bool = True
 
     class Config:
         env_file = '.env'

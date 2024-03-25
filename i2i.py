@@ -2,8 +2,9 @@ import ujson as json
 
 from loguru import logger
 
-from utils.utils import *
+from utils.error import DataIsNoneError
 from utils.imgtools import get_img_info, img_to_base64
+from utils.utils import *
 
 
 
@@ -53,7 +54,7 @@ for img in img_list:
             json_for_i2i = prepare_json(imginfo, img_path)
             img_data = generate_image(json_for_i2i)
             if img_data == None:
-                raise ConnectionRefusedError
+                raise DataIsNoneError
             save_image(img_data, type_, info_list[0], info_list[1], info_list[2])
             logger.warning("删除小图...")
             os.remove(img_path)
