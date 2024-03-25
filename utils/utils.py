@@ -1,10 +1,20 @@
+import io
 import os
+import random
+import requests
 import shutil
+import time
+import zipfile
+
+from loguru import logger
+
+need_dir_list = ["./output", "./output/t2i", "./output/choose_for_i2i", "./output/i2i/", "./output/pixiv", "./output/choose_for_upscale" ,"./output/upscale"]
 
 if not os.path.exists(".env"):
     shutil.copyfile(".env.example", ".env")
-if not os.path.exists("./output"):
-    os.mkdir("./output")
+for dir in need_dir_list:
+    if not os.path.exists(dir):
+        os.mkdir(dir)
 
 from utils.env import env
 
@@ -90,7 +100,7 @@ json_for_i2i = {
 }
 
 
-def list_to_str(str_list: list) -> str:
+def list_to_str(str_list: list):
     empty_str = ""
     for i in str_list:
         empty_str += f"{i},"
@@ -102,9 +112,27 @@ def format_str(str_: str):
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
 
-def save_image(img_data, seed, choose_game, choose_character):
+def sleep_for_cool(int1, int2):
+    sleep_time = round(random.uniform(int1, int2), 3)
+    logger.info(f"等待 {sleep_time} 后继续...")
+    time.sleep(sleep_time)
+
+def generate_image(json_data):
+    try:
+        rep = requests.post("https://api.novelai.net/ai/generate-image", json=json_data, headers=headers)
+        rep.raise_for_status()
+        logger.success("生成成功!")
+        with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
+            with zip.open("image_0.png") as image:
+                return image.read()
+
+    except Exception as e:
+        logger.error(f"出现错误: {e}")
+        return None
+
+def save_image(img_data, type_, seed, choose_game, choose_character):
     if img_data != None:
-        with open(f"./output/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
+        with open(f"./output/{type_}/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
             file.write(img_data)
     else:
         pass

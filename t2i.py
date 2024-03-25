@@ -1,9 +1,6 @@
-import io
-import ujson as json
 import random
-import requests
-import time
-import zipfile
+
+import ujson as json
 
 from loguru import logger
 
@@ -73,20 +70,6 @@ def prepare_json(input_, negetive):
     return json_for_t2i, seed
 
 
-def generate_image(json_for_t2i):
-    try:
-        rep = requests.post("https://api.novelai.net/ai/generate-image", json=json_for_t2i, headers=headers)
-        rep.raise_for_status()
-        logger.success("生成成功!")
-        with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
-            with zip.open("image_0.png") as image:
-                return image.read()
-
-    except Exception as e:
-        logger.error(f"出现错误: {e}")
-        return None
-
-
 
 times = 0
 while 1:
@@ -96,10 +79,8 @@ while 1:
         input_, negative, choose_game, choose_character = prepare_input()
         json_for_t2i, seed = prepare_json(input_, negative)
         img_data = generate_image(json_for_t2i)
-        save_image(img_data, seed, choose_game, choose_character)
-        sleep_time = round(random.uniform(8, 24), 3)
-        logger.info(f"等待 {sleep_time} 后继续...")
-        time.sleep(sleep_time)
+        save_image(img_data, "t2i", seed, choose_game, choose_character)
+        sleep_for_cool(8, 24)
     except KeyboardInterrupt:
         logger.warning("程序退出...")
         quit()

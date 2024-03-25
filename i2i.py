@@ -1,9 +1,3 @@
-import io
-import random
-import requests
-import time
-import zipfile
-
 import ujson as json
 
 from loguru import logger
@@ -43,34 +37,32 @@ def prepare_json(imginfo: dict, imgpath):
     return json_for_i2i
 
 
-def upscale_img(json_for_i2i):
-    try:
-        rep = requests.post('https://image.novelai.net/ai/generate-image', headers=headers, json=json_for_i2i)
-        rep.raise_for_status()
-        # logger.success("放大成功!")
-        with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
-            with zip.open("image_0.png") as image:
-                return image.read()
-    except Exception as e:
-        logger.error(f"出现错误: {e}")
-        return None
 
+type_ = "i2i"
+i2i_path = f"./output/choose_for_{type_}/"
+img_list = os.listdir(i2i_path)
 
-imgpath = r"D:\GitClone\Semi-Auto-NovelAI-to-Pixiv\output\140845219_GenshinImpact_纳西妲.png"
-
-
-info = get_img_info(imgpath)
-
-json_ = prepare_json(info, imgpath)
-
-
-
-"""with open("./test.txt", 'w', encoding='utf-8') as file:
-    file.write(json.dumps(json_))
-
-with open("./test.txt", 'r', encoding='utf-8') as file:
-    data = file.read()"""
-
-imgdata = upscale_img(json_)
-
-save_image(imgdata, "t", "t", "t")
+for img in img_list:
+    times = 1
+    while times <= 5:
+        try:
+            logger.info(f"正在放大{img}...")
+            info_list = img.replace(".png", '').split("_")
+            img_path = i2i_path + img
+            imginfo = get_img_info(img_path)
+            json_for_i2i = prepare_json(imginfo, img_path)
+            img_data = generate_image(json_for_i2i)
+            if img_data == None:
+                raise ConnectionRefusedError
+            save_image(img_data, type_, info_list[0], info_list[1], info_list[2])
+            logger.warning("删除小图...")
+            os.remove(img_path)
+            sleep_for_cool(16, 48)
+            break
+        except Exception:
+            sleep_for_cool(8, 24)
+            times += 1
+            logger.warning(f"重试 {times}/5...")
+        except KeyboardInterrupt:
+            logger.warning("程序退出...")
+            quit()
