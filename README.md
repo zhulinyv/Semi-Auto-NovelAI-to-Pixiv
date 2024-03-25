@@ -58,6 +58,8 @@ pip install -r requirements.txt
 | pixiv_cookie | 是 | str | "xxx" | 上传 Pixiv 使用的 cookie | "first_..." |
 | pixiv_token | 是 | str | "xxx" | 上传 Pixiv 使用的 x-csrf-token | "655c0c..." |
 | allow_tag_edit | 否 | bool | True | 是否允许其它用户编辑标签 | False |
+| waifu2x_scale | 否 | int | 2 | Waifu2x 放大倍数 | 4 |
+| waifu2x_noise | 否 | int | 3 | Waifu2x 降噪等级 | 2 |
 
 ⚠️ token 的获取:
 
@@ -142,6 +144,14 @@ python pixiv.py
 ```
 
 上传 `.\output\pixiv` 中的图片或文件加到 Pixiv
+
+#### waifu2x.py
+
+```
+python pixiv.py
+```
+
+使用 waifu2x-ncnn-vulkan 放大图片
 
 
 ## 📖 待办

@@ -19,6 +19,8 @@ class Settings(BaseSettings):
     pixiv_cookie: str = None
     pixiv_token: str = None
     allow_tag_edit: bool = True
+    waifu2x_scale: int = 2
+    waifu2x_noise: int = 3
 
     class Config:
         env_file = '.env'
