@@ -18,7 +18,7 @@ def mosaic(img, fx, fy, tx, ty):
 
 def _mosaic(img, length):
     s = img.size
-    img = img.resize((int(length * 0.01), int(length *0.01)))
+    img = img.resize((int(length * 0.01), int(length * 0.01)))
     img = img.resize(s)
     return img
 
