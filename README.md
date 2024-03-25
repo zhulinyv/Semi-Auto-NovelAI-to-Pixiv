@@ -18,11 +18,11 @@
 
 <p>
     <text>灵感来自于我的朋友们: </text> 
-    <a href="https://github.com/huliku"><img src="https://avatars.githubusercontent.com/u/149586580?v=4" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
-    <a href="https://github.com/LittleApple-fp16"><img src="https://avatars.githubusercontent.com/u/148928493?v=4" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
-    <a href="https://github.com/CyanAutumn"><img src="https://avatars.githubusercontent.com/u/86090878?v=4" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
-    <a href="https://github.com/wochenlong"><img src="https://avatars.githubusercontent.com/u/117965575?v=4" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
-    <a href="https://github.com/zhulinyv"><img src="https://avatars.githubusercontent.com/u/66541860?v=4" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
+    <a href="https://github.com/huliku"><img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/dc90cc04-7dc0-4dce-968f-39199ca73d4c" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
+    <a href="https://github.com/LittleApple-fp16"><img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/6d9fefe5-44c0-4b58-a54e-baa1b5aca170" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
+    <a href="https://github.com/CyanAutumn"><img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/d82e85ee-2468-41bd-95b7-8e732bd291c4" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
+    <a href="https://github.com/wochenlong"><img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/1e9821ad-aab3-47c1-8528-7f3f70cd722b" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
+    <a href="https://github.com/zhulinyv"><img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a3cbe72e-67f6-4aa3-a2dd-e936b8bf9cd9" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
 </p>
 
 
@@ -147,11 +147,11 @@ python pixiv.py
 + [x] 批量文生图
 + [x] 批量图生图
 + [x] 批量上传 Pixiv
-+ [] 计算剩余水晶
-+ [] 批量 Waifu2x
-+ [] 批量局部重绘
-+ [] 批量 vibe
-+ [] 批量打码
++ [ ] 计算剩余水晶
++ [ ] 批量 Waifu2x
++ [ ] 批量局部重绘
++ [ ] 批量 vibe
++ [ ] 批量打码
 + [] ...
 
 <hr>
