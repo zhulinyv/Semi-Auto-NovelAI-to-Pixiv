@@ -58,8 +58,8 @@ pip install -r requirements.txt
 | pixiv_cookie | 是 | str | "xxx" | 上传 Pixiv 使用的 cookie | "first_..." |
 | pixiv_token | 是 | str | "xxx" | 上传 Pixiv 使用的 x-csrf-token | "655c0c..." |
 | allow_tag_edit | 否 | bool | True | 是否允许其它用户编辑标签 | False |
-| waifu2x_scale | 否 | int | 2 | waifu2x 放大倍数 | 4 |
-| waifu2x_noise | 否 | int | 3 | waifu2x 降噪等级 | 2 |
+| [waifu2x](https://github.com/nagadomi/waifu2x)_scale | 否 | int | 2 | [waifu2x](https://github.com/nagadomi/waifu2x) 放大倍数 | 4 |
+| [waifu2x](https://github.com/nagadomi/waifu2x)_noise | 否 | int | 3 | [waifu2x](https://github.com/nagadomi/waifu2x) 降噪等级 | 2 |
 
 ⚠️ token 的获取:
 
@@ -118,7 +118,16 @@ pip install -r requirements.txt
   └---\choose_to_upscale
         └---7589641258_GenshinImpact_可莉.png
         └---6594641258_AzureLane_拉菲.png
-        └---the_blue_picture_of_groupmates.jpg
+```
+
+> 对于打马赛克, 需要将图片放到 `.\output\mosaic` 文件夹
+
+```
+例如:
+.\output
+  └---\mosaic
+        └---7589641258_GenshinImpact_可莉.png
+        └---6594641258_AzureLane_拉菲.png
 ```
 
 ## 🎉 使用
@@ -162,10 +171,17 @@ python pixiv.py
 python pixiv.py
 ```
 
-使用 [waifu2x](https://github.com/nagadomi/waifu2x-ncnn-vulkan) 放大图片
+使用 [waifu2x](https://github.com/nagadomi/waifu2x)-ncnn-vulkan 放大图片
 
 ![效果](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a304d3bd-181f-4d94-ac18-a2c53b9f2f79)
 
+#### mosaic.py
+
+```
+python mosaic.py
+```
+
+对关键部位打马赛克
 
 ## 📖 待办
 
@@ -176,7 +192,7 @@ python pixiv.py
 + [x] 批量 [waifu2x](https://github.com/nagadomi/waifu2x)
 + [ ] 批量局部重绘
 + [ ] 批量 vibe
-+ [ ] 批量打码
++ [x] 批量打码
 + [ ] ...
 
 

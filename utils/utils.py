@@ -8,7 +8,7 @@ import zipfile
 
 from loguru import logger
 
-need_dir_list = ["./output", "./output/t2i", "./output/choose_for_i2i", "./output/i2i/", "./output/pixiv", "./output/choose_for_upscale" ,"./output/upscale"]
+need_dir_list = ["./output", "./output/t2i", "./output/choose_for_i2i", "./output/i2i/", "./output/pixiv", "./output/choose_for_upscale" ,"./output/upscale", "./output/mosaic"]
 
 if not os.path.exists(".env"):
     shutil.copyfile(".env.example", ".env")

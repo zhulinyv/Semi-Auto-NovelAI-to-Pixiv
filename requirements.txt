@@ -4,3 +4,4 @@ pillow
 requests
 loguru
 ujson
+nudenet
