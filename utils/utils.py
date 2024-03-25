@@ -136,3 +136,9 @@ def save_image(img_data, type_, seed, choose_game, choose_character):
             file.write(img_data)
     else:
         pass
+
+def inquire_anlas():
+    rep = requests.get('https://api.novelai.net/user/subscription', headers=headers)
+    if rep.status_code == 200:
+        return rep.json()['trainingStepsLeft']['fixedTrainingStepsLeft']
+    return 0

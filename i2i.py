@@ -47,6 +47,7 @@ for img in img_list:
     times = 1
     while times <= 5:
         try:
+            logger.warning(f"剩余水晶: {inquire_anlas()}")
             logger.info(f"正在放大{img}...")
             info_list = img.replace(".png", '').split("_")
             img_path = i2i_path + img
