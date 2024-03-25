@@ -199,6 +199,7 @@ python mosaic.py
 ## 🤝 鸣谢
 
 本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) 降噪和放大图片
+本项目使用 [NudeNet](https://github.com/notAI-tech/NudeNet) 打马赛克
 
 
 <hr>
