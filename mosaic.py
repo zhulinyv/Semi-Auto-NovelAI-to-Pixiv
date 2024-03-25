@@ -29,7 +29,7 @@ file_list.remove("temp.png") if "temp.png" in file_list else ...
 for file in file_list:
     logger.info(f"正在处理{file}...")
     # 这个库不能使用中文文件名
-    shutil.copy(file_path + file, file_path + "temp.png")
+    shutil.copyfile(file_path + file, file_path + "temp.png")
     body = nude_detector.detect(file_path + "temp.png")
     for part in body:
         image = Image.open(file_path + "temp.png")
