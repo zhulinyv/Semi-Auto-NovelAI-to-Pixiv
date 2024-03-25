@@ -3,12 +3,14 @@ import platform
 
 from loguru import logger
 from utils.error import Waifu2xError
+from utils.env import env
 
 
 
 def waifu2x():
     if platform.system() == "Windows":
-        code = r".\files\waifu2x-ncnn-vulkan\waifu2x-ncnn-vulkan.exe -i .\output\choose_for_upscale\ -o .\output\upscale\ -n 3 -s 2"
+        code = rf".\files\waifu2x-ncnn-vulkan\waifu2x-ncnn-vulkan.exe -i .\output\choose_for_upscale\ -o .\output\upscale\ -n {env.waifu2x_noise} -s {env.waifu2x_scale}"
+        logger.debug(code)
     else:
         logger.error("仅支持 Window 运行!")
         return "寄"
