@@ -112,6 +112,13 @@ def format_str(str_: str):
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
 
+def format_path(str_: str):
+    if str_[-1] == "/":
+        str_ = str_[:-1]
+        return str_
+    else:
+        return str_
+
 def sleep_for_cool(int1, int2):
     sleep_time = round(random.uniform(int1, int2), 3)
     logger.info(f"等待 {sleep_time} 后继续...")

@@ -15,9 +15,9 @@ def waifu2x(file, file_path, open_button, waifu2x_noise, waifu2x_scale):
         file = file_path
     else:
         random_string = "".join(random.choices(string.ascii_lowercase + string.digits, k=8))
-        file.save(f"./output/temp_{random_string}.png")
-        file = f"./output/temp_{random_string}.png"
-        output_dir = f"./output/upscale/temp_{random_string}.png"
+        file.save(f"./output/temp.png")
+        file = f"./output/temp.png"
+        output_dir = f"./output/upscale/upscale_{waifu2x_noise}n_{waifu2x_scale}s_{random_string}.png"
     logger.info(f"正在放大 {file}...")
 
     if platform.system() == "Windows":
@@ -45,4 +45,4 @@ def waifu2x(file, file_path, open_button, waifu2x_noise, waifu2x_scale):
 
 
 if __name__ == "__main__":
-    waifu2x(None, "./output/choose_for_upscale/", True, env.waifu2x_noise, env.waifu2x_scale)
+    waifu2x(None, "./output/choose_for_upscale", True, env.waifu2x_noise, env.waifu2x_scale)

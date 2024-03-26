@@ -8,29 +8,33 @@ from utils.utils import *
 
 
 
-def i2i_by_band(input_img, positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, strength: float, sm: bool, sm_dyn: bool):
-    json_for_i2i["input"] = positive
-    json_for_i2i["parameters"]["width"] = int(resolution.split("x")[0])
-    json_for_i2i["parameters"]["height"] = int(resolution.split("x")[1])
-    json_for_i2i["parameters"]["scale"] = scale
-    json_for_i2i["parameters"]["sampler"] = sampler
-    json_for_i2i["parameters"]["steps"] = steps
-    json_for_i2i["parameters"]["strength"] = strength
-    json_for_i2i["parameters"]["sm"] = sm
-    json_for_i2i["parameters"]["sm_dyn"] =  sm_dyn if sm else False
-    json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
-    seed = random.randint(1000000000, 9999999999)
-    json_for_i2i["parameters"]["seed"] = seed
-    json_for_i2i["parameters"]["image"] = img_to_base64(input_img)
-    json_for_i2i["parameters"]["extra_noise_seed"] = seed
-    json_for_i2i["parameters"]["negative_prompt"] = negative
-    
-    logger.debug(json_for_i2i)
-    
-    save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
-    sleep_for_cool(12, 24)
-    
-    return f"./output/i2i/{seed}_None_None.png"
+def i2i_by_band(input_img, input_path, open_button, positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, strength: float, sm: bool, sm_dyn: bool):
+    if open_button:
+        main(input_path)
+        return None, "处理完成"
+    else:
+        json_for_i2i["input"] = positive
+        json_for_i2i["parameters"]["width"] = int(resolution.split("x")[0])
+        json_for_i2i["parameters"]["height"] = int(resolution.split("x")[1])
+        json_for_i2i["parameters"]["scale"] = scale
+        json_for_i2i["parameters"]["sampler"] = sampler
+        json_for_i2i["parameters"]["steps"] = steps
+        json_for_i2i["parameters"]["strength"] = strength
+        json_for_i2i["parameters"]["sm"] = sm
+        json_for_i2i["parameters"]["sm_dyn"] =  sm_dyn if sm else False
+        json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
+        seed = random.randint(1000000000, 9999999999)
+        json_for_i2i["parameters"]["seed"] = seed
+        json_for_i2i["parameters"]["image"] = img_to_base64(input_img)
+        json_for_i2i["parameters"]["extra_noise_seed"] = seed
+        json_for_i2i["parameters"]["negative_prompt"] = negative
+        
+        logger.debug(json_for_i2i)
+        
+        save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
+        sleep_for_cool(12, 24)
+        
+        return f"./output/i2i/{seed}_None_None.png", None
 
 
 def prepare_json(imginfo: dict, imgpath):
@@ -63,9 +67,9 @@ def prepare_json(imginfo: dict, imgpath):
     return json_for_i2i
 
 
-if __name__ == "__main__":
+def main(input_path):
     type_ = "i2i"
-    i2i_path = f"./output/choose_for_{type_}/"
+    i2i_path = format_path(input_path)
     img_list = os.listdir(i2i_path)
 
     for img in img_list:
@@ -75,7 +79,7 @@ if __name__ == "__main__":
                 logger.warning(f"剩余水晶: {inquire_anlas()}")
                 logger.info(f"正在放大{img}...")
                 info_list = img.replace(".png", '').split("_")
-                img_path = i2i_path + img
+                img_path = f"{i2i_path}/{img}"
                 imginfo = get_img_info(img_path)
                 json_for_i2i = prepare_json(imginfo, img_path)
                 img_data = generate_image(json_for_i2i)
@@ -93,3 +97,7 @@ if __name__ == "__main__":
             except KeyboardInterrupt:
                 logger.warning("程序退出...")
                 quit()
+
+
+if __name__ == "__main__":
+    main(f"./output/choose_for_i2i/")
