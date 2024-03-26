@@ -205,6 +205,7 @@ python main.py
 + [ ] 批量 vibe
 + [x] 批量打码
 + [ ] 用 Gradio 写一个 WebUI
++ [ ] 将项目放到容器持久化运行
 + [ ] ...
 
 

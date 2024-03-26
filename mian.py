@@ -57,7 +57,7 @@ with gr.Blocks() as demo:
                     sm = gr.Radio([True, False],value=False, label="sm")
                     sm_dyn = gr.Radio([True, False], value=False, label="sm_dyn(开启需同时开启 sm)")
             generate.click(fn=i2i_by_band, inputs=[input_img, input_path, open_button, positive, negative, resolution, scale, sampler, noise_schedule, steps, strength, sm, sm_dyn], outputs=output_img)
-    with gr.Tab("文生图(随机涩图)"):
+    with gr.Tab("随机涩图)"):
         gr.Markdown("> 还在写 QWQ... 文生图无限生成还有 bug, 无限生成布吉岛怎么返回图片, 所以全部是 False")
         with gr.Column():
             with gr.Row():
@@ -95,6 +95,10 @@ with gr.Blocks() as demo:
                     output_img = gr.Image(scale=2)
         generate.click(fn=mosaic, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
     with gr.Tab("上传Pixiv"):
+        ...
+    with gr.Tab("局部重绘"):
+        ...
+    with gr.Tab("vibe"):
         ...
     
 
