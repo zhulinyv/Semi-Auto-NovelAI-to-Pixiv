@@ -60,7 +60,7 @@ json_for_t2i = {
         "legacy_v3_extend": False,
         "reference_information_extracted": 1,
         "reference_strength": 0.6,
-        "seed": 0,
+        "seed": int,
         "negative_prompt": str,
     },
 }
@@ -116,6 +116,7 @@ def sleep_for_cool(int1, int2):
     sleep_time = round(random.uniform(int1, int2), 3)
     logger.info(f"等待 {sleep_time} 后继续...")
     time.sleep(sleep_time)
+    return f"等待 {sleep_time} 后继续..."
 
 def generate_image(json_data):
     try:
