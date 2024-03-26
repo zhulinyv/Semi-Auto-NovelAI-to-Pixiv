@@ -9,10 +9,10 @@ from utils.env import env
 
 
 
-def waifu2x(file, waifu2x_noise, waifu2x_scale):
-    if isinstance(file, str):
+def waifu2x(file, file_path, open_button, waifu2x_noise, waifu2x_scale):
+    if open_button:
         output_dir = "./output/upscale"
-        pass
+        file = file_path
     else:
         random_string = "".join(random.choices(string.ascii_lowercase + string.digits, k=8))
         file.save(f"./output/temp_{random_string}.png")
@@ -37,12 +37,12 @@ def waifu2x(file, waifu2x_noise, waifu2x_scale):
     logger.success("放大成功!")
     logger.info("图片已保存到 ./output/upscale...")
 
-    if isinstance(file, str):
-        return
+    if open_button:
+        return "图片已保存到 ./output/upscale...", None
     else:
-        return f"./output/upscale/temp_{random_string}.png"
+        return None, f"./output/upscale/temp_{random_string}.png"
 
 
 
 if __name__ == "__main__":
-    waifu2x("./output/choose_for_upscale/", env.waifu2x_noise, env.waifu2x_scale)
+    waifu2x(None, "./output/choose_for_upscale/", True, env.waifu2x_noise, env.waifu2x_scale)

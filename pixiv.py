@@ -12,10 +12,6 @@ from utils.pixivposter import *
 from utils.utils import sleep_for_cool
 
 
-file_path = "./output/pixiv/"
-file_list = os.listdir(file_path)
-
-
 
 def upload(image_list, file):
     image_info = get_img_info(image_list[-1])
@@ -51,6 +47,9 @@ def upload(image_list, file):
     return status
 
 
+
+file_path = "./output/pixiv/"
+file_list = os.listdir(file_path)
 
 for file in file_list:
     times = 1

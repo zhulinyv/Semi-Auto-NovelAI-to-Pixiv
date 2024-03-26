@@ -44,6 +44,9 @@ with gr.Blocks() as demo:
                 with gr.Row():
                     negative = gr.Textbox(value="lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], mosaic censoring, bar censor, censored, {{{{{chibi,doll}}}}}, silhouette,", label="负面提示词", scale=3)
                     generate = gr.Button(value="开始生成", scale=1)
+            # with gr.Row():
+            #     input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
+            #     open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
             with gr.Row():
                 input_img = gr.Image(type="pil")
                 output_img = gr.Image()
@@ -67,14 +70,20 @@ with gr.Blocks() as demo:
                 waifu2x_noise = gr.Slider(minimum=-1, maximum=3, value=3, step=1, label="降噪强度")
                 waifu2x_scale = gr.Radio([1, 2, 4, 8, 16, 32], value=2, label="放大倍数")
             with gr.Row():
+                input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
+                open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
+            with gr.Row():
                 input_img = gr.Image(type="pil", scale=1)
-                output_img = gr.Image(scale=2)
-                generate.click(fn=waifu2x, inputs=[input_img, waifu2x_noise, waifu2x_scale], outputs=output_img)
+                with gr.Column(scale=2):
+                    output_info = gr.Textbox(label="输出信息")
+                    output_img = gr.Image(scale=2)
+        generate.click(fn=waifu2x, inputs=[input_img, input_path, open_button, waifu2x_noise, waifu2x_scale], outputs=[output_info, output_img])
     with gr.Tab("自动打码"):
+        # input_img = gr.Image(type="pil")
         ...
     with gr.Tab("上传Pixiv"):
         ...
     
 
 
-demo.queue().launch(share=True, server_port=24680)
+demo.queue().launch(share=True, server_port=11451)
