@@ -14,7 +14,7 @@
 
 ## 💬 前言
 
-这是一个 NovelAI 自动生成图片, 经过人工筛选后上传 Pixiv 的脚本集合.
+这是一个 NovelAI 自动生成图片, 经过人工筛选后上传 Pixiv 的脚本集合
 
 <p>
     <text>灵感来自于我的朋友们: </text> 
@@ -24,6 +24,8 @@
     <a href="https://github.com/wochenlong"><img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/1e9821ad-aab3-47c1-8528-7f3f70cd722b" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
     <a href="https://github.com/zhulinyv"><img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a3cbe72e-67f6-4aa3-a2dd-e936b8bf9cd9" width="50" height="50" style="border-radius:50%; overflow:hidden;"></a>
 </p>
+
+正在学习 Gradio, 尝试为本项目写一个 WebUI
 
 
 ## 💿 部署
@@ -39,7 +41,7 @@ pip install -r requirements.txt
 
 ## ⚙️ 配置
 
-使用项目前, 你需要复制一份 `env.example` 并重命名为 `.env`, 并对照下方表格按照需要修改配置.
+使用项目前, 你需要复制一份 `env.example` 并重命名为 `.env`, 并对照下方表格按照需要修改配置
 
 | 项目 | 必须 | 类型 | 默认 | 说明 | 示例 |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -183,6 +185,15 @@ python mosaic.py
 
 对关键部位打马赛克
 
+#### main.py
+
+```
+python main.py
+```
+
+⚠️ WebUI 开发中, 目前仅支持单张随机文生图
+
+
 ## 📖 待办
 
 + [x] 批量文生图
@@ -193,14 +204,13 @@ python mosaic.py
 + [ ] 批量局部重绘
 + [ ] 批量 vibe
 + [x] 批量打码
++ [ ] 用 Gradio 写一个 WebUI
 + [ ] ...
 
 
 ## 🤝 鸣谢
 
 本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) 降噪和放大图片
-
-本项目使用 [NudeNet](https://github.com/notAI-tech/NudeNet) 打马赛克
 
 
 <hr>

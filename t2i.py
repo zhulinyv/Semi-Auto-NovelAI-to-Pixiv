@@ -70,10 +70,11 @@ def prepare_json(input_, negetive):
     return json_for_t2i, seed
 
 
-
 times = 0
-while 1:
+
+def t2i(forever: bool):
     try:
+        global times
         times += 1
         logger.info(f"正在生成第{times}张图片...")
         input_, negative, choose_game, choose_character = prepare_input()
@@ -81,7 +82,18 @@ while 1:
         img_data = generate_image(json_for_t2i)
         save_image(img_data, "t2i", seed, choose_game, choose_character)
         sleep_for_cool(8, 24)
+    except GeneratorExit:
+        logger.error("生成失败")
+
+    if forever:
+        return t2i(True)
+    else:
+        return f"./output/t2i/{seed}_{choose_game}_{choose_character}.png"
+
+
+
+if __name__ == "__main__":
+    try:
+        t2i(True)
     except KeyboardInterrupt:
         logger.warning("程序退出...")
-        quit()
-
