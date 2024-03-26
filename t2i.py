@@ -7,6 +7,28 @@ from loguru import logger
 from utils.utils import *
 
 
+def t2i_by_band(positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, sm: bool, sm_dyn: bool, seed: str):
+    json_for_t2i["input"] = positive
+    
+    json_for_t2i["parameters"]["width"] = int(resolution.split("x")[0])
+    json_for_t2i["parameters"]["height"] = int(resolution.split("x")[1])
+    json_for_t2i["parameters"]["scale"] = scale
+    json_for_t2i["parameters"]["sampler"] = sampler
+    json_for_t2i["parameters"]["steps"] = steps
+    json_for_t2i["parameters"]["sm"] = sm
+    json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
+    json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
+    seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
+    json_for_t2i["parameters"]["seed"] = seed
+    json_for_t2i["parameters"]["negative_prompt"] = negative
+    
+    logger.debug(json_for_t2i)
+    
+    save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
+    sleep_for_cool(12, 24)
+    
+    return f"./output/t2i/{seed}_None_None.png"
+
 
 def prepare_input():
     with open("./files/favorite.json", 'r', encoding='utf-8') as file:
@@ -81,7 +103,7 @@ def t2i(forever: bool):
         json_for_t2i, seed = prepare_json(input_, negative)
         img_data = generate_image(json_for_t2i)
         save_image(img_data, "t2i", seed, choose_game, choose_character)
-        sleep_for_cool(8, 24)
+        sleep_for_cool(12, 24)
     except GeneratorExit:
         logger.error("生成失败")
 
