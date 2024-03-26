@@ -65,7 +65,7 @@ for file in file_list:
                 folder_list = os.listdir(folder_path)
                 for i in folder_list: image_list.append(f"{folder_path}/{i}")
                 file = folder_list[-1]
-            status = upload(image_list, folder_list[-1])
+            status = upload(image_list, file)
             if status == 1:
                 times += 1
                 raise UploadError

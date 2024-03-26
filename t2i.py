@@ -7,7 +7,7 @@ from loguru import logger
 from utils.utils import *
 
 
-def generate_by_band(positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, sm: bool, seed: str):
+def t2i_by_band(positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, sm: bool, sm_dyn: bool, seed: str):
     json_for_t2i["input"] = positive
     
     json_for_t2i["parameters"]["width"] = int(resolution.split("x")[0])
@@ -16,9 +16,10 @@ def generate_by_band(positive: str, negative: str, resolution: str, scale: float
     json_for_t2i["parameters"]["sampler"] = sampler
     json_for_t2i["parameters"]["steps"] = steps
     json_for_t2i["parameters"]["sm"] = sm
-    json_for_t2i["parameters"]["sm_dyn"] = False
+    json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
     json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
-    json_for_t2i["parameters"]["seed"] = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
+    seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
+    json_for_t2i["parameters"]["seed"] = seed
     json_for_t2i["parameters"]["negative_prompt"] = negative
     
     logger.debug(json_for_t2i)
