@@ -3,6 +3,7 @@ import gradio as gr
 from t2i import t2i, t2i_by_band
 from i2i import i2i_by_band
 from waifu2x import waifu2x
+from mosaic import main as mosaic
 
 
 
@@ -28,14 +29,6 @@ with gr.Blocks() as demo:
                     seed = gr.Textbox(value="-1", label="随机种子")
                 output_img = gr.Image(scale=2)
         generate.click(fn=t2i_by_band, inputs=[positive, negative, resolution, scale, sampler, noise_schedule, steps, sm, sm_dyn, seed], outputs=output_img)
-    with gr.Tab("文生图(随机涩图)"):
-        gr.Markdown("> 还在写 QWQ... 文生图无限生成还有 bug, 无限生成布吉岛怎么返回图片, 所以全部是 False")
-        with gr.Column():
-            with gr.Row():
-                forever = gr.Radio([False, False], value=False, label="是否无限生成")
-                generate_button = gr.Button("开始生成")
-            show_img = gr.Image()
-        generate_button.click(fn=t2i, inputs=forever, outputs=show_img)
     with gr.Tab("图生图"):
         gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o")
         with gr.Column():
@@ -44,12 +37,14 @@ with gr.Blocks() as demo:
                 with gr.Row():
                     negative = gr.Textbox(value="lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], mosaic censoring, bar censor, censored, {{{{{chibi,doll}}}}}, silhouette,", label="负面提示词", scale=3)
                     generate = gr.Button(value="开始生成", scale=1)
-            # with gr.Row():
-            #     input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
-            #     open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
+            with gr.Row():
+                input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
+                open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
             with gr.Row():
                 input_img = gr.Image(type="pil")
-                output_img = gr.Image()
+                with gr.Column():
+                    output_info = gr.Textbox(label="输出信息")
+                    output_img = gr.Image()
             with gr.Column():
                 with gr.Row():
                     resolution = gr.Radio(["832x1216", "1216x832", "1024x1024", "512x768", "768x768", "640x640"], value="832x1216", label="分辨率(宽x高)")
@@ -61,7 +56,15 @@ with gr.Blocks() as demo:
                     noise_schedule = gr.Radio(["native", "karras", "exponential", "polyexponential"], value="native", label="噪声计划表")
                     sm = gr.Radio([True, False],value=False, label="sm")
                     sm_dyn = gr.Radio([True, False], value=False, label="sm_dyn(开启需同时开启 sm)")
-            generate.click(fn=i2i_by_band, inputs=[input_img, positive, negative, resolution, scale, sampler, noise_schedule, steps, strength, sm, sm_dyn], outputs=output_img)
+            generate.click(fn=i2i_by_band, inputs=[input_img, input_path, open_button, positive, negative, resolution, scale, sampler, noise_schedule, steps, strength, sm, sm_dyn], outputs=output_img)
+    with gr.Tab("文生图(随机涩图)"):
+        gr.Markdown("> 还在写 QWQ... 文生图无限生成还有 bug, 无限生成布吉岛怎么返回图片, 所以全部是 False")
+        with gr.Column():
+            with gr.Row():
+                forever = gr.Radio([False, False], value=False, label="是否无限生成")
+                generate_button = gr.Button("开始生成")
+            show_img = gr.Image()
+        generate_button.click(fn=t2i, inputs=forever, outputs=show_img)
     with gr.Tab("Waifu2x放大"):
         gr.Markdown("> 使用 Waifu2x 放大并降噪图片")
         generate = gr.Button(value="开始生成")
@@ -79,8 +82,18 @@ with gr.Blocks() as demo:
                     output_img = gr.Image(scale=2)
         generate.click(fn=waifu2x, inputs=[input_img, input_path, open_button, waifu2x_noise, waifu2x_scale], outputs=[output_info, output_img])
     with gr.Tab("自动打码"):
-        # input_img = gr.Image(type="pil")
-        ...
+        gr.Markdown("> 对关键部位进行自动打码")
+        generate = gr.Button(value="开始生成")
+        with gr.Column():
+            with gr.Row():
+                input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
+                open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
+            with gr.Row():
+                input_img = gr.Image(type="pil", scale=1)
+                with gr.Column(scale=2):
+                    output_info = gr.Textbox(label="输出信息")
+                    output_img = gr.Image(scale=2)
+        generate.click(fn=mosaic, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
     with gr.Tab("上传Pixiv"):
         ...
     
