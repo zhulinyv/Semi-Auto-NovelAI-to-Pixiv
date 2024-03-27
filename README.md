@@ -14,6 +14,8 @@
 
 ## 💬 前言
 
+英文版文档: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/README_EN.md)
+
 这是一个 NovelAI 自动生成图片, 经过人工筛选后上传 Pixiv 的脚本
 
 <details>
