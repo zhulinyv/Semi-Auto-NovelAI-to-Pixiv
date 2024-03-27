@@ -14,7 +14,24 @@
 
 ## 💬 前言
 
-这是一个 NovelAI 自动生成图片, 经过人工筛选后上传 Pixiv 的脚本集合
+这是一个 NovelAI 自动生成图片, 经过人工筛选后上传 Pixiv 的脚本
+
+<details>
+<summary><b>查看运行示例</b></summary>
+
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/d6059625-0640-46dd-97b6-ecbfcb37b646)
+
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/685a034f-e66b-4afd-8e2e-5e0a2ebca709)
+
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/74874ed3-6686-4cd2-b80e-3b3a3dca4b0a)
+
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/b76c93a0-bddc-4792-8a39-8673c0edc30d)
+
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/f0b4ab5c-3ebb-489c-83b7-3b32676c28ae)
+
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/6b794c4f-2a9a-4d2c-96f1-394c801d880e)
+
+</details>
 
 <p>
     <text>灵感来自于我的朋友们: </text> 
