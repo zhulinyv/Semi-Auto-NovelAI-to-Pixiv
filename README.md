@@ -269,6 +269,7 @@ python inpaint.py
 ## 🤝 鸣谢
 
 本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) 降噪和放大图片
+
 本项目使用 [stable-diffusion-inspector](https://spell.novelai.dev/) 解析图片元数据
 
 
