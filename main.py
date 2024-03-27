@@ -5,6 +5,7 @@ from i2i import i2i_by_band
 from waifu2x import main as waifu2x
 from mosaic import main as mosaic
 from pixiv import main as pixiv
+from inpaint import for_webui as inpaint
 
 from utils.utils import env
 
@@ -16,9 +17,9 @@ with gr.Blocks() as demo:
         gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o")
         with gr.Column():
             with gr.Column(scale=3):
-                positive = gr.Textbox(value="[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,", label="正面提示词")
+                positive = gr.Textbox(value="[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,", lines=2, label="正面提示词")
                 with gr.Row():
-                    negative = gr.Textbox(value="lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], mosaic censoring, bar censor, censored, {{{{{chibi,doll}}}}}, silhouette,", label="负面提示词", scale=3)
+                    negative = gr.Textbox(value="lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], mosaic censoring, bar censor, censored, {{{{{chibi,doll}}}}}, silhouette,", lines=2, label="负面提示词", scale=3)
                     generate = gr.Button(value="开始生成", scale=1)
             with gr.Row():
                 with gr.Column(scale=1):
@@ -36,9 +37,9 @@ with gr.Blocks() as demo:
         gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o")
         with gr.Column():
             with gr.Column():
-                positive = gr.Textbox(value="[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,", label="正面提示词")
+                positive = gr.Textbox(value="[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,", lines=2, label="正面提示词")
                 with gr.Row():
-                    negative = gr.Textbox(value="lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], mosaic censoring, bar censor, censored, {{{{{chibi,doll}}}}}, silhouette,", label="负面提示词", scale=3)
+                    negative = gr.Textbox(value="lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], mosaic censoring, bar censor, censored, {{{{{chibi,doll}}}}}, silhouette,", lines=3, label="负面提示词", scale=3)
                     generate = gr.Button(value="开始生成", scale=1)
             with gr.Row():
                 input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
@@ -74,6 +75,21 @@ with gr.Blocks() as demo:
         generate_button.click(fn=t2i, inputs=forever, outputs=show_img)
         generate_forever.click(fn=t2i, inputs=forever, outputs=show_img_)
         stop_button.click(None, None, None, cancels=[cancel_event])
+    with gr.Tab("局部重绘"):
+        gr.Markdown("> 通过蒙版对图片重绘(重绘区域为白色, 其余透明而不是黑色)")
+        generate = gr.Button(value="开始生成")
+        with gr.Column():
+            with gr.Row():
+                input_path = gr.Textbox(value="", label="批量处理图片路径(仅在本程序运行的电脑生效)", scale=5)
+                mask_path = gr.Textbox(value="", label="批量处理蒙版路径(仅在本程序运行的电脑生效)", scale=5)
+                open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
+            with gr.Row():
+                input_img = gr.Image(label="重绘图片", type="pil", scale=1)
+                input_mask = gr.Image(image_mode="RGBA", label="重绘蒙版", type="pil", scale=1)
+                with gr.Column(scale=2):
+                    output_info = gr.Textbox(label="输出信息")
+                    output_img = gr.Image(scale=2)
+        generate.click(fn=inpaint, inputs=[input_path, mask_path, input_img, input_mask, open_button], outputs=[output_img, output_info])
     with gr.Tab("Waifu2x放大"):
         gr.Markdown("> 使用 Waifu2x 放大并降噪图片")
         generate = gr.Button(value="开始生成")

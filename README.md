@@ -163,6 +163,21 @@ pip install -r requirements.txt
         └---6594641258_AzureLane_拉菲.png
 ```
 
+> 对于局部重绘, 需要将重绘图片放到 `.\output\inpaint\img` 文件夹, 蒙版图片放到 `.\output\inpaint\mask` 文件夹
+
+```
+例如:
+.\output
+  └---\inpaint
+        └---img
+            └---7589641258_GenshinImpact_可莉.png
+            └---6594641258_AzureLane_拉菲.png
+        └---mask
+            └---7589641258_GenshinImpact_可莉.png
+            └---6594641258_AzureLane_拉菲.png
+```
+
+
 </details>
 
 ## 🎉 使用
@@ -225,7 +240,14 @@ python mosaic.py
 
 对关键部位打马赛克
 
+#### inpaint.py
+
+```
+python inpaint.py
+```
+
 </details>
+
 
 ## 📖 待办
 
@@ -234,7 +256,7 @@ python mosaic.py
 + [x] 批量上传 Pixiv
 + [x] 计算剩余水晶
 + [x] 批量 [waifu2x](https://github.com/nagadomi/waifu2x)
-+ [ ] ~~批量局部重绘~~
++ [x] 批量局部重绘
 + [ ] ~~批量 vibe~~
 + [x] 批量打码
 + [x] 用 Gradio 写一个 WebUI

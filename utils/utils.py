@@ -8,7 +8,7 @@ import zipfile
 
 from loguru import logger
 
-need_dir_list = ["./output", "./output/t2i", "./output/choose_for_i2i", "./output/i2i/", "./output/pixiv", "./output/choose_for_upscale" ,"./output/upscale", "./output/mosaic"]
+need_dir_list = ["./output", "./output/t2i", "./output/choose_for_i2i", "./output/i2i/", "./output/pixiv", "./output/choose_for_upscale" ,"./output/upscale", "./output/mosaic", "./output/inpaint", "./output/inpaint/img", "./output/inpaint/mask"]
 
 if not os.path.exists(".env"):
     shutil.copyfile(".env.example", ".env")
@@ -98,7 +98,41 @@ json_for_i2i = {
         "negative_prompt": str
     }
 }
-
+json_for_inpaint = {
+    "input": str,
+    "model": "nai-diffusion-3-inpainting",
+    "action": "infill",
+    "parameters": {
+        "width": int,
+        "height": int,
+        "scale": float,
+        "sampler": str,
+        "steps": int,
+        "n_samples": 1,
+        "strength": float,
+        "noise": 0,
+        "ucPreset": 3,
+        "qualityToggle": True,
+        "sm": bool,
+        "sm_dyn": bool,
+        "dynamic_thresholding": False,
+        "controlnet_strength": 1,
+        "legacy": False,
+        "add_original_image": True,
+        "uncond_scale": 1,
+        "cfg_rescale": 0,
+        "noise_schedule": str,
+        "legacy_v3_extend": False,
+        "params_version": 1,
+        "reference_information_extracted": 1,
+        "reference_strength": 0.6,
+        "seed": int,
+        "image": str,
+        "mask": str,
+        "extra_noise_seed": int,
+        "negative_prompt": str
+    }
+}
 
 def list_to_str(str_list: list):
     empty_str = ""
