@@ -8,7 +8,7 @@ if not exist venv (
 set PYTHON="venv\Scripts\Python.exe"
 
 : check pip packages
-%PYTHON% -m pip install -r requirements.txt
+%PYTHON% -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 : have fun :)
 %PYTHON% .\main.py

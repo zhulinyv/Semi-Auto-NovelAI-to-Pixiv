@@ -234,8 +234,8 @@ python mosaic.py
 + [x] 批量上传 Pixiv
 + [x] 计算剩余水晶
 + [x] 批量 [waifu2x](https://github.com/nagadomi/waifu2x)
-+ [ ] 批量局部重绘
-+ [ ] 批量 vibe
++ [ ] ~~批量局部重绘~~
++ [ ] ~~批量 vibe~~
 + [x] 批量打码
 + [x] 用 Gradio 写一个 WebUI
 + [ ] 将项目放到容器持久化运行

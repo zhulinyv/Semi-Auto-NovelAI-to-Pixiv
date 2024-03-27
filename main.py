@@ -111,8 +111,6 @@ with gr.Blocks() as demo:
                 output_info =gr.Textbox(label="输出信息", scale=4)
                 generate = gr.Button("开始上传", scale=1)
         generate.click(fn=pixiv, inputs=input_path, outputs=output_info)
-    with gr.Tab("局部重绘"):
-        ...
     with gr.Tab("法术解析"):
         gr.HTML("""
 <iframe id="myiframe" src="https://spell.novelai.dev/"></iframe>
