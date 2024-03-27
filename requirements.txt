@@ -1,6 +1,6 @@
 setuptools>=69.2.0
 pydantic>=2.0
-gradio
+gradio==4.21.0
 pydantic-settings
 python-dotenv
 pillow

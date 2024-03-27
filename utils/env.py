@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     allow_tag_edit: bool = True
     waifu2x_scale: int = 2
     waifu2x_noise: int = 3
+    share: bool = False
 
     class Config:
         env_file = '.env'

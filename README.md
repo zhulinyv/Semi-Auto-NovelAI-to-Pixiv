@@ -69,6 +69,7 @@ pip install -r requirements.txt
 | allow_tag_edit | 否 | bool | True | 是否允许其它用户编辑标签 | False |
 | waifu2x_scale | 否 | int | 2 | waifu2x 放大倍数 | 4 |
 | waifu2x_noise | 否 | int | 3 | waifu2x 降噪等级 | 2 |
+| share | 否 | bool | False | 是否共享 gradio 链接 | True |
 
 ⚠️ token 的获取:
 
@@ -148,7 +149,7 @@ pip install -r requirements.txt
 
 ## 🎉 使用
 
-运行 `run.bat`, 之后可在浏览器访问 [http://127.0.0.1:11451/](http://127.0.0.1:11451/)
+运行 `run.bat`
 
 这些脚本均可独立运行, 如有需要请展开 ↓
 
