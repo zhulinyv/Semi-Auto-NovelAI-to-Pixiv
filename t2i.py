@@ -46,9 +46,9 @@ def prepare_input():
     action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][choose_action])
     emotion_type = "口交" if "oral" in action else "普通"
     choose_emotion = random.choice(list(data["R18"]["表情"][f"{emotion_type}表情"].keys()))
-    emotion = list_to_str(data["R18"]["表情"][f"{emotion_type}表情"][choose_emotion])
+    emotion = list_to_str(data["R18"]["表情"][f"{emotion_type}表情"][choose_emotion]) if any(view not in action for view in ["from behind", "sex from behind"]) else ""
     choose_surrounding = random.choice(list(data["R18"]["场景"]["仅场景"].keys()))
-    surrounding = list_to_str(data["R18"]["场景"]["仅场景"][choose_surrounding])
+    surrounding = list_to_str(data["R18"]["场景"]["仅场景"][choose_surrounding]) if "multiple views" not in action else "{white background},"
     cum = random.choice(data["R18"]["射精"])
 
     logger.info(f"""

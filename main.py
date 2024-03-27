@@ -61,12 +61,12 @@ with gr.Blocks() as demo:
                     sm_dyn = gr.Radio([True, False], value=False, label="sm_dyn(开启需同时开启 sm)")
             generate.click(fn=i2i_by_band, inputs=[input_img, input_path, open_button, positive, negative, resolution, scale, sampler, noise_schedule, steps, strength, sm, sm_dyn], outputs=output_img)
     with gr.Tab("随机涩图"):
+        gr.Markdown("> 通过随机组合 ./files/favorite.json 中的 tag 生成一张涩图")
         with gr.Row():
             forever = gr.Radio(value=False, visible=False)
             generate_button = gr.Button("开始生成", scale=2)
             generate_forever = gr.Button("无限生成", scale=1)
             stop_button = gr.Button("停止生成", scale=1)
-
         with gr.Row():
             show_img = gr.Image()
             show_img_ = gr.Image()
@@ -106,7 +106,7 @@ with gr.Blocks() as demo:
     with gr.Tab("上传Pixiv"):
         gr.Markdown("> 将图片或图片组上传至 Pixiv, 你可以在命令行查看上传进度")
         with gr.Column():
-            input_path = gr.Textbox(label="上传路径(其中可包含单张图片或文件夹)")
+            input_path = gr.Textbox(label="上传路径(其中可包含单张图片或文件夹, 仅在本程序运行的电脑生效)")
             with gr.Row():
                 output_info =gr.Textbox(label="输出信息", scale=4)
                 generate = gr.Button("开始上传", scale=1)
