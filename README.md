@@ -88,6 +88,7 @@ pip install -r requirements.txt
 | waifu2x_noise | 否 | int | 3 | waifu2x 降噪等级 | 2 |
 | share | 否 | bool | False | 是否共享 gradio 链接 | True |
 | height | 否 | int | 650 | 法术解析页面的高度 | 800 |
+| port | 否 | int | 11451 | 本地启动的端口 | 13579 |
 
 ⚠️ token 的获取:
 

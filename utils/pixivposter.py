@@ -75,7 +75,7 @@ def pixiv_upload(image_paths: list, title: str, caption: str, labels: list, cook
         'ratings[violent]': 'false',
         'responseAutoAccept': 'false',
         'restrict': 'public',
-        'suggestedTags[]': ['女の子', '原神'],
+        'suggestedTags[]': ['女の子'],
         'tags[]': labels,
         'title': title,
         'titleTranslations[en]': '',

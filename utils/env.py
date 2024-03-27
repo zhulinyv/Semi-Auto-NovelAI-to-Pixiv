@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     waifu2x_noise: int = 3
     share: bool = False
     height: int = 650
+    port: int = 11451
 
     class Config:
         env_file = '.env'
