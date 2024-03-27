@@ -273,6 +273,8 @@ python inpaint.py
 
 本项目使用 [stable-diffusion-inspector](https://spell.novelai.dev/) 解析图片元数据
 
+本项目使用 [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshin-Sync/tree/main) 上传图片至 Pixiv
+
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
