@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     waifu2x_scale: int = 2
     waifu2x_noise: int = 3
     share: bool = False
+    height: int = 650
 
     class Config:
         env_file = '.env'

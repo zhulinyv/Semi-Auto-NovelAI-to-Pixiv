@@ -113,9 +113,17 @@ with gr.Blocks() as demo:
         generate.click(fn=pixiv, inputs=input_path, outputs=output_info)
     with gr.Tab("局部重绘"):
         ...
-    with gr.Tab("vibe"):
-        ...
-    
+    with gr.Tab("法术解析"):
+        gr.HTML("""
+<iframe id="myiframe" src="https://spell.novelai.dev/"></iframe>
+<style>
+    #myiframe {
+        width: 100%;
+        height: 650px;
+    }
+</style>
+""".replace("650", str(env.height)))
+        
 
 
 demo.queue().launch(inbrowser=env.share, share=True, server_port=11451)

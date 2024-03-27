@@ -87,6 +87,7 @@ pip install -r requirements.txt
 | waifu2x_scale | 否 | int | 2 | waifu2x 放大倍数 | 4 |
 | waifu2x_noise | 否 | int | 3 | waifu2x 降噪等级 | 2 |
 | share | 否 | bool | False | 是否共享 gradio 链接 | True |
+| height | 否 | int | 650 | 法术解析页面的高度 | 800 |
 
 ⚠️ token 的获取:
 
@@ -244,6 +245,7 @@ python mosaic.py
 ## 🤝 鸣谢
 
 本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) 降噪和放大图片
+本项目使用 [stable-diffusion-inspector](https://spell.novelai.dev/) 解析图片元数据
 
 
 <hr>
