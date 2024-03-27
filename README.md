@@ -25,6 +25,8 @@
 
 ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/74874ed3-6686-4cd2-b80e-3b3a3dca4b0a)
 
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/5f30cb40-f014-4aff-81ef-f86b02ae2fdb)
+
 ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/b76c93a0-bddc-4792-8a39-8673c0edc30d)
 
 ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/f0b4ab5c-3ebb-489c-83b7-3b32676c28ae)
