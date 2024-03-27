@@ -48,31 +48,38 @@ def upload(image_list, file):
 
 
 
-file_path = "./output/pixiv/"
-file_list = os.listdir(file_path)
+def main(file_path):
+    file_list = os.listdir(file_path)
 
-for file in file_list:
-    times = 1
-    while times <= 5:
-        try:
-            image_list = []
-            if file[-4:] == '.png':
-                image_list.append(file_path + file)
-                file = file
-            else:
-                folder_path = file_path + file
-                folder_list = os.listdir(folder_path)
-                for i in folder_list: image_list.append(f"{folder_path}/{i}")
-                file = folder_list[-1]
-            status = upload(image_list, file)
-            if status == 1:
-                times += 1
-                raise UploadError
-            elif status == 2:
-                sleep_for_cool(600, 1200)
-                raise UploadTooFastError
-            else:
-                break
-        except:
-            pass
-    sleep_for_cool(600, 1200)
+    for file in file_list:
+        times = 1
+        while times <= 5:
+            try:
+                image_list = []
+                if file[-4:] == '.png':
+                    image_list.append(f"{file_path}/{file}")
+                    file = file
+                else:
+                    folder_path = f"{file_path}/{file}"
+                    folder_list = os.listdir(folder_path)
+                    for i in folder_list: image_list.append(f"{folder_path}/{i}")
+                    file = folder_list[-1]
+                status = upload(image_list, file)
+                if status == 1:
+                    times += 1
+                    raise UploadError
+                elif status == 2:
+                    sleep_for_cool(600, 1200)
+                    raise UploadTooFastError
+                else:
+                    break
+            except:
+                pass
+        sleep_for_cool(600, 1200)
+    
+    return "处理完成"
+
+
+
+if __name__ == "__main__":
+    main("./output/pixiv")

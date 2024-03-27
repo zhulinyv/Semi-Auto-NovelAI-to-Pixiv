@@ -2,8 +2,9 @@ import gradio as gr
 
 from t2i import t2i, t2i_by_band
 from i2i import i2i_by_band
-from waifu2x import waifu2x
+from waifu2x import main as waifu2x
 from mosaic import main as mosaic
+from pixiv import main as pixiv
 
 
 
@@ -57,14 +58,20 @@ with gr.Blocks() as demo:
                     sm = gr.Radio([True, False],value=False, label="sm")
                     sm_dyn = gr.Radio([True, False], value=False, label="sm_dyn(开启需同时开启 sm)")
             generate.click(fn=i2i_by_band, inputs=[input_img, input_path, open_button, positive, negative, resolution, scale, sampler, noise_schedule, steps, strength, sm, sm_dyn], outputs=output_img)
-    with gr.Tab("随机涩图)"):
-        gr.Markdown("> 还在写 QWQ... 文生图无限生成还有 bug, 无限生成布吉岛怎么返回图片, 所以全部是 False")
-        with gr.Column():
-            with gr.Row():
-                forever = gr.Radio([False, False], value=False, label="是否无限生成")
-                generate_button = gr.Button("开始生成")
+    with gr.Tab("随机涩图"):
+        with gr.Row():
+            forever = gr.Radio(value=False, visible=False)
+            generate_button = gr.Button("开始生成", scale=2)
+            generate_forever = gr.Button("无限生成", scale=1)
+            stop_button = gr.Button("停止生成", scale=1)
+
+        with gr.Row():
             show_img = gr.Image()
+            show_img_ = gr.Image()
+        cancel_event = show_img_.change(fn=t2i, inputs=forever, outputs=show_img_, show_progress="hidden")
         generate_button.click(fn=t2i, inputs=forever, outputs=show_img)
+        generate_forever.click(fn=t2i, inputs=forever, outputs=show_img_)
+        stop_button.click(None, None, None, cancels=[cancel_event])
     with gr.Tab("Waifu2x放大"):
         gr.Markdown("> 使用 Waifu2x 放大并降噪图片")
         generate = gr.Button(value="开始生成")
@@ -95,7 +102,13 @@ with gr.Blocks() as demo:
                     output_img = gr.Image(scale=2)
         generate.click(fn=mosaic, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
     with gr.Tab("上传Pixiv"):
-        ...
+        gr.Markdown("> 将图片或图片组上传至 Pixiv, 你可以在命令行查看上传进度")
+        with gr.Column():
+            input_path = gr.Textbox(label="上传路径(其中可包含单张图片或文件夹)")
+            with gr.Row():
+                output_info =gr.Textbox(label="输出信息", scale=4)
+                generate = gr.Button("开始上传", scale=1)
+        generate.click(fn=pixiv, inputs=input_path, outputs=output_info)
     with gr.Tab("局部重绘"):
         ...
     with gr.Tab("vibe"):

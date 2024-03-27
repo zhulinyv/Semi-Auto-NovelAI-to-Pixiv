@@ -73,7 +73,7 @@ def prepare_input():
 def prepare_json(input_, negetive):
     json_for_t2i["input"] = input_
     if isinstance(env.img_size, int):
-        resolution_list = [[832, 1216],[1024, 1024], [1216, 832]]
+        resolution_list = [[832, 1216], [1024, 1024], [1216, 832]]
         resolution = random.choice(resolution_list)
     elif isinstance(env.img_size, list):
         resolution = env.img_size

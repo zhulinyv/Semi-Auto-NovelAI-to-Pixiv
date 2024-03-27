@@ -100,4 +100,4 @@ def main(input_path):
 
 
 if __name__ == "__main__":
-    main(f"./output/choose_for_i2i/")
+    main("./output/choose_for_i2i")
