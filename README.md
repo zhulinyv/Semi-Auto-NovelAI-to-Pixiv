@@ -32,12 +32,19 @@
 
 请确保你已经安装了 Python 并将其添加到环境变量中
 
+这些脚本均可独立运行, 如有需要请展开 ↓
+
+<details>
+<summary>已过时(请直接运行 run.bat)</summary>
+
 在命令行中依次执行以下代码
 
 ```
 .\venv\Scripts\activate
 pip install -r requirements.txt
 ```
+
+</details>
 
 ## ⚙️ 配置
 
@@ -82,6 +89,11 @@ pip install -r requirements.txt
 
 
 ### 其它配置:
+
+这些脚本均可独立运行, 如有需要请展开 ↓
+
+<details>
+<summary>已过时(请直接运行 run.bat)</summary>
 
 > 对于图生图, 需要将 NovelAI 生成的图片放到 `.\output\choose_for_i2i` 文件夹
 
@@ -132,7 +144,16 @@ pip install -r requirements.txt
         └---6594641258_AzureLane_拉菲.png
 ```
 
+</details>
+
 ## 🎉 使用
+
+运行 `run.bat`, 之后可在浏览器访问 [http://127.0.0.1:11451/](http://127.0.0.1:11451/)
+
+这些脚本均可独立运行, 如有需要请展开 ↓
+
+<details>
+<summary>已过时(请直接运行 run.bat)</summary>
 
 ### 1️⃣ 激活虚拟环境
 
@@ -185,14 +206,7 @@ python mosaic.py
 
 对关键部位打马赛克
 
-#### main.py
-
-```
-python main.py
-```
-
-⚠️ WebUI 开发中, 目前仅支持单张随机文生图
-
+</details>
 
 ## 📖 待办
 
@@ -204,7 +218,7 @@ python main.py
 + [ ] 批量局部重绘
 + [ ] 批量 vibe
 + [x] 批量打码
-+ [ ] 用 Gradio 写一个 WebUI
++ [x] 用 Gradio 写一个 WebUI
 + [ ] 将项目放到容器持久化运行
 + [ ] ...
 
