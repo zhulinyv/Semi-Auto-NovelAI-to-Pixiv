@@ -35,6 +35,10 @@
 
 ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/6b794c4f-2a9a-4d2c-96f1-394c801d880e)
 
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/30e22047-ce6c-4016-896b-852e55b9e724)
+
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/12f73504-e7b8-420b-aa90-9a8610cd1a0e)
+
 </details>
 
 <p>
@@ -187,7 +191,9 @@ pip install -r requirements.txt
 
 ## 🎉 使用
 
-运行 `run.bat`
+运行 `run.bat`, 即可在[浏览器打开的链接](http://127.0.0.1:11451/)进行生成图片
+
+运行 `selector.py`, 即可在打开的窗口进行筛选图片
 
 这些脚本均可独立运行, 如有需要请展开 ↓
 
@@ -268,6 +274,7 @@ python inpaint.py
 + [ ] 将项目放到容器持久化运行
 + [ ] 修改界面样式
 + [ ] ~~添加 ChatGPT~~
++ [x] ~~写一个图片筛选器~~
 + [ ] 通过账号密码获取 token
 + [ ] ...
 
