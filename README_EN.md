@@ -35,6 +35,10 @@ This is a script that generates images with NovelAI, manually selects them, and 
 
 ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/6b794c4f-2a9a-4d2c-96f1-394c801d880e)
 
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/30e22047-ce6c-4016-896b-852e55b9e724)
+
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/12f73504-e7b8-420b-aa90-9a8610cd1a0e)
+
 </details>
 
 <p>
@@ -182,11 +186,11 @@ e.g.
 
 </details>
 
-
-
 ## 🎉 Use
 
-run `run.bat`
+run `run.bat`, then you can generate pictures on [http://127.0.0.1:11451](http://127.0.0.1:11451)
+
+run `selector.py`, then you can select pictures on a open window
 
 These scripts can be run independently. If needed, expand ↓
 
@@ -267,6 +271,7 @@ python inpaint.py
 + [ ] Containerize the project for persistent running
 + [ ] Change the style of the interface
 + [ ] ~~Add ChatGPT~~
++ [x] White a picture selector
 + [ ] Get token by account and password
 + [ ] ...
 

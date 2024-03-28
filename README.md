@@ -52,7 +52,6 @@
 
 正在学习 Gradio, 尝试为本项目写一个 WebUI
 
-
 ## 💿 部署
 
 请确保你已经安装了 Python 并将其添加到环境变量中
@@ -114,7 +113,6 @@ pip install -r requirements.txt
 - 5.找到并单击 illustraion, 右侧切换到标头选项
 - 6.在请求头部中可以找到 Cookie 和 X-Csrf-Token
 - ![97ae3696ad11708ae2eb0474f198de0c](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/e59caaf6-c69d-485e-965d-d7d924397667)
-
 
 ### 其它配置:
 
@@ -185,7 +183,6 @@ pip install -r requirements.txt
             └---7589641258_GenshinImpact_可莉.png
             └---6594641258_AzureLane_拉菲.png
 ```
-
 
 </details>
 
@@ -278,7 +275,6 @@ python inpaint.py
 + [ ] 通过账号密码获取 token
 + [ ] ...
 
-
 ## 🤝 鸣谢
 
 本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) 降噪和放大图片
@@ -287,7 +283,5 @@ python inpaint.py
 
 本项目使用 [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshin-Sync/tree/main) 上传图片至 Pixiv
 
-
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
-
