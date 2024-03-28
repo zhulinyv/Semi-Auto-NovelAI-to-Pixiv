@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "semi-auto-novelai-to-pixiv"
+version = "2.0.0"
+description = "通过 Nai3 生成图片然后经过人工筛选上传 Pixiv"
+authors = ["zhulinyv <zhulinyv2005@outlook.com>"]
+license = "AGPL-3.0"
+readme = "README.md"
+packages = [{include = "semi_auto_novelai_to_pixiv"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+setuptools = ">=69.2.0"
+pydantic = ">=2.0"
+gradio = "4.21.0"
+pydantic-settings = "^2.2.1"
+python-dotenv = "^1.0.1"
+pillow = "^10.2.0"
+requests = "^2.31.0"
+loguru = "^0.7.2"
+ujson = "^5.9.0"
+nudenet = "^3.0.8"
+pyautogui = "^0.9.54"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
