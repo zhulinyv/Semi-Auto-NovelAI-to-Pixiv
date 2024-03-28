@@ -1,8 +1,10 @@
+# ChatGPT 写的, 效果一般
+
 import os
 import shutil
 import pyautogui
 import tkinter as tk
-from tkinter import filedialog, font
+from tkinter import filedialog
 from PIL import Image, ImageTk
 
 screen_width, screen_height = pyautogui.size()
