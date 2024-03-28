@@ -160,7 +160,7 @@ e.g.
         └---6594641258_AzureLane_拉菲.png
 ```
 
-> "For adding mosaic, you need to place the images in the `.\output\mosaic` folder."
+> "For adding mosaic, you need to place the images in the `.\output\choose_to_mosaic` folder."
 
 ```
 e.g.

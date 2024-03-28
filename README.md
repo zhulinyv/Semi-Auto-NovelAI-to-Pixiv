@@ -160,7 +160,7 @@ pip install -r requirements.txt
         └---6594641258_AzureLane_拉菲.png
 ```
 
-> 对于打马赛克, 需要将图片放到 `.\output\mosaic` 文件夹
+> 对于打马赛克, 需要将图片放到 `.\output\choose_to_mosaic` 文件夹
 
 ```
 例如:

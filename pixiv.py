@@ -15,11 +15,14 @@ from utils.utils import sleep_for_cool
 
 def upload(image_list, file):
     image_info = get_img_info(image_list[-1])
-    if image_info["Software"] != "NovelAI":
+    try:
+        image_info["Software"] == "NovelAI"
+        img_comment = json.loads(image_info["Comment"])
+        caption = img_comment["prompt"]
+        pass
+    except:
         logger.error("不是 NovelAI 生成的图片!")
-        return
-    img_comment = json.loads(image_info["Comment"])
-    caption = img_comment["prompt"]
+        caption = ""
     
     name_list = file.replace(".png", '').split("_")
     title = name_list[2]

@@ -108,6 +108,7 @@ def pixiv_upload(image_paths: list, title: str, caption: str, labels: list, cook
     }
 
     post_response = requests.request("POST", post_url, headers=headers, data=payload, files=files)
+    logger.debug(f">>>>> {post_response.status_code}")
     if not post_response.json().get('error', True):
         get_url = f"https://www.pixiv.net/ajax/work/create/illustration/progress?convertKey={post_response.json()['body']['convertKey']}&lang=zh"
         illust_id = None
