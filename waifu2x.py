@@ -38,7 +38,7 @@ def waifu2x(file, output_dir, waifu2x_noise, waifu2x_scale):
     metadata.add_text("Comment", info["Comment"])
     new_img = Image.open(output_dir)
     new_img.save(output_dir, pnginfo=metadata)
-    logger.success("还原成功")
+    logger.success("还原成功!")
 
 
 def main(file, file_path, open_button, waifu2x_noise, waifu2x_scale):

@@ -266,6 +266,9 @@ python inpaint.py
 + [x] 批量打码
 + [x] 用 Gradio 写一个 WebUI
 + [ ] 将项目放到容器持久化运行
++ [ ] 修改界面样式
++ [ ] ~~添加 ChatGPT~~
++ [ ] 通过账号密码获取 token
 + [ ] ...
 
 

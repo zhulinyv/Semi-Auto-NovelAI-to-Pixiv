@@ -14,7 +14,7 @@ from utils.utils import env
 with gr.Blocks() as demo:
     gr.Markdown("# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 半自动 NovelAI 上传 Pixiv")
     with gr.Tab("文生图"):
-        gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o")
+        gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o, 更多画风串: [Nai3 画风串](https://zhulinyv.github.io/aLcTZgiMf/)")
         with gr.Column():
             with gr.Column(scale=3):
                 positive = gr.Textbox(value="[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,", lines=2, label="正面提示词")
@@ -34,7 +34,7 @@ with gr.Blocks() as demo:
                 output_img = gr.Image(scale=2)
         generate.click(fn=t2i_by_band, inputs=[positive, negative, resolution, scale, sampler, noise_schedule, steps, sm, sm_dyn, seed], outputs=output_img)
     with gr.Tab("图生图"):
-        gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o")
+        gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o, 更多画风串: [Nai3 画风串](https://zhulinyv.github.io/aLcTZgiMf/)")
         with gr.Column():
             with gr.Column():
                 positive = gr.Textbox(value="[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,", lines=2, label="正面提示词")
@@ -60,7 +60,7 @@ with gr.Blocks() as demo:
                     noise_schedule = gr.Radio(["native", "karras", "exponential", "polyexponential"], value="native", label="噪声计划表")
                     sm = gr.Radio([True, False],value=False, label="sm")
                     sm_dyn = gr.Radio([True, False], value=False, label="sm_dyn(开启需同时开启 sm)")
-            generate.click(fn=i2i_by_band, inputs=[input_img, input_path, open_button, positive, negative, resolution, scale, sampler, noise_schedule, steps, strength, sm, sm_dyn], outputs=output_img)
+            generate.click(fn=i2i_by_band, inputs=[input_img, input_path, open_button, positive, negative, resolution, scale, sampler, noise_schedule, steps, strength, sm, sm_dyn], outputs=[output_img, output_info])
     with gr.Tab("随机涩图"):
         gr.Markdown("> 通过随机组合 ./files/favorite.json 中的 tag 生成一张涩图")
         with gr.Row():
@@ -137,7 +137,6 @@ with gr.Blocks() as demo:
     }
 </style>
 """.replace("650", str(env.height)))
-        
 
 
-demo.queue().launch(inbrowser=env.share, share=True, server_port=env.port)
+demo.queue().launch(inbrowser=True, share=env.share, server_port=env.port)

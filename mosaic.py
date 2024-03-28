@@ -18,7 +18,7 @@ def __mosaic(img, length):
     return img
 
 def _mosaic(img, fx, fy, tx, ty):
-    length = img.width if img.width > img.height else img.height
+    length = img.width if img.width < img.height else img.height
     c = img.crop((fx, fy, tx, ty))
     c = __mosaic(c, length)
     img.paste(c, (fx, fy, tx, ty))

@@ -265,6 +265,9 @@ python inpaint.py
 + [x] Batch mosaic
 + [x] Write a WebUI using Gradio
 + [ ] Containerize the project for persistent running
++ [ ] Change the style of the interface
++ [ ] ~~Add ChatGPT~~
++ [ ] Get token by account and password
 + [ ] ...
 
 ## 🤝 Acknowledgements
