@@ -8,3 +8,4 @@ requests
 loguru
 ujson
 nudenet
+pyautogui
