@@ -155,9 +155,9 @@ def format_path(str_: str):
 
 def sleep_for_cool(int1, int2):
     sleep_time = round(random.uniform(int1, int2), 3)
-    logger.info(f"等待 {sleep_time} 后继续...")
+    logger.info(f"等待 {sleep_time} 秒后继续...")
     time.sleep(sleep_time)
-    return f"等待 {sleep_time} 后继续..."
+    return f"等待 {sleep_time} 秒后继续..."
 
 def generate_image(json_data):
     try:
