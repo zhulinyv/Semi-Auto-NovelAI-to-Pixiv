@@ -3,6 +3,7 @@ import os
 import ujson as json
 
 from loguru import logger
+from pathlib import Path
 
 from utils.env import env
 from utils.error import UploadError, UploadTooFastError
@@ -60,12 +61,15 @@ def main(file_path):
             try:
                 image_list = []
                 if file[-4:] == '.png':
-                    image_list.append(f"{file_path}/{file}")
+                    # image_list.append(f"{file_path}/{file}")
+                    image_list.append(Path(file_path)/file)
                     file = file
                 else:
-                    folder_path = f"{file_path}/{file}"
+                    # folder_path = f"{file_path}/{file}"
+                    folder_path = Path(file_path)/file
                     folder_list = os.listdir(folder_path)
-                    for i in folder_list: image_list.append(f"{folder_path}/{i}")
+                    # for i in folder_list: image_list.append(f"{folder_path}/{i}")
+                    for i in folder_list: image_list.append(folder_path/i)
                     file = folder_list[-1]
                 status = upload(image_list, file)
                 if status == 1:
@@ -79,8 +83,9 @@ def main(file_path):
             except:
                 pass
         sleep_for_cool(600, 1200)
+    logger.success("上传完成!")
     
-    return "处理完成"
+    return "上传完成!"
 
 
 
