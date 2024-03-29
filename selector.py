@@ -47,7 +47,7 @@ class ImageSelectorApp:
         if self.image_dir:
             self.image_list = [os.path.join(self.image_dir, filename) for filename in os.listdir(self.image_dir) if filename.endswith(('.jpg', '.png', '.jpeg'))]
             self.show_next_image()
-            self.image_dir_label.config(text="图片筛选器: " + self.image_dir)
+            self.image_dir_label.config(text="图片目录: " + self.image_dir)
             self.load_image_button.config(state=tk.DISABLED)
             self.select_button.config(state=tk.NORMAL)
             self.next_button.config(state=tk.NORMAL)
