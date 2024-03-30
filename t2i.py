@@ -25,7 +25,7 @@ def t2i_by_band(positive: str, negative: str, resolution: str, scale: float, sam
     logger.debug(json_for_t2i)
     
     save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
-    sleep_for_cool(12, 24)
+    # sleep_for_cool(12, 24)
     
     return f"./output/t2i/{seed}_None_None.png"
 
