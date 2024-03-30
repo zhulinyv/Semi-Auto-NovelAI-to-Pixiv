@@ -1,3 +1,4 @@
+import cv2
 import os
 import shutil
 
@@ -12,35 +13,48 @@ nude_detector = NudeDetector()
 
 
 
-def __mosaic(img, length):
-    s = img.size
-    img = img.resize((int(length * 0.01), int(length * 0.01)))
-    img = img.resize(s)
-    return img
-
-def _mosaic(img, fx, fy, tx, ty):
-    length = img.width if img.width < img.height else img.height
-    c = img.crop((fx, fy, tx, ty))
-    c = __mosaic(c, length)
-    img.paste(c, (fx, fy, tx, ty))
-    return img
-
-def mosaic(img):
-    image = Image.open(img)
+def _mosaic(img, x, y, w, h, neighbor):
+    for i in range(0, h , neighbor):  
+        for j in range(0, w , neighbor):
+            rect = [j + x, i + y]
+            color = img[i + y][j + x].tolist()
+            left_up = (rect[0], rect[1])
+            x2=rect[0] + neighbor - 1
+            y2=rect[1] + neighbor - 1
+            if x2>x+w:
+                x2=x+w
+            if y2>y+h:
+                y2=y+h
+            right_down = (x2,y2)  
+            cv2.rectangle(img, left_up, right_down, color, -1)
     
-    logger.info("正在还原 pnginfo")
-    info = image.info
+    return img
+
+
+def mosaic(img_path):
+    pil_img = Image.open(img_path)
+    
+    neighbor = int(pil_img.width * 0.01 if pil_img.width > pil_img.height else pil_img.height * 0.01)
+    
+    info = pil_img.info
     metadata = PngInfo()
     metadata.add_text("Software", info["Software"])
     metadata.add_text("Comment", info["Comment"])
-    logger.success("还原成功!")
     
-    body = nude_detector.detect(img)
+    body = nude_detector.detect(img_path)
     
     for part in body:
         if part["class"] in ["FEMALE_GENITALIA_EXPOSED",  "MALE_GENITALIA_EXPOSED"]:
-            image = _mosaic(image, part["box"][0], part["box"][1], part["box"][0] + part["box"][2], part["box"][1] + part["box"][3])
-            image.save(img, pnginfo=metadata)
+            logger.debug("检测到: {}".format(part["class"]))
+            
+            cv2_img=cv2.imread(img_path)
+            cv2_img = _mosaic(cv2_img, part["box"][0], part["box"][1], part["box"][2], part["box"][3], neighbor)
+            cv2.imwrite(img_path, cv2_img)
+
+    logger.info("正在还原 pnginfo")
+    pil_img = Image.open(img_path)
+    pil_img.save(img_path, pnginfo=metadata)
+    logger.success("还原成功!")
 
 
 
@@ -64,6 +78,7 @@ def main(file_path, input_img, open_button):
         mosaic(input_img)
         logger.success("处理完成!")
         return "./output/temp_.png", None
+
 
 
 if __name__ == "__main__":
