@@ -20,6 +20,7 @@ loguru = "^0.7.2"
 ujson = "^5.9.0"
 nudenet = "^3.0.8"
 pyautogui = "^0.9.54"
+opencv-python = "^4.9.0.80"
 
 
 [build-system]
