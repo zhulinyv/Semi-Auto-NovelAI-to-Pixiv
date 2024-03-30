@@ -23,7 +23,7 @@ with gr.Blocks() as demo:
                     generate = gr.Button(value="开始生成", scale=1)
             with gr.Row():
                 with gr.Column(scale=1):
-                    resolution = gr.Radio(["832x1216", "1216x832", "1024x1024", "512x768", "768x768", "640x640"], value="832x1216", label="分辨率(宽x高)")
+                    resolution = gr.Radio(["832x1216", "1216x832", "1024x1024", "512x768", "768x768", "640x640", "1024x1536", "1536x1024", "1472x1472", "1088x1920", "1920x1088"], value="832x1216", label="分辨率(宽x高)(大分辨率请注意水晶消耗)")
                     scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label="提示词相关性")
                     sampler = gr.Radio(["k_euler", "k_euler_ancestral", "k_dpmpp_2s_ancestral", "k_dpmpp_2m", "k_dpmpp_sde", "ddim_v3"], value="k_euler", label="采样器")
                     noise_schedule = gr.Radio(["native", "karras", "exponential", "polyexponential"], value="native", label="噪声计划表")
@@ -51,7 +51,7 @@ with gr.Blocks() as demo:
                     output_img = gr.Image()
             with gr.Column():
                 with gr.Row():
-                    resolution = gr.Radio(["832x1216", "1216x832", "1024x1024", "512x768", "768x768", "640x640"], value="832x1216", label="分辨率(宽x高)")
+                    resolution = gr.Radio(["832x1216", "1216x832", "1024x1024", "512x768", "768x768", "640x640", "1024x1536", "1536x1024", "1472x1472", "1088x1920", "1920x1088"], value="832x1216", label="分辨率(宽x高)(大分辨率请注意水晶消耗)")
                     scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label="提示词相关性")
                     steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label="采样步数")
                     strength = gr.Slider(minimum=0, maximum=1, value=0.5, step=0.1, label="重绘幅度")

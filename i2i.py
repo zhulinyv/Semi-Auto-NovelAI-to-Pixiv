@@ -29,7 +29,7 @@ def i2i_by_band(input_img, input_path, open_button, positive: str, negative: str
         json_for_i2i["parameters"]["extra_noise_seed"] = seed
         json_for_i2i["parameters"]["negative_prompt"] = negative
         
-        logger.debug(json_for_i2i)
+        # logger.debug(json_for_i2i)
         
         save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
         sleep_for_cool(12, 24)
