@@ -11,7 +11,7 @@ from utils.utils import env
 
 
 
-with gr.Blocks() as demo:
+with gr.Blocks(theme=env.theme) as demo:
     gr.Markdown("# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 半自动 NovelAI 上传 Pixiv")
     with gr.Tab("文生图"):
         gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o, 更多画风串: [Nai3 画风串](https://zhulinyv.github.io/aLcTZgiMf/)")

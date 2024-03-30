@@ -96,6 +96,7 @@ Before using the project, you need to make a copy of `env.example` and rename it
 | share | No | bool | False | Whether to share the Gradio link | True |
 | height | No | int | 650 | Height of the Gradio interface | 800 |
 | port | No | int | 11451 | Port for local deployment | 13579 |
+| theme | No | str \| None | "NoCrypt/miku" | WebUI interface theme | more theme: [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
 
 ⚠️ Getting the token:
 
@@ -269,7 +270,7 @@ python inpaint.py
 + [x] Batch mosaic
 + [x] Write a WebUI using Gradio
 + [ ] Containerize the project for persistent running
-+ [ ] Change the style of the interface
++ [x] Change the style of the interface
 + [ ] ~~Add ChatGPT~~
 + [x] White a picture selector
 + [ ] Get token by account and password

@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     share: bool = False
     height: int = 650
     port: int = 11451
+    theme: Union[str, None] = "NoCrypt/miku"
 
     class Config:
         env_file = '.env'

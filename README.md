@@ -96,6 +96,7 @@ pip install -r requirements.txt
 | share | 否 | bool | False | 是否共享 gradio 链接 | True |
 | height | 否 | int | 650 | 法术解析页面的高度 | 800 |
 | port | 否 | int | 11451 | 本地启动的端口 | 13579 |
+| theme | 否 | str \| None | "NoCrypt/miku" | WebUI 界面主题 | 更多请查看 [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
 
 ⚠️ token 的获取:
 
@@ -269,7 +270,7 @@ python inpaint.py
 + [x] 批量打码
 + [x] 用 Gradio 写一个 WebUI
 + [ ] 将项目放到容器持久化运行
-+ [ ] 修改界面样式
++ [x] 修改界面样式
 + [ ] ~~添加 ChatGPT~~
 + [x] ~~写一个图片筛选器~~
 + [ ] 通过账号密码获取 token
