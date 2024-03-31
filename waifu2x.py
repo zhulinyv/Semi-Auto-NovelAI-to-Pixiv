@@ -21,7 +21,7 @@ def run_cmd(file, output_dir, code):
     try:
         p = subprocess.Popen(code, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate()
-        result = (stdout or stderr).decode('gb2312').strip()
+        result = (stdout or stderr).decode("gb18030", errors="ignore").strip()
     except Waifu2xError:
         logger.error("放大失败!")
         return "寄"
@@ -53,6 +53,8 @@ def main(engine, file, file_path, open_button, *options):
         
         if engine == "waifu2x-ncnn-vulkan":
             code = r".\files\waifu2x-ncnn-vulkan\waifu2x-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(j, otp, options[0], options[1])
+            if options[2]:
+                code += " -x"
             run_cmd(j, otp, code)
         else:
             if os.path.exists("./files/else_upscale_engine"):
@@ -69,24 +71,75 @@ def main(engine, file, file_path, open_button, *options):
                     code += " -w"
                     if options[3]:
                         code += " -H -L {}".format(options[4])
-                run_cmd(j, otp, code)
+
             elif engine == "realcugan-ncnn-vulkan":
                 code = r".\files\else_upscale_engine\realcugan-ncnn-vulkan\realcugan-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(j, otp, options[0], options[1])
                 if options[2] != "models-se":
                     code += " -m {}".format(options[2])
-                run_cmd(j, otp, code)
+
             elif engine == "realesrgan-ncnn-vulkan":
                 code = r".\files\else_upscale_engine\realesrgan-ncnn-vulkan\realesrgan-ncnn-vulkan.exe -i {} -o {} -s {} -n {}".format(j, otp, options[0], options[1])
-                run_cmd(j, otp, code)
+                if options[2]:
+                    code += " -x"
+
             elif engine == "realsr-ncnn-vulkan":
                 code = rf".\files\else_upscale_engine\realsr-ncnn-vulkan\realsr-ncnn-vulkan.exe -i {j} -o {otp}"
                 if options[0] != "models-DF2K_JPEG":
                     code += " -m {}".format(options[0])
                 if options[1]:
                     code += " -x"
-                run_cmd(j, otp, code)
-            elif engine == "":
-                ...
+
+            elif engine == "srmd-cuda":
+                try:
+                    from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetName
+                    nvmlInit()
+                    vcard = nvmlDeviceGetName(nvmlDeviceGetHandleByIndex(0))
+                    logger.info(f"检测到显卡: {vcard}")
+                    if "GTX" in vcard:
+                        software = "srmd-cuda-GTX-W2xEX.exe"
+                    elif "RTX" in vcard:
+                        software = "srmd-cuda-RTX-W2xEX.exe"
+                    else:
+                        logger.error("仅支持 RTX 和 GTX 系列显卡")
+                except:
+                    logger.error("仅支持 RTX 和 GTX 系列显卡")
+                code = r".\files\else_upscale_engine\srmd-cuda\{} -i {} -o {} -n {} -s {}".format(software, j, otp, options[0], options[1])
+
+            elif engine == "srmd-ncnn-vulkan":
+                code = r".\files\else_upscale_engine\srmd-ncnn-vulkan\srmd-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(j, otp, options[0], options[1])
+                if options[2]:
+                    code += " -x"
+
+            elif engine == "waifu2x-caffe":
+                code = os.path.abspath("./files/else_upscale_engine/waifu2x-caffe/waifu2x-caffe-cui.exe")
+                code += r" -i {} -o {} -m {} -s {} -n {}".format(os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2])
+                if options[3] != "gpu":
+                    code += " -p {}".format(options[3])
+                if options[4]:
+                    code += " -t 1"
+                if options[5] != "models/cunet":
+                    code += " --model_dir {}".format(options[5])
+                
+                with open("./output/temp_waifu2x_caffe.bat", 'w') as temp:
+                    temp.write(code)
+                
+                os.system(os.path.abspath("./output/temp_waifu2x_caffe.bat"))
+                
+                if open_button:
+                    return "图片已保存到 ./output/upscale...", None
+                else:
+                    return None, otp
+
+            elif engine == "waifu2x-converter":
+                code = r".\files\else_upscale_engine\waifu2x-converter\waifu2x-converter-cpp.exe -i {} -o {} -m {} --scale_ratio {} --noise_level {}".format(j, otp, options[0], options[1], options[2])
+                if options[3]:
+                    code += " --disable-gpu"
+                if options[4]:
+                    code += " -t 1"
+            else:
+                return None, None
+
+            run_cmd(j, otp, code)
 
     if open_button:
         return "图片已保存到 ./output/upscale...", None
