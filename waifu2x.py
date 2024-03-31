@@ -130,12 +130,13 @@ def main(engine, file, file_path, open_button, *options):
                 else:
                     return None, otp
 
-            elif engine == "waifu2x-converter":
-                code = r".\files\else_upscale_engine\waifu2x-converter\waifu2x-converter-cpp.exe -i {} -o {} -m {} --scale_ratio {} --noise_level {}".format(j, otp, options[0], options[1], options[2])
-                if options[3]:
-                    code += " --disable-gpu"
-                if options[4]:
-                    code += " -t 1"
+            # elif engine == "waifu2x-converter":
+            #     code = r".# \files\else_upscale_engine\waifu2x-conver# ter\waifu2x-converter-cpp.exe -i {} -o # {} -m {} --scale_ratio {} --noise_level # {}".format(j, otp, options[0], options# [1], options[2])
+            #     if options[3]:
+            #         code += " --disable-gpu"
+            #     if options[4]:
+            #         code += " -t 1"
+
             else:
                 return None, None
 
