@@ -231,24 +231,6 @@ with gr.Blocks(theme=env.theme) as demo:
                     output_info = gr.Textbox(label="输出信息")
                     output_img = gr.Image(scale=2)
         generate.click(fn=upscale, inputs=[engine, input_img, input_path, open_button, mode, scale, noise, process, tta, model], outputs=[output_info, output_img])
-        # with gr.Tab("waifu2x-converter"):
-        #     engine = gr.Textbox("waifu2x-converter", visible=False)
-        #     generate = gr.Button(value="开始生成")
-        #     with gr.Row():
-        #         mode = gr.Radio(["noise", "scale", "noise_scale"], value="noise_scale", label="模式")
-        #         scale = gr.Slider(minimum=1, maximum=32, value=2, label="放大倍数")
-        #         noise = gr.Radio([0, 1, 2, 3], value=0, label="降噪强度")
-        #         disable_gpu = gr.Radio([True, False], value=False, label="是否禁用GPU")
-        #         tta = gr.Radio([True, False], value=False, label="是否开启 tta 模式")
-        #     with gr.Row():
-        #         input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
-        #         open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
-        #     with gr.Row():
-        #         input_img = gr.Image(type="pil", scale=1)
-        #         with gr.Column(scale=2):
-        #             output_info = gr.Textbox(label="输出信息")
-        #             output_img = gr.Image(scale=2)
-        # generate.click(fn=upscale, inputs=[engine, input_img, input_path, open_button, mode, scale, noise, disable_gpu, tta], outputs=[output_info, output_img])
     with gr.Tab("自动打码"):
         gr.Markdown("> 对关键部位进行自动打码")
         generate = gr.Button(value="开始生成")
