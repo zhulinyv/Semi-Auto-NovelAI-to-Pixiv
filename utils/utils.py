@@ -1,5 +1,6 @@
 import io
 import os
+import platform
 import random
 import requests
 import shutil
@@ -184,3 +185,10 @@ def inquire_anlas():
     if rep.status_code == 200:
         return rep.json()['trainingStepsLeft']['fixedTrainingStepsLeft']
     return 0
+
+def check_platform():
+    if platform.system() == "Windows":
+        pass
+    else:
+        logger.error("仅支持 Window 运行!")
+        return "寄"

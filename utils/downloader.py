@@ -2,26 +2,22 @@ import os
 import requests
 import zipfile
 
+from loguru import logger
+
 
 
 def download(url):
+    logger.info("正在下载超分引擎...")
     rep = requests.get(url, stream=True)
-    
     with open("./files/temp.zip", 'wb') as file:
-        for chunk in rep.iter_content(chunk_size=512):
+        for chunk in rep.iter_content(chunk_size=256):
             file.write(chunk)
+    logger.success("下载完成!")
 
 
 def extract(file_path, otp_path):
+    logger.info("正在解压超分引擎...")
     with zipfile.ZipFile(file_path) as zip:
         zip.extractall(otp_path)
-    
     os.remove(file_path)
-
-
-
-download("https://huggingface.co/datasets/Xytpz/Upscale-Software-Collection/resolve/main/Upscale-Software-Collection.zip?download=true")
-
-extract("./files/temp.zip", "./files/else_upscale_engine")
-
-
+    logger.success("解压完成!")
