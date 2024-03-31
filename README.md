@@ -93,7 +93,7 @@ pip install -r requirements.txt
 | allow_tag_edit | 否 | bool | True | 是否允许其它用户编辑标签 | False |
 | waifu2x_scale | 否 | int | 2 | waifu2x 放大倍数 | 4 |
 | waifu2x_noise | 否 | int | 3 | waifu2x 降噪等级 | 2 |
-| share | 否 | bool | False | 是否共享 gradio 链接 | True |
+| share_ | 否 | bool | False | 是否共享 gradio 链接 | True |
 | height | 否 | int | 650 | 法术解析页面的高度 | 800 |
 | port | 否 | int | 11451 | 本地启动的端口 | 13579 |
 | theme | 否 | str \| None | "NoCrypt/miku" | WebUI 界面主题 | 更多请查看 [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
@@ -278,7 +278,7 @@ python inpaint.py
 
 ## 🤝 鸣谢
 
-本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) 降噪和放大图片
+本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) | [Anime4KCPP](https://github.com/TianZerL/Anime4KCPP) | [realcugan-ncnn-vulkan](https://github.com/nihui/realcugan-ncnn-vulkan/) | [realesrgan-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan) | [realsr-ncnn-vulkan](https://github.com/nihui/realsr-ncnn-vulkan/) | [srmd-cuda](https://github.com/MrZihan/Super-resolution-SR-CUDA) | [srmd-ncnn-vulkan](https://github.com/nihui/srmd-ncnn-vulkan) | [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe) 降噪和放大图片
 
 本项目使用 [stable-diffusion-inspector](https://spell.novelai.dev/) 解析图片元数据
 
