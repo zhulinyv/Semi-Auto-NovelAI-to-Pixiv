@@ -60,7 +60,7 @@ def main(engine, file, file_path, open_button, *options):
             if os.path.exists("./files/else_upscale_engine"):
                 pass
             else:
-                download("https://huggingface.co/datasets/Xytpz/Upscale-Software-Collection/resolve/main/Upscale-Software-Collection.zip?download=true")
+                download("https://huggingface.co/datasets/Xytpz/Upscale-Software-Collection/resolve/main/else_upscale_engine.zip?download=true")
                 extract("./files/temp.zip", "./files/else_upscale_engine")
 
             if engine == "Anime4K":
