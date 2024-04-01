@@ -36,11 +36,6 @@ def mosaic(img_path):
     
     neighbor = int(pil_img.width * 0.01 if pil_img.width > pil_img.height else pil_img.height * 0.01)
     
-    info = pil_img.info
-    metadata = PngInfo()
-    metadata.add_text("Software", info["Software"])
-    metadata.add_text("Comment", info["Comment"])
-    
     body = nude_detector.detect(img_path)
     
     for part in body:
@@ -52,9 +47,16 @@ def mosaic(img_path):
             cv2.imwrite(img_path, cv2_img)
 
     logger.info("正在还原 pnginfo")
-    pil_img = Image.open(img_path)
-    pil_img.save(img_path, pnginfo=metadata)
-    logger.success("还原成功!")
+    try:
+        info = pil_img.info
+        metadata = PngInfo()
+        metadata.add_text("Software", info["Software"])
+        metadata.add_text("Comment", info["Comment"])
+        pil_img = Image.open(img_path)
+        pil_img.save(img_path, pnginfo=metadata)
+        logger.success("还原成功!")
+    except:
+        logger.error("还原失败!")
 
 
 
