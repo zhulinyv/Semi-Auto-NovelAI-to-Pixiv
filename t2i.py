@@ -49,7 +49,7 @@ def prepare_input():
     emotion = list_to_str(data["R18"]["表情"][f"{emotion_type}表情"][choose_emotion]) if any(view not in action for view in ["from behind", "sex from behind"]) else ""
     choose_surrounding = random.choice(list(data["R18"]["场景"]["仅场景"].keys()))
     surrounding = list_to_str(data["R18"]["场景"]["仅场景"][choose_surrounding]) if "multiple views" not in action else "{white background},"
-    cum = random.choice(data["R18"]["射精"])
+    cum = random.choice(data["R18"]["污渍"])
 
     logger.info(f"""
 >>>>>>>>>>
@@ -60,7 +60,7 @@ def prepare_input():
 表情: {emotion}
 动作: {action}
 场景: {surrounding}
-射精: {cum}
+污渍: {cum}
 正面: {pref}
 负面: {negetive}
 <<<<<<<<<<""")
