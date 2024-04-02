@@ -34,7 +34,24 @@ def prepare_input():
     with open("./files/favorite.json", 'r', encoding='utf-8') as file:
         data = json.load(file)
 
-    artist = random.choice(data["artists"]["belief"])
+    weight_list = list(data["artists"]["belief"].keys())
+    artist = ""
+    while artist == "":
+        possibility = random.random()
+        for weight in weight_list:
+            if possibility >= float(weight):
+                artist_list = list(data["artists"]["belief"][weight].keys())
+                if artist_list != []:
+                    style_name = random.choice(artist_list)
+                    style = data["artists"]["belief"][weight][style_name]
+                    artist = style[0]
+                    sm = style[1]
+                    scale = style[2]
+                    break
+                else:
+                    pass
+            else:
+                pass
     pref = random.choice(data["quality_pref"]["belief"])
     negetive = format_str(random.choice(data["negative_prompt"]["belief"]))
     choose_game = random.choice(list(data["character"].keys()))
@@ -55,7 +72,7 @@ def prepare_input():
 >>>>>>>>>>
 游戏: {choose_game}: {choose_character}
 角色: {character}
-画风: {artist}
+画风: {style_name}: {style}
 审查: {censored}
 表情: {emotion}
 动作: {action}
@@ -67,10 +84,10 @@ def prepare_input():
 
     input_ = format_str(pref + character + artist + censored + emotion + action + surrounding + cum)
 
-    return input_, negetive, choose_game, choose_character
+    return input_, sm, scale, negetive, choose_game, choose_character
 
 
-def prepare_json(input_, negetive):
+def prepare_json(input_, sm, scale, negetive):
     json_for_t2i["input"] = input_
     if isinstance(env.img_size, int):
         resolution_list = [[832, 1216], [1024, 1024], [1216, 832]]
@@ -79,11 +96,11 @@ def prepare_json(input_, negetive):
         resolution = env.img_size
     json_for_t2i["parameters"]["width"] = resolution[0]
     json_for_t2i["parameters"]["height"] = resolution[1]
-    json_for_t2i["parameters"]["scale"] = env.scale
+    json_for_t2i["parameters"]["scale"] = env.scale if scale == 0 else scale
     json_for_t2i["parameters"]["sampler"] = env.sampler
     json_for_t2i["parameters"]["steps"] = env.steps
-    json_for_t2i["parameters"]["sm"] = env.sm
-    json_for_t2i["parameters"]["sm_dyn"] = env.sm_dyn if env.sm and env.sm_dyn else False
+    json_for_t2i["parameters"]["sm"] = env.sm if sm == 0 else True
+    json_for_t2i["parameters"]["sm_dyn"] = env.sm_dyn if (env.sm or (sm == 1)) and env.sm_dyn else False
     json_for_t2i["parameters"]["noise_schedule"] = env.noise_schedule
     seed = random.randint(1000000000, 9999999999) if env.seed == -1 else env.seed
     json_for_t2i["parameters"]["seed"] = seed
@@ -95,17 +112,14 @@ def prepare_json(input_, negetive):
 times = 0
 
 def t2i(forever: bool):
-    try:
-        global times
-        times += 1
-        logger.info(f"正在生成第{times}张图片...")
-        input_, negative, choose_game, choose_character = prepare_input()
-        json_for_t2i, seed = prepare_json(input_, negative)
-        img_data = generate_image(json_for_t2i)
-        save_image(img_data, "t2i", seed, choose_game, choose_character)
-        sleep_for_cool(12, 24)
-    except GeneratorExit:
-        logger.error("生成失败")
+    global times
+    times += 1
+    logger.info(f"正在生成第{times}张图片...")
+    input_, sm, scale, negative, choose_game, choose_character = prepare_input()
+    json_for_t2i, seed = prepare_json(input_, sm, scale, negative)
+    img_data = generate_image(json_for_t2i)
+    save_image(img_data, "t2i", seed, choose_game, choose_character)
+    sleep_for_cool(12, 24)
 
     if forever:
         return t2i(True)

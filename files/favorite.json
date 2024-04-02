@@ -126,35 +126,152 @@
                 "deyui"
             ]
         },
-        "belief": [
-            "artist:kedama milk,{artist:nishiki_koi},sekiya_asami,artist:chen_bin,[[[[[artist:jyt]]]]],artist:ke-ta,artist:ATDAN,artist:bigxixi,",
-            "artist:ke-ta,[[[artist:kedama milk]]],artist:ciloranko,artist:Hiten,[[artist:ask(askzy)]],artist:chen bin,year 2023,",
-            "artist:kedama milk, ((artist:chen_bin)),[[[[[tianliang duohe fangdongye]]]]],[artist:ke-ta],artist:jyt,artist:himitsu_(hi_mi_tsu_2),",
-            "artist:onineko, [momoko_(momopoco)],[[necomi]], hanekoto, [kouyafu], [[ningen_mame]],[[[conago]]],[ask (askzy)], [[uenomigi]], [kani_biimu], [[ibara riato]], [torano], year_2023,",
-            "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023,",
-            "naga_u,henreader,[[[usashiro_mani]]],{azumi_kazuki},[wlop],wanke,ciloranko,[[tianliang duohe fangdongye,rhasta]],{{daidai_ookami}},,year 2023,",
-            "[elaina (majo no tabitabi)],convenient censoring, 1girl==={ningen mame,{ciloranko},ke-ta,kedama milk,wlop,rhasta},year 2023, ===   solo,",
-            "{{toosaka asagi}},[[ningen mame],ciloranko,[sho (sho lwlw)],[[tianliang duohe fangdongye]],[rhasta]],",
-            "{ningen mame,{ciloranko},ke-ta,kedama milk,wlop,rhasta},tianliang duohe fangdongye,year 2023,upsidedown ，oiled,",
-            "artist:kedama milk,rucaco,kanda_done,[[artist:chen_bin]],[[[[mignon]]]],[[artist:Hiten]],",
-            "yinpa_(wanone500511),[[usashiro_mani]],ransusan,samneco ,{healthyman},year_2023,uncensored,",
-            "kz_oji,[naga_u,henreader],[[ask_(askzy),ama_mitsuki]],mikozin,{kaede_(sayappa),goldowl},[wlop,nekojira],[[ke-ta]],rhasta,year_2023,",
-            "{{sakurada shiro}},yinpa_(wanone500511),usashiro_mani,ransusan,[samneco],{healthyman},naga_u,musouzuki,henreader,morino_donguri,baku-p,year_2023,",
-            "artist:ke-ta, [[[artist:kedama milk]]], artist:ciloranko, artist:Hiten, [[artist:ask(askzy)]], artist:chen bin,",
-            "artist:kedama milk, rucaco, kanda_done, [[artist:chen_bin]], [[[[mignon]]]], [[artist:Hiten]], [[artist:ke-ta]],",
-            "[jyt,asou_(asabu202),tyakomes], [[[ayanepuna,yamamomo_(plank)]]], [[ogipote,fuzichoco,wlop]], {ruffling},",
-            "[[jyt,tyakomes]], {{asou_(asabu202)}}, [[[ayanepuna,baku-p]]], [ogipote,fuzichoco,wlop,mamyouda], {{ruffling}},",
-            "artist:hiten_(hitenkei), artist:WERI, artist:ask(askzy), [[artist:cui_(jidanhaidaitang)]], artist:chen_bin, [[[artist:TAB_head]]],",
-            "[artist:kedama milk], [artist:ask (askzy)], artist:wanke, artist:wlop, [artist:atdan],",
-            "artist:chen_bin, artist:wlop, [artist:As109], [artist:kedama milk], artist:momoco, artist:ke-ta, artist:40hara, artist:Torino, artist:ask(askzy), artist:ciloranko, [artist:sho_(sho_lwlw)], [artist:Rella], [artist:omone hokoma agm],",
-            "{himitsu_(hi_mi_tsu_2)}, {kedama_milk}, tsubasa_tsubasa, [chen_bin], [[mignon]],",
-            "{{artist:ask(askzy)}}, {artist:JYT}, artist:chen_bin, [artist:yago8 pp3], [artist:namie],",
-            "artist:ke-ta, [[[artist:kedama milk]]], artist:ciloranko, artist:Hiten, [[artist:ask(askzy)]], artist:chen_bin,",
-            "artist:kedama milk, ((artist:chen_bin)), [[[[[tianliang duohe fangdongye]]]]], [artist:ke-ta], artist:jyt, artist:himitsu_(hi_mi_tsu_2),",
-            "[artist:ningen_mame], artist:ciloranko, [artist:sho_(sho_lwlw)], [[[[[tianliang duohe fangdongye]]]]], artist: kani biimu,",
-            "artist:ciloranko, artist:tianliang_duohe_fangdongye, [artist:sho_(sho_lwlw)], [artist:baku-p], [artist:tsubasa_tsubasa],",
-            "1 girl, [artist:kedama milk], artist:tab_head, [artist:ciloranko], [artist:sho_(sho_lwlw)], [[artist:as109]], [[artist:rhasta]], [artist:wlop], [artist:chen_bin], artist:nekoda, year_2023, oiled,"
-        ]
+        "belief": {
+            "0.6": {
+
+            },
+            "0.25": {
+                "茶叶蛋画风1": [
+                    "artist:kedama milk,{artist:nishiki_koi},sekiya_asami,artist:chen_bin,[[[[[artist:jyt]]]]],artist:ke-ta,artist:ATDAN,artist:bigxixi,",
+                    0,
+                    0
+                ],
+                "茶叶蛋画风备1": [
+                    "artist:ke-ta,[[[artist:kedama milk]]],artist:ciloranko,artist:Hiten,[[artist:ask(askzy)]],artist:chen bin,year 2023,",
+                    0,
+                    0
+                ],
+                "茶叶蛋画风备2": [
+                    "artist:kedama milk, ((artist:chen_bin)),[[[[[tianliang duohe fangdongye]]]]],[artist:ke-ta],artist:jyt,artist:himitsu_(hi_mi_tsu_2),",
+                    0,
+                    0
+                ],
+                "未命名画风1": [
+                    "artist:onineko, [momoko_(momopoco)],[[necomi]], hanekoto, [kouyafu], [[ningen_mame]],[[[conago]]],[ask (askzy)], [[uenomigi]], [kani_biimu], [[ibara riato]], [torano], year_2023,",
+                    0,
+                    0
+                ],
+                "未命名画风2": [
+                    "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023,",
+                    0,
+                    0
+                ],
+                "未命名画风3": [
+                    "naga_u,henreader,[[[usashiro_mani]]],{azumi_kazuki},[wlop],wanke,ciloranko,[[tianliang duohe fangdongye,rhasta]],{{daidai_ookami}},,year 2023,",
+                    0,
+                    0
+                ],
+                "未命名画风4": [
+                    "[elaina (majo no tabitabi)],convenient censoring, 1girl==={ningen mame,{ciloranko},ke-ta,kedama milk,wlop,rhasta},year 2023, ===   solo,",
+                    0,
+                    0
+                ],
+                "未命名画风5": [
+                    "{{toosaka asagi}},[[ningen mame],ciloranko,[sho (sho lwlw)],[[tianliang duohe fangdongye]],[rhasta]],",
+                    0,
+                    0
+                ],
+                "未命名画风6": [
+                    "{ningen mame,{ciloranko},ke-ta,kedama milk,wlop,rhasta},tianliang duohe fangdongye,year 2023,upsidedown ，oiled,",
+                    0,
+                    0
+                ],
+                "未命名画风7": [
+                    "artist:kedama milk,rucaco,kanda_done,[[artist:chen_bin]],[[[[mignon]]]],[[artist:Hiten]],",
+                    0,
+                    0
+                ],
+                "未命名画风8": [
+                    "yinpa_(wanone500511),[[usashiro_mani]],ransusan,samneco ,{healthyman},year_2023,uncensored,",
+                    0,
+                    0
+                ],
+                "未命名画风9": [
+                    "kz_oji,[naga_u,henreader],[[ask_(askzy),ama_mitsuki]],mikozin,{kaede_(sayappa),goldowl},[wlop,nekojira],[[ke-ta]],rhasta,year_2023,",
+                    0,
+                    0
+                ],
+                "未命名画风10": [
+                    "{{sakurada shiro}},yinpa_(wanone500511),usashiro_mani,ransusan,[samneco],{healthyman},naga_u,musouzuki,henreader,morino_donguri,baku-p,year_2023,",
+                    0,
+                    0
+                ],
+                "小白兔奶糖i": [
+                    "artist:ke-ta, [[[artist:kedama milk]]], artist:ciloranko, artist:Hiten, [[artist:ask(askzy)]], artist:chen bin,",
+                    0,
+                    5.0
+                ],
+                "草莓蓝莓": [
+                    "artist:kedama milk, rucaco, kanda_done, [[artist:chen_bin]], [[[[mignon]]]], [[artist:Hiten]], [[artist:ke-ta]],",
+                    0,
+                    5.0
+                ],
+                "天使白猫": [
+                    "[jyt,asou_(asabu202),tyakomes], [[[ayanepuna,yamamomo_(plank)]]], [[ogipote,fuzichoco,wlop]], {ruffling},",
+                    0,
+                    5.0
+                ],
+                "炫彩白猫": [
+                    "[[jyt,tyakomes]], {{asou_(asabu202)}}, [[[ayanepuna,baku-p]]], [ogipote,fuzichoco,wlop,mamyouda], {{ruffling}},",
+                    0,
+                    5.0
+                ],
+                "线条平涂": [
+                    "artist:hiten_(hitenkei), artist:WERI, artist:ask(askzy), [[artist:cui_(jidanhaidaitang)]], artist:chen_bin, [[[artist:TAB_head]]],",
+                    0,
+                    5.0
+                ],
+                "原子弹厚涂": [
+                    "[artist:kedama milk], [artist:ask (askzy)], artist:wanke, artist:wlop, [artist:atdan],",
+                    0,
+                    5.0
+                ],
+                "老十三样": [
+                    "artist:chen_bin, artist:wlop, [artist:As109], [artist:kedama milk], artist:momoco, artist:ke-ta, artist:40hara, artist:Torino, artist:ask(askzy), artist:ciloranko, [artist:sho_(sho_lwlw)], [artist:Rella], [artist:omone hokoma agm],",
+                    0,
+                    5.0
+                ],
+                "毛玉翼鬼丝袜特化": [
+                    "{himitsu_(hi_mi_tsu_2)}, {kedama_milk}, tsubasa_tsubasa, [chen_bin], [[mignon]],",
+                    0,
+                    5.0
+                ],
+                "ask简单稳定Gal风格": [
+                    "{{artist:ask(askzy)}}, {artist:JYT}, artist:chen_bin, [artist:yago8 pp3], [artist:namie],",
+                    0,
+                    5.0
+                ],
+                "keta老五样": [
+                    "artist:ke-ta, [[[artist:kedama milk]]], artist:ciloranko, artist:Hiten, [[artist:ask(askzy)]], artist:chen_bin,",
+                    0,
+                    5.0
+                ],
+                "毛玉老五样": [
+                    "artist:kedama milk, ((artist:chen_bin)), [[[[[tianliang duohe fangdongye]]]]], [artist:ke-ta], artist:jyt, artist:himitsu_(hi_mi_tsu_2),",
+                    0,
+                    5.0
+                ],
+                "小碎骨kani": [
+                    "[artist:ningen_mame], artist:ciloranko, [artist:sho_(sho_lwlw)], [[[[[tianliang duohe fangdongye]]]]], artist: kani biimu,",
+                    0,
+                    5.0
+                ],
+                "翼ばく防冻幼": [
+                    "artist:ciloranko, artist:tianliang_duohe_fangdongye, [artist:sho_(sho_lwlw)], [artist:baku-p], [artist:tsubasa_tsubasa],",
+                    0,
+                    5.0
+                ],
+                "QAQ": [
+                    "1 girl, [artist:kedama milk], artist:tab_head, [artist:ciloranko], [artist:sho_(sho_lwlw)], [[artist:as109]], [[artist:rhasta]], [artist:wlop], [artist:chen_bin], artist:nekoda, year_2023, oiled,",
+                    1,
+                    6.5
+                ]
+                
+            },
+            "0.0": {
+
+            }
+        }
     },
     "quality_pref": {
         "experiment": [
@@ -505,6 +622,28 @@
                 "cat_tail",
                 "short_hair",
                 "sidelocks"
+            ],
+            "阿罗娜": [
+                "arona_(blue archive)",
+                "blue_hair",
+                "white choker",
+                "heart halo",
+                "white hairband",
+                "bow hairband",
+                "blue halo",
+                "colored inner hair"
+            ]
+        },
+        "ReDive": {
+            "ミミ": [
+                "mimi_(princess connect!)",
+                "pink_hair",
+                "loli"
+            ],
+            "ミソギ" : [
+                "misogi_(princess connect!)",
+                "orange_hair",
+                "loli"
             ]
         }
     },
@@ -3284,6 +3423,14 @@
             ],
             "midori_(blue_archive)": [
                 "才羽ミドリ"
+            ]
+        },
+        "ReDive": {
+            "mimi_(princess connect!)": [
+                "ミミ"
+            ],
+            "misogi_(princess connect!)": [
+                "ミソギ"
             ]
         },
         "None": {
