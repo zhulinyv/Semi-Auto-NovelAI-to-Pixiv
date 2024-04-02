@@ -118,7 +118,7 @@ with gr.Blocks(theme=env.theme) as demo:
                     GPUMode = gr.Radio([True, False], label="是否开启GPU加速", value=True)
                     CNNMode = gr.Radio([True, False], label="是否开启ACNet模式", value=True)
                     HDN = gr.Radio([True, False], label="是否为ACNet开启HDN", value=True)
-                    HDNLevel = gr.Radio([1, 2, 3], value=3, label="HDN等级")
+                    HDNLevel = gr.Slider(minimum=1, maximum=3, step=1, value=3, label="HDN等级")
                 with gr.Row():
                     input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
                     open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
@@ -216,11 +216,11 @@ with gr.Blocks(theme=env.theme) as demo:
             engine = gr.Textbox("waifu2x-caffe", visible=False)
             generate = gr.Button(value="开始生成")
             with gr.Row():
-                mode = gr.Radio(["noise", "scale", "noise_scale"], value="noise_scale", label="模式")
-                scale = gr.Slider(minimum=1, maximum=32, value=2, label="放大倍数")
-                noise = gr.Radio([0, 1, 2, 3], value=0, label="降噪强度")
-                process = gr.Radio(["cpu", "gpu", "cudnn"],value="gpu", label="处理模式")
-                tta = gr.Radio([True, False], value=False, label="是否开启 tta 模式")
+                mode = gr.Radio(["noise", "scale", "noise_scale"], value="noise_scale", label="模式", scale=4)
+                scale = gr.Slider(minimum=1, maximum=32, value=2, label="放大倍数", scale=1)
+                noise = gr.Slider(minimum=0, maximum=3, step=1, value=3, label="降噪等级", scale=1)
+                process = gr.Radio(["cpu", "gpu", "cudnn"],value="gpu", label="处理模式", scale=3)
+                tta = gr.Radio([True, False], value=False, label="是否开启 tta 模式", scale=2)
             model = gr.Radio(["models/anime_style_art_rgb", "models/anime_style_art", "models/photo", "models/upconv_7_anime_style_art_rgb", "models/upconv_7_photo", "models/upresnet10", "models/cunet", "models/ukbench"], value="models/cunet", label="超分模型")
             with gr.Row():
                 input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
@@ -231,6 +231,23 @@ with gr.Blocks(theme=env.theme) as demo:
                     output_info = gr.Textbox(label="输出信息")
                     output_img = gr.Image(scale=2)
         generate.click(fn=upscale, inputs=[engine, input_img, input_path, open_button, mode, scale, noise, process, tta, model], outputs=[output_info, output_img])
+        with gr.Tab("waifu2x-converter"):
+            engine = gr.Textbox("waifu2x-converter", visible=False)
+            generate = gr.Button(value="开始生成")
+            with gr.Row():
+                mode = gr.Radio(["noise", "scale", "noise-scale"], value="noise-scale", label="模式", scale=3)
+                scale = gr.Slider(minimum=1, maximum=32, step=1, value=2, label="放大倍数", scale=2)
+                noise = gr.Slider(minimum=0, maximum=3, step=1, value=3, label="降噪等级", scale=2)
+                jobs = gr.Slider(1, maximum=10, value=5, step=1, label="处理线程数", scale=2)
+            with gr.Row():
+                input_path = gr.Textbox(value="", label="批量处理路仅在本程序运行的电脑生效)", scale=5)
+                open_button = gr.Radio([True, False], value=False, label="是否启用批处理", scale=1)
+            with gr.Row():
+                input_img = gr.Image(type="pil", scale=1)
+                with gr.Column(scale=2):
+                    output_info = gr.Textbox(label="输出信息")
+                    output_img = gr.Image(scale=2)
+        generate.click(fn=upscale, inputs=[engine, input_img, input_path, open_button, scale, noise, mode, jobs], outputs=[output_info, output_img])
     with gr.Tab("自动打码"):
         gr.Markdown("> 对关键部位进行自动打码")
         generate = gr.Button(value="开始生成")

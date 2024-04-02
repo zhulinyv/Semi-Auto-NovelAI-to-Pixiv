@@ -57,10 +57,10 @@ def main(engine, file, file_path, open_button, *options):
                 code += " -x"
             run_cmd(j, otp, code)
         else:
-            if os.path.exists("./files/else_upscale_engine"):
+            if os.path.exists(f"./files/else_upscale_engine/{engine}"):
                 pass
             else:
-                download("https://huggingface.co/datasets/Xytpz/Upscale-Software-Collection/resolve/main/else_upscale_engine.zip?download=true")
+                download(f"https://huggingface.co/datasets/Xytpz/Upscale-Software-Collection/resolve/main/{engine}.zip?download=true")
                 extract("./files/temp.zip", "./files/else_upscale_engine")
 
             if engine == "Anime4K":
@@ -110,28 +110,29 @@ def main(engine, file, file_path, open_button, *options):
                 if options[2]:
                     code += " -x"
 
-            elif engine == "waifu2x-caffe":
-                code = os.path.abspath("./files/else_upscale_engine/waifu2x-caffe/waifu2x-caffe-cui.exe")
-                code += r" -i {} -o {} -m {} -s {} -n {}".format(os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2])
-                if options[3] != "gpu":
-                    code += " -p {}".format(options[3])
-                if options[4]:
-                    code += " -t 1"
-                if options[5] != "models/cunet":
-                    code += " --model_dir {}".format(options[5])
-                
-                with open("./output/temp_waifu2x_caffe.bat", 'w') as temp:
+            else:
+                if engine == "waifu2x-caffe":
+                    code = os.path.abspath("./files/else_upscale_engine/waifu2x-caffe/waifu2x-caffe-cui.exe")
+                    code += " -i {} -o {} -m {} -s {} -n {}".format(os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2])
+                    if options[3] != "gpu":
+                        code += " -p {}".format(options[3])
+                    if options[4]:
+                        code += " -t 1"
+                    if options[5] != "models/cunet":
+                        code += " --model_dir {}".format(options[5])
+
+                elif engine == "waifu2x-converter":
+                    code = "cd ./files/else_upscale_engine/waifu2x-converter\n"
+                    code += os.path.abspath("./files/else_upscale_engine/waifu2x-converter/waifu2x-converter-cpp.exe")
+                    code += " -i {} -o {} --scale-ratio {} --noise-level {} -m {} -j {}".format(os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2], options[3])
+
+                with open("./output/temp_waifu2x.bat", 'w') as temp:
                     temp.write(code)
-                
-                os.system(os.path.abspath("./output/temp_waifu2x_caffe.bat"))
-                
+                os.system(os.path.abspath("./output/temp_waifu2x.bat"))
                 if open_button:
                     return "图片已保存到 ./output/upscale...", None
                 else:
                     return None, otp
-
-            else:
-                return None, None
 
             run_cmd(j, otp, code)
 
