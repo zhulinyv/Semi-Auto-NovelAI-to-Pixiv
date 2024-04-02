@@ -281,4 +281,4 @@ with gr.Blocks(theme=env.theme) as demo:
 """.replace("650", str(env.height)))
 
 
-demo.queue().launch(inbrowser=True, share=env.share_, server_port=env.port)
+demo.queue().launch(inbrowser=True, share=env.share, server_port=env.port)
