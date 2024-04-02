@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     allow_tag_edit: bool = True
     waifu2x_scale: int = 2
     waifu2x_noise: int = 3
-    share_: bool = False
+    share: bool = False
     height: int = 650
     port: int = 11451
     theme: Union[str, None] = "NoCrypt/miku"
