@@ -93,7 +93,7 @@ Before using the project, you need to make a copy of `env.example` and rename it
 | allow_tag_edit | No | bool | True | Whether to allow other users to edit tags | False |
 | waifu2x_scale | No | int | 2 | Scale for waifu2x | 4 |
 | waifu2x_noise | No | int | 3 | Noise reduction level for waifu2x | 2 |
-| share_ | No | bool | False | Whether to share the Gradio link | True |
+| share | No | bool | False | Whether to share the Gradio link | True |
 | height | No | int | 650 | Height of the Gradio interface | 800 |
 | port | No | int | 11451 | Port for local deployment | 13579 |
 | theme | No | str \| None | "NoCrypt/miku" | WebUI interface theme | more theme: [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
