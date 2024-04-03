@@ -70,7 +70,7 @@ def prepare_input():
 
     logger.info(f"""
 >>>>>>>>>>
-游戏: {choose_game}: {choose_character}
+出处: {choose_game}: {choose_character}
 角色: {character}
 画风: {style_name}: {style}
 审查: {censored}

@@ -156,11 +156,6 @@
                     0,
                     0
                 ],
-                "未命名画风3": [
-                    "naga_u,henreader,[[[usashiro_mani]]],{azumi_kazuki},[wlop],wanke,ciloranko,[[tianliang duohe fangdongye,rhasta]],{{daidai_ookami}},,year 2023,",
-                    0,
-                    0
-                ],
                 "未命名画风4": [
                     "[elaina (majo no tabitabi)],convenient censoring, 1girl==={ningen mame,{ciloranko},ke-ta,kedama milk,wlop,rhasta},year 2023, ===   solo,",
                     0,
@@ -178,16 +173,6 @@
                 ],
                 "未命名画风7": [
                     "artist:kedama milk,rucaco,kanda_done,[[artist:chen_bin]],[[[[mignon]]]],[[artist:Hiten]],",
-                    0,
-                    0
-                ],
-                "未命名画风8": [
-                    "yinpa_(wanone500511),[[usashiro_mani]],ransusan,samneco ,{healthyman},year_2023,uncensored,",
-                    0,
-                    0
-                ],
-                "未命名画风9": [
-                    "kz_oji,[naga_u,henreader],[[ask_(askzy),ama_mitsuki]],mikozin,{kaede_(sayappa),goldowl},[wlop,nekojira],[[ke-ta]],rhasta,year_2023,",
                     0,
                     0
                 ],
@@ -634,7 +619,27 @@
                 "colored inner hair"
             ]
         },
-        "ReDive": {
+        "番剧": {
+            "雏鹤爱": [
+                "hinatsuru_ai",
+                "loli",
+                "twintails",
+                "layered sleeves"
+            ],
+            "白咲花": [
+                "shirosaki hana",
+                "loli",
+                "hair flower",
+                "sailor dress",
+                "black hair"
+            ],
+            "姬坂乃爱": [
+                "himesaka noa",
+                "loli",
+                "hair bow",
+                "red bow",
+                "green eyes"
+            ],
             "ミミ": [
                 "mimi_(princess connect!)",
                 "pink_hair",
@@ -3425,7 +3430,22 @@
                 "才羽ミドリ"
             ]
         },
-        "ReDive": {
+        "番剧": {
+            "hinatsuru_ai": [
+                "雛鶴 あい"
+            ],
+            "charlotte_izoard": [
+                "シャルロット・イゾアール"
+            ],
+            "yashajin_ai": [
+                "夜叉神 天衣"
+            ],
+            "shirosaki hana": [
+                "白咲 花"
+            ],
+            "himesaka noa": [
+                "姫坂 乃愛"
+            ],
             "mimi_(princess connect!)": [
                 "ミミ"
             ],

@@ -97,6 +97,8 @@ Before using the project, you need to make a copy of `env.example` and rename it
 | height | No | int | 650 | Height of the Gradio interface | 800 |
 | port | No | int | 11451 | Port for local deployment | 13579 |
 | theme | No | str \| None | "NoCrypt/miku" | WebUI interface theme | more theme: [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
+| caption_prefix | No | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | the prefix of the caption when uploading pictures to pixiv | Hello |
+| neighbor | No | float | 0.01 | The square mosaic is relative to the length of the sides of the picture | 0.008 |
 
 ⚠️ Getting the token:
 

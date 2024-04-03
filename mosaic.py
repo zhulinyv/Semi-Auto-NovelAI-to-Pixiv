@@ -7,6 +7,7 @@ from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
 from utils.utils import format_path
+from utils.env import env
 
 from nudenet import NudeDetector
 nude_detector = NudeDetector()
@@ -34,7 +35,7 @@ def _mosaic(img, x, y, w, h, neighbor):
 def mosaic(img_path):
     pil_img = Image.open(img_path)
     
-    neighbor = int(pil_img.width * 0.01 if pil_img.width > pil_img.height else pil_img.height * 0.01)
+    neighbor = int(pil_img.width * env.neighbor if pil_img.width > pil_img.height else pil_img.height * env.neighbor)
     
     body = nude_detector.detect(img_path)
     

@@ -97,6 +97,8 @@ pip install -r requirements.txt
 | height | 否 | int | 650 | 法术解析页面的高度 | 800 |
 | port | 否 | int | 11451 | 本地启动的端口 | 13579 |
 | theme | 否 | str \| None | "NoCrypt/miku" | WebUI 界面主题 | 更多请查看 [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
+| caption_prefix | 否 | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | 上传 pixiv 的描述前缀 | 你好 |
+| neighbor | 否 | float | 0.01 | 方形马赛克相对于图片的边长 | 0.008 |
 
 ⚠️ token 的获取:
 

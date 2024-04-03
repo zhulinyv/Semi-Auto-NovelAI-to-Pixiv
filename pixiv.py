@@ -19,11 +19,11 @@ def upload(image_list, file):
     try:
         image_info["Software"] == "NovelAI"
         img_comment = json.loads(image_info["Comment"])
-        caption = img_comment["prompt"]
+        caption = env.caption_prefix + "\n----------\n" + img_comment["prompt"]
         pass
     except:
         logger.error("不是 NovelAI 生成的图片!")
-        caption = ""
+        caption = env.caption_prefix
     
     name_list = file.replace(".png", '').split("_")
     title = name_list[2]
@@ -56,9 +56,10 @@ def main(file_path):
     file_list = os.listdir(file_path)
 
     for file in file_list:
-        times = 1
+        times = 0
         while times <= 5:
             try:
+                times += 1
                 image_list = []
                 if file[-4:] == '.png':
                     # image_list.append(f"{file_path}/{file}")
@@ -73,7 +74,6 @@ def main(file_path):
                     file = folder_list[-1]
                 status = upload(image_list, file)
                 if status == 1:
-                    times += 1
                     raise UploadError
                 elif status == 2:
                     sleep_for_cool(600, 1200)

@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     height: int = 650
     port: int = 11451
     theme: Union[str, None] = "NoCrypt/miku"
+    caption_prefix: str = None
+    neighbor: float = 0.01
 
     class Config:
         env_file = '.env'
