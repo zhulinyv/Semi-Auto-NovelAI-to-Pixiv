@@ -30,8 +30,11 @@ def upload(image_list, file):
     
     with open("./files/favorite.json", 'r', encoding='utf-8') as f:
         data = json.load(f)
-    labels_list = ['女の子']
-    character_labels_list = list(data["labels"][name_list[1]].keys())
+    labels_list = ["女の子"]
+    try:
+        character_labels_list = list(data["labels"][name_list[1]].keys())
+    except:
+        character_labels_list = []
     description_labels_list = list(data["labels"]["description"].keys())
     for i in character_labels_list:
         for j in data["labels"][name_list[1]][i]: labels_list.append(j) if i in caption else ...
