@@ -91,9 +91,10 @@ def main(input_path):
                 os.remove(img_path)
                 sleep_for_cool(16, 48)
                 break
-            except Exception:
+            except Exception as e:
                 sleep_for_cool(8, 24)
                 times += 1
+                logger.error(f"出现错误: {e}")
                 logger.warning(f"重试 {times}/5...")
             except KeyboardInterrupt:
                 logger.warning("程序退出...")
