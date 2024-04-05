@@ -6,3 +6,4 @@ __pycache__
 venv
 temp.*
 files/else_upscale_engine
+files/prompt
