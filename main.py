@@ -6,6 +6,7 @@ from waifu2x import main as upscale
 from mosaic import main as mosaic
 from pixiv import main as pixiv
 from inpaint import for_webui as inpaint
+from batchtxt import main as batchtxt
 
 from utils.env import env
 
@@ -75,6 +76,15 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         generate_button.click(fn=t2i, inputs=forever, outputs=show_img)
         generate_forever.click(fn=t2i, inputs=forever, outputs=show_img_)
         stop_button.click(None, None, None, cancels=[cancel_event])
+    with gr.Tab("随机图片"):
+        gr.Markdown("> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片")
+        with gr.Row():
+            forever = gr.Radio(value=False, visible=False)
+            generate_button = gr.Button("无限生成")
+            stop_button = gr.Button("停止生成")
+        batchtxt_img = gr.Image()
+        cancel_event = batchtxt_img.change(fn=batchtxt, inputs=forever, outputs=batchtxt_img, show_progress="hidden")
+        generate_button.click(fn=batchtxt, inputs=forever, outputs=batchtxt_img)
     with gr.Tab("局部重绘"):
         gr.Markdown("> 通过蒙版对图片重绘(重绘区域为白色, 其余透明而不是黑色)")
         generate = gr.Button(value="开始生成")

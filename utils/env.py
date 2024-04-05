@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     theme: Union[str, None] = "NoCrypt/miku"
     caption_prefix: str = None
     neighbor: float = 0.01
+    negetive: str = "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]"
 
     class Config:
         env_file = '.env'
