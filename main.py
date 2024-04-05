@@ -290,7 +290,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
 </style>
 """.replace("650", str(env.height)))
     with gr.Tab("GPT Free"):
-        gr.Markdown("> 包含各种模型的免费 GPT, 来自项目 [GPT4FREE](https://github.com/xtekky/gpt4free)")
+        # gr.Markdown("> 包含各种模型的免费 GPT, 来自项目 [GPT4FREE](https://github.com/xtekky/gpt4free)")
         gr.HTML("""
 <iframe id="myiframe" src="http://127.0.0.1:19198"></iframe>
 <style>
