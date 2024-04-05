@@ -99,6 +99,7 @@ pip install -r requirements.txt
 | theme | 否 | str \| None | "NoCrypt/miku" | WebUI 界面主题 | 更多请查看 [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
 | caption_prefix | 否 | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | 上传 pixiv 的描述前缀 | 你好 |
 | neighbor | 否 | float | 0.01 | 方形马赛克相对于图片的边长 | 0.008 |
+| negetive | 否 | str | "nsfw, ..." | 随机图片使用的负面 | "sfw, ..." |
 
 ⚠️ token 的获取:
 
@@ -118,6 +119,17 @@ pip install -r requirements.txt
 - ![97ae3696ad11708ae2eb0474f198de0c](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/e59caaf6-c69d-485e-965d-d7d924397667)
 
 ### 其它配置:
+
+关于随机图片, 请将提示词文件(例如: example.txt, 文件内含有 prompt)放到 `./files/prompt` 文件夹
+
+```
+例如:
+.\files
+  └---\prompt
+        └---可莉.txt -> 文件内容: tianliang duohe fangdongye, loli, klee_(genshin_impact)
+        └---loli.txt -> 文件内容: {{{loli}}}
+        └---114514.txt -> 文件内容: {henghengheng aaaaa}
+```
 
 关于随机涩图, 可以在对应位置自行添加配置:
 

@@ -99,6 +99,7 @@ Before using the project, you need to make a copy of `env.example` and rename it
 | theme | No | str \| None | "NoCrypt/miku" | WebUI interface theme | more theme: [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
 | caption_prefix | No | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | the prefix of the caption when uploading pictures to pixiv | Hello |
 | neighbor | No | float | 0.01 | The square mosaic is relative to the length of the sides of the picture | 0.008 |
+| negetive | No | str | "nsfw, ..." | random pictures uesd negative | "sfw, ..." |
 
 ⚠️ Getting the token:
 
@@ -118,6 +119,17 @@ Before using the project, you need to make a copy of `env.example` and rename it
 - ![97ae3696ad11708ae2eb0474f198de0c](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/e59caaf6-c69d-485e-965d-d7d924397667)
 
 ### Other Configurations:
+
+About random pictures, please put the prompt files(e.g.: example.txt, including: prompt) into this directory `./files/prompt`
+
+```
+e.g.:
+.\files
+  └---\prompt
+        └---可莉.txt -> file contents: tianliang duohe fangdongye, loli, klee_(genshin_impact)
+        └---loli.txt -> file contents: {{{loli}}}
+        └---114514.txt -> file contents: {henghengheng aaaaa}
+```
 
 About random blue pictures, you can add more at the correct position by your self:
 
