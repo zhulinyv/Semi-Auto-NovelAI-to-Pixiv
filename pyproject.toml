@@ -22,7 +22,7 @@ nudenet = "^3.0.8"
 pyautogui = "^0.9.54"
 opencv-python = "^4.9.0.80"
 pynvml = "^11.5.0"
-g4f[all] = "^0.2.7.3"
+g4f = "^0.2.7.3"
 pypiwin32 = "^223"
 
 
