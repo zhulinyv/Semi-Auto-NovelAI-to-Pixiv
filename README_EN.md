@@ -381,9 +381,11 @@ python inpaint.py
 + [x] Write a WebUI using Gradio
 + [ ] Containerize the project for persistent running
 + [x] Change the style of the interface
-+ [ ] ~~Add ChatGPT~~
++ [x] ~~Add ChatGPT~~
 + [x] White a picture selector
 + [ ] Get token by account and password
++ [x] Add more upscale engine
++ [x] Add more ways to t2i
 + [ ] ...
 
 ## 🤝 Acknowledgements
