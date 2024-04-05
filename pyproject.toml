@@ -24,6 +24,7 @@ opencv-python = "^4.9.0.80"
 pynvml = "^11.5.0"
 g4f = "^0.2.7.3"
 pypiwin32 = "^223"
+flask = "^3.0.2"
 
 
 [build-system]
