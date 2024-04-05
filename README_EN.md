@@ -41,6 +41,8 @@ This is a script that generates images with NovelAI, manually selects them, and 
 
 ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/12f73504-e7b8-420b-aa90-9a8610cd1a0e)
 
+![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/b1f43335-fff8-440d-a50e-5399dee10c67)
+
 </details>
 
 <p>
