@@ -81,10 +81,11 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         with gr.Row():
             forever = gr.Radio(value=False, visible=False)
             generate_button = gr.Button("无限生成")
-            stop_button = gr.Button("停止生成")
+            stop = gr.Button("停止生成")
         batchtxt_img = gr.Image()
         cancel_event = batchtxt_img.change(fn=batchtxt, inputs=forever, outputs=batchtxt_img, show_progress="hidden")
         generate_button.click(fn=batchtxt, inputs=forever, outputs=batchtxt_img)
+        stop.click(None, None, None, cancels=[cancel_event])
     with gr.Tab("局部重绘"):
         gr.Markdown("> 通过蒙版对图片重绘(重绘区域为白色, 其余透明而不是黑色)")
         generate = gr.Button(value="开始生成")

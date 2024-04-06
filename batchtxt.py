@@ -27,7 +27,7 @@ def main(forever: bool):
     json_for_t2i, seed = prepare_json(prompt, env.sm, env.scale, env.negetive)
     img_data = generate_image(json_for_t2i)
     if img_data != None:
-        save_image(img_data, "t2i", str(seed) + file.replace(".txt", ''), "None", "None")
+        save_image(img_data, "t2i", str(seed) + file.replace(".txt", '').replace("_", '-'), "None", "None")
         file_list.remove(file)
         shutil.move(f"./files/prompt/{file}", f"./files/prompt/done/{file}")
     else:
