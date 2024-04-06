@@ -129,12 +129,12 @@ def main(engine, file, file_path, open_button, *options):
                 with open("./output/temp_waifu2x.bat", 'w') as temp:
                     temp.write(code)
                 os.system(os.path.abspath("./output/temp_waifu2x.bat"))
-                if open_button:
-                    return "图片已保存到 ./output/upscale...", None
-                else:
-                    return None, otp
+                revert_img_info(j, otp)
 
-            run_cmd(j, otp, code)
+            if engine in ["waifu2x-caffe", "waifu2x-converter"]:
+                pass
+            else:
+                run_cmd(j, otp, code)
 
     if open_button:
         return "图片已保存到 ./output/upscale...", None
