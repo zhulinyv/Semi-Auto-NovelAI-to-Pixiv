@@ -12,38 +12,24 @@
     <img src="https://img.shields.io/github/forks/zhulinyv/Semi-Auto-NovelAI-to-Pixiv">
 </p>
 
-## 💬 前言
+## 💬 介绍
 
-英文版文档: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/README_EN.md)
+English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/README_EN.md)
 
-这是一个 NovelAI 自动生成图片, 经过人工筛选后上传 Pixiv 的脚本
-
-<details>
-<summary><b>查看运行示例</b></summary>
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/d6059625-0640-46dd-97b6-ecbfcb37b646)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/685a034f-e66b-4afd-8e2e-5e0a2ebca709)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/74874ed3-6686-4cd2-b80e-3b3a3dca4b0a)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a6c3973a-76e3-47b6-aa1e-b3e20850cf41)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/5f30cb40-f014-4aff-81ef-f86b02ae2fdb)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/b76c93a0-bddc-4792-8a39-8673c0edc30d)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/f0b4ab5c-3ebb-489c-83b7-3b32676c28ae)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/6b794c4f-2a9a-4d2c-96f1-394c801d880e)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/30e22047-ce6c-4016-896b-852e55b9e724)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/12f73504-e7b8-420b-aa90-9a8610cd1a0e)
-
-![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/b1f43335-fff8-440d-a50e-5399dee10c67)
-
-</details>
+✨ **目前已实现的功能**:
+| 功能 | 介绍 | 示例 | 说明 |
+|:---:|:---:|:---:|:---:|
+| 文生图 | 使用 Gradio 为 NovelAI 写的一个用户界面, 除了界面不同, 其它完全等同于使用 NovelAI 网站 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/252b2455-3185-47b4-8606-3a736b3bc99f) | 生成的图片将保存到 `./output/t2i` 文件夹 |
+| 图生图 | 等同于使用 NovelAI 网站, 支持任何图片, 另外, 我为它添加了批量图生图 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/43d99c78-70ec-42fe-9762-fcacf0b34d4b) | 生成的图片将保存到 `./output/i2i` 文件夹, 但会在 `output` 文件夹内生成一张名为 `temp.png` 的临时图片, 可以删除, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_i2i` |
+| 随机涩图 | 通过随机组合 `./files/favorite.json` 中的 tag 生成一张涩图或无限生成涩图 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/faf4e7cb-7a63-4cf1-8056-473d986c004e) | 关于随机涩图的配置, 请参考[其它配置](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE)中关于随机涩图部分 |
+| 随机图片 | 通过读取 `./file/prompt` 中的 `*.txt` 文件作为提示词无限生成图片, 当文件夹下的所有 `*.txt` 文件均生成过一次后或点击停止生成后, 则将停止运行 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/7bbfa72b-ab54-4011-9a2e-cebf3a6bd275) | 关于随机图片的配置, 请参考[其它配置](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE)中关于随机图片部分 |
+| 局部重绘 | 仅支持 NovelAI 生成的图片, 并且需要上传蒙版, 支持批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/57e91754-c2ec-4bca-9149-cad424569de1) | 上传的蒙版应为: 重绘区域为白色, 其余透明而不是黑色, 分辨率等于重绘图像, 批量操作时, 请将图片和蒙版放置于两个文件夹, 并且保证图片和蒙版文件名相同, 例如: `./output/inpaint/img`, `./output/inpaint/mask`, 生成的图片将保存到 `./output/inpaint` |
+| 超分降噪 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目对图片进行超分降噪, 支持任何图片单张或批量处理 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/3465c6be-4326-423d-848b-1a281e1e32ae) | 生成的图片将保存到 `./output/upscale` 文件夹, 不建议使用 **srmd-cuda**, 因为它不稳定. 当使用 **waifu2x-caffe** 或 **waifu2x-converter** 时, 将会在 `.\output` 文件夹内生成一个名为 `temp_waifu2x.bat` 的临时批处理文件, 可以删除, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_upscale` |
+| 自动打码 | 自动检测图片中的关键部位, 并对其打码 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/98650568-c58f-4571-8dcd-222e1b48e5be) | 不能确保 100% 检测出来, 生成的图片将保存到 `./output/mosaic` 文件夹, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_mosaic` |
+| 上传Pixiv | 批量将图片上传到 Pixiv |![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/95603593-6bff-47aa-a5c6-5ba21067e306) | 关于上传Pixiv的配置, 请参考[其它配置](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE)中关于上传Pixiv部分 |
+| 法术解析 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目进行读取 png info | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/08fcf698-4be3-4ee3-b4a5-4225810740ca) | 使用 iframe 嵌套入本项目 |
+| GPT Free | 免费, 多模型的 GPT, 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a3ae56b2-4fc4-47e1-8d1d-aa01b7114892) | 使用 iframe 嵌套入本项目 |
+| selector | 人工对图片进行筛选的工具 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/12f73504-e7b8-420b-aa90-9a8610cd1a0e) | 这是一个独立程序, 使用请直接运行根目录下 `selector.py`, ChatGPT 写的, 效果一般, 使用时需要先选择图片目录和输出目录, 当按下移动按钮时, 当前展示的图片将会从图片目录被移动到输出目录 |
 
 <p>
     <text>灵感来自于我的朋友们: </text> 
@@ -58,25 +44,25 @@
 
 ## 💿 部署
 
-请确保你已经安装了 Python 并将其添加到环境变量中
+### 1️⃣ 安装 Python
 
-这些脚本均可独立运行, 如有需要请展开 ↓
+推荐安装 [Python 3.10.11](https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe), 安装时请勾选 **Add Python to PATH**, 其余保持默认
 
-<details>
-<summary>已过时(请直接运行 run.bat)</summary>
+### 2️⃣ 接下来的路
 
-在命令行中依次执行以下代码
-
-```
-.\venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-</details>
+现在你可以直接运行项目根目录下的 `run.bat` 来启动 WebUI, 首次启动会自动创建虚拟环境并安装依赖, 耗时较长, 可以去冲杯咖啡或继续看下方的文档
 
 ## ⚙️ 配置
 
-使用项目前, 你需要复制一份 `env.example` 并重命名为 `.env`, 并对照下方表格按照需要修改配置
+⚠️ 1.请不要跳过这一步, 它非常重要, 确保你已经将所有配置浏览过一遍
+
+⚠️ 2.如果你已经启动了 WebUI, 但没有进行必要配置, 那么请关闭它
+
+⚠️ 3.使用项目前, 你需要复制一份 `env.example` 并重命名为 `.env`
+
+⚠️ 4.如果你已经启动过一次, 脚本将会自动进行复制和重命名操作
+
+⚠️ 5.以下配置仅有三项为必须配置(不配置将无法使用相关功能), 其余可以按需配置
 
 | 项目 | 必须 | 类型 | 默认 | 说明 | 示例 |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -124,7 +110,7 @@ pip install -r requirements.txt
 
 ### 其它配置:
 
-关于随机图片, 请将提示词文件(例如: example.txt, 文件内含有 prompt)放到 `./files/prompt` 文件夹
+- 关于随机图片, 请将提示词文件(例如: example.txt, 文件内含有 prompt 放到 `./files/prompt` 文件夹
 
 ```
 例如:
@@ -135,7 +121,21 @@ pip install -r requirements.txt
         └---114514.txt -> 文件内容: {henghengheng aaaaa}
 ```
 
-关于随机涩图, 可以在对应位置自行添加配置:
+- 关于上传 Pixiv, 需要将选择上传的图片或文件夹放到同一个文件夹, 例如 `./output/pixiv`
+
+```
+例如:
+.\output
+  └---\pixiv
+        └---7589641258_GenshinImpact_可莉.png -> 注意: 图片的名称为: 种子_出处_角色.png 的形式, 将会根据生成信息以及出处和角色进行打标签, 角色将作为标题
+        └---6594641258dwuibuib_None_None.png  -> 注意: 图片的名称为: 内容_None_None.png 的形式, 将会根据生成信息进行打标签, None 将作为标题
+        └---拉菲.png                          -> 注意: 这样的图片将会导致错误, 不用担心, 如果完全使用本项目生成的图片, 生成的图片名均是符合标准的
+        └---\Nahida                           -> 注意: 可以将文件夹作为图片组, 即上传的一个作品中含有多张图片
+              └---5264942125_GenshinImpact_纳西妲.png
+              └---4351819919_GenshinImpact_纳西妲.png
+```
+
+- 关于随机涩图, 请根据说明在对应位置自行添加配置:
 
 ```py
 {
@@ -229,147 +229,6 @@ pip install -r requirements.txt
 }
 ```
 
-这些脚本均可独立运行, 如有需要请展开 ↓
-
-<details>
-<summary>已过时(请直接运行 run.bat)</summary>
-
-> 对于图生图, 需要将 NovelAI 生成的图片放到 `.\output\choose_for_i2i` 文件夹
-
-```
-例如:
-需要放大的图片:
-.\output
-  └---\choose_to_i2i
-        └---7589641258_GenshinImpact_可莉.png
-        └---6594641258_AzureLane_拉菲.png
-放大之后的图片:
-.\output
-  └---\i2i
-        └---7589641258_GenshinImpact_可莉.png
-        └---6594641258_AzureLane_拉菲.png
-```
-
-> 对于上传 Pixiv, 需要将选择上传的图片或文件夹放到 `.\output\pixiv` 文件夹
-
-```
-例如:
-.\output
-  └---\pixiv
-        └---7589641258_GenshinImpact_可莉.png
-        └---6594641258_AzureLane_拉菲.png
-        └---\Nahida
-              └---5264942125_GenshinImpact_纳西妲.png
-              └---4351819919_GenshinImpact_纳西妲.png
-```
-
-> 对于 [waifu2x](https://github.com/nagadomi/waifu2x) 放大, 需要将图片放到 `.\output\choose_for_upscale` 文件夹
-
-```
-例如:
-.\output
-  └---\choose_to_upscale
-        └---7589641258_GenshinImpact_可莉.png
-        └---6594641258_AzureLane_拉菲.png
-```
-
-> 对于打马赛克, 需要将图片放到 `.\output\choose_to_mosaic` 文件夹
-
-```
-例如:
-.\output
-  └---\mosaic
-        └---7589641258_GenshinImpact_可莉.png
-        └---6594641258_AzureLane_拉菲.png
-```
-
-> 对于局部重绘, 需要将重绘图片放到 `.\output\inpaint\img` 文件夹, 蒙版图片放到 `.\output\inpaint\mask` 文件夹
-
-```
-例如:
-.\output
-  └---\inpaint
-        └---img
-            └---7589641258_GenshinImpact_可莉.png
-            └---6594641258_AzureLane_拉菲.png
-        └---mask
-            └---7589641258_GenshinImpact_可莉.png
-            └---6594641258_AzureLane_拉菲.png
-```
-
-</details>
-
-## 🎉 使用
-
-运行 `run.bat`, 即可在[浏览器打开的链接](http://127.0.0.1:11451/)进行生成图片
-
-运行 `selector.py`, 即可在打开的窗口进行筛选图片
-
-这些脚本均可独立运行, 如有需要请展开 ↓
-
-<details>
-<summary>已过时(请直接运行 run.bat)</summary>
-
-### 1️⃣ 激活虚拟环境
-
-```
-.\venv\Scripts\activate
-```
-
-### 2️⃣ 根据需要选择脚本
-
-#### t2i.py
-
-```
-python t2i.py
-```
-
-随机生成涩图到 `.\output`
-
-
-#### i2i.py
-
-```
-python i2i.py
-```
-
-放大 `.\output\choose_for_i2i` 中的图片到  `.\output\i2i`
-
-#### pixiv.py
-
-```
-python pixiv.py
-```
-
-上传 `.\output\pixiv` 中的图片或文件加到 Pixiv
-
-#### waifu2x.py
-
-```
-python pixiv.py
-```
-
-使用 [waifu2x-ncnn-vulkan](https://github.com/nagadomi/waifu2x-ncnn-vulkan) 放大图片
-
-![效果](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a304d3bd-181f-4d94-ac18-a2c53b9f2f79)
-
-#### mosaic.py
-
-```
-python mosaic.py
-```
-
-对关键部位打马赛克
-
-#### inpaint.py
-
-```
-python inpaint.py
-```
-
-</details>
-
-
 ## 📖 待办
 
 + [x] 批量文生图
@@ -397,6 +256,8 @@ python inpaint.py
 本项目使用 [stable-diffusion-inspector](https://spell.novelai.dev/) 解析图片元数据
 
 本项目使用 [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshin-Sync/tree/main) 上传图片至 Pixiv
+
+本项目使用 [GPT4FREE](https://github.com/xtekky/gpt4free) 提供 GPT 服务
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
