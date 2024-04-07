@@ -30,7 +30,7 @@
 | 上传Pixiv | Batch upload images to Pixiv. | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/95603593-6bff-47aa-a5c6-5ba21067e306) | For configuration of Pixiv upload, refer to the Upload to Pixiv section in [Other Configurations](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE). |
 | 法术解析 | Reads PNG info using open-source projects listed in the acknowledgments. | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/08fcf698-4be3-4ee3-b4a5-4225810740ca) | Embedded into this project using iframe. |
 | GPT Free | Free, multi-model GPT using open-source projects listed in the acknowledgments. | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a3ae56b2-4fc4-47e1-8d1d-aa01b7114892) | Embedded into this project using iframe. |
-| 图片筛选 | A tool that manually filters images | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/47a261bc-f962-489f-83b1-2f7381fb5e0a) | To use it, please enter the image directory first and press OK, and then enter the output directory. When pressed to skip, the next image is displayed; When you press Move, the currently displayed image will be moved to the output directory; When you press Delete, the currently displayed image is deleted |
+| 图片筛选 | A tool that manually filters images | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/47a261bc-f962-489f-83b1-2f7381fb5e0a) | To use it, please enter the image directory first and press OK, and then enter the output directory. A file named 'array_data.npy' will be generated in the './output' folder, which will save the progress of the last filter, that is, you can continue to filter without selecting the image directory, and it will be automatically deleted after the filtering |
 
 <p>
     <text>Inspired by my friends: </text> 
@@ -42,6 +42,17 @@
 </p>
 
 Learning Gradio, trying to create a WebUI for this project.
+
+## 💻 Configuration Requirements
+
+| Item | Description |
+|:---:|:---:|
+| NovelAI Membership | To generate images infinitely, it is recommended to have a $25/month membership. |
+| Magic Network | To successfully send POST requests, Magic Network is required. |
+| 1GB VRAM | At least 1GB of VRAM is required to use all engines for super-resolution denoising. |
+| 2GB RAM | At least 2GB of RAM is required for smooth operation of this project. |
+| Windows 10/11(x64) | To use all features, a 64-bit version of Windows 10/11 is required. |
+| [Microsoft Visual C++ 2015](https://www.microsoft.com/en-us/download/details.aspx?id=53587) | Installation of the runtime library is required to use all engines for super-resolution denoising. |
 
 ## 💿 Deployment
 
