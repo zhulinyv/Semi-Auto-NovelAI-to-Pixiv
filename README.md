@@ -30,7 +30,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | 上传Pixiv | 批量将图片上传到 Pixiv |![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/95603593-6bff-47aa-a5c6-5ba21067e306) | 关于上传Pixiv的配置, 请参考[其它配置](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE)中关于上传Pixiv部分 |
 | 法术解析 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目进行读取 png info | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/08fcf698-4be3-4ee3-b4a5-4225810740ca) | 使用 iframe 嵌套入本项目 |
 | GPT Free | 免费, 多模型的 GPT, 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a3ae56b2-4fc4-47e1-8d1d-aa01b7114892) | 使用 iframe 嵌套入本项目 |
-| selector | 人工对图片进行筛选的工具 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/12f73504-e7b8-420b-aa90-9a8610cd1a0e) | 这是一个独立程序, 使用请直接运行根目录下 `selector.py`, ChatGPT 写的, 效果一般, 使用时需要先选择图片目录和输出目录, 当按下移动按钮时, 当前展示的图片将会从图片目录被移动到输出目录 |
+| 图片筛选 | 人工对图片进行筛选的工具 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/47a261bc-f962-489f-83b1-2f7381fb5e0a) | 使用时, 请先输入图片目录并按下确定, 然后输入输出目录. 当按下跳过时, 展示下一张图片; 当按下移动时, 将当前展示的图片移动到输出目录; 当按下删除时, 删除当前展示的图片 |
 
 <p>
     <text>灵感来自于我的朋友们: </text> 
