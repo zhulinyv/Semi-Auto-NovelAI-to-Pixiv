@@ -7,18 +7,20 @@ from utils.utils import format_path
 
 def show_first_img(input_path):
     file_list: list = os.listdir(input_path)
-    for file in file_list:
-        if file[-4:] not in [".png", ".jpg"]:
-            file_list.remove(file)
     new_list = []
     for file in file_list:
-        new_list.append("{}/{}".format(format_path(input_path), file))
+        if file[-4:] in [".png", ".jpg"]:
+            new_list.append("{}/{}".format(format_path(input_path), file))
     file_list = new_list
+    if file_list != []:
+        img = file_list[0]
+    else:
+        img = None
+    file_list.remove(img)
     array_data = np.array(file_list)
     np.save("./output/array_data.npy", array_data)
-    
-    file_list = np.load("./output/array_data.npy")
-    return str(file_list[0]), str(file_list[0])
+
+    return img, img
 
 
 def show_next_img():
@@ -29,13 +31,14 @@ def show_next_img():
         for file in file_list:
             new_list.append(str(file))
         file_list = new_list
-        img = file_list[0]
-        file_list.remove(file_list[0])
-        if file_list != []:
-            array_data = np.array(new_list)
-            np.save("./output/array_data.npy", array_data)
-            return img, img
-        else:
+        try:
+            img = file_list[0]
+            if file_list != []:
+                file_list.remove(file_list[0])
+                array_data = np.array(file_list)
+                np.save("./output/array_data.npy", array_data)
+                return img, img
+        except:
             os.remove("./output/array_data.npy")
     return None, None
 
