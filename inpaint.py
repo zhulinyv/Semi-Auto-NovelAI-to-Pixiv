@@ -1,3 +1,4 @@
+import os
 import string
 
 from PIL.PngImagePlugin import PngInfo

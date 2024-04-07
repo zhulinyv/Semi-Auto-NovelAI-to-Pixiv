@@ -7,6 +7,7 @@ from mosaic import main as mosaic
 from pixiv import main as pixiv
 from inpaint import for_webui as inpaint
 from batchtxt import main as batchtxt
+from selector import *
 
 from utils.env import env
 
@@ -301,6 +302,23 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     }
 </style>
 """.replace("650", str(env.height)))
+    with gr.Tab("图片筛选"):
+        with gr.Column():
+            with gr.Row():
+                input_path = gr.Textbox(label="图片路径", scale=4)
+                select_button = gr.Button("确定", scale=1)
+            output_path = gr.Textbox(label="输出路径")
+        with gr.Row():
+            show_img = gr.Image(scale=7)
+            with gr.Column(scale=1):
+                next_button = gr.Button("跳过", size='lg')
+                move_button = gr.Button("移动", size='lg')
+                del_button = gr.Button("删除", size='lg')
+        current_img = gr.Textbox(visible=False)
+        select_button.click(fn=show_first_img, inputs=[input_path], outputs=[show_img, current_img])
+        next_button.click(fn=show_next_img, outputs=[show_img, current_img])
+        move_button.click(fn=move_current_img, inputs=[current_img, output_path], outputs=[show_img, current_img])
+        del_button.click(fn=del_current_img, inputs=[current_img], outputs=[show_img, current_img])
 
 
 demo.queue().launch(inbrowser=True, share=env.share, server_port=env.port, favicon_path="./files/logo.png")

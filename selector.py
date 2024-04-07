@@ -1,89 +1,51 @@
-# ChatGPT 写的, 效果一般
-
 import os
 import shutil
-import pyautogui
-import tkinter as tk
-from tkinter import filedialog
-from PIL import Image, ImageTk
+import numpy as np
 
-screen_width, screen_height = pyautogui.size()
+from utils.utils import format_path
 
-class ImageSelectorApp:
-    def __init__(self, master):
-        self.master = master
-        self.master.title("图片筛选器")
 
-        self.image_dir = ""
-        self.output_dir = ""
-        self.image_list = []
-        self.current_index = 0
+def show_first_img(input_path):
+    file_list: list = os.listdir(input_path)
+    for file in file_list:
+        if file[-4:] not in [".png", ".jpg"]:
+            file_list.remove(file)
+    new_list = []
+    for file in file_list:
+        new_list.append("{}/{}".format(format_path(input_path), file))
+    file_list = new_list
+    array_data = np.array(file_list)
+    np.save("./output/array_data.npy", array_data)
+    
+    file_list = np.load("./output/array_data.npy")
+    return str(file_list[0]), str(file_list[0])
 
-        self.master.geometry(f"{screen_width}x{screen_height}")
 
-        self.image_dir_label = tk.Label(master, text="图片目录:")
-        self.image_dir_label.place(x=screen_width/5+65, y=10)
+def show_next_img():
+    if os.path.exists("./output/array_data.npy"):
+        file_list = np.load("./output/array_data.npy")
+        file_list = list(file_list)
+        new_list = []
+        for file in file_list:
+            new_list.append(str(file))
+        file_list = new_list
+        img = file_list[0]
+        file_list.remove(file_list[0])
+        if file_list != []:
+            array_data = np.array(new_list)
+            np.save("./output/array_data.npy", array_data)
+            return img, img
+        else:
+            os.remove("./output/array_data.npy")
+    return None, None
 
-        self.output_dir_label = tk.Label(master, text="移动目录:")
-        self.output_dir_label.place(x=screen_width/5+65, y=60)
 
-        self.load_image_button = tk.Button(master, text="选择图片目录", command=self.load_image_directory)
-        self.load_image_button.place(x=10, y=10)
+def move_current_img(current_img, output_path):
+    img_name = os.path.basename(current_img)
+    shutil.move(current_img, "{}/{}".format(format_path(output_path), img_name))
+    return show_next_img()
 
-        self.load_output_button = tk.Button(master, text="选择移动目录", command=self.load_output_directory)
-        self.load_output_button.place(x=10, y=60)
 
-        self.select_button = tk.Button(master, text="移动", command=self.move_selected_image, state=tk.DISABLED)
-        self.select_button.place(x=10, y=110, width=screen_width/5-20, height=(screen_height-200)/2)
-
-        self.next_button = tk.Button(master, text="跳过", command=self.show_next_image, state=tk.DISABLED)
-        self.next_button.place(x=10, y=110+(screen_height-200)/2, width=screen_width/5-20, height=(screen_height-200)/2)
-
-        self.image_label = tk.Label(master)
-        self.image_label.place(x=screen_width/5+65, y=110)
-
-    def load_image_directory(self):
-        self.image_dir = filedialog.askdirectory(title="选择图片目录")
-        if self.image_dir:
-            self.image_list = [os.path.join(self.image_dir, filename) for filename in os.listdir(self.image_dir) if filename.endswith(('.jpg', '.png', '.jpeg'))]
-            self.show_next_image()
-            self.image_dir_label.config(text="图片目录: " + self.image_dir)
-            self.load_image_button.config(state=tk.DISABLED)
-            self.select_button.config(state=tk.NORMAL)
-            self.next_button.config(state=tk.NORMAL)
-
-    def load_output_directory(self):
-        self.output_dir = filedialog.askdirectory(title="选择移动目录")
-        if self.output_dir:
-            self.output_dir_label.config(text="移动目录: " + self.output_dir)
-            self.load_output_button.config(state=tk.DISABLED)
-
-    def show_next_image(self):
-        if self.image_list:
-            image_path = self.image_list[self.current_index]
-            image = Image.open(image_path)
-            w, h = image.size
-            aspect_ratio = w / h
-            new_height = self.master.winfo_height() - 100
-            new_width = int(new_height * aspect_ratio)
-            image = image.resize((new_width, new_height), Image.LANCZOS)
-            photo = ImageTk.PhotoImage(image)
-            self.image_label.configure(image=photo)
-            self.image_label.image = photo
-            self.current_index = (self.current_index + 1) % len(self.image_list)
-
-    def move_selected_image(self):
-        if self.output_dir and self.image_list:
-            selected_image_path = self.image_list[(self.current_index - 1) % len(self.image_list)]
-            image_filename = os.path.basename(selected_image_path)
-            output_path = os.path.join(self.output_dir, image_filename)
-            shutil.move(selected_image_path, output_path)
-            self.show_next_image()
-
-def main():
-    root = tk.Tk()
-    app = ImageSelectorApp(root)
-    root.mainloop()
-
-if __name__ == "__main__":
-    main()
+def del_current_img(current_img):
+    os.remove(current_img)
+    return show_next_img()

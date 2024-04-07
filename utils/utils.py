@@ -138,7 +138,7 @@ def format_str(str_: str):
     return str_
 
 def format_path(str_: str):
-    if str_[-1] == "/":
+    if str_[-1] == "/" or str_[-1] == "\\":
         str_ = str_[:-1]
         return str_
     else:
