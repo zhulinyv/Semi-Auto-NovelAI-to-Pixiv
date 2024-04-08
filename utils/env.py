@@ -1,6 +1,6 @@
-from pydantic_settings import BaseSettings
 from typing import Union
 
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -30,6 +30,7 @@ class Settings(BaseSettings):
     negetive: str = "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]"
 
     class Config:
-        env_file = '.env'
+        env_file = ".env"
+
 
 env = Settings()

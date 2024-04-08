@@ -1,5 +1,6 @@
 import os
 import shutil
+
 import numpy as np
 
 from utils.utils import format_path
@@ -38,7 +39,7 @@ def show_next_img():
                 array_data = np.array(file_list)
                 np.save("./output/array_data.npy", array_data)
                 return img, img
-        except:
+        except Exception:
             os.remove("./output/array_data.npy")
     return None, None
 

@@ -1,12 +1,13 @@
 import os
-import ujson as json
+import random
 
+import ujson as json
 from loguru import logger
 
+from utils.env import env
 from utils.error import DataIsNoneError
 from utils.imgtools import get_img_info, img_to_base64
-from utils.utils import *
-
+from utils.utils import format_path, generate_image, inquire_anlas, json_for_i2i, save_image, sleep_for_cool
 
 
 def i2i_by_band(input_img, input_path, open_button, positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, strength: float, sm: bool, sm_dyn: bool):
@@ -22,19 +23,19 @@ def i2i_by_band(input_img, input_path, open_button, positive: str, negative: str
         json_for_i2i["parameters"]["steps"] = steps
         json_for_i2i["parameters"]["strength"] = strength
         json_for_i2i["parameters"]["sm"] = sm
-        json_for_i2i["parameters"]["sm_dyn"] =  sm_dyn if sm else False
+        json_for_i2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
         json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
         seed = random.randint(1000000000, 9999999999)
         json_for_i2i["parameters"]["seed"] = seed
         json_for_i2i["parameters"]["image"] = img_to_base64(input_img)
         json_for_i2i["parameters"]["extra_noise_seed"] = seed
         json_for_i2i["parameters"]["negative_prompt"] = negative
-        
+
         # logger.debug(json_for_i2i)
-        
+
         save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
         sleep_for_cool(12, 24)
-        
+
         return f"./output/i2i/{seed}_None_None.png", None
 
 
@@ -79,12 +80,12 @@ def main(input_path):
             try:
                 logger.warning(f"剩余水晶: {inquire_anlas()}")
                 logger.info(f"正在放大{img}...")
-                info_list = img.replace(".png", '').split("_")
+                info_list = img.replace(".png", "").split("_")
                 img_path = f"{i2i_path}/{img}"
                 imginfo = get_img_info(img_path)
                 json_for_i2i = prepare_json(imginfo, img_path)
                 img_data = generate_image(json_for_i2i)
-                if img_data == None:
+                if not img_data:
                     raise DataIsNoneError
                 save_image(img_data, type_, info_list[0], info_list[1], info_list[2])
                 logger.warning("删除小图...")

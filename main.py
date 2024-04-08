@@ -1,17 +1,14 @@
 import gradio as gr
 
-from t2i import t2i, t2i_by_band
+from batchtxt import main as batchtxt
 from i2i import i2i_by_band
-from waifu2x import main as upscale
+from inpaint import for_webui as inpaint
 from mosaic import main as mosaic
 from pixiv import main as pixiv
-from inpaint import for_webui as inpaint
-from batchtxt import main as batchtxt
-from selector import *
-
+from selector import del_current_img, move_current_img, show_first_img, show_next_img
+from t2i import t2i, t2i_by_band
 from utils.env import env
-
-
+from waifu2x import main as upscale
 
 with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     gr.Markdown("# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 半自动 NovelAI 上传 Pixiv")
@@ -30,7 +27,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     sampler = gr.Radio(["k_euler", "k_euler_ancestral", "k_dpmpp_2s_ancestral", "k_dpmpp_2m", "k_dpmpp_sde", "ddim_v3"], value="k_euler", label="采样器")
                     noise_schedule = gr.Radio(["native", "karras", "exponential", "polyexponential"], value="native", label="噪声计划表")
                     steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label="采样步数")
-                    sm = gr.Radio([True, False],value=False, label="sm")
+                    sm = gr.Radio([True, False], value=False, label="sm")
                     sm_dyn = gr.Radio([True, False], value=False, label="sm_dyn(开启需同时开启 sm)")
                     seed = gr.Textbox(value="-1", label="随机种子")
                 output_img = gr.Image(scale=2)
@@ -60,7 +57,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 with gr.Row():
                     sampler = gr.Radio(["k_euler", "k_euler_ancestral", "k_dpmpp_2s_ancestral", "k_dpmpp_2m", "k_dpmpp_sde", "ddim_v3"], value="k_euler", label="采样器")
                     noise_schedule = gr.Radio(["native", "karras", "exponential", "polyexponential"], value="native", label="噪声计划表")
-                    sm = gr.Radio([True, False],value=False, label="sm")
+                    sm = gr.Radio([True, False], value=False, label="sm")
                     sm_dyn = gr.Radio([True, False], value=False, label="sm_dyn(开启需同时开启 sm)")
             generate.click(fn=i2i_by_band, inputs=[input_img, input_path, open_button, positive, negative, resolution, scale, sampler, noise_schedule, steps, strength, sm, sm_dyn], outputs=[output_img, output_info])
     with gr.Tab("随机涩图"):
@@ -231,7 +228,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 mode = gr.Radio(["noise", "scale", "noise_scale"], value="noise_scale", label="模式", scale=4)
                 scale = gr.Slider(minimum=1, maximum=32, value=2, label="放大倍数", scale=1)
                 noise = gr.Slider(minimum=0, maximum=3, step=1, value=3, label="降噪等级", scale=1)
-                process = gr.Radio(["cpu", "gpu", "cudnn"],value="gpu", label="处理模式", scale=3)
+                process = gr.Radio(["cpu", "gpu", "cudnn"], value="gpu", label="处理模式", scale=3)
                 tta = gr.Radio([True, False], value=False, label="是否开启 tta 模式", scale=2)
             model = gr.Radio(["models/anime_style_art_rgb", "models/anime_style_art", "models/photo", "models/upconv_7_anime_style_art_rgb", "models/upconv_7_photo", "models/upresnet10", "models/cunet", "models/ukbench"], value="models/cunet", label="超分模型")
             with gr.Row():
@@ -278,11 +275,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         with gr.Column():
             input_path = gr.Textbox(label="上传路径(其中可包含单张图片或文件夹, 仅在本程序运行的电脑生效)")
             with gr.Row():
-                output_info =gr.Textbox(label="输出信息", scale=4)
+                output_info = gr.Textbox(label="输出信息", scale=4)
                 generate = gr.Button("开始上传", scale=1)
         generate.click(fn=pixiv, inputs=input_path, outputs=output_info)
     with gr.Tab("法术解析"):
-        gr.HTML("""
+        gr.HTML(
+            """
 <iframe id="myiframe" src="https://spell.novelai.dev/"></iframe>
 <style>
     #myiframe {
@@ -290,10 +288,14 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         height: 650px;
     }
 </style>
-""".replace("650", str(env.height)))
+""".replace(
+                "650", str(env.height)
+            )
+        )
     with gr.Tab("GPT Free"):
         # gr.Markdown("> 包含各种模型的免费 GPT, 来自项目 [GPT4FREE](https://github.com/xtekky/gpt4free)")
-        gr.HTML("""
+        gr.HTML(
+            """
 <iframe id="myiframe" src="http://127.0.0.1:19198"></iframe>
 <style>
     #myiframe {
@@ -301,7 +303,10 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         height: 650px;
     }
 </style>
-""".replace("650", str(env.height)))
+""".replace(
+                "650", str(env.height)
+            )
+        )
     with gr.Tab("图片筛选"):
         with gr.Column():
             with gr.Row():
@@ -311,9 +316,9 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         with gr.Row():
             show_img = gr.Image(scale=7)
             with gr.Column(scale=1):
-                next_button = gr.Button("跳过", size='lg')
-                move_button = gr.Button("移动", size='lg')
-                del_button = gr.Button("删除", size='lg')
+                next_button = gr.Button("跳过", size="lg")
+                move_button = gr.Button("移动", size="lg")
+                del_button = gr.Button("删除", size="lg")
         current_img = gr.Textbox(visible=False)
         select_button.click(fn=show_first_img, inputs=[input_path], outputs=[show_img, current_img])
         next_button.click(fn=show_next_img, outputs=[show_img, current_img])

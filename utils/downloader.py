@@ -1,15 +1,14 @@
 import os
-import requests
 import zipfile
 
+import requests
 from loguru import logger
-
 
 
 def download(url):
     logger.info("正在下载超分引擎...")
     rep = requests.get(url, stream=True)
-    with open("./files/temp.zip", 'wb') as file:
+    with open("./files/temp.zip", "wb") as file:
         for chunk in rep.iter_content(chunk_size=256):
             file.write(chunk)
     logger.success("下载完成!")

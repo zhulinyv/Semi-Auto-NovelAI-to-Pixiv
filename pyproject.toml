@@ -26,6 +26,20 @@ pypiwin32 = "^223"
 flask = "^3.0.2"
 numpy = "^1.26.4"
 
+# https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html
+[tool.black]
+line-length = 500
+
+# https://beta.ruff.rs/docs/settings/
+[tool.ruff]
+line-length = 500
+# https://beta.ruff.rs/docs/rules/
+select = ["E", "W", "F"]
+ignore = ["F401"]
+# Exclude a variety of commonly ignored directories.
+respect-gitignore = true
+ignore-init-module-imports = true
+
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,29 +1,27 @@
 import io
 import platform
 import random
-import requests
 import time
 import zipfile
 
+import requests
 from loguru import logger
 
 from utils.env import env
 
-
-
 headers = {
-    'Accept': '*/*',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Accept-Language': 'en-GB,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-US;q=0.6',
-    'Authorization': f'Bearer {env.token if env.token != "xxx" else logger.error("未配置 token!")}',
-    'Referer': 'https://novelai.net',
-    'Sec-Ch-Ua': '"Chromium";v="122", "Not(A:Brand";v="24", "Microsoft Edge";v="122"',
-    'Sec-Ch-Ua-mobile': '?0',
-    'Sec-Ch-Ua-Platform': '"Windows"',
-    'Sec-Fetch-Dest': 'empty',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Site': 'same-site',
-    "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "en-GB,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-US;q=0.6",
+    "Authorization": f'Bearer {env.token if env.token != "xxx" else logger.error("未配置 token!")}',
+    "Referer": "https://novelai.net",
+    "Sec-Ch-Ua": '"Chromium";v="122", "Not(A:Brand";v="24", "Microsoft Edge";v="122"',
+    "Sec-Ch-Ua-mobile": "?0",
+    "Sec-Ch-Ua-Platform": '"Windows"',
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-site",
+    "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
 }
 json_for_t2i = {
     "input": str,
@@ -86,8 +84,8 @@ json_for_i2i = {
         "seed": int,
         "image": str,
         "extra_noise_seed": int,
-        "negative_prompt": str
-    }
+        "negative_prompt": str,
+    },
 }
 json_for_inpaint = {
     "input": str,
@@ -121,9 +119,10 @@ json_for_inpaint = {
         "image": str,
         "mask": str,
         "extra_noise_seed": int,
-        "negative_prompt": str
-    }
+        "negative_prompt": str,
+    },
 }
+
 
 def list_to_str(str_list: list):
     empty_str = ""
@@ -131,11 +130,13 @@ def list_to_str(str_list: list):
         empty_str += f"{i},"
     return empty_str
 
+
 def format_str(str_: str):
-    str_ = str_.replace(", ", ',')
-    str_ = str_.replace(",", ', ')
+    str_ = str_.replace(", ", ",")
+    str_ = str_.replace(",", ", ")
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
+
 
 def format_path(str_: str):
     if str_[-1] == "/" or str_[-1] == "\\":
@@ -144,11 +145,13 @@ def format_path(str_: str):
     else:
         return str_
 
+
 def sleep_for_cool(int1, int2):
     sleep_time = round(random.uniform(int1, int2), 3)
     logger.info(f"等待 {sleep_time} 秒后继续...")
     time.sleep(sleep_time)
     return f"等待 {sleep_time} 秒后继续..."
+
 
 def generate_image(json_data):
     try:
@@ -163,18 +166,21 @@ def generate_image(json_data):
         logger.error(f"出现错误: {e}")
         return None
 
+
 def save_image(img_data, type_, seed, choose_game, choose_character):
-    if img_data != None:
+    if img_data:
         with open(f"./output/{type_}/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
             file.write(img_data)
     else:
         pass
 
+
 def inquire_anlas():
-    rep = requests.get('https://api.novelai.net/user/subscription', headers=headers)
+    rep = requests.get("https://api.novelai.net/user/subscription", headers=headers)
     if rep.status_code == 200:
-        return rep.json()['trainingStepsLeft']['fixedTrainingStepsLeft']
+        return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
     return 0
+
 
 def check_platform():
     if platform.system() == "Windows":

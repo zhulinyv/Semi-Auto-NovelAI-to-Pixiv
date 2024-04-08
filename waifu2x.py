@@ -1,23 +1,22 @@
-import subprocess
+import os
 import random
 import string
-import os
+import subprocess
 
 from loguru import logger
 
-from utils.error import Waifu2xError
+from utils.downloader import download, extract
 from utils.env import env
+from utils.error import VideoCardError, Waifu2xError
 from utils.imgtools import revert_img_info
 from utils.utils import check_platform
-from utils.downloader import *
-
 
 
 def run_cmd(file, output_dir, code):
     logger.info(f"正在放大 {file}...")
     check_platform()
     logger.debug(code)
-    
+
     try:
         p = subprocess.Popen(code, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate()
@@ -25,11 +24,11 @@ def run_cmd(file, output_dir, code):
     except Waifu2xError:
         logger.error("放大失败!")
         return "寄"
-    
+
     logger.info("\n" + result)
     logger.success("放大成功!")
     logger.info(f"图片已保存到 {output_dir}")
-    
+
     revert_img_info(file, output_dir)
 
 
@@ -49,8 +48,8 @@ def main(engine, file, file_path, open_button, *options):
         file_list = [file]
 
     for j in file_list:
-        otp = "./output/upscale/" + j.replace(file_path, '').replace("/", '')
-        
+        otp = "./output/upscale/" + j.replace(file_path, "").replace("/", "")
+
         if engine == "waifu2x-ncnn-vulkan":
             code = r".\files\waifu2x-ncnn-vulkan\waifu2x-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(j, otp, options[0], options[1])
             if options[2]:
@@ -91,7 +90,8 @@ def main(engine, file, file_path, open_button, *options):
 
             elif engine == "srmd-cuda":
                 try:
-                    from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetName
+                    from pynvml import nvmlDeviceGetHandleByIndex, nvmlDeviceGetName, nvmlInit
+
                     nvmlInit()
                     vcard = nvmlDeviceGetName(nvmlDeviceGetHandleByIndex(0))
                     logger.info(f"检测到显卡: {vcard}")
@@ -101,7 +101,7 @@ def main(engine, file, file_path, open_button, *options):
                         software = "srmd-cuda-RTX-W2xEX.exe"
                     else:
                         logger.error("仅支持 RTX 和 GTX 系列显卡")
-                except:
+                except VideoCardError:
                     logger.error("仅支持 RTX 和 GTX 系列显卡")
                 code = r".\files\else_upscale_engine\srmd-cuda\{} -i {} -o {} -n {} -s {}".format(software, j, otp, options[0], options[1])
 
@@ -126,7 +126,7 @@ def main(engine, file, file_path, open_button, *options):
                     code += os.path.abspath("./files/else_upscale_engine/waifu2x-converter/waifu2x-converter-cpp.exe")
                     code += " -i {} -o {} --scale-ratio {} --noise-level {} -m {} -j {}".format(os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2], options[3])
 
-                with open("./output/temp_waifu2x.bat", 'w') as temp:
+                with open("./output/temp_waifu2x.bat", "w") as temp:
                     temp.write(code)
                 os.system(os.path.abspath("./output/temp_waifu2x.bat"))
                 revert_img_info(j, otp)
@@ -140,8 +140,6 @@ def main(engine, file, file_path, open_button, *options):
         return "图片已保存到 ./output/upscale...", None
     else:
         return None, otp
-
-
 
 
 if __name__ == "__main__":

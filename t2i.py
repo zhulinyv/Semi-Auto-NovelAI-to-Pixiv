@@ -1,15 +1,15 @@
 import random
 
 import ujson as json
-
 from loguru import logger
 
-from utils.utils import *
+from utils.env import env
+from utils.utils import format_str, generate_image, json_for_t2i, list_to_str, save_image, sleep_for_cool
 
 
 def t2i_by_band(positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, sm: bool, sm_dyn: bool, seed: str):
     json_for_t2i["input"] = positive
-    
+
     json_for_t2i["parameters"]["width"] = int(resolution.split("x")[0])
     json_for_t2i["parameters"]["height"] = int(resolution.split("x")[1])
     json_for_t2i["parameters"]["scale"] = scale
@@ -21,17 +21,17 @@ def t2i_by_band(positive: str, negative: str, resolution: str, scale: float, sam
     seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
     json_for_t2i["parameters"]["seed"] = seed
     json_for_t2i["parameters"]["negative_prompt"] = negative
-    
+
     logger.debug(json_for_t2i)
-    
+
     save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
     # sleep_for_cool(12, 24)
-    
+
     return f"./output/t2i/{seed}_None_None.png"
 
 
 def prepare_input():
-    with open("./files/favorite.json", 'r', encoding='utf-8') as file:
+    with open("./files/favorite.json", "r", encoding="utf-8") as file:
         data = json.load(file)
 
     weight_list = list(data["artists"]["belief"].keys())
@@ -58,7 +58,7 @@ def prepare_input():
     choose_character = random.choice(list(data["character"][choose_game].keys()))
     character = list_to_str(data["character"][choose_game][choose_character])
     censored = data["R18"]["去码"] if not env.censor else data["R18"]["打码"]
-    action_type = "巨乳" if any(char in character for char in ['huge breasts', 'large breasts', 'medium breasts']) else "普通"
+    action_type = "巨乳" if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"]) else "普通"
     choose_action: list = random.choice(list(data["R18"]["动作"][f"{action_type}动作"].keys()))
     action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][choose_action])
     emotion_type = "口交" if "oral" in action else "普通"
@@ -68,7 +68,8 @@ def prepare_input():
     surrounding = list_to_str(data["R18"]["场景"]["仅场景"][choose_surrounding]) if "multiple views" not in action else "{white background},"
     cum = random.choice(data["R18"]["污渍"])
 
-    logger.info(f"""
+    logger.info(
+        f"""
 >>>>>>>>>>
 出处: {choose_game}: {choose_character}
 角色: {character}
@@ -80,7 +81,8 @@ def prepare_input():
 污渍: {cum}
 正面: {pref}
 负面: {negetive}
-<<<<<<<<<<""")
+<<<<<<<<<<"""
+    )
 
     input_ = format_str(pref + character + artist + censored + emotion + action + surrounding + cum)
 
@@ -111,6 +113,7 @@ def prepare_json(input_, sm, scale, negetive):
 
 times = 0
 
+
 def t2i(forever: bool):
     global times
     times += 1
@@ -125,7 +128,6 @@ def t2i(forever: bool):
         return t2i(True)
     else:
         return f"./output/t2i/{seed}_{choose_game}_{choose_character}.png"
-
 
 
 if __name__ == "__main__":

@@ -1,14 +1,14 @@
 import os
+import random
 import string
 
+from loguru import logger
 from PIL.PngImagePlugin import PngInfo
 
 from i2i import prepare_json
 from utils.error import DataIsNoneError
-
-from utils.utils import *
-from utils.imgtools import *
-
+from utils.imgtools import get_img_info, img_to_base64
+from utils.utils import format_path, generate_image, inquire_anlas
 
 
 def for_webui(input_path, mask_path, input_img, input_mask, open_button):
@@ -33,10 +33,10 @@ def inpaint(img_path, mask_path, output_path):
     json_for_inpaint = prepare_json(imginfo, img_path)
     json_for_inpaint["parameters"]["mask"] = img_to_base64(mask_path)
     img_data = generate_image(json_for_inpaint)
-    if img_data == None:
+    if not img_data:
         raise DataIsNoneError
     img_name = os.path.basename(img_path)
-    with open(f"{format_path(output_path)}/{img_name}", 'wb') as file:
+    with open(f"{format_path(output_path)}/{img_name}", "wb") as file:
         file.write(img_data)
     return f"{format_path(output_path)}/{img_name}"
 
@@ -51,7 +51,6 @@ def main(img_folder, mask_folder, otp_folder):
     for i in range(len(file_list)):
         logger.warning(f"剩余水晶: {inquire_anlas()}")
         inpaint(file_list[i], f"{mask_folder}/{os.path.basename(file_list[i])}", otp_folder)
-
 
 
 if __name__ == "__main__":

@@ -1,49 +1,48 @@
-import cv2
 import os
 import shutil
 
+import cv2
 from loguru import logger
+from nudenet import NudeDetector
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
-from utils.utils import format_path
 from utils.env import env
+from utils.utils import format_path
 
-from nudenet import NudeDetector
 nude_detector = NudeDetector()
 
 
-
 def _mosaic(img, x, y, w, h, neighbor):
-    for i in range(0, h , neighbor):  
-        for j in range(0, w , neighbor):
+    for i in range(0, h, neighbor):
+        for j in range(0, w, neighbor):
             rect = [j + x, i + y]
             color = img[i + y][j + x].tolist()
             left_up = (rect[0], rect[1])
-            x2=rect[0] + neighbor - 1
-            y2=rect[1] + neighbor - 1
-            if x2>x+w:
-                x2=x+w
-            if y2>y+h:
-                y2=y+h
-            right_down = (x2,y2)  
+            x2 = rect[0] + neighbor - 1
+            y2 = rect[1] + neighbor - 1
+            if x2 > x + w:
+                x2 = x + w
+            if y2 > y + h:
+                y2 = y + h
+            right_down = (x2, y2)
             cv2.rectangle(img, left_up, right_down, color, -1)
-    
+
     return img
 
 
 def mosaic(img_path):
     pil_img = Image.open(img_path)
-    
+
     neighbor = int(pil_img.width * env.neighbor if pil_img.width > pil_img.height else pil_img.height * env.neighbor)
-    
+
     body = nude_detector.detect(img_path)
-    
+
     for part in body:
-        if part["class"] in ["FEMALE_GENITALIA_EXPOSED",  "MALE_GENITALIA_EXPOSED"]:
+        if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
             logger.debug("检测到: {}".format(part["class"]))
-            
-            cv2_img=cv2.imread(img_path)
+
+            cv2_img = cv2.imread(img_path)
             cv2_img = _mosaic(cv2_img, part["box"][0], part["box"][1], part["box"][2], part["box"][3], neighbor)
             cv2.imwrite(img_path, cv2_img)
 
@@ -56,9 +55,8 @@ def mosaic(img_path):
         pil_img = Image.open(img_path)
         pil_img.save(img_path, pnginfo=metadata)
         logger.success("还原成功!")
-    except:
+    except Exception:
         logger.error("还原失败!")
-
 
 
 def main(file_path, input_img, open_button):
@@ -81,7 +79,6 @@ def main(file_path, input_img, open_button):
         mosaic(input_img)
         logger.success("处理完成!")
         return "./output/temp_.png", None
-
 
 
 if __name__ == "__main__":
