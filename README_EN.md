@@ -102,6 +102,10 @@ Now you can launch the `run.bat` at the origin directory to start WebUI, it will
 | caption_prefix | No | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | the prefix of the caption when uploading pictures to pixiv | Hello |
 | neighbor | No | float | 0.01 | The square mosaic is relative to the length of the sides of the picture | 0.008 |
 | negetive | No | str | "nsfw, ..." | random pictures uesd negative | "sfw, ..." |
+| alpha | No | float | 0.7 | Watermark transparency (0~1, the higher the value, the more transparent) | 0.5 |
+| water_height | No | int | 135 | Adjust the height of the watermark | 100 |
+| position | No | list[str] | ["Top left", "Top right", "Bottom left", "Bottom right"] | Possible positions for the watermark | ["Top left"] |
+| water_num | No | int | 1 | Number of watermarks | 2 |
 
 ⚠️ Getting the token:
 

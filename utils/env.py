@@ -28,6 +28,10 @@ class Settings(BaseSettings):
     caption_prefix: str = None
     neighbor: float = 0.01
     negetive: str = "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]"
+    alpha: float = 0.7
+    water_height: int = 135
+    position: list = ["左上", "右上", "左下", "右下"]
+    water_num: int = 1
 
     class Config:
         env_file = ".env"

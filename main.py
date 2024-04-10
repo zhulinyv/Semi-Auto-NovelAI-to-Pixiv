@@ -9,6 +9,7 @@ from selector import del_current_img, move_current_img, show_first_img, show_nex
 from t2i import t2i, t2i_by_band
 from utils.env import env
 from waifu2x import main as upscale
+from water import main as water
 
 with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     gr.Markdown("# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 半自动 NovelAI 上传 Pixiv")
@@ -270,6 +271,13 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     output_info = gr.Textbox(label="输出信息")
                     output_img = gr.Image(scale=2)
         generate.click(fn=mosaic, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
+    with gr.Tab("添加水印"):
+        output_path = gr.Textbox("./output/water", visible=False)
+        with gr.Row():
+            input_path = gr.Textbox(label="图片路径", scale=4)
+            start_button = gr.Button("确定", scale=1)
+        output_info = gr.Textbox(label="输出信息")
+        start_button.click(fn=water, inputs=[input_path, output_path], outputs=output_info)
     with gr.Tab("上传Pixiv"):
         gr.Markdown("> 将图片或图片组上传至 Pixiv, 你可以在命令行查看上传进度")
         with gr.Column():
