@@ -102,6 +102,10 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | caption_prefix | 否 | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | 上传 pixiv 的描述前缀 | 你好 |
 | neighbor | 否 | float | 0.01 | 方形马赛克相对于图片的边长 | 0.008 |
 | negetive | 否 | str | "nsfw, ..." | 随机图片使用的负面 | "sfw, ..." |
+| alpha | 否 | float | 0.7 | 水印透明度(0~1, 越大越透明) | 0.5 |
+| water_height | 否 | int | 135 | 调整水印的高度 | 100 |
+| position | 否 | list[str] | ["左上", "右上", "左下", "右下"] | 水印可能出现的位置 | ["左上"] |
+| water_num | 否 | int | 1 | 水印的数量 | 2 |
 
 ⚠️ token 的获取:
 
