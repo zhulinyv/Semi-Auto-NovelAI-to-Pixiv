@@ -13,7 +13,7 @@ from waifu2x import main as upscale
 with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     gr.Markdown("# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 半自动 NovelAI 上传 Pixiv")
     with gr.Tab("文生图"):
-        gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o, 更多画风串: [Nai3 画风串](https://zhulinyv.github.io/aLcTZgiMf/)")
+        gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高), 429(请求过快), 443(节点不稳定), 反正不是我的问题 ヾ(≧▽≦*)o")
         with gr.Column():
             with gr.Column(scale=3):
                 positive = gr.Textbox(value="[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,", lines=2, label="正面提示词")
@@ -33,7 +33,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 output_img = gr.Image(scale=2)
         generate.click(fn=t2i_by_band, inputs=[positive, negative, resolution, scale, sampler, noise_schedule, steps, sm, sm_dyn, seed], outputs=output_img)
     with gr.Tab("图生图"):
-        gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高) 或 429(请求过快), 反正不是我的问题 ヾ(≧▽≦*)o, 更多画风串: [Nai3 画风串](https://zhulinyv.github.io/aLcTZgiMf/)")
+        gr.Markdown("> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高), 429(请求过快), 443(节点不稳定), 反正不是我的问题 ヾ(≧▽≦*)o")
         with gr.Column():
             with gr.Column():
                 positive = gr.Textbox(value="[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,", lines=2, label="正面提示词")
@@ -308,6 +308,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             )
         )
     with gr.Tab("图片筛选"):
+        gr.Markdown("> 方便人工筛选图片(很简单的几个按钮, 应该不用说怎么用叭...)")
         with gr.Column():
             with gr.Row():
                 input_path = gr.Textbox(label="图片路径", scale=4)
