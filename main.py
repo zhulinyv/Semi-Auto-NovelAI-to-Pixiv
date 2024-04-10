@@ -4,6 +4,7 @@ from src.batchtxt import main as batchtxt
 from src.i2i import i2i_by_band
 from src.inpaint import for_webui as inpaint
 from src.mosaic import main as mosaic
+from src.mosold import main as mosold
 from src.pixiv import main as pixiv
 from src.selector import del_current_img, move_current_img, show_first_img, show_next_img
 from src.t2i import t2i, t2i_by_band
@@ -260,7 +261,9 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         generate.click(fn=upscale, inputs=[engine, input_img, input_path, open_button, scale, noise, mode, jobs], outputs=[output_info, output_img])
     with gr.Tab("自动打码"):
         gr.Markdown("> 对关键部位进行自动打码")
-        generate = gr.Button(value="开始生成")
+        with gr.Row():
+            generate = gr.Button(value="开始处理(新版像素)", scale=2)
+            generate_old = gr.Button(value="开始处理(旧版模糊)", scale=1)
         with gr.Column():
             with gr.Row():
                 input_path = gr.Textbox(value="", label="批量处理路径(仅在本程序运行的电脑生效)", scale=5)
@@ -271,6 +274,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     output_info = gr.Textbox(label="输出信息")
                     output_img = gr.Image(scale=2)
         generate.click(fn=mosaic, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
+        generate_old.click(fn=mosold, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
     with gr.Tab("添加水印"):
         output_path = gr.Textbox("./output/water", visible=False)
         with gr.Row():
