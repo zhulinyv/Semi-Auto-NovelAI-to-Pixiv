@@ -4,7 +4,7 @@ import shutil
 
 from loguru import logger
 
-from t2i import prepare_json
+from src.t2i import prepare_json
 from utils.env import env
 from utils.utils import generate_image, save_image, sleep_for_cool
 

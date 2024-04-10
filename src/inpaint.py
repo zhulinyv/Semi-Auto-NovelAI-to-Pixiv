@@ -5,7 +5,7 @@ import string
 from loguru import logger
 from PIL.PngImagePlugin import PngInfo
 
-from i2i import prepare_json
+from src.i2i import prepare_json
 from utils.error import DataIsNoneError
 from utils.imgtools import get_img_info, img_to_base64
 from utils.utils import format_path, generate_image, inquire_anlas

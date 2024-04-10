@@ -1,15 +1,15 @@
 import gradio as gr
 
-from batchtxt import main as batchtxt
-from i2i import i2i_by_band
-from inpaint import for_webui as inpaint
-from mosaic import main as mosaic
-from pixiv import main as pixiv
-from selector import del_current_img, move_current_img, show_first_img, show_next_img
-from t2i import t2i, t2i_by_band
+from src.batchtxt import main as batchtxt
+from src.i2i import i2i_by_band
+from src.inpaint import for_webui as inpaint
+from src.mosaic import main as mosaic
+from src.pixiv import main as pixiv
+from src.selector import del_current_img, move_current_img, show_first_img, show_next_img
+from src.t2i import t2i, t2i_by_band
+from src.waifu2x import main as upscale
+from src.water import main as water
 from utils.env import env
-from waifu2x import main as upscale
-from water import main as water
 
 with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     gr.Markdown("# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 半自动 NovelAI 上传 Pixiv")
