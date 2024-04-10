@@ -27,6 +27,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | 局部重绘 | 仅支持 NovelAI 生成的图片, 并且需要上传蒙版, 支持批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/57e91754-c2ec-4bca-9149-cad424569de1) | 上传的蒙版应为: 重绘区域为白色, 其余透明而不是黑色, 分辨率等于重绘图像, 批量操作时, 请将图片和蒙版放置于两个文件夹, 并且保证图片和蒙版文件名相同, 例如: `./output/inpaint/img`, `./output/inpaint/mask`, 生成的图片将保存到 `./output/inpaint` |
 | 超分降噪 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目对图片进行超分降噪, 支持任何图片单张或批量处理 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/3465c6be-4326-423d-848b-1a281e1e32ae) | 生成的图片将保存到 `./output/upscale` 文件夹, 不建议使用 **srmd-cuda**, 因为它不稳定. 当使用 **waifu2x-caffe** 或 **waifu2x-converter** 时, 将会在 `./output` 文件夹内生成一个名为 `temp_waifu2x.bat` 的临时批处理文件, 可以删除, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_upscale` |
 | 自动打码 | 自动检测图片中的关键部位, 并对其打码 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/98650568-c58f-4571-8dcd-222e1b48e5be) | 不能确保 100% 检测出来, 生成的图片将保存到 `./output/mosaic` 文件夹, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_mosaic` |
+| 添加水印 | 在图片左上, 右上, 左下, 右下随机某个位置范围添加指定数量的随机透明度的随机水印 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/4016b4f5-6c83-4c8c-b1db-e372eddae425) | 使用时, 请输入需要处理的图片目录并按确定, 处理后的图片将保存到 `./output/water` |
 | 上传Pixiv | 批量将图片上传到 Pixiv |![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/95603593-6bff-47aa-a5c6-5ba21067e306) | 关于上传Pixiv的配置, 请参考[其它配置](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE)中关于上传Pixiv部分 |
 | 法术解析 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目进行读取 png info | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/08fcf698-4be3-4ee3-b4a5-4225810740ca) | 使用 iframe 嵌套入本项目 |
 | GPT Free | 免费, 多模型的 GPT, 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a3ae56b2-4fc4-47e1-8d1d-aa01b7114892) | 使用 iframe 嵌套入本项目 |
@@ -263,6 +264,8 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [ ] 通过账号密码获取 token
 + [x] 添加更多超分引擎
 + [x] 添加文生图方式
++ [x] 批量水印
++ [ ] 批量图片信息处理
 + [ ] ...
 
 ## 🤝 鸣谢
