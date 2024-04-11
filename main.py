@@ -6,6 +6,7 @@ from src.inpaint import for_webui as inpaint
 from src.mosaic import main as mosaic
 from src.mosold import main as mosold
 from src.pixiv import main as pixiv
+from src.rminfo import remove_info, revert_info
 from src.selector import del_current_img, move_current_img, show_first_img, show_next_img
 from src.t2i import t2i, t2i_by_band
 from src.waifu2x import main as upscale
@@ -290,6 +291,42 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 output_info = gr.Textbox(label="输出信息", scale=4)
                 generate = gr.Button("开始上传", scale=1)
         generate.click(fn=pixiv, inputs=input_path, outputs=output_info)
+    with gr.Tab("图片筛选"):
+        gr.Markdown("> 方便人工筛选图片(很简单的几个按钮, 应该不用说怎么用叭...)")
+        with gr.Column():
+            with gr.Row():
+                input_path = gr.Textbox(label="图片路径", scale=4)
+                select_button = gr.Button("确定", scale=1)
+            with gr.Row():
+                output_path = gr.Textbox(label="输出路径1")
+                output_path_ = gr.Textbox(label="输出路径2")
+        with gr.Row():
+            show_img = gr.Image(scale=7)
+            with gr.Column(scale=1):
+                next_button = gr.Button("跳过", size="lg")
+                move_button = gr.Button("移动1", size="lg")
+                move_button_ = gr.Button("移动2", size="lg")
+                del_button = gr.Button("删除", size="lg")
+        current_img = gr.Textbox(visible=False)
+        select_button.click(fn=show_first_img, inputs=[input_path], outputs=[show_img, current_img])
+        next_button.click(fn=show_next_img, outputs=[show_img, current_img])
+        move_button.click(fn=move_current_img, inputs=[current_img, output_path], outputs=[show_img, current_img])
+        move_button_.click(fn=move_current_img, inputs=[current_img, output_path_], outputs=[show_img, current_img])
+        del_button.click(fn=del_current_img, inputs=[current_img], outputs=[show_img, current_img])
+    with gr.Tab("抹除数据"):
+        gr.Markdown("> 对图片生成信息进行抹除或还原")
+        with gr.Tab("抹除"):
+            start_button = gr.Button("开始抹除")
+            input_path = gr.Textbox(label="图片目录")
+            output_path = gr.Textbox("./output/info_removed", visible=False)
+            output_info = gr.Textbox(label="输出信息")
+            start_button.click(fn=remove_info, inputs=[input_path, output_path], outputs=[output_info])
+        with gr.Tab("还原"):
+            start_button = gr.Button("开始还原")
+            info_file_path = gr.Textbox(label="图片信息文件目录")
+            input_path = gr.Textbox(label="待还原图片目录")
+            output_info = gr.Textbox(label="输出信息")
+            start_button.click(fn=revert_info, inputs=[info_file_path, input_path], outputs=[output_info])
     with gr.Tab("法术解析"):
         gr.HTML(
             """
@@ -319,28 +356,6 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 "650", str(env.height)
             )
         )
-    with gr.Tab("图片筛选"):
-        gr.Markdown("> 方便人工筛选图片(很简单的几个按钮, 应该不用说怎么用叭...)")
-        with gr.Column():
-            with gr.Row():
-                input_path = gr.Textbox(label="图片路径", scale=4)
-                select_button = gr.Button("确定", scale=1)
-            with gr.Row():
-                output_path = gr.Textbox(label="输出路径1")
-                output_path_ = gr.Textbox(label="输出路径2")
-        with gr.Row():
-            show_img = gr.Image(scale=7)
-            with gr.Column(scale=1):
-                next_button = gr.Button("跳过", size="lg")
-                move_button = gr.Button("移动1", size="lg")
-                move_button_ = gr.Button("移动2", size="lg")
-                del_button = gr.Button("删除", size="lg")
-        current_img = gr.Textbox(visible=False)
-        select_button.click(fn=show_first_img, inputs=[input_path], outputs=[show_img, current_img])
-        next_button.click(fn=show_next_img, outputs=[show_img, current_img])
-        move_button.click(fn=move_current_img, inputs=[current_img, output_path], outputs=[show_img, current_img])
-        move_button_.click(fn=move_current_img, inputs=[current_img, output_path_], outputs=[show_img, current_img])
-        del_button.click(fn=del_current_img, inputs=[current_img], outputs=[show_img, current_img])
 
 
 demo.queue().launch(inbrowser=True, share=env.share, server_port=env.port, favicon_path="./files/logo.png")

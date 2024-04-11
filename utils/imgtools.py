@@ -1,5 +1,6 @@
 import base64
 
+import ujson as json
 from loguru import logger
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
@@ -23,12 +24,23 @@ def img_to_base64(img_path):
 
 def revert_img_info(img_path, output_dir):
     logger.info("正在还原 pnginfo")
-    old_img = Image.open(img_path)
-    info = old_img.info
+    if img_path[-4:] == ".png":
+        old_img = Image.open(img_path)
+        info = old_img.info
+        software = info["Software"]
+        comment = info["Comment"]
+    elif img_path[-4:] == ".txt":
+        with open(img_path) as f:
+            prompt = f.read()
+        software = "NovelAI"
+        comment = json.dumps({"prompt": prompt})
+    else:
+        logger.error("仅支持从 *.png 和 *.txt 文件中读取元数据!")
+        return
     metadata = PngInfo()
     try:
-        metadata.add_text("Software", info["Software"])
-        metadata.add_text("Comment", info["Comment"])
+        metadata.add_text("Software", software)
+        metadata.add_text("Comment", comment)
     except Exception:
         logger.error("还原失败!")
         return
