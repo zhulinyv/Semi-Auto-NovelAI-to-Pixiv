@@ -277,6 +277,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         generate.click(fn=mosaic, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
         generate_old.click(fn=mosold, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
     with gr.Tab("添加水印"):
+        gr.Markdown("> 使用前, 请先准备一些自己的水印到 ./files/water 文件夹")
         output_path = gr.Textbox("./output/water", visible=False)
         with gr.Row():
             input_path = gr.Textbox(label="图片路径", scale=4)
