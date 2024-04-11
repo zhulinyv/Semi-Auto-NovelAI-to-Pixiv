@@ -29,9 +29,10 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | 自动打码 | 自动检测图片中的关键部位, 并对其打码 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/98650568-c58f-4571-8dcd-222e1b48e5be) | 不能确保 100% 检测出来, 生成的图片将保存到 `./output/mosaic` 文件夹, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_mosaic` |
 | 添加水印 | 在图片左上, 右上, 左下, 右下随机某个位置范围添加指定数量的随机透明度的随机水印 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/4016b4f5-6c83-4c8c-b1db-e372eddae425) | 使用前, 请先准备一些自己的水印到 `./files/water` 文件夹. 使用时, 请输入需要处理的图片目录并按确定, 处理后的图片将保存到 `./output/water` |
 | 上传Pixiv | 批量将图片上传到 Pixiv |![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/95603593-6bff-47aa-a5c6-5ba21067e306) | 关于上传Pixiv的配置, 请参考[其它配置](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE)中关于上传Pixiv部分 |
+| 图片筛选 | 人工对图片进行筛选的工具 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/47a261bc-f962-489f-83b1-2f7381fb5e0a) | 使用时, 请先输入图片目录并按下确定, 然后输入输出目录. 会在 `./output` 文件夹下生成一个名为 `array_data.npy` 的文件, 它会保存上次筛选的进度, 即你可以不选择图片目录继续筛选, 筛选完毕后会自动删除. |
+| 抹除数据 | 批量抹除或还原图片生成信息 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/39383963-838c-4b93-bc1b-14d614343bff) | 还原信息时, 需要准备至少带有 prompt 的 *.png 图片或内容为 prompt 的 *.txt 文件, 并放到某一目录(图片信息文件目录), 选取的待还原图片目录中的文件名(不含扩展名)需要和刚刚的图片信息文件目录中的文件文件名一致 | 
 | 法术解析 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目进行读取 png info | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/08fcf698-4be3-4ee3-b4a5-4225810740ca) | 使用 iframe 嵌套入本项目 |
 | GPT Free | 免费, 多模型的 GPT, 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a3ae56b2-4fc4-47e1-8d1d-aa01b7114892) | 使用 iframe 嵌套入本项目 |
-| 图片筛选 | 人工对图片进行筛选的工具 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/47a261bc-f962-489f-83b1-2f7381fb5e0a) | 使用时, 请先输入图片目录并按下确定, 然后输入输出目录. 会在 `./output` 文件夹下生成一个名为 `array_data.npy` 的文件, 它会保存上次筛选的进度, 即你可以不选择图片目录继续筛选, 筛选完毕后会自动删除. |
 
 <p>
     <text>灵感来自于我的朋友们: </text> 
@@ -265,7 +266,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 添加更多超分引擎
 + [x] 添加文生图方式
 + [x] 批量水印
-+ [ ] 批量图片信息处理
++ [x] 批量图片信息处理
 + [ ] ...
 
 ## 🤝 鸣谢

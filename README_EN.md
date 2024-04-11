@@ -29,9 +29,10 @@
 | 自动打码 | Automatically detects key parts of images and applies mosaic to them. | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/98650568-c58f-4571-8dcd-222e1b48e5be) | Cannot guarantee 100% detection. Generated images will be saved to the `./output/mosaic` folder. When batch processing, please place images in the same folder, for example: `./output/choose_to_mosaic`. |
 | 添加水印 | Randomly add a specified number of watermarks with random transparency within a certain position range at the top left, top right, bottom left, or bottom right of the image | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/4016b4f5-6c83-4c8c-b1db-e372eddae425) | Before using, you need to prepare some watermark pictures and put them into `./files/water` folder. When using, please enter the directory of the image to be processed and press confirm, the processed image will be saved to `./output/water` |
 | 上传Pixiv | Batch upload images to Pixiv. | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/95603593-6bff-47aa-a5c6-5ba21067e306) | For configuration of Pixiv upload, refer to the Upload to Pixiv section in [Other Configurations](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE). |
+| 图片筛选 | A tool that manually filters images | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/47a261bc-f962-489f-83b1-2f7381fb5e0a) | To use it, please enter the image directory first and press OK, and then enter the output directory. A file named 'array_data.npy' will be generated in the './output' folder, which will save the progress of the last filter, that is, you can continue to filter without selecting the image directory, and it will be automatically deleted after the filtering |
+| 抹除数据 | Batch erase or restore image generation information | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/39383963-838c-4b93-bc1b-14d614343bff) | | When restoring information, it is necessary to prepare at least *.png images with prompts or *.txt files containing prompts, and place them in a certain directory (image information file directory). The filenames (excluding the extension) of the files in the selected directory for restoration must match the filenames in the just mentioned image information file directory |
 | 法术解析 | Reads PNG info using open-source projects listed in the acknowledgments. | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/08fcf698-4be3-4ee3-b4a5-4225810740ca) | Embedded into this project using iframe. |
 | GPT Free | Free, multi-model GPT using open-source projects listed in the acknowledgments. | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/a3ae56b2-4fc4-47e1-8d1d-aa01b7114892) | Embedded into this project using iframe. |
-| 图片筛选 | A tool that manually filters images | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/47a261bc-f962-489f-83b1-2f7381fb5e0a) | To use it, please enter the image directory first and press OK, and then enter the output directory. A file named 'array_data.npy' will be generated in the './output' folder, which will save the progress of the last filter, that is, you can continue to filter without selecting the image directory, and it will be automatically deleted after the filtering |
 
 <p>
     <text>Inspired by my friends: </text> 
@@ -265,7 +266,7 @@ About random blue pictures, you can add more at the correct position by your sel
 + [x] Add more upscale engine
 + [x] Add more ways to t2i
 + [x] Batch watermarking
-+ [ ] Batch PNG infp processing
++ [x] Batch PNG info processing
 + [ ] ...
 
 ## 🤝 Acknowledgements
