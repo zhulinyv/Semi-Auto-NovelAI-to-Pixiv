@@ -108,6 +108,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | water_height | 否 | int | 135 | 调整水印的高度 | 100 |
 | position | 否 | list[str] | ["左上", "右上", "左下", "右下"] | 水印可能出现的位置 | ["左上"] |
 | water_num | 否 | int | 1 | 水印的数量 | 2 |
+| t2i_cool_time | 否 | int | 18 | 文生图冷却时间 | 20 |
 
 ⚠️ token 的获取:
 

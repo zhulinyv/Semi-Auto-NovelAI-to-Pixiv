@@ -108,6 +108,7 @@ Now you can launch the `run.bat` at the origin directory to start WebUI, it will
 | water_height | No | int | 135 | Adjust the height of the watermark | 100 |
 | position | No | list[str] | ["左上", "右上", "左下", "右下"] | Possible positions for the watermark | ["Top left"] |
 | water_num | No | int | 1 | Number of watermarks | 2 |
+| t2i_cool_time | No | int | 18 | the cool time for t2i | 20 |
 
 ⚠️ Getting the token:
 

@@ -32,6 +32,7 @@ class Settings(BaseSettings):
     water_height: int = 135
     position: list = ["左上", "右上", "左下", "右下"]
     water_num: int = 1
+    t2i_cool_time: int = 18
 
     class Config:
         env_file = ".env"

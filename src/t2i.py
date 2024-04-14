@@ -122,7 +122,7 @@ def t2i(forever: bool):
     json_for_t2i, seed = prepare_json(input_, sm, scale, negative)
     img_data = generate_image(json_for_t2i)
     save_image(img_data, "t2i", seed, choose_game, choose_character)
-    sleep_for_cool(12, 24)
+    sleep_for_cool(env.t2i_cool_time - 6, env.t2i_cool_time + 6)
 
     if forever:
         return t2i(True)
