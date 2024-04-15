@@ -40,7 +40,9 @@ def mosaic(img):
 
     for part in body:
         if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
-            image = _mosaic(image, part["box"][0], part["box"][1], part["box"][0] + part["box"][2], part["box"][1] + part["box"][3])
+            image = _mosaic(
+                image, part["box"][0], part["box"][1], part["box"][0] + part["box"][2], part["box"][1] + part["box"][3]
+            )
             image.save(img, pnginfo=metadata)
 
 

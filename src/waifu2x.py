@@ -51,7 +51,9 @@ def main(engine, file, file_path, open_button, *options):
         otp = "./output/upscale/" + j.replace(file_path, "").replace("/", "")
 
         if engine == "waifu2x-ncnn-vulkan":
-            code = r".\files\waifu2x-ncnn-vulkan\waifu2x-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(j, otp, options[0], options[1])
+            code = r".\files\waifu2x-ncnn-vulkan\waifu2x-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(
+                j, otp, options[0], options[1]
+            )
             if options[2]:
                 code += " -x"
             run_cmd(j, otp, code)
@@ -59,11 +61,15 @@ def main(engine, file, file_path, open_button, *options):
             if os.path.exists(f"./files/else_upscale_engine/{engine}"):
                 pass
             else:
-                download(f"https://huggingface.co/datasets/Xytpz/Upscale-Software-Collection/resolve/main/{engine}.zip?download=true")
+                download(
+                    f"https://huggingface.co/datasets/Xytpz/Upscale-Software-Collection/resolve/main/{engine}.zip?download=true"
+                )
                 extract("./files/temp.zip", "./files/else_upscale_engine")
 
             if engine == "Anime4K":
-                code = r".\files\else_upscale_engine\Anime4K\Anime4KCPP_CLI.exe -i {} -o {} -z {}".format(j, otp, options[0])
+                code = r".\files\else_upscale_engine\Anime4K\Anime4KCPP_CLI.exe -i {} -o {} -z {}".format(
+                    j, otp, options[0]
+                )
                 if options[1]:
                     code += " -q"
                 if options[2]:
@@ -72,12 +78,16 @@ def main(engine, file, file_path, open_button, *options):
                         code += " -H -L {}".format(options[4])
 
             elif engine == "realcugan-ncnn-vulkan":
-                code = r".\files\else_upscale_engine\realcugan-ncnn-vulkan\realcugan-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(j, otp, options[0], options[1])
+                code = r".\files\else_upscale_engine\realcugan-ncnn-vulkan\realcugan-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(
+                    j, otp, options[0], options[1]
+                )
                 if options[2] != "models-se":
                     code += " -m {}".format(options[2])
 
             elif engine == "realesrgan-ncnn-vulkan":
-                code = r".\files\else_upscale_engine\realesrgan-ncnn-vulkan\realesrgan-ncnn-vulkan.exe -i {} -o {} -s {} -n {}".format(j, otp, options[0], options[1])
+                code = r".\files\else_upscale_engine\realesrgan-ncnn-vulkan\realesrgan-ncnn-vulkan.exe -i {} -o {} -s {} -n {}".format(
+                    j, otp, options[0], options[1]
+                )
                 if options[2]:
                     code += " -x"
 
@@ -103,17 +113,25 @@ def main(engine, file, file_path, open_button, *options):
                         logger.error("仅支持 RTX 和 GTX 系列显卡")
                 except VideoCardError:
                     logger.error("仅支持 RTX 和 GTX 系列显卡")
-                code = r".\files\else_upscale_engine\srmd-cuda\{} -i {} -o {} -n {} -s {}".format(software, j, otp, options[0], options[1])
+                code = r".\files\else_upscale_engine\srmd-cuda\{} -i {} -o {} -n {} -s {}".format(
+                    software, j, otp, options[0], options[1]
+                )
 
             elif engine == "srmd-ncnn-vulkan":
-                code = r".\files\else_upscale_engine\srmd-ncnn-vulkan\srmd-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(j, otp, options[0], options[1])
+                code = (
+                    r".\files\else_upscale_engine\srmd-ncnn-vulkan\srmd-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(
+                        j, otp, options[0], options[1]
+                    )
+                )
                 if options[2]:
                     code += " -x"
 
             else:
                 if engine == "waifu2x-caffe":
                     code = os.path.abspath("./files/else_upscale_engine/waifu2x-caffe/waifu2x-caffe-cui.exe")
-                    code += " -i {} -o {} -m {} -s {} -n {}".format(os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2])
+                    code += " -i {} -o {} -m {} -s {} -n {}".format(
+                        os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2]
+                    )
                     if options[3] != "gpu":
                         code += " -p {}".format(options[3])
                     if options[4]:
@@ -124,7 +142,9 @@ def main(engine, file, file_path, open_button, *options):
                 elif engine == "waifu2x-converter":
                     code = "cd ./files/else_upscale_engine/waifu2x-converter\n"
                     code += os.path.abspath("./files/else_upscale_engine/waifu2x-converter/waifu2x-converter-cpp.exe")
-                    code += " -i {} -o {} --scale-ratio {} --noise-level {} -m {} -j {}".format(os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2], options[3])
+                    code += " -i {} -o {} --scale-ratio {} --noise-level {} -m {} -j {}".format(
+                        os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2], options[3]
+                    )
 
                 with open("./output/temp_waifu2x.bat", "w") as temp:
                     temp.write(code)

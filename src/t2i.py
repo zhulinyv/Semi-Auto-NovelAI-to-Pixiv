@@ -7,7 +7,18 @@ from utils.env import env
 from utils.utils import format_str, generate_image, json_for_t2i, list_to_str, save_image, sleep_for_cool
 
 
-def t2i_by_band(positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, sm: bool, sm_dyn: bool, seed: str):
+def t2i_by_band(
+    positive: str,
+    negative: str,
+    resolution: str,
+    scale: float,
+    sampler: str,
+    noise_schedule: str,
+    steps: int,
+    sm: bool,
+    sm_dyn: bool,
+    seed: str,
+):
     json_for_t2i["input"] = positive
 
     json_for_t2i["parameters"]["width"] = int(resolution.split("x")[0])
@@ -58,14 +69,24 @@ def prepare_input():
     choose_character = random.choice(list(data["character"][choose_game].keys()))
     character = list_to_str(data["character"][choose_game][choose_character])
     censored = data["R18"]["去码"] if not env.censor else data["R18"]["打码"]
-    action_type = "巨乳" if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"]) else "普通"
+    action_type = (
+        "巨乳" if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"]) else "普通"
+    )
     choose_action: list = random.choice(list(data["R18"]["动作"][f"{action_type}动作"].keys()))
     action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][choose_action])
     emotion_type = "口交" if "oral" in action else "普通"
     choose_emotion = random.choice(list(data["R18"]["表情"][f"{emotion_type}表情"].keys()))
-    emotion = list_to_str(data["R18"]["表情"][f"{emotion_type}表情"][choose_emotion]) if any(view not in action for view in ["from behind", "sex from behind"]) else ""
+    emotion = (
+        list_to_str(data["R18"]["表情"][f"{emotion_type}表情"][choose_emotion])
+        if any(view not in action for view in ["from behind", "sex from behind"])
+        else ""
+    )
     choose_surrounding = random.choice(list(data["R18"]["场景"]["仅场景"].keys()))
-    surrounding = list_to_str(data["R18"]["场景"]["仅场景"][choose_surrounding]) if "multiple views" not in action else "{white background},"
+    surrounding = (
+        list_to_str(data["R18"]["场景"]["仅场景"][choose_surrounding])
+        if "multiple views" not in action
+        else "{white background},"
+    )
     cum = random.choice(data["R18"]["污渍"])
 
     logger.info(

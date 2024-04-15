@@ -1,4 +1,13 @@
-def pixiv_upload(image_paths: list, title: str, caption: str, labels: list, cookie: str, x_token: str, allow_tag_edit: bool = False, is_r18: bool = True):
+def pixiv_upload(
+    image_paths: list,
+    title: str,
+    caption: str,
+    labels: list,
+    cookie: str,
+    x_token: str,
+    allow_tag_edit: bool = False,
+    is_r18: bool = True,
+):
     import os
     import time
     import uuid
@@ -33,7 +42,11 @@ def pixiv_upload(image_paths: list, title: str, caption: str, labels: list, cook
 
         # 在 'captionTranslations[en]' 字段的下面插入动态生成的字段
         if caption_index is not None:
-            payload = dict(list(payload.items())[: caption_index + 1] + list(image_order.items()) + list(payload.items())[caption_index + 1 :])
+            payload = dict(
+                list(payload.items())[: caption_index + 1]
+                + list(image_order.items())
+                + list(payload.items())[caption_index + 1 :]
+            )
         else:
             # 如果找不到 'captionTranslations[en]' 字段，则直接在最后插入动态生成的字段
             payload.update(image_order)

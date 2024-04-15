@@ -10,7 +10,21 @@ from utils.imgtools import get_img_info, img_to_base64
 from utils.utils import format_path, generate_image, inquire_anlas, json_for_i2i, save_image, sleep_for_cool
 
 
-def i2i_by_band(input_img, input_path, open_button, positive: str, negative: str, resolution: str, scale: float, sampler: str, noise_schedule: str, steps: int, strength: float, sm: bool, sm_dyn: bool):
+def i2i_by_band(
+    input_img,
+    input_path,
+    open_button,
+    positive: str,
+    negative: str,
+    resolution: str,
+    scale: float,
+    sampler: str,
+    noise_schedule: str,
+    steps: int,
+    strength: float,
+    sm: bool,
+    sm_dyn: bool,
+):
     if open_button:
         main(input_path)
         return None, "处理完成"

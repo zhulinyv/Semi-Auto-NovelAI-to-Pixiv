@@ -26,19 +26,27 @@ pypiwin32 = "^223"
 flask = "^3.0.2"
 numpy = "^1.26.4"
 
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.7.0"
+
 # https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html
 [tool.black]
-line-length = 500
+line-length = 120
 
 # https://beta.ruff.rs/docs/settings/
 [tool.ruff]
-line-length = 500
+line-length = 120
 # https://beta.ruff.rs/docs/rules/
-select = ["E", "W", "F"]
-ignore = ["F401"]
+lint.select = ["E", "W", "F"]
+lint.ignore = ["E501"]
 # Exclude a variety of commonly ignored directories.
 respect-gitignore = true
-ignore-init-module-imports = true
+lint.ignore-init-module-imports = true
+
+[tool.isort]
+profile = "black"
+line_length = 120
+skip_gitignore = true
 
 
 [build-system]
