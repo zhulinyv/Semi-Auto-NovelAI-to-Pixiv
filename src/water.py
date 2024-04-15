@@ -19,7 +19,7 @@ def water(img_path, otp_path):
     # 随机水印透明度
     new_png = water.copy()
     layer = Image.new("RGBA", water.size, color=(0, 0, 0, 0))
-    new_png = Image.blend(new_png, layer, env.alpha)
+    new_png = Image.blend(new_png, layer, env.alpha + random.uniform(-0.15, 0.15))
 
     # 随机水印大小
     w, h = img.size
