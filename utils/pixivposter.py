@@ -5,7 +5,7 @@ def pixiv_upload(
     labels: list,
     cookie: str,
     x_token: str,
-    allow_tag_edit: bool = False,
+    allow_tag_edit: bool = True,
     is_r18: bool = True,
 ):
     import os
