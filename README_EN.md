@@ -246,6 +246,12 @@ About random blue pictures, you can add more at the correct position by your sel
 }
 ```
 
+## 🎉 Use
+
+run `run.bat`, it will start your default browser and jump to [127.0.0.1:11451](http://127.0.0.1:11451)
+
+For old version users: I suggested not to use the independent scripts, please use the WebUI
+
 ## 📖 To-Do
 
 + [x] Batch text-to-image generation
