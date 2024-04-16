@@ -7,14 +7,14 @@ ci:
   autoupdate_commit_msg: ":lipstick: 自动格式化代码"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.5
+    rev: v0.3.7
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
         stages: [commit]
 
   - repo: https://github.com/psf/black
-    rev: 24.3.0
+    rev: 24.4.0
     hooks:
       - id: black
         stages: [commit]
