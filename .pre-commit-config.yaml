@@ -1,10 +1,10 @@
 default_install_hook_types: [pre-commit, prepare-commit-msg]
 ci:
-  autofix_commit_msg: ":lipstick: 格式化代码"
+  autofix_commit_msg: ":lipstick: 自动格式化"
   autofix_prs: true
   autoupdate_branch: main
   autoupdate_schedule: weekly
-  autoupdate_commit_msg: ":lipstick: 自动格式化代码"
+  autoupdate_commit_msg: ":arrow_up: 自动更新"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.3.7
