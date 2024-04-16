@@ -159,6 +159,11 @@ def sleep_for_cool(int1, int2):
 def generate_image(json_data):
     try:
         rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
+        while rep.status_code in [429, 500]:
+            logger.debug(f">>>>> {rep.status_code}")
+            sleep_for_cool(3, 9)
+            rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
+        logger.debug(f">>>>> {rep.status_code}")
         rep.raise_for_status()
         logger.success("生成成功!")
         with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
