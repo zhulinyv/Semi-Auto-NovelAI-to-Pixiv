@@ -35,18 +35,23 @@ def upload(image_list, file):
     for k in surrounding_title_list:
         if k in caption:
             surrounding_title = random.choice(data["title"]["surrounding"][k])
+            break
     for v in action_title_list:
         if v in caption:
             action_title = random.choice(data["title"]["action"][v])
+            break
     if name == "None":
         title = "无题"
     else:
-        if action_title:
+        try:
+            action_title
             title = f"{name}{action_title}~"
-        elif surrounding_title:
-            title = f"和{name}在{surrounding_title}~"
-        else:
-            title = f"{name}涩涩~"
+        except NameError:
+            try:
+                surrounding_title
+                title = f"和{name}在{surrounding_title}~"
+            except NameError:
+                title = f"{name}涩涩~"
 
     labels_list = ["女の子"]
     try:
