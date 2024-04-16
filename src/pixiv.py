@@ -1,4 +1,5 @@
 import os
+import random
 from pathlib import Path
 
 import ujson as json
@@ -24,11 +25,29 @@ def upload(image_list, file):
         logger.error("不是 NovelAI 生成的图片!")
         caption = env.caption_prefix
 
-    name_list = file.replace(".png", "").split("_")
-    title = name_list[2]
-
     with open("./files/favorite.json", "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    name_list = file.replace(".png", "").split("_")
+    name = name_list[2]
+    surrounding_title_list = list(data["title"]["surrounding"].keys())
+    action_title_list = list(data["title"]["action"].keys())
+    for k in surrounding_title_list:
+        if k in caption:
+            surrounding_title = random.choice(data["title"]["surrounding"][k])
+    for v in action_title_list:
+        if v in caption:
+            action_title = random.choice(data["title"]["action"][v])
+    if name == "None":
+        title = "无题"
+    else:
+        if action_title:
+            title = f"{name}{action_title}~"
+        elif surrounding_title:
+            title = f"和{name}在{surrounding_title}~"
+        else:
+            title = f"{name}涩涩~"
+
     labels_list = ["女の子"]
     try:
         character_labels_list = list(data["labels"][name_list[1]].keys())

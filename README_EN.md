@@ -95,8 +95,6 @@ Now you can launch the `run.bat` at the origin directory to start WebUI, it will
 | pixiv_cookie | Yes | str | "xxx" | Cookie for uploading to Pixiv | "first_..." |
 | pixiv_token | Yes | str | "xxx" | x-csrf-token for uploading to Pixiv | "655c0c..." |
 | allow_tag_edit | No | bool | True | Whether to allow other users to edit tags | False |
-| waifu2x_scale | No | int | 2 | Scale for waifu2x | 4 |
-| waifu2x_noise | No | int | 3 | Noise reduction level for waifu2x | 2 |
 | share | No | bool | False | Whether to share the Gradio link | True |
 | height | No | int | 650 | Height of the Gradio interface | 800 |
 | port | No | int | 11451 | Port for local deployment | 13579 |

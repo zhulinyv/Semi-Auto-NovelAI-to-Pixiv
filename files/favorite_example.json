@@ -1839,6 +1839,26 @@
             "心形袋": "heart pouch"
         }
     },
+    "title": {
+        "surrounding": {
+            "on bed, indoor": ["床上"],
+            "outdoors, forest, nature, blurry foreground": ["森林中"],
+            "indoor, classroom": ["教室"],
+            "outdoors, sea, sunlight, beach": ["海边"],
+            "Japanese Housing, indoors, blurry foreground, night": ["合室晚上"],
+            "greenhouse, plant, garden": ["温室"],
+            "outdoors, on grass, day, nature": ["草原"],
+            "toilet stall, tiles": ["厕所隔间"],
+            "church, depth of field": ["教堂"],
+            "ferris wheel interior, ferris wheel, cityscape, city lights, night": ["摩天轮内部"],
+            "park, tree, park bench": ["公园"],
+            "bedroom, white background, simple background": ["简单背景"]
+        },
+        "action": {
+            "lactation": ["乳液狂飙", "噴乳"],
+            "masturbation": ["自慰"]
+        }
+    },
     "labels": {
         "GenshinImpact": {
             "ganyu_(genshin_impact)": [

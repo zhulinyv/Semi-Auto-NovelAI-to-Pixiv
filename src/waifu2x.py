@@ -6,7 +6,6 @@ import subprocess
 from loguru import logger
 
 from utils.downloader import download, extract
-from utils.env import env
 from utils.error import VideoCardError, Waifu2xError
 from utils.imgtools import revert_img_info
 from utils.utils import check_platform
@@ -160,7 +159,3 @@ def main(engine, file, file_path, open_button, *options):
         return "图片已保存到 ./output/upscale...", None
     else:
         return None, otp
-
-
-if __name__ == "__main__":
-    main(None, "./output/choose_for_upscale", True, env.waifu2x_noise, env.waifu2x_scale)

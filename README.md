@@ -95,8 +95,6 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | pixiv_cookie | 是 | str | "xxx" | 上传 Pixiv 使用的 cookie | "first_..." |
 | pixiv_token | 是 | str | "xxx" | 上传 Pixiv 使用的 x-csrf-token | "655c0c..." |
 | allow_tag_edit | 否 | bool | True | 是否允许其它用户编辑标签 | False |
-| waifu2x_scale | 否 | int | 2 | waifu2x 放大倍数 | 4 |
-| waifu2x_noise | 否 | int | 3 | waifu2x 降噪等级 | 2 |
 | share | 否 | bool | False | 是否共享 gradio 链接 | True |
 | height | 否 | int | 650 | 法术解析页面的高度 | 800 |
 | port | 否 | int | 11451 | 本地启动的端口 | 13579 |
