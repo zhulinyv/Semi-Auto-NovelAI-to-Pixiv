@@ -47,4 +47,4 @@ if __name__ == "__main__":
     try:
         main(True)
     except KeyboardInterrupt:
-        logger.warning("程序退出...")
+        logger.warning("程序退出...", "", "最前面(Top)")
