@@ -1,13 +1,14 @@
 import os
 import random
+from pathlib import Path
 
 import ujson as json
 from loguru import logger
 
 from utils.env import env
-from utils.error import DataIsNoneError
 from utils.imgtools import get_img_info, img_to_base64
-from utils.utils import format_path, generate_image, inquire_anlas, json_for_i2i, save_image, sleep_for_cool
+from utils.jsondata import json_for_i2i
+from utils.utils import file_path2list, generate_image, inquire_anlas, save_image, sleep_for_cool
 
 
 def i2i_by_band(
@@ -45,8 +46,6 @@ def i2i_by_band(
         json_for_i2i["parameters"]["extra_noise_seed"] = seed
         json_for_i2i["parameters"]["negative_prompt"] = negative
 
-        # logger.debug(json_for_i2i)
-
         save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
         sleep_for_cool(12, 24)
 
@@ -56,7 +55,7 @@ def i2i_by_band(
 def prepare_json(imginfo: dict, imgpath):
     if imginfo["Software"] != "NovelAI":
         logger.error("不是 NovelAI 生成的图片!")
-        return "寄"
+        return
     img_comment = json.loads(imginfo["Comment"])
     json_for_i2i["input"] = img_comment["prompt"]
     width = img_comment["width"]
@@ -84,24 +83,24 @@ def prepare_json(imginfo: dict, imgpath):
 
 
 def main(input_path):
-    type_ = "i2i"
-    i2i_path = format_path(input_path)
-    img_list = os.listdir(i2i_path)
+    i2i_path = Path(input_path)
+    img_list = file_path2list(i2i_path)
 
     for img in img_list:
         times = 1
         while times <= 5:
             try:
                 logger.warning(f"剩余水晶: {inquire_anlas()}")
-                logger.info(f"正在放大{img}...")
+                logger.info(f"正在放大: {img}...")
                 info_list = img.replace(".png", "").split("_")
-                img_path = f"{i2i_path}/{img}"
-                imginfo = get_img_info(img_path)
-                json_for_i2i = prepare_json(imginfo, img_path)
-                img_data = generate_image(json_for_i2i)
-                if not img_data:
-                    raise DataIsNoneError
-                save_image(img_data, type_, info_list[0], info_list[1], info_list[2])
+                img_path = i2i_path / img
+                save_image(
+                    generate_image(prepare_json(get_img_info(img_path), img_path)),
+                    "i2i",
+                    info_list[0],
+                    info_list[1],
+                    info_list[2],
+                )
                 logger.warning("删除小图...")
                 os.remove(img_path)
                 sleep_for_cool(16, 48)

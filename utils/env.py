@@ -27,14 +27,12 @@ class Settings(BaseSettings):
     theme: Union[str, None] = "NoCrypt/miku"
     caption_prefix: str = None
     neighbor: float = 0.0085
-    negetive: str = (
-        "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]"
-    )
     alpha: float = 0.65
     water_height: int = 135
     position: list = ["左上", "右上", "左下", "右下"]
     water_num: int = 1
     t2i_cool_time: int = 12
+    webui_lang: str = "zh"
 
     class Config:
         env_file = ".env"

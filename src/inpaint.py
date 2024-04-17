@@ -1,57 +1,43 @@
-import os
-import random
-import string
-
 from loguru import logger
-from PIL.PngImagePlugin import PngInfo
 
 from src.i2i import prepare_json
-from utils.error import DataIsNoneError
-from utils.imgtools import get_img_info, img_to_base64
-from utils.utils import format_path, generate_image, inquire_anlas
+from utils.imgtools import get_img_info, img_to_base64, revert_img_info
+from utils.utils import file_name2path, file_path2list, file_path2name, generate_image, inquire_anlas, save_image
 
 
 def for_webui(input_path, mask_path, input_img, input_mask, open_button):
     if open_button:
-        main(input_path, mask_path, "./output/inpaint")
+        main(input_path, mask_path)
         return None, "处理完成, 图片已保存到 ./output/inpaint..."
     else:
-        logger.warning(f"剩余水晶: {inquire_anlas()}")
-        info = input_img.info
-        metadata = PngInfo()
-        metadata.add_text("Software", info["Software"])
-        metadata.add_text("Comment", info["Comment"])
-        random_string = "".join(random.choices(string.ascii_lowercase + string.digits, k=8))
-        input_img.save(f"./output/inpaint_img_{random_string}.png", pnginfo=metadata)
+        input_img.save("./output/temp_inpaint_img.png")
         input_mask.save("./output/temp_inpaint_mask.png")
-        inpaint(f"./output/inpaint_img_{random_string}.png", "./output/temp_inpaint_mask.png", "./output/inpaint")
-    return f"./output/inpaint/inpaint_img_{random_string}.png", None
+        revert_img_info(None, "./output/temp_inpaint_img.png", input_img.info)
+        path = inpaint("./output/temp_inpaint_img.png", "./output/temp_inpaint_mask.png")
+    return path, f"剩余水晶: {inquire_anlas()}"
 
 
-def inpaint(img_path, mask_path, output_path):
+def inpaint(img_path, mask_path):
     imginfo = get_img_info(img_path)
     json_for_inpaint = prepare_json(imginfo, img_path)
     json_for_inpaint["parameters"]["mask"] = img_to_base64(mask_path)
-    img_data = generate_image(json_for_inpaint)
-    if not img_data:
-        raise DataIsNoneError
-    img_name = os.path.basename(img_path)
-    with open(f"{format_path(output_path)}/{img_name}", "wb") as file:
-        file.write(img_data)
-    return f"{format_path(output_path)}/{img_name}"
+    json_for_inpaint["model"] = "nai-diffusion-3-inpainting"
+    json_for_inpaint["action"] = "infill"
+
+    img_name = file_path2name(img_path)
+
+    save_image(generate_image(json_for_inpaint), "inpaint", None, None, None, img_name)
+
+    return f"./output/inpaint/{img_name}"
 
 
-def main(img_folder, mask_folder, otp_folder):
-    file_list = os.listdir(img_folder)
-    empty_list = []
+def main(img_folder, mask_folder):
+    file_list = file_name2path(file_path2list(img_folder), img_folder)
+
     for file in file_list:
-        empty_list.append(f"{img_folder}/{file}")
-    file_list = empty_list
-
-    for i in range(len(file_list)):
-        logger.warning(f"剩余水晶: {inquire_anlas()}")
-        inpaint(file_list[i], f"{mask_folder}/{os.path.basename(file_list[i])}", otp_folder)
+        logger.info(f"正在处理: {file}")
+        inpaint(file, f"{mask_folder}/{file_path2name(file)}")
 
 
 if __name__ == "__main__":
-    main("./output/inpaint/img", "./output/inpaint/mask", "./output/inpaint")
+    main("./output/inpaint/img", "./output/inpaint/mask")

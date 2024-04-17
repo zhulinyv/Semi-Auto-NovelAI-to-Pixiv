@@ -1,4 +1,3 @@
-import os
 import random
 from pathlib import Path
 
@@ -11,7 +10,7 @@ from utils.imgtools import get_img_info
 from utils.pixivposter import pixiv_upload
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
-from utils.utils import sleep_for_cool
+from utils.utils import file_path2list, read_json, sleep_for_cool
 
 
 def upload(image_list, file):
@@ -24,10 +23,8 @@ def upload(image_list, file):
     except WrongImgError:
         logger.error("不是 NovelAI 生成的图片!")
         caption = env.caption_prefix
-
-    with open("./files/favorite.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-
+    # 标题
+    data = read_json("./files/favorite.json")
     name_list = file.replace(".png", "").split("_")
     name = name_list[2]
     surrounding_title_list = list(data["title"]["surrounding"].keys())
@@ -36,23 +33,24 @@ def upload(image_list, file):
         if k in caption:
             surrounding_title = random.choice(data["title"]["surrounding"][k])
             break
+        else:
+            surrounding_title = None
     for v in action_title_list:
         if v in caption:
             action_title = random.choice(data["title"]["action"][v])
             break
+        else:
+            action_title = None
     if name == "None":
         title = "无题"
     else:
-        try:
-            action_title
+        if action_title:
             title = f"{name}{action_title}~"
-        except NameError:
-            try:
-                surrounding_title
-                title = f"和{name}在{surrounding_title}~"
-            except NameError:
-                title = f"{name}涩涩~"
-
+        elif surrounding_title:
+            title = f"和{name}在{surrounding_title}~"
+        else:
+            title = f"{name}涩涩~"
+    # 标签
     labels_list = ["女の子"]
     try:
         character_labels_list = list(data["labels"][name_list[1]].keys())
@@ -67,7 +65,7 @@ def upload(image_list, file):
             labels_list.append(n) if m in caption else ...
     while len(labels_list) > 10:
         del labels_list[-1]
-
+    # 预览
     logger.info(
         f"""
 图片: {image_list}
@@ -76,14 +74,15 @@ def upload(image_list, file):
 标签: {labels_list}
 """
     )
-
-    status = pixiv_upload(image_list, title, caption, labels_list, env.pixiv_cookie, env.pixiv_token, True, True)
+    # 状态
+    status = pixiv_upload(
+        image_list, title, caption, labels_list, env.pixiv_cookie, env.pixiv_token, env.allow_tag_edit, True
+    )
     return status
 
 
 def main(file_path):
-    file_list = os.listdir(file_path)
-
+    file_list = file_path2list(file_path)
     for file in file_list:
         times = 0
         while times <= 5:
@@ -97,7 +96,7 @@ def main(file_path):
                 else:
                     # folder_path = f"{file_path}/{file}"
                     folder_path = Path(file_path) / file
-                    folder_list = os.listdir(folder_path)
+                    folder_list = file_path2list(folder_path)
                     # for i in folder_list: image_list.append(f"{folder_path}/{i}")
                     for i in folder_list:
                         image_list.append(folder_path / i)
@@ -106,7 +105,7 @@ def main(file_path):
                 if status == 1:
                     raise UploadError
                 elif status == 2:
-                    sleep_for_cool(600, 1200)
+                    sleep_for_cool(300, 600)
                     raise UploadTooFastError
                 else:
                     break

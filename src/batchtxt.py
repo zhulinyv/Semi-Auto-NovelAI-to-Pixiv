@@ -1,4 +1,3 @@
-import os
 import random
 import shutil
 
@@ -6,36 +5,37 @@ from loguru import logger
 
 from src.t2i import prepare_json
 from utils.env import env
-from utils.utils import generate_image, save_image, sleep_for_cool
+from utils.utils import file_path2list, generate_image, read_json, save_image, sleep_for_cool
 
 
 def main(forever: bool):
-    file_list = os.listdir("./files/prompt")
+    file_list = file_path2list("./files/prompt")
     file_list.remove("done")
     if file_list == []:
         logger.warning("./files/prompt 目录下 *.txt 文件已全部生成过一次!")
         return None
-    file = random.choice(file_list)
+    file: str = random.choice(file_list)
 
     with open(f"./files/prompt/{file}") as f:
         prompt = f.read()
     logger.debug("prompt: " + prompt)
 
-    json_for_t2i, seed = prepare_json(prompt, env.sm, env.scale, env.negetive)
-    img_data = generate_image(json_for_t2i)
-    if img_data:
-        save_image(img_data, "t2i", str(seed) + file.replace(".txt", "").replace("_", "-"), "None", "None")
-        file_list.remove(file)
-        shutil.move(f"./files/prompt/{file}", f"./files/prompt/done/{file}")
-    else:
-        pass
+    data = read_json("./files/favorite.json")
 
-    sleep_for_cool(12, 24)
+    json_for_t2i, seed = prepare_json(prompt, env.sm, env.scale, random.choice(data["negative_prompt"]["belief"]))
+    save_image(
+        generate_image(json_for_t2i), "t2i", str(seed) + file.replace(".txt", "").replace("_", "-"), "None", "None"
+    )
+
+    file_list.remove(file)
+    shutil.move(f"./files/prompt/{file}", f"./files/prompt/done/{file}")
+
+    sleep_for_cool(env.t2i_cool_time - 6, env.t2i_cool_time + 6)
 
     if forever:
         return main(True)
     else:
-        return "./output/t2i/{}_None_None.png".format(str(seed) + file.replace(".txt", ""))
+        return "./output/t2i/{}_None_None.png".format(str(seed) + file.replace(".txt", "").replace("_", "-"))
 
 
 if __name__ == "__main__":

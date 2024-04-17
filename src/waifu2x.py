@@ -1,6 +1,4 @@
 import os
-import random
-import string
 import subprocess
 
 from loguru import logger
@@ -8,7 +6,7 @@ from loguru import logger
 from utils.downloader import download, extract
 from utils.error import VideoCardError, Waifu2xError
 from utils.imgtools import revert_img_info
-from utils.utils import check_platform
+from utils.utils import check_platform, file_path2list
 
 
 def run_cmd(file, output_dir, code):
@@ -34,16 +32,15 @@ def run_cmd(file, output_dir, code):
 def main(engine, file, file_path, open_button, *options):
     if open_button:
         file_path = file_path
-        file_list = os.listdir(file_path)
+        file_list = file_path2list(file_path)
         empty_list = []
         for i in file_list:
             empty_list.append(f"{file_path}/{i}")
         file_list = empty_list
     else:
         file_path = "./output"
-        random_string = "".join(random.choices(string.ascii_lowercase + string.digits, k=8))
-        file.save(f"./output/upscale_temp_{random_string}.png")
-        file = f"./output/upscale_temp_{random_string}.png"
+        file.save("./output/temp.png")
+        file = "./output/temp.png"
         file_list = [file]
 
     for j in file_list:
@@ -145,9 +142,9 @@ def main(engine, file, file_path, open_button, *options):
                         os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2], options[3]
                     )
 
-                with open("./output/temp_waifu2x.bat", "w") as temp:
+                with open("./output/temp.bat", "w") as temp:
                     temp.write(code)
-                os.system(os.path.abspath("./output/temp_waifu2x.bat"))
+                os.system(os.path.abspath("./output/temp.bat"))
                 revert_img_info(j, otp)
 
             if engine in ["waifu2x-caffe", "waifu2x-converter"]:

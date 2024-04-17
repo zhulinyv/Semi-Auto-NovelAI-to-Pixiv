@@ -1,130 +1,16 @@
 import io
+import os
 import platform
 import random
 import time
 import zipfile
+from pathlib import Path
 
 import requests
+import ujson as json
 from loguru import logger
 
-from utils.env import env
-
-headers = {
-    "Accept": "*/*",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Accept-Language": "en-GB,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-US;q=0.6",
-    "Authorization": f'Bearer {env.token if env.token != "xxx" else logger.error("未配置 token!")}',
-    "Referer": "https://novelai.net",
-    "Sec-Ch-Ua": '"Chromium";v="122", "Not(A:Brand";v="24", "Microsoft Edge";v="122"',
-    "Sec-Ch-Ua-mobile": "?0",
-    "Sec-Ch-Ua-Platform": '"Windows"',
-    "Sec-Fetch-Dest": "empty",
-    "Sec-Fetch-Mode": "cors",
-    "Sec-Fetch-Site": "same-site",
-    "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
-}
-json_for_t2i = {
-    "input": str,
-    "model": "nai-diffusion-3",
-    "action": "generate",
-    "parameters": {
-        "params_version": 1,
-        "width": int,
-        "height": int,
-        "scale": float,
-        "sampler": str,
-        "steps": int,
-        "n_samples": 1,
-        "ucPreset": 0,
-        "qualityToggle": True,
-        "sm": bool,
-        "sm_dyn": bool,
-        "dynamic_thresholding": False,
-        "controlnet_strength": 1,
-        "legacy": False,
-        "add_original_image": False,
-        "uncond_scale": 1,
-        "cfg_rescale": 0,
-        "noise_schedule": str,
-        "legacy_v3_extend": False,
-        "seed": int,
-        "negative_prompt": str,
-        "reference_image_multiple": [],
-        "reference_information_extracted_multiple": [],
-        "reference_strength_multiple": [],
-    },
-}
-json_for_i2i = {
-    "input": str,
-    "model": "nai-diffusion-3",
-    "action": "img2img",
-    "parameters": {
-        "width": int,
-        "height": int,
-        "scale": float,
-        "sampler": str,
-        "steps": int,
-        "n_samples": 1,
-        "strength": float,
-        "noise": 0,
-        "ucPreset": 0,
-        "qualityToggle": True,
-        "sm": bool,
-        "sm_dyn": bool,
-        "dynamic_thresholding": False,
-        "controlnet_strength": 1,
-        "legacy": False,
-        "add_original_image": True,
-        "uncond_scale": 1,
-        "cfg_rescale": 0,
-        "noise_schedule": str,
-        "legacy_v3_extend": False,
-        "params_version": 1,
-        "seed": int,
-        "image": str,
-        "extra_noise_seed": int,
-        "negative_prompt": str,
-        "reference_image_multiple": [],
-        "reference_information_extracted_multiple": [],
-        "reference_strength_multiple": [],
-    },
-}
-json_for_inpaint = {
-    "input": str,
-    "model": "nai-diffusion-3-inpainting",
-    "action": "infill",
-    "parameters": {
-        "width": int,
-        "height": int,
-        "scale": float,
-        "sampler": str,
-        "steps": int,
-        "n_samples": 1,
-        "strength": float,
-        "noise": 0,
-        "ucPreset": 0,
-        "qualityToggle": True,
-        "sm": bool,
-        "sm_dyn": bool,
-        "dynamic_thresholding": False,
-        "controlnet_strength": 1,
-        "legacy": False,
-        "add_original_image": True,
-        "uncond_scale": 1,
-        "cfg_rescale": 0,
-        "noise_schedule": str,
-        "legacy_v3_extend": False,
-        "params_version": 1,
-        "seed": int,
-        "image": str,
-        "mask": str,
-        "extra_noise_seed": int,
-        "negative_prompt": str,
-        "reference_image_multiple": [],
-        "reference_information_extracted_multiple": [],
-        "reference_strength_multiple": [],
-    },
-}
+from utils.jsondata import headers
 
 
 def list_to_str(str_list: list):
@@ -139,14 +25,6 @@ def format_str(str_: str):
     str_ = str_.replace(",", ", ")
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
-
-
-def format_path(str_: str):
-    if str_[-1] == "/" or str_[-1] == "\\":
-        str_ = str_[:-1]
-        return str_
-    else:
-        return str_
 
 
 def sleep_for_cool(int1, int2):
@@ -168,18 +46,19 @@ def generate_image(json_data):
         with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
             with zip.open("image_0.png") as image:
                 return image.read()
-
     except Exception as e:
         logger.error(f"出现错误: {e}")
         return None
 
 
-def save_image(img_data, type_, seed, choose_game, choose_character):
+def save_image(img_data, type_, seed, choose_game, choose_character, *args):
     if img_data:
-        with open(f"./output/{type_}/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
-            file.write(img_data)
-    else:
-        pass
+        if seed and choose_game and choose_character:
+            with open(f"./output/{type_}/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
+                file.write(img_data)
+        else:
+            with open(f"./output/{type_}/{args[0]}", "wb") as file:
+                file.write(img_data)
 
 
 def inquire_anlas():
@@ -194,4 +73,25 @@ def check_platform():
         pass
     else:
         logger.error("仅支持 Window 运行!")
-        return "寄"
+        return
+
+
+def read_json(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def file_path2name(path) -> str:
+    return os.path.basename(path)
+
+
+def file_path2list(path) -> list:
+    return os.listdir(path)
+
+
+def file_name2path(file_list: list, file_path):
+    empty_list = []
+    for file in file_list:
+        empty_list.append(Path(file_path) / file)
+    file_list = empty_list[:]
+    return file_list
