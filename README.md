@@ -101,12 +101,12 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | theme | 否 | str \| None | "NoCrypt/miku" | WebUI 界面主题 | 更多请查看 [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
 | caption_prefix | 否 | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | 上传 pixiv 的描述前缀 | 你好 |
 | neighbor | 否 | float | 0.01 | 方形马赛克相对于图片的边长 | 0.008 |
-| negetive | 否 | str | "nsfw, ..." | 随机图片使用的负面 | "sfw, ..." |
 | alpha | 否 | float | 0.7 | 水印透明度(0~1, 越大越透明) | 0.5 |
 | water_height | 否 | int | 135 | 调整水印的高度 | 100 |
 | position | 否 | list[str] | ["左上", "右上", "左下", "右下"] | 水印可能出现的位置 | ["左上"] |
 | water_num | 否 | int | 1 | 水印的数量 | 2 |
 | t2i_cool_time | 否 | int | 18 | 文生图冷却时间 | 20 |
+| webui_lang | 否 | str | "zh" | WebUI界面语言 | "en" |
 
 ⚠️ token 的获取:
 
