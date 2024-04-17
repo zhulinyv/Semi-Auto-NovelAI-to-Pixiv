@@ -1,4 +1,5 @@
 import gradio as gr
+from loguru import logger
 
 from src.batchtxt import main as batchtxt
 from src.i2i import i2i_by_band
@@ -652,5 +653,15 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             )
         )
 
+
+logger.opt(colors=True).success(
+    """<c>
+██╗  ██╗██╗   ██╗████████╗██████╗ ███████╗
+╚██╗██╔╝╚██╗ ██╔╝╚══██╔══╝██╔══██╗╚══███╔╝
+ ╚███╔╝  ╚████╔╝    ██║   ██████╔╝  ███╔╝
+ ██╔██╗   ╚██╔╝     ██║   ██╔═══╝  ███╔╝
+██╔╝ ██╗   ██║      ██║   ██║     ███████╗
+╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     ╚══════╝</c>"""
+)
 
 demo.queue().launch(inbrowser=True, share=env.share, server_port=env.port, favicon_path="./files/logo.png")

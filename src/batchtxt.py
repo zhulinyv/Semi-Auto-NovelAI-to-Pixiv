@@ -45,6 +45,6 @@ def main(forever: bool, pref, position):
 
 if __name__ == "__main__":
     try:
-        main(True)
+        main(True, "", "最前面(Top)")
     except KeyboardInterrupt:
-        logger.warning("程序退出...", "", "最前面(Top)")
+        logger.warning("程序退出...")
