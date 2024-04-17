@@ -1,0 +1,99 @@
+{
+    "title": "# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 半自动 NovelAI 上传 Pixiv",
+    "t2i": {
+        "tab": "Txt2Img",
+        "description": "> Equivalent to using NovelAI official website, supporting your favorite style combination. If no image is returned, it's mostly due to 500 (server overload), 429 (request too fast), 443 (unstable node), anyway, it's not my problem ヾ(≧▽≦*)o",
+        "generate_button": "Start Generating",
+        "positive": "Positive Prompts",
+        "negative": "Negative Prompts",
+        "resolution": "Resolution (Width x Height) (Be cautious of crystal consumption for high resolutions)",
+        "scale": "Prompt Relevance",
+        "sampler": "Sampler",
+        "noise_schedule": "Noise Schedule",
+        "steps": "Sampling Steps",
+        "smdyn": "sm_dyn (Enable requires sm to be enabled)",
+        "seed": "Random Seed"
+    },
+    "i2i": {
+        "tab": "Img2Img",
+        "input_path": "Batch Processing Path (Effective only on the computer where this program runs)",
+        "open_button": "Enable Batch Processing",
+        "output_info": "Output Information",
+        "strength": "Redraw Strength"
+    },
+    "random blue picture": {
+        "tab": "Random Blue Picture",
+        "description": "> Generates a blue picture by randomly combining tags from ./files/favorite.json",
+        "generate_forever": "Generate Infinitely",
+        "stop_button": "Stop Generating"
+    },
+    "random picture": {
+        "tab": "Random Picture",
+        "description": "> Generates a picture using *.txt files in ./file/prompt as prompts"
+    },
+    "inpaint": {
+        "tab": "Inpaint",
+        "description": "> Redraws images using masks (redrawn area is white, remaining is transparent instead of black)",
+        "input_path": "Batch Processing Image Path (Effective only on the computer where this program runs)",
+        "mask_path": "Batch Processing Mask Path (Effective only on the computer where this program runs)",
+        "inpaint_img": "Redraw Image",
+        "inpaint_mask": "Redraw Mask"
+    },
+    "super resolution": {
+        "tab": "Super Resolution",
+        "description": "> Enlarges and denoises images using different engines",
+        "waifu2x_noise": "Denoising Strength",
+        "waifu2x_scale": "Scaling Factor",
+        "tta": "Enable TTA Mode",
+        "gpumode": "Enable GPU Acceleration",
+        "cnnmode": "Enable ACNet Mode",
+        "hdn": "Enable HDN for ACNet",
+        "hdn_level": "HDN Level",
+        "realcugan_model": "Super Resolution Model",
+        "mode": "Mode",
+        "process": "Process Mode",
+        "jobs": "Processing Threads"
+    },
+    "mosaic": {
+        "tab": "Automatic Mosaic",
+        "description": "> Automatically applies mosaic to key parts",
+        "generate_button": "Start Processing (New Pixelation)",
+        "generate_button_old": "Start Processing (Old Blurring)"
+    },
+    "water mark": {
+        "tab": "Add Watermark",
+        "description": "> Before using, please prepare your own watermarks in ./files/water folder",
+        "generate_button": "Start Processing"
+    },
+    "pixiv": {
+        "tab": "Upload to Pixiv",
+        "description": "> Uploads images or image sets to Pixiv, you can check the upload progress in the command line"
+    },
+    "selector": {
+        "tab": "Image Selection",
+        "description": "> Facilitates manual image selection (very simple buttons, should be self-explanatory...)",
+        "input_path": "Image Path",
+        "select_button": "Confirm",
+        "output_path": "Output Path 1",
+        "output_path_": "Output Path 2",
+        "next_button": "Skip",
+        "move_button": "Move 1",
+        "move_button_": "Move 2",
+        "del_button": "Delete"
+    },
+    "rm png info": {
+        "tab": "Erase Data",
+        "description": "> Erase or restore image generation information",
+        "tab_rm": "Erase",
+        "tab_re": "Restore",
+        "info_file_path": "Image Information File Directory",
+        "input_path": "Directory of Images to Be Restored"
+    },
+    "maigic analysis": {
+        "tab": "Magic Analysis"
+    },
+    "example": {
+        "positive": "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,",
+        "negative": "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],"
+    }
+}

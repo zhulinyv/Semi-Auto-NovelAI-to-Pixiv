@@ -1,0 +1,99 @@
+{
+    "title": "# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 半自动 NovelAI 上传 Pixiv",
+    "t2i": {
+        "tab": "文生图",
+        "description": "> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高), 429(请求过快), 443(节点不稳定), 反正不是我的问题 ヾ(≧▽≦*)o",
+        "generate_button": "开始生成",
+        "positive": "正面提示词",
+        "negative": "负面提示词",
+        "resolution": "分辨率(宽x高)(大分辨率请注意水晶消耗)",
+        "scale": "提示词相关性",
+        "sampler": "采样器",
+        "noise_schedule": "噪声计划表",
+        "steps": "采样步数",
+        "smdyn": "sm_dyn(开启需同时开启 sm)",
+        "seed": "随机种子"
+    },
+    "i2i": {
+        "tab": "图生图",
+        "input_path": "批量处理路径(仅在本程序运行的电脑生效)",
+        "open_button": "是否启用批处理",
+        "output_info": "输出信息",
+        "strength": "重绘幅度"
+    },
+    "random blue picture": {
+        "tab": "随机涩图",
+        "description": "> 通过随机组合 ./files/favorite.json 中的 tag 生成一张涩图",
+        "generate_forever": "无限生成",
+        "stop_button": "停止生成"
+    },
+    "random picture": {
+        "tab": "随机图片",
+        "description": "> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片"
+    },
+    "inpaint": {
+        "tab": "局部重绘",
+        "description": "> 通过蒙版对图片重绘(重绘区域为白色, 其余透明而不是黑色)",
+        "input_path": "批量处理图片路径(仅在本程序运行的电脑生效)",
+        "mask_path": "批量处理蒙版路径(仅在本程序运行的电脑生效)",
+        "inpaint_img": "重绘图片",
+        "inpaint_mask": "重绘蒙版"
+    },
+    "super resolution": {
+        "tab": "超分降噪",
+        "description": "> 使用不同引擎放大并降噪图片",
+        "waifu2x_noise": "降噪强度",
+        "waifu2x_scale": "放大倍数",
+        "tta": "是否开启tta模式",
+        "gpumode": "是否开启GPU加速",
+        "cnnmode": "是否开启ACNet模式",
+        "hdn": "是否为ACNet开启HDN",
+        "hdn_level": "HDN等级",
+        "realcugan_model": "超分模型",
+        "mode": "模式",
+        "process": "处理模式",
+        "jobs": "处理线程数"
+    },
+    "mosaic": {
+        "tab": "自动打码",
+        "description": "> 对关键部位进行自动打码",
+        "generate_button": "开始处理(新版像素)",
+        "generate_button_old": "开始处理(旧版模糊)"
+    },
+    "water mark": {
+        "tab": "添加水印",
+        "description": "> 使用前, 请先准备一些自己的水印到 ./files/water 文件夹",
+        "generate_button": "开始处理"
+    },
+    "pixiv": {
+        "tab": "上传Pixiv",
+        "description": "> 将图片或图片组上传至 Pixiv, 你可以在命令行查看上传进度"
+    },
+    "selector": {
+        "tab": "图片筛选",
+        "description": "> 方便人工筛选图片(很简单的几个按钮, 应该不用说怎么用叭...)",
+        "input_path": "图片路径",
+        "select_button": "确定",
+        "output_path": "输出路径1",
+        "output_path_": "输出路径2",
+        "next_button": "跳过",
+        "move_button": "移动1",
+        "move_button_": "移动2",
+        "del_button": "删除"
+    },
+    "rm png info": {
+        "tab": "抹除数据",
+        "description": "> 对图片生成信息进行抹除或还原",
+        "tab_rm": "抹除",
+        "tab_re": "还原",
+        "info_file_path": "图片信息文件目录",
+        "input_path": "待还原图片目录"
+    },
+    "maigic analysis": {
+        "tab": "法术解析"
+    },
+    "example": {
+        "positive": "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,",
+        "negative": "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],"
+    }
+}
