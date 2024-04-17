@@ -184,12 +184,17 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     with gr.Tab(webui_lang["random picture"]["tab"]):
         gr.Markdown(webui_lang["random picture"]["description"])
         with gr.Row():
+            pref = gr.Textbox("", label=webui_lang["random picture"]["pref"], scale=5)
+            position = gr.Radio(
+                ["最前面(Top)", "最后面(Last)"], label=webui_lang["random picture"]["position"], scale=1
+            )
+        with gr.Row():
             forever = gr.Radio(value=False, visible=False)
             generate_button = gr.Button(webui_lang["random blue picture"]["generate_forever"])
             stop = gr.Button(webui_lang["random blue picture"]["stop_button"])
         batchtxt_img = gr.Image()
         cancel_event = batchtxt_img.change(fn=batchtxt, inputs=forever, outputs=batchtxt_img, show_progress="hidden")
-        generate_button.click(fn=batchtxt, inputs=forever, outputs=batchtxt_img)
+        generate_button.click(fn=batchtxt, inputs=[forever, pref, position], outputs=batchtxt_img)
         stop.click(None, None, None, cancels=[cancel_event])
     with gr.Tab(webui_lang["inpaint"]["tab"]):
         gr.Markdown(webui_lang["inpaint"]["description"])

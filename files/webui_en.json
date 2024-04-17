@@ -29,7 +29,9 @@
     },
     "random picture": {
         "tab": "Random Picture",
-        "description": "> Generates a picture using *.txt files in ./file/prompt as prompts"
+        "description": "> Generates a picture using *.txt files in ./file/prompt as prompts",
+        "pref": "Additional Prompts",
+        "position": "Addition Position"
     },
     "inpaint": {
         "tab": "Inpaint",

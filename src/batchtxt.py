@@ -5,10 +5,10 @@ from loguru import logger
 
 from src.t2i import prepare_json
 from utils.env import env
-from utils.utils import file_path2list, generate_image, read_json, save_image, sleep_for_cool
+from utils.utils import file_path2list, format_str, generate_image, read_json, save_image, sleep_for_cool
 
 
-def main(forever: bool):
+def main(forever: bool, pref, position):
     file_list = file_path2list("./files/prompt")
     file_list.remove("done")
     if file_list == []:
@@ -18,6 +18,11 @@ def main(forever: bool):
 
     with open(f"./files/prompt/{file}") as f:
         prompt = f.read()
+    if pref != "":
+        if position == "最前面(Top)":
+            prompt = f"{format_str(pref)}, {prompt}"
+        else:
+            prompt = f"{format_str(prompt)}, {pref}"
     logger.debug("prompt: " + prompt)
 
     data = read_json("./files/favorite.json")

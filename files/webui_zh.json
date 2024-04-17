@@ -29,7 +29,9 @@
     },
     "random picture": {
         "tab": "随机图片",
-        "description": "> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片"
+        "description": "> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片",
+        "pref": "追加的提示词",
+        "position": "追加位置"
     },
     "inpaint": {
         "tab": "局部重绘",
