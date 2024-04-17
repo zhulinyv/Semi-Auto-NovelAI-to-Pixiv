@@ -88,6 +88,7 @@
         "description": "> 对图片生成信息进行抹除或还原",
         "tab_rm": "抹除",
         "tab_re": "还原",
+        "tab_ex": "导出",
         "info_file_path": "图片信息文件目录",
         "input_path": "待还原图片目录"
     },

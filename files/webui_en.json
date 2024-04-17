@@ -88,6 +88,7 @@
         "description": "> Erase or restore image generation information",
         "tab_rm": "Erase",
         "tab_re": "Restore",
+        "tab_ex": "Export",
         "info_file_path": "Image Information File Directory",
         "input_path": "Directory of Images to Be Restored"
     },

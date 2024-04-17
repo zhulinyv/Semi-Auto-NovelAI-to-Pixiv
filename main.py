@@ -6,7 +6,7 @@ from src.inpaint import for_webui as inpaint
 from src.mosaic import main as mosaic
 from src.mosold import main as mosold
 from src.pixiv import main as pixiv
-from src.rminfo import remove_info, revert_info
+from src.rminfo import export_info, remove_info, revert_info
 from src.selector import del_current_img, move_current_img, show_first_img, show_next_img
 from src.t2i import t2i, t2i_by_band
 from src.waifu2x import main as upscale
@@ -186,7 +186,8 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         with gr.Row():
             pref = gr.Textbox("", label=webui_lang["random picture"]["pref"], lines=2, scale=5)
             position = gr.Radio(
-                value="最前面(Top)"["最前面(Top)", "最后面(Last)"],
+                value="最前面(Top)",
+                choices=["最前面(Top)", "最后面(Last)"],
                 label=webui_lang["random picture"]["position"],
                 scale=1,
             )
@@ -616,6 +617,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             input_path = gr.Textbox(label=webui_lang["rm png info"]["input_path"])
             output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
             start_button.click(fn=revert_info, inputs=[info_file_path, input_path], outputs=[output_info])
+        with gr.Tab(webui_lang["rm png info"]["tab_ex"]):
+            start_button = gr.Button(webui_lang["water mark"]["generate_button"])
+            input_path = gr.Textbox(label=webui_lang["i2i"]["input_path"])
+            output_path = gr.Textbox("./output/info_file", visible=False)
+            output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
+            start_button.click(fn=export_info, inputs=[input_path, output_path], outputs=output_info)
     with gr.Tab(webui_lang["maigic analysis"]["tab"]):
         gr.HTML(
             """
