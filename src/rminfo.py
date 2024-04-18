@@ -19,7 +19,7 @@ def remove_info(input_path, output_path):
     for file in file_list:
         logger.warning(f"正在清除 {file} 的元数据...")
         with Image.open(Path(input_path) / file) as img:
-            img = inject_data(img)
+            img = inject_data(img, metadata)
             img.save(Path(output_path) / file)
         logger.success("清除成功!")
     return f"清除成功! 图片已保存到 {output_path}"
