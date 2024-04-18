@@ -96,8 +96,9 @@ Now you can launch the `run.bat` at the origin directory to start WebUI, it will
 | water_height | No | int | 135 | Adjust the height of the watermark | 100 |
 | position | No | list[str] | ["左上", "右上", "左下", "右下"] | Possible positions for the watermark | ["左上"] |
 | water_num | No | int | 1 | Number of watermarks | 2 |
-| t2i_cool_time | No | int | 18 | the cool time for t2i | 20 |
+| t2i_cool_time | No | int | 12 | the cool time for t2i (Unit: Seconds (6 seconds up or down)) | 20 |
 | webui_lang | No | str | "zh" | Language of the WebUI | "en" |
+| pixiv_cool_time | No | int | 15 | The cool time of pixiv uploading (Unit: Minutes (up or minus 5 minutes)) | 240 |
 
 ⚠️ Getting the token:
 
