@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     water_num: int = 1
     t2i_cool_time: int = 12
     webui_lang: str = "zh"
+    pixiv_cool_time: int = 15
 
     class Config:
         env_file = ".env"

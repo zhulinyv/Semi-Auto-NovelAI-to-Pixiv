@@ -111,7 +111,7 @@ def main(file_path):
                     break
             except Exception:
                 pass
-        sleep_for_cool(600, 1200)
+        sleep_for_cool((env.pixiv_cool_time - 5) * 60, (env.pixiv_cool_time + 5) * 60)
     logger.success("上传完成!")
 
     return "上传完成!"
