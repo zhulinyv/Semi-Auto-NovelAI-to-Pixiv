@@ -100,6 +100,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | webui_lang | 否 | str | "zh" | WebUI界面语言 | "en" |
 | pixiv_cool_time | 否 | int | 15 | 上传 Pixiv 冷却时间(单位: 分钟(上下浮动 5 分钟)) | 240 |
 | meta_data | 否 | str | "杂鱼\~杂鱼\~" | 清除 meta 信息时自己添加的信息 | "杂鱼\~杂鱼\~杂鱼\~" |
+| g4f_port | 否 | int | 19198 | G4F 的网页端口号 | 24680 |
 
 ⚠️ token 的获取:
 
