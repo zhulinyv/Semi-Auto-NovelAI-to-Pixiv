@@ -35,6 +35,7 @@ class Settings(BaseSettings):
     webui_lang: str = "zh"
     pixiv_cool_time: int = 15
     meta_data: str = "杂鱼~杂鱼~"
+    g4f_port: int = 19198
 
     class Config:
         env_file = ".env"

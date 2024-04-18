@@ -5,9 +5,6 @@ if not exist venv (
     python -m venv venv
 )
 
-: start g4f
-.\g4f.vbs
-
 set PYTHON="venv\Scripts\Python.exe"
 
 : check pip packages

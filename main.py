@@ -1,3 +1,5 @@
+import multiprocessing as mp
+
 import gradio as gr
 from loguru import logger
 
@@ -13,6 +15,7 @@ from src.t2i import t2i, t2i_by_band
 from src.waifu2x import main as upscale
 from src.water import main as water
 from utils.env import env
+from utils.g4f import main as g4f
 from utils.utils import read_json
 
 webui_lang = read_json(f"./files/webui_{env.webui_lang}.json")
@@ -650,18 +653,32 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
 </style>
 """.replace(
                 "650", str(env.height)
+            ).replace(
+                "19198", str(env.g4f_port)
             )
         )
 
 
-logger.opt(colors=True).success(
-    """<c>
+def main():
+    demo.queue().launch(inbrowser=True, share=env.share, server_port=env.port, favicon_path="./files/logo.png")
+
+
+if __name__ == "__main__":
+    p1 = mp.Process(target=g4f)
+    p2 = mp.Process(target=main)
+
+    p1.start()
+    p2.start()
+
+    logger.opt(colors=True).success(
+        """<c>
 ██╗  ██╗██╗   ██╗████████╗██████╗ ███████╗
 ╚██╗██╔╝╚██╗ ██╔╝╚══██╔══╝██╔══██╗╚══███╔╝
  ╚███╔╝  ╚████╔╝    ██║   ██████╔╝  ███╔╝
  ██╔██╗   ╚██╔╝     ██║   ██╔═══╝  ███╔╝
 ██╔╝ ██╗   ██║      ██║   ██║     ███████╗
 ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     ╚══════╝</c>"""
-)
+    )
 
-demo.queue().launch(inbrowser=True, share=env.share, server_port=env.port, favicon_path="./files/logo.png")
+    p1.join()
+    p2.join()
