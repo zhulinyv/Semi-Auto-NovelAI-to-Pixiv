@@ -12,38 +12,39 @@ from utils.utils import file_path2list
 def water(img_path, otp_path):
     # 打开图片和水印
     water_list = file_path2list("./files/water")
-    img = Image.open(img_path).convert("RGBA")
     water_img = random.choice(water_list)
-    water = Image.open(f"./files/water/{water_img}").convert("RGBA")
+    with Image.open(img_path) as img, Image.open(f"./files/water/{water_img}") as water:
+        img = img.convert("RGBA")
+        water = water.convert("RGBA")
 
-    # 随机水印透明度
-    new_png = water.copy()
-    layer = Image.new("RGBA", water.size, color=(0, 0, 0, 0))
-    new_png = Image.blend(new_png, layer, env.alpha + random.uniform(-0.15, 0.15))
+        # 随机水印透明度
+        new_png = water.copy()
+        layer = Image.new("RGBA", water.size, color=(0, 0, 0, 0))
+        new_png = Image.blend(new_png, layer, env.alpha + random.uniform(-0.15, 0.15))
 
-    # 随机水印大小
-    w, h = img.size
-    w_, h_ = new_png.size
-    new_height = env.water_height + random.randint(-20, 20)
-    new_width = int(new_height / h_ * w_)
-    new_png.resize((new_width, new_height))
+        # 随机水印大小
+        w, h = img.size
+        w_, h_ = new_png.size
+        new_height = env.water_height + random.randint(-20, 20)
+        new_width = int(new_height / h_ * w_)
+        new_png.resize((new_width, new_height))
 
-    # 随机水印位置
-    position = random.choice(env.position)
-    if position == "左上":
-        box = (100 + random.randint(-20, 20), 100 + random.randint(-20, 20))
-    elif position == "右上":
-        box = (w - new_width - 100 + random.randint(-20, 20), 100 + random.randint(-20, 20))
-    elif position == "左下":
-        box = (100 + random.randint(-20, 20), h - new_height - 100 + random.randint(-20, 20))
-    elif position == "右下":
-        box = (w - new_width - 100 + random.randint(-20, 20), h - new_height - 100 + random.randint(-20, 20))
+        # 随机水印位置
+        position = random.choice(env.position)
+        if position == "左上":
+            box = (100 + random.randint(-20, 20), 100 + random.randint(-20, 20))
+        elif position == "右上":
+            box = (w - new_width - 100 + random.randint(-20, 20), 100 + random.randint(-20, 20))
+        elif position == "左下":
+            box = (100 + random.randint(-20, 20), h - new_height - 100 + random.randint(-20, 20))
+        elif position == "右下":
+            box = (w - new_width - 100 + random.randint(-20, 20), h - new_height - 100 + random.randint(-20, 20))
 
-    img = img.filter(ImageFilter.SMOOTH)
-    img.paste(new_png, box, new_png)
-    img = img.convert("RGBA")
-    img.save(otp_path)
-    revert_img_info(str(img_path), otp_path)
+        img = img.filter(ImageFilter.SMOOTH)
+        img.paste(new_png, box, new_png)
+        img = img.convert("RGBA")
+        img.save(otp_path)
+        revert_img_info(str(img_path), otp_path)
 
 
 def main(input_path, output_path):

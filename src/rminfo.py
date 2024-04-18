@@ -4,17 +4,23 @@ from pathlib import Path
 import ujson as json
 from loguru import logger
 from PIL import Image
+from PIL.PngImagePlugin import PngInfo
 
+from utils.env import env
 from utils.imgtools import get_img_info, revert_img_info
+from utils.naimeta import inject_data
 from utils.utils import file_path2list
 
 
 def remove_info(input_path, output_path):
+    metadata = PngInfo()
+    metadata.add_text("None", env.meta_data)
     file_list = file_path2list(input_path)
     for file in file_list:
         logger.warning(f"正在清除 {file} 的元数据...")
-        img = Image.open(Path(input_path) / file)
-        img.save(Path(output_path) / file)
+        with Image.open(Path(input_path) / file) as img:
+            img = inject_data(img)
+            img.save(Path(output_path) / file)
         logger.success("清除成功!")
     return f"清除成功! 图片已保存到 {output_path}"
 

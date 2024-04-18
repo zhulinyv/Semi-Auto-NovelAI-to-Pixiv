@@ -28,16 +28,20 @@ def _mosaic(img, fx, fy, tx, ty):
 
 def mosaic(img):
     img = str(img)
-    image = Image.open(img)
-    body = nude_detector.detect(img)
-    for part in body:
-        if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
-            logger.debug("检测到: {}".format(part["class"]))
-            image = _mosaic(
-                image, part["box"][0], part["box"][1], part["box"][0] + part["box"][2], part["box"][1] + part["box"][3]
-            )
-            image.save(img)
-    revert_img_info(None, img, image.info)
+    with Image.open(img) as image:
+        body = nude_detector.detect(img)
+        for part in body:
+            if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
+                logger.debug("检测到: {}".format(part["class"]))
+                image = _mosaic(
+                    image,
+                    part["box"][0],
+                    part["box"][1],
+                    part["box"][0] + part["box"][2],
+                    part["box"][1] + part["box"][3],
+                )
+                image.save(img)
+        revert_img_info(None, img, image.info)
 
 
 def main(file_path, input_img, open_button):

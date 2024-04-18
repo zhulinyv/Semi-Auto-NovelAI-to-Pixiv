@@ -34,6 +34,7 @@ class Settings(BaseSettings):
     t2i_cool_time: int = 12
     webui_lang: str = "zh"
     pixiv_cool_time: int = 15
+    meta_data: str = "杂鱼~杂鱼~"
 
     class Config:
         env_file = ".env"

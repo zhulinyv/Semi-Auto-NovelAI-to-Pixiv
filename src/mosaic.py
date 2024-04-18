@@ -32,16 +32,18 @@ def _mosaic(img, x, y, w, h, neighbor):
 
 def mosaic(img_path):
     img_path = str(img_path)
-    pil_img = Image.open(img_path)
-    neighbor = int(pil_img.width * env.neighbor if pil_img.width > pil_img.height else pil_img.height * env.neighbor)
-    body = nude_detector.detect(img_path)
-    for part in body:
-        if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
-            logger.debug("检测到: {}".format(part["class"]))
-            cv2_img = cv2.imread(img_path)
-            cv2_img = _mosaic(cv2_img, part["box"][0], part["box"][1], part["box"][2], part["box"][3], neighbor)
-            cv2.imwrite(img_path, cv2_img)
-    revert_img_info(None, img_path, pil_img.info)
+    with Image.open(img_path) as pil_img:
+        neighbor = int(
+            pil_img.width * env.neighbor if pil_img.width > pil_img.height else pil_img.height * env.neighbor
+        )
+        body = nude_detector.detect(img_path)
+        for part in body:
+            if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
+                logger.debug("检测到: {}".format(part["class"]))
+                cv2_img = cv2.imread(img_path)
+                cv2_img = _mosaic(cv2_img, part["box"][0], part["box"][1], part["box"][2], part["box"][3], neighbor)
+                cv2.imwrite(img_path, cv2_img)
+        revert_img_info(None, img_path, pil_img.info)
 
 
 def main(file_path, input_img, open_button):
