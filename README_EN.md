@@ -99,6 +99,7 @@ Now you can launch the `run.bat` at the origin directory to start WebUI, it will
 | t2i_cool_time | No | int | 12 | the cool time for t2i (Unit: Seconds (6 seconds up or down)) | 20 |
 | webui_lang | No | str | "zh" | Language of the WebUI | "en" |
 | pixiv_cool_time | No | int | 15 | The cool time of pixiv uploading (Unit: Minutes (up or minus 5 minutes)) | 240 |
+| meta_data | No | str | "杂鱼~杂鱼~" | The metadata which you want to add when erasering the metadata | "杂鱼~杂鱼~杂鱼~" |
 
 ⚠️ Getting the token:
 
@@ -274,7 +275,10 @@ This project uses [stable-diffusion-inspector](https://spell.novelai.dev/) for p
 
 This project uses [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshin-Sync/tree/main) for uploading images to Pixiv.
 
-This project utilizes [GPT4FREE](https://github.com/xtekky/gpt4free) to provide GPT services.
+This project uses [GPT4FREE](https://github.com/xtekky/gpt4free) to provide GPT services.
+
+This project uses  [novelai-image-metadata](https://github.com/NovelAI/novelai-image-metadata) to eraser the metadata.
+
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>

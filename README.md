@@ -99,6 +99,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | t2i_cool_time | 否 | int | 12 | 文生图冷却时间(单位: 秒(上下浮动 6 秒)) | 20 |
 | webui_lang | 否 | str | "zh" | WebUI界面语言 | "en" |
 | pixiv_cool_time | 否 | int | 15 | 上传 Pixiv 冷却时间(单位: 分钟(上下浮动 5 分钟)) | 240 |
+| meta_data | 否 | str | "杂鱼~杂鱼~" | 清除 meta 信息时自己添加的信息 | "杂鱼~杂鱼~杂鱼~" |
 
 ⚠️ token 的获取:
 
@@ -275,6 +276,8 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 本项目使用 [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshin-Sync/tree/main) 上传图片至 Pixiv
 
 本项目使用 [GPT4FREE](https://github.com/xtekky/gpt4free) 提供 GPT 服务
+
+本项目使用 [novelai-image-metadata](https://github.com/NovelAI/novelai-image-metadata) 抹除元数据
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
