@@ -10,7 +10,7 @@ from utils.imgtools import get_img_info
 from utils.pixivposter import pixiv_upload
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
-from utils.utils import file_path2list, read_json, sleep_for_cool
+from utils.utils import file_path2list, format_str, list_to_str, read_json, sleep_for_cool
 
 
 def upload(image_list, file):
@@ -18,8 +18,16 @@ def upload(image_list, file):
     try:
         image_info["Software"] == "NovelAI"
         img_comment = json.loads(image_info["Comment"])
-        caption = env.caption_prefix + "\n----------\n" + img_comment["prompt"]
-        pass
+        prompt: str = img_comment["prompt"]
+        if env.rep_tags:
+            prompt = "".join(i for i in prompt if i not in ["[", "]", "{", "}"])
+            prompt = format_str(prompt)
+            prompt = prompt.split(", ")
+            prompt = random.sample(prompt, num := int(len(prompt) * env.rep_tags_per))
+            prompt = list_to_str(prompt)
+            prompt = format_str(prompt)
+            prompt += f", {env.rep_tags_with_tag}" * int(num * (1 - env.rep_tags_per))
+        caption = env.caption_prefix + "\n----------\n" + prompt
     except WrongImgError:
         logger.error("不是 NovelAI 生成的图片!")
         caption = env.caption_prefix

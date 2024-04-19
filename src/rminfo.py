@@ -8,6 +8,8 @@ from PIL.PngImagePlugin import PngInfo
 
 from utils.env import env
 from utils.imgtools import get_img_info, revert_img_info
+
+# inject_data 修改自 https://github.com/NovelAI/novelai-image-metadata
 from utils.naimeta import inject_data
 from utils.utils import file_path2list
 
