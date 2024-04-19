@@ -81,26 +81,29 @@ Now you can launch the `run.bat` at the origin directory to start WebUI, it will
 | sm_dyn |No| bool | False | sm_dyn | True |
 | noise_schedule |No| str | "native" | Noise schedule | "karras" |
 | seed | No | int | -1 | Random seed | 2468751262 |
+| t2i_cool_time | No | int | 12 | the cool time for t2i (Unit: Seconds (6 seconds up or down)) | 20 |
 | magnification | No | float | 1.5 | Magnification for generating images | 1.3 |
 | hires_strength | No | float | 0.5 | Redraw strength | 0.6 |
 | pixiv_cookie | Yes | str | "xxx" | Cookie for uploading to Pixiv | "first_..." |
 | pixiv_token | Yes | str | "xxx" | x-csrf-token for uploading to Pixiv | "655c0c..." |
 | allow_tag_edit | No | bool | True | Whether to allow other users to edit tags | False |
-| share | No | bool | False | Whether to share the Gradio link | True |
-| height | No | int | 650 | Height of the Gradio interface | 800 |
-| port | No | int | 11451 | Port for local deployment | 13579 |
-| theme | No | str \| None | "NoCrypt/miku" | WebUI interface theme | more theme: [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
 | caption_prefix | No | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | the prefix of the caption when uploading pictures to pixiv | Hello |
+| rep_tags | No | bool | True | Whether to shuffle and replace some tags in the Pixiv description prompt | False |
+| rep_tags_per | No | float | 0.5 | How much to replace (default 0.5 is to replace half) | 1.0 |
+| rep_tags_with_tag | No | str | "Trash~" | What to replace tags with | "Abba" |
+| pixiv_cool_time | No | int | 15 | The cool time of pixiv uploading (Unit: Minutes (up or minus 5 minutes)) | 240 |
 | neighbor | No | float | 0.01 | The square mosaic is relative to the length of the sides of the picture | 0.008 |
+| meta_data | No | str | "杂鱼\~杂鱼\~" | The metadata which you want to add when erasering the metadata | "杂鱼\~杂鱼\~杂鱼\~" |
 | alpha | No | float | 0.7 | Watermark transparency (0~1, the higher the value, the more transparent) | 0.5 |
 | water_height | No | int | 135 | Adjust the height of the watermark | 100 |
 | position | No | list[str] | ["左上", "右上", "左下", "右下"] | Possible positions for the watermark | ["左上"] |
 | water_num | No | int | 1 | Number of watermarks | 2 |
-| t2i_cool_time | No | int | 12 | the cool time for t2i (Unit: Seconds (6 seconds up or down)) | 20 |
-| webui_lang | No | str | "zh" | Language of the WebUI | "en" |
-| pixiv_cool_time | No | int | 15 | The cool time of pixiv uploading (Unit: Minutes (up or minus 5 minutes)) | 240 |
-| meta_data | No | str | "杂鱼\~杂鱼\~" | The metadata which you want to add when erasering the metadata | "杂鱼\~杂鱼\~杂鱼\~" |
+| share | No | bool | False | Whether to share the Gradio link | True |
+| height | No | int | 650 | Height of the Gradio interface | 800 |
+| port | No | int | 11451 | Port for local deployment | 13579 |
 | g4f_port | No | int | 19198 | The port of G4F webui | 24680 |
+| theme | No | str \| None | "NoCrypt/miku" | WebUI interface theme | more theme: [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
+| webui_lang | No | str | "zh" | Language of the WebUI | "en" |
 
 ⚠️ Getting the token:
 

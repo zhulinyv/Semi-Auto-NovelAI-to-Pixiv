@@ -81,26 +81,29 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | sm_dyn |否| bool | False | sm_dyn | True |
 | noise_schedule |否| str | "native" |噪声计划表| "karras" |
 | seed | 否 | int | -1 | 随机种子 | 2468751262 |
+| t2i_cool_time | 否 | int | 12 | 文生图冷却时间(单位: 秒(上下浮动 6 秒)) | 20 |
 | magnification | 否 | float | 1.5 | 图生图的放大倍数 | 1.3 |
 | hires_strength | 否 | float | 0.5 |重绘幅度| 0.6 |
 | pixiv_cookie | 是 | str | "xxx" | 上传 Pixiv 使用的 cookie | "first_..." |
 | pixiv_token | 是 | str | "xxx" | 上传 Pixiv 使用的 x-csrf-token | "655c0c..." |
 | allow_tag_edit | 否 | bool | True | 是否允许其它用户编辑标签 | False |
-| share | 否 | bool | False | 是否共享 gradio 链接 | True |
-| height | 否 | int | 650 | 法术解析页面的高度 | 800 |
-| port | 否 | int | 11451 | 本地启动的端口 | 13579 |
-| theme | 否 | str \| None | "NoCrypt/miku" | WebUI 界面主题 | 更多请查看 [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
 | caption_prefix | 否 | str \| None | "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 632344043, 欢迎!" | 上传 pixiv 的描述前缀 | 你好 |
+| rep_tags | 否 | bool | True | 上传 Pixiv 描述中的 prompt 是否乱序并替换其中一些 tags | False |
+| rep_tags_per | 否 | float | 0.5 | 替换多少(默认 0.5 为替换一半) | 1.0 |
+| rep_tags_with_tag | 否 | str | "杂鱼~" | 用什么替换 tags | "阿巴" |
+| pixiv_cool_time | 否 | int | 15 | 上传 Pixiv 冷却时间(单位: 分钟(上下浮动 5 分钟)) | 240 |
 | neighbor | 否 | float | 0.01 | 方形马赛克相对于图片的边长 | 0.008 |
+| meta_data | 否 | str | "杂鱼\~杂鱼\~" | 清除 meta 信息时自己添加的信息 | "杂鱼\~杂鱼\~杂鱼\~" |
 | alpha | 否 | float | 0.7 | 水印透明度(0~1, 越大越透明) | 0.5 |
 | water_height | 否 | int | 135 | 调整水印的高度 | 100 |
 | position | 否 | list[str] | ["左上", "右上", "左下", "右下"] | 水印可能出现的位置 | ["左上"] |
 | water_num | 否 | int | 1 | 水印的数量 | 2 |
-| t2i_cool_time | 否 | int | 12 | 文生图冷却时间(单位: 秒(上下浮动 6 秒)) | 20 |
-| webui_lang | 否 | str | "zh" | WebUI界面语言 | "en" |
-| pixiv_cool_time | 否 | int | 15 | 上传 Pixiv 冷却时间(单位: 分钟(上下浮动 5 分钟)) | 240 |
-| meta_data | 否 | str | "杂鱼\~杂鱼\~" | 清除 meta 信息时自己添加的信息 | "杂鱼\~杂鱼\~杂鱼\~" |
+| share | 否 | bool | False | 是否共享 gradio 链接 | True |
+| height | 否 | int | 650 | 法术解析页面的高度 | 800 |
+| port | 否 | int | 11451 | 本地启动的端口 | 13579 |
 | g4f_port | 否 | int | 19198 | G4F 的网页端口号 | 24680 |
+| theme | 否 | str \| None | "NoCrypt/miku" | WebUI 界面主题 | 更多请查看 [Themes Gallery](https://huggingface.co/spaces/gradio/theme-gallery) |
+| webui_lang | 否 | str | "zh" | WebUI界面语言 | "en" |
 
 ⚠️ token 的获取:
 
