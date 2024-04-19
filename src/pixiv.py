@@ -23,7 +23,7 @@ def upload(image_list, file):
             prompt = "".join(i for i in prompt if i not in ["[", "]", "{", "}"])
             prompt = format_str(prompt)
             prompt = prompt.split(", ")
-            prompt = random.sample(prompt, num := int(len(prompt) * env.rep_tags_per))
+            prompt = random.sample(prompt, int((num := len(prompt)) * env.rep_tags_per))
             prompt = list_to_str(prompt)
             prompt = format_str(prompt)
             prompt += f", {env.rep_tags_with_tag}" * int(num * (1 - env.rep_tags_per))
