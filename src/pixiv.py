@@ -38,13 +38,13 @@ def upload(image_list, file):
     surrounding_title_list = list(data["title"]["surrounding"].keys())
     action_title_list = list(data["title"]["action"].keys())
     for k in surrounding_title_list:
-        if k in caption:
+        if k in img_comment["prompt"]:
             surrounding_title = random.choice(data["title"]["surrounding"][k])
             break
         else:
             surrounding_title = None
     for v in action_title_list:
-        if v in caption:
+        if v in img_comment["prompt"]:
             action_title = random.choice(data["title"]["action"][v])
             break
         else:
@@ -67,10 +67,10 @@ def upload(image_list, file):
     description_labels_list = list(data["labels"]["description"].keys())
     for i in character_labels_list:
         for j in data["labels"][name_list[1]][i]:
-            labels_list.append(j) if i in caption else ...
+            labels_list.append(j) if i in img_comment["prompt"] else ...
     for m in description_labels_list:
         for n in data["labels"]["description"][m]:
-            labels_list.append(n) if m in caption else ...
+            labels_list.append(n) if m in img_comment["prompt"] else ...
     while len(labels_list) > 10:
         del labels_list[-1]
     # 预览
