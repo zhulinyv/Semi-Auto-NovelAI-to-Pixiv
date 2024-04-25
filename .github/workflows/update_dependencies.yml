@@ -21,7 +21,7 @@ jobs:
           python-version: 3.10.11
 
       - name: Set up Poetry
-        uses: Gr1N/setup-poetry@v8
+        uses: Gr1N/setup-poetry@v9
 
       - name: lock poetry.lock
         run: poetry lock
