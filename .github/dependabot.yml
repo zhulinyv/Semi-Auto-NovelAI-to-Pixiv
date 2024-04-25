@@ -9,11 +9,11 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      time: "14:45"
+      time: "14:48"
 
   # Maintain dependencies for npm
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
-      time: "14:45"
+      time: "14:48"
