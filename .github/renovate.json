@@ -4,14 +4,12 @@
       "schedule:weekly"
     ],
     "baseBranches": [
-      "main",
-      "docs"
+      "main"
     ],
     "dependencyDashboard": false,
     "rangeStrategy": "bump",
     "enabledManagers": [
       "github-actions",
-      "npm",
       "poetry",
       "pre-commit"
     ],
