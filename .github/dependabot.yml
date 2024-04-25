@@ -8,12 +8,10 @@ updates:
     # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
     directory: "/"
     schedule:
-      interval: "daily"
-      time: "14:48"
+      interval: "weekly"
 
   # Maintain dependencies for npm
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "daily"
-      time: "14:48"
+      interval: "weekly"
