@@ -1,0 +1,63 @@
+{
+    "extends": [
+      "config:base",
+      "schedule:weekly"
+    ],
+    "baseBranches": [
+      "main",
+      "docs"
+    ],
+    "dependencyDashboard": false,
+    "rangeStrategy": "bump",
+    "enabledManagers": [
+      "github-actions",
+      "npm",
+      "poetry",
+      "pre-commit"
+    ],
+    "pre-commit": {
+      "enabled": true
+    },
+    "lockFileMaintenance": {
+      "enabled": true
+    },
+    "packageRules": [
+      {
+        "matchPackagePatterns": [
+          "*"
+        ],
+        "matchUpdateTypes": [
+          "minor",
+          "patch"
+        ],
+        "groupName": "all non-major dependencies",
+        "groupSlug": "all-minor-patch",
+        "labels": [
+          "dependencies"
+        ],
+        "automerge": true
+      },
+      {
+        "matchPackagePatterns": [
+          "*"
+        ],
+        "matchUpdateTypes": [
+          "major"
+        ],
+        "labels": [
+          "dependencies",
+          "breaking"
+        ]
+      },
+      {
+        "description": "disable python updates for poetry manager",
+        "matchPackageNames": [
+          "python"
+        ],
+        "matchManagers": [
+          "poetry"
+        ],
+        "enabled": false
+      }
+    ]
+  }
