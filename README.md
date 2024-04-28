@@ -260,7 +260,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [ ] ~~批量 vibe~~
 + [x] 批量打码
 + [x] 用 Gradio 写一个 WebUI
-+ [ ] 将项目放到容器持久化运行
++ [ ] ~~将项目放到容器持久化运行~~
 + [x] 修改界面样式
 + [x] ~~添加 ChatGPT~~
 + [x] ~~写一个图片筛选器~~
@@ -273,6 +273,8 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [ ] 打开相关文件夹功能
 + [ ] 合并随机涩图等界面
 + [ ] 批量打标和编辑
++ [ ] 热键快速筛图
++ [ ] 教程和说明页面
 + [ ] ...
 
 ## 🤝 鸣谢
