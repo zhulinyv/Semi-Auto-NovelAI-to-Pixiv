@@ -264,11 +264,15 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 修改界面样式
 + [x] ~~添加 ChatGPT~~
 + [x] ~~写一个图片筛选器~~
-+ [ ] 通过账号密码获取 token
++ [ ] ~~通过账号密码获取 token~~
 + [x] 添加更多超分引擎
 + [x] 添加文生图方式
 + [x] 批量水印
 + [x] 批量图片信息处理
++ [ ] 配置项界面
++ [ ] 打开相关文件夹功能
++ [ ] 合并随机涩图等界面
++ [ ] 批量打标和编辑
 + [ ] ...
 
 ## 🤝 鸣谢
