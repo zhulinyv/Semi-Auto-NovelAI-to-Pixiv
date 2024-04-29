@@ -3,6 +3,7 @@
     "t2i": {
         "tab": "文生图",
         "description": "> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高), 429(请求过快), 443(节点不稳定), 反正不是我的问题 ヾ(≧▽≦*)o",
+        "open_folder": "打开保存目录",
         "generate_button": "开始生成",
         "positive": "正面提示词",
         "negative": "负面提示词",
@@ -98,5 +99,60 @@
     "example": {
         "positive": "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,",
         "negative": "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],"
+    },
+    "setting": {
+        "tab": "配置设置",
+        "sub_tab": {
+            "necessary": "Token",
+            "t2i": "文生图",
+            "i2i": "图生图",
+            "pixiv": "上传 Pixiv",
+            "mosaic": "马赛克",
+            "eraser": "抹除信息",
+            "water": "水印",
+            "other": "其它"
+        },
+        "description": {
+            "token": "生成图片需要的 token",
+            "img_size": "生成图片的分辨率",
+            "scale": "提示词相关性",
+            "censor": "是否对生成的图片打码",
+            "sampler": "采样器",
+            "steps": "采样步数",
+            "sm": "sm",
+            "sm_dyn": "sm_dyn",
+            "noise_schedule": "噪声计划表",
+            "seed": "随机种子",
+            "t2i_cool_time": "文生图冷却时间(单位: 秒(上下浮动 6 秒))",
+            "magnification": "图生图的放大倍数",
+            "hires_strength": "重绘幅度",
+            "pixiv_cookie": "上传 Pixiv 使用的 cookie",
+            "pixiv_token": "上传 Pixiv 使用的 x-csrf-token",
+            "allow_tag_edit": "是否允许其它用户编辑标签",
+            "caption_prefix": "上传 pixiv 的描述前缀",
+            "rep_tags": "上传 Pixiv 描述中的 prompt 是否乱序并替换其中一些 tags",
+            "rep_tags_per": "替换多少(默认 0.5 为替换一半)",
+            "rep_tags_with_tag": "用什么替换 tags",
+            "pixiv_cool_time": "上传 Pixiv 冷却时间(单位: 分钟(上下浮动 5 分钟))",
+            "neighbor": "方形马赛克相对于图片的边长",
+            "meta_data": "清除 meta 信息时自己添加的信息",
+            "alpha": "水印透明度(0~1, 越大越透明)",
+            "water_height": "调整水印的高度",
+            "position": "水印可能出现的位置",
+            "water_num": "水印的数量",
+            "share": "是否共享 gradio 链接",
+            "height": "法术解析页面的高度",
+            "port": "本地启动的端口",
+            "g4f_port": "G4F 的网页端口号",
+            "theme": "WebUI 界面主题",
+            "webui_lang": "WebUI界面语言"
+        }
+    },
+    "info": {
+        "tab": "教程说明"
+    },
+    "vibe": {
+        "input_imgs": "作为基底的图片路径",
+        "blue_imgs": "随机涩图"
     }
 }
