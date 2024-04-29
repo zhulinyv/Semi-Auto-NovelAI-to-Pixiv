@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     # 图生图
     magnification: float = 1.5
     hires_strength: float = 0.5
+    hires_noise: float = 0
 
     # 上传 Pixiv
     pixiv_cookie: str = None

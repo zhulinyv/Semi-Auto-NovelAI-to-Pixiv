@@ -23,6 +23,7 @@ def i2i_by_band(
     noise_schedule: str,
     steps: int,
     strength: float,
+    noise: float,
     sm: bool,
     sm_dyn: bool,
 ):
@@ -37,6 +38,7 @@ def i2i_by_band(
         json_for_i2i["parameters"]["sampler"] = sampler
         json_for_i2i["parameters"]["steps"] = steps
         json_for_i2i["parameters"]["strength"] = strength
+        json_for_i2i["parameters"]["noise"] = noise
         json_for_i2i["parameters"]["sm"] = sm
         json_for_i2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
         json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
@@ -71,6 +73,7 @@ def prepare_json(imginfo: dict, imgpath):
     json_for_i2i["parameters"]["sampler"] = img_comment["sampler"]
     json_for_i2i["parameters"]["steps"] = img_comment["steps"]
     json_for_i2i["parameters"]["strength"] = env.hires_strength
+    json_for_i2i["parameters"]["noise"] = env.hires_noise
     json_for_i2i["parameters"]["sm"] = img_comment["sm"]
     json_for_i2i["parameters"]["sm_dyn"] = img_comment["sm_dyn"]
     json_for_i2i["parameters"]["noise_schedule"] = img_comment["noise_schedule"]

@@ -195,7 +195,11 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     )
                     scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"])
                     steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
-                    strength = gr.Slider(minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"])
+                    with gr.Column():
+                        strength = gr.Slider(
+                            minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"]
+                        )
+                        noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label=webui_lang["i2i"]["noise"])
                 with gr.Row():
                     sampler = gr.Radio(
                         [
@@ -230,6 +234,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     noise_schedule,
                     steps,
                     strength,
+                    noise,
                     sm,
                     sm_dyn,
                 ],
@@ -864,6 +869,13 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     step=0.1,
                     label=webui_lang["setting"]["description"]["hires_strength"],
                 )
+                hires_noise = gr.Slider(
+                    0,
+                    1,
+                    env.hires_noise,
+                    step=0.1,
+                    label=webui_lang["setting"]["description"]["hires_noise"],
+                )
         with gr.Tab(webui_lang["setting"]["sub_tab"]["pixiv"]):
             pixiv_cookie = gr.Textbox(
                 value=env.pixiv_cookie,
@@ -939,6 +951,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 t2i_cool_time,
                 magnification,
                 hires_strength,
+                hires_noise,
                 pixiv_cookie,
                 pixiv_token,
                 allow_tag_edit,

@@ -20,7 +20,8 @@
         "input_path": "批量处理路径(仅在本程序运行的电脑生效)",
         "open_button": "是否启用批处理",
         "output_info": "输出信息",
-        "strength": "重绘幅度"
+        "strength": "重绘幅度",
+        "noise": "添加噪声"
     },
     "random blue picture": {
         "tab": "随机涩图",
@@ -126,6 +127,7 @@
             "t2i_cool_time": "文生图冷却时间(单位: 秒(上下浮动 6 秒))",
             "magnification": "图生图的放大倍数",
             "hires_strength": "重绘幅度",
+            "hires_noise": "添加噪声",
             "pixiv_cookie": "上传 Pixiv 使用的 cookie",
             "pixiv_token": "上传 Pixiv 使用的 x-csrf-token",
             "allow_tag_edit": "是否允许其它用户编辑标签",

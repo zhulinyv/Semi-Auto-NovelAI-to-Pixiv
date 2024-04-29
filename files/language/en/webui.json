@@ -20,7 +20,8 @@
         "input_path": "Batch Processing Path (Effective only on the computer where this program runs)",
         "open_button": "Enable Batch Processing",
         "output_info": "Output Information",
-        "strength": "Redraw Strength"
+        "strength": "Redraw Strength",
+        "noise": "Add noise"
     },
     "random blue picture": {
         "tab": "Random Blue Picture",
@@ -126,6 +127,7 @@
             "t2i_cool_time": "Cooling time for Text-to-Image (in seconds, fluctuates within 6 seconds)",
             "magnification": "Magnification for Image-to-Image",
             "hires_strength": "Redraw strength",
+            "hires_noise": "Add noise",
             "pixiv_cookie": "Cookie used for uploading to Pixiv",
             "pixiv_token": "x-csrf-token used for uploading to Pixiv",
             "allow_tag_edit": "Whether to allow other users to edit tags",
