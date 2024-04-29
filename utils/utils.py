@@ -35,20 +35,17 @@ def sleep_for_cool(int1, int2):
 
 
 def generate_image(json_data):
-    try:
+
+    rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
+    while rep.status_code in [429, 500]:
+        sleep_for_cool(3, 9)
         rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
-        while rep.status_code in [429, 500]:
-            sleep_for_cool(3, 9)
-            rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
-            logger.debug(f">>>>> {rep.status_code}")
-        rep.raise_for_status()
-        logger.success("生成成功!")
-        with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
-            with zip.open("image_0.png") as image:
-                return image.read()
-    except Exception as e:
-        logger.error(f"出现错误: {e}")
-        return None
+        logger.debug(f">>>>> {rep.status_code}")
+    rep.raise_for_status()
+    logger.success("生成成功!")
+    with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
+        with zip.open("image_0.png") as image:
+            return image.read()
 
 
 def save_image(img_data, type_, seed, choose_game, choose_character, *args):
@@ -81,6 +78,11 @@ def read_json(path):
         return json.load(f)
 
 
+def read_txt(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+
 def file_path2name(path) -> str:
     return os.path.basename(path)
 
@@ -95,3 +97,7 @@ def file_name2path(file_list: list, file_path):
         empty_list.append(Path(file_path) / file)
     file_list = empty_list[:]
     return file_list
+
+
+def open_folder(folder):
+    os.startfile(folder)

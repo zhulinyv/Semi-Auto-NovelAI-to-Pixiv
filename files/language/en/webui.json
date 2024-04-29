@@ -3,6 +3,7 @@
     "t2i": {
         "tab": "Txt2Img",
         "description": "> Equivalent to using NovelAI official website, supporting your favorite style combination. If no image is returned, it's mostly due to 500 (server overload), 429 (request too fast), 443 (unstable node), anyway, it's not my problem ヾ(≧▽≦*)o",
+        "open_folder": "Open imgs saved folder",
         "generate_button": "Start Generating",
         "positive": "Positive Prompts",
         "negative": "Negative Prompts",
@@ -98,5 +99,60 @@
     "example": {
         "positive": "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,",
         "negative": "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],"
+    },
+    "setting": {
+        "tab": "Configuration Settings",
+        "sub_tab": {
+            "necessary": "Token",
+            "t2i": "Text-to-Image",
+            "i2i": "Image-to-Image",
+            "pixiv": "Upload to Pixiv",
+            "mosaic": "Mosaic",
+            "eraser": "Data Erasure",
+            "water": "Watermark",
+            "other": "Other"
+        },
+        "description": {
+            "token": "Token required for generating images",
+            "img_size": "Resolution of generated images",
+            "scale": "Relevance of prompts",
+            "censor": "Whether to mosaic generated images",
+            "sampler": "Sampler",
+            "steps": "Sampling steps",
+            "sm": "sm",
+            "sm_dyn": "sm_dyn",
+            "noise_schedule": "Noise schedule",
+            "seed": "Random seed",
+            "t2i_cool_time": "Cooling time for Text-to-Image (in seconds, fluctuates within 6 seconds)",
+            "magnification": "Magnification for Image-to-Image",
+            "hires_strength": "Redraw strength",
+            "pixiv_cookie": "Cookie used for uploading to Pixiv",
+            "pixiv_token": "x-csrf-token used for uploading to Pixiv",
+            "allow_tag_edit": "Whether to allow other users to edit tags",
+            "caption_prefix": "Prefix for descriptions when uploading to Pixiv",
+            "rep_tags": "Whether to shuffle and replace some tags in Pixiv descriptions",
+            "rep_tags_per": "How much to replace (default is 0.5 for replacing half)",
+            "rep_tags_with_tag": "What to replace tags with",
+            "pixiv_cool_time": "Cooling time for uploading to Pixiv (in minutes, fluctuates within 5 minutes)",
+            "neighbor": "Side length of square mosaic relative to image",
+            "meta_data": "Information added when clearing meta data",
+            "alpha": "Opacity of watermark (0~1, larger values mean more transparent)",
+            "water_height": "Adjustment of watermark height",
+            "position": "Possible positions where watermark may appear",
+            "water_num": "Number of watermarks",
+            "share": "Whether to share Gradio link",
+            "height": "Height of Magic Parser page",
+            "port": "Port for local startup",
+            "g4f_port": "Port number for G4F web",
+            "theme": "Theme of WebUI interface",
+            "webui_lang": "Language of WebUI interface"
+        }
+    },
+    "info": {
+        "tab": "Tutorial"
+    },
+    "vibe": {
+        "input_imgs": "Path to base images",
+        "blue_imgs": "Random NSFW images"
     }
 }
