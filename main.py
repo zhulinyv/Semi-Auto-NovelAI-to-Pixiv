@@ -278,12 +278,10 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                         value=webui_lang["example"]["negative"], lines=2, label=webui_lang["t2i"]["negative"]
                     )
                 with gr.Column(scale=1):
-                    with gr.Row():
-                        generate = gr.Button(value=webui_lang["t2i"]["generate_button"], scale=1)
-                        stop_button = gr.Button(webui_lang["random blue picture"]["stop_button"], scale=1)
-                    with gr.Row():
-                        generate_forever = gr.Button(webui_lang["random blue picture"]["generate_forever"], scale=1)
-                        blue_imgs = gr.Checkbox(True, label=webui_lang["vibe"]["blue_imgs"])
+                    generate = gr.Button(value=webui_lang["t2i"]["generate_button"], scale=1)
+                    stop_button = gr.Button(webui_lang["random blue picture"]["stop_button"], scale=1)
+                    generate_forever = gr.Button(webui_lang["random blue picture"]["generate_forever"], scale=1)
+                    blue_imgs = gr.Checkbox(True, label=webui_lang["vibe"]["blue_imgs"])
             input_imgs = gr.Textbox("", label=webui_lang["vibe"]["input_imgs"])
             with gr.Row():
                 with gr.Column(scale=1):
