@@ -54,7 +54,7 @@ def vibe_by_band(
         f"""
 基底图片: {img_list}
 信息提取: {reference_information_extracted_multiple}
-重绘幅度: {reference_strength_multiple}"""
+参考强度: {reference_strength_multiple}"""
     )
 
     json_for_vibe["parameters"]["reference_image_multiple"] = reference_image_multiple
@@ -101,7 +101,7 @@ def prepare_json(input_, sm, scale, negative, input_imgs):
         f"""
 基底图片: {img_list}
 信息提取: {reference_information_extracted_multiple}
-作用强度: {reference_strength_multiple}"""
+参考强度: {reference_strength_multiple}"""
     )
 
     json_for_vibe["parameters"]["reference_image_multiple"] = reference_image_multiple
