@@ -104,6 +104,8 @@ from src.t2i import t2i
 t2i(True) # True 表示无限生成
 ```
 
+插件开发请移步: [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+
 ## 📖 待办
 
 + [x] 批量文生图
@@ -129,6 +131,7 @@ t2i(True) # True 表示无限生成
 + [x] 合并随机涩图等界面
 + [ ] 热键快速筛图
 + [x] 教程和说明页面
++ [x] 自定义插件
 + [ ] ...
 
 ## 🤝 鸣谢

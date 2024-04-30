@@ -35,17 +35,19 @@ def sleep_for_cool(int1, int2):
 
 
 def generate_image(json_data):
-
-    rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
-    while rep.status_code in [429, 500]:
-        sleep_for_cool(3, 9)
+    try:
         rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
-        logger.debug(f">>>>> {rep.status_code}")
-    rep.raise_for_status()
-    logger.success("生成成功!")
-    with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
-        with zip.open("image_0.png") as image:
-            return image.read()
+        while rep.status_code in [429, 500]:
+            sleep_for_cool(3, 9)
+            rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
+            logger.debug(f">>>>> {rep.status_code}")
+        rep.raise_for_status()
+        logger.success("生成成功!")
+        with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
+            with zip.open("image_0.png") as image:
+                return image.read()
+    except Exception as e:
+        logger.error(f"出现错误: {e}")
 
 
 def save_image(img_data, type_, seed, choose_game, choose_character, *args):

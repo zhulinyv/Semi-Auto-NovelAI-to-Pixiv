@@ -104,6 +104,8 @@ from src.t2i import t2i
 t2i(True) # True indicates infinite generation
 ```
 
+If you want to deploy your own plugins, please turn to [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+
 ## 📖 To-Do
 
 + [x] Batch text-to-image generation
@@ -115,11 +117,11 @@ t2i(True) # True indicates infinite generation
 + [x] ~~Batch vibe~~
 + [x] Batch mosaic
 + [x] Write a WebUI using Gradio
-+ [ ] Containerize the project for persistent running
++ [ ] ~~Containerize the project for persistent running~~
 + [x] Change the style of the interface
 + [x] ~~Add ChatGPT~~
-+ [x] White a picture selector
-+ [ ] Get token by account and password
++ [x] ~~White a picture selector~~
++ [ ] ~~Get token by account and password~~
 + [x] Add more upscale engine
 + [x] Add more ways to t2i
 + [x] Batch watermarking
@@ -129,6 +131,7 @@ t2i(True) # True indicates infinite generation
 + [x] Merge interfaces such as random NSFW
 + [ ] Hotkey for quick image filtering
 + [x] Tutorial and instruction pages
++ [x] Custom plugins
 + [ ] ...
 
 ## 🤝 Acknowledgements

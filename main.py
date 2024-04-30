@@ -19,6 +19,7 @@ from src.waifu2x import main as upscale
 from src.water import main as water
 from utils.env import env
 from utils.g4f import main as g4f
+from utils.plugin import load_plugins
 from utils.restart import restart
 from utils.update import check_update
 from utils.utils import open_folder, read_json, read_txt
@@ -144,6 +145,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             )
             generate_button.click(fn=batchtxt, inputs=[forever, pref, position], outputs=batchtxt_img)
             stop.click(None, None, None, cancels=[cancel_event])
+        plugins = load_plugins(Path("./plugins"))
+        for plugin_name, plugin_module in plugins.items():
+            if hasattr(plugin_module, "plugin"):
+                plugin_module.plugin()
+            else:
+                logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
     with gr.Tab(webui_lang["i2i"]["tab"]):
         with gr.Row():
             with gr.Column(scale=8):
