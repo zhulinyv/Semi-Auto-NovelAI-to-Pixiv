@@ -1,13 +1,16 @@
 import random
+import time
 
 from loguru import logger
+from PIL import Image
 
 from utils.env import env
+from utils.imgtools import get_concat_h, get_concat_v
 from utils.jsondata import json_for_t2i
 from utils.utils import format_str, generate_image, list_to_str, read_json, save_image, sleep_for_cool
 
 
-def t2i_by_band(
+def t2i_by_hand(
     positive: str,
     negative: str,
     resolution: str,
@@ -18,26 +21,72 @@ def t2i_by_band(
     sm: bool,
     sm_dyn: bool,
     seed: str,
+    times: int,
 ):
-    json_for_t2i["input"] = positive
+    imgs = []
+    for i in range(times):
+        if times != 1:
+            logger.info(f"正在生成第 {i+1} 张图片...")
+        json_for_t2i["input"] = positive
 
-    json_for_t2i["parameters"]["width"] = int(resolution.split("x")[0])
-    json_for_t2i["parameters"]["height"] = int(resolution.split("x")[1])
-    json_for_t2i["parameters"]["scale"] = scale
-    json_for_t2i["parameters"]["sampler"] = sampler
-    json_for_t2i["parameters"]["steps"] = steps
-    json_for_t2i["parameters"]["sm"] = sm
-    json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
-    json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
-    seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
-    json_for_t2i["parameters"]["seed"] = seed
-    json_for_t2i["parameters"]["negative_prompt"] = negative
+        json_for_t2i["parameters"]["width"] = int(resolution.split("x")[0])
+        json_for_t2i["parameters"]["height"] = int(resolution.split("x")[1])
+        json_for_t2i["parameters"]["scale"] = scale
+        json_for_t2i["parameters"]["sampler"] = sampler
+        json_for_t2i["parameters"]["steps"] = steps
+        json_for_t2i["parameters"]["sm"] = sm
+        json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
+        json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
+        if isinstance(seed, int):
+            seed = random.randint(1000000000, 9999999999)
+        else:
+            seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
+        json_for_t2i["parameters"]["seed"] = seed
+        json_for_t2i["parameters"]["negative_prompt"] = negative
 
-    logger.debug(json_for_t2i)
+        logger.debug(json_for_t2i)
 
-    save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
+        save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
 
-    return f"./output/t2i/{seed}_None_None.png"
+        imgs.append(f"./output/t2i/{seed}_None_None.png")
+
+    if times != 1:
+        num = 1
+        for i in range(len(imgs)):
+            if num == 0:
+                break
+            for j in range(len(imgs)):
+                if i * j >= len(imgs):
+                    num = 0
+                    break
+        merged_imgs = []
+        num = 0
+        while imgs != []:
+            for img_ in imgs:
+                if num == j:
+                    break
+                num += 1
+                # with Image.open(img_) as img:
+                img = Image.open(img_)
+                if img_ == imgs[0]:
+                    merged_img = img
+                else:
+                    merged_img = get_concat_v(merged_img, img)
+                imgs.remove(img_)
+            merged_imgs.append(merged_img)
+            num = 0
+        while merged_imgs != []:
+            if num == 0:
+                merged_img = merged_imgs[0]
+                num = 1
+            else:
+                merged_img = get_concat_h(merged_img, merged_imgs[0])
+            merged_imgs.remove(merged_imgs[0])
+        time_ = int(time.time())
+        merged_img.save("./output/t2i/grids/{}.png".format(time_))
+        return "./output/t2i/grids/{}.png".format(time_)
+    else:
+        return f"./output/t2i/{seed}_None_None.png"
 
 
 def prepare_input():

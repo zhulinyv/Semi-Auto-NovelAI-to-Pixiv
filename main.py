@@ -5,7 +5,7 @@ import gradio as gr
 from loguru import logger
 
 from src.batchtxt import main as batchtxt
-from src.i2i import i2i_by_band
+from src.i2i import i2i_by_hand
 from src.inpaint import for_webui as inpaint
 from src.mosaic import main as mosaic
 from src.mosold import main as mosold
@@ -13,7 +13,7 @@ from src.pixiv import main as pixiv
 from src.rminfo import export_info, remove_info, revert_info
 from src.selector import del_current_img, move_current_img, show_first_img, show_next_img
 from src.setting import webui as setting
-from src.t2i import t2i, t2i_by_band
+from src.t2i import t2i, t2i_by_hand
 from src.vibe import vibe, vibe_by_band
 from src.waifu2x import main as upscale
 from src.water import main as water
@@ -22,7 +22,7 @@ from utils.g4f import main as g4f
 from utils.plugin import load_plugins
 from utils.restart import restart
 from utils.update import check_update
-from utils.utils import open_folder, read_json, read_txt
+from utils.utils import gen_script, open_folder, read_json, read_txt
 
 webui_lang = read_json(f"./files/language/{env.webui_lang}/webui.json")
 webui_help = read_txt(f"./files/language/{env.webui_lang}/help.md")
@@ -53,7 +53,9 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                             label=webui_lang["t2i"]["negative"],
                             scale=3,
                         )
-                        generate = gr.Button(value=webui_lang["t2i"]["generate_button"], scale=1)
+                        with gr.Column(scale=1):
+                            generate = gr.Button(value=webui_lang["t2i"]["generate_button"])
+                            times = gr.Slider(minimum=1, maximum=999, value=1, step=1, label=webui_lang["t2i"]["times"])
                 with gr.Row():
                     with gr.Column(scale=1):
                         resolution = gr.Radio(
@@ -97,17 +99,21 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                         seed = gr.Textbox(value="-1", label=webui_lang["t2i"]["seed"])
                     output_img = gr.Image(scale=2)
             generate.click(
-                fn=t2i_by_band,
-                inputs=[positive, negative, resolution, scale, sampler, noise_schedule, steps, sm, sm_dyn, seed],
+                fn=t2i_by_hand,
+                inputs=[positive, negative, resolution, scale, sampler, noise_schedule, steps, sm, sm_dyn, seed, times],
                 outputs=output_img,
             )
         with gr.Tab(webui_lang["random blue picture"]["tab"]):
             with gr.Row():
-                with gr.Column(scale=8):
+                with gr.Column(scale=6):
                     gr.Markdown(webui_lang["random blue picture"]["description"])
-                folder = gr.Textbox(Path("./output/t2i"), visible=False)
-                open_folder_ = gr.Button(webui_lang["t2i"]["open_folder"], scale=1)
-                open_folder_.click(open_folder, inputs=folder)
+                with gr.Row():
+                    folder = gr.Textbox(Path("./output/t2i"), visible=False)
+                    open_folder_ = gr.Button(webui_lang["t2i"]["open_folder"])
+                    open_folder_.click(open_folder, inputs=folder)
+                    script_type = gr.Textbox("随机涩图", visible=False)
+                    script_gen = gr.Button(webui_lang["t2i"]["script_gen"])
+                    script_gen.click(gen_script, inputs=script_type, outputs=None)
             with gr.Row():
                 forever = gr.Radio(value=False, visible=False)
                 generate_button = gr.Button(webui_lang["t2i"]["generate_button"], scale=2)
@@ -122,11 +128,14 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             stop_button.click(None, None, None, cancels=[cancel_event])
         with gr.Tab(webui_lang["random picture"]["tab"]):
             with gr.Row():
-                with gr.Column(scale=8):
+                with gr.Column(scale=6):
                     gr.Markdown(webui_lang["random picture"]["description"])
-                folder = gr.Textbox(Path("./output/t2i"), visible=False)
-                open_folder_ = gr.Button(webui_lang["t2i"]["open_folder"], scale=1)
-                open_folder_.click(open_folder, inputs=folder)
+                with gr.Row():
+                    folder = gr.Textbox(Path("./output/t2i"), visible=False)
+                    open_folder_ = gr.Button(webui_lang["t2i"]["open_folder"])
+                    open_folder_.click(open_folder, inputs=folder)
+                    script_type = gr.Textbox("随机图片", visible=False)
+                    script_gen = gr.Button(webui_lang["t2i"]["script_gen"])
             with gr.Row():
                 pref = gr.Textbox("", label=webui_lang["random picture"]["pref"], lines=2, scale=5)
                 position = gr.Radio(
@@ -145,6 +154,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             )
             generate_button.click(fn=batchtxt, inputs=[forever, pref, position], outputs=batchtxt_img)
             stop.click(None, None, None, cancels=[cancel_event])
+            script_gen.click(gen_script, inputs=[script_type, pref, position])
         plugins = load_plugins(Path("./plugins"))
         for plugin_name, plugin_module in plugins.items():
             if hasattr(plugin_module, "plugin"):
@@ -228,7 +238,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     sm = gr.Radio([True, False], value=False, label="sm")
                     sm_dyn = gr.Radio([True, False], value=False, label=webui_lang["t2i"]["smdyn"])
             generate.click(
-                fn=i2i_by_band,
+                fn=i2i_by_hand,
                 inputs=[
                     input_img,
                     input_path,

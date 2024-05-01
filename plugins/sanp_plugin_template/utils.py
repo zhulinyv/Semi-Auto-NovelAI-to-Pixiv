@@ -1,6 +1,6 @@
 import random
 
-from src.t2i import t2i_by_band
+from src.t2i import t2i_by_hand
 from utils.env import env
 from utils.utils import format_str, read_json, sleep_for_cool
 
@@ -32,6 +32,6 @@ def t2i():
     sm = env.sm
     sm_dyn = env.sm_dyn
     seed = random.randint(1000000000, 9999999999) if env.seed == -1 else env.seed
-    img = t2i_by_band(positive, negative, resolution, scale, sampler, noise_schedule, steps, sm, sm_dyn, seed)
+    img = t2i_by_hand(positive, negative, resolution, scale, sampler, noise_schedule, steps, sm, sm_dyn, seed, 1)
     sleep_for_cool(env.t2i_cool_time - 6, env.t2i_cool_time + 6)
     return img

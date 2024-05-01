@@ -103,3 +103,33 @@ def file_name2path(file_list: list, file_path):
 
 def open_folder(folder):
     os.startfile(folder)
+
+
+def gen_script(script_type, *args):
+    with open("stand_alone_scripts.py", "w", encoding="utf-8") as script:
+        if script_type == "随机涩图":
+            script.write(
+                """import sys
+
+sys.setrecursionlimit(999999999)
+
+from src.t2i import t2i  # noqa: E402
+
+t2i(True)
+"""
+            )
+        elif script_type == "随机图片":
+            script.write(
+                """import sys
+
+sys.setrecursionlimit(999999999)
+
+from src.batchtxt import main  # noqa: E402
+
+main(True, "{}", "{}")
+""".format(
+                    args[0], args[1]
+                )
+            )
+        else:
+            ...

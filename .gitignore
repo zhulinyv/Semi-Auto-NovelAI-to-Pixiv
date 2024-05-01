@@ -8,3 +8,4 @@ temp.*
 files/else_upscale_engine
 files/prompt
 files/favorite.json
+stand_alone_scripts.py

@@ -11,7 +11,7 @@ from utils.jsondata import json_for_i2i
 from utils.utils import file_path2list, generate_image, inquire_anlas, save_image, sleep_for_cool
 
 
-def i2i_by_band(
+def i2i_by_hand(
     input_img,
     input_path,
     open_button,

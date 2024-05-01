@@ -23,6 +23,7 @@ need_dir_list = [
     "./output/info_removed",
     "./output/info_reverted",
     "./output/vibe",
+    "./output/t2i/grids",
 ]
 
 
