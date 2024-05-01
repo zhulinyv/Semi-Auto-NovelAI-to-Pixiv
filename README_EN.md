@@ -62,7 +62,7 @@ Suggested to install [Latest Version](https://git-scm.com/download/win), you jus
 
 ### 3️⃣ Clone Repositories
 
-Open cmd/powershell, run `git clone -b main --depth=1 https://github.com/zhulinyv/NJS.git`
+Open cmd/powershell, run `git clone -b main --depth=1 https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv.git`
 
 ### 4️⃣ Next step
 
@@ -104,7 +104,7 @@ from src.t2i import t2i
 t2i(True) # True indicates infinite generation
 ```
 
-If you want to deploy your own plugins, please turn to [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+If your want function do not in t2i, please submit issue or join my QQ group 632344043 or turn to: [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
 
 ## 📖 To-Do
 
