@@ -104,7 +104,7 @@ from src.t2i import t2i
 t2i(True) # True 表示无限生成
 ```
 
-插件开发请移步: [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+如果文生图没有想要的功能，请提交 issue，加群 632344043 或移步: [插件开发 Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
 
 ## 📖 待办
 
