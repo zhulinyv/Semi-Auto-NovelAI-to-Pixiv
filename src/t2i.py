@@ -84,6 +84,7 @@ def t2i_by_hand(
 
         time_ = int(time.time())
         merged_img.save("./output/t2i/grids/{}.png".format(time_))
+        merged_img.close()
 
         revert_img_info(imgs_list[0], "./output/t2i/grids/{}.png".format(time_))
 
