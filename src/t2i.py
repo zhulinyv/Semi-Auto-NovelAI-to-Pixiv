@@ -6,7 +6,7 @@ from loguru import logger
 from PIL import Image
 
 from utils.env import env
-from utils.imgtools import get_concat_h, get_concat_v
+from utils.imgtools import get_concat_h, get_concat_v, revert_img_info
 from utils.jsondata import json_for_t2i
 from utils.utils import format_str, generate_image, list_to_str, read_json, save_image, sleep_for_cool
 
@@ -57,8 +57,8 @@ def t2i_by_hand(
 
     if times != 1:
         num_list = []
-        for row in range(len(imgs_list)):
-            for column in range(len(imgs_list)):
+        for row in range(3 if len(imgs_list) == 2 else len(imgs_list)):
+            for column in range(3 if len(imgs_list) == 2 else len(imgs_list)):
                 if row * column >= len(imgs_list):
                     num_list.append([row, column])
         row, column = num_list[0]
@@ -84,6 +84,9 @@ def t2i_by_hand(
 
         time_ = int(time.time())
         merged_img.save("./output/t2i/grids/{}.png".format(time_))
+
+        revert_img_info(imgs_list[0], "./output/t2i/grids/{}.png".format(time_))
+
         return "./output/t2i/grids/{}.png".format(time_)
     else:
         return f"./output/t2i/{seed}_None_None.png"
