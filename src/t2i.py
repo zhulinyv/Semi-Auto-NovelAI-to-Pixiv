@@ -1,3 +1,4 @@
+import os
 import random
 import time
 
@@ -23,7 +24,7 @@ def t2i_by_hand(
     seed: str,
     times: int,
 ):
-    imgs = []
+    imgs_list = []
     for i in range(times):
         if times != 1:
             logger.info(f"正在生成第 {i+1} 张图片...")
@@ -48,41 +49,40 @@ def t2i_by_hand(
 
         save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
 
-        imgs.append(f"./output/t2i/{seed}_None_None.png")
+        imgs_list.append(f"./output/t2i/{seed}_None_None.png")
+
+    for img in imgs_list:
+        if not os.path.exists(img):
+            imgs_list.remove(img)
 
     if times != 1:
-        num = 1
-        for i in range(len(imgs)):
-            if num == 0:
-                break
-            for j in range(len(imgs)):
-                if i * j >= len(imgs):
-                    num = 0
-                    break
+        num_list = []
+        for row in range(len(imgs_list)):
+            for column in range(len(imgs_list)):
+                if row * column >= len(imgs_list):
+                    num_list.append([row, column])
+        row, column = num_list[0]
+        for num in num_list[1:]:
+            if abs(num[0] - num[1]) < abs(row - column):
+                row, column = num
+
+        imgs_list_list = [imgs_list[i : i + column] for i in range(0, len(imgs_list), column)]
+
         merged_imgs = []
-        num = 0
-        while imgs != []:
-            for img_ in imgs:
-                if num == j:
-                    break
-                num += 1
-                # with Image.open(img_) as img:
-                img = Image.open(img_)
-                if img_ == imgs[0]:
-                    merged_img = img
+        for imgs_list in imgs_list_list:
+            for img in imgs_list:
+                if img == imgs_list[0]:
+                    merged_img = Image.open(img)
                 else:
-                    merged_img = get_concat_v(merged_img, img)
-                imgs.remove(img_)
+                    merged_img = get_concat_h(merged_img, Image.open(img))
             merged_imgs.append(merged_img)
-            num = 0
-        while merged_imgs != []:
-            if num == 0:
-                merged_img = merged_imgs[0]
-                num = 1
+        for img in merged_imgs:
+            if img == merged_imgs[0]:
+                merged_img = img
             else:
-                merged_img = get_concat_h(merged_img, merged_imgs[0])
-            merged_imgs.remove(merged_imgs[0])
-        time_ = int(time.time())
+                merged_img = get_concat_v(merged_img, img)
+
+        time_ = time.time()
         merged_img.save("./output/t2i/grids/{}.png".format(time_))
         return "./output/t2i/grids/{}.png".format(time_)
     else:
