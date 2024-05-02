@@ -82,7 +82,7 @@ def t2i_by_hand(
             else:
                 merged_img = get_concat_v(merged_img, img)
 
-        time_ = time.time()
+        time_ = int(time.time())
         merged_img.save("./output/t2i/grids/{}.png".format(time_))
         return "./output/t2i/grids/{}.png".format(time_)
     else:
