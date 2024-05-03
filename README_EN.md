@@ -128,6 +128,10 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Custom plugins
 + [x] Automatically generate standalone script
 + [x] Specify the number of Text-to-Image outputs
++ [ ] Wensheng diagram seed click to switch randomly
++ [ ] Add whether to restore image information in the configuration item
++ [ ] Complete independent script generation
++ [ ] Picture save category
 + [ ] ...
 
 ## 🤝 Acknowledgements

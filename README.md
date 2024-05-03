@@ -128,6 +128,10 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 自定义插件
 + [x] 自动生成独立脚本
 + [x] 文生图指定数量
++ [ ] 文生图种子点击切换随机
++ [ ] 配置项添加是否还原图片信息
++ [ ] 补全独立脚本生成
++ [ ] 图片保存分类
 + [ ] ...
 
 ## 🤝 鸣谢
