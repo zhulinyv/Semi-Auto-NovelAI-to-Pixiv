@@ -25,6 +25,7 @@ def webui(
     noise_schedule,
     seed,
     t2i_cool_time,
+    save_path,
     magnification,
     hires_strength,
     hires_noise,
@@ -45,6 +46,7 @@ def webui(
     lr,
     water_num,
     meta_data,
+    revert_info,
     share,
     height,
     port,
@@ -69,6 +71,12 @@ def webui(
         img_size = [1216, 832]
     else:
         pass
+    if save_path == "默认(Default)":
+        save_path = "默认"
+    elif save_path == "日期(Date)":
+        save_path = "日期"
+    elif save_path == "角色(Character)":
+        save_path = "角色"
     otp_info = modify_env(
         token=f'"{token}"',
         img_size=img_size,
@@ -81,6 +89,7 @@ def webui(
         noise_schedule=f'"{noise_schedule}"',
         seed=seed,
         t2i_cool_time=t2i_cool_time,
+        save_path=save_path,
         magnification=magnification,
         hires_strength=hires_strength,
         hires_noise=hires_noise,
@@ -98,6 +107,7 @@ def webui(
         position=position,
         water_num=water_num,
         meta_data=f'"{meta_data}"',
+        revert_info=revert_info,
         share=share,
         height=height,
         port=port,

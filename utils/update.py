@@ -17,12 +17,16 @@ def check_update():
     except InvalidGitRepositoryError:
         return "Version: xxxxxxx  Error | 检查失败"
     local_commit = repo.head.commit
+    remote_commit = []
     for commit in data:
-        if commit["sha"] == str(local_commit):
-            version = read_txt("VERSION")
-            return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})".format(
-                version, str(local_commit)
-            )
+        if str(local_commit) == commit["sha"]:
+            break
+        remote_commit.append(commit)
+    if not remote_commit:
+        version = read_txt("VERSION")
+        return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})".format(
+            version, str(local_commit)
+        )
     return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})  Older Version | 更新可用".format(
         str(local_commit)[:7], str(local_commit)
     )

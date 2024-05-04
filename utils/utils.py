@@ -4,12 +4,14 @@ import platform
 import random
 import time
 import zipfile
+from datetime import date
 from pathlib import Path
 
 import requests
 import ujson as json
 from loguru import logger
 
+from utils.env import env
 from utils.jsondata import headers
 
 
@@ -51,12 +53,30 @@ def generate_image(json_data):
 
 
 def save_image(img_data, type_, seed, choose_game, choose_character, *args):
+    try:
+        file_name: str = args[0]
+        file_name = file_name.replace(".png", "")
+        name_list = file_name.split("_")
+        choose_character = name_list[2]
+    except Exception:
+        pass
+    if env.save_path == "默认":
+        path = ""
+    elif env.save_path == "日期":
+        path = f"/{date.today()}"
+    elif env.save_path == "角色":
+        path = f"/{choose_character}"
+    else:
+        path = ""
+    if not os.path.exists(f"./output/{type_}{path}"):
+        os.mkdir(f"./output/{type_}{path}")
+
     if img_data:
         if seed and choose_game and choose_character:
-            with open(f"./output/{type_}/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
+            with open(f"./output/{type_}{path}/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
                 file.write(img_data)
         else:
-            with open(f"./output/{type_}/{args[0]}", "wb") as file:
+            with open(f"./output/{type_}{path}/{args[0]}", "wb") as file:
                 file.write(img_data)
 
 
@@ -133,3 +153,7 @@ main(True, "{}", "{}")
             )
         else:
             ...
+
+
+def return_random():
+    return "-1"

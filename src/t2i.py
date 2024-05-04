@@ -185,7 +185,7 @@ times = 0
 def t2i(forever: bool):
     global times
     times += 1
-    logger.info(f"正在生成第{times}张图片...")
+    logger.info(f"正在生成第 {times} 张图片...")
     input_, sm, scale, negative, choose_game, choose_character = prepare_input()
     json_for_t2i, seed = prepare_json(input_, sm, scale, negative)
     save_image(generate_image(json_for_t2i), "t2i", seed, choose_game, choose_character)

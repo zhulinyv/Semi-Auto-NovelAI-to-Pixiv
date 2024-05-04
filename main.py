@@ -22,7 +22,7 @@ from utils.g4f import main as g4f
 from utils.plugin import load_plugins
 from utils.restart import restart
 from utils.update import check_update
-from utils.utils import gen_script, open_folder, read_json, read_txt
+from utils.utils import gen_script, open_folder, read_json, read_txt, return_random
 
 webui_lang = read_json(f"./files/language/{env.webui_lang}/webui.json")
 webui_help = read_txt(f"./files/language/{env.webui_lang}/help.md")
@@ -96,7 +96,10 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                         steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
                         sm = gr.Radio([True, False], value=False, label="sm")
                         sm_dyn = gr.Radio([True, False], value=False, label=webui_lang["t2i"]["smdyn"])
-                        seed = gr.Textbox(value="-1", label=webui_lang["t2i"]["seed"])
+                        with gr.Row():
+                            seed = gr.Textbox(value="-1", label=webui_lang["t2i"]["seed"], scale=7)
+                            random_button = gr.Button(value="♻️", size="sm", scale=1)
+                            random_button.click(return_random, inputs=None, outputs=seed)
                     output_img = gr.Image(scale=2)
             generate.click(
                 fn=t2i_by_hand,
@@ -870,6 +873,11 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 t2i_cool_time = gr.Slider(
                     6, 120, env.t2i_cool_time, step=1, label=webui_lang["setting"]["description"]["t2i_cool_time"]
                 )
+                save_path = gr.Radio(
+                    ["默认(Default)", "日期(Date)", "角色(Character)"],
+                    value=env.save_path,
+                    label=webui_lang["setting"]["description"]["save_path"],
+                )
         with gr.Tab(webui_lang["setting"]["sub_tab"]["i2i"]):
             with gr.Column():
                 magnification = gr.Slider(
@@ -931,6 +939,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             )
         with gr.Tab(webui_lang["setting"]["sub_tab"]["eraser"]):
             meta_data = gr.Textbox(value=env.meta_data, label=webui_lang["setting"]["description"]["meta_data"])
+            revert_info_ = gr.Textbox(value=env.meta_data, label=webui_lang["setting"]["description"]["revert_info_"])
         with gr.Tab(webui_lang["setting"]["sub_tab"]["water"]):
             alpha = gr.Slider(0, 1, env.alpha, label=webui_lang["setting"]["description"]["alpha"])
             water_height = gr.Slider(
@@ -966,6 +975,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 noise_schedule,
                 seed,
                 t2i_cool_time,
+                save_path,
                 magnification,
                 hires_strength,
                 hires_noise,
@@ -986,6 +996,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 lr,
                 water_num,
                 meta_data,
+                revert_info_,
                 share,
                 height,
                 port,
