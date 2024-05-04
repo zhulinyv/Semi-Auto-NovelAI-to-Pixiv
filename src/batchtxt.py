@@ -37,7 +37,7 @@ def main(forever: bool, pref, position):
     data = read_json("./files/favorite.json")
 
     json_for_t2i, seed = prepare_json(prompt, env.sm, env.scale, random.choice(data["negative_prompt"]["belief"]))
-    save_image(
+    saved_path = save_image(
         generate_image(json_for_t2i), "t2i", str(seed) + file.replace(".txt", "").replace("_", "-"), "None", "None"
     )
 
@@ -46,7 +46,7 @@ def main(forever: bool, pref, position):
     if forever:
         return main(True)
     else:
-        return "./output/t2i/{}_None_None.png".format(str(seed) + file.replace(".txt", "").replace("_", "-"))
+        return saved_path
 
 
 if __name__ == "__main__":

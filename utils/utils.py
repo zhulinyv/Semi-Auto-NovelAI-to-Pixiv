@@ -73,11 +73,14 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
 
     if img_data:
         if seed and choose_game and choose_character:
-            with open(f"./output/{type_}{path}/{seed}_{choose_game}_{choose_character}.png", "wb") as file:
+            saved_path = f"./output/{type_}{path}/{seed}_{choose_game}_{choose_character}.png"
+            with open(saved_path, "wb") as file:
                 file.write(img_data)
         else:
-            with open(f"./output/{type_}{path}/{args[0]}", "wb") as file:
+            saved_path = f"./output/{type_}{path}/{args[0]}"
+            with open(saved_path, "wb") as file:
                 file.write(img_data)
+    return saved_path
 
 
 def inquire_anlas():

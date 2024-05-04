@@ -61,9 +61,9 @@ def vibe_by_band(
     json_for_vibe["parameters"]["reference_information_extracted_multiple"] = reference_information_extracted_multiple
     json_for_vibe["parameters"]["reference_strength_multiple"] = reference_strength_multiple
 
-    save_image(generate_image(json_for_vibe), "vibe", seed, "None", "None")
+    saved_path = save_image(generate_image(json_for_vibe), "vibe", seed, "None", "None")
 
-    return f"./output/vibe/{seed}_None_None.png"
+    return saved_path
 
 
 def prepare_json(input_, sm, scale, negative, input_imgs):
@@ -122,8 +122,7 @@ def vibe(blue_imgs: bool, input_imgs):
         negative = random.choice(data["negative_prompt"]["belief"])
         choose_game = choose_character = "None"
     json_for_vibe, seed = prepare_json(prompt, sm, scale, negative, input_imgs)
-    save_image(generate_image(json_for_vibe), "vibe", seed, choose_game, choose_character)
+    saved_path = save_image(generate_image(json_for_vibe), "vibe", seed, choose_game, choose_character)
     sleep_for_cool(env.t2i_cool_time - 6, env.t2i_cool_time + 6)
 
-    img = f"./output/vibe/{seed}_{choose_game}_{choose_character}.png"
-    return img, img
+    return saved_path, saved_path

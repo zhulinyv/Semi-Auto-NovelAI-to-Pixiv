@@ -47,9 +47,9 @@ def t2i_by_hand(
 
         logger.debug(json_for_t2i)
 
-        save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
+        saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
 
-        imgs_list.append(f"./output/t2i/{seed}_None_None.png")
+        imgs_list.append(saved_path)
 
     for img in imgs_list:
         if not os.path.exists(img):
@@ -61,6 +61,7 @@ def t2i_by_hand(
             for column in range(3 if len(imgs_list) == 2 else len(imgs_list)):
                 if row * column >= len(imgs_list):
                     num_list.append([row, column])
+        logger.debug(num_list)
         row, column = num_list[0]
         for num in num_list[1:]:
             if abs(num[0] - num[1]) < abs(row - column):
@@ -188,13 +189,13 @@ def t2i(forever: bool):
     logger.info(f"正在生成第 {times} 张图片...")
     input_, sm, scale, negative, choose_game, choose_character = prepare_input()
     json_for_t2i, seed = prepare_json(input_, sm, scale, negative)
-    save_image(generate_image(json_for_t2i), "t2i", seed, choose_game, choose_character)
+    saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, choose_game, choose_character)
     sleep_for_cool(env.t2i_cool_time - 6, env.t2i_cool_time + 6)
 
     if forever:
         return t2i(True)
     else:
-        return f"./output/t2i/{seed}_{choose_game}_{choose_character}.png"
+        return saved_path
 
 
 if __name__ == "__main__":

@@ -26,9 +26,9 @@ def inpaint(img_path, mask_path):
 
     img_name = file_path2name(img_path)
 
-    save_image(generate_image(json_for_inpaint), "inpaint", None, None, None, img_name)
+    saved_path = save_image(generate_image(json_for_inpaint), "inpaint", None, None, None, img_name)
 
-    return f"./output/inpaint/{img_name}"
+    return saved_path
 
 
 def main(img_folder, mask_folder):

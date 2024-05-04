@@ -48,10 +48,10 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["extra_noise_seed"] = seed
         json_for_i2i["parameters"]["negative_prompt"] = negative
 
-        save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
+        saved_path = save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
         sleep_for_cool(12, 24)
 
-        return f"./output/i2i/{seed}_None_None.png", None
+        return saved_path, None
 
 
 def prepare_json(imginfo: dict, imgpath):
