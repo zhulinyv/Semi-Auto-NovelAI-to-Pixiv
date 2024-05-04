@@ -939,7 +939,9 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             )
         with gr.Tab(webui_lang["setting"]["sub_tab"]["eraser"]):
             meta_data = gr.Textbox(value=env.meta_data, label=webui_lang["setting"]["description"]["meta_data"])
-            revert_info_ = gr.Textbox(value=env.meta_data, label=webui_lang["setting"]["description"]["revert_info_"])
+            revert_info_ = gr.Radio(
+                choices=[True, False], value=env.revert_info, label=webui_lang["setting"]["description"]["revert_info_"]
+            )
         with gr.Tab(webui_lang["setting"]["sub_tab"]["water"]):
             alpha = gr.Slider(0, 1, env.alpha, label=webui_lang["setting"]["description"]["alpha"])
             water_height = gr.Slider(
