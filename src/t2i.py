@@ -61,7 +61,6 @@ def t2i_by_hand(
             for column in range(3 if len(imgs_list) == 2 else len(imgs_list)):
                 if row * column >= len(imgs_list):
                     num_list.append([row, column])
-        logger.debug(num_list)
         row, column = num_list[0]
         for num in num_list[1:]:
             if abs(num[0] - num[1]) < abs(row - column):
@@ -91,7 +90,7 @@ def t2i_by_hand(
 
         return "./output/t2i/grids/{}.png".format(time_)
     else:
-        return f"./output/t2i/{seed}_None_None.png"
+        return saved_path
 
 
 def prepare_input():
