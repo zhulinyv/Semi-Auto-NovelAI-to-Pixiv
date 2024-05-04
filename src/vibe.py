@@ -11,7 +11,7 @@ from utils.jsondata import json_for_vibe
 from utils.utils import file_path2list, generate_image, read_json, save_image, sleep_for_cool
 
 
-def vibe_by_band(
+def vibe_by_hand(
     positive: str,
     negative: str,
     resolution: str,

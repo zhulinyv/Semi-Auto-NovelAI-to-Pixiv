@@ -14,7 +14,7 @@ from src.rminfo import export_info, remove_info, revert_info
 from src.selector import del_current_img, move_current_img, show_first_img, show_next_img
 from src.setting import webui as setting
 from src.t2i import t2i, t2i_by_hand
-from src.vibe import vibe, vibe_by_band
+from src.vibe import vibe, vibe_by_hand
 from src.waifu2x import main as upscale
 from src.water import main as water
 from utils.env import env
@@ -355,7 +355,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             fn=vibe, inputs=[blue_imgs, input_imgs], outputs=[output_img, output_img_], show_progress="hidden"
         )
         generate.click(
-            fn=vibe_by_band,
+            fn=vibe_by_hand,
             inputs=[
                 positive,
                 negative,
