@@ -7,6 +7,7 @@ from loguru import logger
 from src.batchtxt import main as batchtxt
 from src.i2i import i2i_by_hand
 from src.inpaint import for_webui as inpaint
+from src.m2m import m2m, merge_av, video2frame
 from src.mosaic import main as mosaic
 from src.mosold import main as mosold
 from src.pixiv import main as pixiv
@@ -166,101 +167,240 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             else:
                 logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
     with gr.Tab(webui_lang["i2i"]["tab"]):
-        with gr.Row():
-            with gr.Column(scale=8):
-                gr.Markdown(webui_lang["t2i"]["description"])
-            folder = gr.Textbox(Path("./output/i2i"), visible=False)
-            open_folder_ = gr.Button(webui_lang["t2i"]["open_folder"], scale=1)
-            open_folder_.click(open_folder, inputs=folder)
-        with gr.Column():
+        with gr.Tab(webui_lang["i2i"]["tab"]):
+            with gr.Row():
+                with gr.Column(scale=8):
+                    gr.Markdown(webui_lang["t2i"]["description"])
+                folder = gr.Textbox(Path("./output/i2i"), visible=False)
+                open_folder_ = gr.Button(webui_lang["t2i"]["open_folder"], scale=1)
+                open_folder_.click(open_folder, inputs=folder)
             with gr.Column():
-                positive = gr.Textbox(
-                    value=webui_lang["example"]["positive"],
+                with gr.Column():
+                    positive = gr.Textbox(
+                        value=webui_lang["example"]["positive"],
+                        lines=2,
+                        label=webui_lang["t2i"]["positive"],
+                    )
+                    with gr.Row():
+                        negative = gr.Textbox(
+                            value=webui_lang["example"]["negative"],
+                            lines=3,
+                            label=webui_lang["t2i"]["negative"],
+                            scale=3,
+                        )
+                        generate = gr.Button(value=webui_lang["t2i"]["generate_button"], scale=1)
+                with gr.Row():
+                    input_path = gr.Textbox(value="", label=webui_lang["i2i"]["input_path"], scale=5)
+                    open_button = gr.Radio([True, False], value=False, label=webui_lang["i2i"]["open_button"], scale=1)
+                with gr.Row():
+                    input_img = gr.Image(type="pil")
+                    with gr.Column():
+                        output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
+                        output_img = gr.Image()
+                with gr.Column():
+                    with gr.Row():
+                        resolution = gr.Radio(
+                            [
+                                "832x1216",
+                                "1216x832",
+                                "1024x1024",
+                                "512x768",
+                                "768x768",
+                                "640x640",
+                                "1024x1536",
+                                "1536x1024",
+                                "1472x1472",
+                                "1088x1920",
+                                "1920x1088",
+                            ],
+                            value="832x1216",
+                            label=webui_lang["t2i"]["resolution"],
+                        )
+                        scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"])
+                        steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
+                        with gr.Column():
+                            strength = gr.Slider(
+                                minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"]
+                            )
+                            noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label=webui_lang["i2i"]["noise"])
+                            with gr.Row():
+                                seed = gr.Textbox(value="-1", label=webui_lang["t2i"]["seed"], scale=7)
+                                random_button = gr.Button(value="♻️", size="sm", scale=1)
+                                random_button.click(return_random, inputs=None, outputs=seed)
+                    with gr.Row():
+                        sampler = gr.Radio(
+                            [
+                                "k_euler",
+                                "k_euler_ancestral",
+                                "k_dpmpp_2s_ancestral",
+                                "k_dpmpp_2m",
+                                "k_dpmpp_sde",
+                                "ddim_v3",
+                            ],
+                            value="k_euler",
+                            label=webui_lang["t2i"]["sampler"],
+                        )
+                        noise_schedule = gr.Radio(
+                            ["native", "karras", "exponential", "polyexponential"],
+                            value="native",
+                            label=webui_lang["t2i"]["noise_schedule"],
+                        )
+                        sm = gr.Radio([True, False], value=False, label="sm")
+                        sm_dyn = gr.Radio([True, False], value=False, label=webui_lang["t2i"]["smdyn"])
+                generate.click(
+                    fn=i2i_by_hand,
+                    inputs=[
+                        input_img,
+                        input_path,
+                        open_button,
+                        positive,
+                        negative,
+                        resolution,
+                        scale,
+                        sampler,
+                        noise_schedule,
+                        steps,
+                        strength,
+                        noise,
+                        sm,
+                        sm_dyn,
+                        seed,
+                    ],
+                    outputs=[output_img, output_info],
+                )
+        with gr.Tab("视频转绘"):
+            with gr.Tab("0.教程说明"):
+                gr.Markdown("1.实验性功能, 请留意每一步的选项")
+                gr.Markdown("2.无法使用 ControlNet, 效果可能不太理想")
+                gr.Markdown("3.还没来得及写部分页面的翻译")
+            with gr.Tab("1.视频拆帧"):
+                output_info = gr.Textbox(label="输出信息")
+                generate_button = gr.Button("开始拆分")
+                video_path = gr.Textbox(label="视频路径(*.mp4)")
+                frames_save_path = gr.Textbox(label="帧保存目录(空目录)")
+                with gr.Row():
+                    time_interval = gr.Slider(1, 30, 3, step=1, label="间隔取帧", scale=5)
+                    save_audio = gr.Checkbox(True, label="是否提取音频", scale=1)
+                audio_path = gr.Textbox(label="音频保存目录")
+                name = gr.Textbox("video_.mp4", visible=False)
+                frames = gr.Slider(visible=False)
+                fps_ = gr.Slider(visible=False)
+                generate_button.click(
+                    video2frame,
+                    inputs=[video_path, frames_save_path, time_interval, save_audio, audio_path],
+                    outputs=[name, frames, fps_, output_info],
+                )
+            with gr.Tab("2.反推提示词"):
+                gr.Markdown("请前往 法术解析-Tagger 页面批量反推提示词")
+            with gr.Tab("3.测试图生图"):
+                gr.Markdown("请前往 图生图-图生态 页面进行单张测试")
+            with gr.Tab("4.逐帧转绘"):
+                output_info = gr.Textbox(label="输出信息")
+                generate_button = gr.Button("开始转绘")
+                frames_save_path = gr.Textbox(label="重绘帧目录")
+                frames_m2m_path = gr.Textbox(label="重绘帧保存目录")
+                with gr.Row():
+                    pref = gr.Textbox("", label="追加的提示词", lines=2, scale=5)
+                    position = gr.Radio(
+                        value="最前面(Top)",
+                        choices=["最前面(Top)", "最后面(Last)"],
+                        label="追加位置",
+                        scale=1,
+                    )
+                negative = gr.Textbox(
+                    "lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],",
+                    label="负面提示词",
                     lines=2,
-                    label=webui_lang["t2i"]["positive"],
+                )
+                resolution = gr.Radio(
+                    [
+                        "832x1216",
+                        "1216x832",
+                        "1024x1024",
+                        "512x768",
+                        "768x768",
+                        "640x640",
+                        "1024x1536",
+                        "1536x1024",
+                        "1472x1472",
+                        "1088x1920",
+                        "1920x1088",
+                    ],
+                    value="832x1216",
+                    label="分辨率(宽x高)(大分辨率请注意水晶消耗)",
+                )
+                scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label="提示词相关性")
+                steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label="采样步数")
+                strength = gr.Slider(minimum=0, maximum=1, value=0.5, step=0.1, label="重绘幅度")
+                noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label="添加噪声")
+                sampler = gr.Radio(
+                    [
+                        "k_euler",
+                        "k_euler_ancestral",
+                        "k_dpmpp_2s_ancestral",
+                        "k_dpmpp_2m",
+                        "k_dpmpp_sde",
+                        "ddim_v3",
+                    ],
+                    value="k_euler",
+                    label="采样器",
+                )
+                noise_schedule = gr.Radio(
+                    ["native", "karras", "exponential", "polyexponential"],
+                    value="native",
+                    label="噪声计划表",
                 )
                 with gr.Row():
-                    negative = gr.Textbox(
-                        value=webui_lang["example"]["negative"],
-                        lines=3,
-                        label=webui_lang["t2i"]["negative"],
-                        scale=3,
-                    )
-                    generate = gr.Button(value=webui_lang["t2i"]["generate_button"], scale=1)
-            with gr.Row():
-                input_path = gr.Textbox(value="", label=webui_lang["i2i"]["input_path"], scale=5)
-                open_button = gr.Radio([True, False], value=False, label=webui_lang["i2i"]["open_button"], scale=1)
-            with gr.Row():
-                input_img = gr.Image(type="pil")
-                with gr.Column():
-                    output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
-                    output_img = gr.Image()
-            with gr.Column():
-                with gr.Row():
-                    resolution = gr.Radio(
-                        [
-                            "832x1216",
-                            "1216x832",
-                            "1024x1024",
-                            "512x768",
-                            "768x768",
-                            "640x640",
-                            "1024x1536",
-                            "1536x1024",
-                            "1472x1472",
-                            "1088x1920",
-                            "1920x1088",
-                        ],
-                        value="832x1216",
-                        label=webui_lang["t2i"]["resolution"],
-                    )
-                    scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"])
-                    steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
-                    with gr.Column():
-                        strength = gr.Slider(
-                            minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"]
-                        )
-                        noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label=webui_lang["i2i"]["noise"])
-                with gr.Row():
-                    sampler = gr.Radio(
-                        [
-                            "k_euler",
-                            "k_euler_ancestral",
-                            "k_dpmpp_2s_ancestral",
-                            "k_dpmpp_2m",
-                            "k_dpmpp_sde",
-                            "ddim_v3",
-                        ],
-                        value="k_euler",
-                        label=webui_lang["t2i"]["sampler"],
-                    )
-                    noise_schedule = gr.Radio(
-                        ["native", "karras", "exponential", "polyexponential"],
-                        value="native",
-                        label=webui_lang["t2i"]["noise_schedule"],
-                    )
                     sm = gr.Radio([True, False], value=False, label="sm")
-                    sm_dyn = gr.Radio([True, False], value=False, label=webui_lang["t2i"]["smdyn"])
-            generate.click(
-                fn=i2i_by_hand,
-                inputs=[
-                    input_img,
-                    input_path,
-                    open_button,
-                    positive,
-                    negative,
-                    resolution,
-                    scale,
-                    sampler,
-                    noise_schedule,
-                    steps,
-                    strength,
-                    noise,
-                    sm,
-                    sm_dyn,
-                ],
-                outputs=[output_img, output_info],
-            )
+                    sm_dyn = gr.Radio([True, False], value=False, label="smdyn")
+                    with gr.Row():
+                        seed = gr.Textbox(value="-1", label="固定种子", scale=7)
+                        random_button = gr.Button(value="♻️", size="sm", scale=1)
+                        random_button.click(return_random, inputs=None, outputs=seed)
+                generate_button.click(
+                    fn=m2m,
+                    inputs=[
+                        frames_save_path,
+                        frames_m2m_path,
+                        pref,
+                        negative,
+                        position,
+                        resolution,
+                        scale,
+                        steps,
+                        sampler,
+                        noise_schedule,
+                        strength,
+                        noise,
+                        sm,
+                        sm_dyn,
+                        seed,
+                    ],
+                    outputs=output_info,
+                )
+            with gr.Tab("5.合并视频"):
+                output_info = gr.Textbox(label="输出信息")
+                generate_button = gr.Button("开始合并")
+                frames_save_path = gr.Textbox(label="重绘帧目录")
+                video_save_path = gr.Textbox(label="视频保存目录(不要和原视频在同一目录)")
+                fps = gr.Slider(0, 60, 8, step=1, label="视频帧率")
+                with gr.Row():
+                    audio_path = gr.Textbox(label="音频路径(*.mp3)")
+                    merge_audio = gr.Checkbox(True, label="是否并入音频")
+                generate_button.click(
+                    merge_av,
+                    inputs=[
+                        name,
+                        fps,
+                        time_interval,
+                        frames_save_path,
+                        video_save_path,
+                        merge_audio,
+                        audio_path,
+                    ],
+                    outputs=output_info,
+                )
+
     with gr.Tab(webui_lang["inpaint"]["tab"]):
         with gr.Row():
             with gr.Column(scale=8):

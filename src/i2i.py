@@ -26,11 +26,14 @@ def i2i_by_hand(
     noise: float,
     sm: bool,
     sm_dyn: bool,
+    seed: str,
 ):
     if open_button:
         main(input_path)
         return None, "处理完成"
     else:
+        logger.info("正在处理生成...")
+
         json_for_i2i["input"] = positive
         json_for_i2i["parameters"]["width"] = int(resolution.split("x")[0])
         json_for_i2i["parameters"]["height"] = int(resolution.split("x")[1])
@@ -42,14 +45,14 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["sm"] = sm
         json_for_i2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
         json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
-        seed = random.randint(1000000000, 9999999999)
+        seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
         json_for_i2i["parameters"]["seed"] = seed
         json_for_i2i["parameters"]["image"] = img_to_base64(input_img)
         json_for_i2i["parameters"]["extra_noise_seed"] = seed
         json_for_i2i["parameters"]["negative_prompt"] = negative
 
         saved_path = save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
-        sleep_for_cool(12, 24)
+        sleep_for_cool(2, 4)
 
         return saved_path, None
 
