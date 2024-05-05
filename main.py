@@ -14,6 +14,7 @@ from src.rminfo import export_info, remove_info, revert_info
 from src.selector import del_current_img, move_current_img, show_first_img, show_next_img
 from src.setting import webui as setting
 from src.t2i import t2i, t2i_by_hand
+from src.tagger import SWINV2_MODEL_DSV3_REPO, dropdown_list, tagger
 from src.vibe import vibe, vibe_by_hand
 from src.waifu2x import main as upscale
 from src.water import main as water
@@ -795,19 +796,101 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
             start_button.click(fn=export_info, inputs=[input_path, output_path], outputs=output_info)
     with gr.Tab(webui_lang["maigic analysis"]["tab"]):
-        gr.HTML(
-            """
+        with gr.Tab(webui_lang["maigic analysis"]["tab"]):
+            gr.HTML(
+                """
 <iframe id="myiframe" src="https://spell.novelai.dev/"></iframe>
 <style>
     #myiframe {
         width: 100%;
-        height: 650px;
+        height: 600px;
     }
 </style>
-""".replace(
-                "650", str(env.height)
+    """.replace(
+                    "600", str(env.height)
+                )
             )
-        )
+        with gr.Tab("Tagger"):
+            with gr.Row():
+                with gr.Column(variant="panel"):
+                    image = gr.Image(type="pil", image_mode="RGBA", label="Input")
+                    with gr.Row():
+                        path = gr.Textbox(label="Input Path", scale=3)
+                        batch = gr.Checkbox(False, label="Batch", scale=1)
+                    model_repo = gr.Dropdown(
+                        dropdown_list,
+                        value=SWINV2_MODEL_DSV3_REPO,
+                        label="Model",
+                    )
+                    with gr.Row():
+                        general_thresh = gr.Slider(
+                            0,
+                            1,
+                            step=0.01,
+                            value=0.35,
+                            label="General Tags Threshold",
+                            scale=3,
+                        )
+                        general_mcut_enabled = gr.Checkbox(
+                            value=False,
+                            label="Use MCut threshold",
+                            scale=1,
+                        )
+                    with gr.Row():
+                        character_thresh = gr.Slider(
+                            0,
+                            1,
+                            step=0.01,
+                            value=0.85,
+                            label="Character Tags Threshold",
+                            scale=3,
+                        )
+                        character_mcut_enabled = gr.Checkbox(
+                            value=False,
+                            label="Use MCut threshold",
+                            scale=1,
+                        )
+                    with gr.Row():
+                        clear = gr.ClearButton(
+                            components=[
+                                image,
+                                model_repo,
+                                general_thresh,
+                                general_mcut_enabled,
+                                character_thresh,
+                                character_mcut_enabled,
+                            ],
+                            variant="secondary",
+                            size="lg",
+                        )
+                        submit = gr.Button(value="Submit", variant="primary", size="lg")
+                with gr.Column(variant="panel"):
+                    sorted_general_strings = gr.Textbox(label="Output (string)")
+                    rating = gr.Label(label="Rating")
+                    character_res = gr.Label(label="Output (characters)")
+                    general_res = gr.Label(label="Output (tags)")
+                    clear.add(
+                        [
+                            sorted_general_strings,
+                            rating,
+                            character_res,
+                            general_res,
+                        ]
+                    )
+            submit.click(
+                tagger,
+                [
+                    image,
+                    path,
+                    batch,
+                    model_repo,
+                    general_thresh,
+                    general_mcut_enabled,
+                    character_thresh,
+                    character_mcut_enabled,
+                ],
+                outputs=[sorted_general_strings, rating, character_res, general_res],
+            )
     with gr.Tab("GPT Free"):
         gr.HTML(
             """
