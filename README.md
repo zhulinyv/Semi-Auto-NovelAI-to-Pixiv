@@ -135,7 +135,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 图片保存分类
 + [ ] 支持非文生图插件
 + [ ] 视频转绘
-+ [ ] 提示词反推
++ [x] 提示词反推
 + [ ] ...
 
 ## 🤝 鸣谢

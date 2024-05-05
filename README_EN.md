@@ -135,7 +135,7 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Picture save category
 + [ ] Support for non-literate diagram plugins
 + [ ] Video redrawing
-+ [ ] Prompts inferr
++ [x] Prompts inferr
 + [ ] ...
 
 ## 🤝 Acknowledgements
