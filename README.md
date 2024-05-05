@@ -133,6 +133,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [ ] 补全独立脚本生成
 + [x] 图片保存分类
 + [ ] 支持非文生图插件
++ [ ] 视频转绘
 + [ ] ...
 
 ## 🤝 鸣谢

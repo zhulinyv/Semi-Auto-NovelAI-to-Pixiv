@@ -132,7 +132,8 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Add whether to restore image information in the configuration item
 + [ ] Complete independent script generation
 + [x] Picture save category
-+ [ ] 支持非文生图插件
++ [ ] Support for non-literate diagram plugins
++ [ ] Video redrawing
 + [ ] ...
 
 ## 🤝 Acknowledgements

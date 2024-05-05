@@ -80,7 +80,9 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
             saved_path = f"./output/{type_}{path}/{args[0]}"
             with open(saved_path, "wb") as file:
                 file.write(img_data)
-    return saved_path
+        return saved_path
+    else:
+        return "寄"
 
 
 def inquire_anlas():
