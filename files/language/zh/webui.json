@@ -146,6 +146,7 @@
             "water_height": "调整水印的高度",
             "position": "水印可能出现的位置",
             "water_num": "水印的数量",
+            "rotate": "水印旋转度数",
             "share": "是否共享 gradio 链接",
             "height": "法术解析页面的高度",
             "port": "本地启动的端口",

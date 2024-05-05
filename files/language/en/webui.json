@@ -146,6 +146,7 @@
             "water_height": "Adjustment of watermark height",
             "position": "Possible positions where watermark may appear",
             "water_num": "Number of watermarks",
+            "rotate": "The degree of rotation of the watermark",
             "share": "Whether to share Gradio link",
             "height": "Height of Magic Parser page",
             "port": "Port for local startup",

@@ -17,6 +17,9 @@ def water(img_path, otp_path):
         img = img.convert("RGBA")
         water = water.convert("RGBA")
 
+        # 随机水印旋转度数
+        water = water.rotate(random.randint(-env.rotate, env.rotate), expand=True)
+
         # 随机水印透明度
         new_png = water.copy()
         layer = Image.new("RGBA", water.size, color=(0, 0, 0, 0))

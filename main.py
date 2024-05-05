@@ -954,6 +954,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 ur = gr.Checkbox(True if "右上" in env.position else False, label="右上(Upper Right)")
                 lr = gr.Checkbox(True if "右下" in env.position else False, label="右下(Upper Right)")
             water_num = gr.Slider(1, 10, env.water_num, step=1, label=webui_lang["setting"]["description"]["water_num"])
+            rotate = gr.Slider(0, 360, 45, step=1, label=webui_lang["setting"]["description"]["rotate"])
         with gr.Tab("WebUI"):
             share = gr.Checkbox(env.share, label=webui_lang["setting"]["description"]["share"])
             height = gr.Slider(300, 1200, env.height, step=10, label=webui_lang["setting"]["description"]["height"])
@@ -997,6 +998,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 ur,
                 lr,
                 water_num,
+                rotate,
                 meta_data,
                 revert_info_,
                 share,

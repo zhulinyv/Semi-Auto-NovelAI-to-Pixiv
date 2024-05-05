@@ -43,6 +43,7 @@ class Settings(BaseSettings):
     water_height: int = 135
     position: list = ["左上", "右上", "左下", "右下"]
     water_num: int = 1
+    rotate: int = 45
 
     # 抹除信息
     meta_data: str = "杂鱼~杂鱼~"
