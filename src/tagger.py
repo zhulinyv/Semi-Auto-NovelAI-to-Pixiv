@@ -5,7 +5,10 @@ from loguru import logger
 
 from utils.utils import file_path2list, file_path2name
 
-client = Client("SmilingWolf/wd-tagger")
+try:
+    client = Client("SmilingWolf/wd-tagger")
+except Exception:
+    pass
 
 
 # Dataset v3 series of models:
@@ -60,17 +63,23 @@ def tagger(
         image.save("./output/temp.png")
         imgs_list = ["./output/temp.png"]
     for img in imgs_list:
-        logger.info(f"正在反推: {img}...")
-        result = client.predict(
-            file(img),  # filepath  in 'Input' Image component
-            model_repo,  # Literal['SmilingWolf/wd-swinv2-tagger-v3', 'SmilingWolf/wd-convnext-tagger-v3', 'SmilingWolf/wd-vit-tagger-v3', 'SmilingWolf/wd-v1-4-moat-tagger-v2', 'SmilingWolf/wd-v1-4-swinv2-tagger-v2', 'SmilingWolf/wd-v1-4-convnext-tagger-v2', 'SmilingWolf/wd-v1-4-convnextv2-tagger-v2', 'SmilingWolf/wd-v1-4-vit-tagger-v2']  in 'Model' Dropdown component
-            general_thresh,  # float (numeric value between 0 and 1) in 'General Tags Threshold' Slider component
-            general_mcut_enabled,  # bool  in 'Use MCut threshold' Checkbox component
-            character_thresh,  # float (numeric value between 0 and 1) in 'Character Tags Threshold' Slider component
-            character_mcut_enabled,  # bool  in 'Use MCut threshold' Checkbox component
-            api_name="/predict",
-        )
-        if batch:
-            with open(Path(path) / file_path2name(img).replace(".png", ".txt"), "w", encoding="utf-8") as f:
-                f.write(result[0])
+        while 1:
+            try:
+                logger.info(f"正在反推: {img}...")
+                result = client.predict(
+                    file(img),  # filepath  in 'Input' Image component
+                    model_repo,  # Literal['SmilingWolf/wd-swinv2-tagger-v3', 'SmilingWolf/wd-convnext-tagger-v3', 'SmilingWolf/wd-vit-tagger-v3', 'SmilingWolf/wd-v1-4-moat-tagger-v2', 'SmilingWolf/wd-v1-4-swinv2-tagger-v2', 'SmilingWolf/wd-v1-4-convnext-tagger-v2', 'SmilingWolf/wd-v1-4-convnextv2-tagger-v2', 'SmilingWolf/wd-v1-4-vit-tagger-v2']  in 'Model' Dropdown component
+                    general_thresh,  # float (numeric value between 0 and 1) in 'General Tags Threshold' Slider component
+                    general_mcut_enabled,  # bool  in 'Use MCut threshold' Checkbox component
+                    character_thresh,  # float (numeric value between 0 and 1) in 'Character Tags Threshold' Slider component
+                    character_mcut_enabled,  # bool  in 'Use MCut threshold' Checkbox component
+                    api_name="/predict",
+                )
+                if batch:
+                    with open(Path(path) / file_path2name(img).replace(".png", ".txt"), "w", encoding="utf-8") as f:
+                        f.write(result[0])
+                break
+            except Exception as e:
+                logger.error(f"出现错误: {e}")
+                logger.info("正在重试...")
     return result[0], format_dict(result[1]), format_dict(result[2]), format_dict(result[3])
