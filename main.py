@@ -293,7 +293,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             with gr.Tab("2.反推提示词"):
                 gr.Markdown("请前往 法术解析-Tagger 页面批量反推提示词")
             with gr.Tab("3.测试图生图"):
-                gr.Markdown("请前往 图生图-图生态 页面进行单张测试")
+                gr.Markdown("请前往 图生图-图生图 页面进行单张测试")
             with gr.Tab("4.逐帧转绘"):
                 output_info = gr.Textbox(label="输出信息")
                 generate_button = gr.Button("开始转绘")
