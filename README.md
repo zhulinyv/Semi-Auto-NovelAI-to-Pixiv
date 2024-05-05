@@ -34,6 +34,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | 图片筛选 | 人工对图片进行筛选的工具 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/10.png?raw=true) | 使用时, 请先输入图片目录并按下确定, 然后输入输出目录. 会在 `./output` 文件夹下生成一个名为 `array_data.npy` 的文件, 它会保存上次筛选的进度, 即你可以不选择图片目录继续筛选, 筛选完毕后会自动删除. |
 | 抹除数据 | 批量抹除, 还原或导出图片生成信息 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/11.png?raw=true) | 还原信息时, 需要准备至少带有 prompt 的 *.png 图片或内容为 prompt 的 *.txt 文件, 并放到某一目录(图片信息文件目录), 选取的待还原图片目录中的文件名(不含扩展名)需要和刚刚的图片信息文件目录中的文件文件名一致 | 
 | 法术解析 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目进行读取 png info | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/12.png?raw=true) | 使用 iframe 嵌套入本项目 |
+| Tagger | 使用 [SmilingWolf](https://huggingface.co/spaces/SmilingWolf/wd-tagger) 在 huggingface 上部署的反推模型, 我为它添加了批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/17.png?raw=true) | 批量处理时, 生成的 prompt 文本会保存到图片的同一目录 |
 | GPT Free | 免费, 多模型的 GPT, 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/13.png?raw=true) | 使用 iframe 嵌套入本项目 |
 | 配置设置 | 在 WebUI 更改配置项 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/14.png?raw=true) | 修改记得保存, 重启后立即生效 |
 
@@ -134,6 +135,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 图片保存分类
 + [ ] 支持非文生图插件
 + [ ] 视频转绘
++ [ ] 提示词反推
 + [ ] ...
 
 ## 🤝 鸣谢
@@ -147,6 +149,8 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 本项目使用 [GPT4FREE](https://github.com/xtekky/gpt4free) 提供 GPT 服务
 
 本项目使用 [novelai-image-metadata](https://github.com/NovelAI/novelai-image-metadata) 抹除元数据
+
+本项目使用 [SmilingWolf/wd-tagger](https://huggingface.co/spaces/SmilingWolf/wd-tagger) 反推提示词
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>

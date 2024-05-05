@@ -34,6 +34,7 @@
 | Image Filtering | Tool for manually filtering images | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/10.png?raw=true) | Enter the image directory and press OK, then input the output directory. A file named `array_data.npy` will be generated in the `./output` folder, it saves the progress of the last filtering, so you can continue without selecting the image directory again, after filtering, it will be automatically deleted |
 | Data Erasure | Batch erases, restores, or exports image generation information | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/11.png?raw=true) | For restoration, prepare at least a *.png image with prompt or a *.txt file containing prompt, and place it in a directory (image information file directory), the filenames (without extension) in the selected directory to be restored need to be consistent with those in the image information file directory |
 | Magic Analysis | Reads png info using open-source projects listed in the acknowledgments | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/12.png?raw=true) | Embedded into this project via iframe |
+| Tagger | Utilizing the reverse inference model deployed on Hugging Face by [SmilingWolf](https://huggingface.co/spaces/SmilingWolf/wd-tagger), I added batch operations to it | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/17.png?raw=true) | During batch processing, the generated prompt text will be saved to the same directory as the images |
 | GPT Free | Free, multi-model GPT, utilizing open-source projects listed in the acknowledgments | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/13.png?raw=true) | Embedded into this project via iframe |
 | Configuration Settings | Change configuration options in WebUI | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/14.png?raw=true) | Remember to save changes, takes effect immediately after restart |
 
@@ -134,6 +135,7 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Picture save category
 + [ ] Support for non-literate diagram plugins
 + [ ] Video redrawing
++ [ ] Prompts inferr
 + [ ] ...
 
 ## 🤝 Acknowledgements
@@ -146,8 +148,9 @@ This project uses [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshi
 
 This project uses [GPT4FREE](https://github.com/xtekky/gpt4free) to provide GPT services.
 
-This project uses  [novelai-image-metadata](https://github.com/NovelAI/novelai-image-metadata) to eraser the metadata.
+This project uses [novelai-image-metadata](https://github.com/NovelAI/novelai-image-metadata) to eraser the metadata.
 
+This project uses [SmilingWolf/wd-tagger](https://huggingface.co/spaces/SmilingWolf/wd-tagger) to inferr Prompts.
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
