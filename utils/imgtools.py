@@ -1,5 +1,6 @@
 import base64
-from pathlib import WindowsPath
+import os
+from pathlib import Path, WindowsPath
 
 import ujson as json
 from loguru import logger
@@ -7,6 +8,7 @@ from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
 from utils.env import env
+from utils.utils import file_path2name
 
 
 def get_img_info(img_path):
@@ -76,3 +78,51 @@ def get_concat_v(im1, im2):
     im1.close()
     im2.close()
     return dst
+
+
+def crop_image(path, otp_path):
+    with Image.open(path) as img:
+        w, h = img.size
+        w_, h_ = 0, 0
+        while w_ < w:
+            w_ += 640
+        while h_ < h:
+            h_ += 640
+        crop_img = img.crop((0, 0, w_, h_))
+        crop_img = crop_img.convert("RGB")
+        w, h = crop_img.size
+        w_, h_ = 0, 0
+        num, num_ = 0, 0
+        while h_ < h:
+            while w_ < w:
+                num += 1
+                tile = crop_img.crop((w_, h_, w_ + 640, h_ + 640))
+                if not os.path.exists(otp_path):
+                    os.mkdir(otp_path)
+                tile.save(Path(otp_path) / f"{num}.png")
+                w_ += 320
+            if num_ == 0:
+                num_ = num
+            h_ += 320
+            w_ = 0
+    return num_, int(num / num_)
+
+
+def cut_img_v(path, otp_path):
+    name = file_path2name(path)
+    with Image.open(path) as img:
+        w, h = img.size
+        crop_img = img.crop((0, 0, w, h / 2))
+        crop_img.save(Path(otp_path) / name.replace(".png", "_u.png"))
+        crop_img = img.crop((0, h / 2, w, h))
+        crop_img.save(Path(otp_path) / name.replace(".png", "_d.png"))
+
+
+def cut_img_h(path, otp_path):
+    name = file_path2name(path)
+    with Image.open(path) as img:
+        w, h = img.size
+        crop_img = img.crop((0, 0, w / 2, h))
+        crop_img.save(Path(otp_path) / name.replace(".png", "_l.png"))
+        crop_img = img.crop((w / 2, 0, w, h))
+        crop_img.save(Path(otp_path) / name.replace(".png", "_r.png"))

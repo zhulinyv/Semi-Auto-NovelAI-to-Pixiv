@@ -9,18 +9,23 @@ from utils.imgtools import revert_img_info
 from utils.utils import check_platform, file_path2list
 
 
+def run_cmd_(code):
+    try:
+        p = subprocess.Popen(code, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        result = (stdout or stderr).decode("gb18030", errors="ignore").strip()
+        return result
+    except Waifu2xError:
+        logger.error("处理失败!")
+        return "寄"
+
+
 def run_cmd(file, output_dir, code):
     logger.info(f"正在放大 {file}...")
     check_platform()
     logger.debug(code)
 
-    try:
-        p = subprocess.Popen(code, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = p.communicate()
-        result = (stdout or stderr).decode("gb18030", errors="ignore").strip()
-    except Waifu2xError:
-        logger.error("放大失败!")
-        return "寄"
+    result = run_cmd_(code)
 
     logger.info("\n" + result)
     logger.success("放大成功!")

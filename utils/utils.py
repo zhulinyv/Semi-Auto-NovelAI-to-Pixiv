@@ -118,12 +118,16 @@ def file_path2list(path) -> list:
     return os.listdir(path)
 
 
-def file_name2path(file_list: list, file_path):
+def file_namel2pathl(file_list: list, file_path):
     empty_list = []
     for file in file_list:
         empty_list.append(Path(file_path) / file)
     file_list = empty_list[:]
     return file_list
+
+
+def file_path2abs(path) -> str:
+    return os.path.dirname(os.path.abspath(path))
 
 
 def open_folder(folder):

@@ -16,6 +16,7 @@ from src.selector import del_current_img, move_current_img, show_first_img, show
 from src.setting import webui as setting
 from src.t2i import t2i, t2i_by_hand
 from src.tagger import SWINV2_MODEL_DSV3_REPO, dropdown_list, tagger
+from src.tileups import tile_upscale
 from src.vibe import vibe, vibe_by_hand
 from src.waifu2x import main as upscale
 from src.water import main as water
@@ -400,7 +401,27 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     ],
                     outputs=output_info,
                 )
-
+        with gr.Tab("分块重绘(正在施工)"):
+            gr.Markdown("> 可以将一张大分辨率图片使用 nai3 不消耗点数放大")
+            with gr.Row():
+                with gr.Column():
+                    generate_button("开始生成")
+                    image = gr.Image(label="输入图片(路径为空时使用图片)", type="pil")
+                    img_path = gr.Textbox(value=None, label="图片路径(单张)")
+                    positive = gr.Textbox("", lines=2, label="质量词画风串(不建议添加角色描述)")
+                    negative = gr.Textbox(
+                        "lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],",
+                        label="负面提示词",
+                    )
+                    strength = gr.Slider(0, 0.5, 0.15, step=0.01, label="重绘幅度(建议不要大于 0.3)")
+                    engine = gr.Radio(
+                        ["cain-ncnn-vulkan", "dain-ncnn-vulkan", "ifrnet-ncnn-vulkan", "rife-ncnn-vulkan"],
+                        label="接缝合并引擎",
+                    )
+                show_image = gr.Image()
+                generate_button.click(
+                    tile_upscale, inputs=[image, img_path, positive, negative, strength, engine], outputs=show_image
+                )
     with gr.Tab(webui_lang["inpaint"]["tab"]):
         with gr.Row():
             with gr.Column(scale=8):

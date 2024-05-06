@@ -2,7 +2,7 @@ from loguru import logger
 
 from src.i2i import prepare_json
 from utils.imgtools import get_img_info, img_to_base64, revert_img_info
-from utils.utils import file_name2path, file_path2list, file_path2name, generate_image, inquire_anlas, save_image
+from utils.utils import file_namel2pathl, file_path2list, file_path2name, generate_image, inquire_anlas, save_image
 
 
 def for_webui(input_path, mask_path, input_img, input_mask, open_button):
@@ -32,7 +32,7 @@ def inpaint(img_path, mask_path):
 
 
 def main(img_folder, mask_folder):
-    file_list = file_name2path(file_path2list(img_folder), img_folder)
+    file_list = file_namel2pathl(file_path2list(img_folder), img_folder)
 
     for file in file_list:
         logger.info(f"正在处理: {file}")
