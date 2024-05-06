@@ -126,8 +126,12 @@ def file_namel2pathl(file_list: list, file_path):
     return file_list
 
 
-def file_path2abs(path) -> str:
-    return os.path.dirname(os.path.abspath(path))
+def file_path2abs(path):
+    return os.path.abspath(path)
+
+
+def file_path2dir(path) -> str:
+    return os.path.dirname(file_path2abs(path))
 
 
 def open_folder(folder):

@@ -1,5 +1,4 @@
 import base64
-import os
 from pathlib import Path, WindowsPath
 
 import ujson as json
@@ -66,8 +65,6 @@ def get_concat_h(im1, im2):
     dst = Image.new("RGB", (im1.width + im2.width, im1.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (im1.width, 0))
-    im1.close()
-    im2.close()
     return dst
 
 
@@ -75,8 +72,6 @@ def get_concat_v(im1, im2):
     dst = Image.new("RGB", (im1.width, im1.height + im2.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (0, im1.height))
-    im1.close()
-    im2.close()
     return dst
 
 
@@ -90,6 +85,7 @@ def crop_image(path, otp_path):
             h_ += 640
         crop_img = img.crop((0, 0, w_, h_))
         crop_img = crop_img.convert("RGB")
+        crop_img.save(r"D:\GitClone\Semi-Auto-NovelAI-to-Pixiv\output\fwuibebvkanvoqavnovbnoqvnoqnvoq\temp.png")
         w, h = crop_img.size
         w_, h_ = 0, 0
         num, num_ = 0, 0
@@ -97,8 +93,6 @@ def crop_image(path, otp_path):
             while w_ < w:
                 num += 1
                 tile = crop_img.crop((w_, h_, w_ + 640, h_ + 640))
-                if not os.path.exists(otp_path):
-                    os.mkdir(otp_path)
                 tile.save(Path(otp_path) / f"{num}.png")
                 w_ += 320
             if num_ == 0:
@@ -108,9 +102,10 @@ def crop_image(path, otp_path):
     return num_, int(num / num_)
 
 
-def cut_img_v(path, otp_path):
+def cut_img_w(path, otp_path):
     name = file_path2name(path)
     with Image.open(path) as img:
+        img = img.convert("RGB")
         w, h = img.size
         crop_img = img.crop((0, 0, w, h / 2))
         crop_img.save(Path(otp_path) / name.replace(".png", "_u.png"))
@@ -121,8 +116,25 @@ def cut_img_v(path, otp_path):
 def cut_img_h(path, otp_path):
     name = file_path2name(path)
     with Image.open(path) as img:
+        img = img.convert("RGB")
         w, h = img.size
         crop_img = img.crop((0, 0, w / 2, h))
         crop_img.save(Path(otp_path) / name.replace(".png", "_l.png"))
         crop_img = img.crop((w / 2, 0, w, h))
         crop_img.save(Path(otp_path) / name.replace(".png", "_r.png"))
+
+
+def find_black_pixels(image):
+    width, height = image.size
+
+    for x in range(width):
+        pixel = image.getpixel((x, 1))
+        if pixel == (0, 0, 0):
+            break
+
+    for y in range(height):
+        pixel = image.getpixel((1, y))
+        if pixel == (0, 0, 0):
+            break
+
+    return x, y

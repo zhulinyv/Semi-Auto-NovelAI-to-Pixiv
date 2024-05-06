@@ -6,7 +6,7 @@ from loguru import logger
 from utils.downloader import download, extract
 from utils.error import VideoCardError, Waifu2xError
 from utils.imgtools import revert_img_info
-from utils.utils import check_platform, file_path2list
+from utils.utils import check_platform, file_path2abs, file_path2list
 
 
 def run_cmd_(code):
@@ -129,9 +129,9 @@ def main(engine, file, file_path, open_button, *options):
 
             else:
                 if engine == "waifu2x-caffe":
-                    code = os.path.abspath("./files/else_upscale_engine/waifu2x-caffe/waifu2x-caffe-cui.exe")
+                    code = file_path2abs("./files/else_upscale_engine/waifu2x-caffe/waifu2x-caffe-cui.exe")
                     code += " -i {} -o {} -m {} -s {} -n {}".format(
-                        os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2]
+                        file_path2abs(j), file_path2abs(otp), options[0], options[1], options[2]
                     )
                     if options[3] != "gpu":
                         code += " -p {}".format(options[3])
@@ -142,14 +142,14 @@ def main(engine, file, file_path, open_button, *options):
 
                 elif engine == "waifu2x-converter":
                     code = "cd ./files/else_upscale_engine/waifu2x-converter\n"
-                    code += os.path.abspath("./files/else_upscale_engine/waifu2x-converter/waifu2x-converter-cpp.exe")
+                    code += file_path2abs("./files/else_upscale_engine/waifu2x-converter/waifu2x-converter-cpp.exe")
                     code += " -i {} -o {} --scale-ratio {} --noise-level {} -m {} -j {}".format(
-                        os.path.abspath(j), os.path.abspath(otp), options[0], options[1], options[2], options[3]
+                        file_path2abs(j), file_path2abs(otp), options[0], options[1], options[2], options[3]
                     )
 
                 with open("./output/temp.bat", "w") as temp:
                     temp.write(code)
-                os.system(os.path.abspath("./output/temp.bat"))
+                os.system(file_path2abs("./output/temp.bat"))
                 revert_img_info(j, otp)
 
             if engine in ["waifu2x-caffe", "waifu2x-converter"]:

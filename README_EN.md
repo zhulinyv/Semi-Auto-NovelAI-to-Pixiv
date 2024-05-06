@@ -138,7 +138,9 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Support for non-literate diagram plugins
 + [x] Video redrawing
 + [x] Prompts inferr
-+ [ ] Tile upscale
++ [x] Tile upscale
++ [ ] Add more interpolation engines
++ [ ] Translate the rest of the page
 + [ ] ...
 
 ## 🤝 Acknowledgements
@@ -154,6 +156,8 @@ This project uses [GPT4FREE](https://github.com/xtekky/gpt4free) to provide GPT 
 This project uses [novelai-image-metadata](https://github.com/NovelAI/novelai-image-metadata) to eraser the metadata.
 
 This project uses [SmilingWolf/wd-tagger](https://huggingface.co/spaces/SmilingWolf/wd-tagger) to inferr Prompts.
+
+This project uses [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) to process tile redrawing slice seams
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>

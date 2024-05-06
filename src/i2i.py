@@ -32,7 +32,7 @@ def i2i_by_hand(
         main(input_path)
         return None, "处理完成"
     else:
-        logger.info("正在处理生成...")
+        logger.info("正在生成...")
 
         json_for_i2i["input"] = positive
         json_for_i2i["parameters"]["width"] = int(resolution.split("x")[0])
@@ -50,6 +50,9 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["image"] = img_to_base64(input_img)
         json_for_i2i["parameters"]["extra_noise_seed"] = seed
         json_for_i2i["parameters"]["negative_prompt"] = negative
+
+        with open("test.txt", "w", encoding="utf-8") as f:
+            f.write(json.dumps(json_for_i2i))
 
         saved_path = save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
         sleep_for_cool(2, 4)

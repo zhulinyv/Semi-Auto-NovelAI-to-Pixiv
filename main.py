@@ -401,7 +401,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     ],
                     outputs=output_info,
                 )
-        with gr.Tab("分块重绘(正在施工)"):
+        with gr.Tab("分块重绘"):
             gr.Markdown("> 可以将一张大分辨率图片使用 nai3 不消耗点数放大")
             with gr.Row():
                 with gr.Column():
@@ -412,11 +412,27 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     negative = gr.Textbox(
                         "lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],",
                         label="负面提示词",
+                        lines=3,
                     )
-                    strength = gr.Slider(0, 0.5, 0.15, step=0.01, label="重绘幅度(建议不要大于 0.3)")
+                    strength = gr.Slider(0, 0.5, 0.15, step=0.01, label="重绘幅度(建议不要太大)")
                     engine = gr.Radio(
-                        ["cain-ncnn-vulkan", "dain-ncnn-vulkan", "ifrnet-ncnn-vulkan", "rife-ncnn-vulkan"],
-                        label="接缝合并引擎",
+                        [
+                            "rife",
+                            "rife-anime",
+                            "rife-HD",
+                            "rife-UHD",
+                            "rife-v2",
+                            "rife-v2.3",
+                            "rife-v2.4",
+                            "rife-v3.0",
+                            "rife-v3.1",
+                            "rife-v4",
+                            "rife-v4.6",
+                            "rife-v4.13-lite",
+                            "rife-v4.14",
+                        ],
+                        value="rife-v2.3",
+                        label="接缝合并模型",
                     )
                 show_image = gr.Image()
                 generate_button.click(

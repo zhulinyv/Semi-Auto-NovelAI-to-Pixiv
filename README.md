@@ -138,7 +138,9 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 支持非文生图插件
 + [x] 视频转绘
 + [x] 提示词反推
-+ [ ] 分块重绘
++ [x] 分块重绘
++ [ ] 添加更多插帧引擎
++ [ ] 翻译剩余页面
 + [ ] ...
 
 ## 🤝 鸣谢
@@ -154,6 +156,8 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 本项目使用 [novelai-image-metadata](https://github.com/NovelAI/novelai-image-metadata) 抹除元数据
 
 本项目使用 [SmilingWolf/wd-tagger](https://huggingface.co/spaces/SmilingWolf/wd-tagger) 反推提示词
+
+本项目使用 [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) 处理分块重绘图片接缝
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
