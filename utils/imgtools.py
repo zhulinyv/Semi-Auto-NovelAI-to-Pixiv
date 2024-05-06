@@ -85,7 +85,6 @@ def crop_image(path, otp_path):
             h_ += 640
         crop_img = img.crop((0, 0, w_, h_))
         crop_img = crop_img.convert("RGB")
-        crop_img.save(r"D:\GitClone\Semi-Auto-NovelAI-to-Pixiv\output\fwuibebvkanvoqavnovbnoqvnoqnvoq\temp.png")
         w, h = crop_img.size
         w_, h_ = 0, 0
         num, num_ = 0, 0
