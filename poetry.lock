@@ -914,13 +914,13 @@ tqdm = ["tqdm"]
 
 [[package]]
 name = "g4f"
-version = "0.3.0.9"
+version = "0.3.0.10"
 description = "The official gpt4free repository | various collection of powerful language models"
 optional = false
 python-versions = "*"
 files = [
-    {file = "g4f-0.3.0.9-py3-none-any.whl", hash = "sha256:dffc0280374a12f2d531a57918234a9c46b95c4df264263a27fedc69ed87db8c"},
-    {file = "g4f-0.3.0.9.tar.gz", hash = "sha256:b620d58abe1ad144eef333a94d86a126b4373a333f7a60f0ac2edd8d8631df63"},
+    {file = "g4f-0.3.0.10-py3-none-any.whl", hash = "sha256:d74f735e6d24b4c53f4cb54e0701f8e0ded7de32271de4db2d29f385d2dd37ca"},
+    {file = "g4f-0.3.0.10.tar.gz", hash = "sha256:8e637f4ebe53080ba88c4b2bd47d2d62a89579e2447973f49edee7534ea7e697"},
 ]
 
 [package.dependencies]
@@ -3460,4 +3460,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "3ebde8b058c2e4ed2c23497ab637a179ac2bb0476943f032c7b55a6a9a4535fc"
+content-hash = "1225c774fb614358f6b3322756794cc8336f6e1b3c4c8355383fd36330725142"
