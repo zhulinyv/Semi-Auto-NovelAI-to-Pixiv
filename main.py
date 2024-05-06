@@ -161,7 +161,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             generate_button.click(fn=batchtxt, inputs=[forever, pref, position], outputs=batchtxt_img)
             stop.click(None, None, None, cancels=[cancel_event])
             script_gen.click(gen_script, inputs=[script_type, pref, position])
-        plugins = load_plugins(Path("./plugins"))
+        plugins = load_plugins(Path("./plugins/t2i"))
         for plugin_name, plugin_module in plugins.items():
             if hasattr(plugin_module, "plugin"):
                 plugin_module.plugin()
@@ -405,7 +405,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             gr.Markdown("> 可以将一张大分辨率图片使用 nai3 不消耗点数放大")
             with gr.Row():
                 with gr.Column():
-                    generate_button("开始生成")
+                    generate_button = gr.Button("开始生成")
                     image = gr.Image(label="输入图片(路径为空时使用图片)", type="pil")
                     img_path = gr.Textbox(value=None, label="图片路径(单张)")
                     positive = gr.Textbox("", lines=2, label="质量词画风串(不建议添加角色描述)")
@@ -1068,6 +1068,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 "19198", str(env.g4f_port)
             )
         )
+    plugins = load_plugins(Path("./plugins/webui"))
+    for plugin_name, plugin_module in plugins.items():
+        if hasattr(plugin_module, "plugin"):
+            plugin_module.plugin()
+        else:
+            logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
     with gr.Tab(webui_lang["setting"]["tab"]):
         with gr.Row():
             modify_button = gr.Button("保存(Save)")

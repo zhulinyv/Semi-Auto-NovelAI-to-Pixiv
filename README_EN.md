@@ -135,7 +135,7 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Add whether to restore image information in the configuration item
 + [ ] Complete independent script generation
 + [x] Picture save category
-+ [ ] Support for non-literate diagram plugins
++ [x] Support for non-literate diagram plugins
 + [x] Video redrawing
 + [x] Prompts inferr
 + [ ] Tile upscale

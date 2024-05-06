@@ -135,7 +135,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 配置项添加是否还原图片信息
 + [ ] 补全独立脚本生成
 + [x] 图片保存分类
-+ [ ] 支持非文生图插件
++ [x] 支持非文生图插件
 + [x] 视频转绘
 + [x] 提示词反推
 + [ ] 分块重绘
