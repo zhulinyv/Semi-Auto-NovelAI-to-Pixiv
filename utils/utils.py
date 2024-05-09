@@ -114,7 +114,7 @@ def file_path2name(path) -> str:
     return os.path.basename(path)
 
 
-def file_path2list(path) -> list:
+def file_path2list(path) -> list[str]:
     return os.listdir(path)
 
 

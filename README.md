@@ -1,5 +1,5 @@
 <p align="center" >
-  <img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/0fbed41e-1b2b-44f4-9562-6eb7aeeb2c7c" width="256" height="256" alt="NJS"></a>
+  <img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/0fbed41e-1b2b-44f4-9562-6eb7aeeb2c7c" width="256" height="256" alt="SANP"></a>
 </p>
 <h1 align="center">Semi-Auto-NovelAI-to-Pixiv</h1>
 <h4 align="center">✨通过 NovelAI 生图并上传 Pixiv✨</h4>
