@@ -1,6 +1,8 @@
 import importlib.util
 import os
 
+from utils.utils import read_json
+
 
 def load_plugins(directory):
     plugins = {}
@@ -20,3 +22,19 @@ def load_plugins(directory):
             spec.loader.exec_module(module)
             plugins[plugin_name] = module
     return plugins
+
+
+def plugin_list():
+    plugins: dict = read_json("./plugins.json")
+    md = """| 名称 | 描述 | 链接 | 作者 |
+| :---: | :---: | :---: | :---: |
+"""
+    for plugin in list(plugins.keys()):
+        md += "| {} | {} | [{}]({}) | {} |\n".format(
+            plugins[plugin]["name"],
+            plugins[plugin]["description"],
+            plugins[plugin]["url"],
+            plugins[plugin]["url"],
+            plugins[plugin]["author"],
+        )
+    return md
