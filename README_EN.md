@@ -139,8 +139,10 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Video redrawing
 + [x] Prompts inferr
 + [x] Tile upscale
-+ [ ] Add more interpolation engines
++ [ ] ~~Add more interpolation engines~~
 + [ ] Translate the rest of the page
++ [ ] Auto updata
++ [ ] Plugins store
 + [ ] ...
 
 ## 🤝 Acknowledgements

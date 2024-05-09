@@ -139,8 +139,10 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 视频转绘
 + [x] 提示词反推
 + [x] 分块重绘
-+ [ ] 添加更多插帧引擎
++ [ ] ~~添加更多插帧引擎~~
 + [ ] 翻译剩余页面
++ [ ] 自动更新
++ [ ] 插件商店
 + [ ] ...
 
 ## 🤝 鸣谢

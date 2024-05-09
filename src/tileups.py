@@ -150,4 +150,4 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
     for dir in [tiles_dir, cuth_dir, mergev_dir, row_dir, cutw_dir, mergeh_dir, i2i_dir]:
         shutil.rmtree(dir)
 
-    return str(dir / file_path2name(img_path).replace(".png", "_tile_upscale.png"))
+    return dir / file_path2name(img_path).replace(".png", "_tile_upscale.png")

@@ -98,14 +98,11 @@ def main(file_path):
                 times += 1
                 image_list = []
                 if file[-4:] == ".png":
-                    # image_list.append(f"{file_path}/{file}")
                     image_list.append(Path(file_path) / file)
                     file = file
                 else:
-                    # folder_path = f"{file_path}/{file}"
                     folder_path = Path(file_path) / file
                     folder_list = file_path2list(folder_path)
-                    # for i in folder_list: image_list.append(f"{folder_path}/{i}")
                     for i in folder_list:
                         image_list.append(folder_path / i)
                     file = folder_list[-1]
