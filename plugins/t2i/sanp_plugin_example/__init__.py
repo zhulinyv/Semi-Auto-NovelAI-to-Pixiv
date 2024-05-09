@@ -6,7 +6,7 @@ from plugins.t2i.sanp_plugin_example.utils import t2i
 from utils.utils import open_folder
 
 
-def plugin_template(name="模板插件", description="描述", func=None):
+def plugin_template(name="示例插件", description="描述", func=None):
     with gr.Tab(name):
         with gr.Row():
             with gr.Column(scale=8):
@@ -33,4 +33,4 @@ def plugin_template(name="模板插件", description="描述", func=None):
 
 
 def plugin():
-    plugin_template("模板插件", "这是一段描述说明或教程", t2i)
+    plugin_template("示例插件", "这是一段描述说明或教程", t2i)
