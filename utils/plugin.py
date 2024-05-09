@@ -1,12 +1,18 @@
 import importlib.util
 import os
 
-from utils.utils import read_json
+from utils.utils import file_path2list, read_json
 
 
 def load_plugins(directory):
     plugins = {}
-    plugin_list = os.listdir(directory)
+    plugin_list = file_path2list(directory)
+    if "sanp_plugin_example" in plugin_list:
+        plugin_list.remove("sanp_plugin_example")
+        plugin_list.append("sanp_plugin_example")
+    if "sanp_plugin_test.py" in plugin_list:
+        plugin_list.remove("sanp_plugin_test.py")
+        plugin_list.append("sanp_plugin_test.py")
     for plugin in plugin_list:
         if plugin.endswith(".py"):
             location = os.path.join(directory, plugin)
