@@ -2,7 +2,7 @@ from pathlib import Path
 
 import gradio as gr
 
-from plugins.t2i.sanp_plugin_template.utils import t2i
+from plugins.t2i.sanp_plugin_example.utils import t2i
 from utils.utils import open_folder
 
 
