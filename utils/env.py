@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     noise_schedule: str = "native"
     seed: int = -1
     t2i_cool_time: int = 12
-    save_path: str = "默认"
+    save_path: str = "默认(Default)"
 
     # 图生图
     magnification: float = 1.5

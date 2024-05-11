@@ -24,7 +24,6 @@ need_dir_list = [
     "./output/info_reverted",
     "./output/vibe",
     "./output/t2i/grids",
-    "./files/else_merge_engine",
 ]
 
 

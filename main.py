@@ -1090,6 +1090,8 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             plugin_module.plugin()
         else:
             logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
+    with gr.Tab("插件商店"):
+        gr.Markdown(plugin_list())
     with gr.Tab(webui_lang["setting"]["tab"]):
         with gr.Tab(webui_lang["setting"]["tab"]):
             with gr.Row():
@@ -1282,8 +1284,6 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 outputs=output_info,
             )
             restar_button.click(restart)
-    with gr.Tab("插件商店"):
-        gr.Markdown(plugin_list())
 
 
 def main():

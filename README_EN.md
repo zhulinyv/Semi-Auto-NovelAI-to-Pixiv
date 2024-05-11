@@ -143,6 +143,7 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [ ] Translate the rest of the page
 + [ ] Auto updata
 + [ ] Plugins store
++ [ ] Custom eraser meta data
 + [ ] ...
 
 ## 🤝 Acknowledgements

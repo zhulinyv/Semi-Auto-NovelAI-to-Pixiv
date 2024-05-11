@@ -60,11 +60,11 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
         choose_character = name_list[2]
     except Exception:
         pass
-    if env.save_path == "默认":
+    if env.save_path == "默认(Default)":
         path = ""
-    elif env.save_path == "日期":
+    elif env.save_path == "日期(Date)":
         path = f"/{date.today()}"
-    elif env.save_path == "角色":
+    elif env.save_path == "角色(Character)":
         path = f"/{choose_character}"
     else:
         path = ""
