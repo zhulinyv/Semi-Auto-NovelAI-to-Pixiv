@@ -140,10 +140,11 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Prompts inferr
 + [x] Tile upscale
 + [ ] ~~Add more interpolation engines~~
-+ [ ] Translate the rest of the page
++ [x] Translate the rest of the page
 + [ ] Auto updata
 + [ ] Plugins store
 + [ ] Custom eraser meta data
++ [ ] Auto install plugins
 + [ ] ...
 
 ## 🤝 Acknowledgements
