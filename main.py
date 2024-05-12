@@ -356,20 +356,22 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     ],
                     outputs=[output_img, output_info],
                 )
-        with gr.Tab("视频转绘"):
-            with gr.Tab("0.教程说明"):
-                gr.Markdown("1.实验性功能, 请留意每一步的选项")
-                gr.Markdown("2.无法使用 ControlNet, 效果可能不太理想")
-                gr.Markdown("3.还没来得及写部分页面的翻译")
-            with gr.Tab("1.视频拆帧"):
-                output_info = gr.Textbox(label="输出信息")
-                generate_button = gr.Button("开始拆分")
-                video_path = gr.Textbox(label="视频路径(*.mp4)")
-                frames_save_path = gr.Textbox(label="帧保存目录(空目录)")
+        with gr.Tab(webui_lang["m2m"]["tab"]):
+            with gr.Tab(webui_lang["m2m"]["sub_tab"]["tab0"]):
+                gr.Markdown(webui_lang["m2m"]["description"]["tab0_1"])
+                gr.Markdown(webui_lang["m2m"]["description"]["tab0_2"])
+                gr.Markdown(webui_lang["m2m"]["description"]["tab0_3"])
+            with gr.Tab(webui_lang["m2m"]["sub_tab"]["tab1"]):
+                output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
+                generate_button = gr.Button(webui_lang["water mark"]["generate_button"])
+                video_path = gr.Textbox(label=webui_lang["m2m"]["func"]["video_path"])
+                frames_save_path = gr.Textbox(label=webui_lang["m2m"]["func"]["frames_save_path"])
                 with gr.Row():
-                    time_interval = gr.Slider(1, 30, 3, step=1, label="间隔取帧", scale=5)
-                    save_audio = gr.Checkbox(True, label="是否提取音频", scale=1)
-                audio_path = gr.Textbox(label="音频保存目录")
+                    time_interval = gr.Slider(
+                        1, 30, 3, step=1, label=webui_lang["m2m"]["func"]["interval_framing"], scale=5
+                    )
+                    save_audio = gr.Checkbox(True, label=webui_lang["m2m"]["func"]["extract_audio"], scale=1)
+                audio_path = gr.Textbox(label=webui_lang["m2m"]["func"]["audio_save_path"])
                 name = gr.Textbox("video_.mp4", visible=False)
                 frames = gr.Slider(visible=False)
                 fps_ = gr.Slider(visible=False)
@@ -378,26 +380,26 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     inputs=[video_path, frames_save_path, time_interval, save_audio, audio_path],
                     outputs=[name, frames, fps_, output_info],
                 )
-            with gr.Tab("2.反推提示词"):
-                gr.Markdown("请前往 法术解析-Tagger 页面批量反推提示词")
-            with gr.Tab("3.测试图生图"):
-                gr.Markdown("请前往 图生图-图生图 页面进行单张测试")
-            with gr.Tab("4.逐帧转绘"):
-                output_info = gr.Textbox(label="输出信息")
-                generate_button = gr.Button("开始转绘")
-                frames_save_path = gr.Textbox(label="重绘帧目录")
-                frames_m2m_path = gr.Textbox(label="重绘帧保存目录")
+            with gr.Tab(webui_lang["m2m"]["sub_tab"]["tab2"]):
+                gr.Markdown(webui_lang["m2m"]["description"]["tab2"])
+            with gr.Tab(webui_lang["m2m"]["sub_tab"]["tab3"]):
+                gr.Markdown(webui_lang["m2m"]["description"]["tab3"])
+            with gr.Tab(webui_lang["m2m"]["sub_tab"]["tab4"]):
+                output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
+                generate_button = gr.Button(webui_lang["water mark"]["generate_button"])
+                frames_save_path = gr.Textbox(label=webui_lang["m2m"]["func"]["i2i_frames_path"])
+                frames_m2m_path = gr.Textbox(label=webui_lang["m2m"]["func"]["frames_save_path"])
                 with gr.Row():
-                    pref = gr.Textbox("", label="追加的提示词", lines=2, scale=5)
+                    pref = gr.Textbox("", label=webui_lang["random picture"]["pref"], lines=2, scale=5)
                     position = gr.Radio(
                         value="最前面(Top)",
                         choices=["最前面(Top)", "最后面(Last)"],
-                        label="追加位置",
+                        label=webui_lang["random picture"]["position"],
                         scale=1,
                     )
                 negative = gr.Textbox(
-                    "lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],",
-                    label="负面提示词",
+                    webui_lang["example"]["negative"],
+                    label=webui_lang["t2i"]["negative"],
                     lines=2,
                 )
                 resolution = gr.Radio(
@@ -415,12 +417,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                         "1920x1088",
                     ],
                     value="832x1216",
-                    label="分辨率(宽x高)(大分辨率请注意水晶消耗)",
+                    label=webui_lang["t2i"]["resolution"],
                 )
-                scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label="提示词相关性")
-                steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label="采样步数")
-                strength = gr.Slider(minimum=0, maximum=1, value=0.5, step=0.1, label="重绘幅度")
-                noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label="添加噪声")
+                scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"])
+                steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
+                strength = gr.Slider(minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"])
+                noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label=webui_lang["i2i"]["noise"])
                 sampler = gr.Radio(
                     [
                         "k_euler",
@@ -431,18 +433,18 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                         "ddim_v3",
                     ],
                     value="k_euler",
-                    label="采样器",
+                    label=webui_lang["t2i"]["sampler"],
                 )
                 noise_schedule = gr.Radio(
                     ["native", "karras", "exponential", "polyexponential"],
                     value="native",
-                    label="噪声计划表",
+                    label=webui_lang["t2i"]["noise_schedule"],
                 )
                 with gr.Row():
                     sm = gr.Radio([True, False], value=False, label="sm")
                     sm_dyn = gr.Radio([True, False], value=False, label="smdyn")
                     with gr.Row():
-                        seed = gr.Textbox(value="-1", label="固定种子", scale=7)
+                        seed = gr.Textbox(value="-1", label=webui_lang["t2i"]["seed"], scale=7)
                         random_button = gr.Button(value="♻️", size="sm", scale=1)
                         random_button.click(return_random, inputs=None, outputs=seed)
                 generate_button.click(
@@ -466,15 +468,15 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     ],
                     outputs=output_info,
                 )
-            with gr.Tab("5.合并视频"):
-                output_info = gr.Textbox(label="输出信息")
-                generate_button = gr.Button("开始合并")
-                frames_save_path = gr.Textbox(label="重绘帧目录")
-                video_save_path = gr.Textbox(label="视频保存目录(不要和原视频在同一目录)")
-                fps = gr.Slider(0, 60, 8, step=1, label="视频帧率")
+            with gr.Tab(webui_lang["m2m"]["sub_tab"]["tab5"]):
+                output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
+                generate_button = gr.Button(webui_lang["water mark"]["generate_button"])
+                frames_save_path = gr.Textbox(label=webui_lang["m2m"]["func"]["i2i_frames_path"])
+                video_save_path = gr.Textbox(label=webui_lang["m2m"]["func"]["video_save_path"])
+                fps = gr.Slider(0, 60, 8, step=1, label=webui_lang["m2m"]["func"]["fps"])
                 with gr.Row():
-                    audio_path = gr.Textbox(label="音频路径(*.mp3)")
-                    merge_audio = gr.Checkbox(True, label="是否并入音频")
+                    audio_path = gr.Textbox(label=webui_lang["m2m"]["func"]["audio_path"])
+                    merge_audio = gr.Checkbox(True, label=webui_lang["m2m"]["func"]["merge_audio"])
                 generate_button.click(
                     merge_av,
                     inputs=[
@@ -488,20 +490,20 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     ],
                     outputs=output_info,
                 )
-        with gr.Tab("分块重绘"):
-            gr.Markdown("> 可以将一张大分辨率图片使用 nai3 不消耗点数放大")
+        with gr.Tab(webui_lang["tile"]["tab"]):
+            gr.Markdown(webui_lang["tile"]["description"])
             with gr.Row():
                 with gr.Column():
-                    generate_button = gr.Button("开始生成")
-                    image = gr.Image(label="输入图片(路径为空时使用图片)", type="pil")
-                    img_path = gr.Textbox(value=None, label="图片路径(单张)")
-                    positive = gr.Textbox("", lines=2, label="质量词画风串(不建议添加角色描述)")
+                    generate_button = gr.Button(webui_lang["t2i"]["generate_button"])
+                    image = gr.Image(label=webui_lang["tile"]["image"], type="pil")
+                    img_path = gr.Textbox(value=None, label=webui_lang["tile"]["img_path"])
+                    positive = gr.Textbox("", lines=2, label=webui_lang["tile"]["positive"])
                     negative = gr.Textbox(
-                        "lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],",
+                        webui_lang["example"]["negative"],
                         label="负面提示词",
                         lines=3,
                     )
-                    strength = gr.Slider(0, 0.5, 0.15, step=0.01, label="重绘幅度(建议不要太大)")
+                    strength = gr.Slider(0, 0.5, 0.15, step=0.01, label=webui_lang["i2i"]["strength"])
                     engine = gr.Radio(
                         [
                             "rife",
@@ -519,7 +521,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                             "rife-v4.14",
                         ],
                         value="rife-v2.3",
-                        label="接缝合并模型",
+                        label=webui_lang["tile"]["model"],
                     )
                 show_image = gr.Image()
                 generate_button.click(
@@ -990,14 +992,14 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         with gr.Tab("Tagger"):
             with gr.Row():
                 with gr.Column(variant="panel"):
-                    image = gr.Image(type="pil", image_mode="RGBA", label="Input")
+                    image = gr.Image(type="pil", image_mode="RGBA")
                     with gr.Row():
-                        path = gr.Textbox(label="Input Path", scale=3)
-                        batch = gr.Checkbox(False, label="Batch", scale=1)
+                        path = gr.Textbox(label=webui_lang["i2i"]["input_path"], scale=3)
+                        batch = gr.Checkbox(False, label=webui_lang["i2i"]["open_button"], scale=1)
                     model_repo = gr.Dropdown(
                         dropdown_list,
                         value=SWINV2_MODEL_DSV3_REPO,
-                        label="Model",
+                        label=webui_lang["tagger"]["model_repo"],
                     )
                     with gr.Row():
                         general_thresh = gr.Slider(
@@ -1005,12 +1007,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                             1,
                             step=0.01,
                             value=0.35,
-                            label="General Tags Threshold",
+                            label=webui_lang["tagger"]["general_thresh"],
                             scale=3,
                         )
                         general_mcut_enabled = gr.Checkbox(
                             value=False,
-                            label="Use MCut threshold",
+                            label=webui_lang["tagger"]["general_mcut_enabled"],
                             scale=1,
                         )
                     with gr.Row():
@@ -1019,12 +1021,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                             1,
                             step=0.01,
                             value=0.85,
-                            label="Character Tags Threshold",
+                            label=webui_lang["tagger"]["character_thresh"],
                             scale=3,
                         )
                         character_mcut_enabled = gr.Checkbox(
                             value=False,
-                            label="Use MCut threshold",
+                            label=webui_lang["tagger"]["character_mcut_enabled"],
                             scale=1,
                         )
                     with gr.Row():
@@ -1040,12 +1042,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                             variant="secondary",
                             size="lg",
                         )
-                        submit = gr.Button(value="Submit", variant="primary", size="lg")
+                        submit = gr.Button(value=webui_lang["tagger"]["submit"], variant="primary", size="lg")
                 with gr.Column(variant="panel"):
-                    sorted_general_strings = gr.Textbox(label="Output (string)")
-                    rating = gr.Label(label="Rating")
-                    character_res = gr.Label(label="Output (characters)")
-                    general_res = gr.Label(label="Output (tags)")
+                    sorted_general_strings = gr.Textbox(label=webui_lang["tagger"]["sorted_general_strings"])
+                    rating = gr.Label(label=webui_lang["tagger"]["rating"])
+                    character_res = gr.Label(label=webui_lang["tagger"]["character_res"])
+                    general_res = gr.Label(label=webui_lang["tagger"]["general_res"])
                     clear.add(
                         [
                             sorted_general_strings,
@@ -1090,7 +1092,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             plugin_module.plugin()
         else:
             logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
-    with gr.Tab("插件商店"):
+    with gr.Tab(webui_lang["plugin"]["tab"]):
         gr.Markdown(plugin_list())
     with gr.Tab(webui_lang["setting"]["tab"]):
         with gr.Tab(webui_lang["setting"]["tab"]):
@@ -1098,7 +1100,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 modify_button = gr.Button("保存(Save)")
                 restar_button = gr.Button("重启(Restart)")
             output_info = gr.Textbox(
-                value="检测到已开启分享链接, 隐藏部分隐私配置!" if env.share else None,
+                value=webui_lang["setting"]["description"] if env.share else None,
                 label=webui_lang["i2i"]["output_info"],
             )
             with gr.Tab(webui_lang["setting"]["sub_tab"]["necessary"]):

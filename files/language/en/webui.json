@@ -152,7 +152,8 @@
             "port": "Port for local startup",
             "g4f_port": "Port number for G4F web",
             "theme": "Theme of WebUI interface",
-            "webui_lang": "Language of WebUI interface"
+            "webui_lang": "Language of WebUI interface",
+            "warning": "Detected shared link enabled, some privacy configurations are hidden!"
         }
     },
     "info": {
@@ -161,5 +162,59 @@
     "vibe": {
         "input_imgs": "Path to base images",
         "blue_imgs": "Random NSFW images"
+    },
+    "m2m": {
+        "tab": "Video to Drawing",
+        "sub_tab": {
+            "tab0": "0. Tutorial",
+            "tab1": "1. Video Frame Extraction",
+            "tab2": "2. Reverse Prompt Generation",
+            "tab3": "3. Test Image Generation",
+            "tab4": "4. Frame-by-Frame Drawing",
+            "tab5": "5. Merge Videos"
+        },
+        "description": {
+            "tab0_1": "1. Experimental feature, please pay attention to each step's options",
+            "tab0_2": "2. ControlNet is not available, the results may not be optimal",
+            "tab0_3": "3. Translation for some pages is pending",
+            "tab2": "Please visit the Spell Parsing - Tagger page for batch prompt generation",
+            "tab3": "Please visit the Image Generation - Image Generation page for single image testing"
+        },
+        "func": {
+            "video_path": "Video Path (*.mp4)",
+            "frames_save_path": "Frame Save Directory (empty directory)",
+            "interval_framing": "Frame Extraction Interval",
+            "extract_audio": "Extract Audio",
+            "audio_save_path": "Audio Save Directory",
+            "i2i_frames_path": "Redrawn Frames Directory",
+            "video_save_path": "Video Save Directory (do not place in the same directory as the original video)",
+            "fps": "Video Frames per Second",
+            "audio_path": "Audio Path (*.mp3)",
+            "merge_audio": "Merge Audio"
+        }
+        
+    },
+    "tile": {
+        "tab": "Chunked Redrawing",
+        "description": "> Can enlarge a high-resolution image using nai3 without consuming points",
+        "image": "Input Image (use image if path is empty)",
+        "img_path": "Image Path (single)",
+        "positive": "Quality-word style fusion (do not recommend adding character descriptions)",
+        "model": "Seam Integration Model"
+    },
+    "plugin": {
+        "tab": "Plugin Store"
+    },
+    "tagger": {
+        "model_repo": "Model",
+        "general_thresh": "General Tags Threshold",
+        "general_mcut_enabled": "Use MCut threshold",
+        "character_thresh": "Character Tags Threshold",
+        "character_mcut_enabled": "Use MCut threshold",
+        "submit": "Submit",
+        "sorted_general_strings": "Output (string)",
+        "rating": "Rating",
+        "character_res": "Output (characters)",
+        "general_res": "Output (tags)"
     }
 }

@@ -32,7 +32,7 @@ def load_plugins(directory):
 
 def plugin_list():
     plugins: dict = read_json("./plugins.json")
-    md = """| 名称 | 描述 | 链接 | 作者 |
+    md = """| 名称(Name) | 描述(Description) | 链接(URL) | 作者(Author) |
 | :---: | :---: | :---: | :---: |
 """
     for plugin in list(plugins.keys()):
