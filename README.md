@@ -42,6 +42,10 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 
 正在学习 Gradio, 尝试为本项目写一个 WebUI
 
+## 🔌 插件
+
+[插件列表](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/plugins.json)
+
 ## 💻 配置需求
 
 | 项目 | 说明 |
