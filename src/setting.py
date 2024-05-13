@@ -90,7 +90,7 @@ def webui(
         noise_schedule=f'"{noise_schedule}"',
         seed=seed,
         t2i_cool_time=t2i_cool_time,
-        save_path=save_path,
+        save_path=f'"{save_path}"',
         magnification=magnification,
         hires_strength=hires_strength,
         hires_noise=hires_noise,
