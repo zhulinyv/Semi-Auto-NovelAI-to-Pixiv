@@ -1,6 +1,6 @@
 from typing import Union
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -57,8 +57,7 @@ class Settings(BaseSettings):
     theme: Union[str, None] = "NoCrypt/miku"
     webui_lang: str = "zh"
 
-    class Config:
-        env_file = ".env"
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 
 env = Settings()

@@ -51,7 +51,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | 项目 | 说明 |
 |:---:|:---:|
 | NovelAI 会员 | 为了无限生成图片, 建议 25$/month 会员|
-| 魔法网络 | 为了成功发送 post 请求, 需要魔法网络 |
+| 魔法网络 | 为了成功发送请求, 确保你可以正常访问 [novelai.net](novelai.net), [huggingface.co](huggingface.co), [github.com](github.com), clash 用户请将模式设置为**规则**, v2ray 用户请将模式设为 **pac** |
 | 1GB 显存 | 为了使用超分降噪所有引擎, 需要至少 1GB 显存 |
 | 2GB 内存 | 为了流畅使用本项目, 需要至少 2GB 内存 |
 | Windows 10/11(x64) | 为了使用全部功能, 需要使用 64 位 Windows10/11 |
