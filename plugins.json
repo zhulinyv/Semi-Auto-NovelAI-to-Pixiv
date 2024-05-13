@@ -1,6 +1,7 @@
 {
     "sanp_plugin_random_artists": {
         "name": "sanp_plugin_random_artists",
+        "type": "t2i",
         "description": "随机组合画师, 权重等来生成不同的画风串",
         "url": "https://github.com/zhulinyv/sanp_plugin_random_artists",
         "author": "[zhulinyv](https://github.com/zhulinyv)"
