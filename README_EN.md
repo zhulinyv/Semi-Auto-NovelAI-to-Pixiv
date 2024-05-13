@@ -146,7 +146,7 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [ ] ~~Add more interpolation engines~~
 + [x] Translate the rest of the page
 + [ ] Auto updata
-+ [ ] Plugins store
++ [x] Plugins store
 + [ ] Custom eraser meta data
 + [ ] Auto install plugins
 + [ ] ...

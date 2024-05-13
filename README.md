@@ -146,7 +146,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [ ] ~~添加更多插帧引擎~~
 + [x] 翻译剩余页面
 + [ ] 自动更新
-+ [ ] 插件商店
++ [x] 插件商店
 + [ ] 自定义清除元数据
 + [ ] 自动安装插件
 + [ ] ...
