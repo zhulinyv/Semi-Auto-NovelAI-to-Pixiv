@@ -149,6 +149,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 插件商店
 + [ ] 自定义清除元数据
 + [ ] 自动安装插件
++ [ ] 代理配置
 + [ ] ...
 
 ## 🤝 鸣谢

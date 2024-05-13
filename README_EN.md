@@ -149,6 +149,7 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Plugins store
 + [ ] Custom eraser meta data
 + [ ] Auto install plugins
++ [ ] Proxy setting
 + [ ] ...
 
 ## 🤝 Acknowledgements
