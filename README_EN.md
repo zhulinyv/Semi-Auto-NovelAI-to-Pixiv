@@ -51,7 +51,7 @@ Learning Gradio, trying to create a WebUI for this project.
 | Item | Description |
 |:---:|:---:|
 | NovelAI Membership | To generate images infinitely, it is recommended to have a $25/month membership. |
-| Network | To successfully send POST requests, please make sure that you can access these website: [novelai.net](novelai.net), [huggingface.co](huggingface.co), [github.com](github.com) |
+| Network | To successfully send POST requests, please make sure that you can access these website: [novelai.net](https://novelai.net), [huggingface.co](https://huggingface.co), [github.com](https://github.com) |
 | 1GB VRAM | At least 1GB of VRAM is required to use all engines for super-resolution denoising. |
 | 2GB RAM | At least 2GB of RAM is required for smooth operation of this project. |
 | Windows 10/11(x64) | To use all features, a 64-bit version of Windows 10/11 is required. |
