@@ -15,7 +15,15 @@ from utils.env import env
 from utils.jsondata import headers
 
 
-def list_to_str(str_list: list):
+def list_to_str(str_list: list[str]):
+    """列表加和字符串
+
+    Args:
+        str_list (list[str]): 字符串列表
+
+    Returns:
+        empty_str: 字符串
+    """
     empty_str = ""
     for i in str_list:
         empty_str += f"{i},"
@@ -23,6 +31,14 @@ def list_to_str(str_list: list):
 
 
 def format_str(str_: str):
+    """格式化字符串
+
+    Args:
+        str_ (str): 字符串
+
+    Returns:
+        str_: 格式化后的字符串
+    """
     str_ = str_.replace(", ", ",")
     str_ = str_.replace(",", ", ")
     str_ = str_[:-2] if str_[-2:] == ", " else str_
@@ -30,6 +46,12 @@ def format_str(str_: str):
 
 
 def sleep_for_cool(int1, int2):
+    """等待指定时间
+
+    Args:
+        int1 (int): 下限
+        int2 (int): 上限
+    """
     sleep_time = round(random.uniform(int1, int2), 3)
     logger.info(f"等待 {sleep_time} 秒后继续...")
     time.sleep(sleep_time)
@@ -37,6 +59,14 @@ def sleep_for_cool(int1, int2):
 
 
 def generate_image(json_data):
+    """发送 post 请求
+
+    Args:
+        json_data (dict): json 数据
+
+    Returns:
+        (bytes): 二进制图片
+    """
     try:
         rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
         while rep.status_code in [429, 500]:
@@ -53,6 +83,18 @@ def generate_image(json_data):
 
 
 def save_image(img_data, type_, seed, choose_game, choose_character, *args):
+    """保存图片
+
+    Args:
+        img_data (bytes): 二进制图片
+        type_ (str): 分类
+        seed (int): 种子
+        choose_game (str): 游戏
+        choose_character (str): 角色
+
+    Returns:
+        saved_path (str): 保存路径
+    """
     try:
         file_name: str = args[0]
         file_name = file_name.replace(".png", "")
@@ -86,6 +128,11 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
 
 
 def inquire_anlas():
+    """计算剩余水晶
+
+    Returns:
+        (int): 剩余水晶数量
+    """
     rep = requests.get("https://api.novelai.net/user/subscription", headers=headers)
     if rep.status_code == 200:
         return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
@@ -93,6 +140,7 @@ def inquire_anlas():
 
 
 def check_platform():
+    """检测运行平台"""
     if platform.system() == "Windows":
         pass
     else:
@@ -101,24 +149,65 @@ def check_platform():
 
 
 def read_json(path):
+    """读取 *.json 文件
+
+    Args:
+        path (str|WindowsPath): 文件路径
+
+    Returns:
+        (dict): 数据
+    """
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def read_txt(path):
+    """读取文本文件
+
+    Args:
+        path (str|WindowsPath): 文件路径
+
+    Returns:
+        (str): 数据
+    """
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
 
 def file_path2name(path) -> str:
+    """文件路径返还文件名
+
+    Args:
+        path (str|WindowsPath): 路径
+
+    Returns:
+        (str): 文件名
+    """
     return os.path.basename(path)
 
 
 def file_path2list(path) -> list[str]:
+    """文件目录返还文件名列表
+
+    Args:
+        path (str|WindowsPath): 目录
+
+    Returns:
+        (list[str]): 文件名列表
+    """
     return os.listdir(path)
 
 
 def file_namel2pathl(file_list: list, file_path):
+    """文件名列表返还文件路径列表
+
+    Args:
+        file_list (list): 文件名列表
+        file_path (_type_): 文件路径列表
+
+    Returns:
+        (list[str]): 文件路径列表
+    """
     empty_list = []
     for file in file_list:
         empty_list.append(Path(file_path) / file)
@@ -127,14 +216,35 @@ def file_namel2pathl(file_list: list, file_path):
 
 
 def file_path2abs(path):
+    """文件相对路径返还绝对路径
+
+    Args:
+        path (str|WindowsPath): 相对路径
+
+    Returns:
+        (str): 绝对路径
+    """
     return os.path.abspath(path)
 
 
 def file_path2dir(path) -> str:
+    """文件路径返还所在目录
+
+    Args:
+        path (str|WindowsPath): 路径
+
+    Returns:
+        (str): 所在目录
+    """
     return os.path.dirname(file_path2abs(path))
 
 
 def open_folder(folder):
+    """打开文件/目录
+
+    Args:
+        folder (str|WindowsPath): 文件或目录
+    """
     os.startfile(folder)
 
 

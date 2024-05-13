@@ -54,7 +54,7 @@ class Settings(BaseSettings):
     height: int = 650
     port: int = 11451
     g4f_port: int = 19198
-    theme: Union[str, None] = "NoCrypt/miku"
+    theme: Union[str, None] = ""
     webui_lang: str = "zh"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
