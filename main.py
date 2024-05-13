@@ -1188,7 +1188,8 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     env.allow_tag_edit, label=webui_lang["setting"]["description"]["allow_tag_edit"]
                 )
                 caption_prefix = gr.Textbox(
-                    value=env.caption_prefix, label=webui_lang["setting"]["description"]["caption_prefix"]
+                    value=str(env.caption_prefix).replace("\n", "\\n"),
+                    label=webui_lang["setting"]["description"]["caption_prefix"],
                 )
                 rep_tags = gr.Checkbox(env.rep_tags, label=webui_lang["setting"]["description"]["rep_tags"])
                 rep_tags_per = gr.Slider(

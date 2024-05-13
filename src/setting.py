@@ -91,7 +91,7 @@ def webui(
         pixiv_cookie=f'"{pixiv_cookie}"',
         pixiv_token=f'"{pixiv_token}"',
         allow_tag_edit=allow_tag_edit,
-        caption_prefix=f'"{caption_prefix}"',
+        caption_prefix=f'"{caption_prefix}"'.replace("\n", "\\n"),
         rep_tags=rep_tags,
         rep_tags_per=rep_tags_per,
         rep_tags_with_tag=f'"{rep_tags_with_tag}"',
