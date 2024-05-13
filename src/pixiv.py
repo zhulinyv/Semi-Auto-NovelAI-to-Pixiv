@@ -84,7 +84,13 @@ def upload(image_list, file):
     )
     # 状态
     status = pixiv_upload(
-        image_list, title, caption, labels_list, env.pixiv_cookie, env.pixiv_token, env.allow_tag_edit, True
+        image_paths=image_list,
+        title=title,
+        caption=caption,
+        labels=labels_list,
+        cookie=env.pixiv_cookie,
+        x_token=env.pixiv_token,
+        allow_tag_edit=env.allow_tag_edit,
     )
     return status
 
