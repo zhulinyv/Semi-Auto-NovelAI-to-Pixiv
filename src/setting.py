@@ -72,12 +72,6 @@ def webui(
         img_size = [1216, 832]
     else:
         pass
-    if save_path == "默认(Default)":
-        save_path = "默认"
-    elif save_path == "日期(Date)":
-        save_path = "日期"
-    elif save_path == "角色(Character)":
-        save_path = "角色"
     otp_info = modify_env(
         token=f'"{token}"',
         img_size=img_size,
