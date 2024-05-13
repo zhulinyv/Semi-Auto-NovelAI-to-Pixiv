@@ -974,13 +974,13 @@ test = ["coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock", "mypy", "pre-commit",
 
 [[package]]
 name = "gradio"
-version = "4.29.0"
+version = "4.31.0"
 description = "Python library for easily interacting with trained machine learning models"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "gradio-4.29.0-py3-none-any.whl", hash = "sha256:1fbd8ee53aabf056ea726c674174f7bea20656ce6ff2611781ec036a76c2359a"},
-    {file = "gradio-4.29.0.tar.gz", hash = "sha256:d7b293d1bf6404efb12e0220c5fa708c44c3a1133869324f949bfb1e39095e3a"},
+    {file = "gradio-4.31.0-py3-none-any.whl", hash = "sha256:6546955859c89d4372ad74eaff67bfecac0e52457215df8f5997b38f05100b3f"},
+    {file = "gradio-4.31.0.tar.gz", hash = "sha256:9d442a801353257a361b88f6a8adcb5ce7ad933f729c32a483a1ceaaab7a7e40"},
 ]
 
 [package.dependencies]
@@ -988,7 +988,7 @@ aiofiles = ">=22.0,<24.0"
 altair = ">=4.2.0,<6.0"
 fastapi = "*"
 ffmpy = "*"
-gradio-client = "0.16.1"
+gradio-client = "0.16.2"
 httpx = ">=0.24.1"
 huggingface-hub = ">=0.19.3"
 importlib-resources = ">=1.3,<7.0"
@@ -1017,13 +1017,13 @@ oauth = ["authlib", "itsdangerous"]
 
 [[package]]
 name = "gradio-client"
-version = "0.16.1"
+version = "0.16.2"
 description = "Python library for easily interacting with trained machine learning models"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "gradio_client-0.16.1-py3-none-any.whl", hash = "sha256:9da92f892d0f9e50a0a0eae7ff65aeeab0495919295dbc079703d1a99c13c980"},
-    {file = "gradio_client-0.16.1.tar.gz", hash = "sha256:28f6799366ca795fbd6ea72f328ee75ea2322417cf11d6a23ce825bca8954be1"},
+    {file = "gradio_client-0.16.2-py3-none-any.whl", hash = "sha256:9393ec8b04f90d0d447d10612b9db3248067c907b400b82a834d84a73ffab8da"},
+    {file = "gradio_client-0.16.2.tar.gz", hash = "sha256:e6770a80132055ddee013a8525b4df0cb5f73c8b85ca4b663d5dda748eaf07d8"},
 ]
 
 [package.dependencies]
@@ -2170,13 +2170,13 @@ type = ["mypy (>=1.8)"]
 
 [[package]]
 name = "pre-commit"
-version = "3.7.0"
+version = "3.7.1"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "pre_commit-3.7.0-py2.py3-none-any.whl", hash = "sha256:5eae9e10c2b5ac51577c3452ec0a490455c45a0533f7960f993a0d01e59decab"},
-    {file = "pre_commit-3.7.0.tar.gz", hash = "sha256:e209d61b8acdcf742404408531f0c37d49d2c734fd7cff2d6076083d191cb060"},
+    {file = "pre_commit-3.7.1-py2.py3-none-any.whl", hash = "sha256:fae36fd1d7ad7d6a5a1c0b0d5adb2ed1a3bda5a21bf6c3e5372073d7a11cd4c5"},
+    {file = "pre_commit-3.7.1.tar.gz", hash = "sha256:8ca3ad567bc78a4972a3f1a477e94a79d4597e8140a6e0b651c5e33899c3654a"},
 ]
 
 [package.dependencies]
@@ -3460,4 +3460,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "1225c774fb614358f6b3322756794cc8336f6e1b3c4c8355383fd36330725142"
+content-hash = "d182780d490fda7f0fc9c0f24ccd402a10582f8fb1d605e8f2b555cdc2d09880"

@@ -11,7 +11,7 @@ packages = [{include = "semi_auto_novelai_to_pixiv"}]
 python = "^3.10"
 setuptools = "^69.5.1"
 pydantic = "^2.7.1"
-gradio = "^4.29.0"
+gradio = "^4.31.0"
 pydantic-settings = "^2.2.1"
 python-dotenv = "^1.0.1"
 pillow = "^10.3.0"
@@ -30,7 +30,7 @@ moviepy = "^1.0.3"
 
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3.7.0"
+pre-commit = "^3.7.1"
 
 # https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html
 [tool.black]
