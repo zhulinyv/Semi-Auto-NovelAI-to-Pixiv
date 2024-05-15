@@ -1,4 +1,4 @@
-import multiprocessing as mp
+import threading
 from pathlib import Path
 
 import gradio as gr
@@ -256,6 +256,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         for plugin_name, plugin_module in plugins.items():
             if hasattr(plugin_module, "plugin"):
                 plugin_module.plugin()
+                logger.success(f" 成功加载插件: {plugin_name}")
             else:
                 logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
     with gr.Tab(webui_lang["i2i"]["tab"]):
@@ -1099,6 +1100,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     for plugin_name, plugin_module in plugins.items():
         if hasattr(plugin_module, "plugin"):
             plugin_module.plugin()
+            logger.success(f"成功加载插件: {plugin_name}")
         else:
             logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
     with gr.Tab(webui_lang["plugin"]["tab"]):
@@ -1305,11 +1307,11 @@ def main():
 
 
 if __name__ == "__main__":
-    p1 = mp.Process(target=g4f)
-    p2 = mp.Process(target=main)
+    thread1 = threading.Thread(target=g4f)
+    thread2 = threading.Thread(target=main)
 
-    p1.start()
-    p2.start()
+    thread1.start()
+    thread2.start()
 
     logger.opt(colors=True).success(
         """<c>
@@ -1320,6 +1322,3 @@ if __name__ == "__main__":
 ██╔╝ ██╗   ██║      ██║   ██║     ███████╗
 ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     ╚══════╝</c>"""
     )
-
-    p1.join()
-    p2.join()
