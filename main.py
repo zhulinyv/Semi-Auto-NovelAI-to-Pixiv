@@ -1,4 +1,4 @@
-import threading
+import multiprocessing as mp
 from pathlib import Path
 
 import gradio as gr
@@ -22,7 +22,7 @@ from src.waifu2x import main as upscale
 from src.water import main as water
 from utils.env import env
 from utils.g4f import main as g4f
-from utils.plugin import load_plugins, plugin_list
+from utils.plugin import install_plugin, load_plugins, plugin_list
 from utils.restart import restart
 from utils.update import check_update
 from utils.utils import gen_script, open_folder, read_json, read_txt, return_random
@@ -256,7 +256,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         for plugin_name, plugin_module in plugins.items():
             if hasattr(plugin_module, "plugin"):
                 plugin_module.plugin()
-                logger.success(f" 成功加载插件: {plugin_name}")
+                # logger.success(f" 成功加载插件: {plugin_name}")
             else:
                 logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
     with gr.Tab(webui_lang["i2i"]["tab"]):
@@ -1100,15 +1100,22 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     for plugin_name, plugin_module in plugins.items():
         if hasattr(plugin_module, "plugin"):
             plugin_module.plugin()
-            logger.success(f"成功加载插件: {plugin_name}")
+            # logger.success(f"成功加载插件: {plugin_name}")
         else:
             logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
     with gr.Tab(webui_lang["plugin"]["tab"]):
+        with gr.Row():
+            plugin_name = gr.Textbox("", label="名称(Name)")
+            output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
+            install = gr.Button("安装(Install)")
+            restart_ = gr.Button("重启(Restart)")
         gr.Markdown(plugin_list())
+        install.click(install_plugin, inputs=plugin_name, outputs=output_info)
+        restart_.click(restart)
     with gr.Tab(webui_lang["setting"]["tab"]):
         with gr.Row():
             modify_button = gr.Button("保存(Save)")
-            restar_button = gr.Button("重启(Restart)")
+            restart_button = gr.Button("重启(Restart)")
         output_info = gr.Textbox(
             value=webui_lang["setting"]["description"] if env.share else None,
             label=webui_lang["i2i"]["output_info"],
@@ -1299,7 +1306,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             ],
             outputs=output_info,
         )
-        restar_button.click(restart)
+        restart_button.click(restart)
 
 
 def main():
@@ -1307,11 +1314,11 @@ def main():
 
 
 if __name__ == "__main__":
-    thread1 = threading.Thread(target=g4f)
-    thread2 = threading.Thread(target=main)
+    p1 = mp.Process(target=g4f)
+    p2 = mp.Process(target=main)
 
-    thread1.start()
-    thread2.start()
+    p1.start()
+    p2.start()
 
     logger.opt(colors=True).success(
         """<c>
@@ -1322,3 +1329,6 @@ if __name__ == "__main__":
 ██╔╝ ██╗   ██║      ██║   ██║     ███████╗
 ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     ╚══════╝</c>"""
     )
+
+    p1.join()
+    p2.join()

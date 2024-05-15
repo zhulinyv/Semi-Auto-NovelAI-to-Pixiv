@@ -148,7 +148,7 @@ If your want function do not here, please submit issue or join my QQ group 63234
 + [ ] Auto updata
 + [x] Plugins store
 + [x] Custom eraser meta data
-+ [ ] Auto install plugins
++ [x] Auto install plugins
 + [x] Proxy setting
 + [ ] ...
 
