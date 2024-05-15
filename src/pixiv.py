@@ -19,18 +19,6 @@ from utils.utils import file_path2list, format_str, list_to_str, read_json, slee
 def upload(image_list, file):
     image_info = get_img_info(image_list[-1])
 
-    if env.remove_info:
-        metadata = PngInfo()
-        metadata.add_text("None", env.meta_data)
-        for file in image_list:
-            logger.warning(f"正在清除 {file} 的元数据...")
-            with Image.open(file) as img:
-                img = inject_data(
-                    img, metadata, ["Title", "Description ", "Software", "Source", "Generation time", "Comment"]
-                )
-                img.save(file)
-            logger.success("清除成功!")
-
     try:
         image_info["Software"] == "NovelAI"
         img_comment = json.loads(image_info["Comment"])
@@ -44,6 +32,19 @@ def upload(image_list, file):
             prompt = format_str(prompt)
             prompt += f", {env.rep_tags_with_tag}" * int(num * (1 - env.rep_tags_per))
         caption = env.caption_prefix + "\n----------\n" + prompt
+
+        if env.remove_info:
+            metadata = PngInfo()
+            metadata.add_text("None", env.meta_data)
+            for file_ in image_list:
+                logger.warning(f"正在清除 {file_} 的元数据...")
+                with Image.open(file_) as img:
+                    img = inject_data(
+                        img, metadata, ["Title", "Description ", "Software", "Source", "Generation time", "Comment"]
+                    )
+                    img.save(file_)
+                logger.success("清除成功!")
+
     except KeyError:
         logger.error("不是 NovelAI 生成的图片!")
         caption = env.caption_prefix
