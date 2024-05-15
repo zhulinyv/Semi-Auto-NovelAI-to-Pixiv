@@ -137,7 +137,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 文生图指定数量
 + [x] 文生图种子点击切换随机
 + [x] 配置项添加是否还原图片信息
-+ [ ] 补全独立脚本生成
++ [x] 补全独立脚本生成
 + [x] 图片保存分类
 + [x] 支持非文生图插件
 + [x] 视频转绘

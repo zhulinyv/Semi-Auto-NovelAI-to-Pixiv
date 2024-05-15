@@ -165,9 +165,12 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             with gr.Row():
                 with gr.Column(scale=8):
                     gr.Markdown(webui_lang["t2i"]["description"])
-                folder = gr.Textbox(Path("./output/vibe"), visible=False)
-                open_folder_ = gr.Button(webui_lang["t2i"]["open_folder"], scale=1)
-                open_folder_.click(open_folder, inputs=folder)
+                with gr.Column(scale=1):
+                    folder = gr.Textbox(Path("./output/vibe"), visible=False)
+                    open_folder_ = gr.Button(webui_lang["t2i"]["open_folder"])
+                    open_folder_.click(open_folder, inputs=folder)
+                    script_type = gr.Textbox("vibe", visible=False)
+                    script_gen = gr.Button(webui_lang["t2i"]["script_gen"])
             with gr.Column():
                 with gr.Row():
                     with gr.Column(scale=3):
@@ -248,6 +251,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             )
             generate_forever.click(fn=vibe, inputs=[blue_imgs, input_imgs], outputs=[output_img, output_img_])
             stop_button.click(None, None, None, cancels=[cancel_event])
+            script_gen.click(gen_script, inputs=[blue_imgs, input_imgs], outputs=None)
         plugins = load_plugins(Path("./plugins/t2i"))
         for plugin_name, plugin_module in plugins.items():
             if hasattr(plugin_module, "plugin"):

@@ -137,7 +137,7 @@ If your want function do not in t2i, please submit issue or join my QQ group 632
 + [x] Specify the number of Text-to-Image outputs
 + [x] Wensheng diagram seed click to switch randomly
 + [x] Add whether to restore image information in the configuration item
-+ [ ] Complete independent script generation
++ [x] Complete independent script generation
 + [x] Picture save category
 + [x] Support for non-literate diagram plugins
 + [x] Video redrawing

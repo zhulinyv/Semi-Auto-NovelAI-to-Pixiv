@@ -274,6 +274,16 @@ main(True, "{}", "{}")
                     args[0], args[1]
                 )
             )
+        elif script_type == "vibe":
+            script.write(
+                """from src.vibe import vibe
+
+while 1:
+    vibe({}, "{}")
+""".format(
+                    args[0], args[1]
+                )
+            )
         else:
             ...
 

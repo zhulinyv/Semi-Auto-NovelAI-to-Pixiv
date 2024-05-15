@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     # 必需
-    token: str = None
+    token: Union[str, None] = None
 
     # 文生图
     img_size: Union[int, list[int]] = -1
@@ -26,10 +26,10 @@ class Settings(BaseSettings):
     hires_noise: float = 0
 
     # 上传 Pixiv
-    pixiv_cookie: str = None
-    pixiv_token: str = None
+    pixiv_cookie: Union[str, None] = None
+    pixiv_token: Union[str, None] = None
     allow_tag_edit: bool = True
-    caption_prefix: str = None
+    caption_prefix: Union[str, None] = None
     rep_tags: bool = True
     rep_tags_per: float = 0.5
     rep_tags_with_tag: str = "杂鱼~"
@@ -54,7 +54,7 @@ class Settings(BaseSettings):
     height: int = 650
     port: int = 11451
     g4f_port: int = 19198
-    theme: Union[str, None] = ""
+    theme: Union[str, None] = None
     webui_lang: str = "zh"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
