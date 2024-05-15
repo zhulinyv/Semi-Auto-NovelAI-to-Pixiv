@@ -2,7 +2,7 @@
   <img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/0fbed41e-1b2b-44f4-9562-6eb7aeeb2c7c" width="256" height="256" alt="SANP"></a>
 </p>
 <h1 align="center">Semi-Auto-NovelAI-to-Pixiv</h1>
-<h4 align="center">✨Generate Images with NovelAI and Upload to Pixiv✨</h4>
+<h4 align="center">✨NovelAI batch script with WebUI✨</h4>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Python-3.10+-blue">
@@ -44,7 +44,7 @@ Learning Gradio, trying to create a WebUI for this project.
 
 ## 🔌 Plugins
 
-[Plugin list](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/plugins.json)
+### [Plugin list](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/plugins.json)
 
 ## 💻 Configuration Requirements
 
