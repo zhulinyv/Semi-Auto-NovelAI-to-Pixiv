@@ -1143,11 +1143,11 @@ def main():
     <style>
         #myiframe {
             width: 100%;
-            height: 650px;
+            height: 600px;
         }
     </style>
     """.replace(
-                    "650", str(env.height)
+                    "600", str(env.height)
                 ).replace(
                     "19198", str(env.g4f_port)
                 )
@@ -1246,6 +1246,9 @@ def main():
                         step=0.1,
                         label=webui_lang["setting"]["description"]["hires_noise"],
                     )
+                    i2i_cool_time = gr.Slider(
+                        6, 120, env.i2i_cool_time, step=1, label=webui_lang["setting"]["description"]["i2i_cool_time"]
+                    )
             with gr.Tab(webui_lang["setting"]["sub_tab"]["pixiv"]):
                 pixiv_cookie = gr.Textbox(
                     value=env.pixiv_cookie,
@@ -1336,6 +1339,7 @@ def main():
                     magnification,
                     hires_strength,
                     hires_noise,
+                    i2i_cool_time,
                     pixiv_cookie,
                     pixiv_token,
                     allow_tag_edit,

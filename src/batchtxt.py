@@ -41,7 +41,7 @@ def main(forever: bool, pref, position):
         generate_image(json_for_t2i), "t2i", str(seed) + file.replace(".txt", "").replace("_", "-"), "None", "None"
     )
 
-    sleep_for_cool(env.t2i_cool_time - 6, env.t2i_cool_time + 6)
+    sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
     if forever:
         return main(True)

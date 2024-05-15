@@ -123,6 +123,6 @@ def vibe(blue_imgs: bool, input_imgs):
         choose_game = choose_character = "None"
     json_for_vibe, seed = prepare_json(prompt, sm, scale, negative, input_imgs)
     saved_path = save_image(generate_image(json_for_vibe), "vibe", seed, choose_game, choose_character)
-    sleep_for_cool(env.t2i_cool_time - 6, env.t2i_cool_time + 6)
+    sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
     return saved_path, saved_path

@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     sm_dyn: bool = False
     noise_schedule: str = "native"
     seed: int = -1
-    t2i_cool_time: int = 12
+    t2i_cool_time: int = 9
     save_path: str = "默认(Default)"
     proxy: Union[str, None] = None
 
@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     magnification: float = 1.5
     hires_strength: float = 0.5
     hires_noise: float = 0
+    i2i_cool_time: int = 12
 
     # 上传 Pixiv
     pixiv_cookie: Union[str, None] = None

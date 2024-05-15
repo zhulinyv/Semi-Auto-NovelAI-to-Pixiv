@@ -112,10 +112,10 @@ def main(input_path):
                 )
                 logger.warning("删除小图...")
                 os.remove(img_path)
-                sleep_for_cool(16, 48)
+                sleep_for_cool(env.i2i_cool_time - 3, env.i2i_cool_time + 3)
                 break
             except Exception as e:
-                sleep_for_cool(8, 24)
+                sleep_for_cool(4, 8)
                 times += 1
                 logger.error(f"出现错误: {e}")
                 logger.warning(f"重试 {times}/5...")
