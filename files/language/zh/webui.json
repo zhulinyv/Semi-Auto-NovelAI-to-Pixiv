@@ -155,7 +155,8 @@
             "g4f_port": "G4F 的网页端口号",
             "theme": "WebUI 界面主题",
             "webui_lang": "WebUI界面语言",
-            "warning": "检测到已开启分享链接, 隐藏部分隐私配置!"
+            "warning": "检测到已开启分享链接, 隐藏部分隐私配置!",
+            "skip_update_check": "跳过更新检查"
         }
     },
     "info": {

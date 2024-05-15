@@ -105,7 +105,7 @@ For legacy users: It's no longer recommended to run individual scripts; please u
 
 If it's really necessary (for example: if the browser has been added to the sleep whitelist but still can't continue generating on inactive pages), please configure the directory and other parameters in the WebUI and click **Generate Standalone Script** (you can also read the source code yourself to write your own standalone script), then run the `run_stand_alone_scripts.bat` in the root directory.
 
-If your want function do not in t2i, please submit issue or join my QQ group 632344043 or turn to: [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+If your want function do not here, please submit issue or join my QQ group 632344043 or turn to: [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
 
 ## 📖 To-Do
 

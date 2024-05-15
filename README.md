@@ -105,7 +105,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 
 如果真的需要(例如: 浏览器已添加休眠白名单但在非活动页面无法继续生成的情况), 请在 WebUI 中配置好目录等参数并单击**生成独立脚本**(你也可以自己阅读源代码编写独立的脚本), 然后运行根目录下的 **run_stand_alone_scripts.bat**
 
-如果文生图没有想要的功能，请提交 issue，加群 632344043 或移步: [插件开发 Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+如果没有想要的功能，请提交 issue，加群 632344043 或移步: [插件开发 Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
 
 ## 📖 待办
 

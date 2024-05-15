@@ -56,6 +56,7 @@ class Settings(BaseSettings):
     g4f_port: int = 19198
     theme: Union[str, None] = None
     webui_lang: str = "zh"
+    skip_update_check: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

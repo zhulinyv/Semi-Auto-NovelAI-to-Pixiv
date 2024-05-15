@@ -54,6 +54,7 @@ def webui(
     g4f_port,
     theme,
     webui_lang,
+    skip_update_check,
 ):
     position = []
     if ul:
@@ -110,5 +111,6 @@ def webui(
         g4f_port=g4f_port,
         theme=f'"{theme}"',
         webui_lang=f'"{webui_lang}"',
+        skip_update_check=skip_update_check,
     )
     return otp_info

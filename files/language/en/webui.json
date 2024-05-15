@@ -155,7 +155,8 @@
             "g4f_port": "Port number for G4F web",
             "theme": "Theme of WebUI interface",
             "webui_lang": "Language of WebUI interface",
-            "warning": "Detected shared link enabled, some privacy configurations are hidden!"
+            "warning": "Detected shared link enabled, some privacy configurations are hidden!",
+            "skip_update_check": "Skip the update check"
         }
     },
     "info": {

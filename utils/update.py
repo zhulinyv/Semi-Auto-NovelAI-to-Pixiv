@@ -4,10 +4,13 @@ import git
 import requests
 from git.exc import InvalidGitRepositoryError
 
+from utils.env import env
 from utils.utils import read_txt
 
 
 def check_update():
+    if env.skip_update_check:
+        return ""
     resp = requests.get("https://api.github.com/repos/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commits")
     data = resp.json()
     if not isinstance(data, list):
