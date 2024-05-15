@@ -19,7 +19,7 @@ from utils.utils import file_path2list, format_str, list_to_str, read_json, slee
 def upload(image_list, file):
     image_info = get_img_info(image_list[-1])
 
-    if env.revert_info:
+    if env.remove_info:
         metadata = PngInfo()
         metadata.add_text("None", env.meta_data)
         for file in image_list:
@@ -112,8 +112,8 @@ def upload(image_list, file):
 
 
 def main(file_path):
-    image_list = file_path2list(file_path)
-    for file in image_list:
+    file_list = file_path2list(file_path)
+    for file in file_list:
         times = 0
         while times <= 5:
             try:
