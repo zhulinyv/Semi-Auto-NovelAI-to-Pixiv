@@ -1244,7 +1244,9 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             g4f_port = gr.Textbox(env.g4f_port, label=webui_lang["setting"]["description"]["g4f_port"])
             theme = gr.Textbox(env.theme, label=webui_lang["setting"]["description"]["theme"])
             webui_lang_ = gr.Textbox(value=env.webui_lang, label=webui_lang["setting"]["description"]["webui_lang"])
-            skip_update_check = gr.Checkbox(False, label=webui_lang["setting"]["description"]["skip_update_check"])
+            skip_update_check = gr.Checkbox(
+                env.skip_update_check, label=webui_lang["setting"]["description"]["skip_update_check"]
+            )
         with gr.Tab(webui_lang["setting"]["sub_tab"]["other"]):
             gr.Markdown(other_setting)
         modify_button.click(
