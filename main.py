@@ -1282,6 +1282,7 @@ def main():
                     step=1,
                     label=webui_lang["setting"]["description"]["pixiv_cool_time"],
                 )
+                remove_info_ = gr.Checkbox(True, label=webui_lang["setting"]["description"]["remove_info"])
             with gr.Tab(webui_lang["setting"]["sub_tab"]["mosaic"]):
                 neighbor = gr.Slider(
                     0, 0.25, env.neighbor, step=0.0001, label=webui_lang["setting"]["description"]["neighbor"]
@@ -1348,6 +1349,7 @@ def main():
                     rep_tags_per,
                     rep_tags_with_tag,
                     pixiv_cool_time,
+                    remove_info_,
                     neighbor,
                     alpha,
                     water_height,

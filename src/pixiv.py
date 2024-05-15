@@ -3,10 +3,13 @@ from pathlib import Path
 
 import ujson as json
 from loguru import logger
+from PIL import Image
+from PIL.PngImagePlugin import PngInfo
 
 from utils.env import env
 from utils.error import UploadError, UploadTooFastError
 from utils.imgtools import get_img_info
+from utils.naimeta import inject_data
 from utils.pixivposter import pixiv_upload
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
@@ -15,6 +18,19 @@ from utils.utils import file_path2list, format_str, list_to_str, read_json, slee
 
 def upload(image_list, file):
     image_info = get_img_info(image_list[-1])
+
+    if env.revert_info:
+        metadata = PngInfo()
+        metadata.add_text("None", env.meta_data)
+        for file in image_list:
+            logger.warning(f"正在清除 {file} 的元数据...")
+            with Image.open(file) as img:
+                img = inject_data(
+                    img, metadata, ["Title", "Description ", "Software", "Source", "Generation time", "Comment"]
+                )
+                img.save(file)
+            logger.success("清除成功!")
+
     try:
         image_info["Software"] == "NovelAI"
         img_comment = json.loads(image_info["Comment"])
@@ -96,8 +112,8 @@ def upload(image_list, file):
 
 
 def main(file_path):
-    file_list = file_path2list(file_path)
-    for file in file_list:
+    image_list = file_path2list(file_path)
+    for file in image_list:
         times = 0
         while times <= 5:
             try:

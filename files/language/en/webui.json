@@ -142,6 +142,7 @@
             "rep_tags_per": "How much to replace (default is 0.5 for replacing half)",
             "rep_tags_with_tag": "What to replace tags with",
             "pixiv_cool_time": "Cooling time for uploading to Pixiv (in minutes, fluctuates within 5 minutes)",
+            "remove_info": "Remove PNG info when upload",
             "neighbor": "Side length of square mosaic relative to image",
             "meta_data": "Information added when clearing meta data",
             "revert_info_": "Whether to restore the picture information after the operation is completed",
