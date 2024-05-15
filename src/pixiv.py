@@ -5,7 +5,7 @@ import ujson as json
 from loguru import logger
 
 from utils.env import env
-from utils.error import UploadError, UploadTooFastError, WrongImgError
+from utils.error import UploadError, UploadTooFastError
 from utils.imgtools import get_img_info
 from utils.pixivposter import pixiv_upload
 
@@ -28,9 +28,10 @@ def upload(image_list, file):
             prompt = format_str(prompt)
             prompt += f", {env.rep_tags_with_tag}" * int(num * (1 - env.rep_tags_per))
         caption = env.caption_prefix + "\n----------\n" + prompt
-    except WrongImgError:
+    except KeyError:
         logger.error("不是 NovelAI 生成的图片!")
         caption = env.caption_prefix
+        img_comment = {"prompt": ""}
     # 标题
     data = read_json("./files/favorite.json")
     name_list = file.replace(".png", "").split("_")
@@ -79,8 +80,7 @@ def upload(image_list, file):
 图片: {image_list}
 标题: {title}
 描述: {caption}
-标签: {labels_list}
-"""
+标签: {labels_list}"""
     )
     # 状态
     status = pixiv_upload(
