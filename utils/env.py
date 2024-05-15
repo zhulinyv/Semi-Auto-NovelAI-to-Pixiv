@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     seed: int = -1
     t2i_cool_time: int = 12
     save_path: str = "默认(Default)"
+    proxy: Union[str, None] = None
 
     # 图生图
     magnification: float = 1.5

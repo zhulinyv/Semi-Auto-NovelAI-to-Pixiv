@@ -149,7 +149,7 @@ If your want function do not here, please submit issue or join my QQ group 63234
 + [x] Plugins store
 + [x] Custom eraser meta data
 + [ ] Auto install plugins
-+ [ ] Proxy setting
++ [x] Proxy setting
 + [ ] ...
 
 ## 🤝 Acknowledgements

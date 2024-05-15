@@ -1157,6 +1157,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                     value=env.save_path,
                     label=webui_lang["setting"]["description"]["save_path"],
                 )
+                proxy = gr.Textbox(env.proxy, label=webui_lang["setting"]["description"]["proxy"])
         with gr.Tab(webui_lang["setting"]["sub_tab"]["i2i"]):
             with gr.Column():
                 magnification = gr.Slider(
@@ -1264,6 +1265,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
                 seed,
                 t2i_cool_time,
                 save_path,
+                proxy,
                 magnification,
                 hires_strength,
                 hires_noise,

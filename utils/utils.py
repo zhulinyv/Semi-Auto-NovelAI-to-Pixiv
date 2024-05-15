@@ -67,11 +67,22 @@ def generate_image(json_data):
     Returns:
         (bytes): 二进制图片
     """
+    if env.proxy != "xxx:xxx":
+        proxies = {
+            "http": "http://" + env.proxy,
+            "https": "http://" + env.proxy,
+        }
+    else:
+        proxies = None
     try:
-        rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
+        rep = requests.post(
+            "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
+        )
         while rep.status_code in [429, 500]:
             sleep_for_cool(3, 9)
-            rep = requests.post("https://image.novelai.net/ai/generate-image", json=json_data, headers=headers)
+            rep = requests.post(
+                "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
+            )
             logger.debug(f">>>>> {rep.status_code}")
         rep.raise_for_status()
         logger.success("生成成功!")

@@ -156,7 +156,8 @@
             "theme": "WebUI 界面主题",
             "webui_lang": "WebUI界面语言",
             "warning": "检测到已开启分享链接, 隐藏部分隐私配置!",
-            "skip_update_check": "跳过更新检查"
+            "skip_update_check": "跳过更新检查",
+            "proxy": "生成图片使用的代理"
         }
     },
     "info": {
