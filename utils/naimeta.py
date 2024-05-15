@@ -40,7 +40,7 @@ class LSBInjector:
         self.put_bytes(string.encode("utf-8"))
 
 
-def serialize_metadata(metadata: PngInfo) -> bytes:
+def serialize_metadata(metadata: PngInfo, choose_to_rm: list[str]) -> bytes:
     # Extract metadata from PNG chunks
     data = {
         k: v
@@ -53,7 +53,7 @@ def serialize_metadata(metadata: PngInfo) -> bytes:
         ]
     }
     # Save space by getting rid of reduntant metadata (Title is static)
-    for sth in ["Title", "Description ", "Software", "Source", "Generation time", "Comment"]:
+    for sth in choose_to_rm:
         if sth in data:
             del data[sth]
     # Encode and compress data using gzip
@@ -61,12 +61,12 @@ def serialize_metadata(metadata: PngInfo) -> bytes:
     return gzip.compress(bytes(data_encoded, "utf-8"))
 
 
-def inject_data(image: Image.Image, data: PngInfo) -> Image.Image:
+def inject_data(image: Image.Image, data: PngInfo, choose_to_rm: list[str]) -> Image.Image:
     image = image.convert("RGBA")
     pixels = np.array(image)
     injector = LSBInjector(pixels)
     injector.put_string("stealth_pngcomp")
-    data = serialize_metadata(data)
+    data = serialize_metadata(data, choose_to_rm)
     injector.put_32bit_integer(len(data) * 8)
     injector.put_bytes(data)
     return Image.fromarray(injector.data)

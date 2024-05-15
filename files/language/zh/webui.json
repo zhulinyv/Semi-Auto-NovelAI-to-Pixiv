@@ -94,7 +94,9 @@
         "tab_re": "还原",
         "tab_ex": "导出",
         "info_file_path": "图片信息文件目录",
-        "input_path": "待还原图片目录"
+        "input_path": "待还原图片目录",
+        "save_path": "保存目录",
+        "choose_to_rm": "选择要清除的内容"
     },
     "maigic analysis": {
         "tab": "法术解析"

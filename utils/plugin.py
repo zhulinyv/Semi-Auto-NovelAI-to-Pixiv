@@ -32,16 +32,26 @@ def load_plugins(directory):
 
 def plugin_list():
     plugins: dict = read_json("./plugins.json")
-    md = """| 名称(Name) | 类型(Type) | 描述(Description) | 链接(URL) | 作者(Author) |
-| :---: | :---: | :---: | :---: | :---: |
+    md = """| 名称(Name) | 类型(Type) | 描述(Description) | 链接(URL) | 作者(Author) | 状态(Status) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
 """
     for plugin in list(plugins.keys()):
-        md += "| {} | {} | {} | [{}]({}) | {} |\n".format(
+        if os.path.exists(
+            "./plugins/{}/{}".format(
+                plugins[plugin]["type"],
+                plugins[plugin]["name"],
+            )
+        ):
+            status = "已安装(Installed)"
+        else:
+            status = "未安装(Uninstalled)"
+        md += "| {} | {} | {} | [{}]({}) | {} | {} |\n".format(
             plugins[plugin]["name"],
             plugins[plugin]["type"],
             plugins[plugin]["description"],
             plugins[plugin]["url"],
             plugins[plugin]["url"],
             plugins[plugin]["author"],
+            status,
         )
     return md

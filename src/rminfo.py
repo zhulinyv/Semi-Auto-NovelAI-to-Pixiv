@@ -14,14 +14,14 @@ from utils.naimeta import inject_data
 from utils.utils import file_path2list
 
 
-def remove_info(input_path, output_path):
+def remove_info(input_path, output_path, choose_to_rm):
     metadata = PngInfo()
     metadata.add_text("None", env.meta_data)
     file_list = file_path2list(input_path)
     for file in file_list:
         logger.warning(f"正在清除 {file} 的元数据...")
         with Image.open(Path(input_path) / file) as img:
-            img = inject_data(img, metadata)
+            img = inject_data(img, metadata, choose_to_rm)
             img.save(Path(output_path) / file)
         logger.success("清除成功!")
     return f"清除成功! 图片已保存到 {output_path}"

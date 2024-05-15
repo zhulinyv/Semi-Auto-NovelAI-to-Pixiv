@@ -163,7 +163,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             script_gen.click(gen_script, inputs=[script_type, pref, position])
         with gr.Tab("Vibe"):
             with gr.Row():
-                with gr.Column(scale=8):
+                with gr.Column(scale=5):
                     gr.Markdown(webui_lang["t2i"]["description"])
                 with gr.Column(scale=1):
                     folder = gr.Textbox(Path("./output/vibe"), visible=False)
@@ -962,10 +962,15 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
             open_folder_.click(open_folder, inputs=folder)
         with gr.Tab(webui_lang["rm png info"]["tab_rm"]):
             start_button = gr.Button(webui_lang["water mark"]["generate_button"])
+            choose_to_rm = gr.CheckboxGroup(
+                ["Title", "Description ", "Software", "Source", "Generation time", "Comment"],
+                value=["Title", "Description ", "Software", "Source", "Generation time", "Comment"],
+                label=webui_lang["rm png info"]["choose_to_rm"],
+            )
             input_path = gr.Textbox(label=webui_lang["i2i"]["input_path"])
-            output_path = gr.Textbox("./output/info_removed", visible=False)
+            output_path = gr.Textbox("./output/info_removed", label=webui_lang["rm png info"]["save_path"])
             output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
-            start_button.click(fn=remove_info, inputs=[input_path, output_path], outputs=[output_info])
+            start_button.click(fn=remove_info, inputs=[input_path, output_path, choose_to_rm], outputs=[output_info])
         with gr.Tab(webui_lang["rm png info"]["tab_re"]):
             start_button = gr.Button(webui_lang["water mark"]["generate_button"])
             info_file_path = gr.Textbox(label=webui_lang["rm png info"]["info_file_path"])
@@ -975,7 +980,7 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
         with gr.Tab(webui_lang["rm png info"]["tab_ex"]):
             start_button = gr.Button(webui_lang["water mark"]["generate_button"])
             input_path = gr.Textbox(label=webui_lang["i2i"]["input_path"])
-            output_path = gr.Textbox("./output/info_file", visible=False)
+            output_path = gr.Textbox("./output/info_file", label=webui_lang["rm png info"]["save_path"])
             output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
             start_button.click(fn=export_info, inputs=[input_path, output_path], outputs=output_info)
     with gr.Tab(webui_lang["maigic analysis"]["tab"]):
@@ -1099,198 +1104,195 @@ with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
     with gr.Tab(webui_lang["plugin"]["tab"]):
         gr.Markdown(plugin_list())
     with gr.Tab(webui_lang["setting"]["tab"]):
-        with gr.Tab(webui_lang["setting"]["tab"]):
-            with gr.Row():
-                modify_button = gr.Button("保存(Save)")
-                restar_button = gr.Button("重启(Restart)")
-            output_info = gr.Textbox(
-                value=webui_lang["setting"]["description"] if env.share else None,
-                label=webui_lang["i2i"]["output_info"],
+        with gr.Row():
+            modify_button = gr.Button("保存(Save)")
+            restar_button = gr.Button("重启(Restart)")
+        output_info = gr.Textbox(
+            value=webui_lang["setting"]["description"] if env.share else None,
+            label=webui_lang["i2i"]["output_info"],
+        )
+        with gr.Tab(webui_lang["setting"]["sub_tab"]["necessary"]):
+            token = gr.Textbox(
+                value=env.token,
+                label=webui_lang["setting"]["description"]["token"],
+                lines=2,
+                visible=True if not env.share else False,
             )
-            with gr.Tab(webui_lang["setting"]["sub_tab"]["necessary"]):
-                token = gr.Textbox(
-                    value=env.token,
-                    label=webui_lang["setting"]["description"]["token"],
-                    lines=2,
-                    visible=True if not env.share else False,
+        with gr.Tab(webui_lang["setting"]["sub_tab"]["t2i"]):
+            with gr.Column():
+                img_size = gr.Radio(
+                    [-1, "832x1216", "1216x832"],
+                    value=env.img_size,
+                    label=webui_lang["setting"]["description"]["img_size"],
                 )
-            with gr.Tab(webui_lang["setting"]["sub_tab"]["t2i"]):
-                with gr.Column():
-                    img_size = gr.Radio(
-                        [-1, "832x1216", "1216x832"],
-                        value=env.img_size,
-                        label=webui_lang["setting"]["description"]["img_size"],
-                    )
-                    scale = gr.Slider(0, 10, env.scale, step=0.1, label=webui_lang["setting"]["description"]["scale"])
-                    censor = gr.Checkbox(value=env.censor, label=webui_lang["setting"]["description"]["censor"])
-                    sampler = gr.Radio(
-                        [
-                            "k_euler",
-                            "k_euler_ancestral",
-                            "k_dpmpp_2s_ancestral",
-                            "k_dpmpp_2m",
-                            "k_dpmpp_sde",
-                            "ddim_v3",
-                        ],
-                        value=env.sampler,
-                        label=webui_lang["setting"]["description"]["sampler"],
-                    )
-                    steps = gr.Slider(1, 28, env.steps, step=1, label=webui_lang["setting"]["description"]["steps"])
-                    with gr.Row():
-                        sm = gr.Checkbox(env.sm, label=webui_lang["setting"]["description"]["sm"])
-                        sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_lang["setting"]["description"]["sm"])
-                    noise_schedule = gr.Radio(
-                        ["native", "karras", "exponential", "polyexponential"],
-                        value=env.noise_schedule,
-                        label=webui_lang["setting"]["description"]["noise_schedule"],
-                    )
-                    seed = gr.Textbox(env.seed, label=webui_lang["setting"]["description"]["seed"])
-                    t2i_cool_time = gr.Slider(
-                        6, 120, env.t2i_cool_time, step=1, label=webui_lang["setting"]["description"]["t2i_cool_time"]
-                    )
-                    save_path = gr.Radio(
-                        ["默认(Default)", "日期(Date)", "角色(Character)"],
-                        value=env.save_path,
-                        label=webui_lang["setting"]["description"]["save_path"],
-                    )
-            with gr.Tab(webui_lang["setting"]["sub_tab"]["i2i"]):
-                with gr.Column():
-                    magnification = gr.Slider(
-                        1,
-                        1.5,
-                        env.magnification,
-                        step=0.1,
-                        label=webui_lang["setting"]["description"]["magnification"],
-                    )
-                    hires_strength = gr.Slider(
-                        0,
-                        1,
-                        env.hires_strength,
-                        step=0.1,
-                        label=webui_lang["setting"]["description"]["hires_strength"],
-                    )
-                    hires_noise = gr.Slider(
-                        0,
-                        1,
-                        env.hires_noise,
-                        step=0.1,
-                        label=webui_lang["setting"]["description"]["hires_noise"],
-                    )
-            with gr.Tab(webui_lang["setting"]["sub_tab"]["pixiv"]):
-                pixiv_cookie = gr.Textbox(
-                    value=env.pixiv_cookie,
-                    label=webui_lang["setting"]["description"]["pixiv_cookie"],
-                    lines=7,
-                    visible=True if not env.share else False,
+                scale = gr.Slider(0, 10, env.scale, step=0.1, label=webui_lang["setting"]["description"]["scale"])
+                censor = gr.Checkbox(value=env.censor, label=webui_lang["setting"]["description"]["censor"])
+                sampler = gr.Radio(
+                    [
+                        "k_euler",
+                        "k_euler_ancestral",
+                        "k_dpmpp_2s_ancestral",
+                        "k_dpmpp_2m",
+                        "k_dpmpp_sde",
+                        "ddim_v3",
+                    ],
+                    value=env.sampler,
+                    label=webui_lang["setting"]["description"]["sampler"],
                 )
-                pixiv_token = gr.Textbox(
-                    value=env.pixiv_token,
-                    label=webui_lang["setting"]["description"]["pixiv_token"],
-                    visible=True if not env.share else False,
-                )
-                allow_tag_edit = gr.Checkbox(
-                    env.allow_tag_edit, label=webui_lang["setting"]["description"]["allow_tag_edit"]
-                )
-                caption_prefix = gr.Textbox(
-                    value=str(env.caption_prefix).replace("\n", "\\n"),
-                    label=webui_lang["setting"]["description"]["caption_prefix"],
-                )
-                rep_tags = gr.Checkbox(env.rep_tags, label=webui_lang["setting"]["description"]["rep_tags"])
-                rep_tags_per = gr.Slider(
-                    0, 1, env.rep_tags_per, step=0.1, label=webui_lang["setting"]["description"]["rep_tags_per"]
-                )
-                rep_tags_with_tag = gr.Textbox(
-                    value=env.rep_tags_with_tag, label=webui_lang["setting"]["description"]["rep_tags_with_tag"]
-                )
-                pixiv_cool_time = gr.Slider(
-                    10,
-                    360,
-                    env.pixiv_cool_time,
-                    step=1,
-                    label=webui_lang["setting"]["description"]["pixiv_cool_time"],
-                )
-            with gr.Tab(webui_lang["setting"]["sub_tab"]["mosaic"]):
-                neighbor = gr.Slider(
-                    0, 0.25, env.neighbor, step=0.0001, label=webui_lang["setting"]["description"]["neighbor"]
-                )
-            with gr.Tab(webui_lang["setting"]["sub_tab"]["eraser"]):
-                meta_data = gr.Textbox(value=env.meta_data, label=webui_lang["setting"]["description"]["meta_data"])
-                revert_info_ = gr.Radio(
-                    choices=[True, False],
-                    value=env.revert_info,
-                    label=webui_lang["setting"]["description"]["revert_info_"],
-                )
-            with gr.Tab(webui_lang["setting"]["sub_tab"]["water"]):
-                alpha = gr.Slider(0, 1, env.alpha, label=webui_lang["setting"]["description"]["alpha"])
-                water_height = gr.Slider(
-                    10, 300, env.water_height, label=webui_lang["setting"]["description"]["water_height"]
-                )
-                gr.Markdown(webui_lang["setting"]["description"]["position"])
+                steps = gr.Slider(1, 28, env.steps, step=1, label=webui_lang["setting"]["description"]["steps"])
                 with gr.Row():
-                    ul = gr.Checkbox(True if "左上" in env.position else False, label="左上(Upper Left)")
-                    ll = gr.Checkbox(True if "左下" in env.position else False, label="左下(Lower Left)")
-                    ur = gr.Checkbox(True if "右上" in env.position else False, label="右上(Upper Right)")
-                    lr = gr.Checkbox(True if "右下" in env.position else False, label="右下(Upper Right)")
-                water_num = gr.Slider(
-                    1, 10, env.water_num, step=1, label=webui_lang["setting"]["description"]["water_num"]
+                    sm = gr.Checkbox(env.sm, label=webui_lang["setting"]["description"]["sm"])
+                    sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_lang["setting"]["description"]["sm"])
+                noise_schedule = gr.Radio(
+                    ["native", "karras", "exponential", "polyexponential"],
+                    value=env.noise_schedule,
+                    label=webui_lang["setting"]["description"]["noise_schedule"],
                 )
-                rotate = gr.Slider(0, 360, 45, step=1, label=webui_lang["setting"]["description"]["rotate"])
-            with gr.Tab("WebUI"):
-                share = gr.Checkbox(env.share, label=webui_lang["setting"]["description"]["share"])
-                height = gr.Slider(300, 1200, env.height, step=10, label=webui_lang["setting"]["description"]["height"])
-                port = gr.Textbox(value=env.port, label=webui_lang["setting"]["description"]["port"])
-                g4f_port = gr.Textbox(env.g4f_port, label=webui_lang["setting"]["description"]["g4f_port"])
-                theme = gr.Textbox(env.theme, label=webui_lang["setting"]["description"]["theme"])
-                webui_lang_ = gr.Textbox(value=env.webui_lang, label=webui_lang["setting"]["description"]["webui_lang"])
-            with gr.Tab(webui_lang["setting"]["sub_tab"]["other"]):
-                gr.Markdown(other_setting)
-            modify_button.click(
-                setting,
-                inputs=[
-                    token,
-                    img_size,
-                    scale,
-                    censor,
-                    sampler,
-                    steps,
-                    sm,
-                    sm_dyn,
-                    noise_schedule,
-                    seed,
-                    t2i_cool_time,
-                    save_path,
-                    magnification,
-                    hires_strength,
-                    hires_noise,
-                    pixiv_cookie,
-                    pixiv_token,
-                    allow_tag_edit,
-                    caption_prefix,
-                    rep_tags,
-                    rep_tags_per,
-                    rep_tags_with_tag,
-                    pixiv_cool_time,
-                    neighbor,
-                    alpha,
-                    water_height,
-                    ul,
-                    ll,
-                    ur,
-                    lr,
-                    water_num,
-                    rotate,
-                    meta_data,
-                    revert_info_,
-                    share,
-                    height,
-                    port,
-                    g4f_port,
-                    theme,
-                    webui_lang_,
-                ],
-                outputs=output_info,
+                seed = gr.Textbox(env.seed, label=webui_lang["setting"]["description"]["seed"])
+                t2i_cool_time = gr.Slider(
+                    6, 120, env.t2i_cool_time, step=1, label=webui_lang["setting"]["description"]["t2i_cool_time"]
+                )
+                save_path = gr.Radio(
+                    ["默认(Default)", "日期(Date)", "角色(Character)"],
+                    value=env.save_path,
+                    label=webui_lang["setting"]["description"]["save_path"],
+                )
+        with gr.Tab(webui_lang["setting"]["sub_tab"]["i2i"]):
+            with gr.Column():
+                magnification = gr.Slider(
+                    1,
+                    1.5,
+                    env.magnification,
+                    step=0.1,
+                    label=webui_lang["setting"]["description"]["magnification"],
+                )
+                hires_strength = gr.Slider(
+                    0,
+                    1,
+                    env.hires_strength,
+                    step=0.1,
+                    label=webui_lang["setting"]["description"]["hires_strength"],
+                )
+                hires_noise = gr.Slider(
+                    0,
+                    1,
+                    env.hires_noise,
+                    step=0.1,
+                    label=webui_lang["setting"]["description"]["hires_noise"],
+                )
+        with gr.Tab(webui_lang["setting"]["sub_tab"]["pixiv"]):
+            pixiv_cookie = gr.Textbox(
+                value=env.pixiv_cookie,
+                label=webui_lang["setting"]["description"]["pixiv_cookie"],
+                lines=7,
+                visible=True if not env.share else False,
             )
-            restar_button.click(restart)
+            pixiv_token = gr.Textbox(
+                value=env.pixiv_token,
+                label=webui_lang["setting"]["description"]["pixiv_token"],
+                visible=True if not env.share else False,
+            )
+            allow_tag_edit = gr.Checkbox(
+                env.allow_tag_edit, label=webui_lang["setting"]["description"]["allow_tag_edit"]
+            )
+            caption_prefix = gr.Textbox(
+                value=str(env.caption_prefix).replace("\n", "\\n"),
+                label=webui_lang["setting"]["description"]["caption_prefix"],
+            )
+            rep_tags = gr.Checkbox(env.rep_tags, label=webui_lang["setting"]["description"]["rep_tags"])
+            rep_tags_per = gr.Slider(
+                0, 1, env.rep_tags_per, step=0.1, label=webui_lang["setting"]["description"]["rep_tags_per"]
+            )
+            rep_tags_with_tag = gr.Textbox(
+                value=env.rep_tags_with_tag, label=webui_lang["setting"]["description"]["rep_tags_with_tag"]
+            )
+            pixiv_cool_time = gr.Slider(
+                10,
+                360,
+                env.pixiv_cool_time,
+                step=1,
+                label=webui_lang["setting"]["description"]["pixiv_cool_time"],
+            )
+        with gr.Tab(webui_lang["setting"]["sub_tab"]["mosaic"]):
+            neighbor = gr.Slider(
+                0, 0.25, env.neighbor, step=0.0001, label=webui_lang["setting"]["description"]["neighbor"]
+            )
+        with gr.Tab(webui_lang["setting"]["sub_tab"]["eraser"]):
+            meta_data = gr.Textbox(value=env.meta_data, label=webui_lang["setting"]["description"]["meta_data"])
+            revert_info_ = gr.Radio(
+                choices=[True, False],
+                value=env.revert_info,
+                label=webui_lang["setting"]["description"]["revert_info_"],
+            )
+        with gr.Tab(webui_lang["setting"]["sub_tab"]["water"]):
+            alpha = gr.Slider(0, 1, env.alpha, label=webui_lang["setting"]["description"]["alpha"])
+            water_height = gr.Slider(
+                10, 300, env.water_height, label=webui_lang["setting"]["description"]["water_height"]
+            )
+            gr.Markdown(webui_lang["setting"]["description"]["position"])
+            with gr.Row():
+                ul = gr.Checkbox(True if "左上" in env.position else False, label="左上(Upper Left)")
+                ll = gr.Checkbox(True if "左下" in env.position else False, label="左下(Lower Left)")
+                ur = gr.Checkbox(True if "右上" in env.position else False, label="右上(Upper Right)")
+                lr = gr.Checkbox(True if "右下" in env.position else False, label="右下(Upper Right)")
+            water_num = gr.Slider(1, 10, env.water_num, step=1, label=webui_lang["setting"]["description"]["water_num"])
+            rotate = gr.Slider(0, 360, 45, step=1, label=webui_lang["setting"]["description"]["rotate"])
+        with gr.Tab("WebUI"):
+            share = gr.Checkbox(env.share, label=webui_lang["setting"]["description"]["share"])
+            height = gr.Slider(300, 1200, env.height, step=10, label=webui_lang["setting"]["description"]["height"])
+            port = gr.Textbox(value=env.port, label=webui_lang["setting"]["description"]["port"])
+            g4f_port = gr.Textbox(env.g4f_port, label=webui_lang["setting"]["description"]["g4f_port"])
+            theme = gr.Textbox(env.theme, label=webui_lang["setting"]["description"]["theme"])
+            webui_lang_ = gr.Textbox(value=env.webui_lang, label=webui_lang["setting"]["description"]["webui_lang"])
+        with gr.Tab(webui_lang["setting"]["sub_tab"]["other"]):
+            gr.Markdown(other_setting)
+        modify_button.click(
+            setting,
+            inputs=[
+                token,
+                img_size,
+                scale,
+                censor,
+                sampler,
+                steps,
+                sm,
+                sm_dyn,
+                noise_schedule,
+                seed,
+                t2i_cool_time,
+                save_path,
+                magnification,
+                hires_strength,
+                hires_noise,
+                pixiv_cookie,
+                pixiv_token,
+                allow_tag_edit,
+                caption_prefix,
+                rep_tags,
+                rep_tags_per,
+                rep_tags_with_tag,
+                pixiv_cool_time,
+                neighbor,
+                alpha,
+                water_height,
+                ul,
+                ll,
+                ur,
+                lr,
+                water_num,
+                rotate,
+                meta_data,
+                revert_info_,
+                share,
+                height,
+                port,
+                g4f_port,
+                theme,
+                webui_lang_,
+            ],
+            outputs=output_info,
+        )
+        restar_button.click(restart)
 
 
 def main():
