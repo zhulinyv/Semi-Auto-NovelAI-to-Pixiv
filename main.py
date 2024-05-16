@@ -12,7 +12,6 @@ from src.mosaic import main as mosaic
 from src.mosold import main as mosold
 from src.pixiv import main as pixiv
 from src.rminfo import export_info, remove_info, revert_info
-from src.selector import del_current_img, move_current_img, show_first_img, show_next_img
 from src.setting import webui as setting
 from src.t2i import t2i, t2i_by_hand
 from src.tagger import SWINV2_MODEL_DSV3_REPO, dropdown_list, tagger
@@ -24,6 +23,7 @@ from utils.env import env
 from utils.g4f import main as g4f
 from utils.plugin import install_plugin, load_plugins, plugin_list
 from utils.restart import restart
+from utils.selector import del_current_img, move_current_img, show_first_img, show_next_img
 from utils.update import check_update, update
 from utils.utils import gen_script, open_folder, read_json, read_txt, return_random
 
@@ -1283,6 +1283,7 @@ def main():
                     label=webui_lang["setting"]["description"]["pixiv_cool_time"],
                 )
                 remove_info_ = gr.Checkbox(True, label=webui_lang["setting"]["description"]["remove_info"])
+                r18 = gr.Checkbox(env.r18, label=webui_lang["setting"]["description"]["r18"])
             with gr.Tab(webui_lang["setting"]["sub_tab"]["mosaic"]):
                 neighbor = gr.Slider(
                     0, 0.25, env.neighbor, step=0.0001, label=webui_lang["setting"]["description"]["neighbor"]
@@ -1354,6 +1355,7 @@ def main():
                     rep_tags_with_tag,
                     pixiv_cool_time,
                     remove_info_,
+                    r18,
                     neighbor,
                     alpha,
                     water_height,

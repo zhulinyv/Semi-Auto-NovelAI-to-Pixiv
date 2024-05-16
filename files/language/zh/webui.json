@@ -143,6 +143,7 @@
             "rep_tags_with_tag": "用什么替换 tags",
             "pixiv_cool_time": "上传 Pixiv 冷却时间(单位: 分钟(上下浮动 5 分钟))",
             "remove_info": "上传时清除图片元数据",
+            "r18": "是否为 r18 图片",
             "neighbor": "方形马赛克相对于图片的边长",
             "meta_data": "清除 meta 信息时自己添加的信息",
             "revert_info_": "操作完成后是否还原图片信息",

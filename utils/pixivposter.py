@@ -46,10 +46,10 @@ def pixiv_upload(
     labels: list,
     cookie: str,
     x_token: str,
+    allow_tag_edit: bool,
+    is_r18: bool,
     title_en: str = "",
     caption_en: str = "",
-    allow_tag_edit: bool = True,
-    is_r18: bool = True,
 ):
     trace_id = uuid.uuid4().hex  # Generates a random UUID and converts it to a hexadecimal string
     span_id = uuid.uuid4().hex[:16]  # Generates a new UUID, but only uses the first 16 characters

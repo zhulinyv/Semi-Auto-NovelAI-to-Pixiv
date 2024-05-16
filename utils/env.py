@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     rep_tags_with_tag: str = "杂鱼~"
     pixiv_cool_time: int = 15
     remove_info: bool = True
+    r18: bool = True
 
     # 马赛克
     neighbor: float = 0.0085

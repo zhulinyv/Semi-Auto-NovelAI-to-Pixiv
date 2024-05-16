@@ -112,6 +112,7 @@ def upload(image_list, file):
         cookie=env.pixiv_cookie,
         x_token=env.pixiv_token,
         allow_tag_edit=env.allow_tag_edit,
+        is_r18=env.r18,
     )
     return status
 
