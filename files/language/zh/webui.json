@@ -139,7 +139,7 @@
             "allow_tag_edit": "是否允许其它用户编辑标签",
             "caption_prefix": "上传 pixiv 的描述前缀",
             "rep_tags": "上传 Pixiv 描述中的 prompt 是否乱序并替换其中一些 tags",
-            "rep_tags_per": "替换多少(默认 0.5 为替换一半)",
+            "rep_tags_per": "替换多少(默认 0.5 为替换一半, 设置为 1 时, 则不会将 prompt 作为描述)",
             "rep_tags_with_tag": "用什么替换 tags",
             "pixiv_cool_time": "上传 Pixiv 冷却时间(单位: 分钟(上下浮动 5 分钟))",
             "remove_info": "上传时清除图片元数据",

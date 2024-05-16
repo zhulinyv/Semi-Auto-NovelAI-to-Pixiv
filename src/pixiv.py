@@ -24,15 +24,18 @@ def upload(image_list, file):
         image_info["Software"] == "NovelAI"
         img_comment = json.loads(image_info["Comment"])
         prompt: str = img_comment["prompt"]
-        if env.rep_tags:
-            prompt = "".join(i for i in prompt if i not in ["[", "]", "{", "}"])
-            prompt = format_str(prompt)
-            prompt = prompt.split(", ")
-            prompt = random.sample(prompt, int((num := len(prompt)) * env.rep_tags_per))
-            prompt = list_to_str(prompt)
-            prompt = format_str(prompt)
-            prompt += f", {env.rep_tags_with_tag}" * int(num * (1 - env.rep_tags_per))
-        caption = env.caption_prefix + "\n----------\n" + prompt
+        if env.rep_tags_per == 1:
+            caption = env.caption_prefix
+        else:
+            if env.rep_tags:
+                prompt = "".join(i for i in prompt if i not in ["[", "]", "{", "}"])
+                prompt = format_str(prompt)
+                prompt = prompt.split(", ")
+                prompt = random.sample(prompt, int((num := len(prompt)) * env.rep_tags_per))
+                prompt = list_to_str(prompt)
+                prompt = format_str(prompt)
+                prompt += f", {env.rep_tags_with_tag}" * int(num * (1 - env.rep_tags_per))
+            caption = env.caption_prefix + "\n----------\n" + prompt
 
         if env.remove_info:
             metadata = PngInfo()
