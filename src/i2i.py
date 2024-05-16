@@ -113,6 +113,8 @@ def main(input_path):
                 if saved_path != "寄":
                     logger.warning("删除小图...")
                     os.remove(img_path)
+                else:
+                    raise Exception
                 sleep_for_cool(env.i2i_cool_time - 3, env.i2i_cool_time + 3)
                 break
             except Exception as e:
