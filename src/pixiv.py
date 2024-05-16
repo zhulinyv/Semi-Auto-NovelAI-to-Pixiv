@@ -1,4 +1,5 @@
 import random
+import traceback
 from pathlib import Path
 
 import ujson as json
@@ -138,7 +139,9 @@ def main(file_path):
                 else:
                     break
             except Exception:
-                pass
+                logger.error("出现错误:\n>>>>>")
+                traceback.print_exc()
+                logger.error("<<<<<")
         sleep_for_cool((env.pixiv_cool_time - 5) * 60, (env.pixiv_cool_time + 5) * 60)
     logger.success("上传完成!")
 
