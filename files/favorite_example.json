@@ -5,27 +5,15 @@
                 [
                     "{mafuyu (chibi21)},{{rurudo,gusha s,hiro (dismaless),wlop,yoneyama mai,mikami mika}},[[murata range]],",
                     1
-                ],
-                [
-                    "naga_u,[tyakomes],henreader,baku-p,",
-                    -1
-                ],
-                [
-                    "{{{{chibi}}}},1 girl,{amaichi esora},zhibuji loom,[artist:WANKE],[artist:ciloranko],[artist:amashiro.natsuki], {artist:rubi-sama}}{{asanagi}},[[toraishi 666]] [[mvv]] {artist:zuizi},{artist:taitai,artist:chen bin},[artist:sho (sho lwlw),chibi,",
-                    -1
                 ]
             ],
             "single": [
-                "tianliang duohe fangdongye",
-                "onineko",
-                "anmi"
+                "tianliang duohe fangdongye"
             ]
         },
         "belief": {
-            "0.6": {
-
-            },
-            "0.25": {
+            "0.6": {},
+            "0.3": {
                 "未命名画风4": [
                     "[elaina (majo no tabitabi)],convenient censoring, 1girl==={ningen mame,{ciloranko},ke-ta,kedama milk,wlop,rhasta},year 2023, ===   solo,",
                     0,
@@ -42,14 +30,12 @@
                     0
                 ]
             },
-            "0.0": {
-
-            }
+            "0.1": {},
+            "0.0": {}
         }
     },
     "quality_pref": {
         "experiment": [
-            "best quality, amazing quality, very aesthetic,",
             "best quality,"
         ],
         "belief": [
@@ -58,9 +44,7 @@
     },
     "negative_prompt": {
         "experiment": [
-            "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], mutated hands,poorly drawn hands,{{{missing toes}}},extra fingers,fused fingers,{{{extra toes}}}, {{{fused toes}}},{{{mutated toes}}},{{{bad foot}}}, {{{mutated foot}}},lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits,username, scan, [abstract], lowres, {bad},fewer, extra,{{{{worst quality}}}},",
-            "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], lowres, {bad}, error, fewer, extra, missing, {worst quality}, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],{{weibo_username}},female_pubic_hair, teeth,",
-            "ugly,lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],"
+            "lowres, {bad}, error, fewer, extra, missing, {worst quality}, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],"
         ],
         "belief": [
             "lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract],"
@@ -113,71 +97,21 @@
                 "animal_ears",
                 "blonde_hair",
                 "fake_animal_ears",
-                "headphones",
-                "animal_ear_headphones",
-                "bow",
-                "cat_ear_headphones",
-                "halo",
-                "bangs",
-                "hair_bow",
-                "short_hair",
-                "pink_eyes",
-                "tail",
-                "cat_tail",
-                "red_bow",
-                "red_eyes",
-                "cat_ears"
+                "headphones"
             ],
             "羽川ハスミ": [
                 "hasumi_(blue_archive)",
                 "black_hair",
                 "breasts",
                 "long_hair",
-                "hair_between_eyes",
-                "red_eyes",
-                "halo",
-                "mole",
-                "wings",
-                "very_long_hair",
-                "mole_under_eye",
-                "black_wings",
-                "large_breasts",
-                "ponytail",
-                "huge_breasts",
-                "low_wings",
-                "feathered_wings",
-                "bangs"
+                "hair_between_eyes"
             ],
             "和纱": [
                 "kazusa_(blue_archive)",
                 "animal_ears",
                 "black_hair",
                 "short_hair",
-                "halo",
-                "bangs",
-                "colored_inner_hair",
-                "multicolored_hair",
-                "pink_hair",
-                "cat_ears",
-                "two-tone_hair",
-                "hair_ornament",
-                "hairclip",
-                "red_eyes",
-                "pink_eyes",
-                "breasts"
-            ]
-        },
-        "番剧": {
-            "雏鹤爱": [
-                "{{hinatsuru_ai}}",
-                "loli",
-                "twintails",
-                "layered sleeves"
-            ],
-            "ミミ": [
-                "mimi_(princess connect!)",
-                "pink_hair",
-                "loli"
+                "halo"
             ]
         }
     },
@@ -192,9 +126,7 @@
                     "paizuri",
                     "hetero",
                     "penis",
-                    "solo focus",
-                    "pov",
-                    "pov crotch"
+                    "solo focus"
                 ],
                 "乳交": [
                     "1boy",
@@ -202,9 +134,7 @@
                     "paizuri",
                     "hetero",
                     "penis",
-                    "solo focus",
-                    "pov",
-                    "pov crotch"
+                    "solo focus"
                 ],
                 "乳交舔阴": [
                     "1boy",
@@ -212,16 +142,7 @@
                     "paizuri",
                     "hetero",
                     "penis",
-                    "solo focus",
-                    "pov",
-                    "pov crotch",
-                    "fellatio",
-                    "licking",
-                    "licking penis",
-                    "oral",
-                    "solo focus",
-                    "tongue",
-                    "tongue out"
+                    "solo focus"
                 ]
             },
             "普通动作": {
@@ -231,10 +152,7 @@
                     "oral",
                     "pov",
                     "erection",
-                    "hetero",
-                    "fellatio",
-                    ":>=",
-                    "solo focus"
+                    "hetero"
                 ],
                 "POV口交射精（正）": [
                     "1boy",
@@ -242,13 +160,7 @@
                     "oral",
                     "pov",
                     "cum",
-                    "nude man",
-                    "cum inside",
-                    "erection",
-                    "hetero",
-                    "fellatio",
-                    ":>=",
-                    "solo focus"
+                    "nude man"
                 ],
                 "侧面口交（侧）": [
                     "1boy",
@@ -257,13 +169,12 @@
                     "from side",
                     "deepthroat",
                     "kneeling",
-                    "erection",
-                    "solo focus",
-                    "testicles",
-                    "hetero",
-                    "hand on another's leg",
-                    "motion lines",
-                    "saliva"
+                    "erection"
+                ]
+            },
+            "自慰动作": {
+                "掰穴": [
+                    "solo,spread pussy,spread legs,"
                 ]
             }
         },
@@ -275,11 +186,6 @@
                     "frown",
                     "v-shaped eyebrows",
                     "steam"
-                ],
-                "半闭眼口交": [
-                    "half-closed eyes",
-                    "blush",
-                    "steam"
                 ]
             },
             "普通表情": {
@@ -289,20 +195,6 @@
                     "steam}",
                     "half-closed eyes",
                     "open mouth"
-                ],
-                "嘟嘴": [
-                    "shy",
-                    "blush",
-                    "pout",
-                    "puckered lips"
-                ],
-                "闭嘴笑": [
-                    "{breath",
-                    "heavy breathing",
-                    "steam}",
-                    "smile",
-                    "half-closed eyes",
-                    "closed mouth"
                 ]
             }
         },
@@ -338,32 +230,12 @@
                     "nude",
                     "bare shoulders",
                     "indoors"
-                ],
-                "穿着透明披肩在森林中": [
-                    "nude",
-                    "outdoors",
-                    "forest",
-                    "nature",
-                    "blurry foreground",
-                    "shawl",
-                    "hair flower",
-                    "off shoulder",
-                    "{{see-through silhouette}}",
-                    "wet hair",
-                    "loose hair"
-                ],
-                "在教室穿着校服": [
-                    "school uniform",
-                    "indoor",
-                    "classroom",
-                    "nude boy",
-                    "1boy"
                 ]
             }
         },
         "污渍": [
             "cum",
-            "cum, excessive ejaculation",
+            "",
             ""
         ],
         "装饰": [
@@ -452,13 +324,24 @@
     },
     "title": {
         "surrounding": {
-            "on bed, indoor": ["床上"],
-            "outdoors, forest, nature, blurry foreground": ["森林中"],
-            "indoor, classroom": ["教室"]
+            "on bed, indoor": [
+                "床上"
+            ],
+            "outdoors, forest, nature, blurry foreground": [
+                "森林中"
+            ],
+            "indoor, classroom": [
+                "教室"
+            ]
         },
         "action": {
-            "lactation": ["乳液狂飙", "噴乳"],
-            "masturbation": ["自慰"]
+            "lactation": [
+                "乳液狂飙",
+                "噴乳"
+            ],
+            "masturbation": [
+                "自慰"
+            ]
         }
     },
     "labels": {

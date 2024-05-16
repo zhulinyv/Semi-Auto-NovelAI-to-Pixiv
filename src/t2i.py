@@ -115,9 +115,10 @@ def prepare_input():
     choose_game = random.choice(list(data["character"].keys()))
     choose_character = random.choice(list(data["character"][choose_game].keys()))
     character = list_to_str(data["character"][choose_game][choose_character])
-    censored = data["R18"]["去码"] if not env.censor else data["R18"]["打码"]
     action_type = (
-        "巨乳" if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"]) else "普通"
+        "巨乳"
+        if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"])
+        else random.choice(["普通", "自慰"])
     )
     choose_action: list = random.choice(list(data["R18"]["动作"][f"{action_type}动作"].keys()))
     action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][choose_action])
@@ -134,11 +135,17 @@ def prepare_input():
         if "multiple views" not in action
         else "{white background},"
     )
-    cum = random.choice(data["R18"]["污渍"])
+    if action_type == "自慰":
+        cum = ""
+        censored = ""
+    else:
+        cum = random.choice(data["R18"]["污渍"])
+        censored = data["R18"]["去码"] if not env.censor else data["R18"]["打码"]
 
     logger.info(
         f"""
 >>>>>>>>>>
+正面: {pref}
 出处: {choose_game}: {choose_character}
 角色: {character}
 画风: {style_name}: {style}
@@ -147,7 +154,6 @@ def prepare_input():
 动作: {action}
 场景: {surrounding}
 污渍: {cum}
-正面: {pref}
 负面: {negative}
 <<<<<<<<<<"""
     )
