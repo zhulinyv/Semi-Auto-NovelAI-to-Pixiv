@@ -6,7 +6,6 @@ def modify_env(**kwargs: dict):
             lines = f.readlines()
             f.seek(0)
             setting = f.read()
-            print(setting)
         if target_key not in setting:
             with open(".env", "w", encoding="utf-8") as f:
                 f.write(setting + f"\n{target_key}={new_value}\n")
