@@ -145,20 +145,20 @@ def prepare_input():
     logger.info(
         f"""
 >>>>>>>>>>
-正面: {pref}
 出处: {choose_game}: {choose_character}
 角色: {character}
 画风: {style_name}: {style}
 审查: {censored}
 表情: {emotion}
-动作: {action}
+动作: {choose_action}: {action}
 场景: {surrounding}
 污渍: {cum}
+正面: {pref}
 负面: {negative}
 <<<<<<<<<<"""
     )
 
-    input_ = format_str(pref + character + artist + censored + emotion + action + surrounding + cum)
+    input_ = format_str(character + artist + censored + emotion + action + surrounding + cum + pref)
 
     return input_, sm, scale, negative, choose_game, choose_character
 
