@@ -1172,7 +1172,7 @@ def main():
             with gr.Row():
                 modify_button = gr.Button("保存(Save)")
                 restart_button = gr.Button("重启(Restart)")
-            output_info = gr.Textbox(
+            setting_output_info = gr.Textbox(
                 value=webui_lang["setting"]["description"] if env.share else None,
                 label=webui_lang["i2i"]["output_info"],
             )
@@ -1375,7 +1375,7 @@ def main():
                     webui_lang_,
                     skip_update_check,
                 ],
-                outputs=output_info,
+                outputs=setting_output_info,
             )
             restart_button.click(restart)
 
