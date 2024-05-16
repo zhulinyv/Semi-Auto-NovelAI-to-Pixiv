@@ -24,7 +24,7 @@ from utils.env import env
 from utils.g4f import main as g4f
 from utils.plugin import install_plugin, load_plugins, plugin_list
 from utils.restart import restart
-from utils.update import check_update
+from utils.update import check_update, update
 from utils.utils import gen_script, open_folder, read_json, read_txt, return_random
 
 webui_lang = read_json(f"./files/language/{env.webui_lang}/webui.json")
@@ -1321,6 +1321,10 @@ def main():
                 )
             with gr.Tab(webui_lang["setting"]["sub_tab"]["other"]):
                 gr.Markdown(other_setting)
+            with gr.Tab("更新 WebUI(Update WebUI)"):
+                update_button = gr.Button("更新 WebUI(Update WebUI)")
+                output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
+                update_button.click(update, inputs=None, outputs=output_info)
             modify_button.click(
                 setting,
                 inputs=[

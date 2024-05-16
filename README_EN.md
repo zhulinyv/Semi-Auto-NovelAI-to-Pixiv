@@ -145,7 +145,7 @@ If your want function do not here, please submit issue or join my QQ group 63234
 + [x] Tile upscale
 + [ ] ~~Add more interpolation engines~~
 + [x] Translate the rest of the page
-+ [ ] Auto updata
++ [x] Auto updata
 + [x] Plugins store
 + [x] Custom eraser meta data
 + [x] Auto install plugins

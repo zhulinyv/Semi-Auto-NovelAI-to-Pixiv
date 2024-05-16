@@ -33,3 +33,9 @@ def check_update():
     return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})  Older Version | 更新可用".format(
         str(local_commit)[:7], str(local_commit)
     )
+
+
+def update():
+    repo = git.Repo("")
+    repo.git.pull()
+    return "更新完成"
