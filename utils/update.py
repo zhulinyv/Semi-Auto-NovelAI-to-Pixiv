@@ -27,6 +27,7 @@ def check_update():
         remote_commit.append(commit)
     if not remote_commit:
         version = read_txt("VERSION")
+        version = version.replace("\n", "")
         return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})".format(
             version, str(local_commit)
         )
