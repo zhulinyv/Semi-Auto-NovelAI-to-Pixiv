@@ -103,15 +103,16 @@ def main(input_path):
                 logger.info(f"正在放大: {img}...")
                 info_list = img.replace(".png", "").split("_")
                 img_path = i2i_path / img
-                save_image(
+                saved_path = save_image(
                     generate_image(prepare_json(get_img_info(img_path), img_path)),
                     "i2i",
                     info_list[0],
                     info_list[1],
                     info_list[2],
                 )
-                logger.warning("删除小图...")
-                os.remove(img_path)
+                if saved_path != "寄":
+                    logger.warning("删除小图...")
+                    os.remove(img_path)
                 sleep_for_cool(env.i2i_cool_time - 3, env.i2i_cool_time + 3)
                 break
             except Exception as e:
