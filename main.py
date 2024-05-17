@@ -33,7 +33,9 @@ other_setting = read_txt(f"./files/language/{env.webui_lang}/setting.md")
 
 
 def main():
-    with gr.Blocks(theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv") as demo:
+    with gr.Blocks(
+        theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv", head=read_txt("./files/click_by_key.html")
+    ) as demo:
         gr.Markdown(webui_lang["title"] + "    " + check_update())
         with gr.Tab(webui_lang["info"]["tab"]):
             gr.Markdown(webui_help)
@@ -998,10 +1000,10 @@ def main():
             with gr.Row():
                 show_img = gr.Image(scale=7)
                 with gr.Column(scale=1):
-                    next_button = gr.Button(webui_lang["selector"]["next_button"], size="lg")
-                    move_button = gr.Button(webui_lang["selector"]["move_button"], size="lg")
-                    move_button_ = gr.Button(webui_lang["selector"]["move_button_"], size="lg")
-                    del_button = gr.Button(webui_lang["selector"]["del_button"], size="lg")
+                    next_button = gr.Button(webui_lang["selector"]["next_button"], size="lg", elem_id="arrow_down")
+                    move_button = gr.Button(webui_lang["selector"]["move_button"], size="lg", elem_id="arrow_left")
+                    move_button_ = gr.Button(webui_lang["selector"]["move_button_"], size="lg", elem_id="arrow_right")
+                    del_button = gr.Button(webui_lang["selector"]["del_button"], size="lg", elem_id="arrow_up")
             current_img = gr.Textbox(visible=False)
             select_button.click(fn=show_first_img, inputs=[input_path], outputs=[show_img, current_img])
             next_button.click(fn=show_next_img, outputs=[show_img, current_img])
@@ -1147,7 +1149,7 @@ def main():
         }
     </style>
     """.replace(
-                    "600", str(env.height)
+                    "600", str(env.height + 50)
                 ).replace(
                     "19198", str(env.g4f_port)
                 )

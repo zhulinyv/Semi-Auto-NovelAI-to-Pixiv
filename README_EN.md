@@ -38,14 +38,14 @@
 | Magic Analysis | Reads png info using open-source projects listed in the acknowledgments | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/12.png?raw=true) | Embedded into this project via iframe |
 | Tagger | Utilizing the reverse inference model deployed on Hugging Face by [SmilingWolf](https://huggingface.co/spaces/SmilingWolf/wd-tagger), I added batch operations to it | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/17.png?raw=true) | During batch processing, the generated prompt text will be saved to the same directory as the images |
 | GPT Free | Free, multi-model GPT, utilizing open-source projects listed in the acknowledgments | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/13.png?raw=true) | Embedded into this project via iframe |
-| Plugin Store | Show all plugins in the plugin list (plugins.json) | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/20.png?raw=true) | When installing, copy and paste the name of the plug-in you want to install into the name in the upper left corner, click Install, and it will take effect after restarting |
+| Plugin Store | Show all plugins in the plugin list (./files/plugins.json) | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/20.png?raw=true) | When installing, copy and paste the name of the plug-in you want to install into the name in the upper left corner, click Install, and it will take effect after restarting |
 | Configuration Settings | Change configuration options in WebUI | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/14.png?raw=true) | Remember to save changes, takes effect immediately after restart |
 
 Learning Gradio, trying to create a WebUI for this project.
 
 ## 🔌 Plugins
 
-### [Plugin list](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/plugins.json)
+### [Plugin list](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/./files/plugins.json)
 
 ## 💻 Configuration Requirements
 
@@ -131,7 +131,7 @@ If your want function do not here, please submit issue or join my QQ group 63234
 + [x] Configuration item interface
 + [x] Open related folders functionality
 + [x] Merge interfaces such as random NSFW
-+ [ ] Hotkey for quick image filtering
++ [x] Hotkey for quick image filtering
 + [x] Tutorial and instruction pages
 + [x] Custom plugins
 + [x] Automatically generate standalone script

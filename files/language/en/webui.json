@@ -77,15 +77,15 @@
     },
     "selector": {
         "tab": "Image Selection",
-        "description": "> Facilitates manual image selection (very simple buttons, should be self-explanatory...)",
+        "description": "> Facilitates manual image selection, you can use the arrow keys on your keyboard (very simple buttons, should be self-explanatory...)",
         "input_path": "Image Path",
         "select_button": "Confirm",
         "output_path": "Output Path 1",
         "output_path_": "Output Path 2",
-        "next_button": "Skip",
-        "move_button": "Move 1",
-        "move_button_": "Move 2",
-        "del_button": "Delete"
+        "next_button": "Skip(↓)",
+        "move_button": "Move 1(←)",
+        "move_button_": "Move 2(→)",
+        "del_button": "Delete(↑)"
     },
     "rm png info": {
         "tab": "Erase Data",

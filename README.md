@@ -38,14 +38,14 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 | 法术解析 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目进行读取 png info | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/12.png?raw=true) | 使用 iframe 嵌套入本项目 |
 |  Tagger  | 使用 [SmilingWolf](https://huggingface.co/spaces/SmilingWolf/wd-tagger) 在 huggingface 上部署的反推模型, 我为它添加了批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/17.png?raw=true) | 批量处理时, 生成的 prompt 文本会保存到图片的同一目录 |
 | GPT Free | 免费, 多模型的 GPT, 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/13.png?raw=true) | 使用 iframe 嵌套入本项目 |
-| 插件商店 | 展示所有在插件列表(plugins.json)中的插件 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/20.png?raw=true) | 安装时, 将想要安装的插件名称复制粘贴到左上角名称内, 点击安装即可, 重启后生效 |
+| 插件商店 | 展示所有在插件列表(./files/plugins.json)中的插件 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/20.png?raw=true) | 安装时, 将想要安装的插件名称复制粘贴到左上角名称内, 点击安装即可, 重启后生效 |
 | 配置设置 | 在 WebUI 更改配置项 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/14.png?raw=true) | 修改记得保存, 重启后立即生效 |
 
 正在学习 Gradio, 尝试为本项目写一个 WebUI
 
 ## 🔌 插件
 
-### [插件列表](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/plugins.json)
+### [插件列表](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/./files/plugins.json)
 
 ## 💻 配置需求
 
@@ -131,7 +131,7 @@ English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-t
 + [x] 配置项界面
 + [x] 打开相关文件夹功能
 + [x] 合并随机涩图等界面
-+ [ ] 热键快速筛图
++ [x] 热键快速筛图
 + [x] 教程和说明页面
 + [x] 自定义插件
 + [x] 自动生成独立脚本

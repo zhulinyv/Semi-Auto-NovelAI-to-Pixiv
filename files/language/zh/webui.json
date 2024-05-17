@@ -77,15 +77,15 @@
     },
     "selector": {
         "tab": "图片筛选",
-        "description": "> 方便人工筛选图片(很简单的几个按钮, 应该不用说怎么用叭...)",
+        "description": "> 方便人工筛选图片, 可使用键盘上的方向键(很简单的几个按钮, 应该不用说怎么用叭...)",
         "input_path": "图片路径",
         "select_button": "确定",
         "output_path": "输出路径1",
         "output_path_": "输出路径2",
-        "next_button": "跳过",
-        "move_button": "移动1",
-        "move_button_": "移动2",
-        "del_button": "删除"
+        "next_button": "跳过(↓)",
+        "move_button": "移动1(←)",
+        "move_button_": "移动2(→)",
+        "del_button": "删除(↑)"
     },
     "rm png info": {
         "tab": "抹除数据",
