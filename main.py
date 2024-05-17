@@ -103,7 +103,7 @@ def main():
                                 value="native",
                                 label=webui_lang["t2i"]["noise_schedule"],
                             )
-                            steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
+                            steps = gr.Slider(minimum=0, maximum=50, value=28, step=1, label=webui_lang["t2i"]["steps"])
                             sm = gr.Radio([True, False], value=False, label="sm")
                             sm_dyn = gr.Radio([True, False], value=False, label=webui_lang["t2i"]["smdyn"])
                             with gr.Row():
@@ -249,7 +249,7 @@ def main():
                                 value="native",
                                 label=webui_lang["t2i"]["noise_schedule"],
                             )
-                            steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
+                            steps = gr.Slider(minimum=0, maximum=50, value=28, step=1, label=webui_lang["t2i"]["steps"])
                             sm = gr.Radio([True, False], value=False, label="sm")
                             sm_dyn = gr.Radio([True, False], value=False, label=webui_lang["t2i"]["smdyn"])
                             seed = gr.Textbox(value="-1", label=webui_lang["t2i"]["seed"])
@@ -340,7 +340,7 @@ def main():
                             scale = gr.Slider(
                                 minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"]
                             )
-                            steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
+                            steps = gr.Slider(minimum=0, maximum=50, value=28, step=1, label=webui_lang["t2i"]["steps"])
                             with gr.Column():
                                 strength = gr.Slider(
                                     minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"]
@@ -457,7 +457,7 @@ def main():
                         label=webui_lang["t2i"]["resolution"],
                     )
                     scale = gr.Slider(minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"])
-                    steps = gr.Slider(minimum=0, maximum=28, value=28, step=1, label=webui_lang["t2i"]["steps"])
+                    steps = gr.Slider(minimum=0, maximum=50, value=28, step=1, label=webui_lang["t2i"]["steps"])
                     strength = gr.Slider(minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"])
                     noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label=webui_lang["i2i"]["noise"])
                     sampler = gr.Radio(
@@ -1211,7 +1211,7 @@ def main():
                         value=env.sampler,
                         label=webui_lang["setting"]["description"]["sampler"],
                     )
-                    steps = gr.Slider(1, 28, env.steps, step=1, label=webui_lang["setting"]["description"]["steps"])
+                    steps = gr.Slider(1, 50, env.steps, step=1, label=webui_lang["setting"]["description"]["steps"])
                     with gr.Row():
                         sm = gr.Checkbox(env.sm, label=webui_lang["setting"]["description"]["sm"])
                         sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_lang["setting"]["description"]["sm"])
