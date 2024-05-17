@@ -22,7 +22,7 @@ def show_first_img(input_path):
     array_data = np.array(file_list)
     np.save("./output/array_data.npy", array_data)
 
-    return img, img
+    return [img], img
 
 
 def show_next_img():
@@ -39,7 +39,7 @@ def show_next_img():
                 file_list.remove(file_list[0])
                 array_data = np.array(file_list)
                 np.save("./output/array_data.npy", array_data)
-                return img, img
+                return [img], img
         except Exception:
             os.remove("./output/array_data.npy")
     return None, None

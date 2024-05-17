@@ -1003,7 +1003,7 @@ def main():
                     output_path = gr.Textbox(label=webui_lang["selector"]["output_path"])
                     output_path_ = gr.Textbox(label=webui_lang["selector"]["output_path_"])
             with gr.Row():
-                show_img = gr.Image(scale=7)
+                show_img = gr.Gallery(scale=7, preview=True, label="Image", height=env.height + 120)
                 with gr.Column(scale=1):
                     next_button = gr.Button(webui_lang["selector"]["next_button"], size="lg", elem_id="arrow_down")
                     move_button = gr.Button(webui_lang["selector"]["move_button"], size="lg", elem_id="arrow_left")
