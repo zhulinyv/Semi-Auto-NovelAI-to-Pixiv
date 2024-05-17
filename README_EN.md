@@ -45,7 +45,7 @@ Learning Gradio, trying to create a WebUI for this project.
 
 ## 🔌 Plugins
 
-### [Plugin list](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/./files/plugins.json)
+### [Plugin list](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/plugins.json)
 
 ## 💻 Configuration Requirements
 

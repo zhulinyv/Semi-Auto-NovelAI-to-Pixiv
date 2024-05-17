@@ -113,7 +113,7 @@ def prepare_json(input_, sm, scale, negative, input_imgs):
 
 def vibe(blue_imgs: bool, input_imgs):
     if blue_imgs:
-        prompt, sm, scale, negative, choose_game, choose_character = t2i_input()
+        prompt, sm, scale, negative, choose_game, choose_character = t2i_input("随机(Random)")
     else:
         file, prompt = batchtxt_input("", "最前面(Top)")
         sm = env.sm

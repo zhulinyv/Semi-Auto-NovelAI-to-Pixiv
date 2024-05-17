@@ -269,8 +269,10 @@ sys.setrecursionlimit(999999999)
 
 from src.t2i import t2i  # noqa: E402
 
-t2i(True)
-"""
+t2i(True, {})
+""".format(
+                    args[0]
+                )
             )
         elif script_type == "随机图片":
             script.write(
