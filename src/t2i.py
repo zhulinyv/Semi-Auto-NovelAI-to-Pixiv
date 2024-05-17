@@ -205,13 +205,13 @@ def t2i(forever: bool, action_type):
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
     if forever:
-        return t2i(True)
+        return t2i(True, action_type)
     else:
         return saved_path
 
 
 if __name__ == "__main__":
     try:
-        t2i(True)
+        t2i(True, "随机(Random)")
     except KeyboardInterrupt:
         logger.warning("程序退出...")
