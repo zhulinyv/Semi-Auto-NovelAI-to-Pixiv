@@ -121,7 +121,7 @@
 - 6.在请求头部中可以找到 Cookie 和 X-Csrf-Token
 - ![97ae3696ad11708ae2eb0474f198de0c](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/e59caaf6-c69d-485e-965d-d7d924397667)
 
-## 🎉 使用
+## 🌟 使用
 
 - **运行 `run.bat`, 会自动打开默认浏览器并跳转到 [127.0.0.1:11451](http://127.0.0.1:11451)**
 
@@ -135,6 +135,9 @@
 > 抬头是无尽的黑暗, 低头是无尽的黑暗, 仿佛陷入一个无边的漩涡中。
 
 ## 📖 待办
+
+> [!TIP]
+> 黑暗如同一双无形的手，将我紧紧拥抱，深深地吞噬着我的思绪。
 
 + [x] 批量文生图
 + [x] 批量图生图
@@ -179,9 +182,6 @@
 + [x] 代理配置
 + [ ] ...
 
-> [!TIP]
-> 黑暗如同一双无形的手，将我紧紧拥抱，深深地吞噬着我的思绪。
-
 ## 🤝 鸣谢
 
 本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) | [Anime4KCPP](https://github.com/TianZerL/Anime4KCPP) | [realcugan-ncnn-vulkan](https://github.com/nihui/realcugan-ncnn-vulkan/) | [realesrgan-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan) | [realsr-ncnn-vulkan](https://github.com/nihui/realsr-ncnn-vulkan/) | [srmd-cuda](https://github.com/MrZihan/Super-resolution-SR-CUDA) | [srmd-ncnn-vulkan](https://github.com/nihui/srmd-ncnn-vulkan) | [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe) | [waifu2x-converter](https://github.com/DeadSix27/waifu2x-converter-cpp) 降噪和放大图片
@@ -198,7 +198,7 @@
 
 本项目使用 [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) 处理分块重绘图片接缝
 
-> [!NOTE]  
+> [!NOTE]
 > 坠落, 坠落。
 
 <hr>

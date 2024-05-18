@@ -1,22 +1,23 @@
 <p align="center" >
-  <img src="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/0fbed41e-1b2b-44f4-9562-6eb7aeeb2c7c" width="256" height="256" alt="SANP"></a>
+  <img src="https://socialify.git.ci/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/image?description=1&descriptionEditable=%E2%9C%A8%E5%B8%A6%E6%9C%89%20WebUI%20%E7%9A%84%20NovelAI%20%E9%87%8F%E4%BA%A7%E5%B7%A5%E5%85%B7%E2%9C%A8&font=KoHo&forks=1&issues=1&language=1&logo=https%3A%2F%2Fi.postimg.cc%2FTwffWVkX%2F00003-XYTPZ-520621529-1x1-waifu2x-1000x1000-3n-png.png&name=1&owner=1&pulls=1&stargazers=1&theme=Auto" alt="Semi-Auto-NovelAI-to-Pixiv" width="640" height="320" />
 </p>
-<h1 align="center">Semi-Auto-NovelAI-to-Pixiv</h1>
-<h4 align="center">✨NovelAI batch script with WebUI✨</h4>
 
-<p align="center">
-    <img src="https://img.shields.io/badge/Python-3.10+-blue">
-    <a href="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/raw/main/LICENSE"><img src="https://img.shields.io/github/license/zhulinyv/Semi-Auto-NovelAI-to-Pixiv" alt="license"></a>
-    <img src="https://img.shields.io/github/issues/zhulinyv/Semi-Auto-NovelAI-to-Pixiv">
-    <img src="https://img.shields.io/github/stars/zhulinyv/Semi-Auto-NovelAI-to-Pixiv">
-    <img src="https://img.shields.io/github/forks/zhulinyv/Semi-Auto-NovelAI-to-Pixiv">
-</p>
+<img decoding="async" align=right src="https://i.postimg.cc/0jSHMMJm/kb.png" width="35%">
 
 ## 💬 Introduction
 
-**Translated by ChatGPT**
+**Chinese document: [README.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/README.md)**
 
-✨ **Currently implemented functions**:
+- This is a magical project that achieves batch image generation, which NovelAI itself cannot accomplish!
+  
+- It not only generates images but also integrates various practical functions into one super user interface!
+
+- **If you encounter any issues during usage, please join the QQ group for consultation: [632344043](https://qm.qq.com/cgi-bin/qm/qr?k=8kjjU-FPNACadpEJqD8KswH9l99XDQ_I&jump_from=webapi&authKey=co29EPnkueC2/+QHQ7CVJNJR1d6Cp+eF6JFpvMdHsYas0jtSkwVcKiIxm+vMvMV1)**
+
+> [!TIP]
+> On that day, heavy rain poured, thunder roared, and the wind was noisy, as if the whole world was trembling for some unknown force.
+
+✨ **Functions currently implemented by Cheese:**
 
 | Feature | Description | Example | Note |
 |:---:|:---:|:---:|:---:|
@@ -43,11 +44,20 @@
 
 Learning Gradio, trying to create a WebUI for this project.
 
-## 🔌 Plugins
+### 🔌 Plugins
 
-### [Plugin list](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/plugins.json)
+- Implementation of dynamically loading plugins to enhance the project's scalability!
 
-## 💻 Configuration Requirements
+- Plugins submitted to the store: [Plugin List](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/plugins.json)
+
+> [!TIP]
+> I walked alone on the slippery and muddy streets, with only a few street lamps blinking lonely in the dark night.
+
+## 💿 Deployment
+
+### 💻 Configuration Requirements
+
+- Extremely low configuration requirements for the ultimate user experience!
 
 | Item | Description |
 |:---:|:---:|
@@ -58,31 +68,44 @@ Learning Gradio, trying to create a WebUI for this project.
 | Windows 10/11(x64) | To use all features, a 64-bit version of Windows 10/11 is required. |
 | [Microsoft Visual C++ 2015](https://www.microsoft.com/en-us/download/details.aspx?id=53587) | Installation of the runtime library is required to use all engines for super-resolution denoising. |
 
-## 💿 Deployment
+> [!WARNING]
+> In the distance, a few cat cries came, as if the only notes of the night, the darkness desolate, the biting cold wind, desolate and lonely.
 
-### 1️⃣ Install Python
+### 🎉 Getting Started with Deployment
 
-Suggested to install [Python 3.10.11](https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe), During installation, please check **Add Python to PATH** and keep the rest as default.
+#### 0️⃣ Star this project
 
-### 2️⃣ Install Git
+- If you enjoy this project, please consider giving it a Star🌟. It's the greatest motivation for the developers.
 
-Suggested to install [Latest Version](https://git-scm.com/download/win), you just need to click **Next** button.
+#### 1️⃣ Install Python
 
-### 3️⃣ Clone Repositories
+- I recommend installing [Python 3.10.11](https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe). During installation, please ensure to check the option **Add Python to PATH**, and keep the rest as **default**.
 
-Open cmd/powershell, run `git clone -b main --depth=1 https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv.git`
+#### 2️⃣ Install Git
 
-### 4️⃣ Next step
+- Suggested to install [Latest Version](https://git-scm.com/download/win), you just need to click **Next** button.
 
-Now you can launch the `run.bat` at the origin directory to start WebUI, it will create the virtual environment and install the dependences at the first time, it will take a long time, so you can drink some coffe or read the documents below
+#### 3️⃣ Clone Repositories
+
+- Open cmd/powershell, run `git clone -b main --depth=1 https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv.git`
+
+#### 4️⃣ Next step
+
+- Now you can launch the `run.bat` at the origin directory to start WebUI, it will create the virtual environment and install the dependences at the first time, it will take a long time, so you can drink some coffe or read the documents below
+
+> [!TIP]
+> Moonlight seeps through sparse clouds, casting its glow upon the ground, sketching out a scene of ethereal beauty.
 
 ## ⚙️ Configuration
 
-⚠️ 1. If you have started the WebUI but haven't performed necessary configurations, please navigate to the settings page for necessary configurations.
+- ⚠️ 1. If you have started the WebUI but haven't performed necessary configurations, please navigate to the settings page for necessary configurations.
 
-⚠️ 2. Please do not skip this step, it's crucial. Make sure you have reviewed all configurations thoroughly.
+- ⚠️ 2. Please do not skip this step, it's crucial. Make sure you have reviewed all configurations thoroughly.
 
-⚠️ 3. Alternatively, you can directly edit the `.env` file for configurations.
+- ⚠️ 3. Alternatively, you can directly edit the `.env` file for configurations.
+
+> [!WARNING]
+> The cries of those cats, sometimes distant, sometimes drawing near, leaving uncertainty about the path ahead.
 
 ⚠️ Getting the token:
 
@@ -98,17 +121,23 @@ Now you can launch the `run.bat` at the origin directory to start WebUI, it will
 - 6. In the request headers, you can find the Cookie and X-Csrf-Token.
 - ![97ae3696ad11708ae2eb0474f198de0c](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/assets/66541860/e59caaf6-c69d-485e-965d-d7d924397667)
 
-## 🎉 Use
+## 🌟 Usage
 
-**Running `run.bat` will automatically open the default browser and navigate to [127.0.0.1:11451](http://127.0.0.1:11451).**
+- **Run `run.bat`, it will automatically open the default browser and navigate to [127.0.0.1:11451](http://127.0.0.1:11451)**
 
-For legacy users: It's no longer recommended to run individual scripts; please use the WebUI instead.
+- For old version users: It's no longer recommended to run individual scripts. Please use the WebUI.
 
-If it's really necessary (for example: if the browser has been added to the sleep whitelist but still can't continue generating on inactive pages), please configure the directory and other parameters in the WebUI and click **Generate Standalone Script** (you can also read the source code yourself to write your own standalone script), then run the `run_stand_alone_scripts.bat` in the root directory.
+- If it's really necessary (for example, if the browser has added the sleep whitelist but cannot continue generating on an inactive page), please configure the directory and other parameters in the WebUI and click **Generate Standalone Scripts** (you can also read the source code to write standalone scripts by yourself), then run **run_stand_alone_scripts.bat** in the root directory.
 
-If your want function do not here, please submit issue or join my QQ group 632344043 or turn to: [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+- For plugin development, please refer to: [Wiki](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+
+> [!TIP]
+> Above is endless darkness, below is endless darkness, as if trapped in an endless vortex.
 
 ## 📖 To-Do
+
+> [!TIP]
+> Darkness is like invisible hands, tightly embracing me, deeply devouring my thoughts.
 
 + [x] Batch text-to-image generation
 + [x] Batch image-to-image generation
@@ -168,6 +197,9 @@ This project uses [novelai-image-metadata](https://github.com/NovelAI/novelai-im
 This project uses [SmilingWolf/wd-tagger](https://huggingface.co/spaces/SmilingWolf/wd-tagger) to inferr Prompts.
 
 This project uses [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) to process tile redrawing slice seams
+
+> [!NOTE]
+> Falling, falling.
 
 <hr>
 <img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
