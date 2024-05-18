@@ -1,22 +1,28 @@
 <script>
 document.onkeydown = checkKey;
 function checkKey(e) {
-    e = e || window.event;
-    if (e.keyCode == '38') {
-        event.preventDefault();
-        document.getElementById("arrow_up").click();
-    }
-    else if (e.keyCode == '40') {
-        event.preventDefault();
-        document.getElementById("arrow_down").click();
-    }
-    else if (e.keyCode == '37') {
-        event.preventDefault();
-        document.getElementById("arrow_left").click();
-    }
-    else if (e.keyCode == '39') {
-        event.preventDefault();
-        document.getElementById("arrow_right").click();
+    var event = document.all ? window.event : e;
+    switch (e.target.tagName.toLowerCase()) {
+        case "input":
+        case "textarea":
+        break;
+        default:
+        if (e.keyCode == '38') {
+            event.preventDefault();
+            document.getElementById("arrow_up").click();
+        }
+        else if (e.keyCode == '40') {
+            event.preventDefault();
+            document.getElementById("arrow_down").click();
+        }
+        else if (e.keyCode == '37') {
+            event.preventDefault();
+            document.getElementById("arrow_left").click();
+        }
+        else if (e.keyCode == '39') {
+            event.preventDefault();
+            document.getElementById("arrow_right").click();
+        }
     }
 }
 document.addEventListener('keypress', checkKey, false);
