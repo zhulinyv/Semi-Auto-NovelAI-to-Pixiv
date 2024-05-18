@@ -121,7 +121,7 @@ def main(input_path):
                 sleep_for_cool(4, 8)
                 times += 1
                 logger.error(f"出现错误: {e}")
-                logger.warning(f"重试 {times}/5...")
+                logger.warning(f"重试 {times-1}/5...")
             except KeyboardInterrupt:
                 logger.warning("程序退出...")
                 quit()
