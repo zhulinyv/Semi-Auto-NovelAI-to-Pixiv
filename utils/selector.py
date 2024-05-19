@@ -3,6 +3,7 @@ import shutil
 from pathlib import Path
 
 import numpy as np
+import send2trash
 
 from utils.utils import file_path2list
 
@@ -52,5 +53,5 @@ def move_current_img(current_img, output_path):
 
 
 def del_current_img(current_img):
-    os.remove(current_img)
+    send2trash.send2trash(current_img)
     return show_next_img()
