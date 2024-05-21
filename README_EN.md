@@ -202,4 +202,4 @@ This project uses [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) 
 > Falling, falling.
 
 <hr>
-<img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>
+<img width="500px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34.xxx"></img>
