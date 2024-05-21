@@ -1225,7 +1225,7 @@ def main():
                         6, 120, env.t2i_cool_time, step=1, label=webui_lang["setting"]["description"]["t2i_cool_time"]
                     )
                     save_path = gr.Radio(
-                        ["默认(Default)", "日期(Date)", "角色(Character)"],
+                        ["默认(Default)", "日期(Date)", "角色(Character)", "出处(Origin)"],
                         value=env.save_path,
                         label=webui_lang["setting"]["description"]["save_path"],
                     )

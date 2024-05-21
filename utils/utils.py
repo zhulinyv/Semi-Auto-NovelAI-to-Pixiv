@@ -119,6 +119,8 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
         path = f"/{date.today()}"
     elif env.save_path == "角色(Character)":
         path = f"/{choose_character}"
+    elif env.save_path == "出处(Origin)":
+        path = f"/{choose_game}"
     else:
         path = ""
     if not os.path.exists(f"./output/{type_}{path}"):
