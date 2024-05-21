@@ -146,7 +146,7 @@
             "r18": "Is r18 picture or not",
             "neighbor": "Side length of square mosaic relative to image",
             "meta_data": "Information added when clearing meta data",
-            "revert_info_": "Whether to restore the picture information after the operation is completed",
+            "revert_info_": "Whether to restore the picture information after the mosaic, water mark, waifu2x, etc is completed",
             "alpha": "Opacity of watermark (0~1, larger values mean more transparent)",
             "water_height": "Adjustment of watermark height",
             "position": "Possible positions where watermark may appear",
