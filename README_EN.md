@@ -180,6 +180,8 @@ Learning Gradio, trying to create a WebUI for this project.
 + [x] Custom eraser meta data
 + [x] Auto install plugins
 + [x] Proxy setting
++ [ ] Batch enhance
++ [ ] Custom save path
 + [ ] ...
 
 ## 🤝 Acknowledgements
