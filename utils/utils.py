@@ -282,7 +282,7 @@ sys.setrecursionlimit(999999999)
 
 from src.batchtxt import main  # noqa: E402
 
-main(True, "{}", "{}")
+main(True, \"\"\"{}\"\"\", "{}")
 """.format(
                     args[0], args[1]
                 )
