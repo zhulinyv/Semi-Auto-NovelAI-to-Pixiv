@@ -9,7 +9,7 @@
     "sanp_plugin_enhance": {
         "name": "sanp_plugin_enhance",
         "type": "i2i",
-        "description": "随机组合画师, 权重等来生成不同的画风串",
+        "description": "批量 Enhance!",
         "url": "https://github.com/zhulinyv/sanp_plugin_enhance",
         "author": "[zhulinyv](https://github.com/zhulinyv)"
     }
