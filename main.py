@@ -564,6 +564,13 @@ def main():
                     generate_button.click(
                         tile_upscale, inputs=[image, img_path, positive, negative, strength, engine], outputs=show_image
                     )
+            plugins = load_plugins(Path("./plugins/i2i"))
+            for plugin_name, plugin_module in plugins.items():
+                if hasattr(plugin_module, "plugin"):
+                    plugin_module.plugin()
+                    logger.success(f" 成功加载插件: {plugin_name}")
+                else:
+                    logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
         with gr.Tab(webui_lang["inpaint"]["tab"]):
             with gr.Row():
                 with gr.Column(scale=8):
