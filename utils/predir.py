@@ -24,6 +24,8 @@ need_dir_list = [
     "./output/info_reverted",
     "./output/vibe",
     "./output/t2i/grids",
+    "./output/choose_to_enhance",
+    "./output/enhance",
     "./plugins",
     "./plugins/t2i",
     "./plugins/i2i",
