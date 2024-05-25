@@ -12,7 +12,7 @@
 
 - 它不仅仅只能生图, 是集各种实用功能于一体的超级用户界面!
 
-- **使用中遇到问题请加 QQ 群咨询：[632344043](https://qm.qq.com/cgi-bin/qm/qr?k=8kjjU-FPNACadpEJqD8KswH9l99XDQ_I&jump_from=webapi&authKey=co29EPnkueC2/+QHQ7CVJNJR1d6Cp+eF6JFpvMdHsYas0jtSkwVcKiIxm+vMvMV1)**
+- **使用中遇到问题请加 QQ 群咨询：[559063963](https://qm.qq.com/cgi-bin/qm/qr?k=I9FqVFb_wn-y5Ejid9CIae57KLLlvDuj&jump_from=webapi&authKey=i+DvSe2nFRBsKNu+D9NK0sFd7Qr1u/vakfRUFDGDCWaceBQOsuiHwkxDa3kRLfup)**
 
 > [!TIP]
 > 那天大雨滂沱，雷电交加, 风儿甚是喧嚣，仿佛整个世界都在为某种未知的力量所动摇。
@@ -87,7 +87,7 @@
 
 #### 3️⃣ 克隆仓库
 
-- 打开 cmd/powershell, 执行 `git clone -b main --depth=1 https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv.git`
+- 打开 cmd 或 powershell, 执行 `git clone -b main --depth=1 https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv.git`
 
 #### 4️⃣ 接下来的路
 

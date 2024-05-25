@@ -12,7 +12,7 @@
   
 - It not only generates images but also integrates various practical functions into one super user interface!
 
-- **If you encounter any issues during usage, please join the QQ group for consultation: [632344043](https://qm.qq.com/cgi-bin/qm/qr?k=8kjjU-FPNACadpEJqD8KswH9l99XDQ_I&jump_from=webapi&authKey=co29EPnkueC2/+QHQ7CVJNJR1d6Cp+eF6JFpvMdHsYas0jtSkwVcKiIxm+vMvMV1)**
+- **If you encounter any issues during usage, please join the QQ group for consultation: [559063963](https://qm.qq.com/cgi-bin/qm/qr?k=I9FqVFb_wn-y5Ejid9CIae57KLLlvDuj&jump_from=webapi&authKey=i+DvSe2nFRBsKNu+D9NK0sFd7Qr1u/vakfRUFDGDCWaceBQOsuiHwkxDa3kRLfup)**
 
 > [!TIP]
 > On that day, heavy rain poured, thunder roared, and the wind was noisy, as if the whole world was trembling for some unknown force.
@@ -87,7 +87,7 @@ Learning Gradio, trying to create a WebUI for this project.
 
 #### 3️⃣ Clone Repositories
 
-- Open cmd/powershell, run `git clone -b main --depth=1 https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv.git`
+- Open cmd or powershell, run `git clone -b main --depth=1 https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv.git`
 
 #### 4️⃣ Next step
 
