@@ -9,7 +9,7 @@ packages = [{include = "semi_auto_novelai_to_pixiv"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-setuptools = "^69.5.1"
+setuptools = "^70.0.0"
 pydantic = "^2.7.1"
 gradio = "^4.31.0"
 pydantic-settings = "^2.2.1"
