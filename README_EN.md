@@ -181,7 +181,8 @@ Learning Gradio, trying to create a WebUI for this project.
 + [x] Auto install plugins
 + [x] Proxy setting
 + [x] Batch enhance
-+ [ ] Custom save path
++ [ ] ~~Custom save path~~
++ [ ] Learn the C# and write a luncher with wpfui
 + [ ] ...
 
 ## 🤝 Acknowledgements
