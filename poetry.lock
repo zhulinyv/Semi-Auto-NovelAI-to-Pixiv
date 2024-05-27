@@ -978,13 +978,13 @@ test = ["coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock", "mypy", "pre-commit",
 
 [[package]]
 name = "gradio"
-version = "4.31.4"
+version = "4.31.5"
 description = "Python library for easily interacting with trained machine learning models"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "gradio-4.31.4-py3-none-any.whl", hash = "sha256:f5f4223497008d94eec240c81db49a894a1871a3f460dd34db36864b54afe38f"},
-    {file = "gradio-4.31.4.tar.gz", hash = "sha256:09fdbfd8271c7aba3e1a091c5011df9e181b639b305e00bfdf05b827c642ca1d"},
+    {file = "gradio-4.31.5-py3-none-any.whl", hash = "sha256:9b3f8138a00fae40e3ee8d8844b23c1358bb2b9f708d1174fdf5a9f10f9e7975"},
+    {file = "gradio-4.31.5.tar.gz", hash = "sha256:86940a50b267883ffcfec9836bcd57e15fdee2f80c6ef8dc4d24299e48465959"},
 ]
 
 [package.dependencies]
@@ -2626,13 +2626,13 @@ rpds-py = ">=0.7.0"
 
 [[package]]
 name = "requests"
-version = "2.32.1"
+version = "2.32.2"
 description = "Python HTTP for Humans."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "requests-2.32.1-py3-none-any.whl", hash = "sha256:21ac9465cdf8c1650fe1ecde8a71669a93d4e6f147550483a2967d08396a56a5"},
-    {file = "requests-2.32.1.tar.gz", hash = "sha256:eb97e87e64c79e64e5b8ac75cee9dd1f97f49e289b083ee6be96268930725685"},
+    {file = "requests-2.32.2-py3-none-any.whl", hash = "sha256:fc06670dd0ed212426dfeb94fc1b983d917c4f9847c863f313c9dfaaffb7c23c"},
+    {file = "requests-2.32.2.tar.gz", hash = "sha256:dd951ff5ecf3e3b3aa26b40703ba77495dab41da839ae72ef3c8e5d8e2433289"},
 ]
 
 [package.dependencies]
@@ -3497,4 +3497,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "bb9cb0f41ea97940607deaeb08e2806af62a75b7a4dd1cbec11efd8af64e8fc1"
+content-hash = "886a11afb68ba600e3775008f3783d94be6d22fccc5b54c1ce28fd3f7e583b0d"
