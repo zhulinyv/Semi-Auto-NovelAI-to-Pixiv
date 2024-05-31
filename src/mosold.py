@@ -64,7 +64,3 @@ def main(file_path, input_img, open_button):
         mosaic(input_img)
         logger.success("处理完成!")
         return "./output/temp.png", None
-
-
-if __name__ == "__main__":
-    main("./output/choose_to_mosaic", None, True)

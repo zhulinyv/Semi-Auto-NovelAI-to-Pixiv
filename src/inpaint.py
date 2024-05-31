@@ -37,7 +37,3 @@ def main(img_folder, mask_folder):
     for file in file_list:
         logger.info(f"正在处理: {file}")
         inpaint(file, f"{mask_folder}/{file_path2name(file)}")
-
-
-if __name__ == "__main__":
-    main("./output/inpaint/img", "./output/inpaint/mask")

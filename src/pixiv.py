@@ -150,7 +150,3 @@ def main(file_path):
     logger.success("上传完成!")
 
     return "上传完成!"
-
-
-if __name__ == "__main__":
-    main("./output/pixiv")

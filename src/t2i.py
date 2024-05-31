@@ -208,10 +208,3 @@ def t2i(forever: bool, action_type):
         return t2i(True, action_type)
     else:
         return saved_path
-
-
-if __name__ == "__main__":
-    try:
-        t2i(True, "随机(Random)")
-    except KeyboardInterrupt:
-        logger.warning("程序退出...")

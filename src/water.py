@@ -58,7 +58,3 @@ def main(input_path, output_path):
             water(Path(input_path) / file, f"{output_path}/{file}")
             logger.success("处理完成!")
     return "处理完成! 图片已保存到 ./output/water..."
-
-
-if __name__ == "__main__":
-    main("./output/choose_to_water", "./output/water")

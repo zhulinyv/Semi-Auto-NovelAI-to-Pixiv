@@ -125,7 +125,3 @@ def main(input_path):
             except KeyboardInterrupt:
                 logger.warning("程序退出...")
                 quit()
-
-
-if __name__ == "__main__":
-    main("./output/choose_for_i2i")

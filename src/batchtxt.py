@@ -47,10 +47,3 @@ def main(forever: bool, pref, position):
         return main(True)
     else:
         return saved_path
-
-
-if __name__ == "__main__":
-    try:
-        main(True, "", "最前面(Top)")
-    except KeyboardInterrupt:
-        logger.warning("程序退出...")
