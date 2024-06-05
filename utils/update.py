@@ -5,7 +5,7 @@ import requests
 from git.exc import InvalidGitRepositoryError
 
 from utils.env import env
-from utils.utils import read_txt
+from utils.prepare import VERSION
 
 
 def check_update():
@@ -26,10 +26,8 @@ def check_update():
             break
         remote_commit.append(commit)
     if not remote_commit:
-        version = read_txt("VERSION")
-        version = version.replace("\n", "")
         return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})".format(
-            version, str(local_commit)
+            VERSION, str(local_commit)
         )
     return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})  Older Version | 更新可用".format(
         str(local_commit)[:7], str(local_commit)
