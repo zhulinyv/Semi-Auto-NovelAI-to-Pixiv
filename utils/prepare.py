@@ -4,6 +4,8 @@ import shutil
 from loguru import logger
 from playsound import playsound
 
+VERSION = "2.15.13"
+
 need_dir_list = [
     "./output",
     "./output/t2i",
@@ -53,36 +55,33 @@ if not os.path.exists("./files/favorite.json"):
     shutil.copyfile("./files/favorite_example.json", "./files/favorite.json")
 
 
-for choose_folder in [
-    "./output/choose_to_i2i",
-    "./output/choose_to_upscale",
-    "./output/choose_to_mosaic",
-    "./output/choose_to_water",
-    "./output/choose_to_enhance",
-]:
-    if len(os.listdir(choose_folder)) != 0:
-        logger.warning(
-            f"""
->>>>>>>>>>
-{choose_folder} 文件夹将在下个大版本更新后弃用!
-----------
-The {choose_folder} folder will be deprecated with the next major version update!
-<<<<<<<<<<"""
-        )
-    else:
-        os.rmdir(choose_folder)
-
-
-VERSION = "2.15.13"
-
-logger.opt(colors=True).success(
-    f"""<c>
+if __name__ == "__main__":
+    logger.opt(colors=True).success(
+        f"""<c>
 ███████╗ █████╗ ███╗   ██╗██████╗
 ██╔════╝██╔══██╗████╗  ██║██╔══██╗
 ███████╗███████║██╔██╗ ██║██████╔╝
 ╚════██║██╔══██║██║╚██╗██║██╔═══╝     Version:    {VERSION}
 ███████║██║  ██║██║ ╚████║██║         Author:     https://github.com/zhulinyv
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝         Repository: https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv</c>"""
-)
+    )
+    playsound("./files/llss.mp3")
 
-playsound("./files/llss.mp3")
+    for choose_folder in [
+        "./output/choose_to_i2i",
+        "./output/choose_to_upscale",
+        "./output/choose_to_mosaic",
+        "./output/choose_to_water",
+        "./output/choose_to_enhance",
+    ]:
+        if len(os.listdir(choose_folder)) != 0:
+            logger.warning(
+                f"""
+>>>>>>>>>>
+{choose_folder} 文件夹将在下个大版本更新后弃用!
+----------
+The {choose_folder} folder will be deprecated with the next major version update!
+<<<<<<<<<<"""
+            )
+        else:
+            os.rmdir(choose_folder)
