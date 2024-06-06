@@ -4,33 +4,25 @@ import shutil
 from loguru import logger
 from playsound import playsound
 
-VERSION = "2.15.13"
+VERSION = "2.16.0"
 
 need_dir_list = [
     "./output",
     "./output/t2i",
-    "./output/choose_to_i2i",
-    "./output/i2i/",
-    "./output/pixiv",
-    "./output/choose_to_upscale",
-    "./output/upscale",
-    "./output/mosaic",
-    "./output/choose_to_mosaic",
+    "./output/t2i/grids",
+    "./output/vibe",
+    "./output/i2i",
+    "./output/enhance",
     "./output/inpaint",
     "./output/inpaint/img",
     "./output/inpaint/mask",
+    "./output/pixiv",
+    "./output/upscale",
+    "./output/mosaic",
+    "./output/water",
     "./files/else_upscale_engine",
     "./files/prompt",
     "./files/prompt/done",
-    "./output/choose_to_water",
-    "./output/water",
-    "./output/info_file",
-    "./output/info_removed",
-    "./output/info_reverted",
-    "./output/vibe",
-    "./output/t2i/grids",
-    "./output/choose_to_enhance",
-    "./output/enhance",
     "./plugins",
     "./plugins/t2i",
     "./plugins/i2i",
@@ -66,22 +58,3 @@ if __name__ == "__main__":
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝         Repository: https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv</c>"""
     )
     playsound("./files/llss.mp3")
-
-    for choose_folder in [
-        "./output/choose_to_i2i",
-        "./output/choose_to_upscale",
-        "./output/choose_to_mosaic",
-        "./output/choose_to_water",
-        "./output/choose_to_enhance",
-    ]:
-        if len(os.listdir(choose_folder)) != 0:
-            logger.warning(
-                f"""
->>>>>>>>>>
-{choose_folder} 文件夹将在下个大版本更新后弃用!
-----------
-The {choose_folder} folder will be deprecated with the next major version update!
-<<<<<<<<<<"""
-            )
-        else:
-            os.rmdir(choose_folder)

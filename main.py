@@ -1,44 +1,62 @@
 import multiprocessing as mp
-from pathlib import Path
 
 import gradio as gr
 from loguru import logger
 
-from src.batchtxt import main as batchtxt
-from src.i2i import i2i_by_hand
-from src.inpaint import for_webui as inpaint
-from src.m2m import m2m, merge_av, video2frame
-from src.mosaic import main as mosaic
-from src.mosold import main as mosold
-from src.pixiv import main as pixiv
-from src.rminfo import export_info, remove_info, revert_info
-from src.setting import webui as setting
-from src.t2i import t2i, t2i_by_hand
-from src.tagger import SWINV2_MODEL_DSV3_REPO, dropdown_list, tagger
-from src.tileups import tile_upscale
-from src.vibe import vibe, vibe_by_hand
-from src.waifu2x import main as upscale
-from src.water import main as water
-from utils.env import env
 from utils.g4f import main as g4f
-from utils.plugin import install_plugin, load_plugins, plugin_list
-from utils.restart import restart
-from utils.selector import del_current_img, move_current_img, show_first_img, show_next_img
-from utils.update import check_update, update
-from utils.utils import gen_script, open_folder, read_json, read_txt, return_random
-
-webui_lang = read_json(f"./files/language/{env.webui_lang}/webui.json")
-webui_help = read_txt(f"./files/language/{env.webui_lang}/help.md")
-other_setting = read_txt(f"./files/language/{env.webui_lang}/setting.md")
 
 
 def main():
+    from pathlib import Path
+
+    from src.batchtxt import main as batchtxt
+    from src.i2i import i2i_by_hand
+    from src.inpaint import for_webui as inpaint
+    from src.m2m import m2m, merge_av, video2frame
+    from src.mosaic import main as mosaic
+    from src.mosold import main as mosold
+    from src.pixiv import main as pixiv
+    from src.rminfo import export_info, remove_info, revert_info
+    from src.setting import webui as setting
+    from src.t2i import t2i, t2i_by_hand
+    from src.tagger import SWINV2_MODEL_DSV3_REPO, dropdown_list, tagger
+    from src.tileups import tile_upscale
+    from src.vibe import vibe, vibe_by_hand
+    from src.waifu2x import main as upscale
+    from src.water import main as water
+    from utils.env import env
+    from utils.plugin import install_plugin, load_plugins, plugin_list
+    from utils.restart import restart
+    from utils.selector import del_current_img, move_current_img, show_first_img, show_next_img
+    from utils.update import check_update, update
+    from utils.utils import (
+        NOISE_SCHEDULE,
+        RESOLUTION,
+        SAMPLER,
+        gen_script,
+        open_folder,
+        read_json,
+        read_txt,
+        return_random,
+    )
+
+    # ------------------------------ #
+
+    webui_lang = read_json(f"./files/language/{env.webui_lang}/webui.json")
+    webui_help = read_txt(f"./files/language/{env.webui_lang}/help.md")
+    other_setting = read_txt(f"./files/language/{env.webui_lang}/setting.md")
+
+    # ------------------------------ #
+
     with gr.Blocks(
         theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv", head=read_txt("./files/click_by_key.html")
     ) as demo:
+        # ---------- 标题 ---------- #
         gr.Markdown(webui_lang["title"] + "    " + check_update())
+        # ---------- 教程说明 ---------- #
         with gr.Tab(webui_lang["info"]["tab"]):
             gr.Markdown(webui_help)
+        # ---------- 文生图 ---------- #
         with gr.Tab(webui_lang["t2i"]["tab"]):
             with gr.Tab(webui_lang["t2i"]["tab"]):
                 with gr.Row():
@@ -66,40 +84,21 @@ def main():
                                 )
                     with gr.Row():
                         with gr.Column(scale=1):
-                            resolution = gr.Radio(
-                                [
-                                    "832x1216",
-                                    "1216x832",
-                                    "1024x1024",
-                                    "512x768",
-                                    "768x768",
-                                    "640x640",
-                                    "1024x1536",
-                                    "1536x1024",
-                                    "1472x1472",
-                                    "1088x1920",
-                                    "1920x1088",
-                                ],
+                            resolution = gr.Dropdown(
+                                RESOLUTION,
                                 value="832x1216",
                                 label=webui_lang["t2i"]["resolution"],
                             )
                             scale = gr.Slider(
                                 minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"]
                             )
-                            sampler = gr.Radio(
-                                [
-                                    "k_euler",
-                                    "k_euler_ancestral",
-                                    "k_dpmpp_2s_ancestral",
-                                    "k_dpmpp_2m",
-                                    "k_dpmpp_sde",
-                                    "ddim_v3",
-                                ],
+                            sampler = gr.Dropdown(
+                                SAMPLER,
                                 value="k_euler",
                                 label=webui_lang["t2i"]["sampler"],
                             )
-                            noise_schedule = gr.Radio(
-                                ["native", "karras", "exponential", "polyexponential"],
+                            noise_schedule = gr.Dropdown(
+                                NOISE_SCHEDULE,
                                 value="native",
                                 label=webui_lang["t2i"]["noise_schedule"],
                             )
@@ -206,46 +205,27 @@ def main():
                             )
                         with gr.Column(scale=1):
                             generate = gr.Button(value=webui_lang["t2i"]["generate_button"], scale=1)
-                            stop_button = gr.Button(webui_lang["random blue picture"]["stop_button"], scale=1)
                             generate_forever = gr.Button(webui_lang["random blue picture"]["generate_forever"], scale=1)
+                            stop_button = gr.Button(webui_lang["random blue picture"]["stop_button"], scale=1)
                             blue_imgs = gr.Checkbox(True, label=webui_lang["vibe"]["blue_imgs"])
                     input_imgs = gr.Textbox("", label=webui_lang["vibe"]["input_imgs"])
                     with gr.Row():
                         with gr.Column(scale=1):
-                            resolution = gr.Radio(
-                                [
-                                    "832x1216",
-                                    "1216x832",
-                                    "1024x1024",
-                                    "512x768",
-                                    "768x768",
-                                    "640x640",
-                                    "1024x1536",
-                                    "1536x1024",
-                                    "1472x1472",
-                                    "1088x1920",
-                                    "1920x1088",
-                                ],
+                            resolution = gr.Dropdown(
+                                RESOLUTION,
                                 value="832x1216",
                                 label=webui_lang["t2i"]["resolution"],
                             )
                             scale = gr.Slider(
                                 minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"]
                             )
-                            sampler = gr.Radio(
-                                [
-                                    "k_euler",
-                                    "k_euler_ancestral",
-                                    "k_dpmpp_2s_ancestral",
-                                    "k_dpmpp_2m",
-                                    "k_dpmpp_sde",
-                                    "ddim_v3",
-                                ],
+                            sampler = gr.Dropdown(
+                                SAMPLER,
                                 value="k_euler",
                                 label=webui_lang["t2i"]["sampler"],
                             )
-                            noise_schedule = gr.Radio(
-                                ["native", "karras", "exponential", "polyexponential"],
+                            noise_schedule = gr.Dropdown(
+                                NOISE_SCHEDULE,
                                 value="native",
                                 label=webui_lang["t2i"]["noise_schedule"],
                             )
@@ -285,6 +265,7 @@ def main():
                     logger.success(f" 成功加载插件: {plugin_name}")
                 else:
                     logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
+        # ---------- 图生图 ---------- #
         with gr.Tab(webui_lang["i2i"]["tab"]):
             with gr.Tab(webui_lang["i2i"]["tab"]):
                 with gr.Row():
@@ -320,58 +301,37 @@ def main():
                             output_img = gr.Image()
                     with gr.Column():
                         with gr.Row():
-                            resolution = gr.Radio(
-                                [
-                                    "832x1216",
-                                    "1216x832",
-                                    "1024x1024",
-                                    "512x768",
-                                    "768x768",
-                                    "640x640",
-                                    "1024x1536",
-                                    "1536x1024",
-                                    "1472x1472",
-                                    "1088x1920",
-                                    "1920x1088",
-                                ],
+                            resolution = gr.Dropdown(
+                                RESOLUTION,
                                 value="832x1216",
                                 label=webui_lang["t2i"]["resolution"],
                             )
+                            sampler = gr.Dropdown(
+                                SAMPLER,
+                                value="k_euler",
+                                label=webui_lang["t2i"]["sampler"],
+                            )
+                            noise_schedule = gr.Dropdown(
+                                NOISE_SCHEDULE,
+                                value="native",
+                                label=webui_lang["t2i"]["noise_schedule"],
+                            )
+                        with gr.Row():
+                            strength = gr.Slider(
+                                minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"]
+                            )
+                            noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label=webui_lang["i2i"]["noise"])
                             scale = gr.Slider(
                                 minimum=0, maximum=10, value=5, step=0.1, label=webui_lang["t2i"]["scale"]
                             )
                             steps = gr.Slider(minimum=0, maximum=50, value=28, step=1, label=webui_lang["t2i"]["steps"])
-                            with gr.Column():
-                                strength = gr.Slider(
-                                    minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"]
-                                )
-                                noise = gr.Slider(
-                                    minimum=0, maximum=1, value=0, step=0.1, label=webui_lang["i2i"]["noise"]
-                                )
-                                with gr.Row():
-                                    seed = gr.Textbox(value="-1", label=webui_lang["t2i"]["seed"], scale=7)
-                                    random_button = gr.Button(value="♻️", size="sm", scale=1)
-                                    random_button.click(return_random, inputs=None, outputs=seed)
                         with gr.Row():
-                            sampler = gr.Radio(
-                                [
-                                    "k_euler",
-                                    "k_euler_ancestral",
-                                    "k_dpmpp_2s_ancestral",
-                                    "k_dpmpp_2m",
-                                    "k_dpmpp_sde",
-                                    "ddim_v3",
-                                ],
-                                value="k_euler",
-                                label=webui_lang["t2i"]["sampler"],
-                            )
-                            noise_schedule = gr.Radio(
-                                ["native", "karras", "exponential", "polyexponential"],
-                                value="native",
-                                label=webui_lang["t2i"]["noise_schedule"],
-                            )
-                            sm = gr.Radio([True, False], value=False, label="sm")
-                            sm_dyn = gr.Radio([True, False], value=False, label=webui_lang["t2i"]["smdyn"])
+                            sm = gr.Radio([True, False], value=False, label="sm", scale=2)
+                            sm_dyn = gr.Radio([True, False], value=False, label=webui_lang["t2i"]["smdyn"], scale=2)
+                            with gr.Column(scale=1):
+                                seed = gr.Textbox(value="-1", label=webui_lang["t2i"]["seed"], scale=7)
+                                random_button = gr.Button(value="♻️", size="sm", scale=1)
+                                random_button.click(return_random, inputs=None, outputs=seed)
                     generate.click(
                         fn=i2i_by_hand,
                         inputs=[
@@ -439,20 +399,8 @@ def main():
                         label=webui_lang["t2i"]["negative"],
                         lines=2,
                     )
-                    resolution = gr.Radio(
-                        [
-                            "832x1216",
-                            "1216x832",
-                            "1024x1024",
-                            "512x768",
-                            "768x768",
-                            "640x640",
-                            "1024x1536",
-                            "1536x1024",
-                            "1472x1472",
-                            "1088x1920",
-                            "1920x1088",
-                        ],
+                    resolution = gr.Dropdown(
+                        RESOLUTION,
                         value="832x1216",
                         label=webui_lang["t2i"]["resolution"],
                     )
@@ -460,20 +408,13 @@ def main():
                     steps = gr.Slider(minimum=0, maximum=50, value=28, step=1, label=webui_lang["t2i"]["steps"])
                     strength = gr.Slider(minimum=0, maximum=1, value=0.5, step=0.1, label=webui_lang["i2i"]["strength"])
                     noise = gr.Slider(minimum=0, maximum=1, value=0, step=0.1, label=webui_lang["i2i"]["noise"])
-                    sampler = gr.Radio(
-                        [
-                            "k_euler",
-                            "k_euler_ancestral",
-                            "k_dpmpp_2s_ancestral",
-                            "k_dpmpp_2m",
-                            "k_dpmpp_sde",
-                            "ddim_v3",
-                        ],
+                    sampler = gr.Dropdown(
+                        SAMPLER,
                         value="k_euler",
                         label=webui_lang["t2i"]["sampler"],
                     )
-                    noise_schedule = gr.Radio(
-                        ["native", "karras", "exponential", "polyexponential"],
+                    noise_schedule = gr.Dropdown(
+                        NOISE_SCHEDULE,
                         value="native",
                         label=webui_lang["t2i"]["noise_schedule"],
                     )
@@ -571,6 +512,7 @@ def main():
                     logger.success(f" 成功加载插件: {plugin_name}")
                 else:
                     logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
+        # ---------- 局部重绘 ---------- #
         with gr.Tab(webui_lang["inpaint"]["tab"]):
             with gr.Row():
                 with gr.Column(scale=8):
@@ -597,6 +539,7 @@ def main():
                 inputs=[input_path, mask_path, input_img, input_mask, open_button],
                 outputs=[output_img, output_info],
             )
+        # ---------- 超分降噪 ---------- #
         with gr.Tab(webui_lang["super resolution"]["tab"]):
             with gr.Row():
                 with gr.Column(scale=8):
@@ -956,6 +899,7 @@ def main():
                 inputs=[engine, input_img, input_path, open_button, scale, noise, mode, jobs],
                 outputs=[output_info, output_img],
             )
+        # ---------- 自动打码 ---------- #
         with gr.Tab(webui_lang["mosaic"]["tab"]):
             with gr.Row():
                 with gr.Column(scale=8):
@@ -979,6 +923,7 @@ def main():
             generate_old.click(
                 fn=mosold, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info]
             )
+        # ---------- 添加水印 ---------- #
         with gr.Tab(webui_lang["water mark"]["tab"]):
             with gr.Row():
                 with gr.Column(scale=8):
@@ -992,6 +937,7 @@ def main():
                 start_button = gr.Button(webui_lang["water mark"]["generate_button"], scale=1)
             output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
             start_button.click(fn=water, inputs=[input_path, output_path], outputs=output_info)
+        # ---------- 上传 Pixiv ---------- #
         with gr.Tab(webui_lang["pixiv"]["tab"]):
             gr.Markdown(webui_lang["pixiv"]["description"])
             with gr.Column():
@@ -1000,6 +946,7 @@ def main():
                     output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"], scale=4)
                     generate = gr.Button(webui_lang["water mark"]["generate_button"], scale=1)
             generate.click(fn=pixiv, inputs=input_path, outputs=output_info)
+        # ---------- 图片筛选 ---------- #
         with gr.Tab(webui_lang["selector"]["tab"]):
             gr.Markdown(webui_lang["selector"]["description"])
             with gr.Column():
@@ -1022,6 +969,7 @@ def main():
             move_button.click(fn=move_current_img, inputs=[current_img, output_path], outputs=[show_img, current_img])
             move_button_.click(fn=move_current_img, inputs=[current_img, output_path_], outputs=[show_img, current_img])
             del_button.click(fn=del_current_img, inputs=[current_img], outputs=[show_img, current_img])
+        # ---------- 抹除数据 ---------- #
         with gr.Tab(webui_lang["rm png info"]["tab"]):
             with gr.Row():
                 with gr.Column(scale=8):
@@ -1037,7 +985,7 @@ def main():
                     label=webui_lang["rm png info"]["choose_to_rm"],
                 )
                 input_path = gr.Textbox(label=webui_lang["i2i"]["input_path"])
-                output_path = gr.Textbox("./output/info_removed", label=webui_lang["rm png info"]["save_path"])
+                output_path = gr.Textbox(label=webui_lang["rm png info"]["save_path"])
                 output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
                 start_button.click(
                     fn=remove_info, inputs=[input_path, output_path, choose_to_rm], outputs=[output_info]
@@ -1051,9 +999,10 @@ def main():
             with gr.Tab(webui_lang["rm png info"]["tab_ex"]):
                 start_button = gr.Button(webui_lang["water mark"]["generate_button"])
                 input_path = gr.Textbox(label=webui_lang["i2i"]["input_path"])
-                output_path = gr.Textbox("./output/info_file", label=webui_lang["rm png info"]["save_path"])
+                output_path = gr.Textbox(label=webui_lang["rm png info"]["save_path"])
                 output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
                 start_button.click(fn=export_info, inputs=[input_path, output_path], outputs=output_info)
+        # ---------- 法术解析 ---------- #
         with gr.Tab(webui_lang["maigic analysis"]["tab"]):
             with gr.Tab(webui_lang["maigic analysis"]["tab"]):
                 gr.HTML(
@@ -1150,6 +1099,7 @@ def main():
                     ],
                     outputs=[sorted_general_strings, rating, character_res, general_res],
                 )
+        # ---------- GPT ---------- #
         with gr.Tab("GPT"):
             gr.HTML(
                 """
@@ -1173,6 +1123,7 @@ def main():
                 logger.success(f"成功加载插件: {plugin_name}")
             else:
                 logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
+        # ---------- 插件商店 ---------- #
         with gr.Tab(webui_lang["plugin"]["tab"]):
             with gr.Row():
                 plugin_name = gr.Textbox("", label="名称(Name)")
@@ -1182,6 +1133,7 @@ def main():
             gr.Markdown(plugin_list())
             install.click(install_plugin, inputs=plugin_name, outputs=output_info)
             restart_.click(restart)
+        # ---------- 配置设置 ---------- #
         with gr.Tab(webui_lang["setting"]["tab"]):
             with gr.Row():
                 modify_button = gr.Button("保存(Save)")
@@ -1207,14 +1159,7 @@ def main():
                     scale = gr.Slider(0, 10, env.scale, step=0.1, label=webui_lang["setting"]["description"]["scale"])
                     censor = gr.Checkbox(value=env.censor, label=webui_lang["setting"]["description"]["censor"])
                     sampler = gr.Radio(
-                        [
-                            "k_euler",
-                            "k_euler_ancestral",
-                            "k_dpmpp_2s_ancestral",
-                            "k_dpmpp_2m",
-                            "k_dpmpp_sde",
-                            "ddim_v3",
-                        ],
+                        SAMPLER,
                         value=env.sampler,
                         label=webui_lang["setting"]["description"]["sampler"],
                     )
@@ -1223,7 +1168,7 @@ def main():
                         sm = gr.Checkbox(env.sm, label=webui_lang["setting"]["description"]["sm"])
                         sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_lang["setting"]["description"]["sm"])
                     noise_schedule = gr.Radio(
-                        ["native", "karras", "exponential", "polyexponential"],
+                        NOISE_SCHEDULE,
                         value=env.noise_schedule,
                         label=webui_lang["setting"]["description"]["noise_schedule"],
                     )
@@ -1232,7 +1177,7 @@ def main():
                         6, 120, env.t2i_cool_time, step=1, label=webui_lang["setting"]["description"]["t2i_cool_time"]
                     )
                     save_path = gr.Radio(
-                        ["默认(Default)", "日期(Date)", "角色(Character)", "出处(Origin)"],
+                        ["默认(Default)", "日期(Date)", "角色(Character)", "出处(Origin)", "画风(Artists)"],
                         value=env.save_path,
                         label=webui_lang["setting"]["description"]["save_path"],
                     )
@@ -1281,6 +1226,7 @@ def main():
                 caption_prefix = gr.Textbox(
                     value=str(env.caption_prefix).replace("\n", "\\n"),
                     label=webui_lang["setting"]["description"]["caption_prefix"],
+                    lines=3,
                 )
                 rep_tags = gr.Checkbox(env.rep_tags, label=webui_lang["setting"]["description"]["rep_tags"])
                 rep_tags_per = gr.Slider(
@@ -1314,12 +1260,11 @@ def main():
                 water_height = gr.Slider(
                     10, 300, env.water_height, label=webui_lang["setting"]["description"]["water_height"]
                 )
-                gr.Markdown(webui_lang["setting"]["description"]["position"])
-                with gr.Row():
-                    ul = gr.Checkbox(True if "左上" in env.position else False, label="左上(Upper Left)")
-                    ll = gr.Checkbox(True if "左下" in env.position else False, label="左下(Lower Left)")
-                    ur = gr.Checkbox(True if "右上" in env.position else False, label="右上(Upper Right)")
-                    lr = gr.Checkbox(True if "右下" in env.position else False, label="右下(Upper Right)")
+                water_position = gr.Dropdown(
+                    ["左上(Upper Left)", "左下(Lower Left)", "右上(Upper Right)", "右下(Upper Right)"],
+                    value=env.position,
+                    label=webui_lang["setting"]["description"]["position"],
+                )
                 water_num = gr.Slider(
                     1, 10, env.water_num, step=1, label=webui_lang["setting"]["description"]["water_num"]
                 )
@@ -1330,7 +1275,9 @@ def main():
                 port = gr.Textbox(value=env.port, label=webui_lang["setting"]["description"]["port"])
                 g4f_port = gr.Textbox(env.g4f_port, label=webui_lang["setting"]["description"]["g4f_port"])
                 theme = gr.Textbox(env.theme, label=webui_lang["setting"]["description"]["theme"])
-                webui_lang_ = gr.Textbox(value=env.webui_lang, label=webui_lang["setting"]["description"]["webui_lang"])
+                webui_lang_ = gr.Dropdown(
+                    ["zh", "en"], value="zh", label=webui_lang["setting"]["description"]["webui_lang"]
+                )
                 skip_update_check = gr.Checkbox(
                     env.skip_update_check, label=webui_lang["setting"]["description"]["skip_update_check"]
                 )
@@ -1373,10 +1320,7 @@ def main():
                     neighbor,
                     alpha,
                     water_height,
-                    ul,
-                    ll,
-                    ur,
-                    lr,
+                    water_position,
                     water_num,
                     rotate,
                     meta_data,

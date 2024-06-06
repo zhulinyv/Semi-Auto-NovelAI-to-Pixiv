@@ -161,11 +161,7 @@ def prepare_input(action_type):
 <<<<<<<<<<"""
     )
 
-    input_ = f"{format_str(character)}, {format_str(artist)}, {format_str(censored)}, {format_str(emotion)}, {format_str(action)}, {format_str(surrounding)}, {format_str(cum)}, {format_str(pref)}".replace(
-        ", , , ", ", "
-    ).replace(
-        ", , ", ", "
-    )
+    input_ = f"{format_str(character)}, {format_str(artist)}, {format_str(censored)}, {format_str(emotion)}, {format_str(action)}, {format_str(surrounding)}, {format_str(cum)}, {format_str(pref)}"
 
     return input_, sm, scale, negative, choose_game, choose_character
 

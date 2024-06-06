@@ -5,14 +5,56 @@ import random
 import time
 import zipfile
 from datetime import date
+from io import BytesIO
 from pathlib import Path
 
 import requests
 import ujson as json
 from loguru import logger
+from PIL import Image
 
 from utils.env import env
 from utils.jsondata import headers
+
+RESOLUTION = [
+    "832x1216",
+    "1216x832",
+    "1024x1024",
+    "512x768",
+    "768x768",
+    "640x640",
+    "1024x1536",
+    "1536x1024",
+    "1472x1472",
+    "1088x1920",
+    "1920x1088",
+]
+SAMPLER = [
+    "k_euler",
+    "k_euler_ancestral",
+    "k_dpmpp_2s_ancestral",
+    "k_dpmpp_2m",
+    "k_dpmpp_sde",
+    "ddim_v3",
+]
+NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
+
+
+def format_str(str_: str):
+    """格式化字符串
+
+    Args:
+        str_ (str): 字符串
+
+    Returns:
+        str_: 格式化后的字符串
+    """
+    str_ = str_.replace(", ", ",")
+    str_ = str_.replace(",", ", ")
+    str_ = str_.replace(", , , ", ", ")
+    str_ = str_.replace(", , ", ", ")
+    str_ = str_[:-2] if str_[-2:] == ", " else str_
+    return str_
 
 
 def list_to_str(str_list: list[str]):
@@ -27,22 +69,7 @@ def list_to_str(str_list: list[str]):
     empty_str = ""
     for i in str_list:
         empty_str += f"{i},"
-    return empty_str
-
-
-def format_str(str_: str):
-    """格式化字符串
-
-    Args:
-        str_ (str): 字符串
-
-    Returns:
-        str_: 格式化后的字符串
-    """
-    str_ = str_.replace(", ", ",")
-    str_ = str_.replace(",", ", ")
-    str_ = str_[:-2] if str_[-2:] == ", " else str_
-    return str_
+    return format_str(empty_str)
 
 
 def sleep_for_cool(int1, int2):
@@ -121,6 +148,20 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
         path = f"/{choose_character}"
     elif env.save_path == "出处(Origin)":
         path = f"/{choose_game}"
+    elif env.save_path == "画风(Artists)":
+        with Image.open(BytesIO(img_data)) as image:
+            info = image.info
+            prompt = json.loads(info["Comment"])["prompt"]
+        data = read_json("./files/favorite.json")
+        weight_list = list(data["artists"]["belief"].keys())
+        for weight in weight_list:
+            artist_list = list(data["artists"]["belief"][weight].keys())
+            for artist in artist_list:
+                artists = list_to_str(data["artists"]["belief"][weight][artist][0])
+                if artists in prompt:
+                    path = f"/{artist}"
+                else:
+                    path = ""
     else:
         path = ""
     if not os.path.exists(f"./output/{type_}{path}"):
@@ -261,6 +302,10 @@ def open_folder(folder):
     os.startfile(folder)
 
 
+def return_random():
+    return "-1"
+
+
 def gen_script(script_type, *args):
     with open("stand_alone_scripts.py", "w", encoding="utf-8") as script:
         if script_type == "随机涩图":
@@ -301,7 +346,3 @@ while 1:
             )
         else:
             ...
-
-
-def return_random():
-    return "-1"

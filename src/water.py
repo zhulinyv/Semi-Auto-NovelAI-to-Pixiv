@@ -34,13 +34,13 @@ def water(img_path, otp_path):
 
         # 随机水印位置
         position = random.choice(env.position)
-        if position == "左上":
+        if position == "左上(Upper Left)":
             box = (100 + random.randint(-20, 20), 100 + random.randint(-20, 20))
-        elif position == "右上":
+        elif position == "右上(Upper Right)":
             box = (w - new_width - 100 + random.randint(-20, 20), 100 + random.randint(-20, 20))
-        elif position == "左下":
+        elif position == "左下(Lower Left)":
             box = (100 + random.randint(-20, 20), h - new_height - 100 + random.randint(-20, 20))
-        elif position == "右下":
+        elif position == "右下(Upper Right)":
             box = (w - new_width - 100 + random.randint(-20, 20), h - new_height - 100 + random.randint(-20, 20))
 
         img = img.filter(ImageFilter.SMOOTH)

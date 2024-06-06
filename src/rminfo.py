@@ -27,16 +27,16 @@ def remove_info(input_path, output_path, choose_to_rm):
     return f"清除成功! 图片已保存到 {output_path}"
 
 
-def revert_info(input_path, output_path):
-    file_list = file_path2list(output_path)
+def revert_info(info_file_path, input_path):
+    file_list = file_path2list(input_path)
     for file in file_list:
-        if os.path.exists(Path(input_path) / f"{file[:-4]}.txt"):
-            revert_img_info(str(Path(input_path) / f"{file[:-4]}.txt"), Path(output_path) / file)
-        elif os.path.exists(Path(input_path) / f"{file[:-4]}.png"):
-            revert_img_info(str(Path(input_path) / f"{file[:-4]}.png"), Path(output_path) / file)
+        if os.path.exists(Path(info_file_path) / f"{file[:-4]}.txt"):
+            revert_img_info(str(Path(info_file_path) / f"{file[:-4]}.txt"), Path(input_path) / file)
+        elif os.path.exists(Path(info_file_path) / f"{file[:-4]}.png"):
+            revert_img_info(str(Path(info_file_path) / f"{file[:-4]}.png"), Path(input_path) / file)
         else:
             logger.error("仅支持从 *.png 和 *.txt 文件中读取元数据!")
-    return f"还原成功! 图片已保存到 {output_path}"
+    return f"还原成功! 图片已保存到 {input_path}"
 
 
 def export_info(input_path, output_path):

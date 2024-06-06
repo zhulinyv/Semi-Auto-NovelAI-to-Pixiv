@@ -50,10 +50,7 @@ def webui(
     neighbor,
     alpha,
     water_height,
-    ul,
-    ll,
-    ur,
-    lr,
+    water_position,
     water_num,
     rotate,
     meta_data,
@@ -66,16 +63,7 @@ def webui(
     webui_lang,
     skip_update_check,
 ):
-    position = []
-    if ul:
-        position.append("左上")
-    if ll:
-        position.append("左下")
-    if ur:
-        position.append("右上")
-    if lr:
-        position.append("右下")
-    position = str(position)
+    position = str(water_position)
     position = position.replace("'", '"')
     if img_size == "832x1216":
         img_size = [832, 1216]
