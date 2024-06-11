@@ -37,4 +37,4 @@ def check_update():
 def update():
     repo = git.Repo("")
     repo.git.pull()
-    return "更新完成"
+    return "更新完成! 重启后生效"

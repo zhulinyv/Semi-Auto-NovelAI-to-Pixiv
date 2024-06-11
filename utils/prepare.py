@@ -4,7 +4,7 @@ import shutil
 from loguru import logger
 from playsound import playsound
 
-VERSION = "2.16.0"
+VERSION = "2.16.1"
 
 need_dir_list = [
     "./output",

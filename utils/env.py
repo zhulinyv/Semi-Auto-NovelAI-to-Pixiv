@@ -38,6 +38,7 @@ class Settings(BaseSettings):
     pixiv_cool_time: int = 15
     remove_info: bool = True
     r18: bool = True
+    default_tag: list[str] = ["女の子"]
 
     # 马赛克
     neighbor: float = 0.0085
