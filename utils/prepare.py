@@ -4,7 +4,7 @@ import shutil
 from loguru import logger
 from playsound import playsound
 
-VERSION = "2.16.1"
+VERSION = "2.16.2"
 
 need_dir_list = [
     "./output",
@@ -48,6 +48,8 @@ if not os.path.exists("./files/favorite.json"):
 
 
 if __name__ == "__main__":
+    from env import env
+
     logger.opt(colors=True).success(
         f"""<c>
 ███████╗ █████╗ ███╗   ██╗██████╗
@@ -57,4 +59,7 @@ if __name__ == "__main__":
 ███████║██║  ██║██║ ╚████║██║         Author:     https://github.com/zhulinyv
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝         Repository: https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv</c>"""
     )
-    playsound("./files/llss.mp3")
+    if env.skip_start_sound:
+        pass
+    else:
+        playsound("./files/llss.mp3")

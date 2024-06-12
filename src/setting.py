@@ -63,6 +63,7 @@ def webui(
     theme,
     webui_lang,
     skip_update_check,
+    skip_start_sound,
 ):
     position = str(water_position)
     position = position.replace("'", '"')
@@ -116,5 +117,6 @@ def webui(
         theme=f'"{theme}"',
         webui_lang=f'"{webui_lang}"',
         skip_update_check=skip_update_check,
+        skip_start_sound=skip_start_sound,
     )
     return otp_info

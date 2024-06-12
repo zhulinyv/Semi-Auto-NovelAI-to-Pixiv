@@ -62,6 +62,7 @@ class Settings(BaseSettings):
     theme: Union[str, None] = None
     webui_lang: str = "zh"
     skip_update_check: bool = False
+    skip_start_sound: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

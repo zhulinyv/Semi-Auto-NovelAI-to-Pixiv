@@ -1284,6 +1284,9 @@ def main():
                 skip_update_check = gr.Checkbox(
                     env.skip_update_check, label=webui_lang["setting"]["description"]["skip_update_check"]
                 )
+                skip_start_sound = gr.Checkbox(
+                    env.skip_update_check, label=webui_lang["setting"]["description"]["skip_start_sound"]
+                )
             with gr.Tab(webui_lang["setting"]["sub_tab"]["other"]):
                 gr.Markdown(other_setting)
             with gr.Tab("更新 WebUI(Update WebUI)"):
@@ -1336,6 +1339,7 @@ def main():
                     theme,
                     webui_lang_,
                     skip_update_check,
+                    skip_start_sound,
                 ],
                 outputs=setting_output_info,
             )
