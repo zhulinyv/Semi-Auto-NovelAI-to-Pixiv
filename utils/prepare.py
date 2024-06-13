@@ -2,7 +2,6 @@ import os
 import shutil
 
 from loguru import logger
-from playsound import playsound
 
 VERSION = "2.16.2"
 
@@ -62,4 +61,6 @@ if __name__ == "__main__":
     if env.skip_start_sound:
         pass
     else:
+        from playsound import playsound
+
         playsound("./files/llss.mp3")
