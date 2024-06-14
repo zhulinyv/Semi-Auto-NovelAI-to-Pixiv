@@ -93,7 +93,7 @@ def t2i_by_hand(
         return saved_path
 
 
-def prepare_input(action_type):
+def prepare_input(action_type, action, origin, character):
     data = read_json("./files/favorite.json")
 
     weight_list = list(data["artists"]["belief"].keys())
@@ -112,19 +112,30 @@ def prepare_input(action_type):
                     break
     pref = random.choice(data["quality_pref"]["belief"])
     negative = format_str(random.choice(data["negative_prompt"]["belief"]))
-    choose_game = random.choice(list(data["character"].keys()))
-    choose_character = random.choice(list(data["character"][choose_game].keys()))
-    character = list_to_str(data["character"][choose_game][choose_character])
-    if action_type == "随机(Random)":
-        action_type = (
-            "巨乳"
-            if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"])
-            else random.choice(["普通", "自慰"])
-        )
+    if character:
+        choose_game = origin
+        choose_character = character
     else:
-        pass
-    choose_action: list = random.choice(list(data["R18"]["动作"][f"{action_type}动作"].keys()))
-    action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][choose_action])
+        if origin:
+            choose_game = origin
+        else:
+            choose_game = random.choice(list(data["character"].keys()))
+        choose_character = random.choice(list(data["character"][choose_game].keys()))
+    character = list_to_str(data["character"][choose_game][choose_character])
+    if action:
+        choose_action = action
+        action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][action])
+    else:
+        if action_type == "随机(Random)":
+            action_type = (
+                "巨乳"
+                if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"])
+                else random.choice(["普通", "自慰"])
+            )
+        else:
+            pass
+        choose_action: list = random.choice(list(data["R18"]["动作"][f"{action_type}动作"].keys()))
+        action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][choose_action])
     emotion_type = "口交" if "oral" in action else "普通"
     choose_emotion = random.choice(list(data["R18"]["表情"][f"{emotion_type}表情"].keys()))
     emotion = (
@@ -191,11 +202,11 @@ def prepare_json(input_, sm, scale, negative):
 times = 0
 
 
-def t2i(forever: bool, action_type):
+def t2i(forever: bool, action_type, action, origin, character):
     global times
     times += 1
     logger.info(f"正在生成第 {times} 张图片...")
-    input_, sm, scale, negative, choose_game, choose_character = prepare_input(action_type)
+    input_, sm, scale, negative, choose_game, choose_character = prepare_input(action_type, action, origin, character)
     json_for_t2i, seed = prepare_json(input_, sm, scale, negative)
     saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, choose_game, choose_character)
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)

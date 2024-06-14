@@ -137,9 +137,15 @@ def main():
                         open_folder_.click(open_folder, inputs=folder)
                         script_type = gr.Textbox("随机涩图", visible=False)
                         script_gen = gr.Button(webui_lang["t2i"]["script_gen"])
-                action_type = gr.Dropdown(
-                    ["随机(Random)", "巨乳", "普通", "自慰"], value="随机(Random)", label="固定动作(Action)"
-                )
+                with gr.Row():
+                    action_type = gr.Dropdown(
+                        ["随机(Random)", "巨乳", "普通", "自慰"],
+                        value="随机(Random)",
+                        label="固定动作类型(Action Type)",
+                    )
+                    action = gr.Textbox(label="固定动作(Action)")
+                    origin = gr.Textbox(label="固定出处(Origin)")
+                    character = gr.Textbox(label="固定角色(Character)")
                 with gr.Row():
                     forever = gr.Radio(value=False, visible=False)
                     generate_button = gr.Button(webui_lang["t2i"]["generate_button"], scale=2)
@@ -149,12 +155,19 @@ def main():
                     show_img = gr.Image()
                     show_img_ = gr.Image()
                 cancel_event = show_img_.change(
-                    fn=t2i, inputs=[forever, action_type], outputs=show_img_, show_progress="hidden"
+                    fn=t2i,
+                    inputs=[forever, action_type, action, origin, character],
+                    outputs=show_img_,
+                    show_progress="hidden",
                 )
-                generate_button.click(fn=t2i, inputs=[forever, action_type], outputs=show_img)
-                generate_forever.click(fn=t2i, inputs=[forever, action_type], outputs=show_img_)
+                generate_button.click(
+                    fn=t2i, inputs=[forever, action_type, action, origin, character], outputs=show_img
+                )
+                generate_forever.click(
+                    fn=t2i, inputs=[forever, action_type, action, origin, character], outputs=show_img_
+                )
                 stop_button.click(None, None, None, cancels=[cancel_event])
-                script_gen.click(gen_script, inputs=[script_type, action_type], outputs=None)
+                script_gen.click(gen_script, inputs=[script_type, action_type, action, origin, character], outputs=None)
             with gr.Tab(webui_lang["random picture"]["tab"]):
                 with gr.Row():
                     with gr.Column(scale=6):
