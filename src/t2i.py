@@ -212,6 +212,6 @@ def t2i(forever: bool, action_type, action, origin, character):
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
     if forever:
-        return t2i(True, action_type)
+        return t2i(True, action_type, action, origin, character)
     else:
         return saved_path
