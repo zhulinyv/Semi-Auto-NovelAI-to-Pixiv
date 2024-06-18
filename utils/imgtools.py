@@ -1,4 +1,5 @@
 import base64
+import shutil
 from pathlib import Path, WindowsPath
 
 import ujson as json
@@ -8,6 +9,43 @@ from PIL.PngImagePlugin import PngInfo
 
 from utils.env import env
 from utils.utils import file_path2name
+
+try:
+    from ultralytics import YOLO
+
+    def detector(image):
+        model = YOLO("./files/censor.pt")
+        box_list = []
+        results = model(image, verbose=False)
+        result = json.loads((results[0]).tojson())
+        for part in result:
+            if part["name"] in ["penis", "pussy"]:
+                logger.debug("检测到: {}".format(part["name"]))
+                x = round(part["box"]["x1"])
+                y = round(part["box"]["y1"])
+                w = round(part["box"]["x2"] - part["box"]["x1"])
+                h = round(part["box"]["y2"] - part["box"]["y1"])
+                box_list.append([x, y, w, h])
+        return box_list
+
+except ModuleNotFoundError:
+    from nudenet import NudeDetector
+
+    def detector(image):
+        nude_detector = NudeDetector()
+        # 这个库不能使用中文文件名
+        shutil.copyfile(image, "./output/temp.png")
+        box_list = []
+        body = nude_detector.detect("./output/temp.png")
+        for part in body:
+            if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
+                logger.debug("检测到: {}".format(part["class"]))
+                x = part["box"][0]
+                y = part["box"][1]
+                w = part["box"][2]
+                h = part["box"][3]
+                box_list.append([x, y, w, h])
+        return box_list
 
 
 def get_img_info(img_path):
@@ -121,19 +159,3 @@ def cut_img_h(path, otp_path):
         crop_img.save(Path(otp_path) / name.replace(".png", "_l.png"))
         crop_img = img.crop((w / 2, 0, w, h))
         crop_img.save(Path(otp_path) / name.replace(".png", "_r.png"))
-
-
-def find_black_pixels(image):
-    width, height = image.size
-
-    for x in range(width):
-        pixel = image.getpixel((x, 1))
-        if pixel == (0, 0, 0):
-            break
-
-    for y in range(height):
-        pixel = image.getpixel((1, y))
-        if pixel == (0, 0, 0):
-            break
-
-    return x, y

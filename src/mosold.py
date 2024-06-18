@@ -2,13 +2,10 @@ import shutil
 from pathlib import Path
 
 from loguru import logger
-from nudenet import NudeDetector
 from PIL import Image
 
-from utils.imgtools import revert_img_info
+from utils.imgtools import detector, revert_img_info
 from utils.utils import file_path2list
-
-nude_detector = NudeDetector()
 
 
 def __mosaic(img, length):
@@ -29,18 +26,16 @@ def _mosaic(img, fx, fy, tx, ty):
 def mosaic(img):
     img = str(img)
     with Image.open(img) as image:
-        body = nude_detector.detect(img)
-        for part in body:
-            if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
-                logger.debug("检测到: {}".format(part["class"]))
-                image = _mosaic(
-                    image,
-                    part["box"][0],
-                    part["box"][1],
-                    part["box"][0] + part["box"][2],
-                    part["box"][1] + part["box"][3],
-                )
-                image.save(img)
+        box_list = detector(img)
+        for box in box_list:
+            image = _mosaic(
+                image,
+                box[0],
+                box[1],
+                box[0] + box[2],
+                box[1] + box[3],
+            )
+            image.save(img)
         revert_img_info(None, img, image.info)
 
 

@@ -3,14 +3,11 @@ from pathlib import Path
 
 import cv2
 from loguru import logger
-from nudenet import NudeDetector
 from PIL import Image
 
 from utils.env import env
-from utils.imgtools import revert_img_info
+from utils.imgtools import detector, revert_img_info
 from utils.utils import file_path2list
-
-nude_detector = NudeDetector()
 
 
 def _mosaic(img, x, y, w, h, neighbor):
@@ -36,13 +33,11 @@ def mosaic(img_path):
         neighbor = int(
             pil_img.width * env.neighbor if pil_img.width > pil_img.height else pil_img.height * env.neighbor
         )
-        body = nude_detector.detect(img_path)
-        for part in body:
-            if part["class"] in ["FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED"]:
-                logger.debug("检测到: {}".format(part["class"]))
-                cv2_img = cv2.imread(img_path)
-                cv2_img = _mosaic(cv2_img, part["box"][0], part["box"][1], part["box"][2], part["box"][3], neighbor)
-                cv2.imwrite(img_path, cv2_img)
+        box_list = detector(img_path)
+        for box in box_list:
+            cv2_img = cv2.imread(img_path)
+            cv2_img = _mosaic(cv2_img, box[0], box[1], box[2], box[3], neighbor)
+            cv2.imwrite(img_path, cv2_img)
         revert_img_info(None, img_path, pil_img.info)
 
 

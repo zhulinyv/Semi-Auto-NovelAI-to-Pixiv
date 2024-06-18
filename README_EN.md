@@ -139,6 +139,9 @@ Learning Gradio, trying to create a WebUI for this project.
 > [!TIP]
 > Darkness is like invisible hands, tightly embracing me, deeply devouring my thoughts.
 
+<details>
+<summary><b>展开查看待办列表</b></summary>
+
 + [x] Batch text-to-image generation
 + [x] Batch image-to-image generation
 + [x] Batch upload to Pixiv
@@ -183,7 +186,13 @@ Learning Gradio, trying to create a WebUI for this project.
 + [x] Batch enhance
 + [ ] ~~Custom save path~~
 + [ ] Learn the C# and write a luncher with wpfui
++ [x] Yolo detects Ensford
++ [x] Activate Loggo (even added a beep)
++ [ ] Rename functions and variables
++ [ ] Optimized save directory
 + [ ] ...
+
+</details>
 
 ## 🤝 Acknowledgements
 

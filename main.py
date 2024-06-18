@@ -932,6 +932,8 @@ def main():
                     with gr.Column(scale=2):
                         output_info = gr.Textbox(label=webui_lang["i2i"]["output_info"])
                         output_img = gr.Image(scale=2)
+            gr.Markdown(webui_lang["mosaic"]["yolo"])
+            gr.Markdown("```\n.\\venv\\Scripts\\activate\npip install -U ultralytics")
             generate.click(fn=mosaic, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info])
             generate_old.click(
                 fn=mosold, inputs=[input_path, input_img, open_button], outputs=[output_img, output_info]
@@ -1161,6 +1163,9 @@ def main():
                     label=webui_lang["setting"]["description"]["token"],
                     lines=2,
                     visible=True if not env.share else False,
+                )
+                gr.Markdown(
+                    "获取 Token 的方法(The Way to Get Token): [**自述文件(README)**](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#%EF%B8%8F-%E9%85%8D%E7%BD%AE)"
                 )
             with gr.Tab(webui_lang["setting"]["sub_tab"]["t2i"]):
                 with gr.Column():
