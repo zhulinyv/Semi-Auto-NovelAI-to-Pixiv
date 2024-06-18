@@ -81,7 +81,7 @@ def upload(image_list, file):
         else:
             title = f"{name}涩涩~"
     # 标签
-    labels_list = env.default_tag
+    labels_list = (env.default_tag)[:]
     try:
         character_labels_list = list(data["labels"][name_list[1]].keys())
     except Exception:
