@@ -13,6 +13,8 @@ from utils.utils import file_path2name
 try:
     from ultralytics import YOLO
 
+    logger.debug("使用 YOLO 进行图像预测")
+
     def detector(image):
         model = YOLO("./files/censor.pt")
         box_list = []
@@ -30,6 +32,8 @@ try:
 
 except ModuleNotFoundError:
     from nudenet import NudeDetector
+
+    logger.debug("使用 nudenet 进行图像检测")
 
     def detector(image):
         nude_detector = NudeDetector()

@@ -65,7 +65,7 @@
         "description": "> Automatically applies mosaic to key parts",
         "generate_button": "Start Processing (New Pixelation)",
         "generate_button_old": "Start Processing (Old Blurring)",
-        "yolo": "Manually install the ultralytics dependency library to use **YOLO** for image prediction(Slower speed, higher accuracy):\n\nOpen cmd or powershell in the Project Directory and execute the following commands:"
+        "yolo": "Manually install the ultralytics dependency library to use **YOLO** for image prediction(Slower speed, higher accuracy):\n\nOpen cmd or powershell in the Project Directory and execute the following commands(It takes effect after the project is successfully installed and restarted):"
     },
     "water mark": {
         "tab": "Add Watermark",

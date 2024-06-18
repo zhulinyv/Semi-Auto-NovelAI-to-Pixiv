@@ -65,7 +65,7 @@
         "description": "> 对关键部位进行自动打码",
         "generate_button": "开始处理(新版像素)",
         "generate_button_old": "开始处理(旧版模糊)",
-        "yolo": "手动安装 ultralytics 依赖库以使用 **YOLO** 进行图像预测(较慢的速度, 更高的精度):\n\n在**项目目录**打开 cmd 或 powershell 依次执行以下命令:"
+        "yolo": "手动安装 ultralytics 依赖库以使用 **YOLO** 进行图像预测(较慢的速度, 更高的精度):\n\n在**项目目录**打开 cmd 或 powershell 依次执行以下命令(成功安装并重启项目后生效):"
     },
     "water mark": {
         "tab": "添加水印",
