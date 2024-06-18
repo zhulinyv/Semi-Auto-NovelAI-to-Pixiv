@@ -49,7 +49,10 @@ def t2i_by_hand(
 
         saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, "None", "None")
 
-        imgs_list.append(saved_path)
+        if saved_path != "寄":
+            imgs_list.append(saved_path)
+        else:
+            pass
 
     for img in imgs_list:
         if not os.path.exists(img):
