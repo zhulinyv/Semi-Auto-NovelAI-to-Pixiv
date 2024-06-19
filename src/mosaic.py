@@ -1,5 +1,4 @@
 import shutil
-from pathlib import Path
 
 import cv2
 from loguru import logger
@@ -7,7 +6,7 @@ from PIL import Image
 
 from utils.env import env
 from utils.imgtools import detector, revert_img_info
-from utils.utils import file_path2list
+from utils.utils import file_namel2pathl, file_path2list, file_path2name
 
 
 def _mosaic(img, x, y, w, h, neighbor):
@@ -43,21 +42,17 @@ def mosaic(img_path):
 
 def main(file_path, input_img, open_button):
     if open_button:
-        file_path = Path(file_path)
-        file_list: list = file_path2list(file_path)
-        file_list.remove("temp.png") if "temp.png" in file_list else ...
+        file_list = file_namel2pathl(file_path2list(file_path), file_path)
         for file in file_list:
-            logger.info(f"正在处理{file}...")
-            # 这个库不能使用中文文件名
-            shutil.copyfile(file_path / file, file_path / "temp.png")
-            mosaic(file_path / "temp.png")
-            shutil.copyfile(file_path / "temp.png", f"./output/mosaic/{file}")
+            logger.info(f"正在处理 {file_path2name(file)}...")
+            mosaic(file)
+            shutil.move(file, f"./output/mosaic/{file_path2name(file)}")
             logger.success("处理完成!")
-        return None, "处理完成!"
+        return None, "处理完成! 图片已保存到 ./output/mosaic"
     else:
         input_img.save("./output/temp.png")
         input_img = "./output/temp.png"
-        logger.info(f"正在处理{input_img}...")
+        logger.info(f"正在处理 {input_img}...")
         mosaic(input_img)
         logger.success("处理完成!")
         return "./output/temp.png", None
