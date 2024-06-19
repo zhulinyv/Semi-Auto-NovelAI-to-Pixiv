@@ -32,12 +32,15 @@ def mosaic(img_path):
         neighbor = int(
             pil_img.width * env.neighbor if pil_img.width > pil_img.height else pil_img.height * env.neighbor
         )
-        box_list = detector(img_path)
-        for box in box_list:
-            cv2_img = cv2.imread(img_path)
+    box_list = detector(img_path)
+    for box in box_list:
+        cv2_img = cv2.imread(img_path)
+        if not cv2_img:
+            pass
+        else:
             cv2_img = _mosaic(cv2_img, box[0], box[1], box[2], box[3], neighbor)
             cv2.imwrite(img_path, cv2_img)
-        revert_img_info(None, img_path, pil_img.info)
+    revert_img_info(None, img_path, pil_img.info)
 
 
 def main(file_path, input_img, open_button):
