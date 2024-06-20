@@ -12,5 +12,12 @@
         "description": "批量 Enhance!",
         "url": "https://github.com/zhulinyv/sanp_plugin_enhance",
         "author": "[zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_maple_from_fall_and_flower": {
+        "name": "sanp_plugin_maple_from_fall_and_flower",
+        "type": "webui",
+        "description": "从 SD 移植过来的插件: maple的tag选择器",
+        "url": "https://github.com/zhulinyv/sanp_plugin_maple_from_fall_and_flower",
+        "author": "[maple-flowers](https://github.com/maple-flowers), [zhulinyv](https://github.com/zhulinyv)"
     }
 }
