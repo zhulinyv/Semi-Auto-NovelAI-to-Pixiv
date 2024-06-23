@@ -21,26 +21,26 @@
 
 | 功能 | 介绍 | 示例 | 说明 |
 |:---:|:---:|:---:|:---:|
-| 教程说明 | 本项目的介绍及使用教程 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/15.png?raw=true) | 请仔细阅读 |
-|  文生图  | 使用 Gradio 为 NovelAI 写的一个用户界面, 除了界面不同, 其它完全等同于使用 NovelAI 网站 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/1.png?raw=true) | 生成的图片将保存到 `./output/t2i` 文件夹 |
-| 随机涩图 | 通过随机组合 `./files/favorite.json` 中的 tag 生成一张涩图或无限生成涩图, 负面提示词将随机选择 favorite.json negative belief 中的负面提示词, 其它参数将使用 env 配置 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/3.png?raw=true) | 关于随机涩图的配置, 请查看 WebUI 配置设置页面的其它部分 |
-| 随机图片 | 通过读取 `./file/prompt` 中的 `*.txt` 文件并追加输入的提示词作为提示词无限生成图片, 负面提示词将随机选择 favorite.json negative belief 中的负面提示词, 其它参数将使用 env 配置, 当文件夹下的所有 `*.txt` 文件均生成过一次后或点击停止生成后, 则将停止运行 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/4.png?raw=true) | 关于随机图片的配置, 请查看 WebUI 配置设置页面的其它部分 |
-|   Vibe   | 等同于使用 NovelAI 网站, 我为它添加了批量功能 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/16.png?raw=true) | 需要准备一些图片到同一文件夹, 图片名称需要重命名为 `(任意(不含下划线)_(信息提取强度, 浮点型(0, 1))_(参考强度, 浮点型(0, 1)).png)` 的格式, 例如 `hoshino-hinata_1.0_0.6`, 勾选随机涩图时, 无限生成将按照随机涩图的模式生成, 未勾选时, 无限生成将按照随机图片的方式生成 |
-|  图生图  | 等同于使用 NovelAI 网站, 支持任何图片, 另外, 我为它添加了批量图生图 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/2.png?raw=true) | 生成的图片将保存到 `./output/i2i` 文件夹, 但会在 `./output` 文件夹内生成一张名为 `temp.png` 的临时图片, 可以删除, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_i2i` |
-| 视频转绘 | 将视频用几个步骤重绘, 用于将三次元转绘为二次元 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/18.png?raw=true) | 实验性功能, 欢迎提出建议 |
-| 分块重绘 | 将一张大图拆分成 640x640 的小块, 然后将这些小块用图生图的方式放大为 1024x1024, 不需要担心两张图片衔接过硬, 我使用鸣谢列表中的开源项目修复接缝 [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/19.png?raw=true) | 由于耗时较长, 目前仅开放单张放大, 使用时需要提供图片或图片路径(任选其一) |
-| 局部重绘 | 仅支持 NovelAI 生成的图片, 并且需要上传蒙版, 支持批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/5.png?raw=true) | 上传的蒙版应为: 重绘区域为白色, 其余透明而不是黑色, 分辨率等于重绘图像, 批量操作时, 请将图片和蒙版放置于两个文件夹, 并且保证图片和蒙版文件名相同, 例如: `./output/inpaint/img`, `./output/inpaint/mask`, 生成的图片将保存到 `./output/inpaint` |
-| 超分降噪 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目对图片进行超分降噪, 支持任何图片单张或批量处理 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/6.png?raw=true) | 生成的图片将保存到 `./output/upscale` 文件夹, 不建议使用 **srmd-cuda**, 因为它不稳定. 当使用 **waifu2x-caffe** 或 **waifu2x-converter** 时, 将会在 `./output` 文件夹内生成一个名为 `temp.bat` 的临时批处理文件, 可以删除, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_upscale` |
-| 自动打码 | 自动检测图片中的关键部位, 并对其打码 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/7.png?raw=true) | 不能确保 100% 检测出来, 生成的图片将保存到 `./output/mosaic` 文件夹, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_mosaic` |
-| 添加水印 | 在图片左上, 右上, 左下, 右下随机某个位置范围添加指定数量的随机透明度的随机水印 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/8.png?raw=true) | 使用前, 请先准备一些自己的水印到 `./files/water` 文件夹. 使用时, 请输入需要处理的图片目录并按确定, 处理后的图片将保存到 `./output/water` |
-| 上传Pixiv| 批量将图片上传到 Pixiv |![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/9.png?raw=true) | 关于上传Pixiv的配置, , 请查看 WebUI 配置设置页面的其它部分 |
-| 图片筛选 | 人工对图片进行筛选的工具 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/10.png?raw=true) | 使用时, 请先输入图片目录并按下确定, 然后输入输出目录. 会在 `./output` 文件夹下生成一个名为 `array_data.npy` 的文件, 它会保存上次筛选的进度, 即你可以不选择图片目录继续筛选, 筛选完毕后会自动删除. |
-| 抹除数据 | 批量抹除, 还原或导出图片生成信息 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/11.png?raw=true) | 还原信息时, 需要准备至少带有 prompt 的 *.png 图片或内容为 prompt 的 *.txt 文件, 并放到某一目录(图片信息文件目录), 选取的待还原图片目录中的文件名(不含扩展名)需要和刚刚的图片信息文件目录中的文件文件名一致 | 
-| 法术解析 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目进行读取 png info | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/12.png?raw=true) | 使用 iframe 嵌套入本项目 |
-|  Tagger  | 使用 [SmilingWolf](https://huggingface.co/spaces/SmilingWolf/wd-tagger) 在 huggingface 上部署的反推模型, 我为它添加了批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/17.png?raw=true) | 批量处理时, 生成的 prompt 文本会保存到图片的同一目录 |
-| GPT Free | 免费, 多模型的 GPT, 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/13.png?raw=true) | 使用 iframe 嵌套入本项目 |
-| 插件商店 | 展示所有在插件列表(./files/plugins.json)中的插件 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/20.png?raw=true) | 安装时, 将想要安装的插件名称复制粘贴到左上角名称内, 点击安装即可, 重启后生效 |
-| 配置设置 | 在 WebUI 更改配置项 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/imgs/14.png?raw=true) | 修改记得保存, 重启后立即生效 |
+| 教程说明 | 本项目的介绍及使用教程 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/15.png?raw=true) | 请仔细阅读 |
+|  文生图  | 使用 Gradio 为 NovelAI 写的一个用户界面, 除了界面不同, 其它完全等同于使用 NovelAI 网站 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/1.png?raw=true) | 生成的图片将保存到 `./output/t2i` 文件夹 |
+| 随机涩图 | 通过随机组合 `./files/favorite.json` 中的 tag 生成一张涩图或无限生成涩图, 负面提示词将随机选择 favorite.json negative belief 中的负面提示词, 其它参数将使用 env 配置 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/3.png?raw=true) | 关于随机涩图的配置, 请查看 WebUI 配置设置页面的其它部分 |
+| 随机图片 | 通过读取 `./file/prompt` 中的 `*.txt` 文件并追加输入的提示词作为提示词无限生成图片, 负面提示词将随机选择 favorite.json negative belief 中的负面提示词, 其它参数将使用 env 配置, 当文件夹下的所有 `*.txt` 文件均生成过一次后或点击停止生成后, 则将停止运行 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/4.png?raw=true) | 关于随机图片的配置, 请查看 WebUI 配置设置页面的其它部分 |
+|   Vibe   | 等同于使用 NovelAI 网站, 我为它添加了批量功能 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/16.png?raw=true) | 需要准备一些图片到同一文件夹, 图片名称需要重命名为 `(任意(不含下划线)_(信息提取强度, 浮点型(0, 1))_(参考强度, 浮点型(0, 1)).png)` 的格式, 例如 `hoshino-hinata_1.0_0.6`, 勾选随机涩图时, 无限生成将按照随机涩图的模式生成, 未勾选时, 无限生成将按照随机图片的方式生成 |
+|  图生图  | 等同于使用 NovelAI 网站, 支持任何图片, 另外, 我为它添加了批量图生图 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/2.png?raw=true) | 生成的图片将保存到 `./output/i2i` 文件夹, 但会在 `./output` 文件夹内生成一张名为 `temp.png` 的临时图片, 可以删除, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_i2i` |
+| 视频转绘 | 将视频用几个步骤重绘, 用于将三次元转绘为二次元 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/18.png?raw=true) | 实验性功能, 欢迎提出建议 |
+| 分块重绘 | 将一张大图拆分成 640x640 的小块, 然后将这些小块用图生图的方式放大为 1024x1024, 不需要担心两张图片衔接过硬, 我使用鸣谢列表中的开源项目修复接缝 [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/19.png?raw=true) | 由于耗时较长, 目前仅开放单张放大, 使用时需要提供图片或图片路径(任选其一) |
+| 局部重绘 | 仅支持 NovelAI 生成的图片, 并且需要上传蒙版, 支持批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/5.png?raw=true) | 上传的蒙版应为: 重绘区域为白色, 其余透明而不是黑色, 分辨率等于重绘图像, 批量操作时, 请将图片和蒙版放置于两个文件夹, 并且保证图片和蒙版文件名相同, 例如: `./output/inpaint/img`, `./output/inpaint/mask`, 生成的图片将保存到 `./output/inpaint` |
+| 超分降噪 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目对图片进行超分降噪, 支持任何图片单张或批量处理 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/6.png?raw=true) | 生成的图片将保存到 `./output/upscale` 文件夹, 不建议使用 **srmd-cuda**, 因为它不稳定. 当使用 **waifu2x-caffe** 或 **waifu2x-converter** 时, 将会在 `./output` 文件夹内生成一个名为 `temp.bat` 的临时批处理文件, 可以删除, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_upscale` |
+| 自动打码 | 自动检测图片中的关键部位, 并对其打码 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/7.png?raw=true) | 不能确保 100% 检测出来, 生成的图片将保存到 `./output/mosaic` 文件夹, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_mosaic` |
+| 添加水印 | 在图片左上, 右上, 左下, 右下随机某个位置范围添加指定数量的随机透明度的随机水印 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/8.png?raw=true) | 使用前, 请先准备一些自己的水印到 `./files/water` 文件夹. 使用时, 请输入需要处理的图片目录并按确定, 处理后的图片将保存到 `./output/water` |
+| 上传Pixiv| 批量将图片上传到 Pixiv |![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/9.png?raw=true) | 关于上传Pixiv的配置, , 请查看 WebUI 配置设置页面的其它部分 |
+| 图片筛选 | 人工对图片进行筛选的工具 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/10.png?raw=true) | 使用时, 请先输入图片目录并按下确定, 然后输入输出目录. 会在 `./output` 文件夹下生成一个名为 `array_data.npy` 的文件, 它会保存上次筛选的进度, 即你可以不选择图片目录继续筛选, 筛选完毕后会自动删除. |
+| 抹除数据 | 批量抹除, 还原或导出图片生成信息 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/11.png?raw=true) | 还原信息时, 需要准备至少带有 prompt 的 *.png 图片或内容为 prompt 的 *.txt 文件, 并放到某一目录(图片信息文件目录), 选取的待还原图片目录中的文件名(不含扩展名)需要和刚刚的图片信息文件目录中的文件文件名一致 | 
+| 法术解析 | 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目进行读取 png info | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/12.png?raw=true) | 使用 iframe 嵌套入本项目 |
+|  Tagger  | 使用 [SmilingWolf](https://huggingface.co/spaces/SmilingWolf/wd-tagger) 在 huggingface 上部署的反推模型, 我为它添加了批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/17.png?raw=true) | 批量处理时, 生成的 prompt 文本会保存到图片的同一目录 |
+| GPT Free | 免费, 多模型的 GPT, 使用[鸣谢名单](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv#-%E9%B8%A3%E8%B0%A2)中的开源项目 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/13.png?raw=true) | 使用 iframe 嵌套入本项目 |
+| 插件商店 | 展示所有在插件列表(./files/plugins.json)中的插件 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/20.png?raw=true) | 安装时, 将想要安装的插件名称复制粘贴到左上角名称内, 点击安装即可, 重启后生效 |
+| 配置设置 | 在 WebUI 更改配置项 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/14.png?raw=true) | 修改记得保存, 重启后立即生效 |
 
 正在学习 Gradio, 尝试为本项目写一个 WebUI
 
@@ -190,6 +190,12 @@
 + [x] 启动 LOGO(甚至还加了个提示音)
 + [ ] 重新命名函数和变量
 + [ ] 优化保存目录
++ [ ] 文生图中断
++ [ ] 插件列表读取远程仓库
++ [ ] 插件更新与卸载
++ [ ] 图片筛选添加复制操作
++ [ ] 整合包
++ [ ] 新增打码方式
 + [ ] ...
 
 </details>

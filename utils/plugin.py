@@ -33,7 +33,7 @@ def load_plugins(directory):
 
 
 def plugin_list():
-    plugins: dict = read_json("./files/plugins.json")
+    plugins: dict = read_json("./files/webui/plugins.json")
     md = """| 名称(Name) | 类型(Type) | 描述(Description) | 仓库(URL) | 作者(Author) | 状态(Status) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 """
@@ -60,7 +60,7 @@ def plugin_list():
 
 
 def install_plugin(name):
-    data = read_json("./files/plugins.json")
+    data = read_json("./files/webui/plugins.json")
 
     Git().clone(data[name]["url"], "./plugins/{}/{}".format(data[name]["type"], data[name]["name"]))
 

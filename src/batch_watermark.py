@@ -11,9 +11,9 @@ from utils.utils import file_path2list
 
 def water(img_path, otp_path):
     # 打开图片和水印
-    water_list = file_path2list("./files/water")
+    water_list = file_path2list("./files/watermarks")
     water_img = random.choice(water_list)
-    with Image.open(img_path) as img, Image.open(f"./files/water/{water_img}") as water:
+    with Image.open(img_path) as img, Image.open(f"./files/watermarks/{water_img}") as water:
         img = img.convert("RGBA")
         water = water.convert("RGBA")
 

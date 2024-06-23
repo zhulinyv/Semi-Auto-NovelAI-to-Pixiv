@@ -3,8 +3,8 @@ from pathlib import Path
 
 from loguru import logger
 
-from src.batchtxt import prepare_input as batchtxt_input
-from src.t2i import prepare_input as t2i_input
+from src.text2image_nsfw import prepare_input as t2i_input
+from src.text2image_sfw import prepare_input as batchtxt_input
 from utils.env import env
 from utils.imgtools import img_to_base64
 from utils.jsondata import json_for_vibe

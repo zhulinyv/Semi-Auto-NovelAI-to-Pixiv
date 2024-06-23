@@ -314,11 +314,11 @@ def gen_script(script_type, *args):
 
 sys.setrecursionlimit(999999999)
 
-from src.t2i import t2i  # noqa: E402
+from src.text2image_nsfw import t2i  # noqa: E402
 
-t2i(True, "{}", "{}", "{}", "{}")
+t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
 """.format(
-                    args[0], args[1], args[2], args[3]
+                    args[0], args[1], args[2], args[3], args[4], args[5], args[6]
                 )
             )
         elif script_type == "随机图片":
@@ -327,7 +327,7 @@ t2i(True, "{}", "{}", "{}", "{}")
 
 sys.setrecursionlimit(999999999)
 
-from src.batchtxt import main  # noqa: E402
+from src.text2image_sfw import main  # noqa: E402
 
 main(True, \"\"\"{}\"\"\", "{}")
 """.format(
@@ -336,7 +336,7 @@ main(True, \"\"\"{}\"\"\", "{}")
             )
         elif script_type == "vibe":
             script.write(
-                """from src.vibe import vibe
+                """from src.batch_vibe_transfer import vibe
 
 while 1:
     vibe({}, "{}")
