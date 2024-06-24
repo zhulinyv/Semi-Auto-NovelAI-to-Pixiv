@@ -44,6 +44,6 @@ def main(forever: bool, pref, position):
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
     if forever:
-        return main(True)
+        return main(True, pref, position)
     else:
         return saved_path
