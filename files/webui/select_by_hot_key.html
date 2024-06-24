@@ -23,6 +23,14 @@ function checkKey(e) {
             event.preventDefault();
             document.getElementById("arrow_right").click();
         }
+        else if (e.keyCode == '67') {
+            event.preventDefault();
+            document.getElementById("c").click();
+        }
+        else if (e.keyCode == '86') {
+            event.preventDefault();
+            document.getElementById("v").click();
+        }
     }
 }
 document.addEventListener('keypress', checkKey, false);

@@ -188,14 +188,13 @@ Learning Gradio, trying to create a WebUI for this project.
 + [ ] Learn the C# and write a luncher with wpfui
 + [x] Yolo detects Ensford
 + [x] Activate Loggo (even added a beep)
-+ [ ] Rename functions and variables
-+ [ ] Optimized save directory
++ [x] Rename functions and variables
 + [ ] T2I interrupt
-+ [ ] The list of plugins reads the remote repository
-+ [ ] Plugin updates and uninstallations
-+ [ ] Add copy operations for image filtering
++ [x] The list of plugins reads the remote repository
++ [x] Plugin updates and uninstallations
++ [x] Add copy operations for image filtering
 + [ ] Modpacks
-+ [ ] New mosaic
++ [x] New mosaic
 + [ ] ...
 
 </details>

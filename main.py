@@ -10,14 +10,13 @@ def main():
     from pathlib import Path
 
     from src.batch_inpaint import for_webui as inpaint
+    from src.batch_mosaic import main as mosaic
     from src.batch_tagger import SWINV2_MODEL_DSV3_REPO, dropdown_list, tagger
     from src.batch_vibe_transfer import vibe, vibe_by_hand
     from src.batch_waifu2x import main as upscale
     from src.batch_watermark import main as water
     from src.image2image import i2i_by_hand
     from src.image2pixiv import main as pixiv
-    from src.mosaic_new import main as mosaic
-    from src.mosaic_old import main as mosold
     from src.movie2movie import m2m, merge_av, video2frame
     from src.pnginfo_modify import export_info, remove_info, revert_info
     from src.setting_update import webui as setting
@@ -25,9 +24,9 @@ def main():
     from src.text2image_sfw import main as batchtxt
     from src.tiled_upscale import tile_upscale
     from utils.env import env
-    from utils.plugin import install_plugin, load_plugins, plugin_list
+    from utils.plugin import install_plugin, load_plugins, plugin_list, uninstall_plugin
     from utils.restart import restart
-    from utils.selector import del_current_img, move_current_img, show_first_img, show_next_img
+    from utils.selector import copy_current_img, del_current_img, move_current_img, show_first_img, show_next_img
     from utils.update import check_update, update
     from utils.utils import (
         NOISE_SCHEDULE,
@@ -1148,8 +1147,11 @@ def main():
                     gr.Markdown(webui_language["mosaic"]["description"])
                 open_output_folder_block("mosaic")
             with gr.Row():
-                mosaic_generate_button = gr.Button(value=webui_language["mosaic"]["generate_button"], scale=2)
-                old_mosaic_generate_button = gr.Button(value=webui_language["mosaic"]["generate_button_old"], scale=1)
+                mosaic_generate_button_pixel = gr.Button(value=webui_language["mosaic"]["mosaic_generate_button_pixel"])
+                mosaic_generate_button_blurry = gr.Button(
+                    value=webui_language["mosaic"]["mosaic_generate_button_blurry"]
+                )
+                mosaic_generate_button_lines = gr.Button(value=webui_language["mosaic"]["mosaic_generate_button_lines"])
             with gr.Column():
                 with gr.Row():
                     mosaic_input_path = gr.Textbox(value="", label=webui_language["i2i"]["input_path"], scale=5)
@@ -1163,14 +1165,24 @@ def main():
                         mosaic_output_image = gr.Image(scale=2)
             gr.Markdown(webui_language["mosaic"]["yolo"])
             gr.Markdown("```\n.\\venv\\Scripts\\activate\npip install -U ultralytics")
-            mosaic_generate_button.click(
+            mosaic_generate_button_pixel.click(
                 fn=mosaic,
-                inputs=[mosaic_input_path, mosaic_input_image, mosaic_batch_switch],
+                inputs=[mosaic_input_path, mosaic_input_image, mosaic_batch_switch, gr.Textbox("pixel", visible=False)],
                 outputs=[mosaic_output_image, mosaic_output_information],
             )
-            old_mosaic_generate_button.click(
-                fn=mosold,
-                inputs=[mosaic_input_path, mosaic_input_image, mosaic_batch_switch],
+            mosaic_generate_button_blurry.click(
+                fn=mosaic,
+                inputs=[
+                    mosaic_input_path,
+                    mosaic_input_image,
+                    mosaic_batch_switch,
+                    gr.Textbox("blurry", visible=False),
+                ],
+                outputs=[mosaic_output_image, mosaic_output_information],
+            )
+            mosaic_generate_button_lines.click(
+                fn=mosaic,
+                inputs=[mosaic_input_path, mosaic_input_image, mosaic_batch_switch, gr.Textbox("lines", visible=False)],
                 outputs=[mosaic_output_image, mosaic_output_information],
             )
         # ---------- 添加水印 ---------- #
@@ -1219,6 +1231,10 @@ def main():
                     _selector_move_button = gr.Button(
                         webui_language["selector"]["move_button_"], size="lg", elem_id="arrow_right"
                     )
+                    selector_copy_button = gr.Button(webui_language["selector"]["copy_button"], size="lg", elem_id="c")
+                    _selector_copy_button = gr.Button(
+                        webui_language["selector"]["copy_button_"], size="lg", elem_id="v"
+                    )
                     selector_delete_button = gr.Button(
                         webui_language["selector"]["del_button"], size="lg", elem_id="arrow_up"
                     )
@@ -1234,6 +1250,16 @@ def main():
             )
             _selector_move_button.click(
                 fn=move_current_img,
+                inputs=[selector_current_img, _selector_output_path],
+                outputs=[selector_output_image, selector_current_img],
+            )
+            selector_copy_button.click(
+                fn=copy_current_img,
+                inputs=[selector_current_img, selector_output_path],
+                outputs=[selector_output_image, selector_current_img],
+            )
+            _selector_copy_button.click(
+                fn=copy_current_img,
                 inputs=[selector_current_img, _selector_output_path],
                 outputs=[selector_output_image, selector_current_img],
             )
@@ -1413,11 +1439,15 @@ def main():
             with gr.Row():
                 plugin_store_plugin_name = gr.Textbox("", label="名称(Name)")
                 plugin_store_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
-                plugin_store_install_button = gr.Button("安装(Install)")
+                plugin_store_install_button = gr.Button("安装/更新(Install/Update)")
+                plugin_store_uninstall_button = gr.Button("安装(Uninstall)")
                 plugin_store_restart_button = gr.Button("重启(Restart)")
             gr.Markdown(plugin_list())
             plugin_store_install_button.click(
                 install_plugin, inputs=plugin_store_plugin_name, outputs=plugin_store_output_information
+            )
+            plugin_store_uninstall_button.click(
+                uninstall_plugin, inputs=plugin_store_plugin_name, outputs=plugin_store_output_information
             )
             plugin_store_restart_button.click(restart)
         # ---------- 配置设置 ---------- #
@@ -1594,7 +1624,7 @@ def main():
             with gr.Tab("更新 WebUI(Update WebUI)"):
                 update_button = gr.Button("更新 WebUI(Update WebUI)")
                 output_info = gr.Textbox(label=webui_language["i2i"]["output_info"])
-                update_button.click(update, inputs=None, outputs=output_info)
+                update_button.click(update, inputs=gr.Textbox("./", visible=False), outputs=output_info)
             setting_modify_button.click(
                 setting,
                 inputs=[

@@ -39,6 +39,14 @@ SAMPLER = [
 ]
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
 
+if env.proxy != "xxx:xxx":
+    proxies = {
+        "http": "http://" + env.proxy,
+        "https": "http://" + env.proxy,
+    }
+else:
+    proxies = None
+
 
 def format_str(str_: str):
     """格式化字符串
@@ -94,13 +102,6 @@ def generate_image(json_data):
     Returns:
         (bytes): 二进制图片
     """
-    if env.proxy != "xxx:xxx":
-        proxies = {
-            "http": "http://" + env.proxy,
-            "https": "http://" + env.proxy,
-        }
-    else:
-        proxies = None
     try:
         rep = requests.post(
             "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies

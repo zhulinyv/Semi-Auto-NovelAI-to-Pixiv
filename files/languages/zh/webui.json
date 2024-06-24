@@ -63,8 +63,9 @@
     "mosaic": {
         "tab": "自动打码",
         "description": "> 对关键部位进行自动打码",
-        "generate_button": "开始处理(新版像素)",
-        "generate_button_old": "开始处理(旧版模糊)",
+        "mosaic_generate_button_pixel": "开始处理 (像素)",
+        "mosaic_generate_button_blurry": "开始处理 (模糊)",
+        "mosaic_generate_button_lines": "开始处理 (线条)",
         "yolo": "手动安装 ultralytics 依赖库以使用 **YOLO** 进行图像预测(较慢的速度, 更高的精度):\n\n在**项目目录**打开 cmd 或 powershell 依次执行以下命令(成功安装并重启项目后生效):"
     },
     "water mark": {
@@ -86,6 +87,8 @@
         "next_button": "跳过(↓)",
         "move_button": "移动1(←)",
         "move_button_": "移动2(→)",
+        "copy_button": "复制1(C)",
+        "copy_button_": "复制2(V)",
         "del_button": "删除(↑)"
     },
     "rm png info": {
