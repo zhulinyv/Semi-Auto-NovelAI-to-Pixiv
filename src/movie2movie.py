@@ -8,7 +8,7 @@ from loguru import logger
 from moviepy.editor import AudioFileClip, VideoFileClip
 from PIL import Image
 
-from src.i2i import i2i_by_hand
+from src.image2image import i2i_by_hand
 from utils.utils import file_path2name, format_str, read_txt
 
 

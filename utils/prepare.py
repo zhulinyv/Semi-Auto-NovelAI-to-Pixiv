@@ -3,7 +3,7 @@ import shutil
 
 from loguru import logger
 
-VERSION = "2.16.5"
+VERSION = "2.18.0"
 
 need_dir_list = [
     "./output",
@@ -63,4 +63,4 @@ if __name__ == "__main__":
     else:
         from playsound import playsound
 
-        playsound("./files/llss.mp3")
+        playsound("./files/webui/llss.mp3")

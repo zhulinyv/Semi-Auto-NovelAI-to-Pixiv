@@ -1,9 +1,23 @@
 import importlib.util
 import os
+import shutil
 
+import requests
 from git import Git
 
-from utils.utils import file_path2list, read_json
+from utils.update import update
+from utils.utils import file_path2list, proxies, read_json
+
+
+def get_plugin_list():
+    try:
+        plugins: dict = requests.get(
+            "https://raw.githubusercontent.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/dev/files/webui/plugins.json",
+            proxies=proxies,
+        ).json()
+    except Exception:
+        plugins: dict = read_json("./files/webui/plugins.json")
+    return plugins
 
 
 def load_plugins(directory):
@@ -33,7 +47,8 @@ def load_plugins(directory):
 
 
 def plugin_list():
-    plugins: dict = read_json("./files/plugins.json")
+    plugins = get_plugin_list()
+
     md = """| 名称(Name) | 类型(Type) | 描述(Description) | 仓库(URL) | 作者(Author) | 状态(Status) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 """
@@ -60,8 +75,18 @@ def plugin_list():
 
 
 def install_plugin(name):
-    data = read_json("./files/plugins.json")
+    data = get_plugin_list()
+    plugin_path = "./plugins/{}/{}".format(data[name]["type"], data[name]["name"])
 
-    Git().clone(data[name]["url"], "./plugins/{}/{}".format(data[name]["type"], data[name]["name"]))
+    if os.path.exists(plugin_path):
+        update("./plugins/{}/{}".format(data[name]["type"], data[name]["name"]))
+        return "更新成功! 重启后生效!"
+
+    Git().clone(data[name]["url"], plugin_path)
 
     return "安装成功! 重启后生效!"
+
+
+def uninstall_plugin(name):
+    data = get_plugin_list()
+    shutil.rmtree("./plugins/{}/{}".format(data[name]["type"], data[name]["name"]))

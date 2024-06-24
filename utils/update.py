@@ -6,13 +6,15 @@ from git.exc import InvalidGitRepositoryError
 
 from utils.env import env
 from utils.prepare import VERSION
+from utils.utils import proxies
 
 
 def check_update():
     if env.skip_update_check:
         return ""
-    resp = requests.get("https://api.github.com/repos/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commits")
-    data = resp.json()
+    data = requests.get(
+        "https://api.github.com/repos/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commits", proxies=proxies
+    ).json()
     if not isinstance(data, list):
         return "Version: xxxxxxx  Error | 检查失败"
     try:
@@ -34,7 +36,7 @@ def check_update():
     )
 
 
-def update():
-    repo = git.Repo("")
+def update(path):
+    repo = git.Repo(path)
     repo.git.pull()
     return "更新完成! 重启后生效"

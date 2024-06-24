@@ -28,6 +28,7 @@ def t2i_by_hand(
     for i in range(times):
         if times != 1:
             logger.info(f"正在生成第 {i+1} 张图片...")
+            sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
         json_for_t2i["input"] = positive
 
         json_for_t2i["parameters"]["width"] = int(resolution.split("x")[0])
@@ -96,23 +97,30 @@ def t2i_by_hand(
         return saved_path
 
 
-def prepare_input(action_type, action, origin, character):
+def prepare_input(action_type, action, origin, character, artists, scale, sm):
     data = read_json("./files/favorite.json")
 
-    weight_list = list(data["artists"]["belief"].keys())
-    artist = ""
-    while artist == "":
-        possibility = random.random()
-        for weight in weight_list:
-            if possibility >= float(weight):
-                artist_list = list(data["artists"]["belief"][weight].keys())
-                if artist_list != []:
-                    style_name = random.choice(artist_list)
-                    style = data["artists"]["belief"][weight][style_name]
-                    artist = style[0]
-                    sm = style[1]
-                    scale = style[2]
-                    break
+    if artists:
+        style_name = "固定画风"
+        style = [artists, 1 if sm else 0, scale]
+        artist = style[0]
+        sm = style[1]
+        scale = style[2]
+    else:
+        weight_list = list(data["artists"]["belief"].keys())
+        artist = ""
+        while artist == "":
+            possibility = random.random()
+            for weight in weight_list:
+                if possibility >= float(weight):
+                    artist_list = list(data["artists"]["belief"][weight].keys())
+                    if artist_list != []:
+                        style_name = random.choice(artist_list)
+                        style = data["artists"]["belief"][weight][style_name]
+                        artist = style[0]
+                        sm = style[1]
+                        scale = style[2]
+                        break
     pref = random.choice(data["quality_pref"]["belief"])
     negative = format_str(random.choice(data["negative_prompt"]["belief"]))
     if character:
@@ -205,11 +213,13 @@ def prepare_json(input_, sm, scale, negative):
 times = 0
 
 
-def t2i(forever: bool, action_type, action, origin, character):
+def t2i(forever: bool, action_type, action, origin, character, artists, scale, sm):
     global times
     times += 1
     logger.info(f"正在生成第 {times} 张图片...")
-    input_, sm, scale, negative, choose_game, choose_character = prepare_input(action_type, action, origin, character)
+    input_, sm, scale, negative, choose_game, choose_character = prepare_input(
+        action_type, action, origin, character, artists, scale, sm
+    )
     json_for_t2i, seed = prepare_json(input_, sm, scale, negative)
     saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, choose_game, choose_character)
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)

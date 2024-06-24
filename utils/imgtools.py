@@ -17,7 +17,7 @@ try:
     logger.debug("使用 YOLO 进行图像预测")
 
     def detector(image):
-        model = YOLO("./files/censor.pt")
+        model = YOLO("./files/models/censor.pt")
         box_list = []
         results = model(image, verbose=False)
         result = json.loads((results[0]).tojson())

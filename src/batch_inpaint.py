@@ -1,6 +1,6 @@
 from loguru import logger
 
-from src.i2i import prepare_json
+from src.image2image import prepare_json
 from utils.imgtools import get_img_info, img_to_base64, revert_img_info
 from utils.utils import file_namel2pathl, file_path2list, file_path2name, generate_image, inquire_anlas, save_image
 

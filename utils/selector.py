@@ -55,3 +55,9 @@ def move_current_img(current_img, output_path):
 def del_current_img(current_img):
     send2trash.send2trash(current_img)
     return show_next_img()
+
+
+def copy_current_img(current_img, output_path):
+    img_name = os.path.basename(current_img)
+    shutil.copyfile(current_img, str(Path(output_path) / img_name))
+    return show_next_img()
