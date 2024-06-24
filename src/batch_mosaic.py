@@ -1,6 +1,5 @@
 import shutil
 
-import cv2
 from loguru import logger
 from PIL import Image, ImageDraw
 
@@ -45,38 +44,32 @@ def mosaic_blurry(img):
 # -------------------- #
 
 
-def _mosaic_pixel(img, x, y, w, h, neighbor):
-    for i in range(0, h, neighbor):
-        for j in range(0, w, neighbor):
-            rect = [j + x, i + y]
-            color = img[i + y][j + x].tolist()
-            left_up = (rect[0], rect[1])
-            x2 = rect[0] + neighbor - 1
-            y2 = rect[1] + neighbor - 1
-            if x2 > x + w:
-                x2 = x + w
-            if y2 > y + h:
-                y2 = y + h
-            right_down = (x2, y2)
-            cv2.rectangle(img, left_up, right_down, color, -1)
-    return img
+def _mosaic_pixel(image, region, block_size):
+    left, upper, right, lower = region
+
+    cropped_image = image.crop(region)
+
+    small = cropped_image.resize(
+        (int((right - left) / block_size), int((lower - upper) / block_size)), resample=Image.Resampling.NEAREST
+    )
+    mosaic_image = small.resize(cropped_image.size, Image.Resampling.NEAREST)
+
+    image.paste(mosaic_image, region)
+    return image
 
 
 def mosaic_pixel(img_path):
     img_path = str(img_path)
-    with Image.open(img_path) as pil_img:
-        neighbor = int(
-            pil_img.width * env.neighbor if pil_img.width > pil_img.height else pil_img.height * env.neighbor
-        )
     box_list = detector(img_path)
+
     for box in box_list:
-        cv2_img = cv2.imread(img_path)
-        if not cv2_img:
-            pass
-        else:
-            cv2_img = _mosaic_pixel(cv2_img, box[0], box[1], box[2], box[3], neighbor)
-            cv2.imwrite(img_path, cv2_img)
-    revert_img_info(None, img_path, pil_img.info)
+        with Image.open(img_path) as pil_img:
+            neighbor = int(
+                pil_img.width * env.neighbor if pil_img.width > pil_img.height else pil_img.height * env.neighbor
+            )
+            image = _mosaic_pixel(pil_img, (box[0], box[1], box[0] + box[2], box[1] + box[3]), neighbor)
+            image.save(img_path)
+            revert_img_info(None, img_path, pil_img.info)
 
 
 # -------------------- #
