@@ -87,6 +87,8 @@
         "next_button": "Skip(↓)",
         "move_button": "Move 1(←)",
         "move_button_": "Move 2(→)",
+        "copy_button": "Copy 1(C)",
+        "copy_button_": "Copy 2(V)",
         "del_button": "Delete(↑)"
     },
     "rm png info": {
@@ -98,7 +100,8 @@
         "info_file_path": "Image Information File Directory",
         "input_path": "Directory of Images to Be Restored",
         "save_path": "Saved path",
-        "choose_to_rm": "Choose sth to rm"
+        "choose_to_rm": "Choose sth to rm",
+        "remove_pnginfo_metadate": "Custom metadata after removing the pnginfo"
     },
     "maigic analysis": {
         "tab": "Magic Analysis"

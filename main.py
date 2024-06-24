@@ -1278,12 +1278,20 @@ def main():
                     value=["Title", "Description ", "Software", "Source", "Generation time", "Comment"],
                     label=webui_language["rm png info"]["choose_to_rm"],
                 )
+                remove_pnginfo_metadate = gr.Textbox(
+                    env.meta_data, label=webui_language["rm png info"]["remove_pnginfo_metadate"]
+                )
                 remove_pnginfo_input_path = gr.Textbox(label=webui_language["i2i"]["input_path"])
                 remove_pnginfo_output_path = gr.Textbox(label=webui_language["rm png info"]["save_path"])
                 remove_pnginfo_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
                 remove_pnginfo_generate_button.click(
                     fn=remove_info,
-                    inputs=[remove_pnginfo_input_path, remove_pnginfo_output_path, remove_pnginfo_choices],
+                    inputs=[
+                        remove_pnginfo_input_path,
+                        remove_pnginfo_output_path,
+                        remove_pnginfo_choices,
+                        remove_pnginfo_metadate,
+                    ],
                     outputs=[remove_pnginfo_output_information],
                 )
             with gr.Tab(webui_language["rm png info"]["tab_re"]):
