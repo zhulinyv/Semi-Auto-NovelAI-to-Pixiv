@@ -74,7 +74,7 @@ def webui(
     else:
         pass
     otp_info = modify_env(
-        token=f'"{token}"',
+        token=f'"{token}"'.replace("\n", ""),
         img_size=img_size,
         scale=scale,
         censor=censor,
