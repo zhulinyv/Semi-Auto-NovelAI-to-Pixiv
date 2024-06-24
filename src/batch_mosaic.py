@@ -111,11 +111,11 @@ def main(file_path, input_img, open_button, mode):
         for file in file_list:
             logger.info(f"正在处理 {file_path2name(file)}...")
             if mode == "pixel":
-                mosaic_pixel(input_img)
+                mosaic_pixel(file)
             elif mode == "blurry":
-                mosaic_blurry(input_img)
+                mosaic_blurry(file)
             elif mode == "lines":
-                mosaic_lines(input_img)
+                mosaic_lines(file)
             shutil.move(file, f"./output/mosaic/{file_path2name(file)}")
             logger.success("处理完成!")
         return None, "处理完成! 图片已保存到 ./output/mosaic"
