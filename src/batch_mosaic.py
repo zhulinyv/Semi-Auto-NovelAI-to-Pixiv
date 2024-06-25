@@ -90,7 +90,7 @@ def mosaic_lines(img_path):
                     fill="black",
                     width=10,
                 )
-                y += int(box[3] * 0.2)
+                y += int(box[3] * 0.1145141919810)
         image.save(img_path)
         revert_img_info(None, img_path, image.info)
 
