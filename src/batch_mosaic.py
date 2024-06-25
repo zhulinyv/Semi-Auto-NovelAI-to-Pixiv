@@ -116,9 +116,9 @@ def main(file_path, input_img, open_button, mode):
             mosaic_blurry("./output/temp.png")
         elif mode == "lines":
             mosaic_lines("./output/temp.png")
-        shutil.move("./output/temp.png", f"./output/mosaic/{file_path2name(file)}")
         logger.success("处理完成!")
     if open_button:
+        shutil.move("./output/temp.png", f"./output/mosaic/{file_path2name(file)}")
         return None, "处理完成! 图片已保存到 ./output/mosaic"
     else:
         os.remove("./output/_temp.png")
