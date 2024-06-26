@@ -35,7 +35,10 @@
         "tab": "Random Picture",
         "description": "> Generates a picture using *.txt files in ./file/prompt as prompts, for a random selection of art styles, please refer to About Random Astringency in other sections of the configuration settings interface",
         "pref": "Additional Prompts",
-        "position": "Addition Position"
+        "position": "Addition Position",
+        "text2image_sfw_random_artists_top_switch": "Randomly select the art style and add it to the top",
+        "text2image_sfw_random_artists_last_switch": "Randomly select the art style and add it to the end",
+        "text2image_sfw_prevent_to_move_switch": "Prevents prompt files from being moved after generation"
     },
     "inpaint": {
         "tab": "Inpaint",

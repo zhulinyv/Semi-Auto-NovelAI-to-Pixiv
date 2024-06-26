@@ -35,7 +35,10 @@
         "tab": "随机图片",
         "description": "> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片, 随机抽取的画风请查看配置设置界面其它部分中的关于随机涩图",
         "pref": "追加的提示词",
-        "position": "追加位置"
+        "position": "追加位置",
+        "text2image_sfw_random_artists_top_switch": "随机抽取画风并加入到最前",
+        "text2image_sfw_random_artists_last_switch": "随机抽取画风并加入到最后",
+        "text2image_sfw_prevent_to_move_switch": "阻止生成后移动提示词文件"
     },
     "inpaint": {
         "tab": "局部重绘",

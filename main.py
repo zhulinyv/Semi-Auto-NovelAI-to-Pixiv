@@ -247,13 +247,15 @@ def main():
                     )
                     with gr.Column():
                         text2image_sfw_random_artists_top_switch = gr.Checkbox(
-                            value=False, label="随机抽取画风并加入到最前"
+                            value=False,
+                            label=webui_language["random picture"]["text2image_sfw_random_artists_top_switch"],
                         )
                         text2image_sfw_random_artists_last_switch = gr.Checkbox(
-                            value=False, label="随机抽取画风并加入到最后"
+                            value=False,
+                            label=webui_language["random picture"]["text2image_sfw_random_artists_last_switch"],
                         )
                         text2image_sfw_prevent_to_move_switch = gr.Checkbox(
-                            value=False, label="阻止生成后移动提示词文件"
+                            value=False, label=webui_language["random picture"]["text2image_sfw_prevent_to_move_switch"]
                         )
                 with gr.Row():
                     text2image_sfw_generate_forever_button = gr.Button(
