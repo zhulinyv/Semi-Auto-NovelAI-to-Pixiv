@@ -16,7 +16,6 @@ def prepare_input(
     text2image_sfw_random_artists_last_switch,
     text2image_sfw_prevent_to_move_switch,
 ):
-    logger.debug(">>>>>")
     data = read_json("./files/favorite.json")
     file_list = file_path2list("./files/prompt")
     file_list.remove("done")
@@ -35,14 +34,11 @@ def prepare_input(
 
     def random_artists():
         weight_list = list(data["artists"]["belief"].keys())
-        logger.debug(weight_list)
         artist = ""
         while artist == "":
             possibility = random.random()
-            logger.debug(possibility)
             time.sleep(1)
             for weight in weight_list:
-                logger.debug(weight)
                 if possibility >= float(weight):
                     artist_list = list(data["artists"]["belief"][weight].keys())
                     if artist_list != []:
@@ -52,12 +48,8 @@ def prepare_input(
                         break
         return artist
 
-    logger.debug(">>>>>")
-
     if text2image_sfw_random_artists_top_switch:
-        logger.debug(">>>>>")
         prompt = f"{format_str(random_artists())}, {format_str(prompt)}"
-        logger.debug(">>>>>")
     elif text2image_sfw_random_artists_last_switch:
         prompt = f"{format_str(prompt)}, {format_str(random_artists())}"
 
@@ -80,7 +72,6 @@ def main(
     text2image_sfw_random_artists_last_switch,
     text2image_sfw_prevent_to_move_switch,
 ):
-    logger.debug(">>>>>")
     file, prompt = prepare_input(
         pref,
         position,
@@ -88,7 +79,6 @@ def main(
         text2image_sfw_random_artists_last_switch,
         text2image_sfw_prevent_to_move_switch,
     )
-    logger.debug(">>>>>")
 
     data = read_json("./files/favorite.json")
 
