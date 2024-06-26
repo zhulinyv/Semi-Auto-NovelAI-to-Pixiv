@@ -33,7 +33,7 @@
     },
     "random picture": {
         "tab": "Random Picture",
-        "description": "> Generates a picture using *.txt files in ./file/prompt as prompts",
+        "description": "> Generates a picture using *.txt files in ./file/prompt as prompts, for a random selection of art styles, please refer to About Random Astringency in other sections of the configuration settings interface",
         "pref": "Additional Prompts",
         "position": "Addition Position"
     },

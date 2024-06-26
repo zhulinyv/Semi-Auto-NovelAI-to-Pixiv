@@ -33,7 +33,7 @@
     },
     "random picture": {
         "tab": "随机图片",
-        "description": "> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片",
+        "description": "> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片, 随机抽取的画风请查看配置设置界面其它部分中的关于随机涩图",
         "pref": "追加的提示词",
         "position": "追加位置"
     },

@@ -115,7 +115,7 @@ def vibe(blue_imgs: bool, input_imgs):
     if blue_imgs:
         prompt, sm, scale, negative, choose_game, choose_character = t2i_input("随机(Random)")
     else:
-        file, prompt = batchtxt_input("", "最前面(Top)")
+        file, prompt = batchtxt_input("", "最前面(Top)", False, False, False)
         sm = env.sm
         scale = env.scale
         data = read_json("./files/favorite.json")

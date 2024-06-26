@@ -237,7 +237,7 @@ def main():
                         generate_text2image_sfw_script_button = gr.Button(webui_language["t2i"]["script_gen"])
                 with gr.Row():
                     text2image_sfw_prefix = gr.Textbox(
-                        "", label=webui_language["random picture"]["pref"], lines=2, scale=5
+                        "", label=webui_language["random picture"]["pref"], lines=2, scale=4
                     )
                     text2image_sfw_position = gr.Radio(
                         value="最前面(Top)",
@@ -245,6 +245,16 @@ def main():
                         label=webui_language["random picture"]["position"],
                         scale=1,
                     )
+                    with gr.Column():
+                        text2image_sfw_random_artists_top_switch = gr.Checkbox(
+                            value=False, label="随机抽取画风并加入到最前"
+                        )
+                        text2image_sfw_random_artists_last_switch = gr.Checkbox(
+                            value=False, label="随机抽取画风并加入到最后"
+                        )
+                        text2image_sfw_prevent_to_move_switch = gr.Checkbox(
+                            value=False, label="阻止生成后移动提示词文件"
+                        )
                 with gr.Row():
                     text2image_sfw_generate_forever_button = gr.Button(
                         webui_language["random blue picture"]["generate_forever"]
@@ -253,19 +263,40 @@ def main():
                 text2image_sfw_output_image = gr.Image()
                 text2image_sfw_cancel_event = text2image_sfw_output_image.change(
                     fn=batchtxt,
-                    inputs=[gr.Radio(value=False, visible=False), text2image_sfw_prefix, text2image_sfw_position],
+                    inputs=[
+                        gr.Radio(value=False, visible=False),
+                        text2image_sfw_prefix,
+                        text2image_sfw_position,
+                        text2image_sfw_random_artists_top_switch,
+                        text2image_sfw_random_artists_last_switch,
+                        text2image_sfw_prevent_to_move_switch,
+                    ],
                     outputs=text2image_sfw_output_image,
                     show_progress="hidden",
                 )
                 text2image_sfw_generate_forever_button.click(
                     fn=batchtxt,
-                    inputs=[gr.Radio(value=False, visible=False), text2image_sfw_prefix, text2image_sfw_position],
+                    inputs=[
+                        gr.Radio(value=False, visible=False),
+                        text2image_sfw_prefix,
+                        text2image_sfw_position,
+                        text2image_sfw_random_artists_top_switch,
+                        text2image_sfw_random_artists_last_switch,
+                        text2image_sfw_prevent_to_move_switch,
+                    ],
                     outputs=text2image_sfw_output_image,
                 )
                 text2image_sfw_stop_button.click(None, None, None, cancels=[text2image_sfw_cancel_event])
                 generate_text2image_sfw_script_button.click(
                     gen_script,
-                    inputs=[gr.Textbox("随机图片", visible=False), text2image_sfw_prefix, text2image_sfw_position],
+                    inputs=[
+                        gr.Textbox("随机图片", visible=False),
+                        text2image_sfw_prefix,
+                        text2image_sfw_position,
+                        text2image_sfw_random_artists_top_switch,
+                        text2image_sfw_random_artists_last_switch,
+                        text2image_sfw_prevent_to_move_switch,
+                    ],
                 )
             with gr.Tab("Vibe"):
                 with gr.Row():
@@ -1496,7 +1527,7 @@ def main():
                     steps = gr.Slider(1, 50, env.steps, step=1, label=webui_language["setting"]["description"]["steps"])
                     with gr.Row():
                         sm = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
-                        sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_language["setting"]["description"]["sm"])
+                        sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_language["setting"]["description"]["sm_dyn"])
                     noise_schedule = gr.Radio(
                         NOISE_SCHEDULE,
                         value=env.noise_schedule,

@@ -330,9 +330,9 @@ sys.setrecursionlimit(999999999)
 
 from src.text2image_sfw import main  # noqa: E402
 
-main(True, \"\"\"{}\"\"\", "{}")
+main(True, \"\"\"{}\"\"\", "{}", "{}", "{}", "{}")
 """.format(
-                    args[0], args[1]
+                    args[0], args[1], args[2], args[3], args[4]
                 )
             )
         elif script_type == "vibe":
