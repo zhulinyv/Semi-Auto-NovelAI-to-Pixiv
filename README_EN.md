@@ -195,7 +195,7 @@ Learning Gradio, trying to create a WebUI for this project.
 + [x] Add copy operations for image filtering
 + [ ] Modpacks
 + [x] New mosaic
-+ [ ] Partial redraw to optimize mask upload
++ [x] Partial redraw to optimize mask upload
 + [ ] Graffiti repaint
 + [ ] Partial zoom in and repaint
 + [ ] ...

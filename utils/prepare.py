@@ -3,7 +3,7 @@ import shutil
 
 from loguru import logger
 
-VERSION = "2.18.0"
+VERSION = "2.18.5"
 
 need_dir_list = [
     "./output",

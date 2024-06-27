@@ -42,9 +42,9 @@
     },
     "inpaint": {
         "tab": "Inpaint",
-        "description": "> Redraws images using masks (redrawn area is white, remaining is transparent instead of black)",
+        "description": "> Redraws images using masks (First, click the image button below the repaint component to upload the image, and then click the paint button to apply a topic)",
         "input_path": "Batch Processing Image Path (Effective only on the computer where this program runs)",
-        "mask_path": "Batch Processing Mask Path (Effective only on the computer where this program runs)",
+        "mask_path": "Batch Processing Mask Path (redrawn area is white, remaining is transparent instead of black)",
         "inpaint_img": "Redraw Image",
         "inpaint_mask": "Redraw Mask"
     },

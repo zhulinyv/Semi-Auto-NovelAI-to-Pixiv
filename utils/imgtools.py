@@ -100,8 +100,8 @@ def revert_img_info(img_path, output_dir, *args):
             with Image.open(output_dir) as new_img:
                 new_img.save(output_dir, pnginfo=metadata)
             logger.success("还原成功!")
-        except Exception:
-            logger.error("还原失败!")
+        except Exception as e:
+            logger.error(f"还原失败!\n{e}")
     else:
         logger.warning("还原图片信息操作已关闭, 如有需要请在配置项中设置 revert_info=True")
 
@@ -166,3 +166,16 @@ def cut_img_h(path, otp_path):
         crop_img.save(Path(otp_path) / name.replace(".png", "_l.png"))
         crop_img = img.crop((w / 2, 0, w, h))
         crop_img.save(Path(otp_path) / name.replace(".png", "_r.png"))
+
+
+def change_the_mask_color_to_white(image_path):
+    with Image.open(image_path) as image:
+        image_array = image.load()
+        width, height = image.size
+        for x in range(0, width):
+            for y in range(0, height):
+                rgba = image_array[x, y]
+                r, g, b, a = rgba
+                if a != 0:
+                    image_array[x, y] = (255, 255, 255)
+        image.save(image_path)

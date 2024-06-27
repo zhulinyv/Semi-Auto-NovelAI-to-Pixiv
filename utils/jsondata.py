@@ -94,7 +94,7 @@ json_for_inpaint = {
         "steps": int,
         "n_samples": 1,
         "strength": float,
-        "noise": 0,
+        "noise": float,
         "ucPreset": 0,
         "qualityToggle": True,
         "sm": bool,

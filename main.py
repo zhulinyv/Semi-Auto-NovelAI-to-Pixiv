@@ -700,8 +700,21 @@ def main():
                 with gr.Column(scale=8):
                     gr.Markdown(webui_language["inpaint"]["description"])
                 open_output_folder_block("inpaint")
-            inpaint_generate_button = gr.Button(value=webui_language["t2i"]["generate_button"])
             with gr.Column():
+                with gr.Column():
+                    inpaint_positive_input = gr.Textbox(
+                        value=webui_language["example"]["positive"],
+                        lines=2,
+                        label=webui_language["t2i"]["positive"],
+                    )
+                    with gr.Row():
+                        inpaint_negative_input = gr.Textbox(
+                            value=webui_language["example"]["negative"],
+                            lines=3,
+                            label=webui_language["t2i"]["negative"],
+                            scale=3,
+                        )
+                        inpaint_generate_button = gr.Button(value=webui_language["t2i"]["generate_button"], scale=1)
                 with gr.Row():
                     inpaint_input_path = gr.Textbox(value="", label=webui_language["inpaint"]["input_path"], scale=5)
                     inpaint_mask_path = gr.Textbox(value="", label=webui_language["inpaint"]["mask_path"], scale=5)
@@ -709,21 +722,72 @@ def main():
                         [True, False], value=False, label=webui_language["i2i"]["open_button"], scale=1
                     )
                 with gr.Row():
-                    inpaint_input_image = gr.Image(label=webui_language["inpaint"]["inpaint_img"], type="pil", scale=1)
-                    inpaint_input_mask = gr.Image(
-                        image_mode="RGBA", label=webui_language["inpaint"]["inpaint_mask"], type="pil", scale=1
+                    inpaint_input_image = gr.Sketchpad(
+                        sources=["upload", "clipboard", "webcam"],
+                        type="pil",
+                        label=webui_language["inpaint"]["inpaint_img"],
                     )
-                    with gr.Column(scale=2):
+                    with gr.Column():
                         inpaint_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
-                        inpaint_output_image = gr.Image(scale=2)
+                        inpaint_output_image = gr.Image()
+                with gr.Column():
+                    with gr.Row():
+                        inpaint_resolution = gr.Dropdown(
+                            RESOLUTION,
+                            value="832x1216",
+                            label=webui_language["t2i"]["resolution"],
+                        )
+                        inpaint_sampler = gr.Dropdown(
+                            SAMPLER,
+                            value="k_euler",
+                            label=webui_language["t2i"]["sampler"],
+                        )
+                        inpaint_noise_schedule = gr.Dropdown(
+                            NOISE_SCHEDULE,
+                            value="native",
+                            label=webui_language["t2i"]["noise_schedule"],
+                        )
+                    with gr.Row():
+                        inpaint_strength = gr.Slider(
+                            minimum=0, maximum=1, value=0.5, step=0.1, label=webui_language["i2i"]["strength"]
+                        )
+                        inpaint_noise = gr.Slider(
+                            minimum=0, maximum=1, value=0, step=0.1, label=webui_language["i2i"]["noise"]
+                        )
+                        inpaint_scale = gr.Slider(
+                            minimum=0, maximum=10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
+                        )
+                        inpaint_steps = gr.Slider(
+                            minimum=0, maximum=50, value=28, step=1, label=webui_language["t2i"]["steps"]
+                        )
+                    with gr.Row():
+                        inpaint_sm = gr.Radio([True, False], value=False, label="sm", scale=2)
+                        inpaint_sm_dyn = gr.Radio(
+                            [True, False], value=False, label=webui_language["t2i"]["smdyn"], scale=2
+                        )
+                        with gr.Column(scale=1):
+                            inpaint_seed = gr.Textbox(value="-1", label=webui_language["t2i"]["seed"], scale=7)
+                            inpaint_random_button = gr.Button(value="♻️", size="sm", scale=1)
+                            inpaint_random_button.click(return_random, inputs=None, outputs=inpaint_seed)
             inpaint_generate_button.click(
                 fn=inpaint,
                 inputs=[
                     inpaint_input_path,
                     inpaint_mask_path,
                     inpaint_input_image,
-                    inpaint_input_mask,
                     inpaint_batch_switch,
+                    inpaint_positive_input,
+                    inpaint_negative_input,
+                    inpaint_resolution,
+                    inpaint_sampler,
+                    inpaint_noise_schedule,
+                    inpaint_strength,
+                    inpaint_noise,
+                    inpaint_scale,
+                    inpaint_steps,
+                    inpaint_sm,
+                    inpaint_sm_dyn,
+                    inpaint_seed,
                 ],
                 outputs=[inpaint_output_image, inpaint_output_information],
             )
