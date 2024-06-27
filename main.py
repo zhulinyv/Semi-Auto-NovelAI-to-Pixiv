@@ -1167,22 +1167,22 @@ def main():
                     with gr.Column(scale=2):
                         waifu2x_caffe_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
                         waifu2x_caffe_output_image = gr.Image(scale=2)
-            waifu2x_caffe_generate_button.click(
-                fn=upscale,
-                inputs=[
-                    gr.Textbox("waifu2x-caffe", visible=False),
-                    waifu2x_caffe_input_image,
-                    waifu2x_caffe_input_path,
-                    waifu2x_caffe_batch_switch,
-                    waifu2x_caffe_mode,
-                    waifu2x_caffe_scale,
-                    waifu2x_caffe_noise,
-                    waifu2x_caffe_process,
-                    waifu2x_caffe_tta,
-                    waifu2x_caffe_model,
-                ],
-                outputs=[waifu2x_caffe_output_information, waifu2x_caffe_output_image],
-            )
+                waifu2x_caffe_generate_button.click(
+                    fn=upscale,
+                    inputs=[
+                        gr.Textbox("waifu2x-caffe", visible=False),
+                        waifu2x_caffe_input_image,
+                        waifu2x_caffe_input_path,
+                        waifu2x_caffe_batch_switch,
+                        waifu2x_caffe_mode,
+                        waifu2x_caffe_scale,
+                        waifu2x_caffe_noise,
+                        waifu2x_caffe_process,
+                        waifu2x_caffe_tta,
+                        waifu2x_caffe_model,
+                    ],
+                    outputs=[waifu2x_caffe_output_information, waifu2x_caffe_output_image],
+                )
             with gr.Tab("waifu2x-converter"):
                 waifu2x_converter_generate_button = gr.Button(value=webui_language["t2i"]["generate_button"])
                 with gr.Row():
