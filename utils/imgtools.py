@@ -100,9 +100,13 @@ def revert_img_info(img_path, output_dir, *args):
             with Image.open(output_dir) as new_img:
                 new_img.save(output_dir, pnginfo=metadata)
             logger.success("还原成功!")
-        except Exception as e:
-            logger.error(f"还原失败!\n{e}")
+        except Exception:
+            with Image.open(output_dir) as new_img:
+                new_img.save(output_dir)
+            logger.error("还原失败!")
     else:
+        with Image.open(output_dir) as new_img:
+            new_img.save(output_dir)
         logger.warning("还原图片信息操作已关闭, 如有需要请在配置项中设置 revert_info=True")
 
 
