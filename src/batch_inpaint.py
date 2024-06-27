@@ -72,9 +72,9 @@ def inpaint(img_path, mask_path, *args):
         json_for_inpaint["strength"] = args[0]
         json_for_inpaint["noise"] = args[1]
 
-    img_name = file_path2name(img_path)
-
-    saved_path = save_image(generate_image(json_for_inpaint), "inpaint", None, None, None, img_name)
+    saved_path = save_image(
+        generate_image(json_for_inpaint), "inpaint", (json.loads(imginfo["Comment"]))["seed"], "None", "None"
+    )
 
     return saved_path
 
