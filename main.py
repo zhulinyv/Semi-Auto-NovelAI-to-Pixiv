@@ -1545,7 +1545,7 @@ def main():
                 plugin_store_plugin_name = gr.Textbox("", label="名称(Name)")
                 plugin_store_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
                 plugin_store_install_button = gr.Button("安装/更新(Install/Update)")
-                plugin_store_uninstall_button = gr.Button("安装(Uninstall)")
+                plugin_store_uninstall_button = gr.Button("卸载(Uninstall)")
                 plugin_store_restart_button = gr.Button("重启(Restart)")
             gr.Markdown(plugin_list())
             plugin_store_install_button.click(
