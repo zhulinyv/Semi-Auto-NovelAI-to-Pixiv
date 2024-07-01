@@ -4,15 +4,17 @@ from pathlib import Path
 
 import ujson as json
 from loguru import logger
+from PIL import Image
+from PIL.PngImagePlugin import PngInfo
 
-from src.pnginfo_modify import remove_info
 from utils.env import env
 from utils.error import UploadError, UploadTooFastError
 from utils.imgtools import get_img_info
+from utils.naimeta import inject_data
 from utils.pixivposter import pixiv_upload
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
-from utils.utils import file_path2dir, file_path2list, format_str, list_to_str, read_json, sleep_for_cool
+from utils.utils import file_path2list, format_str, list_to_str, read_json, sleep_for_cool
 
 
 def upload(image_list, file):
@@ -36,12 +38,16 @@ def upload(image_list, file):
             caption = env.caption_prefix + "\n----------\n" + prompt
 
         if env.remove_info:
-            remove_info(
-                file_path2dir(image_list[0]),
-                file_path2dir(image_list[0]),
-                ["Title", "Description ", "Software", "Source", "Generation time", "Comment"],
-                env.meta_data,
-            )
+            for image in image_list:
+                metadata = PngInfo()
+                metadata.add_text("None", env.meta_data)
+                logger.warning(f"正在清除 {image} 的元数据...")
+                with Image.open(image) as img:
+                    img = inject_data(
+                        img, metadata, ["Title", "Description ", "Software", "Source", "Generation time", "Comment"]
+                    )
+                    img.save(image)
+                logger.success("清除成功!")
 
     except KeyError:
         logger.error("不是 NovelAI 生成的图片!")
