@@ -93,6 +93,12 @@
 
 - 现在你可以直接运行项目根目录下的 `run.bat` 来启动 WebUI, 首次启动会自动创建虚拟环境并安装依赖, 耗时较长, 可以去冲杯咖啡或继续看下方的文档
 
+#### 5️⃣ 整合包下载
+
+如果上述操作你觉得难以上手或出现问题, 请加群咨询或下载整合包 [Semi-Auto-NovelAI-to-Pixiv.7z](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/releases/download/modpack/Semi-Auto-NovelAI-to-Pixiv.7z)
+
+解压即用, 整合包用户请运行 `整合包启动(Modpack launcher).bat`
+
 > [!TIP]
 > 月光透过稀疏的云层，洒在地面上，勾勒出一幅幽冥的画卷。
 

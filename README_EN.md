@@ -93,6 +93,12 @@ Learning Gradio, trying to create a WebUI for this project.
 
 - Now you can launch the `run.bat` at the origin directory to start WebUI, it will create the virtual environment and install the dependences at the first time, it will take a long time, so you can drink some coffe or read the documents below
 
+#### 5️⃣ Modpack download
+
+If you find it difficult to get started or have problems with the above operations, please join the group to consult or download the modpack [Semi-Auto-NovelAI-to-Pixiv.7z]( https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/releases/download/modpack/Semi-Auto-NovelAI-to-Pixiv.7z)
+
+To unzip and use, modpack users need to run `Modpack launcher.bat`
+
 > [!TIP]
 > Moonlight seeps through sparse clouds, casting its glow upon the ground, sketching out a scene of ethereal beauty.
 
