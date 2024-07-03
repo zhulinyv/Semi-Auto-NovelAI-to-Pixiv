@@ -51,9 +51,6 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["extra_noise_seed"] = seed
         json_for_i2i["parameters"]["negative_prompt"] = negative
 
-        with open("test.txt", "w", encoding="utf-8") as f:
-            f.write(json.dumps(json_for_i2i))
-
         saved_path = save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
         sleep_for_cool(2, 4)
 

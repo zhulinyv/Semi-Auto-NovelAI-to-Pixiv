@@ -3,7 +3,12 @@ import os
 import shutil
 
 import requests
-from git import Git
+
+try:
+    from git import Git
+except Exception:
+    os.environ["PATH"] = os.path.abspath("./Git24521/bin")
+    from git import Git
 
 from utils.update import update
 from utils.utils import file_path2list, proxies, read_json

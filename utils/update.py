@@ -1,6 +1,12 @@
+import os
 from pathlib import Path
 
-import git
+try:
+    import git
+except Exception:
+    os.environ["PATH"] = os.path.abspath("./Git24521/bin")
+    import git
+
 import requests
 from git.exc import InvalidGitRepositoryError
 

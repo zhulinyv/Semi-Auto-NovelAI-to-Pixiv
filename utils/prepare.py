@@ -1,9 +1,19 @@
 import os
 import shutil
+from urllib.request import getproxies
 
 from loguru import logger
 
-VERSION = "2.18.5"
+try:
+    proxies = getproxies()
+    os.environ["http_proxy"] = proxies["http"]
+    os.environ["https_proxy"] = proxies["https"]
+    os.environ["no_proxy"] = proxies.get("no", "localhost, 127.0.0.1, ::1")
+except KeyError:
+    pass
+
+
+VERSION = "2.19.0"
 
 need_dir_list = [
     "./output",
@@ -26,6 +36,7 @@ need_dir_list = [
     "./plugins/t2i",
     "./plugins/i2i",
     "./plugins/webui",
+    "./plugins/inpaint",
 ]
 
 

@@ -48,7 +48,7 @@ Learning Gradio, trying to create a WebUI for this project.
 
 - Implementation of dynamically loading plugins to enhance the project's scalability!
 
-- Plugins submitted to the store: [Plugin List](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/plugins.json)
+- Plugins submitted to the store: [Plugin List](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/webui/files/plugins.json)
 
 > [!TIP]
 > I walked alone on the slippery and muddy streets, with only a few street lamps blinking lonely in the dark night.
@@ -193,7 +193,7 @@ Learning Gradio, trying to create a WebUI for this project.
 + [x] The list of plugins reads the remote repository
 + [x] Plugin updates and uninstallations
 + [x] Add copy operations for image filtering
-+ [ ] Modpacks
++ [x] Modpacks
 + [x] New mosaic
 + [x] Partial redraw to optimize mask upload
 + [ ] Graffiti repaint

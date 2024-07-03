@@ -48,7 +48,7 @@
 
 - 实现动态加载插件, 提高本项目可扩展性!
 
-- 已提交到商店的插件: [插件列表](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/plugins.json)
+- 已提交到商店的插件: [插件列表](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/webui/plugins.json)
 
 > [!TIP]
 > 我独自一人走在湿滑泥泞的街头, 身旁只有寥寥几盏路灯在暗夜中孤寂地闪烁。
@@ -193,7 +193,7 @@
 + [x] 插件列表读取远程仓库
 + [x] 插件更新与卸载
 + [x] 图片筛选添加复制操作
-+ [ ] 整合包
++ [x] 整合包
 + [x] 新增打码方式
 + [x] 局部重绘优化蒙版上传
 + [ ] 涂鸦重绘
