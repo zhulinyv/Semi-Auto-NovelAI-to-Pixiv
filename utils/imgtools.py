@@ -1,6 +1,4 @@
 import base64
-import os
-import shutil
 from pathlib import Path, WindowsPath
 
 import ujson as json
@@ -39,9 +37,7 @@ except ModuleNotFoundError:
     def detector(image):
         nude_detector = NudeDetector()
         # 这个库不能使用中文文件名
-        if os.path.exists("./output/temp.png"):
-            os.remove("./output/temp.png")
-        shutil.copyfile(image, "./output/temp.png")
+        # 写重复了, batch_mosaic 里已经写过了
         box_list = []
         body = nude_detector.detect("./output/temp.png")
         for part in body:
