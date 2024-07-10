@@ -56,6 +56,7 @@ def move_current_img(current_img, output_path):
     try:
         img_name = os.path.basename(current_img)
         shutil.move(current_img, str(Path(output_path) / img_name))
+        logger.info(f"已将 {current_img} 移动到 {output_path}")
         return show_next_img()
     except Exception:
         logger.error("未输入要移动的目录!")
@@ -63,6 +64,7 @@ def move_current_img(current_img, output_path):
 
 def del_current_img(current_img):
     send2trash.send2trash(current_img)
+    logger.info(f"已将 {current_img} 删除")
     return show_next_img()
 
 
@@ -70,6 +72,7 @@ def copy_current_img(current_img, output_path):
     try:
         img_name = os.path.basename(current_img)
         shutil.copyfile(current_img, str(Path(output_path) / img_name))
+        logger.info(f"已将 {current_img} 复制到 {output_path}")
         return show_next_img()
     except Exception:
         logger.error("未输入要复制的目录!")

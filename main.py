@@ -1440,7 +1440,7 @@ def main():
                 )
             with gr.Tab("Tagger"):
                 with gr.Row():
-                    with gr.Column(variant="panel"):
+                    with gr.Column():
                         tagger_input_image = gr.Image(type="pil", image_mode="RGBA")
                         with gr.Row():
                             tagger_path = gr.Textbox(label=webui_language["i2i"]["input_path"], scale=3)
@@ -1490,13 +1490,10 @@ def main():
                                     tagger_character_thresh,
                                     tagger_character_mcut_enabled,
                                 ],
-                                variant="secondary",
                                 size="lg",
                             )
-                            tagger_submit = gr.Button(
-                                value=webui_language["tagger"]["submit"], variant="primary", size="lg"
-                            )
-                    with gr.Column(variant="panel"):
+                            tagger_submit = gr.Button(value=webui_language["tagger"]["submit"], size="lg")
+                    with gr.Column():
                         tagger_sorted_general_strings = gr.Textbox(
                             label=webui_language["tagger"]["sorted_general_strings"]
                         )

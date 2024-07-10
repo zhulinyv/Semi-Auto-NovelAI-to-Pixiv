@@ -5,7 +5,7 @@ from loguru import logger
 
 from src.image2image import prepare_json
 from utils.imgtools import change_the_mask_color_to_white, get_img_info, img_to_base64, revert_img_info
-from utils.utils import file_namel2pathl, file_path2list, file_path2name, generate_image, save_image
+from utils.utils import file_namel2pathl, file_path2list, file_path2name, generate_image, inquire_anlas, save_image
 
 
 def for_webui(
@@ -27,6 +27,7 @@ def for_webui(
     inpaint_seed,
 ):
     if open_button:
+        logger.warning(f"剩余水晶: {inquire_anlas()}")
         main(input_path, mask_path)
         return None, "处理完成, 图片已保存到 ./output/inpaint..."
     else:
