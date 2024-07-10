@@ -19,5 +19,12 @@
         "description": "从 SD 移植过来的插件: maple的tag选择器",
         "url": "https://github.com/zhulinyv/sanp_plugin_maple_from_fall_and_flower",
         "author": "[maple-flowers](https://github.com/maple-flowers), [zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_draw_inpaint": {
+        "name": "sanp_plugin_draw_inpaint",
+        "type": "inpaint",
+        "description": "适用于 Semi-Auto-NovelAI-to-Pixiv 涂鸦重绘插件",
+        "url": "https://github.com/zhulinyv/sanp_plugin_draw_inpaint",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
     }
 }
