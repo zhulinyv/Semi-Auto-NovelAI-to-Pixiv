@@ -17,7 +17,7 @@ from utils.utils import file_path2list, proxies, read_json
 def get_plugin_list():
     try:
         plugins: dict = requests.get(
-            "https://raw.githubusercontent.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/dev/files/webui/plugins.json",
+            "https://raw.githubusercontent.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/main/files/webui/plugins.json",
             proxies=proxies,
         ).json()
     except Exception:
