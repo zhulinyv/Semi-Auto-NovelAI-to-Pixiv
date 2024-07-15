@@ -799,7 +799,7 @@ def main():
             for plugin_name, plugin_module in inpaint_plugins.items():
                 if hasattr(plugin_module, "plugin"):
                     plugin_module.plugin()
-                    logger.success(f"成功加载插件: {plugin_name}")
+                    logger.success(f" 成功加载插件: {plugin_name}")
                 else:
                     logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
         # ---------- 超分降噪 ---------- #

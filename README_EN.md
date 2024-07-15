@@ -202,7 +202,7 @@ To unzip and use, modpack users need to run `Modpack launcher.bat`
 + [x] Modpacks
 + [x] New mosaic
 + [x] Partial redraw to optimize mask upload
-+ [ ] Graffiti repaint
++ [x] Graffiti repaint
 + [ ] Partial zoom in and repaint
 + [ ] ...
 

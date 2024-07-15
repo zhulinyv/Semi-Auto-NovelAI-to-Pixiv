@@ -26,8 +26,8 @@ def for_webui(
     inpaint_sm_dyn,
     inpaint_seed,
 ):
+    logger.warning(f"剩余水晶: {inquire_anlas()}")
     if open_button:
-        logger.warning(f"剩余水晶: {inquire_anlas()}")
         main(input_path, mask_path)
         return None, "处理完成, 图片已保存到 ./output/inpaint..."
     else:
