@@ -13,13 +13,14 @@ except KeyError:
     pass
 
 
-VERSION = "2.19.4"
+VERSION = "2.19.5"
 
 need_dir_list = [
     "./output",
     "./output/t2i",
     "./output/t2i/grids",
     "./output/vibe",
+    "./output/vibe/grids",
     "./output/i2i",
     "./output/enhance",
     "./output/inpaint",

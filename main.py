@@ -12,7 +12,7 @@ def main():
     from src.batch_inpaint import for_webui as inpaint
     from src.batch_mosaic import main as mosaic
     from src.batch_tagger import SWINV2_MODEL_DSV3_REPO, dropdown_list, tagger
-    from src.batch_vibe_transfer import vibe, vibe_by_hand
+    from src.batch_vibe_transfer import vibe_by_hand
     from src.batch_waifu2x import main as upscale
     from src.batch_watermark import main as water
     from src.image2image import i2i_by_hand
@@ -66,7 +66,7 @@ def main():
         with gr.Tab(webui_language["t2i"]["tab"]):
             with gr.Tab(webui_language["t2i"]["tab"]):
                 with gr.Row():
-                    with gr.Column(scale=8):
+                    with gr.Column(scale=5):
                         gr.Markdown(webui_language["t2i"]["description"])
                     open_output_folder_block("t2i")
                 with gr.Column():
@@ -305,33 +305,28 @@ def main():
                 with gr.Row():
                     with gr.Column(scale=5):
                         gr.Markdown(webui_language["t2i"]["description"])
-                    with gr.Column(scale=1):
-                        open_output_folder_block("vibe")
-                        generate_vibe_transfer_script_button = gr.Button(webui_language["t2i"]["script_gen"])
+                    open_output_folder_block("vibe")
                 with gr.Column():
-                    with gr.Row():
-                        with gr.Column(scale=3):
-                            vibe_transfer_positive_input = gr.Textbox(
-                                value=webui_language["example"]["positive"],
-                                lines=2,
-                                label=webui_language["t2i"]["positive"],
-                            )
+                    with gr.Column(scale=3):
+                        vibe_transfer_positive_input = gr.Textbox(
+                            value=webui_language["example"]["positive"],
+                            lines=2,
+                            label=webui_language["t2i"]["positive"],
+                        )
+                        with gr.Row():
                             vibe_transfer_negative_input = gr.Textbox(
                                 value=webui_language["example"]["negative"],
                                 lines=2,
                                 label=webui_language["t2i"]["negative"],
+                                scale=3,
                             )
-                        with gr.Column(scale=1):
-                            vibe_transfer_generate_button = gr.Button(
-                                value=webui_language["t2i"]["generate_button"], scale=1
-                            )
-                            vibe_transfer_generate_forever_button = gr.Button(
-                                webui_language["random blue picture"]["generate_forever"], scale=1
-                            )
-                            vibe_transfer_stop_button = gr.Button(
-                                webui_language["random blue picture"]["stop_button"], scale=1
-                            )
-                            vibe_transfer_nsfw_switch = gr.Checkbox(False, label=webui_language["vibe"]["blue_imgs"])
+                            with gr.Column(scale=1):
+                                vibe_transfer_generate_button = gr.Button(
+                                    value=webui_language["t2i"]["generate_button"], scale=1
+                                )
+                                vibe_transfer_quantity = gr.Slider(
+                                    minimum=1, maximum=999, value=1, step=1, label=webui_language["t2i"]["times"]
+                                )
                     vibe_transfer_input_images = gr.Textbox("", label=webui_language["vibe"]["input_imgs"])
                     with gr.Row():
                         with gr.Column(scale=1):
@@ -362,13 +357,6 @@ def main():
                             )
                             vibe_transfer_seed = gr.Textbox(value="-1", label=webui_language["t2i"]["seed"])
                         vibe_transfer_output_image = gr.Image(scale=2)
-                        _vibe_transfer_output_image = gr.Image(visible=False)
-                vibe_transfer_cancel_event = _vibe_transfer_output_image.change(
-                    fn=vibe,
-                    inputs=[vibe_transfer_nsfw_switch, vibe_transfer_input_images],
-                    outputs=[vibe_transfer_output_image, _vibe_transfer_output_image],
-                    show_progress="hidden",
-                )
                 vibe_transfer_generate_button.click(
                     fn=vibe_by_hand,
                     inputs=[
@@ -383,19 +371,9 @@ def main():
                         vibe_transfer_sm_dyn,
                         vibe_transfer_seed,
                         vibe_transfer_input_images,
+                        vibe_transfer_quantity,
                     ],
                     outputs=vibe_transfer_output_image,
-                )
-                vibe_transfer_generate_forever_button.click(
-                    fn=vibe,
-                    inputs=[vibe_transfer_nsfw_switch, vibe_transfer_input_images],
-                    outputs=[vibe_transfer_output_image, _vibe_transfer_output_image],
-                )
-                vibe_transfer_stop_button.click(None, None, None, cancels=[vibe_transfer_cancel_event])
-                generate_vibe_transfer_script_button.click(
-                    gen_script,
-                    inputs=[gr.Textbox("vibe", visible=False), vibe_transfer_nsfw_switch, vibe_transfer_input_images],
-                    outputs=None,
                 )
             # ---------- 文生图插件 ---------- #
             text2image_plugins = load_plugins(Path("./plugins/t2i"))
