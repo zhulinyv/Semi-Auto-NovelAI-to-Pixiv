@@ -1340,10 +1340,8 @@ def main():
                     _selector_move_button = gr.Button(
                         webui_language["selector"]["move_button_"], size="lg", elem_id="arrow_right"
                     )
-                    selector_copy_button = gr.Button(webui_language["selector"]["copy_button"], size="lg", elem_id="c")
-                    _selector_copy_button = gr.Button(
-                        webui_language["selector"]["copy_button_"], size="lg", elem_id="v"
-                    )
+                    selector_copy_button = gr.Button(webui_language["selector"]["copy_button"], size="lg")
+                    _selector_copy_button = gr.Button(webui_language["selector"]["copy_button_"], size="lg")
                     selector_delete_button = gr.Button(
                         webui_language["selector"]["del_button"], size="lg", elem_id="arrow_up"
                     )
