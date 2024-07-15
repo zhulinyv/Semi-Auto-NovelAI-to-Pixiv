@@ -90,8 +90,8 @@
         "next_button": "跳过(↓)",
         "move_button": "移动1(←)",
         "move_button_": "移动2(→)",
-        "copy_button": "复制1(C)",
-        "copy_button_": "复制2(V)",
+        "copy_button": "复制1",
+        "copy_button_": "复制2",
         "del_button": "删除(↑)"
     },
     "rm png info": {

@@ -90,8 +90,8 @@
         "next_button": "Skip(↓)",
         "move_button": "Move 1(←)",
         "move_button_": "Move 2(→)",
-        "copy_button": "Copy 1(C)",
-        "copy_button_": "Copy 2(V)",
+        "copy_button": "Copy 1",
+        "copy_button_": "Copy 2",
         "del_button": "Delete(↑)"
     },
     "rm png info": {
