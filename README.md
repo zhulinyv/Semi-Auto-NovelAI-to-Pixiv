@@ -203,7 +203,8 @@
 + [x] 新增打码方式
 + [x] 局部重绘优化蒙版上传
 + [x] 涂鸦重绘
-+ [ ] 局部放大重绘
++ [ ] ~~局部放大重绘~~
++ [ ] 图片压缩与分类整理
 + [ ] ...
 
 </details>
@@ -211,8 +212,6 @@
 ## 🤝 鸣谢
 
 本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) | [Anime4KCPP](https://github.com/TianZerL/Anime4KCPP) | [realcugan-ncnn-vulkan](https://github.com/nihui/realcugan-ncnn-vulkan/) | [realesrgan-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan) | [realsr-ncnn-vulkan](https://github.com/nihui/realsr-ncnn-vulkan/) | [srmd-cuda](https://github.com/MrZihan/Super-resolution-SR-CUDA) | [srmd-ncnn-vulkan](https://github.com/nihui/srmd-ncnn-vulkan) | [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe) | [waifu2x-converter](https://github.com/DeadSix27/waifu2x-converter-cpp) 降噪和放大图片
-
-本项目使用 [stable-diffusion-inspector](https://spell.novelai.dev/) 解析图片元数据
 
 本项目使用 [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshin-Sync/tree/main) 上传图片至 Pixiv
 

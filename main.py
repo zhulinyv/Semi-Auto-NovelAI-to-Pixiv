@@ -24,6 +24,7 @@ def main():
     from src.text2image_sfw import main as batchtxt
     from src.tiled_upscale import tile_upscale
     from utils.env import env
+    from utils.imgtools import _return_pnginfo, return_pnginfo
     from utils.plugin import install_plugin, load_plugins, plugin_list, uninstall_plugin
     from utils.restart import restart
     from utils.selector import copy_current_img, del_current_img, move_current_img, show_first_img, show_next_img
@@ -1425,18 +1426,123 @@ def main():
         # ---------- 法术解析 ---------- #
         with gr.Tab(webui_language["maigic analysis"]["tab"]):
             with gr.Tab(webui_language["maigic analysis"]["tab"]):
-                gr.HTML(
-                    """
-<iframe id="myiframe" src="https://spell.novelai.dev/"></iframe>
-<style>
-    #myiframe {
-        width: 100%;
-        height: 600px;
-    }
-</style>
-""".replace(
-                        "600", str(env.height)
-                    )
+                with gr.Column():
+                    with gr.Row():
+                        with gr.Column():
+                            pnginfo_image = gr.Image(type="pil", image_mode="RGBA")
+                            pnginfo_send2text2image_button = gr.Button(
+                                webui_language["maigic analysis"]["pnginfo_send2text2image_button"]
+                            )
+                            pnginfo_send2image2image_button = gr.Button(
+                                webui_language["maigic analysis"]["pnginfo_send2image2image_button"]
+                            )
+                            pnginfo_send2inpaint_button = gr.Button(
+                                webui_language["maigic analysis"]["pnginfo_send2inpaint_button"]
+                            )
+                        with gr.Column():
+                            pnginfo_positive_input = gr.Textbox(label="正面提示词(Positive Prompt)")
+                            pnginfo_negative_input = gr.Textbox(label="负面提示词(Negative Prompt)")
+                            with gr.Row():
+                                pnginfo_resolution = gr.Dropdown(choices=RESOLUTION, label="分辨率(Resolution)")
+                            pnginfo_steps = gr.Slider(0, 50, step=1, label="采样步数(Steps)")
+                            pnginfo_scale = gr.Slider(0, 10, step=0.1, label="提示词相关性(Scale)")
+                            with gr.Row():
+                                pnginfo_noise_schedule = gr.Dropdown(
+                                    choices=NOISE_SCHEDULE, label="噪声计划表(Noise Schedule)"
+                                )
+                                pnginfo_sampler = gr.Dropdown(choices=SAMPLER, label="采样器(Sampler)")
+                            with gr.Row():
+                                pnginfo_sm = gr.Checkbox(label="sm")
+                                pnginfo_sm_dyn = gr.Checkbox(label="sm_dyn")
+                pnginfo_image.change(
+                    return_pnginfo,
+                    inputs=pnginfo_image,
+                    outputs=[
+                        pnginfo_positive_input,
+                        pnginfo_negative_input,
+                        pnginfo_resolution,
+                        pnginfo_steps,
+                        pnginfo_scale,
+                        pnginfo_noise_schedule,
+                        pnginfo_sampler,
+                        pnginfo_sm,
+                        pnginfo_sm_dyn,
+                    ],
+                )
+                pnginfo_send2text2image_button.click(
+                    _return_pnginfo,
+                    inputs=[
+                        pnginfo_positive_input,
+                        pnginfo_negative_input,
+                        pnginfo_resolution,
+                        pnginfo_steps,
+                        pnginfo_scale,
+                        pnginfo_noise_schedule,
+                        pnginfo_sampler,
+                        pnginfo_sm,
+                        pnginfo_sm_dyn,
+                    ],
+                    outputs=[
+                        text2image_positive_input,
+                        text2image_negative_input,
+                        text2image_resolution,
+                        text2image_steps,
+                        text2image_scale,
+                        text2image_noise_schedule,
+                        text2image_sampler,
+                        text2image_sm,
+                        text2image_sm_dyn,
+                    ],
+                )
+                pnginfo_send2image2image_button.click(
+                    _return_pnginfo,
+                    inputs=[
+                        pnginfo_positive_input,
+                        pnginfo_negative_input,
+                        pnginfo_resolution,
+                        pnginfo_steps,
+                        pnginfo_scale,
+                        pnginfo_noise_schedule,
+                        pnginfo_sampler,
+                        pnginfo_sm,
+                        pnginfo_sm_dyn,
+                    ],
+                    outputs=[
+                        image2image_positive_input,
+                        image2image_negative_input,
+                        image2image_resolution,
+                        image2image_steps,
+                        image2image_scale,
+                        image2image_noise_schedule,
+                        image2image_sampler,
+                        image2image_sm,
+                        image2image_sm_dyn,
+                    ],
+                )
+                pnginfo_send2inpaint_button.click(
+                    _return_pnginfo,
+                    inputs=[
+                        pnginfo_positive_input,
+                        pnginfo_negative_input,
+                        pnginfo_resolution,
+                        pnginfo_steps,
+                        pnginfo_scale,
+                        pnginfo_noise_schedule,
+                        pnginfo_sampler,
+                        pnginfo_sm,
+                        pnginfo_sm_dyn,
+                    ],
+                    outputs=[
+                        inpaint_positive_input,
+                        inpaint_negative_input,
+                        inpaint_resolution,
+                        inpaint_steps,
+                        inpaint_scale,
+                        inpaint_noise_schedule,
+                        inpaint_sampler,
+                        inpaint_sm,
+                        inpaint_sm_dyn,
+                    ],
                 )
             with gr.Tab("Tagger"):
                 with gr.Row():

@@ -107,7 +107,10 @@
         "remove_pnginfo_metadate": "清除图片数据后自定义添加的元数据"
     },
     "maigic analysis": {
-        "tab": "法术解析"
+        "tab": "法术解析",
+        "pnginfo_send2text2image_button": "发送到文生图",
+        "pnginfo_send2image2image_button": "发送到图生图",
+        "pnginfo_send2inpaint_button": "发送到局部重绘"
     },
     "example": {
         "positive": "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,",

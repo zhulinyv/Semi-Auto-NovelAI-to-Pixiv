@@ -179,3 +179,46 @@ def change_the_mask_color_to_white(image_path):
                 if a != 0:
                     image_array[x, y] = (255, 255, 255)
         image.save(image_path)
+
+
+def return_pnginfo(image: Image.Image):
+    try:
+        comment = json.loads((image.info)["Comment"])
+
+        return (
+            comment["prompt"],
+            comment["uc"],
+            "{}x{}".format(comment["width"], comment["height"]),
+            comment["steps"],
+            comment["scale"],
+            comment["noise_schedule"],
+            comment["sampler"],
+            comment["sm"],
+            comment["sm_dyn"],
+        )
+    except Exception:
+        return (
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+        )
+
+
+def _return_pnginfo(
+    positive_input,
+    negative_input,
+    resolution,
+    steps,
+    scale,
+    noise_schedule,
+    sampler,
+    sm,
+    sm_dyn,
+):
+    return positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn

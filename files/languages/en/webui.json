@@ -107,7 +107,10 @@
         "remove_pnginfo_metadate": "Custom metadata after removing the pnginfo"
     },
     "maigic analysis": {
-        "tab": "Magic Analysis"
+        "tab": "Magic Analysis",
+        "pnginfo_send2text2image_button": "Send to T2I",
+        "pnginfo_send2image2image_button": "Send to I2I",
+        "pnginfo_send2inpaint_button": "Send to Inapint"
     },
     "example": {
         "positive": "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,",

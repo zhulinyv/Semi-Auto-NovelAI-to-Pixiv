@@ -204,6 +204,7 @@ To unzip and use, modpack users need to run `Modpack launcher.bat`
 + [x] Partial redraw to optimize mask upload
 + [x] Graffiti repaint
 + [ ] Partial zoom in and repaint
++ [ ] Image compression and categorization
 + [ ] ...
 
 </details>
@@ -211,8 +212,6 @@ To unzip and use, modpack users need to run `Modpack launcher.bat`
 ## 🤝 Acknowledgements
 
 This project uses [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) | [Anime4KCPP](https://github.com/TianZerL/Anime4KCPP) | [realcugan-ncnn-vulkan](https://github.com/nihui/realcugan-ncnn-vulkan/) | [realesrgan-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan) | [realsr-ncnn-vulkan](https://github.com/nihui/realsr-ncnn-vulkan/) | [srmd-cuda](https://github.com/MrZihan/Super-resolution-SR-CUDA) | [srmd-ncnn-vulkan](https://github.com/nihui/srmd-ncnn-vulkan) | [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe) | [waifu2x-converter](https://github.com/DeadSix27/waifu2x-converter-cpp) for denoising and upscaling images.
-
-This project uses [stable-diffusion-inspector](https://spell.novelai.dev/) for parsing image metadata.
 
 This project uses [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshin-Sync/tree/main) for uploading images to Pixiv.
 
