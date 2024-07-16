@@ -1433,6 +1433,7 @@ def main():
                             with gr.Row():
                                 pnginfo_sm = gr.Checkbox(label="sm")
                                 pnginfo_sm_dyn = gr.Checkbox(label="sm_dyn")
+                            pnginfo_seed = gr.Textbox(label="种子(Seed)")
                 pnginfo_image.change(
                     return_pnginfo,
                     inputs=pnginfo_image,
@@ -1446,6 +1447,7 @@ def main():
                         pnginfo_sampler,
                         pnginfo_sm,
                         pnginfo_sm_dyn,
+                        pnginfo_seed,
                     ],
                 )
                 pnginfo_send2text2image_button.click(
@@ -1460,6 +1462,7 @@ def main():
                         pnginfo_sampler,
                         pnginfo_sm,
                         pnginfo_sm_dyn,
+                        pnginfo_seed,
                     ],
                     outputs=[
                         text2image_positive_input,
@@ -1471,6 +1474,7 @@ def main():
                         text2image_sampler,
                         text2image_sm,
                         text2image_sm_dyn,
+                        text2image_seed,
                     ],
                 )
                 pnginfo_send2image2image_button.click(
@@ -1485,6 +1489,7 @@ def main():
                         pnginfo_sampler,
                         pnginfo_sm,
                         pnginfo_sm_dyn,
+                        pnginfo_seed,
                     ],
                     outputs=[
                         image2image_positive_input,
@@ -1496,6 +1501,7 @@ def main():
                         image2image_sampler,
                         image2image_sm,
                         image2image_sm_dyn,
+                        image2image_seed,
                     ],
                 )
                 pnginfo_send2inpaint_button.click(
@@ -1510,6 +1516,7 @@ def main():
                         pnginfo_sampler,
                         pnginfo_sm,
                         pnginfo_sm_dyn,
+                        pnginfo_seed,
                     ],
                     outputs=[
                         inpaint_positive_input,
@@ -1521,6 +1528,7 @@ def main():
                         inpaint_sampler,
                         inpaint_sm,
                         inpaint_sm_dyn,
+                        inpaint_seed,
                     ],
                 )
             with gr.Tab("Tagger"):

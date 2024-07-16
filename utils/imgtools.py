@@ -195,9 +195,11 @@ def return_pnginfo(image: Image.Image):
             comment["sampler"],
             comment["sm"],
             comment["sm_dyn"],
+            comment["seed"],
         )
     except Exception:
         return (
+            None,
             None,
             None,
             None,
@@ -211,14 +213,6 @@ def return_pnginfo(image: Image.Image):
 
 
 def _return_pnginfo(
-    positive_input,
-    negative_input,
-    resolution,
-    steps,
-    scale,
-    noise_schedule,
-    sampler,
-    sm,
-    sm_dyn,
+    positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed
 ):
-    return positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn
+    return positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed
