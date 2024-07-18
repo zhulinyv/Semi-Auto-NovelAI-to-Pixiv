@@ -57,7 +57,7 @@ def vibe_by_hand(
         img_list = file_path2list(Path(input_imgs))
         for img in img_list:
             reference_image_multiple.append(img_to_base64(Path(input_imgs) / img))
-            reference_list = img.replace(".png", "").split("_")
+            reference_list = img.replace(".jpg", "").replace(".png", "").split("_")
             reference_information_extracted_multiple.append(float(reference_list[1]))
             reference_strength_multiple.append(float(reference_list[2]))
 
@@ -84,8 +84,6 @@ def vibe_by_hand(
     for img in imgs_list:
         if not os.path.exists(img):
             imgs_list.remove(img)
-
-    logger.debug(imgs_list)
 
     if times != 1:
         num_list = []
