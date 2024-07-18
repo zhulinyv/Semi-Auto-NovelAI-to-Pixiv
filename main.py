@@ -1369,7 +1369,7 @@ def main():
                         scale=2,
                     )
                     remove_pnginfo_data_cloaking_switch = gr.Checkbox(
-                        True, label=webui_language["rm png info"]["remove_pnginfo_data_cloaking_switch"], scale=1
+                        False, label=webui_language["rm png info"]["remove_pnginfo_data_cloaking_switch"], scale=1
                     )
                 remove_pnginfo_metadate = gr.Textbox(
                     env.meta_data, label=webui_language["rm png info"]["remove_pnginfo_metadate"]
