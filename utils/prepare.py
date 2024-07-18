@@ -14,7 +14,7 @@ except KeyError:
     pass
 
 
-VERSION = "2.19.5"
+VERSION = "2.19.6"
 
 need_dir_list = [
     "./output",

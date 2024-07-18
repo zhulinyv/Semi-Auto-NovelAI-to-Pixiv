@@ -1,6 +1,7 @@
 import importlib.util
 import os
 import shutil
+import sys
 
 import requests
 
@@ -28,6 +29,7 @@ def get_plugin_list():
 def load_plugins(directory):
     plugins = {}
     plugin_list = file_path2list(directory)
+    # 示例插件和测试插件放到最后加载
     if "sanp_plugin_example" in plugin_list:
         plugin_list.remove("sanp_plugin_example")
         plugin_list.append("sanp_plugin_example")
@@ -38,6 +40,8 @@ def load_plugins(directory):
         if plugin.endswith(".py"):
             location = os.path.join(directory, plugin)
         elif plugin != "__pycache__":
+            if os.path.exists(os.path.join(directory, plugin, "requirements.txt")):
+                os.system(f"{sys.executable} -s -m pip install -r requirements.txt")
             location = os.path.join(directory, plugin, "__init__.py")
         else:
             location = None
