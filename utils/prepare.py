@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 from urllib.request import getproxies
 
 from loguru import logger
@@ -57,19 +58,29 @@ if not os.path.exists("./files/prompt/example.txt") and not os.path.exists("./fi
 if not os.path.exists("./files/favorite.json"):
     shutil.copyfile("./files/favorite_example.json", "./files/favorite.json")
 
+if not os.path.exists("run_stand_alone_scripts.bat"):
+    with open("run_stand_alone_scripts.bat", "w") as f:
+        f.write(
+            f"""@echo off
+set PYTHON=\"{sys.executable}\"
+%PYTHON% stand_alone_scripts.py
+pause"""
+        )
+
 
 if __name__ == "__main__":
     from env import env
 
     logger.opt(colors=True).success(
         f"""<c>
-███████╗ █████╗ ███╗   ██╗██████╗
-██╔════╝██╔══██╗████╗  ██║██╔══██╗
-███████╗███████║██╔██╗ ██║██████╔╝
+███████╗ █████╗ ███╗   ██╗██████╗     <r>######################</r>
+██╔════╝██╔══██╗████╗  ██║██╔══██╗    <r># 本项目完全开源免费 #</r>
+███████╗███████║██╔██╗ ██║██████╔╝    <r>######################</r>
 ╚════██║██╔══██║██║╚██╗██║██╔═══╝     Version:    {VERSION}
 ███████║██║  ██║██║ ╚████║██║         Author:     https://github.com/zhulinyv
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝         Repository: https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv</c>"""
     )
+
     if env.skip_start_sound:
         pass
     else:
