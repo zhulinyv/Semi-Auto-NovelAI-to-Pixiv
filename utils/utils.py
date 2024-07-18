@@ -1,3 +1,5 @@
+import base64
+import hmac
 import io
 import os
 import platform
@@ -5,6 +7,7 @@ import random
 import time
 import zipfile
 from datetime import date
+from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
 
@@ -305,6 +308,14 @@ def open_folder(folder):
 
 def return_random():
     return "-1"
+
+
+def get_sign(data: str, key: str):
+    key = key.encode("utf-8")
+    message = data.encode("utf-8")
+    sign = base64.b64encode(hmac.new(key, message, digestmod=sha256).digest())
+    sign = str(sign, "utf-8")
+    return sign
 
 
 def gen_script(script_type, *args):

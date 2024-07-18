@@ -1361,11 +1361,16 @@ def main():
                     gr.Markdown(webui_language["rm png info"]["description"])
             with gr.Tab(webui_language["rm png info"]["tab_rm"]):
                 remove_pnginfo_generate_button = gr.Button(webui_language["water mark"]["generate_button"])
-                remove_pnginfo_choices = gr.CheckboxGroup(
-                    ["Title", "Description ", "Software", "Source", "Generation time", "Comment"],
-                    value=["Title", "Description ", "Software", "Source", "Generation time", "Comment"],
-                    label=webui_language["rm png info"]["choose_to_rm"],
-                )
+                with gr.Row():
+                    remove_pnginfo_choices = gr.CheckboxGroup(
+                        ["Title", "Description ", "Software", "Source", "Generation time", "Comment"],
+                        value=["Title", "Description ", "Software", "Source", "Generation time", "Comment"],
+                        label=webui_language["rm png info"]["choose_to_rm"],
+                        scale=2,
+                    )
+                    remove_pnginfo_data_cloaking_switch = gr.Checkbox(
+                        True, label=webui_language["rm png info"]["remove_pnginfo_data_cloaking_switch"], scale=1
+                    )
                 remove_pnginfo_metadate = gr.Textbox(
                     env.meta_data, label=webui_language["rm png info"]["remove_pnginfo_metadate"]
                 )
@@ -1379,6 +1384,7 @@ def main():
                         remove_pnginfo_output_path,
                         remove_pnginfo_choices,
                         remove_pnginfo_metadate,
+                        remove_pnginfo_data_cloaking_switch,
                     ],
                     outputs=[remove_pnginfo_output_information],
                 )
