@@ -56,7 +56,7 @@ except ModuleNotFoundError:
 
 def get_img_info(img_path):
     with Image.open(img_path) as img:
-        return extract_data(img)
+        return img.info
 
 
 def img_to_base64(img_path):
