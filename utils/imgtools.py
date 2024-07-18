@@ -7,6 +7,7 @@ from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
 from utils.env import env
+from utils.naimeta import extract_data
 from utils.utils import file_path2name
 
 try:
@@ -53,7 +54,7 @@ except ModuleNotFoundError:
 
 def get_img_info(img_path):
     with Image.open(img_path) as img:
-        return img.info
+        return extract_data(img)
 
 
 def img_to_base64(img_path):
@@ -183,7 +184,7 @@ def change_the_mask_color_to_white(image_path):
 
 def return_pnginfo(image: Image.Image):
     try:
-        comment = json.loads((image.info)["Comment"])
+        comment = json.loads((extract_data(image))["Comment"])
 
         return (
             comment["prompt"],
