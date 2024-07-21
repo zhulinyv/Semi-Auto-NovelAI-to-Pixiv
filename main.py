@@ -3,6 +3,7 @@ import multiprocessing as mp
 import gradio as gr
 from loguru import logger
 
+from utils.env import env
 from utils.gpt4free import main as g4f
 
 
@@ -23,7 +24,6 @@ def main():
     from src.text2image_nsfw import t2i, t2i_by_hand
     from src.text2image_sfw import main as batchtxt
     from src.tiled_upscale import tile_upscale
-    from utils.env import env
     from utils.imgtools import _return_pnginfo, return_pnginfo
     from utils.plugin import install_plugin, load_plugins, plugin_list, uninstall_plugin
     from utils.restart import restart
@@ -1831,6 +1831,9 @@ def main():
                 skip_start_sound = gr.Checkbox(
                     env.skip_update_check, label=webui_language["setting"]["description"]["skip_start_sound"]
                 )
+                skip_load_g4f = gr.Checkbox(
+                    env.skip_load_g4f, label=webui_language["setting"]["description"]["skip_load_g4f"]
+                )
             with gr.Tab(webui_language["setting"]["sub_tab"]["other"]):
                 gr.Markdown(read_txt(f"./files/languages/{env.webui_lang}/setting.md"))
             with gr.Tab("更新 WebUI(Update WebUI)"):
@@ -1884,6 +1887,7 @@ def main():
                     webui_lang,
                     skip_update_check,
                     skip_start_sound,
+                    skip_load_g4f,
                 ],
                 outputs=setting_output_information,
             )
@@ -1893,11 +1897,12 @@ def main():
 
 
 if __name__ == "__main__":
-    p1 = mp.Process(target=g4f)
+    if not env.skip_load_g4f:
+        p1 = mp.Process(target=g4f)
     p2 = mp.Process(target=main)
-
-    p1.start()
+    if not env.skip_load_g4f:
+        p1.start()
     p2.start()
-
-    p1.join()
+    if not env.skip_load_g4f:
+        p1.join()
     p2.join()

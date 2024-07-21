@@ -174,7 +174,8 @@
             "warning": "检测到已开启分享链接, 隐藏部分隐私配置!",
             "skip_update_check": "跳过更新检查",
             "proxy": "生成图片使用的代理",
-            "skip_start_sound": "跳过启动提示音"
+            "skip_start_sound": "跳过启动提示音",
+            "skip_load_g4f": "跳过加载 g4f(GPT)"
         }
     },
     "info": {

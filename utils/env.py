@@ -63,6 +63,7 @@ class Settings(BaseSettings):
     webui_lang: str = "zh"
     skip_update_check: bool = False
     skip_start_sound: bool = False
+    skip_load_g4f: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

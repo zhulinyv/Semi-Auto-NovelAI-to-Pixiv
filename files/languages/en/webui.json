@@ -174,7 +174,8 @@
             "warning": "Detected shared link enabled, some privacy configurations are hidden!",
             "skip_update_check": "Skip the update check",
             "proxy": "The proxy when generate pictures",
-            "skip_start_sound": "Skip start sound"
+            "skip_start_sound": "Skip start sound",
+            "skip_load_g4f": "Skip load g4f"
         }
     },
     "info": {
