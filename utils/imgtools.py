@@ -186,33 +186,24 @@ def change_the_mask_color_to_white(image_path):
 
 def return_pnginfo(image: Image.Image):
     try:
-        comment = json.loads((extract_data(image))["Comment"])
-
-        return (
-            comment["prompt"],
-            comment["uc"],
-            "{}x{}".format(comment["width"], comment["height"]),
-            comment["steps"],
-            comment["scale"],
-            comment["noise_schedule"],
-            comment["sampler"],
-            comment["sm"],
-            comment["sm_dyn"],
-            comment["seed"],
-        )
+        try:
+            comment = json.loads((image.info)["Comment"])
+        except Exception:
+            comment = json.loads((extract_data(image))["Comment"])
     except Exception:
-        return (
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-        )
+        return None, None, None, None, None, None, None, None, None, None
+    return (
+        comment["prompt"],
+        comment["uc"],
+        "{}x{}".format(comment["width"], comment["height"]),
+        comment["steps"],
+        comment["scale"],
+        comment["noise_schedule"],
+        comment["sampler"],
+        comment["sm"],
+        comment["sm_dyn"],
+        comment["seed"],
+    )
 
 
 def _return_pnginfo(
