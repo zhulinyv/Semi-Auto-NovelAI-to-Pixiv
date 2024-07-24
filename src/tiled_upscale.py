@@ -147,7 +147,9 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
     merged_image.close()
 
     logger.warning("删除临时目录...")
-    for dir in [tiles_dir, cuth_dir, mergev_dir, row_dir, cutw_dir, mergeh_dir, i2i_dir]:
-        shutil.rmtree(dir)
+    for dir_ in [tiles_dir, cuth_dir, mergev_dir, row_dir, cutw_dir, mergeh_dir, i2i_dir]:
+        shutil.rmtree(dir_)
+
+    logger.success("放大完成!")
 
     return dir / file_path2name(img_path).replace(".png", "_tile_upscale.png")
