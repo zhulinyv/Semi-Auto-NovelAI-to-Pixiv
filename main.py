@@ -415,7 +415,7 @@ def main():
                             [True, False], value=False, label=webui_language["i2i"]["open_button"], scale=1
                         )
                     with gr.Row():
-                        image2image_input_img = gr.Image(type="pil")
+                        image2image_input_image = gr.Image(type="pil")
                         with gr.Column():
                             image2image_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
                             image2image_output_image = gr.Image()
@@ -461,7 +461,7 @@ def main():
                     image2image_generate_button.click(
                         fn=i2i_by_hand,
                         inputs=[
-                            image2image_input_img,
+                            image2image_input_image,
                             image2image_input_path,
                             image2image_batch_switch,
                             image2image_positive_input,
@@ -1496,6 +1496,7 @@ def main():
                         pnginfo_sm,
                         pnginfo_sm_dyn,
                         pnginfo_seed,
+                        pnginfo_image,
                     ],
                     outputs=[
                         image2image_positive_input,
@@ -1508,6 +1509,7 @@ def main():
                         image2image_sm,
                         image2image_sm_dyn,
                         image2image_seed,
+                        image2image_input_image,
                     ],
                 )
                 pnginfo_send2inpaint_button.click(
@@ -1523,6 +1525,7 @@ def main():
                         pnginfo_sm,
                         pnginfo_sm_dyn,
                         pnginfo_seed,
+                        pnginfo_image,
                     ],
                     outputs=[
                         inpaint_positive_input,
@@ -1535,6 +1538,7 @@ def main():
                         inpaint_sm,
                         inpaint_sm_dyn,
                         inpaint_seed,
+                        inpaint_input_image,
                     ],
                 )
             with gr.Tab("Tagger"):

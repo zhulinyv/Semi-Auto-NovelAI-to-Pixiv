@@ -207,6 +207,7 @@ def return_pnginfo(image: Image.Image):
 
 
 def _return_pnginfo(
-    positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed
+    positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed, *image
 ):
-    return positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed
+    metadata = (positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed)
+    return metadata if not image else metadata + (image[0],)
