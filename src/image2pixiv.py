@@ -1,3 +1,4 @@
+import os
 import random
 import shutil
 import traceback
@@ -149,7 +150,11 @@ def main(file_path):
                 logger.error("出现错误:\n>>>>>")
                 traceback.print_exc()
                 logger.error("<<<<<")
-        shutil.rmtree(file)
+        logger.warning(f"删除 {Path(file_path) / file}...")
+        try:
+            os.remove(Path(file_path) / file)
+        except NotADirectoryError:
+            shutil.rmtree(Path(file_path) / file)
         sleep_for_cool((env.pixiv_cool_time - 5) * 60, (env.pixiv_cool_time + 5) * 60)
     logger.success("上传完成!")
 
