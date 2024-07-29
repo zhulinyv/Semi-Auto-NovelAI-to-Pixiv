@@ -203,8 +203,8 @@ To unzip and use, modpack users need to run `Modpack launcher.bat`
 + [x] New mosaic
 + [x] Partial redraw to optimize mask upload
 + [x] Graffiti repaint
-+ [ ] Partial zoom in and repaint
-+ [ ] Image compression and categorization
++ [ ] ~~Partial zoom in and repaint~~
++ [x] Image compression and categorization
 + [ ] Vibe save style
 + [ ] Fallback Vibe random chart
 + [ ] Simplification of Favorit. Edited by Ethan

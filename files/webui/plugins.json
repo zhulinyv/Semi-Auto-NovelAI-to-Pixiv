@@ -26,5 +26,12 @@
         "description": "适用于 Semi-Auto-NovelAI-to-Pixiv 涂鸦重绘插件",
         "url": "https://github.com/zhulinyv/sanp_plugin_draw_inpaint",
         "author": "[zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_image_compression": {
+        "name": "sanp_plugin_image_compression",
+        "type": "webui",
+        "description": "批量将图片压缩, 同时支持整理为 excel 表格",
+        "url": "https://github.com/zhulinyv/sanp_plugin_image_compression",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
     }
 }
