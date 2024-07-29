@@ -33,5 +33,12 @@
         "description": "批量将图片压缩, 同时支持整理为 excel 表格",
         "url": "https://github.com/zhulinyv/sanp_plugin_image_compression",
         "author": "[zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_random_vibe": {
+        "name": "sanp_plugin_random_vibe",
+        "type": "t2i",
+        "description": "还原旧版 vibe 随机出图的功能",
+        "url": "https://github.com/zhulinyv/sanp_plugin_random_vibe",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
     }
 }

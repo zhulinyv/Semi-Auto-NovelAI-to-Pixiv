@@ -206,7 +206,7 @@ To unzip and use, modpack users need to run `Modpack launcher.bat`
 + [ ] ~~Partial zoom in and repaint~~
 + [x] Image compression and categorization
 + [ ] Vibe save style
-+ [ ] Fallback Vibe random chart
++ [x] Fallback Vibe random chart
 + [ ] Simplification of Favorit. Edited by Ethan
 + [ ] Learn to write an autocomplete for Is
 + [ ] Simplify Vibe image uploading
