@@ -187,11 +187,12 @@ def change_the_mask_color_to_white(image_path):
 def return_pnginfo(image: Image.Image):
     try:
         try:
-            comment = json.loads((image.info)["Comment"])
+            comment = json.loads((pnginfo := image.info)["Comment"])
         except Exception:
-            comment = json.loads((extract_data(image))["Comment"])
+            comment = json.loads((pnginfo := extract_data(image))["Comment"])
+        pnginfo["Comment"] = json.loads(pnginfo["Comment"])
     except Exception:
-        return None, None, None, None, None, None, None, None, None, None
+        return None, None, None, None, None, None, None, None, None, None, None
     return (
         comment["prompt"],
         comment["uc"],
@@ -203,11 +204,24 @@ def return_pnginfo(image: Image.Image):
         comment["sm"],
         comment["sm_dyn"],
         comment["seed"],
+        json.dumps(pnginfo, indent=4, ensure_ascii=False),
     )
 
 
 def _return_pnginfo(
-    positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed, *image
+    positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed, pnginfo, *image
 ):
-    metadata = (positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed)
+    metadata = (
+        positive_input,
+        negative_input,
+        resolution,
+        steps,
+        scale,
+        noise_schedule,
+        sampler,
+        sm,
+        sm_dyn,
+        seed,
+        pnginfo,
+    )
     return metadata if not image else metadata + (image[0],)

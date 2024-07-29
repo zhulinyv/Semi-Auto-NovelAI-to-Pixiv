@@ -1411,35 +1411,35 @@ def main():
         # ---------- 法术解析 ---------- #
         with gr.Tab(webui_language["maigic analysis"]["tab"]):
             with gr.Tab(webui_language["maigic analysis"]["tab"]):
-                with gr.Column():
-                    with gr.Row():
-                        with gr.Column():
-                            pnginfo_image = gr.Image(type="pil", image_mode="RGBA")
-                            pnginfo_send2text2image_button = gr.Button(
-                                webui_language["maigic analysis"]["pnginfo_send2text2image_button"]
+                with gr.Row():
+                    with gr.Column():
+                        pnginfo_image = gr.Image(type="pil", image_mode="RGBA")
+                        pnginfo_send2text2image_button = gr.Button(
+                            webui_language["maigic analysis"]["pnginfo_send2text2image_button"]
+                        )
+                        pnginfo_send2image2image_button = gr.Button(
+                            webui_language["maigic analysis"]["pnginfo_send2image2image_button"]
+                        )
+                        pnginfo_send2inpaint_button = gr.Button(
+                            webui_language["maigic analysis"]["pnginfo_send2inpaint_button"]
+                        )
+                    with gr.Column():
+                        pnginfo_positive_input = gr.Textbox(label="正面提示词(Positive Prompt)")
+                        pnginfo_negative_input = gr.Textbox(label="负面提示词(Negative Prompt)")
+                        with gr.Row():
+                            pnginfo_resolution = gr.Dropdown(choices=RESOLUTION, label="分辨率(Resolution)")
+                        pnginfo_steps = gr.Slider(0, 50, step=1, label="采样步数(Steps)")
+                        pnginfo_scale = gr.Slider(0, 10, step=0.1, label="提示词相关性(Scale)")
+                        with gr.Row():
+                            pnginfo_noise_schedule = gr.Dropdown(
+                                choices=NOISE_SCHEDULE, label="噪声计划表(Noise Schedule)"
                             )
-                            pnginfo_send2image2image_button = gr.Button(
-                                webui_language["maigic analysis"]["pnginfo_send2image2image_button"]
-                            )
-                            pnginfo_send2inpaint_button = gr.Button(
-                                webui_language["maigic analysis"]["pnginfo_send2inpaint_button"]
-                            )
-                        with gr.Column():
-                            pnginfo_positive_input = gr.Textbox(label="正面提示词(Positive Prompt)")
-                            pnginfo_negative_input = gr.Textbox(label="负面提示词(Negative Prompt)")
-                            with gr.Row():
-                                pnginfo_resolution = gr.Dropdown(choices=RESOLUTION, label="分辨率(Resolution)")
-                            pnginfo_steps = gr.Slider(0, 50, step=1, label="采样步数(Steps)")
-                            pnginfo_scale = gr.Slider(0, 10, step=0.1, label="提示词相关性(Scale)")
-                            with gr.Row():
-                                pnginfo_noise_schedule = gr.Dropdown(
-                                    choices=NOISE_SCHEDULE, label="噪声计划表(Noise Schedule)"
-                                )
-                                pnginfo_sampler = gr.Dropdown(choices=SAMPLER, label="采样器(Sampler)")
-                            with gr.Row():
-                                pnginfo_sm = gr.Checkbox(label="sm")
-                                pnginfo_sm_dyn = gr.Checkbox(label="sm_dyn")
-                            pnginfo_seed = gr.Textbox(label="种子(Seed)")
+                            pnginfo_sampler = gr.Dropdown(choices=SAMPLER, label="采样器(Sampler)")
+                        with gr.Row():
+                            pnginfo_sm = gr.Checkbox(label="sm")
+                            pnginfo_sm_dyn = gr.Checkbox(label="sm_dyn")
+                        pnginfo_seed = gr.Textbox(label="种子(Seed)")
+                pnginfo_pnginfo = gr.Textbox(label="Png Info")
                 pnginfo_image.change(
                     return_pnginfo,
                     inputs=pnginfo_image,
@@ -1454,6 +1454,7 @@ def main():
                         pnginfo_sm,
                         pnginfo_sm_dyn,
                         pnginfo_seed,
+                        pnginfo_pnginfo,
                     ],
                 )
                 pnginfo_send2text2image_button.click(
