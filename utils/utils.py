@@ -346,16 +346,6 @@ main(True, \"\"\"{}\"\"\", "{}", "{}", "{}", "{}")
                     args[0], args[1], args[2], args[3], args[4]
                 )
             )
-        elif script_type == "vibe":
-            script.write(
-                """from src.batch_vibe_transfer import vibe
-
-while 1:
-    vibe({}, "{}")
-""".format(
-                    args[0], args[1]
-                )
-            )
         else:
             ...
     logger.success("生成成功, 运行 run_stand_alone_scripts.bat 即可独立执行该操作")
