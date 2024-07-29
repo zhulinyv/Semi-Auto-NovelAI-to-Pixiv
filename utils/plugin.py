@@ -40,8 +40,8 @@ def load_plugins(directory):
         if plugin.endswith(".py"):
             location = os.path.join(directory, plugin)
         elif plugin != "__pycache__":
-            if os.path.exists(os.path.join(directory, plugin, "requirements.txt")):
-                os.system(f"{sys.executable} -s -m pip install -r requirements.txt")
+            if os.path.exists(requirements_path := os.path.join(directory, plugin, "requirements.txt")):
+                os.system(f"{sys.executable} -s -m pip install -r {requirements_path}")
             location = os.path.join(directory, plugin, "__init__.py")
         else:
             location = None
