@@ -61,9 +61,9 @@ def format_str(str_: str):
         str_: 格式化后的字符串
     """
     str_ = str_.replace(", ", ",")
+    str_ = str_.replace(",,", ",")
     str_ = str_.replace(",", ", ")
-    str_ = str_.replace(", , , ", ", ")
-    str_ = str_.replace(", , ", ", ")
+    str_ = str_.replace(", ,", ", ")
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
 

@@ -205,6 +205,11 @@ To unzip and use, modpack users need to run `Modpack launcher.bat`
 + [x] Graffiti repaint
 + [ ] Partial zoom in and repaint
 + [ ] Image compression and categorization
++ [ ] Vibe save style
++ [ ] Fallback Vibe random chart
++ [ ] Simplification of Favorit. Edited by Ethan
++ [ ] Learn to write an autocomplete for Is
++ [ ] Simplify Vibe image uploading
 + [ ] ...
 
 </details>

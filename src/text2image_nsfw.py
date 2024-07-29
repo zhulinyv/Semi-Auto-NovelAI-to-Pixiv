@@ -139,7 +139,7 @@ def prepare_input(action_type, action, origin, character, artists, scale, sm):
     else:
         if action_type == "随机(Random)":
             action_type = (
-                "巨乳"
+                random.choice(["普通", "自慰", "巨乳"])
                 if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"])
                 else random.choice(["普通", "自慰"])
             )
