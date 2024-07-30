@@ -2,11 +2,12 @@ import os
 import random
 import time
 
+import cv2
 from loguru import logger
 from PIL import Image
 
 from utils.env import env
-from utils.imgtools import get_concat_h, get_concat_v, revert_img_info
+from utils.imgtools import get_concat_h, get_concat_v, get_img_info, revert_img_info
 from utils.jsondata import json_for_t2i
 from utils.utils import format_str, generate_image, list_to_str, read_json, save_image, sleep_for_cool
 
@@ -90,9 +91,20 @@ def t2i_by_hand(
         merged_img.save("./output/t2i/grids/{}.png".format(time_))
         merged_img.close()
 
-        revert_img_info(imgs_list[0], "./output/t2i/grids/{}.png".format(time_))
+        try:
+            revert_img_info(imgs_list[0], "./output/t2i/grids/{}.png".format(time_))
+            return "./output/t2i/grids/{}.png".format(time_)
+        except Image.DecompressionBombError:
+            logger.warning("图片过大, 进行压缩...")
+            cv2.imwrite(
+                "./output/t2i/grids/{}.jpg".format(time_),
+                cv2.imread("./output/t2i/grids/{}.png".format(time_)),
+                [cv2.IMWRITE_JPEG_QUALITY, 90],
+            )
+            with open("./output/t2i/grids/{}.txt".format(time_), "w") as infofile:
+                infofile.write(get_img_info(imgs_list[0])["Description"])
+            return "./output/t2i/grids/{}.jpg".format(time_)
 
-        return "./output/t2i/grids/{}.png".format(time_)
     else:
         return saved_path
 

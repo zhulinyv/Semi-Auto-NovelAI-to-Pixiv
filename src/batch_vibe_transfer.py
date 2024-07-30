@@ -3,11 +3,12 @@ import random
 import time
 from pathlib import Path
 
+import cv2
 from loguru import logger
 from PIL import Image
 
 from utils.env import env
-from utils.imgtools import get_concat_h, get_concat_v, img_to_base64, revert_img_info
+from utils.imgtools import get_concat_h, get_concat_v, get_img_info, img_to_base64, revert_img_info
 from utils.jsondata import json_for_vibe
 from utils.utils import file_path2list, generate_image, save_image, sleep_for_cool
 
@@ -116,8 +117,18 @@ def vibe_by_hand(
         merged_img.save("./output/vibe/grids/{}.png".format(time_))
         merged_img.close()
 
-        revert_img_info(imgs_list[0], "./output/vibe/grids/{}.png".format(time_))
-
-        return "./output/vibe/grids/{}.png".format(time_)
+        try:
+            revert_img_info(imgs_list[0], "./output/vibe/grids/{}.png".format(time_))
+            return "./output/vibe/grids/{}.png".format(time_)
+        except Image.DecompressionBombError:
+            logger.warning("图片过大, 进行压缩...")
+            cv2.imwrite(
+                "./output/vibe/grids/{}.jpg".format(time_),
+                cv2.imread("./output/vibe/grids/{}.png".format(time_)),
+                [cv2.IMWRITE_JPEG_QUALITY, 90],
+            )
+            with open("./output/vibe/grids/{}.txt".format(time_), "w") as infofile:
+                infofile.write(get_img_info(imgs_list[0])["Description"])
+            return "./output/vibe/grids/{}.jpg".format(time_)
     else:
         return saved_path
