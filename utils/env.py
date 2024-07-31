@@ -9,7 +9,7 @@ class Settings(BaseSettings):
 
     # 文生图
     img_size: Union[int, list[int]] = -1
-    scale: float = 5
+    scale: float = 5.0
     censor: bool = False
     sampler: str = "k_euler"
     steps: int = 28
@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     seed: int = -1
     t2i_cool_time: int = 9
     save_path: str = "默认(Default)"
-    proxy: Union[str, None] = None
+    proxy: Union[str, None] = "xxx:xxx"
 
     # 图生图
     magnification: float = 1.5
@@ -28,10 +28,10 @@ class Settings(BaseSettings):
     i2i_cool_time: int = 12
 
     # 上传 Pixiv
-    pixiv_cookie: Union[str, None] = None
-    pixiv_token: Union[str, None] = None
+    pixiv_cookie: Union[str, None] = "xxx"
+    pixiv_token: Union[str, None] = "xxx"
     allow_tag_edit: bool = True
-    caption_prefix: Union[str, None] = None
+    caption_prefix: Union[str, None] = "Hi there! 这里是小丫头片子, 芝士我的 QQ 群: 559063963, 欢迎!"
     rep_tags: bool = True
     rep_tags_per: float = 0.5
     rep_tags_with_tag: str = "杂鱼~"
@@ -46,7 +46,7 @@ class Settings(BaseSettings):
     # 水印
     alpha: float = 0.65
     water_height: int = 135
-    position: list = ["左上", "右上", "左下", "右下"]
+    position: list = ["左上(Upper Left)", "左下(Lower Left)", "右上(Upper Right)", "右下(Upper Right)"]
     water_num: int = 1
     rotate: int = 45
 
