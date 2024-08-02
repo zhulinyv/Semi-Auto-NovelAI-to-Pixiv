@@ -96,6 +96,18 @@ def sleep_for_cool(int1, int2):
     return f"等待 {sleep_time} 秒后继续..."
 
 
+def generate_random_str(randomlength):
+    """
+    生成一个指定长度的随机字符串
+    """
+    random_str = ""
+    base_str = "ABCDEFGHIGKLMNOPQRSTUVWXYZabcdefghigklmnopqrstuvwxyz0123456789"
+    length = len(base_str) - 1
+    for i in range(randomlength):
+        random_str += base_str[random.randint(0, length)]
+    return random_str
+
+
 def generate_image(json_data):
     """发送 post 请求
 
@@ -118,6 +130,39 @@ def generate_image(json_data):
         rep.raise_for_status()
         logger.success("生成成功!")
         with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
+            with zip.open("image_0.png") as image:
+                return image.read()
+    except Exception as e:
+        logger.error(f"出现错误: {e}")
+
+
+def generate_image_for_director_tools(json_data):
+    """发送 post 请求(For director tools)
+
+    Args:
+        json_data (dict): json 数据
+
+    Returns:
+        (bytes): 二进制图片
+    """
+    try:
+        rep = requests.post(
+            "https://image.novelai.net/ai/augment-image", json=json_data, headers=headers, proxies=proxies
+        )
+        while rep.status_code in [429, 500]:
+            sleep_for_cool(3, 9)
+            rep = requests.post(
+                "https://image.novelai.net/ai/augment-image", json=json_data, headers=headers, proxies=proxies
+            )
+            logger.debug(f">>>>> {rep.status_code}")
+        rep.raise_for_status()
+        logger.success("生成成功!")
+        with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
+            if json_data["req_type"] == "bg-removal":
+                with zip.open("image_0.png") as masked, zip.open("image_1.png") as generated, zip.open(
+                    "image_2.png"
+                ) as blend:
+                    return masked.read(), generated.read(), blend.read()
             with zip.open("image_0.png") as image:
                 return image.read()
     except Exception as e:
@@ -183,6 +228,39 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
         return saved_path
     else:
         return "寄"
+
+
+def save_image_for_director_tools(type_, image_data):
+    """保存图片
+
+    Args:
+        type_ (str): 分类
+        image_data (bytes): 二进制图片
+
+    Returns:
+        saved_path (str): 保存路径
+    """
+    if env.save_path == "默认(Default)":
+        path = ""
+    elif env.save_path == "日期(Date)":
+        path = f"/{date.today()}"
+    else:
+        path = ""
+    saved_path = f"./output/{type_}{path}/{generate_random_str(10)}.png"
+    if not os.path.exists(f"./output/{type_}{path}"):
+        os.mkdir(f"./output/{type_}{path}")
+    if type_ == "bg-removal":
+        saved_paths = []
+        for image in image_data:
+            saved_path = f"./output/{type_}{path}/{generate_random_str(10)}.png"
+            saved_paths.append(saved_path)
+            with open(saved_path, "wb") as file:
+                file.write(image)
+        return saved_paths
+    else:
+        with open(saved_path, "wb") as file:
+            file.write(image_data)
+        return saved_path
 
 
 def inquire_anlas():

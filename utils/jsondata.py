@@ -149,3 +149,51 @@ json_for_vibe = {
         "reference_strength_multiple": list,
     },
 }
+
+
+json_for_remove_bg = {
+    "req_type": "bg-removal",
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+
+json_for_lineart = {
+    "req_type": "lineart",
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+json_for_sketch = {
+    "req_type": "sketch",
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+json_for_declutter = {
+    "req_type": "declutter",
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+json_for_colorize = {
+    "req_type": "colorize",
+    "prompt": str,
+    "defry": int,
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+json_for_emotion = {
+    "req_type": "emotion",
+    "prompt": str,
+    "defry": int,
+    "width": int,
+    "height": int,
+    "image": str,
+}

@@ -14,7 +14,7 @@ except KeyError:
     pass
 
 
-VERSION = "2.19.14"
+VERSION = "2.20.0"
 
 need_dir_list = [
     "./output",
@@ -31,6 +31,12 @@ need_dir_list = [
     "./output/upscale",
     "./output/mosaic",
     "./output/water",
+    "./output/bg-removal",
+    "./output/lineart",
+    "./output/sketch",
+    "./output/declutter",
+    "./output/colorize",
+    "./output/emotion",
     "./files/else_upscale_engine",
     "./files/prompt",
     "./files/prompt/done",

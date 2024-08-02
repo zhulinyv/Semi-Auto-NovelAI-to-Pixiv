@@ -16,6 +16,14 @@ def main():
     from src.batch_vibe_transfer import vibe_by_hand
     from src.batch_waifu2x import main as upscale
     from src.batch_watermark import main as water
+    from src.director_tools import (
+        director_tools_colorize,
+        director_tools_declutter,
+        director_tools_emotion,
+        director_tools_line_art,
+        director_tools_remove_bg,
+        director_tools_sketch,
+    )
     from src.image2image import i2i_by_hand
     from src.image2pixiv import main as pixiv
     from src.movie2movie import m2m, merge_av, video2frame
@@ -781,6 +789,190 @@ def main():
                     logger.success(f" 成功加载插件: {plugin_name}")
                 else:
                     logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
+        # ---------- NAI工具箱 ---------- #
+        with gr.Tab("Director Tools"):
+            gr.Markdown("> Use a variety of AI tools to edit your images.")
+            with gr.Tab("Remove BG"):
+                director_tools_remove_bg_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
+                with gr.Row():
+                    director_tools_remove_bg_image_path = gr.Textbox(label=webui_language["i2i"]["input_path"], scale=3)
+                    director_tools_remove_bg_batch_switch = gr.Checkbox(
+                        False, label=webui_language["i2i"]["open_button"], scale=1
+                    )
+                with gr.Row():
+                    director_tools_remove_bg_image = gr.Image(type="pil")
+                    with gr.Column():
+                        director_tools_remove_bg_output_information = gr.Textbox(
+                            label=webui_language["i2i"]["output_info"]
+                        )
+                        director_tools_remove_bg_output_masked = gr.Image(label="Masked")
+                        director_tools_remove_bg_output_generated = gr.Image(label="Generated")
+                        director_tools_remove_bg_output_blend = gr.Image(label="Blend")
+                director_tools_remove_bg_generate_button.click(
+                    fn=director_tools_remove_bg,
+                    inputs=[
+                        director_tools_remove_bg_image_path,
+                        director_tools_remove_bg_batch_switch,
+                        director_tools_remove_bg_image,
+                    ],
+                    outputs=[
+                        director_tools_remove_bg_output_masked,
+                        director_tools_remove_bg_output_generated,
+                        director_tools_remove_bg_output_blend,
+                        director_tools_remove_bg_output_information,
+                    ],
+                )
+            with gr.Tab("Line Art"):
+                director_tools_lineart_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
+                with gr.Row():
+                    director_tools_lineart_image_path = gr.Textbox(label=webui_language["i2i"]["input_path"], scale=3)
+                    director_tools_lineart_batch_switch = gr.Checkbox(
+                        False, label=webui_language["i2i"]["open_button"], scale=1
+                    )
+                with gr.Row():
+                    director_tools_lineart_image = gr.Image(type="pil")
+                    with gr.Column():
+                        director_tools_lineart_output_information = gr.Textbox(
+                            label=webui_language["i2i"]["output_info"]
+                        )
+                        director_tools_lineart_output_image = gr.Image()
+                director_tools_lineart_generate_button.click(
+                    fn=director_tools_line_art,
+                    inputs=[
+                        director_tools_lineart_image_path,
+                        director_tools_lineart_batch_switch,
+                        director_tools_lineart_image,
+                    ],
+                    outputs=[
+                        director_tools_lineart_output_image,
+                        director_tools_lineart_output_information,
+                    ],
+                )
+            with gr.Tab("Sketch"):
+                director_tools_sketch_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
+                with gr.Row():
+                    director_tools_sketch_image_path = gr.Textbox(label=webui_language["i2i"]["input_path"], scale=3)
+                    director_tools_sketch_batch_switch = gr.Checkbox(
+                        False, label=webui_language["i2i"]["open_button"], scale=1
+                    )
+                with gr.Row():
+                    director_tools_sketch_image = gr.Image(type="pil")
+                    with gr.Column():
+                        director_tools_sketch_output_information = gr.Textbox(
+                            label=webui_language["i2i"]["output_info"]
+                        )
+                        director_tools_sketch_output_image = gr.Image()
+                director_tools_sketch_generate_button.click(
+                    fn=director_tools_sketch,
+                    inputs=[
+                        director_tools_sketch_image_path,
+                        director_tools_sketch_batch_switch,
+                        director_tools_sketch_image,
+                    ],
+                    outputs=[
+                        director_tools_sketch_output_image,
+                        director_tools_sketch_output_information,
+                    ],
+                )
+            with gr.Tab("Colorize"):
+                director_tools_colorize_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
+                with gr.Row():
+                    director_tools_colorize_defry = gr.Slider(0, 5, 0, step=1, label="Defry")
+                    director_tools_colorize_prompt = gr.Textbox(label="Prompt (Optional)")
+                with gr.Row():
+                    director_tools_colorize_image = gr.Image(type="pil")
+                    with gr.Column():
+                        director_tools_colorize_output_image = gr.Image()
+                director_tools_colorize_generate_button.click(
+                    fn=director_tools_colorize,
+                    inputs=[
+                        director_tools_colorize_defry,
+                        director_tools_colorize_prompt,
+                        director_tools_colorize_image,
+                    ],
+                    outputs=director_tools_colorize_output_image,
+                )
+            with gr.Tab("Emotion"):
+                director_tools_emotion_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
+                with gr.Row():
+                    director_tools_emotion_emotion = gr.Dropdown(
+                        [
+                            "Neutral",
+                            "Happy",
+                            "Sad",
+                            "Angry",
+                            "Scared",
+                            "Surprised",
+                            "Tired",
+                            "Excited",
+                            "Nervous",
+                            "Thinking",
+                            "Confused",
+                            "Shy",
+                            "Disgusted",
+                            "Smug",
+                            "Bored",
+                            "Laughing",
+                            "Irritated",
+                            "Aroused",
+                            "Embarrassed",
+                            "Worried",
+                            "Love",
+                            "Determined",
+                            "Hurt",
+                            "Playful",
+                        ],
+                        value="Neutral",
+                        label="Emotion",
+                        scale=1,
+                    )
+                    director_tools_emotion_defry = gr.Dropdown(
+                        ["Normal", "Slightly Weak", "Weak", "Even Weaker", "Very Weak", "Weakest"],
+                        value="Normal",
+                        label="Defry",
+                        scale=1,
+                    )
+                    director_tools_emotion_prompt = gr.Textbox(label="Prompt (Optional)", scale=2)
+                with gr.Row():
+                    director_tools_emotion_image = gr.Image(type="pil")
+                    with gr.Column():
+                        director_tools_emotion_output_image = gr.Image()
+                director_tools_emotion_generate_button.click(
+                    fn=director_tools_emotion,
+                    inputs=[
+                        director_tools_emotion_emotion,
+                        director_tools_emotion_defry,
+                        director_tools_emotion_prompt,
+                        director_tools_emotion_image,
+                    ],
+                    outputs=director_tools_emotion_output_image,
+                )
+            with gr.Tab("Declutter"):
+                director_tools_declutter_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
+                with gr.Row():
+                    director_tools_declutter_image_path = gr.Textbox(label=webui_language["i2i"]["input_path"], scale=3)
+                    director_tools_declutter_batch_switch = gr.Checkbox(
+                        False, label=webui_language["i2i"]["open_button"], scale=1
+                    )
+                with gr.Row():
+                    director_tools_declutter_image = gr.Image(type="pil")
+                    with gr.Column():
+                        director_tools_declutter_output_information = gr.Textbox(
+                            label=webui_language["i2i"]["output_info"]
+                        )
+                        director_tools_declutter_output_image = gr.Image()
+                director_tools_declutter_generate_button.click(
+                    fn=director_tools_declutter,
+                    inputs=[
+                        director_tools_declutter_image_path,
+                        director_tools_declutter_batch_switch,
+                        director_tools_declutter_image,
+                    ],
+                    outputs=[
+                        director_tools_declutter_output_image,
+                        director_tools_declutter_output_information,
+                    ],
+                )
         # ---------- 超分降噪 ---------- #
         with gr.Tab(webui_language["super resolution"]["tab"]):
             with gr.Row():
