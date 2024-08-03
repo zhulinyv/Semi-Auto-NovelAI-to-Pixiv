@@ -232,6 +232,12 @@ This project uses [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) 
 > [!NOTE]
 > Falling, falling.
 
+## 🔊 Declaration
+
+Disclaimer: **This software only provides technical services, and the developer is not responsible for any legal liability or loss that may arise from the user's use of this software, and the user shall be fully responsible for its use of this software and its results**
+
+[**Code of conduct**](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/CODE_OF_CONDUCT.md) | [**Security**](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/SECURITY.md)
+
 <hr>
 <!--img width="500px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34.xxx"></img-->
 
