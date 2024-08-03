@@ -236,7 +236,9 @@
 
 免责声明: **本软件仅提供技术服务，开发者不对用户使用本软件可能引发的任何法律责任或损失承担责任, 用户应对其使用本软件及其结果负全部责任**
 
-[**Code of conduct**](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/CODE_OF_CONDUCT.md) | [**Security**](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/SECURITY.md)
+<p align="center" >
+  <a href="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/CODE_OF_CONDUCT.md"><b>Code of conduct</b></a> | <a href="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/SECURITY.md"><b>Security</b></a>
+</p>
 
 <hr>
 <!--img width="500px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34.xxx"></img-->
