@@ -77,4 +77,4 @@
 如果您有任何关于本安全政策的问题或建议，请通过以下方式联系我们：
 
 - 安全邮箱：[zhulinyv2005@outlook.com]
-- 项目主页：[https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/README_EN.md]
+- 项目主页：[https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv]
