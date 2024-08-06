@@ -192,11 +192,12 @@ def return_pnginfo(image: Image.Image):
             comment = json.loads((pnginfo := extract_data(image))["Comment"])
         pnginfo["Comment"] = json.loads(pnginfo["Comment"])
     except Exception:
-        return None, None, None, None, None, None, None, None, None, None, None
+        return None, None, None, None, None, None, None, None, None, None, None, None
     return (
         comment["prompt"],
         comment["uc"],
-        "{}x{}".format(comment["width"], comment["height"]),
+        str(comment["width"]),
+        str(comment["height"]),
         comment["steps"],
         comment["scale"],
         comment["noise_schedule"],
@@ -209,12 +210,25 @@ def return_pnginfo(image: Image.Image):
 
 
 def _return_pnginfo(
-    positive_input, negative_input, resolution, steps, scale, noise_schedule, sampler, sm, sm_dyn, seed, pnginfo, *image
+    positive_input,
+    negative_input,
+    width,
+    height,
+    steps,
+    scale,
+    noise_schedule,
+    sampler,
+    sm,
+    sm_dyn,
+    seed,
+    pnginfo,
+    *image,
 ):
     metadata = (
         positive_input,
         negative_input,
-        resolution,
+        width,
+        height,
         steps,
         scale,
         noise_schedule,

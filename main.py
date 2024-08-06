@@ -1657,7 +1657,8 @@ def main():
                         pnginfo_positive_input = gr.Textbox(label="正面提示词(Positive Prompt)")
                         pnginfo_negative_input = gr.Textbox(label="负面提示词(Negative Prompt)")
                         with gr.Row():
-                            pnginfo_resolution = gr.Dropdown(choices=RESOLUTION, label="分辨率(Resolution)")
+                            pnginfo_width = gr.Textbox(label="宽(Width)")
+                            pnginfo_height = gr.Textbox(label="高(Height)")
                         pnginfo_steps = gr.Slider(0, 50, step=1, label="采样步数(Steps)")
                         pnginfo_scale = gr.Slider(0, 10, step=0.1, label="提示词相关性(Scale)")
                         with gr.Row():
@@ -1676,7 +1677,8 @@ def main():
                     outputs=[
                         pnginfo_positive_input,
                         pnginfo_negative_input,
-                        pnginfo_resolution,
+                        pnginfo_width,
+                        pnginfo_height,
                         pnginfo_steps,
                         pnginfo_scale,
                         pnginfo_noise_schedule,
@@ -1692,7 +1694,8 @@ def main():
                     inputs=[
                         pnginfo_positive_input,
                         pnginfo_negative_input,
-                        pnginfo_resolution,
+                        pnginfo_width,
+                        pnginfo_height,
                         pnginfo_steps,
                         pnginfo_scale,
                         pnginfo_noise_schedule,
@@ -1704,7 +1707,8 @@ def main():
                     outputs=[
                         text2image_positive_input,
                         text2image_negative_input,
-                        text2image_resolution,
+                        text2image_width,
+                        text2image_height,
                         text2image_steps,
                         text2image_scale,
                         text2image_noise_schedule,
@@ -1719,7 +1723,8 @@ def main():
                     inputs=[
                         pnginfo_positive_input,
                         pnginfo_negative_input,
-                        pnginfo_resolution,
+                        pnginfo_width,
+                        pnginfo_height,
                         pnginfo_steps,
                         pnginfo_scale,
                         pnginfo_noise_schedule,
@@ -1732,7 +1737,8 @@ def main():
                     outputs=[
                         image2image_positive_input,
                         image2image_negative_input,
-                        image2image_resolution,
+                        image2image_width,
+                        image2image_height,
                         image2image_steps,
                         image2image_scale,
                         image2image_noise_schedule,
@@ -1748,7 +1754,8 @@ def main():
                     inputs=[
                         pnginfo_positive_input,
                         pnginfo_negative_input,
-                        pnginfo_resolution,
+                        pnginfo_width,
+                        pnginfo_height,
                         pnginfo_steps,
                         pnginfo_scale,
                         pnginfo_noise_schedule,
@@ -1761,7 +1768,8 @@ def main():
                     outputs=[
                         inpaint_positive_input,
                         inpaint_negative_input,
-                        inpaint_resolution,
+                        inpaint_width,
+                        inpaint_height,
                         inpaint_steps,
                         inpaint_scale,
                         inpaint_noise_schedule,
