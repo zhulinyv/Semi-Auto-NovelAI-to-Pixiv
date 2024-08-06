@@ -9,13 +9,22 @@ from PIL import Image
 from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, revert_img_info
 from utils.jsondata import json_for_t2i
-from utils.utils import format_str, generate_image, list_to_str, read_json, save_image, sleep_for_cool
+from utils.utils import format_str, generate_image, list_to_str, read_json, return_x64, save_image, sleep_for_cool
+
+
+def return_resolution(resolution: str, width: str, height: str):
+    if resolution == "自定义(Custom)":
+        return width, height
+    else:
+        resolution = resolution.split("x")
+        return resolution[0], resolution[1]
 
 
 def t2i_by_hand(
     positive: str,
     negative: str,
-    resolution: str,
+    text2image_width: str,
+    text2image_height: str,
     scale: float,
     sampler: str,
     noise_schedule: str,
@@ -32,8 +41,8 @@ def t2i_by_hand(
             sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
         json_for_t2i["input"] = positive
 
-        json_for_t2i["parameters"]["width"] = int(resolution.split("x")[0])
-        json_for_t2i["parameters"]["height"] = int(resolution.split("x")[1])
+        json_for_t2i["parameters"]["width"] = return_x64(int(text2image_width))
+        json_for_t2i["parameters"]["height"] = return_x64(int(text2image_height))
         json_for_t2i["parameters"]["scale"] = scale
         json_for_t2i["parameters"]["sampler"] = sampler
         json_for_t2i["parameters"]["steps"] = steps

@@ -10,13 +10,14 @@ from PIL import Image
 from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, img_to_base64, revert_img_info
 from utils.jsondata import json_for_vibe
-from utils.utils import file_path2list, generate_image, save_image, sleep_for_cool
+from utils.utils import file_path2list, generate_image, return_x64, save_image, sleep_for_cool
 
 
 def vibe_by_hand(
     positive: str,
     negative: str,
-    resolution: str,
+    vibe_transfer_width: str,
+    vibe_transfer_height: str,
     scale: float,
     sampler: str,
     noise_schedule: str,
@@ -35,8 +36,8 @@ def vibe_by_hand(
 
         json_for_vibe["input"] = positive
 
-        json_for_vibe["parameters"]["width"] = int(resolution.split("x")[0])
-        json_for_vibe["parameters"]["height"] = int(resolution.split("x")[1])
+        json_for_vibe["parameters"]["width"] = return_x64(int(vibe_transfer_width))
+        json_for_vibe["parameters"]["height"] = return_x64(int(vibe_transfer_height))
         json_for_vibe["parameters"]["scale"] = scale
         json_for_vibe["parameters"]["sampler"] = sampler
         json_for_vibe["parameters"]["steps"] = steps

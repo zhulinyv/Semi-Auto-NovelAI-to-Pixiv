@@ -16,6 +16,8 @@ headers = {
     "Sec-Fetch-Site": "same-site",
     "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
 }
+
+
 json_for_t2i = {
     "input": str,
     "model": "nai-diffusion-3",
@@ -47,6 +49,8 @@ json_for_t2i = {
         "reference_strength_multiple": [],
     },
 }
+
+
 json_for_i2i = {
     "input": str,
     "model": "nai-diffusion-3",
@@ -82,6 +86,8 @@ json_for_i2i = {
         "reference_strength_multiple": [],
     },
 }
+
+
 json_for_inpaint = {
     "input": str,
     "model": "nai-diffusion-3-inpainting",
@@ -118,6 +124,8 @@ json_for_inpaint = {
         "reference_strength_multiple": [],
     },
 }
+
+
 json_for_vibe = {
     "input": str,
     "model": "nai-diffusion-3",

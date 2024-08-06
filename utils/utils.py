@@ -108,6 +108,18 @@ def generate_random_str(randomlength):
     return random_str
 
 
+def inquire_anlas():
+    """计算剩余点数
+
+    Returns:
+        (int): 剩余点数数量
+    """
+    rep = requests.get("https://api.novelai.net/user/subscription", headers=headers)
+    if rep.status_code == 200:
+        return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
+    return 0
+
+
 def generate_image(json_data):
     """发送 post 请求
 
@@ -118,10 +130,11 @@ def generate_image(json_data):
         (bytes): 二进制图片
     """
     try:
+        logger.warning(f"剩余点数: {inquire_anlas()}")
         rep = requests.post(
             "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
         )
-        while rep.status_code in [429, 500]:
+        while rep.status_code == 429:
             sleep_for_cool(3, 9)
             rep = requests.post(
                 "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
@@ -146,10 +159,11 @@ def generate_image_for_director_tools(json_data):
         (bytes): 二进制图片
     """
     try:
+        logger.warning(f"剩余点数: {inquire_anlas()}")
         rep = requests.post(
             "https://image.novelai.net/ai/augment-image", json=json_data, headers=headers, proxies=proxies
         )
-        while rep.status_code in [429, 500]:
+        while rep.status_code == 429:
             sleep_for_cool(3, 9)
             rep = requests.post(
                 "https://image.novelai.net/ai/augment-image", json=json_data, headers=headers, proxies=proxies
@@ -261,18 +275,6 @@ def save_image_for_director_tools(type_, image_data):
         with open(saved_path, "wb") as file:
             file.write(image_data)
         return saved_path
-
-
-def inquire_anlas():
-    """计算剩余水晶
-
-    Returns:
-        (int): 剩余水晶数量
-    """
-    rep = requests.get("https://api.novelai.net/user/subscription", headers=headers)
-    if rep.status_code == 200:
-        return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
-    return 0
 
 
 def check_platform():
@@ -388,6 +390,26 @@ def return_random():
     return "-1"
 
 
+def return_x64(int_: int):
+    """返回最接近 64 倍数的整数
+
+    Args:
+        int_ (int): 整数
+
+    Returns:
+        (int): 调整后的整数
+    """
+    if int_ <= 64:
+        int_ = 64
+    elif int_ % 64 == 0:
+        pass
+    elif int_ / 64 % 1 >= 0.5:
+        int_ = (int_ // 64 + 1) * 64
+    else:
+        int_ = (int_ // 64) * 64
+    return int_
+
+
 def get_sign(data: str, key: str):
     key = key.encode("utf-8")
     message = data.encode("utf-8")
@@ -398,7 +420,7 @@ def get_sign(data: str, key: str):
 
 def gen_script(script_type, *args):
     with open("stand_alone_scripts.py", "w", encoding="utf-8") as script:
-        if script_type == "随机涩图":
+        if script_type == "随机蓝图":
             script.write(
                 """import sys
 

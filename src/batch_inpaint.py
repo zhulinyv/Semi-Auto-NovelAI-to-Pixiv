@@ -5,7 +5,7 @@ from loguru import logger
 
 from src.image2image import prepare_json
 from utils.imgtools import change_the_mask_color_to_white, get_img_info, img_to_base64, revert_img_info
-from utils.utils import file_namel2pathl, file_path2list, file_path2name, generate_image, inquire_anlas, save_image
+from utils.utils import file_namel2pathl, file_path2list, file_path2name, generate_image, return_x64, save_image
 
 
 def for_webui(
@@ -15,7 +15,8 @@ def for_webui(
     open_button,
     inpaint_positive_input,
     inpaint_negative_input,
-    inpaint_resolution,
+    inpaint_width,
+    inpaint_height,
     inpaint_sampler,
     inpaint_noise_schedule,
     inpaint_strength,
@@ -26,7 +27,6 @@ def for_webui(
     inpaint_sm_dyn,
     inpaint_seed,
 ):
-    logger.warning(f"剩余水晶: {inquire_anlas()}")
     if open_button:
         main(input_path, mask_path)
         return None, "处理完成, 图片已保存到 ./output/inpaint..."
@@ -41,8 +41,8 @@ def for_webui(
                 {
                     "prompt": inpaint_positive_input,
                     "steps": inpaint_steps,
-                    "height": int(inpaint_resolution.split("x")[1]),
-                    "width": int(inpaint_resolution.split("x")[0]),
+                    "height": return_x64(int(inpaint_height)),
+                    "width": return_x64(int(inpaint_width)),
                     "scale": inpaint_scale,
                     "seed": random.randint(1000000000, 9999999999) if inpaint_seed == "-1" else int(inpaint_seed),
                     "noise_schedule": inpaint_noise_schedule,

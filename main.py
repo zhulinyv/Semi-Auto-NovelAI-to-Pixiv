@@ -29,7 +29,7 @@ def main():
     from src.movie2movie import m2m, merge_av, video2frame
     from src.pnginfo_modify import export_info, remove_info, revert_info
     from src.setting_update import webui as setting
-    from src.text2image_nsfw import t2i, t2i_by_hand
+    from src.text2image_nsfw import return_resolution, t2i, t2i_by_hand
     from src.text2image_sfw import main as batchtxt
     from src.tiled_upscale import tile_upscale
     from utils.imgtools import _return_pnginfo, return_pnginfo
@@ -103,6 +103,15 @@ def main():
                                 value="832x1216",
                                 label=webui_language["t2i"]["resolution"],
                             )
+                            with gr.Row():
+                                text2image_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
+                                text2image_height = gr.Textbox(value="1216", label=webui_language["t2i"]["height"])
+                                text2image_resolution.change(
+                                    return_resolution,
+                                    text2image_resolution,
+                                    outputs=[text2image_width, text2image_height],
+                                    show_progress="hidden",
+                                )
                             text2image_scale = gr.Slider(
                                 minimum=0, maximum=10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
                             )
@@ -133,7 +142,8 @@ def main():
                     inputs=[
                         text2image_positive_input,
                         text2image_negative_input,
-                        text2image_resolution,
+                        text2image_width,
+                        text2image_height,
                         text2image_scale,
                         text2image_sampler,
                         text2image_noise_schedule,
@@ -226,7 +236,7 @@ def main():
                 generate_text2image_nsfw_script_button.click(
                     gen_script,
                     inputs=[
-                        gr.Textbox("随机涩图", visible=False),
+                        gr.Textbox("随机蓝图", visible=False),
                         text2image_nsfw_action_type,
                         text2image_nsfw_action,
                         text2image_nsfw_origin,
@@ -343,6 +353,15 @@ def main():
                                 value="832x1216",
                                 label=webui_language["t2i"]["resolution"],
                             )
+                            with gr.Row():
+                                vibe_transfer_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
+                                vibe_transfer_height = gr.Textbox(value="1216", label=webui_language["t2i"]["height"])
+                                vibe_transfer_resolution.change(
+                                    return_resolution,
+                                    vibe_transfer_resolution,
+                                    outputs=[vibe_transfer_width, vibe_transfer_height],
+                                    show_progress="hidden",
+                                )
                             vibe_transfer_scale = gr.Slider(
                                 minimum=0, maximum=10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
                             )
@@ -370,7 +389,8 @@ def main():
                     inputs=[
                         vibe_transfer_positive_input,
                         vibe_transfer_negative_input,
-                        vibe_transfer_resolution,
+                        vibe_transfer_width,
+                        vibe_transfer_height,
                         vibe_transfer_scale,
                         vibe_transfer_sampler,
                         vibe_transfer_noise_schedule,
@@ -434,6 +454,14 @@ def main():
                                 value="832x1216",
                                 label=webui_language["t2i"]["resolution"],
                             )
+                            image2image_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
+                            image2image_height = gr.Textbox(value="1216", label=webui_language["t2i"]["height"])
+                            image2image_resolution.change(
+                                return_resolution,
+                                image2image_resolution,
+                                outputs=[image2image_width, image2image_height],
+                                show_progress="hidden",
+                            )
                             image2image_sampler = gr.Dropdown(
                                 SAMPLER,
                                 value="k_euler",
@@ -474,7 +502,8 @@ def main():
                             image2image_batch_switch,
                             image2image_positive_input,
                             image2image_negative_input,
-                            image2image_resolution,
+                            image2image_width,
+                            image2image_height,
                             image2image_scale,
                             image2image_sampler,
                             image2image_noise_schedule,
@@ -727,6 +756,14 @@ def main():
                                 value="832x1216",
                                 label=webui_language["t2i"]["resolution"],
                             )
+                            inpaint_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
+                            inpaint_height = gr.Textbox(value="1216", label=webui_language["t2i"]["height"])
+                            inpaint_resolution.change(
+                                return_resolution,
+                                inpaint_resolution,
+                                outputs=[inpaint_width, inpaint_height],
+                                show_progress="hidden",
+                            )
                             inpaint_sampler = gr.Dropdown(
                                 SAMPLER,
                                 value="k_euler",
@@ -768,7 +805,8 @@ def main():
                         inpaint_batch_switch,
                         inpaint_positive_input,
                         inpaint_negative_input,
-                        inpaint_resolution,
+                        inpaint_width,
+                        inpaint_height,
                         inpaint_sampler,
                         inpaint_noise_schedule,
                         inpaint_strength,
