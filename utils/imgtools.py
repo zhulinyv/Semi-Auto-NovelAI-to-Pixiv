@@ -54,11 +54,6 @@ except ModuleNotFoundError:
         return box_list
 
 
-def get_img_info(img_path):
-    with Image.open(img_path) as img:
-        return img.info
-
-
 def img_to_base64(img_path):
     if isinstance(img_path, str):
         pass
@@ -207,6 +202,11 @@ def return_pnginfo(image: Image.Image):
         comment["seed"],
         json.dumps(pnginfo, indent=4, ensure_ascii=False),
     )
+
+
+def get_img_info(img_path):
+    with Image.open(img_path) as img:
+        return (return_pnginfo(img))[-1]
 
 
 def _return_pnginfo(
