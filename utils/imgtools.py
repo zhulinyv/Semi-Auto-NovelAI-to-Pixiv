@@ -206,7 +206,7 @@ def return_pnginfo(image: Image.Image):
 
 def get_img_info(img_path):
     with Image.open(img_path) as img:
-        return (return_pnginfo(img))[-1]
+        return json.loads((return_pnginfo(img))[-1])
 
 
 def _return_pnginfo(

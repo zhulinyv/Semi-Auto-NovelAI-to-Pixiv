@@ -2,7 +2,6 @@ import os
 import random
 from pathlib import Path
 
-import ujson as json
 from loguru import logger
 
 from utils.env import env
@@ -62,7 +61,7 @@ def prepare_json(imginfo: dict, imgpath):
     if imginfo["Software"] != "NovelAI":
         logger.error("不是 NovelAI 生成的图片!")
         return
-    img_comment = json.loads(imginfo["Comment"])
+    img_comment = imginfo["Comment"]
     json_for_i2i["input"] = img_comment["prompt"]
     seed = random.randint(1000000000, 9999999999)
     json_for_i2i["parameters"]["width"] = return_x64(int(img_comment["width"] * env.magnification))

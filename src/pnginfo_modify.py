@@ -93,7 +93,7 @@ def export_info(input_path, output_path):
     for file in file_list:
         logger.info(f"正在导出: {file}...")
         info = get_img_info(f"{input_path}/{file}")
-        prompt = json.loads(info["Comment"])["prompt"]
+        prompt = info["Comment"]["prompt"]
         file = file.replace(".png", ".txt")
         with open(f"{output_path}/{file}", "w", encoding="utf-8") as f:
             f.write(prompt)

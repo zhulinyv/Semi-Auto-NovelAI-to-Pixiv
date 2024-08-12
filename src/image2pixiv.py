@@ -4,7 +4,6 @@ import shutil
 import traceback
 from pathlib import Path
 
-import ujson as json
 from loguru import logger
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
@@ -26,7 +25,7 @@ def upload(image_list, file):
 
     try:
         image_info["Software"] == "NovelAI"
-        img_comment = json.loads(image_info["Comment"])
+        img_comment = image_info["Comment"]
         prompt: str = img_comment["prompt"]
         if env.rep_tags_per == 1:
             caption = env.caption_prefix
