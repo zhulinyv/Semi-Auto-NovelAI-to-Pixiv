@@ -145,12 +145,12 @@ def main(file_path):
                     sleep_for_cool(300, 600)
                     raise UploadTooFastError
                 else:
+                    logger.warning(f"删除 {Path(file_path) / file}...")
                     break
             except Exception:
                 logger.error("出现错误:\n>>>>>")
                 traceback.print_exc()
                 logger.error("<<<<<")
-        logger.warning(f"删除 {Path(file_path) / file}...")
         try:
             os.remove(Path(file_path) / file)
         except NotADirectoryError:
