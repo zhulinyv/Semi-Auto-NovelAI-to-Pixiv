@@ -65,7 +65,7 @@ class Settings(BaseSettings):
     skip_start_sound: bool = False
     skip_load_g4f: bool = False
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(env_file=".env", extra="allow")
 
 
 env = Settings()

@@ -159,7 +159,6 @@ def generate_image_for_director_tools(json_data):
         (bytes): 二进制图片
     """
     try:
-        logger.warning(f"剩余点数: {inquire_anlas()}")
         rep = requests.post(
             "https://image.novelai.net/ai/augment-image", json=json_data, headers=headers, proxies=proxies
         )
@@ -171,6 +170,7 @@ def generate_image_for_director_tools(json_data):
             logger.debug(f">>>>> {rep.status_code}")
         rep.raise_for_status()
         logger.success("生成成功!")
+        logger.warning(f"剩余点数: {inquire_anlas()}")
         with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
             if json_data["req_type"] == "bg-removal":
                 with zip.open("image_0.png") as masked, zip.open("image_1.png") as generated, zip.open(
