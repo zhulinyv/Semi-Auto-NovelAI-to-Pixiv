@@ -56,6 +56,11 @@ def upload(image_list, file):
         logger.error("不是 NovelAI 生成的图片!")
         caption = env.caption_prefix
         img_comment = {"prompt": ""}
+    except TypeError:
+        logger.error("未包含 NovelAI 生成信息!")
+        caption = env.caption_prefix
+        img_comment = {"prompt": ""}
+
     # 标题
     data = read_json("./files/favorite.json")
     name_list = file.replace(".png", "").split("_")

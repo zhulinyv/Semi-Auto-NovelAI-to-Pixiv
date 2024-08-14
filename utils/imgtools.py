@@ -206,7 +206,11 @@ def return_pnginfo(image: Image.Image):
 
 def get_img_info(img_path):
     with Image.open(img_path) as img:
-        return json.loads((return_pnginfo(img))[-1])
+        try:
+            return json.loads((return_pnginfo(img))[-1])
+        except Exception as e:
+            logger.error(f"读取图片生成信息失败: {e}")
+            return None
 
 
 def _return_pnginfo(
