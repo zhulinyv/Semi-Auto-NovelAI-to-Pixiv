@@ -231,13 +231,7 @@ def prepare_json(input_, sm, scale, negative):
     return json_for_t2i, seed
 
 
-times = 0
-
-
 def t2i(forever: bool, action_type, action, origin, character, artists, scale, sm):
-    global times
-    times += 1
-    logger.info(f"正在生成第 {times} 张图片...")
     input_, sm, scale, negative, choose_game, choose_character = prepare_input(
         action_type, action, origin, character, artists, scale, sm
     )
@@ -246,6 +240,10 @@ def t2i(forever: bool, action_type, action, origin, character, artists, scale, s
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
     if forever:
-        return t2i(True, action_type, action, origin, character, artists, scale, sm)
+        times = 0
+        while 1:
+            times += 1
+            logger.info(f"正在生成第 {times} 张图片...")
+            t2i(True, action_type, action, origin, character, artists, scale, sm)
     else:
         return saved_path

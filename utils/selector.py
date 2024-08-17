@@ -64,7 +64,7 @@ def move_current_img(current_img, output_path):
 
 def del_current_img(current_img):
     send2trash.send2trash(current_img)
-    logger.info(f"\n已将 {current_img} 删除")
+    logger.info(f"\n已将 {current_img} 移动到回收站")
     return show_next_img()
 
 

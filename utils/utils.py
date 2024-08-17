@@ -130,7 +130,6 @@ def generate_image(json_data):
         (bytes): 二进制图片
     """
     try:
-        logger.warning(f"剩余点数: {inquire_anlas()}")
         rep = requests.post(
             "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
         )
@@ -142,6 +141,7 @@ def generate_image(json_data):
             logger.debug(f">>>>> {rep.status_code}")
         rep.raise_for_status()
         logger.success("生成成功!")
+        logger.warning(f"剩余点数: {inquire_anlas()}")
         with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
             with zip.open("image_0.png") as image:
                 return image.read()
@@ -422,11 +422,7 @@ def gen_script(script_type, *args):
     with open("stand_alone_scripts.py", "w", encoding="utf-8") as script:
         if script_type == "随机蓝图":
             script.write(
-                """import sys
-
-sys.setrecursionlimit(999999999)
-
-from src.text2image_nsfw import t2i  # noqa: E402
+                """from src.text2image_nsfw import t2i  # noqa: E402
 
 t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
 """.format(
@@ -435,11 +431,7 @@ t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
             )
         elif script_type == "随机图片":
             script.write(
-                """import sys
-
-sys.setrecursionlimit(999999999)
-
-from src.text2image_sfw import main  # noqa: E402
+                """from src.text2image_sfw import main  # noqa: E402
 
 main(True, \"\"\"{}\"\"\", "{}", "{}", "{}", "{}")
 """.format(

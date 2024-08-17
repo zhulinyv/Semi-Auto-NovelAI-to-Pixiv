@@ -89,7 +89,7 @@ def mosaic_lines(img_path):
                 draw.line(
                     xy,
                     fill="black",
-                    width=10,
+                    width=int(10 * 0.35),
                 )
                 y += int(box[3] * 0.15)
         image.save(img_path)
