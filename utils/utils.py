@@ -50,6 +50,10 @@ if env.proxy != "xxx:xxx":
 else:
     proxies = None
 
+if env.proxy != "xxx:xxx":
+    os.environ["http_proxy"] = env.proxy
+    os.environ["https_proxy"] = env.proxy
+
 
 def format_str(str_: str):
     """格式化字符串
@@ -114,10 +118,13 @@ def inquire_anlas():
     Returns:
         (int): 剩余点数数量
     """
-    rep = requests.get("https://api.novelai.net/user/subscription", headers=headers, proxies=proxies)
-    if rep.status_code == 200:
-        return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
-    return 0
+    try:
+        rep = requests.get("https://api.novelai.net/user/subscription", headers=headers, proxies=proxies)
+        if rep.status_code == 200:
+            return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
+        return 0
+    except Exception as e:
+        return str(e)
 
 
 def generate_image(json_data):
