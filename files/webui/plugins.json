@@ -40,5 +40,12 @@
         "description": "还原旧版 vibe 随机出图的功能",
         "url": "https://github.com/zhulinyv/sanp_plugin_random_vibe",
         "author": "[zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_casrand": {
+        "name": "sanp_plugin_casrand",
+        "type": "t2i",
+        "description": "适用于 Semi-Auto-NovelAI-to-Pixiv 的文生图插件, 出图逻辑与 NAI_CasRand 一致",
+        "url": "https://github.com/zhulinyv/sanp_plugin_casrand",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
     }
 }
