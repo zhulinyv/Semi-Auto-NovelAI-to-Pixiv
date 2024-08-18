@@ -7,6 +7,8 @@ import uuid
 import requests
 from loguru import logger
 
+from utils.utils import proxies
+
 
 def keep_alive(task_func, max_retries=50, base_delay=1, max_delay=64):
     retries = 0
@@ -149,12 +151,16 @@ def pixiv_upload(
         "x-csrf-token": x_token,
     }
 
-    post_response = keep_alive(lambda: requests.request("POST", post_url, headers=headers, data=payload, files=files))
+    post_response = keep_alive(
+        lambda: requests.request("POST", post_url, headers=headers, data=payload, files=files, proxies=proxies)
+    )
     if not post_response.json().get("error", True):
         get_url = f"https://www.pixiv.net/ajax/work/create/illustration/progress?convertKey={post_response.json()['body']['convertKey']}&lang=zh"
         illust_id = None
         while not illust_id:
-            status_resp = keep_alive(lambda: requests.request("GET", get_url, headers=headers, data={}))
+            status_resp = keep_alive(
+                lambda: requests.request("GET", get_url, headers=headers, data={}, proxies=proxies)
+            )
             if status_resp.json()["body"]["status"] == "COMPLETE":
                 illust_id = status_resp.json()["body"]["illustId"]
             else:

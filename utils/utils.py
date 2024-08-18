@@ -114,7 +114,7 @@ def inquire_anlas():
     Returns:
         (int): 剩余点数数量
     """
-    rep = requests.get("https://api.novelai.net/user/subscription", headers=headers)
+    rep = requests.get("https://api.novelai.net/user/subscription", headers=headers, proxies=proxies)
     if rep.status_code == 200:
         return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
     return 0
