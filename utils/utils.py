@@ -429,18 +429,32 @@ def gen_script(script_type, *args):
     with open("stand_alone_scripts.py", "w", encoding="utf-8") as script:
         if script_type == "随机蓝图":
             script.write(
-                """from src.text2image_nsfw import t2i  # noqa: E402
+                """from loguru import logger
 
-t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
+from src.text2image_nsfw import t2i
+
+times = 0
+while 1:
+    times += 1
+    info = "正在生成第 " + str(times) + " 张图片..."
+    logger.info(info)
+    t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
 """.format(
                     args[0], args[1], args[2], args[3], args[4], args[5], args[6]
                 )
             )
         elif script_type == "随机图片":
             script.write(
-                """from src.text2image_sfw import main  # noqa: E402
+                """
+                from loguru import logger
+from src.text2image_sfw import main
 
-main(True, \"\"\"{}\"\"\", "{}", "{}", "{}", "{}")
+times = 0
+while 1:
+    times += 1
+    info = "正在生成第 " + str(times) + " 张图片..."
+    logger.info(info)
+    main(True, \"\"\"{}\"\"\", "{}", "{}", "{}", "{}")
 """.format(
                     args[0], args[1], args[2], args[3], args[4]
                 )

@@ -90,10 +90,6 @@ def main(
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
     if forever:
-        times = 0
-        while 1:
-            times += 1
-            logger.info(f"正在生成第 {times} 张图片...")
-            main(True, pref, position)
+        pass
     else:
         return saved_path
