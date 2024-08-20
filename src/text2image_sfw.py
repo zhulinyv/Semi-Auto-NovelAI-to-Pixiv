@@ -2,10 +2,9 @@ import random
 import shutil
 import time
 
-from loguru import logger
-
 from src.text2image_nsfw import prepare_json
 from utils.env import env
+from utils.prepare import logger
 from utils.utils import file_path2list, format_str, generate_image, read_json, read_txt, save_image, sleep_for_cool
 
 

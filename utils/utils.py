@@ -13,11 +13,11 @@ from pathlib import Path
 
 import requests
 import ujson as json
-from loguru import logger
 from PIL import Image
 
 from utils.env import env
 from utils.jsondata import headers
+from utils.prepare import logger
 
 RESOLUTION = [
     "832x1216",
@@ -429,7 +429,7 @@ def gen_script(script_type, *args):
     with open("stand_alone_scripts.py", "w", encoding="utf-8") as script:
         if script_type == "随机蓝图":
             script.write(
-                """from loguru import logger
+                """from utils.prepare import logger
 
 from src.text2image_nsfw import t2i
 
@@ -446,7 +446,7 @@ while 1:
         elif script_type == "随机图片":
             script.write(
                 """
-                from loguru import logger
+                from utils.prepare import logger
 from src.text2image_sfw import main
 
 times = 0

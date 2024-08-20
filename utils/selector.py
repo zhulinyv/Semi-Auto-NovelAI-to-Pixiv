@@ -4,8 +4,8 @@ from pathlib import Path
 
 import numpy as np
 import send2trash
-from loguru import logger
 
+from utils.prepare import logger
 from utils.utils import file_path2list
 
 

@@ -3,7 +3,6 @@ import random
 from pathlib import Path
 
 import ujson as json
-from loguru import logger
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
@@ -11,6 +10,7 @@ from utils.imgtools import get_img_info, revert_img_info
 
 # inject_data 修改自 https://github.com/NovelAI/novelai-image-metadata
 from utils.naimeta import inject_data
+from utils.prepare import logger
 from utils.utils import NOISE_SCHEDULE, RESOLUTION, file_path2list, get_sign
 
 

@@ -3,7 +3,6 @@ import random
 import shutil
 from pathlib import Path
 
-from loguru import logger
 from PIL import Image
 
 from src.batch_waifu2x import run_cmd_
@@ -11,6 +10,7 @@ from src.image2image import i2i_by_hand
 from utils.downloader import download, extract
 from utils.env import env
 from utils.imgtools import crop_image, cut_img_h, cut_img_w, get_concat_h, get_concat_v
+from utils.prepare import logger
 from utils.utils import file_namel2pathl, file_path2abs, file_path2dir, file_path2list, file_path2name
 
 

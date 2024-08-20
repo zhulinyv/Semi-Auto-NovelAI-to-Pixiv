@@ -4,12 +4,12 @@ import time
 from pathlib import Path
 
 import cv2
-from loguru import logger
 from PIL import Image
 
 from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, img_to_base64, revert_img_info
 from utils.jsondata import json_for_vibe
+from utils.prepare import logger
 from utils.utils import file_path2list, generate_image, return_x64, save_image, sleep_for_cool
 
 

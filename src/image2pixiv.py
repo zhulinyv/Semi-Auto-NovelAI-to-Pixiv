@@ -4,7 +4,6 @@ import shutil
 import traceback
 from pathlib import Path
 
-from loguru import logger
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
@@ -15,6 +14,7 @@ from utils.imgtools import get_img_info
 # inject_data 修改自 https://github.com/NovelAI/novelai-image-metadata
 from utils.naimeta import inject_data
 from utils.pixivposter import pixiv_upload
+from utils.prepare import logger
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
 from utils.utils import file_path2list, format_str, list_to_str, read_json, sleep_for_cool

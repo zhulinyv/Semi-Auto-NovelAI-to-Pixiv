@@ -2,8 +2,8 @@ import os
 import zipfile
 
 import requests
-from loguru import logger
 
+from utils.prepare import logger
 from utils.utils import proxies
 
 

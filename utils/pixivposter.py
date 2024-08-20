@@ -5,8 +5,8 @@ import traceback
 import uuid
 
 import requests
-from loguru import logger
 
+from utils.prepare import logger
 from utils.utils import proxies
 
 
@@ -18,7 +18,7 @@ def keep_alive(task_func, max_retries=50, base_delay=1, max_delay=64):
         try:
             return task_func()
         except Exception:
-            logger.error("[保活] 出现错误:\n>>>>>")
+            logger.error("出现错误:\n>>>>>")
             traceback.print_exc()
             logger.error("<<<<<")
             retries += 1
@@ -30,7 +30,7 @@ def keep_alive(task_func, max_retries=50, base_delay=1, max_delay=64):
             delay += random.uniform(0, delay / 3)
             time.sleep(delay)
 
-    logger.error(f"[保活] 保活重试次数用尽 ({max_retries}), 退出.")
+    logger.error(f"重试次数用尽 ({max_retries}), 退出")
 
 
 def pixiv_upload(

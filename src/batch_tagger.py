@@ -1,7 +1,6 @@
 from pathlib import Path
 
-from loguru import logger
-
+from utils.prepare import logger
 from utils.utils import file_namel2pathl, file_path2list, file_path2name
 
 # Dataset v3 series of models:

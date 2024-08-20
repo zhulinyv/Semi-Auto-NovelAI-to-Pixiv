@@ -1,10 +1,10 @@
 import random
 
 import ujson as json
-from loguru import logger
 
 from src.image2image import prepare_json
 from utils.imgtools import change_the_mask_color_to_white, get_img_info, img_to_base64, revert_img_info
+from utils.prepare import logger
 from utils.utils import file_namel2pathl, file_path2list, file_path2name, generate_image, return_x64, save_image
 
 

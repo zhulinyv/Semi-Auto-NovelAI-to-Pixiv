@@ -3,12 +3,12 @@ import random
 import time
 
 import cv2
-from loguru import logger
 from PIL import Image
 
 from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, revert_img_info
 from utils.jsondata import json_for_t2i
+from utils.prepare import logger
 from utils.utils import format_str, generate_image, list_to_str, read_json, return_x64, save_image, sleep_for_cool
 
 

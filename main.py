@@ -1,10 +1,10 @@
 import multiprocessing as mp
 
 import gradio as gr
-from loguru import logger
 
 from utils.env import env
 from utils.gpt4free import main as g4f
+from utils.prepare import logger
 
 
 def main():

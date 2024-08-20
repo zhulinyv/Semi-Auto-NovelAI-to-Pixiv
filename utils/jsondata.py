@@ -1,6 +1,5 @@
-from loguru import logger
-
 from utils.env import env
+from utils.prepare import logger
 
 headers = {
     "Accept": "*/*",

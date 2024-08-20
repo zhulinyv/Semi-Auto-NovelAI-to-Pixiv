@@ -5,6 +5,21 @@ from urllib.request import getproxies
 
 from loguru import logger
 
+VERSION = "2.20.6"
+
+
+format_ = (
+    f"<m>SANP:{VERSION} </m>"
+    "| <c>{time:YY-MM-DD HH:mm:ss}</c> "
+    "| <c>{module}:{line}</c> "
+    "| <level>{level}</level> "
+    "| <level>{message}</level>"
+)
+
+logger.remove()
+logger.add(sys.stdout, format=format_, colorize=True)
+
+
 try:
     proxies = getproxies()
     os.environ["http_proxy"] = proxies["http"]
@@ -13,8 +28,6 @@ try:
 except KeyError:
     pass
 
-
-VERSION = "2.20.5"
 
 need_dir_list = [
     "./output",
@@ -80,7 +93,7 @@ if __name__ == "__main__":
     logger.opt(colors=True).success(
         f"""<c>
 ███████╗ █████╗ ███╗   ██╗██████╗     <y>###################################################</y>
-██╔════╝██╔══██╗████╗  ██║██╔══██╗    <y># This project is completely <r><b><i><u>OPEN SOURCE</u></i></b></r> and <r><b><i><u>FREE</u></i></b></r> #</y>
+██╔════╝██╔══██╗████╗  ██║██╔══██╗    <y># This project is completely <r><i><u>OPEN SOURCE</u></i></r> and <r><i><u>FREE</u></i></r> #</y>
 ███████╗███████║██╔██╗ ██║██████╔╝    <y>###################################################</y>
 ╚════██║██╔══██║██║╚██╗██║██╔═══╝     Version:    {VERSION}
 ███████║██║  ██║██║ ╚████║██║         Author:     https://github.com/zhulinyv

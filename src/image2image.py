@@ -2,11 +2,10 @@ import os
 import random
 from pathlib import Path
 
-from loguru import logger
-
 from utils.env import env
 from utils.imgtools import get_img_info, img_to_base64
 from utils.jsondata import json_for_i2i
+from utils.prepare import logger
 from utils.utils import file_path2list, generate_image, return_x64, save_image, sleep_for_cool
 
 

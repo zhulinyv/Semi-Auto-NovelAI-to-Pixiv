@@ -1,4 +1,3 @@
-from loguru import logger
 from PIL import Image
 
 from utils.imgtools import img_to_base64
@@ -10,6 +9,7 @@ from utils.jsondata import (
     json_for_remove_bg,
     json_for_sketch,
 )
+from utils.prepare import logger
 from utils.utils import (
     file_namel2pathl,
     file_path2list,

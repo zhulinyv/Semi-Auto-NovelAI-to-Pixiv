@@ -1,11 +1,11 @@
 import os
 import shutil
 
-from loguru import logger
 from PIL import Image, ImageDraw
 
 from utils.env import env
 from utils.imgtools import detector, revert_img_info
+from utils.prepare import logger
 from utils.utils import file_namel2pathl, file_path2list, file_path2name
 
 # -------------------- #
