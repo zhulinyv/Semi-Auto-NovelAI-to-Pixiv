@@ -8,7 +8,7 @@ import requests
 try:
     from git import Git
 except Exception:
-    os.environ["PATH"] = os.path.abspath("./Git24521/bin")
+    os.environ["PATH"] = os.path.abspath("./Git23921/cmd")
     from git import Git
 
 from utils.update import update
