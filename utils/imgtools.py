@@ -179,7 +179,9 @@ def change_the_mask_color_to_white(image_path):
         image.save(image_path)
 
 
-def return_pnginfo(image: Image.Image):
+def return_pnginfo(image):
+    if not image:
+        return None, None, None, None, None, None, None, None, None, None, None, None
     try:
         try:
             comment = json.loads((pnginfo := image.info)["Comment"])
