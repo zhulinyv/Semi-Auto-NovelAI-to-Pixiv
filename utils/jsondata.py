@@ -1,6 +1,5 @@
-from loguru import logger
-
 from utils.env import env
+from utils.prepare import logger
 
 headers = {
     "Accept": "*/*",
@@ -16,6 +15,8 @@ headers = {
     "Sec-Fetch-Site": "same-site",
     "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
 }
+
+
 json_for_t2i = {
     "input": str,
     "model": "nai-diffusion-3",
@@ -47,6 +48,8 @@ json_for_t2i = {
         "reference_strength_multiple": [],
     },
 }
+
+
 json_for_i2i = {
     "input": str,
     "model": "nai-diffusion-3",
@@ -82,6 +85,8 @@ json_for_i2i = {
         "reference_strength_multiple": [],
     },
 }
+
+
 json_for_inpaint = {
     "input": str,
     "model": "nai-diffusion-3-inpainting",
@@ -94,7 +99,7 @@ json_for_inpaint = {
         "steps": int,
         "n_samples": 1,
         "strength": float,
-        "noise": 0,
+        "noise": float,
         "ucPreset": 0,
         "qualityToggle": True,
         "sm": bool,
@@ -118,6 +123,8 @@ json_for_inpaint = {
         "reference_strength_multiple": [],
     },
 }
+
+
 json_for_vibe = {
     "input": str,
     "model": "nai-diffusion-3",
@@ -148,4 +155,52 @@ json_for_vibe = {
         "reference_information_extracted_multiple": list,
         "reference_strength_multiple": list,
     },
+}
+
+
+json_for_remove_bg = {
+    "req_type": "bg-removal",
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+
+json_for_lineart = {
+    "req_type": "lineart",
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+json_for_sketch = {
+    "req_type": "sketch",
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+json_for_declutter = {
+    "req_type": "declutter",
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+json_for_colorize = {
+    "req_type": "colorize",
+    "prompt": str,
+    "defry": int,
+    "width": int,
+    "height": int,
+    "image": str,
+}
+
+json_for_emotion = {
+    "req_type": "emotion",
+    "prompt": str,
+    "defry": int,
+    "width": int,
+    "height": int,
+    "image": str,
 }

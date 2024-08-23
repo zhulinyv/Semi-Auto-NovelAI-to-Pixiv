@@ -3,7 +3,6 @@ import random
 import shutil
 from pathlib import Path
 
-from loguru import logger
 from PIL import Image
 
 from src.batch_waifu2x import run_cmd_
@@ -11,6 +10,7 @@ from src.image2image import i2i_by_hand
 from utils.downloader import download, extract
 from utils.env import env
 from utils.imgtools import crop_image, cut_img_h, cut_img_w, get_concat_h, get_concat_v
+from utils.prepare import logger
 from utils.utils import file_namel2pathl, file_path2abs, file_path2dir, file_path2list, file_path2name
 
 
@@ -147,7 +147,9 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
     merged_image.close()
 
     logger.warning("删除临时目录...")
-    for dir in [tiles_dir, cuth_dir, mergev_dir, row_dir, cutw_dir, mergeh_dir, i2i_dir]:
-        shutil.rmtree(dir)
+    for dir_ in [tiles_dir, cuth_dir, mergev_dir, row_dir, cutw_dir, mergeh_dir, i2i_dir]:
+        shutil.rmtree(dir_)
+
+    logger.success("放大完成!")
 
     return dir / file_path2name(img_path).replace(".png", "_tile_upscale.png")

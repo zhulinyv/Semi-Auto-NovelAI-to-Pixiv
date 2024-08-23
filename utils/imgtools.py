@@ -1,14 +1,15 @@
 import base64
-import os
-import shutil
 from pathlib import Path, WindowsPath
 
 import ujson as json
-from loguru import logger
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
 from utils.env import env
+
+# extract_data 修改自 https://github.com/NovelAI/novelai-image-metadata
+from utils.naimeta import extract_data
+from utils.prepare import logger
 from utils.utils import file_path2name
 
 try:
@@ -39,9 +40,7 @@ except ModuleNotFoundError:
     def detector(image):
         nude_detector = NudeDetector()
         # 这个库不能使用中文文件名
-        if os.path.exists("./output/temp.png"):
-            os.remove("./output/temp.png")
-        shutil.copyfile(image, "./output/temp.png")
+        # 写重复了, batch_mosaic 里已经写过了
         box_list = []
         body = nude_detector.detect("./output/temp.png")
         for part in body:
@@ -53,11 +52,6 @@ except ModuleNotFoundError:
                 h = part["box"][3]
                 box_list.append([x, y, w, h])
         return box_list
-
-
-def get_img_info(img_path):
-    with Image.open(img_path) as img:
-        return img.info
 
 
 def img_to_base64(img_path):
@@ -101,8 +95,12 @@ def revert_img_info(img_path, output_dir, *args):
                 new_img.save(output_dir, pnginfo=metadata)
             logger.success("还原成功!")
         except Exception:
+            with Image.open(output_dir) as new_img:
+                new_img.save(output_dir)
             logger.error("还原失败!")
     else:
+        with Image.open(output_dir) as new_img:
+            new_img.save(output_dir)
         logger.warning("还原图片信息操作已关闭, 如有需要请在配置项中设置 revert_info=True")
 
 
@@ -166,3 +164,95 @@ def cut_img_h(path, otp_path):
         crop_img.save(Path(otp_path) / name.replace(".png", "_l.png"))
         crop_img = img.crop((w / 2, 0, w, h))
         crop_img.save(Path(otp_path) / name.replace(".png", "_r.png"))
+
+
+def change_the_mask_color_to_white(image_path):
+    with Image.open(image_path) as image:
+        image_array = image.load()
+        width, height = image.size
+        for x in range(0, width):
+            for y in range(0, height):
+                rgba = image_array[x, y]
+                r, g, b, a = rgba
+                if a != 0:
+                    image_array[x, y] = (255, 255, 255)
+        image.save(image_path)
+
+
+def return_pnginfo(image: Image.Image):
+    try:
+        try:
+            comment = json.loads((pnginfo := image.info)["Comment"])
+        except Exception:
+            comment = json.loads((pnginfo := extract_data(image))["Comment"])
+        pnginfo["Comment"] = json.loads(pnginfo["Comment"])
+    except Exception:
+        return (
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            json.dumps(pnginfo, indent=4, ensure_ascii=False),
+        )
+    return (
+        comment["prompt"],
+        comment["uc"],
+        str(comment["width"]),
+        str(comment["height"]),
+        comment["steps"],
+        comment["scale"],
+        comment["noise_schedule"],
+        comment["sampler"],
+        comment["sm"],
+        comment["sm_dyn"],
+        comment["seed"],
+        json.dumps(pnginfo, indent=4, ensure_ascii=False),
+    )
+
+
+def get_img_info(img_path):
+    with Image.open(img_path) as img:
+        try:
+            return json.loads((return_pnginfo(img))[-1])
+        except Exception as e:
+            logger.error(f"读取图片生成信息失败: {e}")
+            return None
+
+
+def _return_pnginfo(
+    positive_input,
+    negative_input,
+    width,
+    height,
+    steps,
+    scale,
+    noise_schedule,
+    sampler,
+    sm,
+    sm_dyn,
+    seed,
+    pnginfo,
+    *image,
+):
+    metadata = (
+        positive_input,
+        negative_input,
+        width,
+        height,
+        steps,
+        scale,
+        noise_schedule,
+        sampler,
+        sm,
+        sm_dyn,
+        seed,
+        pnginfo,
+    )
+    return metadata if not image else metadata + (image[0],)

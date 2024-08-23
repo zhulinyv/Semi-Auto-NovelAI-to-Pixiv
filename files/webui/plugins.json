@@ -19,5 +19,33 @@
         "description": "从 SD 移植过来的插件: maple的tag选择器",
         "url": "https://github.com/zhulinyv/sanp_plugin_maple_from_fall_and_flower",
         "author": "[maple-flowers](https://github.com/maple-flowers), [zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_draw_inpaint": {
+        "name": "sanp_plugin_draw_inpaint",
+        "type": "inpaint",
+        "description": "适用于 Semi-Auto-NovelAI-to-Pixiv 涂鸦重绘插件",
+        "url": "https://github.com/zhulinyv/sanp_plugin_draw_inpaint",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_image_compression": {
+        "name": "sanp_plugin_image_compression",
+        "type": "webui",
+        "description": "批量将图片压缩, 同时支持整理为 excel 表格",
+        "url": "https://github.com/zhulinyv/sanp_plugin_image_compression",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_random_vibe": {
+        "name": "sanp_plugin_random_vibe",
+        "type": "t2i",
+        "description": "还原旧版 vibe 随机出图的功能",
+        "url": "https://github.com/zhulinyv/sanp_plugin_random_vibe",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_casrand": {
+        "name": "sanp_plugin_casrand",
+        "type": "t2i",
+        "description": "适用于 Semi-Auto-NovelAI-to-Pixiv 的文生图插件, 出图逻辑与 NAI_CasRand 一致",
+        "url": "https://github.com/zhulinyv/sanp_plugin_casrand",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
     }
 }

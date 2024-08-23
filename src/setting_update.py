@@ -64,6 +64,7 @@ def webui(
     webui_lang,
     skip_update_check,
     skip_start_sound,
+    skip_load_g4f,
 ):
     position = str(water_position)
     position = position.replace("'", '"')
@@ -74,7 +75,7 @@ def webui(
     else:
         pass
     otp_info = modify_env(
-        token=f'"{token}"',
+        token=f'"{token}"'.replace("\n", ""),
         img_size=img_size,
         scale=scale,
         censor=censor,
@@ -118,5 +119,6 @@ def webui(
         webui_lang=f'"{webui_lang}"',
         skip_update_check=skip_update_check,
         skip_start_sound=skip_start_sound,
+        skip_load_g4f=skip_load_g4f,
     )
     return otp_info

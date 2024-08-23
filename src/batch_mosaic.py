@@ -1,10 +1,11 @@
+import os
 import shutil
 
-from loguru import logger
 from PIL import Image, ImageDraw
 
 from utils.env import env
 from utils.imgtools import detector, revert_img_info
+from utils.prepare import logger
 from utils.utils import file_namel2pathl, file_path2list, file_path2name
 
 # -------------------- #
@@ -88,9 +89,9 @@ def mosaic_lines(img_path):
                 draw.line(
                     xy,
                     fill="black",
-                    width=10,
+                    width=int(10 * 0.35),
                 )
-                y += int(box[3] * 0.2)
+                y += int(box[3] * 0.15)
         image.save(img_path)
         revert_img_info(None, img_path, image.info)
 
@@ -101,26 +102,23 @@ def mosaic_lines(img_path):
 def main(file_path, input_img, open_button, mode):
     if open_button:
         file_list = file_namel2pathl(file_path2list(file_path), file_path)
-        for file in file_list:
-            logger.info(f"正在处理 {file_path2name(file)}...")
-            if mode == "pixel":
-                mosaic_pixel(file)
-            elif mode == "blurry":
-                mosaic_blurry(file)
-            elif mode == "lines":
-                mosaic_lines(file)
-            shutil.move(file, f"./output/mosaic/{file_path2name(file)}")
-            logger.success("处理完成!")
-        return None, "处理完成! 图片已保存到 ./output/mosaic"
     else:
-        input_img.save("./output/temp.png")
-        input_img = "./output/temp.png"
-        logger.info(f"正在处理 {input_img}...")
+        input_img.save("./output/_temp.png")
+        file_list = ["./output/_temp.png"]
+    for file in file_list:
+        logger.info(f"正在处理 {file_path2name(file)}...")
+        if os.path.exists("./output/temp.png"):
+            os.remove("./output/temp.png")
+        shutil.copyfile(file, "./output/temp.png")
         if mode == "pixel":
-            mosaic_pixel(input_img)
+            mosaic_pixel("./output/temp.png")
         elif mode == "blurry":
-            mosaic_blurry(input_img)
+            mosaic_blurry("./output/temp.png")
         elif mode == "lines":
-            mosaic_lines(input_img)
+            mosaic_lines("./output/temp.png")
         logger.success("处理完成!")
-        return "./output/temp.png", None
+        if open_button:
+            shutil.copyfile("./output/temp.png", f"./output/mosaic/{file_path2name(file)}")
+        else:
+            os.remove("./output/_temp.png")
+    return "./output/temp.png", "处理完成! 图片已保存到 ./output/mosaic"

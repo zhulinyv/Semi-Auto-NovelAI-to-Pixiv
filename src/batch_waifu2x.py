@@ -1,11 +1,10 @@
 import os
 import subprocess
 
-from loguru import logger
-
 from utils.downloader import download, extract
 from utils.error import VideoCardError, Waifu2xError
 from utils.imgtools import revert_img_info
+from utils.prepare import logger
 from utils.utils import check_platform, file_path2abs, file_path2list
 
 

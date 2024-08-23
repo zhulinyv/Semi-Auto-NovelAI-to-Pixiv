@@ -1,9 +1,15 @@
 import importlib.util
 import os
 import shutil
+import sys
 
 import requests
-from git import Git
+
+try:
+    from git import Git
+except Exception:
+    os.environ["PATH"] = os.path.abspath("./Git23921/cmd")
+    from git import Git
 
 from utils.update import update
 from utils.utils import file_path2list, proxies, read_json
@@ -12,7 +18,7 @@ from utils.utils import file_path2list, proxies, read_json
 def get_plugin_list():
     try:
         plugins: dict = requests.get(
-            "https://raw.githubusercontent.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/dev/files/webui/plugins.json",
+            "https://raw.githubusercontent.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/main/files/webui/plugins.json",
             proxies=proxies,
         ).json()
     except Exception:
@@ -23,6 +29,7 @@ def get_plugin_list():
 def load_plugins(directory):
     plugins = {}
     plugin_list = file_path2list(directory)
+    # 示例插件和测试插件放到最后加载
     if "sanp_plugin_example" in plugin_list:
         plugin_list.remove("sanp_plugin_example")
         plugin_list.append("sanp_plugin_example")
@@ -33,6 +40,8 @@ def load_plugins(directory):
         if plugin.endswith(".py"):
             location = os.path.join(directory, plugin)
         elif plugin != "__pycache__":
+            if os.path.exists(requirements_path := os.path.join(directory, plugin, "requirements.txt")):
+                os.system(f"{sys.executable} -s -m pip install -r {requirements_path}")
             location = os.path.join(directory, plugin, "__init__.py")
         else:
             location = None

@@ -5,28 +5,22 @@ import traceback
 import uuid
 
 import requests
-from loguru import logger
+
+from utils.prepare import logger
+from utils.utils import proxies
 
 
 def keep_alive(task_func, max_retries=50, base_delay=1, max_delay=64):
-    def format_traceback(exc_traceback, indent="  ", limit=None):
-        stack = traceback.extract_tb(exc_traceback)
-        formatted_traceback = ""
-        if limit is not None:
-            stack = stack[-limit:]
-        for filename, line_no, func_name, text in reversed(stack):
-            formatted_traceback += f"{indent}File '{filename}', line {line_no}, in {func_name}\n"
-            formatted_traceback += f"{indent}{indent}{text}\n"
-        return formatted_traceback
-
     retries = 0
     delay = base_delay
 
     while retries < max_retries:
         try:
             return task_func()
-        except Exception as e:
-            logger.warning(f"[保活] 致命错误追踪:\n{format_traceback(e.__traceback__, limit=3)}")
+        except Exception:
+            logger.error("出现错误:\n>>>>>")
+            traceback.print_exc()
+            logger.error("<<<<<")
             retries += 1
             # 指数增长
             if retries > 5:
@@ -36,7 +30,7 @@ def keep_alive(task_func, max_retries=50, base_delay=1, max_delay=64):
             delay += random.uniform(0, delay / 3)
             time.sleep(delay)
 
-    logger.error(f"[保活] 保活重试次数用尽 ({max_retries}), 退出.")
+    logger.error(f"重试次数用尽 ({max_retries}), 退出")
 
 
 def pixiv_upload(
@@ -157,23 +151,27 @@ def pixiv_upload(
         "x-csrf-token": x_token,
     }
 
-    post_response = keep_alive(lambda: requests.request("POST", post_url, headers=headers, data=payload, files=files))
+    post_response = keep_alive(
+        lambda: requests.request("POST", post_url, headers=headers, data=payload, files=files, proxies=proxies)
+    )
     if not post_response.json().get("error", True):
         get_url = f"https://www.pixiv.net/ajax/work/create/illustration/progress?convertKey={post_response.json()['body']['convertKey']}&lang=zh"
         illust_id = None
         while not illust_id:
-            status_resp = keep_alive(lambda: requests.request("GET", get_url, headers=headers, data={}))
+            status_resp = keep_alive(
+                lambda: requests.request("GET", get_url, headers=headers, data={}, proxies=proxies)
+            )
             if status_resp.json()["body"]["status"] == "COMPLETE":
                 illust_id = status_resp.json()["body"]["illustId"]
             else:
                 time.sleep(1)
         time.sleep(1)
-        logger.success(f"\n上传成功, PID: {illust_id}")
+        logger.success(f"上传成功, PID: {illust_id}")
         return illust_id
     else:
         if post_response.json()["body"].get("errors", {}).get("gRecaptchaResponse"):
-            logger.warning("\n上传暂停: 投稿冷却中")
+            logger.warning("上传暂停: 投稿冷却中")
             return 2
         else:
-            logger.error(f"\n上传失败: {post_response.text}")
+            logger.error(f"上传失败: {post_response.text}")
             return 1

@@ -1,7 +1,6 @@
 from pathlib import Path
 
-from loguru import logger
-
+from utils.prepare import logger
 from utils.utils import file_namel2pathl, file_path2list, file_path2name
 
 # Dataset v3 series of models:
@@ -66,7 +65,8 @@ def tagger(
         if str(img).endswith(".txt"):
             pass
         else:
-            while 1:
+            times = 0
+            while times < 5:
                 try:
                     logger.info(f"正在反推: {img}...")
                     result = client.predict(
@@ -81,8 +81,10 @@ def tagger(
                     if batch:
                         with open(Path(path) / file_path2name(img).replace(".png", ".txt"), "w", encoding="utf-8") as f:
                             f.write(result[0])
+                    logger.success("反推成功!")
                     break
                 except Exception as e:
                     logger.error(f"出现错误: {e}")
                     logger.info("正在重试...")
+                    times += 1
     return result[0], format_dict(result[1]), format_dict(result[2]), format_dict(result[3])

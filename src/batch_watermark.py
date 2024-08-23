@@ -1,11 +1,11 @@
 import random
 from pathlib import Path
 
-from loguru import logger
 from PIL import Image, ImageFilter
 
 from utils.env import env
 from utils.imgtools import revert_img_info
+from utils.prepare import logger
 from utils.utils import file_path2list
 
 

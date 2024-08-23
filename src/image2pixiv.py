@@ -1,17 +1,20 @@
+import os
 import random
+import shutil
 import traceback
 from pathlib import Path
 
-import ujson as json
-from loguru import logger
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
 from utils.env import env
 from utils.error import UploadError, UploadTooFastError
 from utils.imgtools import get_img_info
+
+# inject_data 修改自 https://github.com/NovelAI/novelai-image-metadata
 from utils.naimeta import inject_data
 from utils.pixivposter import pixiv_upload
+from utils.prepare import logger
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
 from utils.utils import file_path2list, format_str, list_to_str, read_json, sleep_for_cool
@@ -22,7 +25,7 @@ def upload(image_list, file):
 
     try:
         image_info["Software"] == "NovelAI"
-        img_comment = json.loads(image_info["Comment"])
+        img_comment = image_info["Comment"]
         prompt: str = img_comment["prompt"]
         if env.rep_tags_per == 1:
             caption = env.caption_prefix
@@ -38,21 +41,26 @@ def upload(image_list, file):
             caption = env.caption_prefix + "\n----------\n" + prompt
 
         if env.remove_info:
-            metadata = PngInfo()
-            metadata.add_text("None", env.meta_data)
-            for file_ in image_list:
-                logger.warning(f"正在清除 {file_} 的元数据...")
-                with Image.open(file_) as img:
+            for image in image_list:
+                metadata = PngInfo()
+                metadata.add_text("None", env.meta_data)
+                logger.warning(f"正在清除 {image} 的元数据...")
+                with Image.open(image) as img:
                     img = inject_data(
                         img, metadata, ["Title", "Description ", "Software", "Source", "Generation time", "Comment"]
                     )
-                    img.save(file_)
+                    img.save(image)
                 logger.success("清除成功!")
 
     except KeyError:
         logger.error("不是 NovelAI 生成的图片!")
         caption = env.caption_prefix
         img_comment = {"prompt": ""}
+    except TypeError:
+        logger.error("未包含 NovelAI 生成信息!")
+        caption = env.caption_prefix
+        img_comment = {"prompt": ""}
+
     # 标题
     data = read_json("./files/favorite.json")
     name_list = file.replace(".png", "").split("_")
@@ -141,6 +149,11 @@ def main(file_path):
                     sleep_for_cool(300, 600)
                     raise UploadTooFastError
                 else:
+                    logger.warning(f"删除 {Path(file_path) / file}...")
+                    try:
+                        shutil.rmtree(Path(file_path) / file)
+                    except NotADirectoryError:
+                        os.remove(Path(file_path) / file)
                     break
             except Exception:
                 logger.error("出现错误:\n>>>>>")

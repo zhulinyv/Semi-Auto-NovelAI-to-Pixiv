@@ -2,14 +2,16 @@
     "title": "# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 带有 WebUI 的 NovelAI 量产工具",
     "t2i": {
         "tab": "文生图",
-        "description": "> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 500(服务器负载过高), 429(请求过快), 443(节点不稳定), 反正不是我的问题 ヾ(≧▽≦*)o",
+        "description": "> 等同于使用 NovelAI 官网, 支持你喜欢的画风串. 如果未返回图片, 多半是 5xx(服务器负载过高), 429(请求过快), 443(节点不稳定), 反正不是我的问题 ヾ(≧▽≦*)o",
         "open_folder": "打开保存目录",
         "script_gen": "生成独立脚本",
         "generate_button": "开始生成",
         "times": "生成数量",
         "positive": "正面提示词",
         "negative": "负面提示词",
-        "resolution": "分辨率(宽x高)(大分辨率请注意水晶消耗)",
+        "resolution": "分辨率",
+        "width": "宽",
+        "height": "高",
         "scale": "提示词相关性",
         "sampler": "采样器",
         "noise_schedule": "噪声计划表",
@@ -26,22 +28,25 @@
         "noise": "添加噪声"
     },
     "random blue picture": {
-        "tab": "随机涩图",
-        "description": "> 通过随机组合 ./files/favorite.json 中的 tag 生成一张涩图",
+        "tab": "随机蓝图",
+        "description": "> 通过随机组合 ./files/favorite.json 中的 tag 生成一张蓝图",
         "generate_forever": "无限生成",
         "stop_button": "停止生成"
     },
     "random picture": {
         "tab": "随机图片",
-        "description": "> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片",
+        "description": "> 通过读取 ./file/prompt 中的 *.txt 作为提示词生成一张图片, 随机抽取的画风请查看配置设置界面其它部分中的关于随机蓝图",
         "pref": "追加的提示词",
-        "position": "追加位置"
+        "position": "追加位置",
+        "text2image_sfw_random_artists_top_switch": "随机抽取画风并加入到最前",
+        "text2image_sfw_random_artists_last_switch": "随机抽取画风并加入到最后",
+        "text2image_sfw_prevent_to_move_switch": "阻止生成后移动提示词文件"
     },
     "inpaint": {
         "tab": "局部重绘",
-        "description": "> 通过蒙版对图片重绘(重绘区域为白色, 其余透明而不是黑色)",
+        "description": "> 通过蒙版对图片重绘(先点击重绘图片组件下方的图片按钮上传图片, 在点击绘画按钮进行局部涂抹)",
         "input_path": "批量处理图片路径(仅在本程序运行的电脑生效)",
-        "mask_path": "批量处理蒙版路径(仅在本程序运行的电脑生效)",
+        "mask_path": "批量处理蒙版路径(重绘区域为白色, 其余透明而不是黑色)",
         "inpaint_img": "重绘图片",
         "inpaint_mask": "重绘蒙版"
     },
@@ -87,8 +92,8 @@
         "next_button": "跳过(↓)",
         "move_button": "移动1(←)",
         "move_button_": "移动2(→)",
-        "copy_button": "复制1(C)",
-        "copy_button_": "复制2(V)",
+        "copy_button": "复制1",
+        "copy_button_": "复制2",
         "del_button": "删除(↑)"
     },
     "rm png info": {
@@ -100,10 +105,15 @@
         "info_file_path": "图片信息文件目录",
         "input_path": "待还原图片目录",
         "save_path": "保存目录",
-        "choose_to_rm": "选择要清除的内容"
+        "choose_to_rm": "选择要清除的内容",
+        "remove_pnginfo_metadate": "清除图片数据后自定义添加的元数据",
+        "remove_pnginfo_data_cloaking_switch": "伪造信息(清除时保留原格式)"
     },
     "maigic analysis": {
-        "tab": "法术解析"
+        "tab": "法术解析",
+        "pnginfo_send2text2image_button": "发送到文生图",
+        "pnginfo_send2image2image_button": "发送到图生图",
+        "pnginfo_send2inpaint_button": "发送到局部重绘"
     },
     "example": {
         "positive": "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,",
@@ -166,7 +176,8 @@
             "warning": "检测到已开启分享链接, 隐藏部分隐私配置!",
             "skip_update_check": "跳过更新检查",
             "proxy": "生成图片使用的代理",
-            "skip_start_sound": "跳过启动提示音"
+            "skip_start_sound": "跳过启动提示音",
+            "skip_load_g4f": "跳过加载 g4f(GPT)"
         }
     },
     "info": {
@@ -174,7 +185,7 @@
     },
     "vibe": {
         "input_imgs": "作为基底的图片路径",
-        "blue_imgs": "随机涩图"
+        "blue_imgs": "随机蓝图"
     },
     "m2m": {
         "tab": "视频转绘",

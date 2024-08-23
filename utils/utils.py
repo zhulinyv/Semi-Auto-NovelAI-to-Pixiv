@@ -1,3 +1,5 @@
+import base64
+import hmac
 import io
 import os
 import platform
@@ -5,16 +7,17 @@ import random
 import time
 import zipfile
 from datetime import date
+from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
 
 import requests
 import ujson as json
-from loguru import logger
 from PIL import Image
 
 from utils.env import env
 from utils.jsondata import headers
+from utils.prepare import logger
 
 RESOLUTION = [
     "832x1216",
@@ -47,6 +50,10 @@ if env.proxy != "xxx:xxx":
 else:
     proxies = None
 
+if env.proxy != "xxx:xxx":
+    os.environ["http_proxy"] = env.proxy
+    os.environ["https_proxy"] = env.proxy
+
 
 def format_str(str_: str):
     """格式化字符串
@@ -58,9 +65,9 @@ def format_str(str_: str):
         str_: 格式化后的字符串
     """
     str_ = str_.replace(", ", ",")
+    str_ = str_.replace(",,", ",")
     str_ = str_.replace(",", ", ")
-    str_ = str_.replace(", , , ", ", ")
-    str_ = str_.replace(", , ", ", ")
+    str_ = str_.replace(", ,", ", ")
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
 
@@ -93,6 +100,33 @@ def sleep_for_cool(int1, int2):
     return f"等待 {sleep_time} 秒后继续..."
 
 
+def generate_random_str(randomlength):
+    """
+    生成一个指定长度的随机字符串
+    """
+    random_str = ""
+    base_str = "ABCDEFGHIGKLMNOPQRSTUVWXYZabcdefghigklmnopqrstuvwxyz0123456789"
+    length = len(base_str) - 1
+    for i in range(randomlength):
+        random_str += base_str[random.randint(0, length)]
+    return random_str
+
+
+def inquire_anlas():
+    """计算剩余点数
+
+    Returns:
+        (int): 剩余点数数量
+    """
+    try:
+        rep = requests.get("https://api.novelai.net/user/subscription", headers=headers, proxies=proxies)
+        if rep.status_code == 200:
+            return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
+        return 0
+    except Exception as e:
+        return str(e)
+
+
 def generate_image(json_data):
     """发送 post 请求
 
@@ -106,7 +140,7 @@ def generate_image(json_data):
         rep = requests.post(
             "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
         )
-        while rep.status_code in [429, 500]:
+        while rep.status_code == 429:
             sleep_for_cool(3, 9)
             rep = requests.post(
                 "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
@@ -114,7 +148,42 @@ def generate_image(json_data):
             logger.debug(f">>>>> {rep.status_code}")
         rep.raise_for_status()
         logger.success("生成成功!")
+        logger.warning(f"剩余点数: {inquire_anlas()}")
         with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
+            with zip.open("image_0.png") as image:
+                return image.read()
+    except Exception as e:
+        logger.error(f"出现错误: {e}")
+
+
+def generate_image_for_director_tools(json_data):
+    """发送 post 请求(For director tools)
+
+    Args:
+        json_data (dict): json 数据
+
+    Returns:
+        (bytes): 二进制图片
+    """
+    try:
+        rep = requests.post(
+            "https://image.novelai.net/ai/augment-image", json=json_data, headers=headers, proxies=proxies
+        )
+        while rep.status_code == 429:
+            sleep_for_cool(3, 9)
+            rep = requests.post(
+                "https://image.novelai.net/ai/augment-image", json=json_data, headers=headers, proxies=proxies
+            )
+            logger.debug(f">>>>> {rep.status_code}")
+        rep.raise_for_status()
+        logger.success("生成成功!")
+        logger.warning(f"剩余点数: {inquire_anlas()}")
+        with zipfile.ZipFile(io.BytesIO(rep.content), mode="r") as zip:
+            if json_data["req_type"] == "bg-removal":
+                with zip.open("image_0.png") as masked, zip.open("image_1.png") as generated, zip.open(
+                    "image_2.png"
+                ) as blend:
+                    return masked.read(), generated.read(), blend.read()
             with zip.open("image_0.png") as image:
                 return image.read()
     except Exception as e:
@@ -182,16 +251,37 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
         return "寄"
 
 
-def inquire_anlas():
-    """计算剩余水晶
+def save_image_for_director_tools(type_, image_data):
+    """保存图片
+
+    Args:
+        type_ (str): 分类
+        image_data (bytes): 二进制图片
 
     Returns:
-        (int): 剩余水晶数量
+        saved_path (str): 保存路径
     """
-    rep = requests.get("https://api.novelai.net/user/subscription", headers=headers)
-    if rep.status_code == 200:
-        return rep.json()["trainingStepsLeft"]["fixedTrainingStepsLeft"]
-    return 0
+    if env.save_path == "默认(Default)":
+        path = ""
+    elif env.save_path == "日期(Date)":
+        path = f"/{date.today()}"
+    else:
+        path = ""
+    saved_path = f"./output/{type_}{path}/{generate_random_str(10)}.png"
+    if not os.path.exists(f"./output/{type_}{path}"):
+        os.mkdir(f"./output/{type_}{path}")
+    if type_ == "bg-removal":
+        saved_paths = []
+        for image in image_data:
+            saved_path = f"./output/{type_}{path}/{generate_random_str(10)}.png"
+            saved_paths.append(saved_path)
+            with open(saved_path, "wb") as file:
+                file.write(image)
+        return saved_paths
+    else:
+        with open(saved_path, "wb") as file:
+            file.write(image_data)
+        return saved_path
 
 
 def check_platform():
@@ -307,43 +397,68 @@ def return_random():
     return "-1"
 
 
+def return_x64(int_: int):
+    """返回最接近 64 倍数的整数
+
+    Args:
+        int_ (int): 整数
+
+    Returns:
+        (int): 调整后的整数
+    """
+    if int_ <= 64:
+        int_ = 64
+    elif int_ % 64 == 0:
+        pass
+    elif int_ / 64 % 1 >= 0.5:
+        int_ = (int_ // 64 + 1) * 64
+    else:
+        int_ = (int_ // 64) * 64
+    return int_
+
+
+def get_sign(data: str, key: str):
+    key = key.encode("utf-8")
+    message = data.encode("utf-8")
+    sign = base64.b64encode(hmac.new(key, message, digestmod=sha256).digest())
+    sign = str(sign, "utf-8")
+    return sign
+
+
 def gen_script(script_type, *args):
     with open("stand_alone_scripts.py", "w", encoding="utf-8") as script:
-        if script_type == "随机涩图":
+        if script_type == "随机蓝图":
             script.write(
-                """import sys
+                """from utils.prepare import logger
 
-sys.setrecursionlimit(999999999)
+from src.text2image_nsfw import t2i
 
-from src.text2image_nsfw import t2i  # noqa: E402
-
-t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
+times = 0
+while 1:
+    times += 1
+    info = "正在生成第 " + str(times) + " 张图片..."
+    logger.info(info)
+    t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
 """.format(
                     args[0], args[1], args[2], args[3], args[4], args[5], args[6]
                 )
             )
         elif script_type == "随机图片":
             script.write(
-                """import sys
+                """
+                from utils.prepare import logger
+from src.text2image_sfw import main
 
-sys.setrecursionlimit(999999999)
-
-from src.text2image_sfw import main  # noqa: E402
-
-main(True, \"\"\"{}\"\"\", "{}")
-""".format(
-                    args[0], args[1]
-                )
-            )
-        elif script_type == "vibe":
-            script.write(
-                """from src.batch_vibe_transfer import vibe
-
+times = 0
 while 1:
-    vibe({}, "{}")
+    times += 1
+    info = "正在生成第 " + str(times) + " 张图片..."
+    logger.info(info)
+    main(True, \"\"\"{}\"\"\", "{}", "{}", "{}", "{}")
 """.format(
-                    args[0], args[1]
+                    args[0], args[1], args[2], args[3], args[4]
                 )
             )
         else:
             ...
+    logger.success("生成成功, 运行 run_stand_alone_scripts.bat 即可独立执行该操作")

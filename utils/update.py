@@ -1,6 +1,12 @@
+import os
 from pathlib import Path
 
-import git
+try:
+    import git
+except Exception:
+    os.environ["PATH"] = os.path.abspath("./Git24521/bin")
+    import git
+
 import requests
 from git.exc import InvalidGitRepositoryError
 
@@ -12,15 +18,16 @@ from utils.utils import proxies
 def check_update():
     if env.skip_update_check:
         return ""
-    data = requests.get(
-        "https://api.github.com/repos/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commits", proxies=proxies
-    ).json()
-    if not isinstance(data, list):
-        return "Version: xxxxxxx  Error | 检查失败"
+    try:
+        data = requests.get(
+            "https://api.github.com/repos/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commits", proxies=proxies
+        ).json()
+    except Exception:
+        return "Version: Error  网络连接失败"
     try:
         repo = git.Repo(Path().absolute())
     except InvalidGitRepositoryError:
-        return "Version: xxxxxxx  Error | 检查失败"
+        return "Version: Error  不是GIT仓库"
     local_commit = repo.head.commit
     remote_commit = []
     for commit in data:

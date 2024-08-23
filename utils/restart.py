@@ -1,7 +1,7 @@
 import os
 import sys
 
-from loguru import logger
+from utils.prepare import logger
 
 
 def restart():

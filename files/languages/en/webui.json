@@ -2,14 +2,16 @@
     "title": "# [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv) | 带有 WebUI 的 NovelAI 量产工具",
     "t2i": {
         "tab": "Txt2Img",
-        "description": "> Equivalent to using NovelAI official website, supporting your favorite style combination. If no image is returned, it's mostly due to 500 (server overload), 429 (request too fast), 443 (unstable node), anyway, it's not my problem ヾ(≧▽≦*)o",
+        "description": "> Equivalent to using NovelAI official website, supporting your favorite style combination. If no image is returned, it's mostly due to 5xx (server overload), 429 (request too fast), 443 (unstable node), anyway, it's not my problem ヾ(≧▽≦*)o",
         "open_folder": "Open imgs saved folder",
         "script_gen": "Generate stand alone scripts",
         "generate_button": "Start Generating",
         "times": "Generation Quantity",
         "positive": "Positive Prompts",
         "negative": "Negative Prompts",
-        "resolution": "Resolution (Width x Height) (Be cautious of crystal consumption for high resolutions)",
+        "resolution": "Resolution",
+        "width": "Width",
+        "height": "Height",
         "scale": "Prompt Relevance",
         "sampler": "Sampler",
         "noise_schedule": "Noise Schedule",
@@ -33,15 +35,18 @@
     },
     "random picture": {
         "tab": "Random Picture",
-        "description": "> Generates a picture using *.txt files in ./file/prompt as prompts",
+        "description": "> Generates a picture using *.txt files in ./file/prompt as prompts, for a random selection of art styles, please refer to About Random Astringency in other sections of the configuration settings interface",
         "pref": "Additional Prompts",
-        "position": "Addition Position"
+        "position": "Addition Position",
+        "text2image_sfw_random_artists_top_switch": "Randomly select the art style and add it to the top",
+        "text2image_sfw_random_artists_last_switch": "Randomly select the art style and add it to the end",
+        "text2image_sfw_prevent_to_move_switch": "Prevents prompt files from being moved after generation"
     },
     "inpaint": {
         "tab": "Inpaint",
-        "description": "> Redraws images using masks (redrawn area is white, remaining is transparent instead of black)",
+        "description": "> Redraws images using masks (First, click the image button below the repaint component to upload the image, and then click the paint button to apply a topic)",
         "input_path": "Batch Processing Image Path (Effective only on the computer where this program runs)",
-        "mask_path": "Batch Processing Mask Path (Effective only on the computer where this program runs)",
+        "mask_path": "Batch Processing Mask Path (redrawn area is white, remaining is transparent instead of black)",
         "inpaint_img": "Redraw Image",
         "inpaint_mask": "Redraw Mask"
     },
@@ -87,6 +92,8 @@
         "next_button": "Skip(↓)",
         "move_button": "Move 1(←)",
         "move_button_": "Move 2(→)",
+        "copy_button": "Copy 1",
+        "copy_button_": "Copy 2",
         "del_button": "Delete(↑)"
     },
     "rm png info": {
@@ -98,10 +105,15 @@
         "info_file_path": "Image Information File Directory",
         "input_path": "Directory of Images to Be Restored",
         "save_path": "Saved path",
-        "choose_to_rm": "Choose sth to rm"
+        "choose_to_rm": "Choose sth to rm",
+        "remove_pnginfo_metadate": "Custom metadata after removing the pnginfo",
+        "remove_pnginfo_data_cloaking_switch": "Falsified information (purged in its original format)"
     },
     "maigic analysis": {
-        "tab": "Magic Analysis"
+        "tab": "Magic Analysis",
+        "pnginfo_send2text2image_button": "Send to T2I",
+        "pnginfo_send2image2image_button": "Send to I2I",
+        "pnginfo_send2inpaint_button": "Send to Inapint"
     },
     "example": {
         "positive": "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,",
@@ -164,7 +176,8 @@
             "warning": "Detected shared link enabled, some privacy configurations are hidden!",
             "skip_update_check": "Skip the update check",
             "proxy": "The proxy when generate pictures",
-            "skip_start_sound": "Skip start sound"
+            "skip_start_sound": "Skip start sound",
+            "skip_load_g4f": "Skip load g4f"
         }
     },
     "info": {

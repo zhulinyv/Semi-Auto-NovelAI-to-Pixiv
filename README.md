@@ -23,10 +23,11 @@
 |:---:|:---:|:---:|:---:|
 | 教程说明 | 本项目的介绍及使用教程 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/15.png?raw=true) | 请仔细阅读 |
 |  文生图  | 使用 Gradio 为 NovelAI 写的一个用户界面, 除了界面不同, 其它完全等同于使用 NovelAI 网站 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/1.png?raw=true) | 生成的图片将保存到 `./output/t2i` 文件夹 |
-| 随机涩图 | 通过随机组合 `./files/favorite.json` 中的 tag 生成一张涩图或无限生成涩图, 负面提示词将随机选择 favorite.json negative belief 中的负面提示词, 其它参数将使用 env 配置 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/3.png?raw=true) | 关于随机涩图的配置, 请查看 WebUI 配置设置页面的其它部分 |
+| 随机蓝图 | 通过随机组合 `./files/favorite.json` 中的 tag 生成一张蓝图或无限生成蓝图, 负面提示词将随机选择 favorite.json negative belief 中的负面提示词, 其它参数将使用 env 配置 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/3.png?raw=true) | 关于固定项目, 后三个文本框需要填写 favorite.json 中对应的键值, 当填写**固定动作**或**固定角色**时, 需要对应的**动作类型**和**出处**, **留空时随机**, 关于随机蓝图的配置, 请查看 WebUI 配置设置页面的其它部分 |
 | 随机图片 | 通过读取 `./file/prompt` 中的 `*.txt` 文件并追加输入的提示词作为提示词无限生成图片, 负面提示词将随机选择 favorite.json negative belief 中的负面提示词, 其它参数将使用 env 配置, 当文件夹下的所有 `*.txt` 文件均生成过一次后或点击停止生成后, 则将停止运行 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/4.png?raw=true) | 关于随机图片的配置, 请查看 WebUI 配置设置页面的其它部分 |
-|   Vibe   | 等同于使用 NovelAI 网站, 我为它添加了批量功能 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/16.png?raw=true) | 需要准备一些图片到同一文件夹, 图片名称需要重命名为 `(任意(不含下划线)_(信息提取强度, 浮点型(0, 1))_(参考强度, 浮点型(0, 1)).png)` 的格式, 例如 `hoshino-hinata_1.0_0.6`, 勾选随机涩图时, 无限生成将按照随机涩图的模式生成, 未勾选时, 无限生成将按照随机图片的方式生成 |
+|   Vibe   | 等同于使用 NovelAI 网站, 我为它添加了批量功能 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/16.png?raw=true) | 需要准备一些图片到同一文件夹, 图片名称需要重命名为 `(任意(不含下划线)_(信息提取强度, 浮点型(0, 1))_(参考强度, 浮点型(0, 1)).png)` 的格式, 例如 `hoshino-hinata_1.0_0.6`|
 |  图生图  | 等同于使用 NovelAI 网站, 支持任何图片, 另外, 我为它添加了批量图生图 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/2.png?raw=true) | 生成的图片将保存到 `./output/i2i` 文件夹, 但会在 `./output` 文件夹内生成一张名为 `temp.png` 的临时图片, 可以删除, 批量处理时, 请将图片放到同一个文件夹, 例如: `./output/choose_to_i2i` |
+| 导演工具 | 使用不用的 AI 工具来编辑你的图片 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/21.png?raw=true) | 完全等同于官网, 我为它添加了批量功能 |
 | 视频转绘 | 将视频用几个步骤重绘, 用于将三次元转绘为二次元 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/18.png?raw=true) | 实验性功能, 欢迎提出建议 |
 | 分块重绘 | 将一张大图拆分成 640x640 的小块, 然后将这些小块用图生图的方式放大为 1024x1024, 不需要担心两张图片衔接过硬, 我使用鸣谢列表中的开源项目修复接缝 [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/19.png?raw=true) | 由于耗时较长, 目前仅开放单张放大, 使用时需要提供图片或图片路径(任选其一) |
 | 局部重绘 | 仅支持 NovelAI 生成的图片, 并且需要上传蒙版, 支持批量操作 | ![image](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/images/5.png?raw=true) | 上传的蒙版应为: 重绘区域为白色, 其余透明而不是黑色, 分辨率等于重绘图像, 批量操作时, 请将图片和蒙版放置于两个文件夹, 并且保证图片和蒙版文件名相同, 例如: `./output/inpaint/img`, `./output/inpaint/mask`, 生成的图片将保存到 `./output/inpaint` |
@@ -48,7 +49,7 @@
 
 - 实现动态加载插件, 提高本项目可扩展性!
 
-- 已提交到商店的插件: [插件列表](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/plugins.json)
+- 已提交到商店的插件: [插件列表](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/files/webui/plugins.json)
 
 > [!TIP]
 > 我独自一人走在湿滑泥泞的街头, 身旁只有寥寥几盏路灯在暗夜中孤寂地闪烁。
@@ -92,6 +93,12 @@
 #### 4️⃣ 接下来的路
 
 - 现在你可以直接运行项目根目录下的 `run.bat` 来启动 WebUI, 首次启动会自动创建虚拟环境并安装依赖, 耗时较长, 可以去冲杯咖啡或继续看下方的文档
+
+#### 5️⃣ 整合包下载
+
+如果上述操作你觉得难以上手或出现问题, 请加群咨询或下载整合包 [Semi-Auto-NovelAI-to-Pixiv.7z](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/releases/download/modpack/Semi-Auto-NovelAI-to-Pixiv.7z)
+
+解压即用, 整合包用户请运行 `整合包启动(Modpack launcher).bat`
 
 > [!TIP]
 > 月光透过稀疏的云层，洒在地面上，勾勒出一幅幽冥的画卷。
@@ -145,7 +152,7 @@
 + [x] 批量文生图
 + [x] 批量图生图
 + [x] 批量上传 Pixiv
-+ [x] 计算剩余水晶
++ [x] 计算剩余点数
 + [x] 批量 [waifu2x](https://github.com/nagadomi/waifu2x)
 + [x] 批量局部重绘
 + [x] ~~批量 vibe~~
@@ -162,7 +169,7 @@
 + [x] 批量图片信息处理
 + [x] 配置项界面
 + [x] 打开相关文件夹功能
-+ [x] 合并随机涩图等界面
++ [x] 合并随机蓝图等界面
 + [x] 热键快速筛图
 + [x] 教程和说明页面
 + [x] 自定义插件
@@ -193,8 +200,18 @@
 + [x] 插件列表读取远程仓库
 + [x] 插件更新与卸载
 + [x] 图片筛选添加复制操作
-+ [ ] 整合包
++ [x] 整合包
 + [x] 新增打码方式
++ [x] 局部重绘优化蒙版上传
++ [x] 涂鸦重绘
++ [ ] ~~局部放大重绘~~
++ [x] 图片压缩与分类整理
++ [ ] vibe 保存风格
++ [x] 回退 vibe 随机图
++ [ ] 简化 favorite.json 编辑
++ [ ] 学习 js 写一个自动补全
++ [ ] 简化 vibe 图片上传
++ [x] 自定义分辨率
 + [ ] ...
 
 </details>
@@ -202,8 +219,6 @@
 ## 🤝 鸣谢
 
 本项目使用 [waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) | [Anime4KCPP](https://github.com/TianZerL/Anime4KCPP) | [realcugan-ncnn-vulkan](https://github.com/nihui/realcugan-ncnn-vulkan/) | [realesrgan-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan) | [realsr-ncnn-vulkan](https://github.com/nihui/realsr-ncnn-vulkan/) | [srmd-cuda](https://github.com/MrZihan/Super-resolution-SR-CUDA) | [srmd-ncnn-vulkan](https://github.com/nihui/srmd-ncnn-vulkan) | [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe) | [waifu2x-converter](https://github.com/DeadSix27/waifu2x-converter-cpp) 降噪和放大图片
-
-本项目使用 [stable-diffusion-inspector](https://spell.novelai.dev/) 解析图片元数据
 
 本项目使用 [Genshin-Sync](https://huggingface.co/spaces/AppleHarem/Genshin-Sync/tree/main) 上传图片至 Pixiv
 
@@ -217,6 +232,14 @@
 
 > [!NOTE]
 > 坠落, 坠落。
+
+## 🔊 声明
+
+免责声明: **本软件仅提供技术服务，开发者不对用户使用本软件可能引发的任何法律责任或损失承担责任, 用户应对其使用本软件及其结果负全部责任**
+
+<p align="center" >
+  <a href="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/CODE_OF_CONDUCT.md"><b>Code of conduct</b></a> | <a href="https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/SECURITY.md"><b>Security</b></a>
+</p>
 
 <hr>
 <!--img width="500px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34.xxx"></img-->
