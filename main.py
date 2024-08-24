@@ -1481,9 +1481,9 @@ def main():
                         mosaic_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
                         mosaic_output_image = gr.Image(scale=2)
             gr.Markdown(webui_language["mosaic"]["yolo"])
-            gr.Markdown("```\n.\\venv\\Scripts\\activate\npip install -U ultralytics```")
+            gr.Markdown("```\n.\\venv\\Scripts\\activate\npip install ultralytics==8.2.50```")
             gr.Markdown(
-                """整合包用户(For Modpack):\n\n```.\\Python310\\python.exe -s -m pip install -U ultralytics```"""
+                """整合包用户(For Modpack):\n\n```.\\Python310\\python.exe -s -m pip install ultralytics==8.2.50```"""
             )
             mosaic_generate_button_pixel.click(
                 fn=mosaic,
