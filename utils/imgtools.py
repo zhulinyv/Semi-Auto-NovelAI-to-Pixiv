@@ -189,20 +189,23 @@ def return_pnginfo(image):
             comment = json.loads((pnginfo := extract_data(image))["Comment"])
         pnginfo["Comment"] = json.loads(pnginfo["Comment"])
     except Exception:
-        return (
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            json.dumps(pnginfo, indent=4, ensure_ascii=False),
-        )
+        try:
+            return (
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                json.dumps(pnginfo, indent=4, ensure_ascii=False),
+            )
+        except Exception:
+            return None, None, None, None, None, None, None, None, None, None, None, None
     return (
         comment["prompt"],
         comment["uc"],
