@@ -231,9 +231,9 @@ def prepare_json(input_, sm, scale, negative):
     return json_for_t2i, seed
 
 
-def t2i(forever: bool, action_type, action, origin, character, artists, scale, sm):
+def t2i(forever: bool, action_type, action, origin, character, artists, scale):
     input_, sm, scale, negative, choose_game, choose_character = prepare_input(
-        action_type, action, origin, character, artists, scale, sm
+        action_type, action, origin, character, artists, scale, env.sm
     )
     json_for_t2i, seed = prepare_json(input_, sm, scale, negative)
     saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, choose_game, choose_character)

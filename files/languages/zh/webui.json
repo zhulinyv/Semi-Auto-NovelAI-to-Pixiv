@@ -123,8 +123,7 @@
         "tab": "配置设置",
         "sub_tab": {
             "necessary": "Token",
-            "t2i": "文生图",
-            "i2i": "图生图",
+            "t2i": "图片生成",
             "pixiv": "上传 Pixiv",
             "mosaic": "马赛克",
             "eraser": "抹除信息",
@@ -133,7 +132,7 @@
         },
         "description": {
             "token": "生成图片需要的 token",
-            "img_size": "生成图片的分辨率",
+            "img_size": "生成图片的分辨率(大分辨率注意点数消耗)",
             "scale": "提示词相关性",
             "censor": "是否对生成的图片打码",
             "sampler": "采样器",

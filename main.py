@@ -100,12 +100,18 @@ def main():
                         with gr.Column(scale=1):
                             text2image_resolution = gr.Dropdown(
                                 RESOLUTION,
-                                value="832x1216",
+                                value="832x1216" if env.img_size == -1 else env.img_size,
                                 label=webui_language["t2i"]["resolution"],
                             )
                             with gr.Row():
-                                text2image_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
-                                text2image_height = gr.Textbox(value="1216", label=webui_language["t2i"]["height"])
+                                text2image_width = gr.Textbox(
+                                    value=((env.img_size).split("x"))[0] if env.img_size != -1 else "832",
+                                    label=webui_language["t2i"]["width"],
+                                )
+                                text2image_height = gr.Textbox(
+                                    value=((env.img_size).split("x"))[1] if env.img_size != -1 else "1216",
+                                    label=webui_language["t2i"]["height"],
+                                )
                                 text2image_resolution.change(
                                     return_resolution,
                                     text2image_resolution,
@@ -113,27 +119,29 @@ def main():
                                     show_progress="hidden",
                                 )
                             text2image_scale = gr.Slider(
-                                minimum=0, maximum=10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
+                                minimum=0, maximum=10, value=env.scale, step=0.1, label=webui_language["t2i"]["scale"]
                             )
                             text2image_sampler = gr.Dropdown(
                                 SAMPLER,
-                                value="k_euler",
+                                value=env.sampler,
                                 label=webui_language["t2i"]["sampler"],
                             )
                             text2image_noise_schedule = gr.Dropdown(
                                 NOISE_SCHEDULE,
-                                value="native",
+                                value=env.noise_schedule,
                                 label=webui_language["t2i"]["noise_schedule"],
                             )
                             text2image_steps = gr.Slider(
-                                minimum=0, maximum=50, value=28, step=1, label=webui_language["t2i"]["steps"]
+                                minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                             )
-                            text2image_sm = gr.Radio([True, False], value=False, label="sm")
+                            text2image_sm = gr.Radio([True, False], value=env.sm, label="sm")
                             text2image_sm_dyn = gr.Radio(
-                                [True, False], value=False, label=webui_language["t2i"]["smdyn"]
+                                [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
                             )
                             with gr.Row():
-                                text2image_seed = gr.Textbox(value="-1", label=webui_language["t2i"]["seed"], scale=7)
+                                text2image_seed = gr.Textbox(
+                                    value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
+                                )
                                 text2image_random_seed = gr.Button(value="♻️", size="sm", scale=1)
                                 text2image_random_seed.click(return_random, inputs=None, outputs=text2image_seed)
                         text2image_output_image = gr.Image(scale=2)
@@ -164,11 +172,9 @@ def main():
                         generate_text2image_nsfw_script_button = gr.Button(webui_language["t2i"]["script_gen"])
                 with gr.Row():
                     text2image_nsfw_artists = gr.Textbox(None, label="固定画风(Artist)", scale=4, lines=3)
-                    with gr.Column(scale=1):
-                        text2image_nsfw_scale = gr.Slider(
-                            0, 10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
-                        )
-                        text2image_nsfw_sm = gr.Checkbox(False, label="sm")
+                    text2image_nsfw_scale = gr.Slider(
+                        0, 10, value=env.scale, step=0.1, label=webui_language["t2i"]["scale"], scale=1
+                    )
                 with gr.Row():
                     text2image_nsfw_action_type = gr.Dropdown(
                         ["随机(Random)", "巨乳", "普通", "自慰"],
@@ -199,7 +205,6 @@ def main():
                         text2image_nsfw_character,
                         text2image_nsfw_artists,
                         text2image_nsfw_scale,
-                        text2image_nsfw_sm,
                     ],
                     outputs=text2image_nsfw_forever_output_image,
                     show_progress="hidden",
@@ -214,7 +219,6 @@ def main():
                         text2image_nsfw_character,
                         text2image_nsfw_artists,
                         text2image_nsfw_scale,
-                        text2image_nsfw_sm,
                     ],
                     outputs=text2image_nsfw_output_image,
                 )
@@ -228,7 +232,6 @@ def main():
                         text2image_nsfw_character,
                         text2image_nsfw_artists,
                         text2image_nsfw_scale,
-                        text2image_nsfw_sm,
                     ],
                     outputs=text2image_nsfw_forever_output_image,
                 )
@@ -243,7 +246,6 @@ def main():
                         text2image_nsfw_character,
                         text2image_nsfw_artists,
                         text2image_nsfw_scale,
-                        text2image_nsfw_sm,
                     ],
                     outputs=None,
                 )
@@ -350,12 +352,18 @@ def main():
                         with gr.Column(scale=1):
                             vibe_transfer_resolution = gr.Dropdown(
                                 RESOLUTION,
-                                value="832x1216",
+                                value="832x1216" if env.img_size == -1 else env.img_size,
                                 label=webui_language["t2i"]["resolution"],
                             )
                             with gr.Row():
-                                vibe_transfer_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
-                                vibe_transfer_height = gr.Textbox(value="1216", label=webui_language["t2i"]["height"])
+                                vibe_transfer_width = gr.Textbox(
+                                    value=((env.img_size).split("x"))[0] if env.img_size != -1 else "832",
+                                    label=webui_language["t2i"]["width"],
+                                )
+                                vibe_transfer_height = gr.Textbox(
+                                    value=((env.img_size).split("x"))[1] if env.img_size != -1 else "1216",
+                                    label=webui_language["t2i"]["height"],
+                                )
                                 vibe_transfer_resolution.change(
                                     return_resolution,
                                     vibe_transfer_resolution,
@@ -363,26 +371,26 @@ def main():
                                     show_progress="hidden",
                                 )
                             vibe_transfer_scale = gr.Slider(
-                                minimum=0, maximum=10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
+                                minimum=0, maximum=10, value=env.scale, step=0.1, label=webui_language["t2i"]["scale"]
                             )
                             vibe_transfer_sampler = gr.Dropdown(
                                 SAMPLER,
-                                value="k_euler",
+                                value=env.sampler,
                                 label=webui_language["t2i"]["sampler"],
                             )
                             vibe_transfer_noise_schedule = gr.Dropdown(
                                 NOISE_SCHEDULE,
-                                value="native",
+                                value=env.noise_schedule,
                                 label=webui_language["t2i"]["noise_schedule"],
                             )
                             vibe_transfer_steps = gr.Slider(
-                                minimum=0, maximum=50, value=28, step=1, label=webui_language["t2i"]["steps"]
+                                minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                             )
-                            vibe_transfer_sm = gr.Radio([True, False], value=False, label="sm")
+                            vibe_transfer_sm = gr.Radio([True, False], value=env.sm, label="sm")
                             vibe_transfer_sm_dyn = gr.Radio(
-                                [True, False], value=False, label=webui_language["t2i"]["smdyn"]
+                                [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
                             )
-                            vibe_transfer_seed = gr.Textbox(value="-1", label=webui_language["t2i"]["seed"])
+                            vibe_transfer_seed = gr.Textbox(value=str(env.seed), label=webui_language["t2i"]["seed"])
                         vibe_transfer_output_image = gr.Image(scale=2)
                 vibe_transfer_generate_button.click(
                     fn=vibe_by_hand,
@@ -451,7 +459,7 @@ def main():
                         with gr.Row():
                             image2image_resolution = gr.Dropdown(
                                 RESOLUTION,
-                                value="832x1216",
+                                value="832x1216" if env.img_size == -1 else env.img_size,
                                 label=webui_language["t2i"]["resolution"],
                             )
                             image2image_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
@@ -464,34 +472,44 @@ def main():
                             )
                             image2image_sampler = gr.Dropdown(
                                 SAMPLER,
-                                value="k_euler",
+                                value=env.sampler,
                                 label=webui_language["t2i"]["sampler"],
                             )
                             image2image_noise_schedule = gr.Dropdown(
                                 NOISE_SCHEDULE,
-                                value="native",
+                                value=env.noise_schedule,
                                 label=webui_language["t2i"]["noise_schedule"],
                             )
                         with gr.Row():
                             image2image_strength = gr.Slider(
-                                minimum=0, maximum=1, value=0.5, step=0.1, label=webui_language["i2i"]["strength"]
+                                minimum=0,
+                                maximum=1,
+                                value=env.hires_strength,
+                                step=0.1,
+                                label=webui_language["i2i"]["strength"],
                             )
                             image2image_noise = gr.Slider(
-                                minimum=0, maximum=1, value=0, step=0.1, label=webui_language["i2i"]["noise"]
+                                minimum=0,
+                                maximum=1,
+                                value=env.hires_noise,
+                                step=0.1,
+                                label=webui_language["i2i"]["noise"],
                             )
                             image2image_scale = gr.Slider(
-                                minimum=0, maximum=10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
+                                minimum=0, maximum=10, value=env.scale, step=0.1, label=webui_language["t2i"]["scale"]
                             )
                             image2image_steps = gr.Slider(
-                                minimum=0, maximum=50, value=28, step=1, label=webui_language["t2i"]["steps"]
+                                minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                             )
                         with gr.Row():
-                            image2image_sm = gr.Radio([True, False], value=False, label="sm", scale=2)
+                            image2image_sm = gr.Radio([True, False], value=env.sm, label="sm", scale=2)
                             image2image_sm_dyn = gr.Radio(
-                                [True, False], value=False, label=webui_language["t2i"]["smdyn"], scale=2
+                                [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
                             )
                             with gr.Column(scale=1):
-                                image2image_seed = gr.Textbox(value="-1", label=webui_language["t2i"]["seed"], scale=7)
+                                image2image_seed = gr.Textbox(
+                                    value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
+                                )
                                 image2image_random_button = gr.Button(value="♻️", size="sm", scale=1)
                                 image2image_random_button.click(return_random, inputs=None, outputs=image2image_seed)
                     image2image_generate_button.click(
@@ -579,14 +597,14 @@ def main():
                     )
                     movie2movie_resolution = gr.Dropdown(
                         RESOLUTION,
-                        value="832x1216",
+                        value="832x1216" if env.img_size == -1 else env.img_size,
                         label=webui_language["t2i"]["resolution"],
                     )
                     movie2movie_scale = gr.Slider(
-                        minimum=0, maximum=10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
+                        minimum=0, maximum=10, value=env.scale, step=0.1, label=webui_language["t2i"]["scale"]
                     )
                     movie2movie_steps = gr.Slider(
-                        minimum=0, maximum=50, value=28, step=1, label=webui_language["t2i"]["steps"]
+                        minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                     )
                     movie2movie_strength = gr.Slider(
                         minimum=0, maximum=1, value=0.5, step=0.1, label=webui_language["i2i"]["strength"]
@@ -596,19 +614,21 @@ def main():
                     )
                     movie2movie_sampler = gr.Dropdown(
                         SAMPLER,
-                        value="k_euler",
+                        value=env.sampler,
                         label=webui_language["t2i"]["sampler"],
                     )
                     movie2movie_noise_schedule = gr.Dropdown(
                         NOISE_SCHEDULE,
-                        value="native",
+                        value=env.noise_schedule,
                         label=webui_language["t2i"]["noise_schedule"],
                     )
                     with gr.Row():
-                        movie2movie_sm = gr.Radio([True, False], value=False, label="sm")
+                        movie2movie_sm = gr.Radio([True, False], value=env.sm, label="sm")
                         movie2movie_sm_dyn = gr.Radio([True, False], value=False, label="smdyn")
                         with gr.Row():
-                            movie2movie_seed = gr.Textbox(value="-1", label=webui_language["t2i"]["seed"], scale=7)
+                            movie2movie_seed = gr.Textbox(
+                                value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
+                            )
                             movie2movie_random_button = gr.Button(value="♻️", size="sm", scale=1)
                             movie2movie_random_button.click(return_random, inputs=None, outputs=movie2movie_seed)
                     movie2movie_generate_button.click(
@@ -753,7 +773,7 @@ def main():
                         with gr.Row():
                             inpaint_resolution = gr.Dropdown(
                                 RESOLUTION,
-                                value="832x1216",
+                                value="832x1216" if env.img_size == -1 else env.img_size,
                                 label=webui_language["t2i"]["resolution"],
                             )
                             inpaint_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
@@ -766,34 +786,44 @@ def main():
                             )
                             inpaint_sampler = gr.Dropdown(
                                 SAMPLER,
-                                value="k_euler",
+                                value=env.sampler,
                                 label=webui_language["t2i"]["sampler"],
                             )
                             inpaint_noise_schedule = gr.Dropdown(
                                 NOISE_SCHEDULE,
-                                value="native",
+                                value=env.noise_schedule,
                                 label=webui_language["t2i"]["noise_schedule"],
                             )
                         with gr.Row():
                             inpaint_strength = gr.Slider(
-                                minimum=0, maximum=1, value=0.5, step=0.1, label=webui_language["i2i"]["strength"]
+                                minimum=0,
+                                maximum=1,
+                                value=env.hires_strength,
+                                step=0.1,
+                                label=webui_language["i2i"]["strength"],
                             )
                             inpaint_noise = gr.Slider(
-                                minimum=0, maximum=1, value=0, step=0.1, label=webui_language["i2i"]["noise"]
+                                minimum=0,
+                                maximum=1,
+                                value=env.hires_noise,
+                                step=0.1,
+                                label=webui_language["i2i"]["noise"],
                             )
                             inpaint_scale = gr.Slider(
-                                minimum=0, maximum=10, value=5, step=0.1, label=webui_language["t2i"]["scale"]
+                                minimum=0, maximum=10, value=env.scale, step=0.1, label=webui_language["t2i"]["scale"]
                             )
                             inpaint_steps = gr.Slider(
-                                minimum=0, maximum=50, value=28, step=1, label=webui_language["t2i"]["steps"]
+                                minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                             )
                         with gr.Row():
-                            inpaint_sm = gr.Radio([True, False], value=False, label="sm", scale=2)
+                            inpaint_sm = gr.Radio([True, False], value=env.sm, label="sm", scale=2)
                             inpaint_sm_dyn = gr.Radio(
-                                [True, False], value=False, label=webui_language["t2i"]["smdyn"], scale=2
+                                [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
                             )
                             with gr.Column(scale=1):
-                                inpaint_seed = gr.Textbox(value="-1", label=webui_language["t2i"]["seed"], scale=7)
+                                inpaint_seed = gr.Textbox(
+                                    value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
+                                )
                                 inpaint_random_button = gr.Button(value="♻️", size="sm", scale=1)
                                 inpaint_random_button.click(return_random, inputs=None, outputs=inpaint_seed)
                 inpaint_generate_button.click(
@@ -1927,29 +1957,47 @@ def main():
             with gr.Tab(webui_language["setting"]["sub_tab"]["t2i"]):
                 with gr.Column():
                     img_size = gr.Radio(
-                        [-1, "832x1216", "1216x832"],
+                        [
+                            -1,
+                            "832x1216",
+                            "1216x832",
+                            "1024x1024",
+                            "512x768",
+                            "768x768",
+                            "640x640",
+                            "1024x1536",
+                            "1536x1024",
+                            "1472x1472",
+                            "1088x1920",
+                            "1920x1088",
+                        ],
                         value=env.img_size,
                         label=webui_language["setting"]["description"]["img_size"],
                     )
-                    scale = gr.Slider(
-                        0, 10, env.scale, step=0.1, label=webui_language["setting"]["description"]["scale"]
-                    )
-                    censor = gr.Checkbox(value=env.censor, label=webui_language["setting"]["description"]["censor"])
                     sampler = gr.Radio(
                         SAMPLER,
                         value=env.sampler,
                         label=webui_language["setting"]["description"]["sampler"],
                     )
-                    steps = gr.Slider(1, 50, env.steps, step=1, label=webui_language["setting"]["description"]["steps"])
-                    with gr.Row():
-                        sm = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
-                        sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_language["setting"]["description"]["sm_dyn"])
                     noise_schedule = gr.Radio(
                         NOISE_SCHEDULE,
                         value=env.noise_schedule,
                         label=webui_language["setting"]["description"]["noise_schedule"],
                     )
-                    seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
+                    with gr.Row():
+                        scale = gr.Slider(
+                            0, 10, env.scale, step=0.1, label=webui_language["setting"]["description"]["scale"]
+                        )
+                        steps = gr.Slider(
+                            1, 50, env.steps, step=1, label=webui_language["setting"]["description"]["steps"]
+                        )
+                    with gr.Row():
+                        censor = gr.Checkbox(value=env.censor, label=webui_language["setting"]["description"]["censor"])
+                        sm = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
+                        sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_language["setting"]["description"]["sm_dyn"])
+                    with gr.Row():
+                        seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
+                        proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
                     t2i_cool_time = gr.Slider(
                         6,
                         120,
@@ -1957,14 +2005,13 @@ def main():
                         step=1,
                         label=webui_language["setting"]["description"]["t2i_cool_time"],
                     )
-                    save_path = gr.Radio(
-                        ["默认(Default)", "日期(Date)", "角色(Character)", "出处(Origin)", "画风(Artists)"],
-                        value=env.save_path,
-                        label=webui_language["setting"]["description"]["save_path"],
+                    i2i_cool_time = gr.Slider(
+                        6,
+                        120,
+                        env.i2i_cool_time,
+                        step=1,
+                        label=webui_language["setting"]["description"]["i2i_cool_time"],
                     )
-                    proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
-            with gr.Tab(webui_language["setting"]["sub_tab"]["i2i"]):
-                with gr.Column():
                     magnification = gr.Slider(
                         1,
                         1.5,
@@ -1986,12 +2033,10 @@ def main():
                         step=0.1,
                         label=webui_language["setting"]["description"]["hires_noise"],
                     )
-                    i2i_cool_time = gr.Slider(
-                        6,
-                        120,
-                        env.i2i_cool_time,
-                        step=1,
-                        label=webui_language["setting"]["description"]["i2i_cool_time"],
+                    save_path = gr.Radio(
+                        ["默认(Default)", "日期(Date)", "角色(Character)", "出处(Origin)", "画风(Artists)"],
+                        value=env.save_path,
+                        label=webui_language["setting"]["description"]["save_path"],
                     )
             with gr.Tab(webui_language["setting"]["sub_tab"]["pixiv"]):
                 pixiv_cookie = gr.Textbox(

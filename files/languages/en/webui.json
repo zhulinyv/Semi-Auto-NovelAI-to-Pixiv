@@ -123,8 +123,7 @@
         "tab": "Configuration Settings",
         "sub_tab": {
             "necessary": "Token",
-            "t2i": "Text-to-Image",
-            "i2i": "Image-to-Image",
+            "t2i": "Image generation",
             "pixiv": "Upload to Pixiv",
             "mosaic": "Mosaic",
             "eraser": "Data Erasure",
@@ -133,7 +132,7 @@
         },
         "description": {
             "token": "Token required for generating images",
-            "img_size": "Resolution of generated images",
+            "img_size": "Resolution of generated images(Large-resolution note point consumption)",
             "scale": "Relevance of prompts",
             "censor": "Whether to mosaic generated images",
             "sampler": "Sampler",

@@ -438,9 +438,9 @@ while 1:
     times += 1
     info = "正在生成第 " + str(times) + " 张图片..."
     logger.info(info)
-    t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
+    t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {})
 """.format(
-                    args[0], args[1], args[2], args[3], args[4], args[5], args[6]
+                    args[0], args[1], args[2], args[3], args[4], args[5]
                 )
             )
         elif script_type == "随机图片":
