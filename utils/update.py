@@ -4,7 +4,7 @@ from pathlib import Path
 try:
     import git
 except Exception:
-    os.environ["PATH"] = os.path.abspath("./Git24521/bin")
+    os.environ["PATH"] = os.path.abspath("./Git23921/bin")
     import git
 
 import requests
@@ -30,10 +30,13 @@ def check_update():
         return "Version: Error  不是GIT仓库"
     local_commit = repo.head.commit
     remote_commit = []
-    for commit in data:
-        if str(local_commit) == commit["sha"]:
-            break
-        remote_commit.append(commit)
+    try:
+        for commit in data:
+            if str(local_commit) == commit["sha"]:
+                break
+            remote_commit.append(commit)
+    except Exception:
+        return "Version: Error  更新检查失败"
     if not remote_commit:
         return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})".format(
             VERSION, str(local_commit)
