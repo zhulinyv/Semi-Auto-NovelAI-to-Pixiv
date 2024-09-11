@@ -100,16 +100,20 @@ def main():
                         with gr.Column(scale=1):
                             text2image_resolution = gr.Dropdown(
                                 RESOLUTION,
-                                value="832x1216" if env.img_size == -1 else env.img_size,
+                                value=(
+                                    "832x1216"
+                                    if env.img_size == -1
+                                    else "{}x{}".format((env.img_size)[0], (env.img_size)[1])
+                                ),
                                 label=webui_language["t2i"]["resolution"],
                             )
                             with gr.Row():
                                 text2image_width = gr.Textbox(
-                                    value=((env.img_size).split("x"))[0] if env.img_size != -1 else "832",
+                                    value=(env.img_size)[0] if env.img_size != -1 else "832",
                                     label=webui_language["t2i"]["width"],
                                 )
                                 text2image_height = gr.Textbox(
-                                    value=((env.img_size).split("x"))[1] if env.img_size != -1 else "1216",
+                                    value=(env.img_size)[1] if env.img_size != -1 else "1216",
                                     label=webui_language["t2i"]["height"],
                                 )
                                 text2image_resolution.change(
@@ -352,16 +356,20 @@ def main():
                         with gr.Column(scale=1):
                             vibe_transfer_resolution = gr.Dropdown(
                                 RESOLUTION,
-                                value="832x1216" if env.img_size == -1 else env.img_size,
+                                value=(
+                                    "832x1216"
+                                    if env.img_size == -1
+                                    else "{}x{}".format((env.img_size)[0], (env.img_size)[1])
+                                ),
                                 label=webui_language["t2i"]["resolution"],
                             )
                             with gr.Row():
                                 vibe_transfer_width = gr.Textbox(
-                                    value=((env.img_size).split("x"))[0] if env.img_size != -1 else "832",
+                                    value=(env.img_size)[0] if env.img_size != -1 else "832",
                                     label=webui_language["t2i"]["width"],
                                 )
                                 vibe_transfer_height = gr.Textbox(
-                                    value=((env.img_size).split("x"))[1] if env.img_size != -1 else "1216",
+                                    value=(env.img_size)[1] if env.img_size != -1 else "1216",
                                     label=webui_language["t2i"]["height"],
                                 )
                                 vibe_transfer_resolution.change(
@@ -459,7 +467,11 @@ def main():
                         with gr.Row():
                             image2image_resolution = gr.Dropdown(
                                 RESOLUTION,
-                                value="832x1216" if env.img_size == -1 else env.img_size,
+                                value=(
+                                    "832x1216"
+                                    if env.img_size == -1
+                                    else "{}x{}".format((env.img_size)[0], (env.img_size)[1])
+                                ),
                                 label=webui_language["t2i"]["resolution"],
                             )
                             image2image_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
@@ -597,7 +609,9 @@ def main():
                     )
                     movie2movie_resolution = gr.Dropdown(
                         RESOLUTION,
-                        value="832x1216" if env.img_size == -1 else env.img_size,
+                        value=(
+                            "832x1216" if env.img_size == -1 else "{}x{}".format((env.img_size)[0], (env.img_size)[1])
+                        ),
                         label=webui_language["t2i"]["resolution"],
                     )
                     movie2movie_scale = gr.Slider(
@@ -773,7 +787,11 @@ def main():
                         with gr.Row():
                             inpaint_resolution = gr.Dropdown(
                                 RESOLUTION,
-                                value="832x1216" if env.img_size == -1 else env.img_size,
+                                value=(
+                                    "832x1216"
+                                    if env.img_size == -1
+                                    else "{}x{}".format((env.img_size)[0], (env.img_size)[1])
+                                ),
                                 label=webui_language["t2i"]["resolution"],
                             )
                             inpaint_width = gr.Textbox(value="832", label=webui_language["t2i"]["width"])
@@ -1971,7 +1989,7 @@ def main():
                             "1088x1920",
                             "1920x1088",
                         ],
-                        value=env.img_size,
+                        value=("{}x{}".format((env.img_size)[0], (env.img_size)[1]) if env.img_size != -1 else -1),
                         label=webui_language["setting"]["description"]["img_size"],
                     )
                     sampler = gr.Radio(
