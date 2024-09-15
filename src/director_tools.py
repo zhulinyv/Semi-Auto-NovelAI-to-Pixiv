@@ -138,7 +138,7 @@ def director_tools_colorize(
         json_for_colorize["height"] = h
         json_for_colorize["defry"] = director_tools_colorize_defry
         json_for_colorize["prompt"] = director_tools_colorize_prompt
-        json_for_colorize["image"] = img_to_base64(img)
+        json_for_colorize["image"] = img_to_base64(image)
         saved_path = save_image_for_director_tools("colorize", generate_image_for_director_tools(json_for_colorize))
         return saved_path
 
@@ -181,6 +181,6 @@ def director_tools_emotion(
         prompt = f"{director_tools_emotion_emotion.lower()};;{director_tools_emotion_prompt}"
         logger.debug(f"Prompt: {prompt}")
         json_for_emotion["prompt"] = prompt
-        json_for_emotion["image"] = img_to_base64(img)
+        json_for_emotion["image"] = img_to_base64(image)
         saved_path = save_image_for_director_tools("emotion", generate_image_for_director_tools(json_for_emotion))
         return saved_path
