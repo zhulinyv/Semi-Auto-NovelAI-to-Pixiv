@@ -54,15 +54,15 @@ except ModuleNotFoundError:
         return box_list
 
 
-def img_to_base64(img_path):
-    if isinstance(img_path, str):
+def img_to_base64(image):
+    if isinstance(image, str):
         pass
-    elif isinstance(img_path, WindowsPath):
+    elif isinstance(image, WindowsPath):
         pass
     else:
-        img_path.save("./output/temp.png")
-        img_path = "./output/temp.png"
-    with open(img_path, "rb") as file:
+        image.save("./output/temp.png")
+        image = "./output/temp.png"
+    with open(image, "rb") as file:
         img_base64 = base64.b64encode(file.read()).decode("utf-8")
     return img_base64
 

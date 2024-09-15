@@ -215,7 +215,6 @@
             "audio_path": "Audio Path (*.mp3)",
             "merge_audio": "Merge Audio"
         }
-        
     },
     "tile": {
         "tab": "Chunked Redrawing",
@@ -239,5 +238,20 @@
         "rating": "Rating",
         "character_res": "Output (characters)",
         "general_res": "Output (tags)"
+    },
+    "director_tools": {
+        "title": "Director Tools",
+        "description": "> Use a variety of AI tools to edit your images.",
+        "remove_bg": "Remove BG",
+        "masked": "Masked",
+        "generated": "Generated",
+        "blend": "Blend",
+        "line_art": "Line Art",
+        "sketch": "Sketch",
+        "colorize": "Colorize",
+        "defry": "Defry",
+        "prompt": "Prompt (Optional)",
+        "emotion": "Emotion",
+        "declutter": "Declutter"
     }
 }
