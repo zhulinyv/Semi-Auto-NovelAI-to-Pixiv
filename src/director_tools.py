@@ -140,7 +140,7 @@ def director_tools_colorize(
         json_for_colorize["prompt"] = director_tools_colorize_prompt
         json_for_colorize["image"] = img_to_base64(image)
         saved_path = save_image_for_director_tools("colorize", generate_image_for_director_tools(json_for_colorize))
-        return saved_path
+    return saved_path, "处理完成! 图片已保存到 ./output/colorize"
 
 
 def director_tools_emotion(
@@ -183,4 +183,4 @@ def director_tools_emotion(
         json_for_emotion["prompt"] = prompt
         json_for_emotion["image"] = img_to_base64(image)
         saved_path = save_image_for_director_tools("emotion", generate_image_for_director_tools(json_for_emotion))
-        return saved_path
+    return saved_path, "处理完成! 图片已保存到 ./output/emotion"

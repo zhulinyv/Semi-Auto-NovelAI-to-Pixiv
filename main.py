@@ -981,6 +981,9 @@ def main():
                 with gr.Row():
                     director_tools_colorize_image = gr.Image(type="pil")
                     with gr.Column():
+                        director_tools_colorize_output_information = gr.Textbox(
+                            label=webui_language["i2i"]["output_info"]
+                        )
                         director_tools_colorize_output_image = gr.Image()
                 director_tools_colorize_generate_button.click(
                     fn=director_tools_colorize,
@@ -991,7 +994,7 @@ def main():
                         director_tools_colorize_image_path,
                         director_tools_colorize_batch_switch,
                     ],
-                    outputs=director_tools_colorize_output_image,
+                    outputs=[director_tools_colorize_output_image, director_tools_colorize_output_information],
                 )
             with gr.Tab(webui_language["director_tools"]["emotion"]):
                 director_tools_emotion_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
@@ -1044,6 +1047,9 @@ def main():
                 with gr.Row():
                     director_tools_emotion_image = gr.Image(type="pil")
                     with gr.Column():
+                        director_tools_emotion_output_information = gr.Textbox(
+                            label=webui_language["i2i"]["output_info"]
+                        )
                         director_tools_emotion_output_image = gr.Image()
                 director_tools_emotion_generate_button.click(
                     fn=director_tools_emotion,
@@ -1055,7 +1061,7 @@ def main():
                         director_tools_emotion_image_path,
                         director_tools_emotion_batch_switch,
                     ],
-                    outputs=director_tools_emotion_output_image,
+                    outputs=[director_tools_emotion_output_image, director_tools_emotion_output_information],
                 )
             with gr.Tab(webui_language["director_tools"]["declutter"]):
                 director_tools_declutter_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
