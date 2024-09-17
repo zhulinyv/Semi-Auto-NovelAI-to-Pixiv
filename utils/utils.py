@@ -19,6 +19,8 @@ from utils.env import env
 from utils.jsondata import headers
 from utils.prepare import logger
 
+PATH = os.getcwd()
+
 RESOLUTION = [
     "832x1216",
     "1216x832",
@@ -41,6 +43,7 @@ SAMPLER = [
     "ddim_v3",
 ]
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
+
 
 if env.proxy != "xxx:xxx":
     proxies = {
@@ -235,6 +238,7 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
     else:
         path = ""
     if not os.path.exists(f"./output/{type_}{path}"):
+        os.chdir(PATH)
         os.mkdir(f"./output/{type_}{path}")
 
     if img_data:
