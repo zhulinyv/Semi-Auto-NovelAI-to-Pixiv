@@ -20,6 +20,8 @@ from utils.env import env
 from utils.jsondata import headers
 from utils.prepare import logger
 
+PATH = os.getcwd()
+
 RESOLUTION = [
     "832x1216",
     "1216x832",
@@ -42,6 +44,7 @@ SAMPLER = [
     "ddim_v3",
 ]
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
+
 
 if env.proxy != "xxx:xxx":
     proxies = {
@@ -234,6 +237,7 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
     else:
         path = ""
     if not os.path.exists(f"./output/{type_}{path}"):
+        os.chdir(PATH)
         os.mkdir(f"./output/{type_}{path}")
 
     if img_data:
@@ -529,9 +533,9 @@ while 1:
     times += 1
     info = "正在生成第 " + str(times) + " 张图片..."
     logger.info(info)
-    t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
+    t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {})
 """.format(
-                    args[0], args[1], args[2], args[3], args[4], args[5], args[6]
+                    args[0], args[1], args[2], args[3], args[4], args[5]
                 )
             )
         elif script_type == "随机图片":

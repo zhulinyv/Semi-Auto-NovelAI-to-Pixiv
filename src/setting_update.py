@@ -68,12 +68,10 @@ def webui(
 ):
     position = str(water_position)
     position = position.replace("'", '"')
-    if img_size == "832x1216":
-        img_size = [832, 1216]
-    elif img_size == "1216x832":
-        img_size = [1216, 832]
+    if img_size == -1:
+        img_size = -1
     else:
-        pass
+        img_size = [int((img_size.split("x"))[0]), int((img_size.split("x"))[1])]
     otp_info = modify_env(
         token=f'"{token}"'.replace("\n", ""),
         img_size=img_size,

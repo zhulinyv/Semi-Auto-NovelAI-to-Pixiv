@@ -27,6 +27,7 @@ def show_first_img(input_path):
         return [img], img
     except Exception:
         logger.error("未输入图片目录或输入的目录为空!")
+        return None, None
 
 
 def show_next_img():
@@ -50,22 +51,28 @@ def show_next_img():
         return None, None
     except Exception:
         logger.error("未输入图片目录或输入的目录为空!")
+        return None, None
 
 
 def move_current_img(current_img, output_path):
     try:
         img_name = os.path.basename(current_img)
         shutil.move(current_img, str(Path(output_path) / img_name))
-        logger.info(f"已将 {current_img} 移动到 {output_path}")
+        logger.info(f"\n已将 {current_img} 移动到 {output_path}")
         return show_next_img()
     except Exception:
         logger.error("未输入要移动的目录!")
+        return None, None
 
 
 def del_current_img(current_img):
-    send2trash.send2trash(current_img)
-    logger.info(f"\n已将 {current_img} 移动到回收站")
-    return show_next_img()
+    try:
+        send2trash.send2trash(current_img)
+        logger.info(f"\n已将 {current_img} 移动到回收站")
+        return show_next_img()
+    except Exception:
+        logger.error("当前未选择图片!")
+        return None, None
 
 
 def copy_current_img(current_img, output_path):
@@ -76,3 +83,4 @@ def copy_current_img(current_img, output_path):
         return show_next_img()
     except Exception:
         logger.error("未输入要复制的目录!")
+        return None, None

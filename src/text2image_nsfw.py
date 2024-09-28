@@ -239,7 +239,7 @@ def prepare_input(
 
     logger.info(
         f"""
->>>>>>>>>>
+----------
 出处: {character_source}
 角色: {character_name}: {character_tag}
 画风: {artist_name}: {artist_tag}
@@ -250,7 +250,7 @@ def prepare_input(
 污渍: {stain_name}: {stain_tag}
 正面: {prefix_name}: {prefix_tag}
 负面: {negative_name}: {negative_tag}
-<<<<<<<<<<"""
+----------"""
     )
 
     input_ = format_str(
@@ -329,7 +329,6 @@ def t2i(
     )
     json_for_t2i, seed = prepare_json(
         input_, artist_sm, artist_sm_dyn, artist_cfg, artist_sampler, artist_noise_schedule, negative_tag
-    )
     saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, character_source, character_name)
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 

@@ -54,15 +54,15 @@ except ModuleNotFoundError:
         return box_list
 
 
-def img_to_base64(img_path):
-    if isinstance(img_path, str):
+def img_to_base64(image):
+    if isinstance(image, str):
         pass
-    elif isinstance(img_path, WindowsPath):
+    elif isinstance(image, WindowsPath):
         pass
     else:
-        img_path.save("./output/temp.png")
-        img_path = "./output/temp.png"
-    with open(img_path, "rb") as file:
+        image.save("./output/temp.png")
+        image = "./output/temp.png"
+    with open(image, "rb") as file:
         img_base64 = base64.b64encode(file.read()).decode("utf-8")
     return img_base64
 
@@ -179,7 +179,9 @@ def change_the_mask_color_to_white(image_path):
         image.save(image_path)
 
 
-def return_pnginfo(image: Image.Image):
+def return_pnginfo(image):
+    if not image:
+        return None, None, None, None, None, None, None, None, None, None, None, None
     try:
         try:
             comment = json.loads((pnginfo := image.info)["Comment"])
@@ -187,20 +189,23 @@ def return_pnginfo(image: Image.Image):
             comment = json.loads((pnginfo := extract_data(image))["Comment"])
         pnginfo["Comment"] = json.loads(pnginfo["Comment"])
     except Exception:
-        return (
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            json.dumps(pnginfo, indent=4, ensure_ascii=False),
-        )
+        try:
+            return (
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                json.dumps(pnginfo, indent=4, ensure_ascii=False),
+            )
+        except Exception:
+            return None, None, None, None, None, None, None, None, None, None, None, None
     return (
         comment["prompt"],
         comment["uc"],

@@ -41,8 +41,8 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["steps"] = steps
         json_for_i2i["parameters"]["strength"] = strength
         json_for_i2i["parameters"]["noise"] = noise
-        json_for_i2i["parameters"]["sm"] = sm
-        json_for_i2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
+        json_for_i2i["parameters"]["sm"] = False
+        json_for_i2i["parameters"]["sm_dyn"] = False
         json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
         seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
         json_for_i2i["parameters"]["seed"] = seed
@@ -70,8 +70,8 @@ def prepare_json(imginfo: dict, imgpath):
     json_for_i2i["parameters"]["steps"] = img_comment["steps"]
     json_for_i2i["parameters"]["strength"] = env.hires_strength
     json_for_i2i["parameters"]["noise"] = env.hires_noise
-    json_for_i2i["parameters"]["sm"] = img_comment["sm"]
-    json_for_i2i["parameters"]["sm_dyn"] = img_comment["sm_dyn"]
+    json_for_i2i["parameters"]["sm"] = False
+    json_for_i2i["parameters"]["sm_dyn"] = False
     json_for_i2i["parameters"]["noise_schedule"] = img_comment["noise_schedule"]
     json_for_i2i["parameters"]["seed"] = seed
     json_for_i2i["parameters"]["image"] = img_to_base64(imgpath)
