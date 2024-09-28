@@ -29,7 +29,7 @@
     },
     "random blue picture": {
         "tab": "Random Blue Picture",
-        "description": "> Generates a blue picture by randomly combining tags from ./files/favorite.json",
+        "description": "> Generates a blue picture by randomly combining tags from ./files/favorite",
         "generate_forever": "Generate Infinitely",
         "stop_button": "Stop Generating"
     },

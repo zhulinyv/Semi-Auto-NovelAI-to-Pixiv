@@ -9,7 +9,17 @@ from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, revert_img_info
 from utils.jsondata import json_for_t2i
 from utils.prepare import logger
-from utils.utils import format_str, generate_image, list_to_str, read_json, return_x64, save_image, sleep_for_cool
+from utils.utils import (
+    cancel_probabilities_for_item,
+    choose_item,
+    format_str,
+    generate_image,
+    read_yaml,
+    return_source_or_type_dict,
+    return_x64,
+    save_image,
+    sleep_for_cool,
+)
 
 
 def return_resolution(resolution: str, width: str, height: str):
@@ -118,98 +128,149 @@ def t2i_by_hand(
         return saved_path
 
 
-def prepare_input(action_type, action, origin, character, artists, scale, sm):
-    data = read_json("./files/favorite.json")
+def prepare_input(
+    fixed_artist,
+    fixed_prefix,
+    fixed_negative,
+    fixed_source,
+    fixed_character,
+    fixed_action_type,
+    fixed_action,
+    fixed_emotion,
+    fixed_surrounding,
+    fixed_stains,
+):
+    artists_file = read_yaml("./files/favorites/artists.yaml")
+    if fixed_artist != "随机":
+        artists_file = cancel_probabilities_for_item(artists_file)
+        artist_name = fixed_artist
+        artist_data = artists_file[fixed_artist]
+    else:
+        artist_name, artist_data = choose_item(artists_file)
+    artist_tag = artist_data["tag"]
+    artist_cfg = artist_data["cfg"]
+    artist_sm = artist_data["sm"]
+    artist_sm_dyn = artist_data["sm_dyn"]
+    artist_sampler = artist_data["sampler"]
+    artist_noise_schedule = artist_data["noise_schedule"]
 
-    if artists:
-        style_name = "固定画风"
-        style = [artists, 1 if sm else 0, scale]
-        artist = style[0]
-        sm = style[1]
-        scale = style[2]
+    prefixes_file = read_yaml("./files/favorites/prefixes.yaml")
+    if fixed_prefix != "随机":
+        prefixes_file = cancel_probabilities_for_item(prefixes_file)
+        prefix_name = fixed_prefix
+        prefix_data = prefixes_file[prefix_name]
     else:
-        weight_list = list(data["artists"]["belief"].keys())
-        artist = ""
-        while artist == "":
-            possibility = random.random()
-            for weight in weight_list:
-                if possibility >= float(weight):
-                    artist_list = list(data["artists"]["belief"][weight].keys())
-                    if artist_list != []:
-                        style_name = random.choice(artist_list)
-                        style = data["artists"]["belief"][weight][style_name]
-                        artist = style[0]
-                        sm = style[1]
-                        scale = style[2]
-                        break
-    pref = random.choice(data["quality_pref"]["belief"])
-    negative = format_str(random.choice(data["negative_prompt"]["belief"]))
-    if character:
-        choose_game = origin
-        choose_character = character
+        prefix_name, prefix_data = choose_item(prefixes_file)
+    prefix_tag = prefix_data["tag"]
+
+    negative_file = read_yaml("./files/favorites/negative.yaml")
+    if fixed_negative != "随机":
+        negative_file = cancel_probabilities_for_item(negative_file)
+        negative_name = fixed_negative
+        negative_data = negative_file[fixed_negative]
     else:
-        if origin:
-            choose_game = origin
+        negative_name, negative_data = choose_item(negative_file)
+    negative_tag = negative_data["tag"]
+
+    if fixed_source != "随机":
+        characters_file = return_source_or_type_dict(read_yaml("./files/favorites/characters.yaml"))
+        print(characters_file)
+        source_data = characters_file[fixed_source]
+        character_name = random.choice(list(source_data.keys()))
+        character_data = source_data[character_name]
+        character_source = fixed_source
+    else:
+        characters_file = read_yaml("./files/favorites/characters.yaml")
+        if fixed_character != "随机":
+            characters_file = cancel_probabilities_for_item(characters_file)
+            character_name = fixed_character
+            character_data = characters_file[fixed_character]
         else:
-            choose_game = random.choice(list(data["character"].keys()))
-        choose_character = random.choice(list(data["character"][choose_game].keys()))
-    character = list_to_str(data["character"][choose_game][choose_character])
-    if action:
-        choose_action = action
-        action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][action])
+            character_name, character_data = choose_item(characters_file)
+        character_source = character_data["source"]
+    character_tag = character_data["tag"]
+
+    if fixed_action_type != "随机":
+        actions_file = return_source_or_type_dict(read_yaml("./files/favorites/actions.yaml"))
+        type_data = actions_file[fixed_action_type]
+        action_name = random.choice(list(type_data.keys()))
+        action_data = type_data[action_name]
     else:
-        if action_type == "随机(Random)":
-            action_type = (
-                random.choice(["普通", "自慰", "巨乳"])
-                if any(char in character for char in ["huge breasts", "large breasts", "medium breasts"])
-                else random.choice(["普通", "自慰"])
-            )
+        actions_file = read_yaml("./files/favorites/actions.yaml")
+        if fixed_action != "随机":
+            actions_file = cancel_probabilities_for_item(actions_file)
+            action_name = fixed_action
+            action_data = actions_file[fixed_action]
         else:
-            pass
-        choose_action: list = random.choice(list(data["R18"]["动作"][f"{action_type}动作"].keys()))
-        action = list_to_str(data["R18"]["动作"][f"{action_type}动作"][choose_action])
-    emotion_type = "口交" if "oral" in action else "普通"
-    choose_emotion = random.choice(list(data["R18"]["表情"][f"{emotion_type}表情"].keys()))
-    emotion = (
-        list_to_str(data["R18"]["表情"][f"{emotion_type}表情"][choose_emotion])
-        if any(view not in action for view in ["from behind", "sex from behind"])
-        else ""
-    )
-    choose_surrounding = random.choice(list(data["R18"]["场景"]["仅场景"].keys()))
-    surrounding = (
-        list_to_str(data["R18"]["场景"]["仅场景"][choose_surrounding])
-        if "multiple views" not in action
-        else "{white background},"
-    )
-    if action_type == "自慰":
-        cum = ""
-        censored = ""
+            action_name, action_data = choose_item(actions_file)
+    action_tag = action_data["tag"]
+
+    emotions_file = read_yaml("./files/favorites/emotions.yaml")
+    if fixed_emotion != "随机":
+        emotions_file = cancel_probabilities_for_item(emotions_file)
+        emotion_name = fixed_emotion
+        emotions_data = emotions_file[fixed_emotion]
     else:
-        cum = random.choice(data["R18"]["污渍"])
-        censored = data["R18"]["去码"] if not env.censor else data["R18"]["打码"]
+        emotion_name, emotions_data = choose_item(emotions_file)
+    emotion_tag = emotions_data["tag"]
+
+    surroundings_files = read_yaml("./files/favorites/surroundings.yaml")
+    if fixed_surrounding != "随机":
+        surroundings_files = cancel_probabilities_for_item(surroundings_files)
+        surrounding_name = fixed_surrounding
+        surrounding_data = surroundings_files[fixed_surrounding]
+    else:
+        surrounding_name, surrounding_data = choose_item(surroundings_files)
+    surrounding_tag = surrounding_data["tag"]
+
+    stains_file = read_yaml("./files/favorites/stains.yaml")
+    if fixed_stains != "随机":
+        stains_file = cancel_probabilities_for_item(stains_file)
+        stain_name = fixed_stains
+        stains_data = stains_file[fixed_stains]
+    else:
+        stain_name, stains_data = choose_item(stains_file)
+    stain_tag = stains_data["tag"]
+
+    if env.censor:
+        censored = "{{censored}}, {{{mosaic}}}, {{{{mosaic censored}}}"
+    else:
+        censored = "uncensored, nsfw, clothed female nude male"
 
     logger.info(
         f"""
->>>>>>>>>>
-出处: {choose_game}: {choose_character}
-角色: {character}
-画风: {style_name}: {style}
-审查: {censored}
-表情: {emotion}
-动作: {choose_action}: {action}
-场景: {surrounding}
-污渍: {cum}
-正面: {pref}
-负面: {negative}
-<<<<<<<<<<"""
+----------
+出处: {character_source}
+角色: {character_name}: {character_tag}
+画风: {artist_name}: {artist_tag}
+审查: {"开" if env.censor else "关"}: {censored}
+表情: {emotion_name}: {emotion_tag}
+动作: {action_name}: {action_tag}
+场景: {surrounding_name}: {surrounding_tag}
+污渍: {stain_name}: {stain_tag}
+正面: {prefix_name}: {prefix_tag}
+负面: {negative_name}: {negative_tag}
+----------"""
     )
 
-    input_ = f"{format_str(character)}, {format_str(artist)}, {format_str(censored)}, {format_str(emotion)}, {format_str(action)}, {format_str(surrounding)}, {format_str(cum)}, {format_str(pref)}"
+    input_ = format_str(
+        f"{character_tag}, {artist_tag}, {censored}, {emotion_tag}, {action_tag}, {surrounding_tag}, {stain_tag}, {prefix_tag}"
+    )
 
-    return input_, sm, scale, negative, choose_game, choose_character
+    return (
+        input_,
+        artist_cfg,
+        artist_sm,
+        artist_sm_dyn,
+        artist_sampler,
+        artist_noise_schedule,
+        character_source,
+        character_name,
+        negative_tag,
+    )
 
 
-def prepare_json(input_, sm, scale, negative):
+def prepare_json(input_, sm, sm_dyn, scale, sampler, noise_schedule, negative):
     json_for_t2i["input"] = input_
     if isinstance(env.img_size, int):
         resolution_list = [[832, 1216], [1024, 1024], [1216, 832]]
@@ -218,12 +279,12 @@ def prepare_json(input_, sm, scale, negative):
         resolution = env.img_size
     json_for_t2i["parameters"]["width"] = resolution[0]
     json_for_t2i["parameters"]["height"] = resolution[1]
-    json_for_t2i["parameters"]["scale"] = env.scale if scale == 0 else scale
-    json_for_t2i["parameters"]["sampler"] = env.sampler
+    json_for_t2i["parameters"]["scale"] = scale
+    json_for_t2i["parameters"]["sampler"] = sampler
     json_for_t2i["parameters"]["steps"] = env.steps
-    json_for_t2i["parameters"]["sm"] = env.sm if sm == 0 else True
-    json_for_t2i["parameters"]["sm_dyn"] = env.sm_dyn if (env.sm or (sm == 1)) and env.sm_dyn else False
-    json_for_t2i["parameters"]["noise_schedule"] = env.noise_schedule
+    json_for_t2i["parameters"]["sm"] = sm
+    json_for_t2i["parameters"]["sm_dyn"] = sm_dyn
+    json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
     seed = random.randint(1000000000, 9999999999) if env.seed == -1 else env.seed
     json_for_t2i["parameters"]["seed"] = seed
     json_for_t2i["parameters"]["negative_prompt"] = negative
@@ -231,12 +292,44 @@ def prepare_json(input_, sm, scale, negative):
     return json_for_t2i, seed
 
 
-def t2i(forever: bool, action_type, action, origin, character, artists, scale):
-    input_, sm, scale, negative, choose_game, choose_character = prepare_input(
-        action_type, action, origin, character, artists, scale, env.sm
+def t2i(
+    forever: bool,
+    fixed_artist,
+    fixed_prefix,
+    fixed_negative,
+    fixed_source,
+    fixed_character,
+    fixed_action_type,
+    fixed_action,
+    fixed_emotion,
+    fixed_surrounding,
+    fixed_stains,
+):
+    (
+        input_,
+        artist_cfg,
+        artist_sm,
+        artist_sm_dyn,
+        artist_sampler,
+        artist_noise_schedule,
+        character_source,
+        character_name,
+        negative_tag,
+    ) = prepare_input(
+        fixed_artist,
+        fixed_prefix,
+        fixed_negative,
+        fixed_source,
+        fixed_character,
+        fixed_action_type,
+        fixed_action,
+        fixed_emotion,
+        fixed_surrounding,
+        fixed_stains,
     )
-    json_for_t2i, seed = prepare_json(input_, sm, scale, negative)
-    saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, choose_game, choose_character)
+    json_for_t2i, seed = prepare_json(
+        input_, artist_sm, artist_sm_dyn, artist_cfg, artist_sampler, artist_noise_schedule, negative_tag
+    saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, character_source, character_name)
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
     if forever:

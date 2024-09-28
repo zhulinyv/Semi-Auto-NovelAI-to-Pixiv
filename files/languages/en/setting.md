@@ -25,96 +25,15 @@ For example:
               └---4351819919_GenshinImpact_纳西妲.png
 ```
 
-About random blue pictures, you can add more at the correct position by your self:
+- For random Blueprints, go to ./files/favorite and add your own configurations:
 
-```json
-{
-  "artists": {
-    ...,
-    "belief": {
-      "0.6(probability of extracting art style below, probability here is 1-0.6)": {
-        "Art Style(Your preferred art style)": [
-          "balabala...",
-          0(whether to enable sm, 1 for enable, 0 for disable),
-          6.3(relevance of prompts, if set to 0, it will read from the .env file configuration)
-        ]
-      },
-      "0.3(probability of extracting art style below, probability here is 0.6-0.3)": {
-        "Art Style(Your preferred art style)": [
-          "balabala...",
-          0(whether to enable sm, 1 for enable, 0 for disable),
-          6.3(relevance of prompts, if set to 0, it will read from the .env file configuration)
-        ]
-      }
-    },
-    ...
-  },
-  "negative_prompt": {
-    ...,
-    "belief": [
-      "prompt(negative prompts)"
-    ]
-  },
-  "character": {
-    "Game(Group of characters)": {
-      "name(Character name)": [
-        "tag1(description of this character)",
-        "tag2, tag3(can be single or a series)"
-      ]
-    }
-  },
-  "R18": {
-    "Action": {
-      "Big Breast Action": {
-        "name(Action name)": [
-          "tag1(description of this action)",
-          "tag2, tag3(can be single or a series)"
-        ]
-      },
-      "Ordinary Action": {
-        "name(Action name)": [
-          "tag1(description of this action)",
-          "tag2, tag3(can be single or a series)"
-        ]
-      }
-    },
-    "Expression": {
-      "Oral Expression": {
-        "name(Expression name)": [
-          "tag1(description of this expression)",
-          "tag2, tag3(can be single or a series)"
-        ]
-      },
-      "Ordinary Expression": {
-        "name(Expression name)": [
-          "tag1(description of this expression)",
-          "tag2, tag3(can be single or a series)"
-        ]
-      }
-    },
-    "Scene": {
-      "Scene Only": {
-        "name(Scene name)": [
-          "tag1(description of this scene)",
-          "tag2, tag3(can be single or a series)"
-        ]
-      },
-      ...
-    },
-    ...
-  },
-  "labels": {
-    "Game(Corresponding to the added sources above)": {
-      "name(Corresponding to the added characters above)": [
-        "char_name(Tags added to this character when uploading to Pixiv)",
-        "char_jp_name(Tags added to this character when uploading to Pixiv)"
-      ]
-    },
-    "description": {
-      "tag (A certain prompt word)": [
-        "tag_label(Tags added to this prompt word when uploading to Pixiv)"
-      ]
-    }
-  }
-}
+```py
+actions.yaml: Actions
+artists.yaml: Painting style
+characters.yaml: role
+emotions.yaml: Emoticons
+negative.yaml: Negative
+prefixes.yaml: Quality word
+stains.yaml: stains
+surroundings.yaml scene
 ```

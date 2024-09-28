@@ -1,11 +1,19 @@
 import random
 import shutil
-import time
 
 from src.text2image_nsfw import prepare_json
 from utils.env import env
 from utils.prepare import logger
-from utils.utils import file_path2list, format_str, generate_image, read_json, read_txt, save_image, sleep_for_cool
+from utils.utils import (
+    choose_item,
+    file_path2list,
+    format_str,
+    generate_image,
+    read_txt,
+    read_yaml,
+    save_image,
+    sleep_for_cool,
+)
 
 
 def prepare_input(
@@ -15,7 +23,6 @@ def prepare_input(
     text2image_sfw_random_artists_last_switch,
     text2image_sfw_prevent_to_move_switch,
 ):
-    data = read_json("./files/favorite.json")
     file_list = file_path2list("./files/prompt")
     file_list.remove("done")
     if file_list == []:
@@ -32,20 +39,10 @@ def prepare_input(
             prompt = f"{format_str(prompt)}, {format_str(pref)}"
 
     def random_artists():
-        weight_list = list(data["artists"]["belief"].keys())
-        artist = ""
-        while artist == "":
-            possibility = random.random()
-            time.sleep(1)
-            for weight in weight_list:
-                if possibility >= float(weight):
-                    artist_list = list(data["artists"]["belief"][weight].keys())
-                    if artist_list != []:
-                        style_name = random.choice(artist_list)
-                        style = data["artists"]["belief"][weight][style_name]
-                        artist = style[0]
-                        break
-        return artist
+        artists_file = read_yaml("./files/favorites/artists.yaml")
+        artist_name, artist_data = choose_item(artists_file)
+        artist_tag = artist_data["tag"]
+        return artist_tag
 
     if text2image_sfw_random_artists_top_switch:
         prompt = f"{format_str(random_artists())}, {format_str(prompt)}"
@@ -79,9 +76,9 @@ def main(
         text2image_sfw_prevent_to_move_switch,
     )
 
-    data = read_json("./files/favorite.json")
+    negative_data = read_yaml("./files/favorites/negative.yaml")
 
-    json_for_t2i, seed = prepare_json(prompt, env.sm, env.scale, random.choice(data["negative_prompt"]["belief"]))
+    json_for_t2i, seed = prepare_json(prompt, env.sm, env.scale, choose_item(negative_data)["tag"])
     saved_path = save_image(
         generate_image(json_for_t2i), "t2i", str(seed) + file.replace(".txt", "").replace("_", "-"), "None", "None"
     )

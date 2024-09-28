@@ -45,6 +45,8 @@ def main():
         open_folder,
         read_json,
         read_txt,
+        read_yaml,
+        return_names_list,
         return_random,
     )
 
@@ -175,19 +177,51 @@ def main():
                         open_output_folder_block("t2i")
                         generate_text2image_nsfw_script_button = gr.Button(webui_language["t2i"]["script_gen"])
                 with gr.Row():
-                    text2image_nsfw_artists = gr.Textbox(None, label="固定画风(Artist)", scale=4, lines=3)
-                    text2image_nsfw_scale = gr.Slider(
-                        0, 10, value=env.scale, step=0.1, label=webui_language["t2i"]["scale"], scale=1
+                    text2image_nsfw_fixed_artist = gr.Dropdown(
+                        choices=return_names_list(read_yaml("./files/favorites/artists.yaml")),
+                        value="随机",
+                        label="固定画风",
+                    )
+                    text2image_nsfw_fixed_prefix = gr.Dropdown(
+                        choices=return_names_list(read_yaml("./files/favorites/prefixes.yaml")),
+                        value="随机",
+                        label="固定质量词",
+                    )
+                    text2image_nsfw_fixed_negative = gr.Dropdown(
+                        choices=return_names_list(read_yaml("./files/favorites/negative.yaml")),
+                        value="随机",
+                        label="固定负面",
                     )
                 with gr.Row():
-                    text2image_nsfw_action_type = gr.Dropdown(
-                        ["随机(Random)", "巨乳", "普通", "自慰"],
-                        value="随机(Random)",
-                        label="固定动作类型(Action Type)",
+                    text2image_nsfw_fixed_source = gr.Dropdown(choices=["随机"], value="随机", label="固定角色出处")
+                    text2image_nsfw_fixed_character = gr.Dropdown(
+                        choices=return_names_list(read_yaml("./files/favorites/characters.yaml")),
+                        value="随机",
+                        label="固定角色",
                     )
-                    text2image_nsfw_action = gr.Textbox(label="固定动作(Action)")
-                    text2image_nsfw_origin = gr.Textbox(label="固定出处(Origin)")
-                    text2image_nsfw_character = gr.Textbox(label="固定角色(Character)")
+                    text2image_nsfw_fixed_action_type = gr.Dropdown(
+                        choices=["随机"], value="随机", label="固定动作类型"
+                    )
+                    text2image_nsfw_fixed_action = gr.Dropdown(
+                        choices=return_names_list(read_yaml("./files/favorites/actions.yaml")),
+                        value="随机",
+                        label="固定动作",
+                with gr.Row():
+                    text2image_nsfw_fixed_emotion = gr.Dropdown(
+                        choices=return_names_list(read_yaml("./files/favorites/emotions.yaml")),
+                        value="随机",
+                        label="固定表情",
+                    )
+                    text2image_nsfw_fixed_surrounding = gr.Dropdown(
+                        choices=return_names_list(read_yaml("./files/favorites/surroundings.yaml")),
+                        value="随机",
+                        label="固定场景",
+                    )
+                    text2image_nsfw_fixed_fixed_stains = gr.Dropdown(
+                        choices=return_names_list(read_yaml("./files/favorites/stains.yaml")),
+                        value="随机",
+                        label="固定污渍",
+                    )
                 with gr.Row():
                     text2image_nsfw_generate_button = gr.Button(webui_language["t2i"]["generate_button"], scale=2)
                     text2image_nsfw_generate_forever_button = gr.Button(
@@ -203,12 +237,16 @@ def main():
                     fn=t2i,
                     inputs=[
                         gr.Radio(value=False, visible=False),
-                        text2image_nsfw_action_type,
-                        text2image_nsfw_action,
-                        text2image_nsfw_origin,
-                        text2image_nsfw_character,
-                        text2image_nsfw_artists,
-                        text2image_nsfw_scale,
+                        text2image_nsfw_fixed_artist,
+                        text2image_nsfw_fixed_prefix,
+                        text2image_nsfw_fixed_negative,
+                        text2image_nsfw_fixed_source,
+                        text2image_nsfw_fixed_character,
+                        text2image_nsfw_fixed_action_type,
+                        text2image_nsfw_fixed_action,
+                        text2image_nsfw_fixed_emotion,
+                        text2image_nsfw_fixed_surrounding,
+                        text2image_nsfw_fixed_fixed_stains,
                     ],
                     outputs=text2image_nsfw_forever_output_image,
                     show_progress="hidden",
@@ -217,12 +255,16 @@ def main():
                     fn=t2i,
                     inputs=[
                         gr.Radio(value=False, visible=False),
-                        text2image_nsfw_action_type,
-                        text2image_nsfw_action,
-                        text2image_nsfw_origin,
-                        text2image_nsfw_character,
-                        text2image_nsfw_artists,
-                        text2image_nsfw_scale,
+                        text2image_nsfw_fixed_artist,
+                        text2image_nsfw_fixed_prefix,
+                        text2image_nsfw_fixed_negative,
+                        text2image_nsfw_fixed_source,
+                        text2image_nsfw_fixed_character,
+                        text2image_nsfw_fixed_action_type,
+                        text2image_nsfw_fixed_action,
+                        text2image_nsfw_fixed_emotion,
+                        text2image_nsfw_fixed_surrounding,
+                        text2image_nsfw_fixed_fixed_stains,
                     ],
                     outputs=text2image_nsfw_output_image,
                 )
@@ -230,12 +272,16 @@ def main():
                     fn=t2i,
                     inputs=[
                         gr.Radio(value=False, visible=False),
-                        text2image_nsfw_action_type,
-                        text2image_nsfw_action,
-                        text2image_nsfw_origin,
-                        text2image_nsfw_character,
-                        text2image_nsfw_artists,
-                        text2image_nsfw_scale,
+                        text2image_nsfw_fixed_artist,
+                        text2image_nsfw_fixed_prefix,
+                        text2image_nsfw_fixed_negative,
+                        text2image_nsfw_fixed_source,
+                        text2image_nsfw_fixed_character,
+                        text2image_nsfw_fixed_action_type,
+                        text2image_nsfw_fixed_action,
+                        text2image_nsfw_fixed_emotion,
+                        text2image_nsfw_fixed_surrounding,
+                        text2image_nsfw_fixed_fixed_stains,
                     ],
                     outputs=text2image_nsfw_forever_output_image,
                 )
@@ -244,12 +290,16 @@ def main():
                     gen_script,
                     inputs=[
                         gr.Textbox("随机蓝图", visible=False),
-                        text2image_nsfw_action_type,
-                        text2image_nsfw_action,
-                        text2image_nsfw_origin,
-                        text2image_nsfw_character,
-                        text2image_nsfw_artists,
-                        text2image_nsfw_scale,
+                        text2image_nsfw_fixed_artist,
+                        text2image_nsfw_fixed_prefix,
+                        text2image_nsfw_fixed_negative,
+                        text2image_nsfw_fixed_source,
+                        text2image_nsfw_fixed_character,
+                        text2image_nsfw_fixed_action_type,
+                        text2image_nsfw_fixed_action,
+                        text2image_nsfw_fixed_emotion,
+                        text2image_nsfw_fixed_surrounding,
+                        text2image_nsfw_fixed_fixed_stains,
                     ],
                     outputs=None,
                 )
