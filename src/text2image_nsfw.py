@@ -174,7 +174,6 @@ def prepare_input(
 
     if fixed_source != "随机":
         characters_file = return_source_or_type_dict(read_yaml("./files/favorites/characters.yaml"))
-        print(characters_file)
         source_data = characters_file[fixed_source]
         character_name = random.choice(list(source_data.keys()))
         character_data = source_data[character_name]

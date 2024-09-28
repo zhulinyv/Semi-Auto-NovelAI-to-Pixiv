@@ -369,42 +369,30 @@ def return_keys_list(d: dict):
 
 
 def return_source_or_type_list(d: dict):
-    print(">>>>>")
-    print(d)
     sources = []
     for name in return_keys_list(d):
-        print(name)
         try:
             source = d[name]["source"]
         except KeyError:
             source = d[name]["type"]
         if source not in sources:
             sources.append(source)
-    print(sources)
     return sources
 
 
 def return_source_or_type_dict(d: dict):
     n = {}
     d = cancel_probabilities_for_item(d)
-    print(d)
     for source in return_source_or_type_list(d):
         n.update({source: {}})
 
-    print(n)
     for name in return_keys_list(d):
-        print(name)
         try:
             n[(d[name]["source"])][name] = {"tag": d[name]["tag"]}
-            # n.update({d[name]["source"]: {name: {d[name]["tag"]}}})
-            print(">>>>>>>>>")
-            print(n)
 
         except KeyError:
             n[(d[name]["type"])][name] = {"tag": d[name]["tag"]}
 
-    print("<<<<<<")
-    print(n)
     return n
 
 
