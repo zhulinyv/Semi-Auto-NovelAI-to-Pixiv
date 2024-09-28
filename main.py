@@ -206,6 +206,7 @@ def main():
                         choices=return_names_list(read_yaml("./files/favorites/actions.yaml")),
                         value="随机",
                         label="固定动作",
+                    )
                 with gr.Row():
                     text2image_nsfw_fixed_emotion = gr.Dropdown(
                         choices=return_names_list(read_yaml("./files/favorites/emotions.yaml")),

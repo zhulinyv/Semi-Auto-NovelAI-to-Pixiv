@@ -329,6 +329,7 @@ def t2i(
     )
     json_for_t2i, seed = prepare_json(
         input_, artist_sm, artist_sm_dyn, artist_cfg, artist_sampler, artist_noise_schedule, negative_tag
+    )
     saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, character_source, character_name)
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
 
