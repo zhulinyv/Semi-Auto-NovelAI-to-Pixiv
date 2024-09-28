@@ -29,7 +29,7 @@ def i2i_by_hand(
 ):
     if open_button:
         main(input_path)
-        return None, "处理完成"
+        return None, "处理完成!"
     else:
         logger.info("正在生成...")
 

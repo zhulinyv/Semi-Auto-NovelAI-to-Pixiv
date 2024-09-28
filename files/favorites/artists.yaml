@@ -1,0 +1,28 @@
+# 画风文件
+较大概率选中:
+
+中等概率选中:
+  未命名画风4:
+    tag: "[elaina (majo no tabitabi)], convenient censoring, 1girl, ningen mame, {ciloranko}, ke-ta, kedama milk, wlop, rhasta, year 2023"
+    cfg: 0
+    sm: False
+    sm_dyn: False
+    sampler: "k_euler"
+    noise_schedule: "native"
+  未命名画风6:
+    tag: "{ningen mame, {ciloranko}, ke-ta, kedama milk, wlop, rhasta}, tianliang duohe fangdongye, year 2023,upsidedown，oiled"
+    cfg: 0
+    sm: False
+    sm_dyn: False
+    sampler: "k_euler"
+    noise_schedule: "native"
+  未命名画风7:
+    tag: "artist:kedama milk, rucaco, kanda_done, [[artist:chen_bin]], [[[[mignon]]]], [[artist:Hiten]]"
+    cfg: 0
+    sm: False
+    sm_dyn: False
+    sampler: "k_euler"
+    noise_schedule: "native"
+
+较小概率选中:
+

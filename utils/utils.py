@@ -13,6 +13,7 @@ from pathlib import Path
 
 import requests
 import ujson as json
+import yaml
 from PIL import Image
 
 from utils.env import env
@@ -66,8 +67,8 @@ def format_str(str_: str):
     """
     str_ = str_.replace(", ", ",")
     str_ = str_.replace(",,", ",")
+    str_ = str_.replace(",,,", ",")
     str_ = str_.replace(",", ", ")
-    str_ = str_.replace(", ,", ", ")
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
 
@@ -222,16 +223,14 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
         with Image.open(BytesIO(img_data)) as image:
             info = image.info
             prompt = json.loads(info["Comment"])["prompt"]
-        data = read_json("./files/favorite.json")
-        weight_list = list(data["artists"]["belief"].keys())
-        for weight in weight_list:
-            artist_list = list(data["artists"]["belief"][weight].keys())
-            for artist in artist_list:
-                artists = list_to_str(data["artists"]["belief"][weight][artist][0])
-                if artists in prompt:
-                    path = f"/{artist}"
-                else:
-                    path = ""
+        artists_data = read_yaml("./files/favorites/artists.yaml")
+        artists_data = cancel_probabilities_for_item(artists_data)
+        for artist in list(artists_data.keys()):
+            artists = artists_data[artist]["tag"]
+            if format_str(artists) in prompt:
+                path = f"/{artist}"
+            else:
+                path = ""
     else:
         path = ""
     if not os.path.exists(f"./output/{type_}{path}"):
@@ -317,6 +316,98 @@ def read_txt(path):
     """
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
+
+
+def read_yaml(path):
+    """读取 *.yaml 文件
+
+    Args:
+        path (str|WindowsPath): 文件路径
+
+    Returns:
+        (dict): 数据
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.load(f, Loader=yaml.FullLoader)
+
+
+def choose_item(data):
+    item = None
+    while item is None:
+        possibility = random.random()
+        if possibility >= 0.5:
+            choice = "较大概率选中"
+        elif possibility >= 0.15:
+            choice = "中等概率选中"
+        elif possibility >= 0.0:
+            choice = "较小概率选中"
+        if data[choice] is None:
+            item = None
+        else:
+            name = random.choice(list(data[choice].keys()))
+            item = data[choice][name]
+    return name, item
+
+
+def cancel_probabilities_for_item(d: dict):
+    n = {}
+    for k, v in d.items():
+        try:
+            n.update(v)
+        except TypeError:
+            pass
+    return n
+
+
+def return_keys_list(d: dict):
+    keys_list = list(d.keys())
+    return keys_list
+
+
+def return_source_or_type_list(d: dict):
+    print(">>>>>")
+    print(d)
+    sources = []
+    for name in return_keys_list(d):
+        print(name)
+        try:
+            source = d[name]["source"]
+        except KeyError:
+            source = d[name]["type"]
+        if source not in sources:
+            sources.append(source)
+    print(sources)
+    return sources
+
+
+def return_source_or_type_dict(d: dict):
+    n = {}
+    d = cancel_probabilities_for_item(d)
+    print(d)
+    for source in return_source_or_type_list(d):
+        n.update({source: {}})
+
+    print(n)
+    for name in return_keys_list(d):
+        print(name)
+        try:
+            n[(d[name]["source"])][name] = {"tag": d[name]["tag"]}
+            # n.update({d[name]["source"]: {name: {d[name]["tag"]}}})
+            print(">>>>>>>>>")
+            print(n)
+
+        except KeyError:
+            n[(d[name]["type"])][name] = {"tag": d[name]["tag"]}
+
+    print("<<<<<<")
+    print(n)
+    return n
+
+
+def return_names_list(d: dict):
+    names_list = return_keys_list(cancel_probabilities_for_item(d))
+    names_list.append("随机")
+    return names_list
 
 
 def file_path2name(path) -> str:

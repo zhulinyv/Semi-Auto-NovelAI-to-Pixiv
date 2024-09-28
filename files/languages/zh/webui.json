@@ -29,7 +29,7 @@
     },
     "random blue picture": {
         "tab": "随机蓝图",
-        "description": "> 通过随机组合 ./files/favorite.json 中的 tag 生成一张蓝图",
+        "description": "> 通过随机组合 ./files/favorite 中的 tag 生成一张蓝图",
         "generate_forever": "无限生成",
         "stop_button": "停止生成"
     },
