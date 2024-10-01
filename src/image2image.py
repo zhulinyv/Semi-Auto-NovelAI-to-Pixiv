@@ -89,15 +89,15 @@ def main(input_path):
         times = 1
         while times <= 5:
             try:
-                logger.info(f"正在放大: {img}...")
-                info_list = img.replace(".png", "").split("_")
+                logger.info(f"正在图生图: {img}...")
                 img_path = i2i_path / img
                 saved_path = save_image(
                     generate_image(prepare_json(get_img_info(img_path), img_path)),
                     "i2i",
-                    info_list[0],
-                    info_list[1],
-                    info_list[2],
+                    None,
+                    None,
+                    None,
+                    img.replace(".jpg", ""),
                 )
                 if saved_path != "寄":
                     logger.warning("删除小图...")
@@ -111,6 +111,3 @@ def main(input_path):
                 times += 1
                 logger.error(f"出现错误: {e}")
                 logger.warning(f"重试 {times-1}/5...")
-            except KeyboardInterrupt:
-                logger.warning("程序退出...")
-                quit()

@@ -219,9 +219,15 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
     elif env.save_path == "日期(Date)":
         path = f"/{date.today()}"
     elif env.save_path == "角色(Character)":
-        path = f"/{choose_character}"
+        if choose_character:
+            path = f"/{choose_character}"
+        else:
+            path = ""
     elif env.save_path == "出处(Origin)":
-        path = f"/{choose_game}"
+        if choose_character:
+            path = f"/{choose_game}"
+        else:
+            path = ""
     elif env.save_path == "画风(Artists)":
         with Image.open(BytesIO(img_data)) as image:
             info = image.info
