@@ -77,7 +77,7 @@ def upload(image_list, file):
         image_paths=image_list,
         title=name,
         caption=caption,
-        labels=[],
+        labels=["女の子"],
         cookie=env.pixiv_cookie,
         x_token=env.pixiv_token,
         allow_tag_edit=env.allow_tag_edit,
