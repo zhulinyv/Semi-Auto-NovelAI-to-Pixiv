@@ -68,6 +68,10 @@ for dir in need_dir_list:
         os.mkdir(dir)
 
 
+if not os.path.exists("./files/favorites"):
+    shutil.copytree("./files/favorites_example", "./files/favorites")
+
+
 if not os.path.exists("./files/prompt/example.txt") and not os.path.exists("./files/prompt/done/example.txt"):
     with open("./files/prompt/example.txt", "w") as f:
         f.write(

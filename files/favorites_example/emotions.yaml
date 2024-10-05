@@ -1,0 +1,37 @@
+# 表情文件
+
+较大概率选中:
+  咬紧牙关:
+    tag: "steam, clenched teeth, blush, half-closed eyes, frown"
+  咬嘴唇:
+    tag: "biting own lip, frown, half-closed eyes, blush, closed mouth"
+  流泪爱心眼:
+    tag: tearing up, full-face blush, heart-shaped pupils
+  张嘴:
+    tag: "{breath}, heavy breathing, {steam}, half-closed eyes, open mouth"
+  嘟嘴:
+    tag: "shy, blush, pout, puckered lips"
+  高潮吐舌:
+    tag: "blush, open mouth, female orgasm, saliva, tongue, half-closed eyes"
+  高潮张嘴:
+    tag: "blush, open mouth, female orgasm, saliva, half-closed eyes"
+
+中等概率选中:
+  闭嘴笑:
+    tag: "{breath}, heavy breathing, steam}, smile, half-closed eyes, closed mouth"
+  张嘴笑:
+    tag: "{breath}, heavy breathing, steam}, smile, half-closed eyes, open mouth"
+  闭眼闭嘴:
+    tag: "closed eyes, closed mouth, blush"
+  闭眼张嘴:
+    tag: "closed eyes, open mouth, blush, frown, blush"
+  波浪闭嘴:
+    tag: "blush, frown, wavy mouth, closed mouth, half-closed eyes"
+  嘴唇微张:
+    tag: "half-closed eyes, parted lips, blush"
+
+较小概率选中:
+  单闭眼咬紧牙关:
+    tag: "one eye closed, steam, clenched teeth, blush"
+  波浪张嘴:
+    tag: "blush, frown, wavy mouth, open mouth, {breath}, heavy breathing, steam}, half-closed eyes"

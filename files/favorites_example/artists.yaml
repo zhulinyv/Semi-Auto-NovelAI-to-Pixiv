@@ -1,0 +1,268 @@
+# 画风文件
+
+较大概率选中:
+  300画风法典4:
+      tag: "[artist:kedama milk],artist:momoco,artist:ke-ta,artist:chen_bin,artist:mignon,artist:nekoda,[artist:As109],artist:Happoubi_jin,year_2022"
+      cfg: 6
+      sm: True
+      sm_dyn: False
+      sampler: "k_dpmpp_2s_ancestral"
+      noise_schedule: "native"
+  300画风法典5:
+    tag: "{{artist:ikeuchi_tanuma}},{{{{{mignon,ATDAN}}}}},{{{{{anmi}}}}},{{ogipote}},{{sy4}},{hiten_(hitenkei)},yuno385,[[[[momoko_(momopoco)]]]],[[[ke-ta]]]"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典8:
+    tag: "{{artist:miyase_mahiro}},[ke-ta],jyt,himitsu_(hi_mi_tsu_2),hiten"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  XYTPZ_roll_5:
+    tag: "artist:matanukinuki, {artist:refeia}, artist:binggong_asylum, artist:s16xue"
+    cfg: 5
+    sm: False
+    sm_dyn: False
+    sampler: "k_euler"
+    noise_schedule: "native"
+  XYTPZ_roll_5_fix:
+    tag: "artist:matanukinuki, {artist:refeia}, artist:binggong_asylum, artist:s16xue, [artist:ke-ta], [shiny skin], perfect_lighting"
+    cfg: 5
+    sm: False
+    sm_dyn: False
+    sampler: "k_euler"
+    noise_schedule: "native"
+  XYTPZ_roll_4_fix:
+    tag: "artist:achiki, [[artist:taesi]], artist:jima, [[artist:mignon]]"
+    cfg: 5
+    sm: False
+    sm_dyn: False
+    sampler: "k_euler"
+    noise_schedule: "native"
+  XYTPZ_roll_12:
+    tag: "{{artist:tiv}}, {artist:takitarou}, [[[artist:natsuki_teru]]], [artist:mignon], [[artist:akadako]], [[artist:cha_chya]], [[[artist:kedama_milk]]], {artist:tooo}, {{{artist:akizero1510}}}"
+    cfg: 5
+    sm: False
+    sm_dyn: False
+    sampler: "k_euler"
+    noise_schedule: "native"
+  XYTPZ_roll_20:
+    tag: "[[artist:suzumi_(ccroquette)]], {{artist:ogata_tei}}, {{artist:kedama_milk}}"
+    fg: 5
+    sm: False
+    sm_dyn: False
+    sampler: "k_euler"
+    noise_schedule: "native"
+
+中等概率选中:
+  300画风法典1:
+    tag: "{mafuyu (chibi21)},{{rurudo,gusha s,hiro (dismaless),wlop,yoneyama mai,mikami mika}},[[murata range]]"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典2:
+    tag: "{artist:yd,artist:satou kuuki},artist:kedama milk,[[[artist:sho_(sho_lwlw)],artist:ke-ta]],year 2022,"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典3:
+    tag: "[artist:kedama milk],artist:ciloranko,artist:ke-ta,artist:Hiten,[artist:ask(askzy],[artist:nekoda],[artist:As109]"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典7:
+    tag: "[[[[artist:binggong asylum]]]],[[artist:onineko]],"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典10:
+    tag: "ciloranko, [[[[ame (uten cancel)]]]], [[[[muloli (artist)]]]], year 2023"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典11:
+    tag: "oyari_ashito, higeneko, goma_satoshi, potetos7, azure_(capriccio)"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典13:
+    tag: "{{gusha_s,kyokucho}},{kedama_milk,amashiro_natsuki},year_2022,AS109"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典15:
+    tag: "[yumenouchi chiharu],sakura_(39ra),{naga_u,tyakomes},henreader,baku-p,daizu_(melon-lemon),year 2023"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典16:
+    tag: "[artist:kedama milk],[artist:ask (askzy)],artist:wanke, [artist:ATDAN],artist:ciloranko,[[artist:rhasta]],[artist:tidsean],[artist:ke-ta],{{chiaroscuro}},[artist:as109]],[artist:sho (sho lwlw)]],,artist:wlop"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典17:
+    tag: "{{artist:blue_archive official_art }},[[[artist:jyt]]],{{artist:rotroto}}"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典18:
+    tag: "[artist:jyt],,artist:namagome_negi,artist:hayana_neru"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典19:
+    tag: "[artist:hiten],[artist:mignon],[artist:riri],[artist:weri],[artist:rurudo]"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典20:
+    tag: "artist:phantom_ix_row,artist:akakura,artist:beni_shake,artist:ningen_mame,[[[artist:tianliang_duohe_fangdongye]]],artist:chen_bin,artist:sy4"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典21:
+    tag: "{{artist:deyui,artist:mikozin}},[artist:jyt],artist:40hara,[[artist:gusha_s]],{{artist:chen_bin}},year 2023"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典22:
+    tag: "akino ell,[memekko],[paraffin],mankai kaika,{miwabe sakura},[miyase mahiro],[[ebihara beniko]],year 2023"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典25:
+    tag: "[[{{artist:mochizuki_kei}},[[[artist:as109,artist:wlop]]],{{artist:asakuraf}},artist:shion(mirudakemann)]]"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典26:
+    tag: "[artist:ningen_mame],artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]],[[artist:rhasta]]"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典27:
+    tag: "[[artist:ciloranko]],[artist:rhasta],artist:tidsean, [artist:ke-ta],{{chiaroscuro}},[artist:sho_(sho_lwlw)]],{artist:ningen_mame}"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典29:
+    tag: "artist:kedama milk,rucaco,kanda_done,[[artist:chen_bin]],[[[[mignon]]]],[ningen mame],[[[[anmi]]]]"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典30:
+    tag: "[[tianliang duohe fangdongye]],[artist:ningen mame],[[[artist:mignon]]],artist:a chiki"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+
+较小概率选中:
+  300画风法典6:
+    tag: "{{hitomaru}},[menyoujan,chen bin],[[tsubasa tsubasa]],[[[kedama milk,redrop]]],[[[[[aki99]]]]]"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典9:
+    tag: "{{hitomaru}},[menyoujan,chen bin],[[tsubasa tsubasa]],[[[kedama milk,redrop,aki99]]]"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典12:
+    tag: "{{{{hiro_(dismaless),kotobuki_utage}}}},hitomaru,[[Kyokucho,murata_range]],year_2023"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典14:
+    tag: "{artist:henreader}, artist:reitou_mikan, [artist:yuuka nonoko], artist:appleq, [artist:tsukinami kousuke], {artist:tomozero}, {{artist:menma_(enaic31)}}, [[artist:migolu]], year 2023"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典23:
+    tag: "akino ell,[memekko],[paraffin],mankai kaika,{miwabe sakura},[miyase mahiro],[[ebihara beniko]],year 2023"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典24:
+    tag: "artist:wlop,artist:aki99,[[{{artist:mochizuki_kei}}, [[[artist:as109]]], {{artist:asakuraf}},artist:shion(mirudakemann)]]"
+    cfg: 6
+    sm: False
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典28:
+    tag: "[artist:ningen_mame],artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]] ,[[[[[nibiiro shizuka]]]]], year 2023"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典31:
+    tag: "artist:shiratama_(shiratamaco)"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+  300画风法典32:
+    tag: "{{artist:yago8 pp3,artist:rella}},artist:ciloranko,artist:sheya,artist:ishiyumi,artist:fkey,artist:tokkyu,artist:infukun"
+    cfg: 6
+    sm: True
+    sm_dyn: False
+    sampler: "k_dpmpp_2s_ancestral"
+    noise_schedule: "native"
+
+

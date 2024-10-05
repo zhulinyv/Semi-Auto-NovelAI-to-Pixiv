@@ -1,0 +1,81 @@
+# 场景文件
+
+较大概率选中:
+  床上:
+    tag: "on bed, indoor"
+  厕所隔间:
+    tag: "toilet stall, tiles"
+  简单背景:
+    tag: "bedroom, white background, simple background"
+  温泉:
+    tag: "onsen, hot_spring"
+  浴场换衣间:
+    tag: "changing_room, lockers, long chair, tiles"
+  游泳池:
+    tag: "pool, water, pool_ladder, tile, tile wall"
+  教室:
+    tag: "indoor, classroom"
+  海边:
+    tag: "outdoors, sea, sunlight, beach"
+  列车内部:
+    tag: "train interior"
+
+中等概率选中:
+  森林中:
+    tag: "outdoors, forest, nature, blurry foreground"
+  合室晚上:
+    tag: "Japanese Housing, indoors, blurry foreground, night"
+  温室:
+    tag: "greenhouse, plant, garden"
+  公园:
+    tag: "park, tree, park bench"
+  温暖冬夜:
+    tag: "bedroom, winter, window, snow"
+  洞穴:
+    tag: "underground, caves, waterfalls, light"
+  荒废列车:
+    tag: "train interior, ruins, plant, lens flare, broken glass, window, bugs"
+  湖边:
+    tag: "in forest, lake, by lake, sand, tree, butterfly, flowers, bugs"
+  街道一角:
+    tag: "street corner, outdoor, dirty, air conditioner, mess, rubbish, cockroach, drainpipe, cable, wire, steam, alley"
+  回乡小路:
+    tag: "rice paddy, dirt road, path, mountainous horizon, rural, transmission_tower, utility_pole"
+  吵闹的雨夜:
+    tag: "rain, lightning, thunder, night, opening door, splashing, wet, wet floor, wet clothes"
+  商场试衣间:
+    tag: "fitting_room, mall, mirror, curtains"
+  水族馆:
+    tag: "aquarium, fish, fish_tank"
+  公交车站:
+    tag: "bus_stop, chair, sign"
+
+较小概率选中:
+  魔法图书馆:
+    tag: "library, magic, firefly, epic building, shadow"
+  太空站:
+    tag: "space, from_space_station, zero_gravity, floating, floating objects"
+  监狱:
+    tag: "prison, jail"
+  神社:
+    tag: "shrine, jinja"
+  城堡:
+    tag: "castle, rock road, bridge"
+  树屋:
+    tag: "treehouse, big tree, ropes"
+  万圣节:
+    tag: "Halloween, bat \\(animal\\), jack-o'-lantern, fence, tombstone, pumpkin"
+  飞机场:
+    tag: "airport, plane, horizon, hangar"
+  草原:
+    tag: "outdoors, on grass, day, nature"
+  教堂:
+    tag: "church, depth of field"
+  摩天轮内部:
+    tag: "ferris wheel interior, ferris wheel, cityscape, city lights, night"
+  乡村码头:
+    tag: "jetty, village, seagulls, sunshine, wooden chair, wet_floor, river, mountain, smoke"
+  草原牧场:
+    tag: "grass land, sheep, cloud, house, outdoor, barn"
+  鸡舍:
+    tag: "chicken_coop, poop, chikens, egg, hay, straw, dirty"

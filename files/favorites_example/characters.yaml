@@ -1,0 +1,307 @@
+# 角色文件
+
+较大概率选中:
+  七七:
+    tag: "qiqi_(genshin_impact), purple eyes, purple hair"
+    source: 原神
+  可莉:
+    tag: "klee_(genshin_impact), red eyes, blonde hair"
+    source: 原神
+  迪奥娜:
+    tag: "diona_(genshin_impact), cat ears, animal_ear_fluff, cat girl, cat tail, bangs_pinned_back, thick_eyebrows, forehead, sidelocks"
+    source: 原神
+  阿罗娜:
+    tag: "arona_(blue archive), {loli}, blue_hair, white choker, heart halo, white hairband, bow hairband, blue halo, colored inner hair"
+    source: 蔚蓝
+  伊吹:
+    tag: "ibuki_(blue_archive), {loli}, medium blonde hair, side ponytail, yellow eyes, pointy ears, low black demon wings, black demon horns, black demon tail" 
+    source: 蔚蓝
+  拉菲:
+    tag: "laffey_(azur_lane), white hair, red eyes, twintails"
+    source: 碧蓝
+  铃兰:
+    tag: "suzuran_(arknights), {loli}, blonde hair, fox ears, fox tail, multiple tails, multicolored hair, hair rings, green eyes, short hair"
+    source: 番剧
+  雏鹤爱:
+    tag: "{{hinatsuru_ai}}, loli, twintails, layered sleeves"
+    source: 番剧
+  初音未来:
+    tag: "hatsune miku, aqua hair, aqua eyes, twintails, long hair, very long hair, number tattoo"
+    source: 番剧
+  夜夜:
+    tag: "yaya_(machine-doll), {loli}, black hair, kimono skirt, short kimono, black kimono, kimono, japanese clothes, hair ribbon, ribbon"
+    source: 番剧
+  香风智乃:
+    tag: "kafuu_chino, {loli}, x hair ornament, blue hair, light blue hair"
+    source: 番剧
+
+中等概率选中:
+  甘雨:
+    tag: "ganyu_(genshin_impact), purple eyes, blue hair, huge breasts"
+    source: 原神
+  胡桃:
+    tag: "hu_tao_(genshin_impact), red eyes, twintails, flower-shaped pupils, medium breasts"
+    source: 原神
+  雷电将军:
+    tag: "raiden_shogun, purple eyes, purple hair, huge breasts"
+    source: 原神
+  荧:
+    tag: "lumine_(genshin_impact), blonde hair, yellow eyes, medium breasts"
+    source: 原神
+  神子:
+    tag: "yae_miko, pink hair, purple eyes, huge breasts"
+    source: 原神
+  莫娜:
+    tag: "mona_(genshin_impact), green eyes, twintails, medium breasts"
+    source: 原神
+  刻晴:
+    tag: "keqing_(genshin_impact), purple hair, purple eyes, medium breasts"
+    source: 原神
+  芭芭拉:
+    tag: "barbara_(genshin_impact), twin drills, twintails, blonde hair"
+    source: 原神
+  申鹤:
+    tag: "shenhe_(genshin_impact), blue eyes, braided ponytail, huge breasts"
+    source: 原神
+  神里凌华:
+    tag: "kamisato_ayaka, blue eyes, ponytail, blue hair, medium breasts"
+    source: 原神
+  妮露:
+    tag: "nilou_(genshin_impact), aqua eyes, red hair, medium breasts"
+    source: 原神
+  心海:
+    tag: "sangonomiya_kokomi, pink hair, multicolored hair, blue horns, medium breasts"
+    source: 原神
+  纳西妲:
+    tag: "nahida_(genshin_impact), green eyes, cross-shaped pupils, side ponytail"
+    source: 原神
+  菲谢尔:
+    tag: "fischl_(genshin_impact), green eyes, blonde hair, medium breasts"
+    source: 原神
+  凝光:
+    tag: "ningguang_(genshin_impact), red eyes, white hair, huge breasts"
+    source: 原神
+  科莱:
+    tag: "collei_(genshin_impact), green_capelet, detached_sleeves, black_dress, long_sleeves, bridal_gauntlets"
+    source: 原神
+  多莉:
+    tag: "dori_(genshin_impact), purple_headwear, looking_over_eyewear, detached_sleeves, crop_top, navel"
+    source: 原神
+  优菈:
+    tag: "eula_(genshin_impact), black_hairband, large breasts, sidelocks, high-waist_shorts"
+    source: 原神
+  珐露珊:
+    tag: "faruzan_(genshin_impact), symbol-shaped_pupils, white dress, triangle-shaped_pupils, shoulder_cutout"
+    source: 原神
+  芙宁娜:
+    tag: "furina_(genshin_impact), heterochromia, long sleeves, blue headwear, blue jacket, top hat"
+    source: 原神
+  琴:
+    tag: "jean_(genshin_impact), ponytail, hair bow, detached sleeves, large breasts, cleavage"
+    source: 原神
+  早柚:
+    tag: "sayu_(genshin_impact), animal hood, raccoon ears, fake animal ears, fingerless gloves, leaf on head, raccoon tail, short sleeves, fake tail"
+    source: 原神
+  闲云:
+    tag: "xianyun_(genshin_impact), glasses, cloud_retainer_(genshin_impact), red-framed_eyewear, large breasts, semi-rimless_eyewear, tassel_earrings, bodystocking, long sleeves"
+    source: 原神
+  夜兰:
+    tag: "Yelan (Genshin Impact)"
+    source: 原神
+  卡芙卡:
+    tag: "kafka_(honkai:_star_rail), purple eyes, purple hair, huge breasts"
+    source: 崩铁
+  三月七:
+    tag: "march_7th_(honkai:_star_rail), blue eyes, pink eyes, gradient eyes, pink hair, medium breasts"
+    source: 崩铁
+  银狼:
+    tag: "silver_wolf_(honkai:_star_rail), grey eyes, gradient hair, drill ponytail"
+    source: 崩铁
+  开拓者:
+    tag: "stelle_(honkai:_star_rail), yellow eyes, grey hair, medium hair, medium breasts"
+    source: 崩铁
+  姬子:
+    tag: "himeko_(honkai:_star_rail), yellow eyes, huge breasts"
+    source: 崩铁
+  黑塔:
+    tag: "herta_(honkai:_star_rail), petite child, purple eyes, brown hair, doll joints, small breasts"
+    source: 崩铁
+  白露:
+    tag: "bailu_(honkai:_star_rail), petite child, loli, blue eyes, purple hair, small breasts"
+    source: 崩铁
+  符玄:
+    tag: "fu_xuan_(honkai:_star_rail), pink hair, pink eyes, bow-shaped hair, small breasts"
+    source: 崩铁
+  塔什干:
+    tag: "tashkent_(azur lane), purple hair"
+    source: 碧蓝
+  埃尔德里奇:
+    tag: "eldridge_(azur_lane), twintails, blonde hair, red eyes"
+    source: 碧蓝
+  恶毒:
+    tag: "le_malin_(azur_lane), blue eyes, cross-shaped pupils, white hair, double bun, very long hair"
+    source: 碧蓝
+  信浓:
+    tag: "shinano_(azur_lane), grey hair, blue eyes, multiple tails, fox ears, fox tail, huge breasts"
+    source: 碧蓝
+  可畏:
+    tag: "formidable_(azur_lane), grey hair, red eyes, twintails, huge breasts"
+    source: 碧蓝
+  z46:
+    tag: "z46_(azur_lane), yellow eyes, grey hair, long hair"
+    source: 碧蓝
+  英仙座:
+    tag: "perseus_(azur_lane), twintails, pink eyes, pink hair, huge breasts"
+    source: 碧蓝
+  伊丽莎白女王:
+    tag: "queen_elizabeth_(azur_lane), blonde hair, drill hair, blue eyes"
+    source: 碧蓝
+  能代:
+    tag: "noshiro_(azur_lane), purple eyes, black hair, long hair, horns"
+    source: 碧蓝
+  安克雷奇:
+    tag: "anchorage_(azur_lane), twintails, red eyes, brown hair, large breasts"
+    source: 碧蓝
+  黛朵:
+    tag: "dido_(azur_lane), blue hair, pink eyes, huge breasts"
+    source: 碧蓝
+  长门:
+    tag: "nagato_(azur_lane), black hair, long hair, yellow eyes"
+    source: 碧蓝
+  天狼星:
+    tag: "sirius_(azur_lane), red eyes, medium hair, white hair, huge breasts"
+    source: 碧蓝
+  光辉:
+    tag: "illustrious_(azur_lane), white hair, tri tails, blue eyes, long hair, huge breasts"
+    source: 碧蓝
+  赤城:
+    tag: "akagi_(azur_lane), fox ears, brown hair, red eyes, multiple tails, huge breasts"
+    source: 碧蓝
+  加贺:
+    tag: "kaga_(azur_lane), fox ears, white hair, blue eyes, medium hair, medium breasts"
+    source: 碧蓝
+  布莱莫顿:
+    tag: "Bremerton_(Azur_Lane)"
+    source: 碧蓝
+  Prinz_Eugen_(Azur_Lane):
+    tag: "Prinz_Eugen_(Azur_Lane)"
+    source: 碧蓝
+  独角兽:
+    tag: "unicorn_(azur_lane), {loli}, purple hair, single hair bun"
+    source: 碧蓝
+  凌波:
+    tag: "Ayanami_(Azur_Lane), loli"
+    source: 碧蓝
+  文月:
+    tag: "fumizuki (azur lane), loli"
+    source: 碧蓝
+  才羽モモイ:
+    tag: "momoi_(blue_archive), animal_ears, blonde_hair, fake_animal_ears, headphones, animal_ear_headphones, bow, cat_ear_headphones, halo, bangs, hair_bow, short_hair, pink_eyes, tail, cat_tail, red_bow, red_eyes, cat_ears"
+    source: 蔚蓝
+  羽川ハスミ:
+    tag: "hasumi_(blue_archive), black_hair, breasts, long_hair, hair_between_eyes, red_eyes, halo, mole, wings, very_long_hair, mole_under_eye, black_wings, large_breasts, ponytail, huge_breasts, low_wings, feathered_wings, bangs"
+    source: 蔚蓝
+  和纱:
+    tag: "kazusa_(blue_archive), animal_ears, black_hair, short_hair, halo, bangs, colored_inner_hair, multicolored_hair, pink_hair, cat_ears, two-tone_hair, hair_ornament, hairclip, red_eyes, pink_eyes, breasts"
+    source: 蔚蓝
+  无月:
+    tag: "mutsuki_(blue_archive), long_hair, bangs, halo, hair_ornament, white_hair, purple_eyes, side_ponytail, hair_flower, grey_hair, very_long_hair, pointy_ears"
+    source: 蔚蓝
+  诺亚:
+    tag: "noa_(blue_archive), long_hair, purple_eyes, halo, bangs, breasts, grey_hair, very_long_hair, white_hair, large_breasts, mechanical_halo, headphones, sidelocks"
+    source: 蔚蓝
+  才羽ミドリ:
+    tag: "midori_(blue_archive), blonde_hair, green_eyes, animal_ear_headphones, animal_ears, bow, fake_animal_ears, halo, headphones, cat_ear_headphones, bangs, hair_bow, tail, cat_tail, short_hair, sidelocks"
+    source: 蔚蓝
+  明日奈:
+    tag: "asuna_(bunny)_(blue_archive), blue eyes, blue halo, light brown hair"
+    source: 蔚蓝
+  花凛:
+    tag: "karin_(bunny)_(blue_archive), black hair, dark-skinned female, yellow eyes, very long hair"
+    source: 蔚蓝
+  未花:
+    tag: "mika_(blue_archive), angel wings, pink hair, yellow eyes"
+    source: 蔚蓝
+  Asuna-(Blue-Archive):
+    tag: "Asuna_(Blue_Archive)"
+    source: 蔚蓝
+  优香:
+    tag: "yuuka_(blue_archive), {loli}"
+    source: 蔚蓝
+  白子:
+    tag: "shiroko_(blue_archive), {loli}"
+    source: 蔚蓝
+  Toki-(Blue-Archive):
+    tag: "Toki_(Blue_Archive)"
+    source: 蔚蓝
+  Hina-(Blue-Archive):
+    tag: "Hina_(Blue_Archive)"
+    source: 蔚蓝
+  小春:
+    tag: "Koharu_(Blue_Archive), {loli}, pink hair"
+    source: 蔚蓝
+  爱丽丝:
+    tag: "Aris_(Blue_Archive), {loli}"
+    source: 蔚蓝
+  Karin-(Blue-Archive):
+    tag: "Karin_(Blue_Archive)"
+    source: 蔚蓝
+  Toki_(Bunny)-(Blue-Archive):
+    tag: "Toki (Bunny)_(Blue_Archive)"
+    source: 蔚蓝
+  小鸟游星野:
+    tag: "hoshino_(blue_archive), {loli}, pink halo, heterochromia, pink hair"
+    source: 蔚蓝
+  霞泽美游:
+    tag: "miyu_(blue_archive), {loli}, grey halo, blue serafuku, white pantyhose"
+    source: 蔚蓝
+  妃咲:
+    tag: "Kisaki_(Blue_Archive)"
+    source: 蔚蓝
+  Mari-(Blue-Archive):
+    tag: "Mari_(Blue_Archive)"
+    source: 蔚蓝
+  阿露:
+    tag: "Aru_(Blue_Archive)"
+    source: 蔚蓝
+  Ui-(Blue-Archive):
+    tag: "Ui_(Blue_Archive)"
+    source: 蔚蓝
+  Hanako-(Blue-Archive):
+    tag: "Hanako_(Blue_Archive)"
+    source: 蔚蓝
+  普拉娜:
+    tag: "Plana (Blue Archive), {loli}"
+    source: 蔚蓝
+  ミミ:
+    tag: "mimi_(princess connect!), pink_hair, loli"
+    source: 番剧
+  ミソギ:
+    tag: "misogi_(princess connect!), orange_hair, loli"
+    source: 番剧
+  白咲花:
+    tag: "shirosaki hana, loli, hair flower, sailor dress, black hair"
+    source: 番剧
+  姬坂乃爱:
+    tag: "himesaka noa, loli, hair bow, red bow, green eyes"
+    source: 番剧
+  GawrGura:
+    tag: "Gawr Gura(Hololive), multicolored hair, gawr_gura"
+    source: 番剧
+  狂三:
+    tag: "tokisaki kurumi"
+    source: 番剧
+  琴里:
+    tag: "itsuka kotori"
+    source: 番剧
+
+较小概率选中:
+  雪未来:
+    tag: "yuki miku, snowflakes"
+    source: 番剧
+  樱未来:
+    tag: "sakura miku, cherry hair ornament, cherry, cherry hat ornament, cherry blossoms, pink thighhighs, pink theme, pink skirt, pink eyes, twintails, long hair, very long hair"
+    source: 番剧
+  芙蕾:
+    tag: "frey_(machine-doll), {loli}, silver hair, arm belt, purple scarf, side ponytail, garter straps, underbust, big breast"
+    source: 番剧
