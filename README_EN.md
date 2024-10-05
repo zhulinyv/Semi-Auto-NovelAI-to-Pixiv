@@ -228,7 +228,12 @@ This project uses [novelai-image-metadata](https://github.com/NovelAI/novelai-im
 
 This project uses [SmilingWolf/wd-tagger](https://huggingface.co/spaces/SmilingWolf/wd-tagger) to inferr Prompts.
 
-This project uses [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) to process tile redrawing slice seams
+This project uses [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) to process tile redrawing slice seams.
+
+This project uses some of the art style strings provided by the [3300画风法典] (https://docs.qq.com/sheet/DZWZMemxNZkpVR0VB).
+
+This item uses a variety of actions provided by [涩涩法典梦神版](QQ:3298853270).
+
 
 > [!NOTE]
 > Falling, falling.

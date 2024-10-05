@@ -230,6 +230,11 @@
 
 本项目使用 [rife-ncnn-vulkan](https://github.com/nihui/rife-ncnn-vulkan) 处理分块重绘图片接缝
 
+本项目使用 [300画风法典](https://docs.qq.com/sheet/DZWZMemxNZkpVR0VB) 提供的部分画风串
+
+本项目使用 [涩涩法典梦神版](qq:3298853270) 提供的各种动作提示词
+
+
 > [!NOTE]
 > 坠落, 坠落。
 
