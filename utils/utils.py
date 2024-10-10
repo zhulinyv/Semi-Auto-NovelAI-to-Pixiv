@@ -11,6 +11,7 @@ from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
 
+import gradio as gr
 import requests
 import ujson as json
 import yaml
@@ -406,6 +407,29 @@ def return_names_list(d: dict):
     names_list = return_keys_list(cancel_probabilities_for_item(d))
     names_list.append("随机")
     return names_list
+
+
+def update_t2i_nsf_dropdown_list():
+    characters_file = read_yaml("./files/favorites/characters.yaml")
+    actions_file = read_yaml("./files/favorites/actions.yaml")
+    return (
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/artists.yaml")), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/prefixes.yaml")), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/negative.yaml")), visible=True),
+        gr.update(
+            choices=["随机"] + return_source_or_type_list(cancel_probabilities_for_item(characters_file)),
+            visible=True,
+        ),
+        gr.update(choices=return_names_list(characters_file), visible=True),
+        gr.update(
+            choices=["随机"] + return_source_or_type_list(cancel_probabilities_for_item(actions_file)),
+            visible=True,
+        ),
+        gr.update(choices=return_names_list(actions_file), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/emotions.yaml")), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/surroundings.yaml")), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/stains.yaml")), visible=True),
+    )
 
 
 def file_path2name(path) -> str:

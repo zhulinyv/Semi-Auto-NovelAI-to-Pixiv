@@ -17,7 +17,8 @@
         "noise_schedule": "Noise Schedule",
         "steps": "Sampling Steps",
         "smdyn": "sm_dyn (Enable requires sm to be enabled)",
-        "seed": "Random Seed"
+        "seed": "Random Seed",
+        "update_dropdown_list": "Update list"
     },
     "i2i": {
         "tab": "Img2Img",

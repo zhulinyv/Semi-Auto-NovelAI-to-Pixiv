@@ -41,6 +41,7 @@ def main():
         NOISE_SCHEDULE,
         RESOLUTION,
         SAMPLER,
+        cancel_probabilities_for_item,
         gen_script,
         open_folder,
         read_json,
@@ -48,6 +49,8 @@ def main():
         read_yaml,
         return_names_list,
         return_random,
+        return_source_or_type_list,
+        update_t2i_nsf_dropdown_list,
     )
 
     # ------------------------------ #
@@ -193,14 +196,26 @@ def main():
                         label="固定负面",
                     )
                 with gr.Row():
-                    text2image_nsfw_fixed_source = gr.Dropdown(choices=["随机"], value="随机", label="固定角色出处")
+                    text2image_nsfw_fixed_source = gr.Dropdown(
+                        choices=["随机"]
+                        + return_source_or_type_list(
+                            cancel_probabilities_for_item(read_yaml("./files/favorites/characters.yaml"))
+                        ),
+                        value="随机",
+                        label="固定角色出处",
+                    )
                     text2image_nsfw_fixed_character = gr.Dropdown(
                         choices=return_names_list(read_yaml("./files/favorites/characters.yaml")),
                         value="随机",
                         label="固定角色",
                     )
                     text2image_nsfw_fixed_action_type = gr.Dropdown(
-                        choices=["随机"], value="随机", label="固定动作类型"
+                        choices=["随机"]
+                        + return_source_or_type_list(
+                            cancel_probabilities_for_item(read_yaml("./files/favorites/actions.yaml"))
+                        ),
+                        value="随机",
+                        label="固定动作类型",
                     )
                     text2image_nsfw_fixed_action = gr.Dropdown(
                         choices=return_names_list(read_yaml("./files/favorites/actions.yaml")),
@@ -224,13 +239,14 @@ def main():
                         label="固定污渍",
                     )
                 with gr.Row():
-                    text2image_nsfw_generate_button = gr.Button(webui_language["t2i"]["generate_button"], scale=2)
+                    text2image_nsfw_update_dropdown_list_button = gr.Button(
+                        webui_language["t2i"]["update_dropdown_list"]
+                    )
+                    text2image_nsfw_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
                     text2image_nsfw_generate_forever_button = gr.Button(
-                        webui_language["random blue picture"]["generate_forever"], scale=1
+                        webui_language["random blue picture"]["generate_forever"]
                     )
-                    text2image_nsfw_stop_button = gr.Button(
-                        webui_language["random blue picture"]["stop_button"], scale=1
-                    )
+                    text2image_nsfw_stop_button = gr.Button(webui_language["random blue picture"]["stop_button"])
                 with gr.Row():
                     text2image_nsfw_output_image = gr.Image()
                     text2image_nsfw_forever_output_image = gr.Image()
@@ -303,6 +319,22 @@ def main():
                         text2image_nsfw_fixed_fixed_stains,
                     ],
                     outputs=None,
+                )
+                text2image_nsfw_update_dropdown_list_button.click(
+                    update_t2i_nsf_dropdown_list,
+                    inputs=None,
+                    outputs=[
+                        text2image_nsfw_fixed_artist,
+                        text2image_nsfw_fixed_prefix,
+                        text2image_nsfw_fixed_negative,
+                        text2image_nsfw_fixed_source,
+                        text2image_nsfw_fixed_character,
+                        text2image_nsfw_fixed_action_type,
+                        text2image_nsfw_fixed_action,
+                        text2image_nsfw_fixed_emotion,
+                        text2image_nsfw_fixed_surrounding,
+                        text2image_nsfw_fixed_fixed_stains,
+                    ],
                 )
             with gr.Tab(webui_language["random picture"]["tab"]):
                 with gr.Row():

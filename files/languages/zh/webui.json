@@ -17,7 +17,8 @@
         "noise_schedule": "噪声计划表",
         "steps": "采样步数",
         "smdyn": "sm_dyn(开启需同时开启 sm)",
-        "seed": "随机种子"
+        "seed": "随机种子",
+        "update_dropdown_list": "更新列表"
     },
     "i2i": {
         "tab": "图生图",
