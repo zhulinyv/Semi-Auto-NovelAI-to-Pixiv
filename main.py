@@ -8,6 +8,7 @@ from utils.prepare import logger
 
 
 def main():
+    import os
     from pathlib import Path
 
     from src.batch_inpaint import for_webui as inpaint
@@ -57,6 +58,17 @@ def main():
 
     webui_language = read_json(f"./files/languages/{env.webui_lang}/webui.json")
 
+    default_positive_input = (
+        webui_language["example"]["positive"]
+        if not os.path.exists("start.json")
+        else read_json("start.json")["positive"]
+    )
+    default_negative_input = (
+        webui_language["example"]["negative"]
+        if not os.path.exists("start.json")
+        else read_json("start.json")["negative"]
+    )
+
     # ------------------------------ #
 
     def open_output_folder_block(output_folder):
@@ -85,13 +97,13 @@ def main():
                 with gr.Column():
                     with gr.Column(scale=3):
                         text2image_positive_input = gr.Textbox(
-                            value=webui_language["example"]["positive"],
+                            value=default_positive_input,
                             lines=2,
                             label=webui_language["t2i"]["positive"],
                         )
                         with gr.Row():
                             text2image_negative_input = gr.Textbox(
-                                value=webui_language["example"]["negative"],
+                                value=default_negative_input,
                                 lines=2,
                                 label=webui_language["t2i"]["negative"],
                                 scale=3,
@@ -416,13 +428,13 @@ def main():
                 with gr.Column():
                     with gr.Column(scale=3):
                         vibe_transfer_positive_input = gr.Textbox(
-                            value=webui_language["example"]["positive"],
+                            value=default_positive_input,
                             lines=2,
                             label=webui_language["t2i"]["positive"],
                         )
                         with gr.Row():
                             vibe_transfer_negative_input = gr.Textbox(
-                                value=webui_language["example"]["negative"],
+                                value=default_negative_input,
                                 lines=2,
                                 label=webui_language["t2i"]["negative"],
                                 scale=3,
@@ -520,13 +532,13 @@ def main():
                 with gr.Column():
                     with gr.Column():
                         image2image_positive_input = gr.Textbox(
-                            value=webui_language["example"]["positive"],
+                            value=default_positive_input,
                             lines=2,
                             label=webui_language["t2i"]["positive"],
                         )
                         with gr.Row():
                             image2image_negative_input = gr.Textbox(
-                                value=webui_language["example"]["negative"],
+                                value=default_negative_input,
                                 lines=3,
                                 label=webui_language["t2i"]["negative"],
                                 scale=3,
@@ -686,7 +698,7 @@ def main():
                             scale=1,
                         )
                     movie2movie_negative = gr.Textbox(
-                        webui_language["example"]["negative"],
+                        default_negative_input,
                         label=webui_language["t2i"]["negative"],
                         lines=2,
                     )
@@ -780,7 +792,7 @@ def main():
                         tiled_upscale_img_path = gr.Textbox(value=None, label=webui_language["tile"]["img_path"])
                         tiled_upscale_positive_input = gr.Textbox("", lines=2, label=webui_language["tile"]["positive"])
                         tiled_upscale_negative_input = gr.Textbox(
-                            webui_language["example"]["negative"],
+                            default_negative_input,
                             label="负面提示词",
                             lines=3,
                         )
@@ -837,13 +849,13 @@ def main():
                 with gr.Column():
                     with gr.Column():
                         inpaint_positive_input = gr.Textbox(
-                            value=webui_language["example"]["positive"],
+                            value=default_positive_input,
                             lines=2,
                             label=webui_language["t2i"]["positive"],
                         )
                         with gr.Row():
                             inpaint_negative_input = gr.Textbox(
-                                value=webui_language["example"]["negative"],
+                                value=default_negative_input,
                                 lines=3,
                                 label=webui_language["t2i"]["negative"],
                                 scale=3,

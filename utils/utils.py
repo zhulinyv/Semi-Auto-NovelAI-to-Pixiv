@@ -141,6 +141,9 @@ def generate_image(json_data):
     Returns:
         (bytes): 二进制图片
     """
+    with open("start.json", "w") as f:
+        json.dump({"positive": json_data["input"], "negative": json_data["parameters"]["negative_prompt"]}, f)
+
     try:
         rep = requests.post(
             "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
