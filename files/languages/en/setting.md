@@ -35,5 +35,5 @@ emotions.yaml: Emoticons
 negative.yaml: Negative
 prefixes.yaml: Quality word
 stains.yaml: stains
-surroundings.yaml scene
+surroundings.yaml: scene
 ```
