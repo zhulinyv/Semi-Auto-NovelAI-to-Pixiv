@@ -252,7 +252,7 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
 
     if img_data:
         if seed and choose_game and choose_character:
-            saved_path = f"./output/{type_}{path}/{seed}_{choose_game}_{choose_character}.png"
+            saved_path = f"./output/{type_}{path}/{seed}{generate_random_str(6)}_{choose_game}_{choose_character}.png"
             with open(saved_path, "wb") as file:
                 file.write(img_data)
         else:
