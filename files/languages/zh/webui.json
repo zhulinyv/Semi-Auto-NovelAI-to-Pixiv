@@ -17,7 +17,8 @@
         "noise_schedule": "噪声计划表",
         "steps": "采样步数",
         "smdyn": "sm_dyn(开启需同时开启 sm)",
-        "seed": "随机种子"
+        "seed": "随机种子",
+        "update_dropdown_list": "更新列表"
     },
     "i2i": {
         "tab": "图生图",
@@ -29,7 +30,7 @@
     },
     "random blue picture": {
         "tab": "随机蓝图",
-        "description": "> 通过随机组合 ./files/favorite.json 中的 tag 生成一张蓝图",
+        "description": "> 通过随机组合 ./files/favorite 中的 tag 生成一张蓝图",
         "generate_forever": "无限生成",
         "stop_button": "停止生成"
     },
@@ -123,8 +124,7 @@
         "tab": "配置设置",
         "sub_tab": {
             "necessary": "Token",
-            "t2i": "文生图",
-            "i2i": "图生图",
+            "t2i": "图片生成",
             "pixiv": "上传 Pixiv",
             "mosaic": "马赛克",
             "eraser": "抹除信息",
@@ -133,7 +133,7 @@
         },
         "description": {
             "token": "生成图片需要的 token",
-            "img_size": "生成图片的分辨率",
+            "img_size": "生成图片的分辨率(大分辨率注意点数消耗)",
             "scale": "提示词相关性",
             "censor": "是否对生成的图片打码",
             "sampler": "采样器",
@@ -216,7 +216,6 @@
             "audio_path": "音频路径(*.mp3)",
             "merge_audio": "是否并入音频"
         }
-        
     },
     "tile": {
         "tab": "分块重绘",
@@ -229,7 +228,7 @@
     "plugin": {
         "tab": "插件商店"
     },
-    "tagger":  {
+    "tagger": {
         "model_repo": "模型存储库",
         "general_thresh": "通用标签阈值",
         "general_mcut_enabled": "使用MCut阈值",
@@ -240,5 +239,20 @@
         "rating": "评级",
         "character_res": "输出（字符）",
         "general_res": "输出（标签）"
-        }
+    },
+    "director_tools": {
+        "title": "导演工具",
+        "description": "> 使用各种 AI 工具编辑您的图像。",
+        "remove_bg": "去除背景",
+        "masked": "蒙版",
+        "generated": "生成",
+        "blend": "混合",
+        "line_art": "线条画",
+        "sketch": "素描",
+        "colorize": "上色",
+        "defry": "去污",
+        "prompt": "提示（可选）",
+        "emotion": "表情",
+        "declutter": "整理"
+    }
 }

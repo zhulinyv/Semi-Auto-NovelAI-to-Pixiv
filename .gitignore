@@ -7,7 +7,7 @@ venv
 temp.*
 files/else_upscale_engine
 files/prompt
-files/favorite.json
+files/favorites
 stand_alone_scripts.py
 rife
 rife-anime
@@ -23,3 +23,4 @@ rife-v4.13-lite
 rife-v4.14
 plugins
 run_stand_alone_scripts.bat
+start.json

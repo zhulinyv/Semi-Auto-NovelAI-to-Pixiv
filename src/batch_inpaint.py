@@ -29,7 +29,7 @@ def for_webui(
 ):
     if open_button:
         main(input_path, mask_path)
-        return None, "处理完成, 图片已保存到 ./output/inpaint..."
+        return None, "处理完成! 图片已保存到 ./output/inpaint..."
     else:
         (inpaint_input_image["background"]).save("./output/temp_inpaint_img.png")
         (inpaint_input_image["layers"][0]).save("./output/temp_inpaint_mask.png")

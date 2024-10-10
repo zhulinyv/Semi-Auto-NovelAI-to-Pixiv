@@ -1,0 +1,14 @@
+# 质量词文件
+
+较大概率选中:
+  空前缀:
+    tag: ""
+
+中等概率选中:
+  常用质量词:
+    tag: "best quality, amazing quality, very aesthetic"
+
+较小概率选中:
+  简单质量词:
+    tag: "best quality"
+

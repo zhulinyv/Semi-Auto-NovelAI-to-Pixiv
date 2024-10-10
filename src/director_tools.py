@@ -119,16 +119,28 @@ def director_tools_colorize(
     director_tools_colorize_defry,
     director_tools_colorize_prompt,
     director_tools_colorize_image: Image.Image,
+    director_tools_colorize_image_path,
+    director_tools_colorize_batch_switch,
 ):
-    logger.info("正在处理...")
-    w, h = director_tools_colorize_image.size
-    json_for_colorize["width"] = w
-    json_for_colorize["height"] = h
-    json_for_colorize["defry"] = director_tools_colorize_defry
-    json_for_colorize["prompt"] = director_tools_colorize_prompt
-    json_for_colorize["image"] = img_to_base64(director_tools_colorize_image)
-    saved_path = save_image_for_director_tools("colorize", generate_image_for_director_tools(json_for_colorize))
-    return saved_path
+    if director_tools_colorize_batch_switch:
+        image_list = file_namel2pathl(
+            file_path2list(director_tools_colorize_image_path), director_tools_colorize_image_path
+        )
+    else:
+        director_tools_colorize_image.save("./output/temp.png")
+        image_list = ["./output/temp.png"]
+
+    for image in image_list:
+        logger.info("正在处理...")
+        with Image.open(image) as img:
+            w, h = img.size
+        json_for_colorize["width"] = w
+        json_for_colorize["height"] = h
+        json_for_colorize["defry"] = director_tools_colorize_defry
+        json_for_colorize["prompt"] = director_tools_colorize_prompt
+        json_for_colorize["image"] = img_to_base64(image)
+        saved_path = save_image_for_director_tools("colorize", generate_image_for_director_tools(json_for_colorize))
+    return saved_path, "处理完成! 图片已保存到 ./output/colorize"
 
 
 def director_tools_emotion(
@@ -136,27 +148,39 @@ def director_tools_emotion(
     director_tools_emotion_defry,
     director_tools_emotion_prompt,
     director_tools_emotion_image: Image.Image,
+    director_tools_emotion_image_path,
+    director_tools_emotion_batch_switch,
 ):
-    logger.info("正在处理...")
-    w, h = director_tools_emotion_image.size
-    json_for_emotion["width"] = w
-    json_for_emotion["height"] = h
-    if director_tools_emotion_defry == "Normal":
-        defry = 0
-    elif director_tools_emotion_defry == "Slightly Weak":
-        defry = 1
-    elif director_tools_emotion_defry == "Weak":
-        defry = 2
-    elif director_tools_emotion_defry == "Even Weaker":
-        defry = 3
-    elif director_tools_emotion_defry == "Very Weak":
-        defry = 4
-    elif director_tools_emotion_defry == "Weakest":
-        defry = 5
-    json_for_emotion["defry"] = defry
-    prompt = f"{director_tools_emotion_emotion.lower()};;{director_tools_emotion_prompt}"
-    logger.debug(f"Prompt: {prompt}")
-    json_for_emotion["prompt"] = prompt
-    json_for_emotion["image"] = img_to_base64(director_tools_emotion_image)
-    saved_path = save_image_for_director_tools("emotion", generate_image_for_director_tools(json_for_emotion))
-    return saved_path
+    if director_tools_emotion_batch_switch:
+        image_list = file_namel2pathl(
+            file_path2list(director_tools_emotion_image_path), director_tools_emotion_image_path
+        )
+    else:
+        director_tools_emotion_image.save("./output/temp.png")
+        image_list = ["./output/temp.png"]
+
+    for image in image_list:
+        logger.info("正在处理...")
+        with Image.open(image) as img:
+            w, h = img.size
+        json_for_emotion["width"] = w
+        json_for_emotion["height"] = h
+        if director_tools_emotion_defry == "Normal":
+            defry = 0
+        elif director_tools_emotion_defry == "Slightly Weak":
+            defry = 1
+        elif director_tools_emotion_defry == "Weak":
+            defry = 2
+        elif director_tools_emotion_defry == "Even Weaker":
+            defry = 3
+        elif director_tools_emotion_defry == "Very Weak":
+            defry = 4
+        elif director_tools_emotion_defry == "Weakest":
+            defry = 5
+        json_for_emotion["defry"] = defry
+        prompt = f"{director_tools_emotion_emotion.lower()};;{director_tools_emotion_prompt}"
+        logger.debug(f"Prompt: {prompt}")
+        json_for_emotion["prompt"] = prompt
+        json_for_emotion["image"] = img_to_base64(image)
+        saved_path = save_image_for_director_tools("emotion", generate_image_for_director_tools(json_for_emotion))
+    return saved_path, "处理完成! 图片已保存到 ./output/emotion"

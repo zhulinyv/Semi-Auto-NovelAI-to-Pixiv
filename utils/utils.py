@@ -11,13 +11,17 @@ from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
 
+import gradio as gr
 import requests
 import ujson as json
+import yaml
 from PIL import Image
 
 from utils.env import env
 from utils.jsondata import headers
 from utils.prepare import logger
+
+PATH = os.getcwd()
 
 RESOLUTION = [
     "832x1216",
@@ -41,6 +45,7 @@ SAMPLER = [
     "ddim_v3",
 ]
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
+
 
 if env.proxy != "xxx:xxx":
     proxies = {
@@ -66,8 +71,8 @@ def format_str(str_: str):
     """
     str_ = str_.replace(", ", ",")
     str_ = str_.replace(",,", ",")
+    str_ = str_.replace(",,,", ",")
     str_ = str_.replace(",", ", ")
-    str_ = str_.replace(", ,", ", ")
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
 
@@ -136,6 +141,9 @@ def generate_image(json_data):
     Returns:
         (bytes): 二进制图片
     """
+    with open("start.json", "w") as f:
+        json.dump({"positive": json_data["input"], "negative": json_data["parameters"]["negative_prompt"]}, f)
+
     try:
         rep = requests.post(
             "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
@@ -215,31 +223,36 @@ def save_image(img_data, type_, seed, choose_game, choose_character, *args):
     elif env.save_path == "日期(Date)":
         path = f"/{date.today()}"
     elif env.save_path == "角色(Character)":
-        path = f"/{choose_character}"
+        if choose_character:
+            path = f"/{choose_character}"
+        else:
+            path = ""
     elif env.save_path == "出处(Origin)":
-        path = f"/{choose_game}"
+        if choose_character:
+            path = f"/{choose_game}"
+        else:
+            path = ""
     elif env.save_path == "画风(Artists)":
         with Image.open(BytesIO(img_data)) as image:
             info = image.info
             prompt = json.loads(info["Comment"])["prompt"]
-        data = read_json("./files/favorite.json")
-        weight_list = list(data["artists"]["belief"].keys())
-        for weight in weight_list:
-            artist_list = list(data["artists"]["belief"][weight].keys())
-            for artist in artist_list:
-                artists = list_to_str(data["artists"]["belief"][weight][artist][0])
-                if artists in prompt:
-                    path = f"/{artist}"
-                else:
-                    path = ""
+        artists_data = read_yaml("./files/favorites/artists.yaml")
+        artists_data = cancel_probabilities_for_item(artists_data)
+        for artist in list(artists_data.keys()):
+            artists = artists_data[artist]["tag"]
+            if format_str(artists) in prompt:
+                path = f"/{artist}"
+            else:
+                path = ""
     else:
         path = ""
     if not os.path.exists(f"./output/{type_}{path}"):
+        os.chdir(PATH)
         os.mkdir(f"./output/{type_}{path}")
 
     if img_data:
         if seed and choose_game and choose_character:
-            saved_path = f"./output/{type_}{path}/{seed}_{choose_game}_{choose_character}.png"
+            saved_path = f"./output/{type_}{path}/{seed}{generate_random_str(6)}_{choose_game}_{choose_character}.png"
             with open(saved_path, "wb") as file:
                 file.write(img_data)
         else:
@@ -317,6 +330,109 @@ def read_txt(path):
     """
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
+
+
+def read_yaml(path):
+    """读取 *.yaml 文件
+
+    Args:
+        path (str|WindowsPath): 文件路径
+
+    Returns:
+        (dict): 数据
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.load(f, Loader=yaml.FullLoader)
+
+
+def choose_item(data):
+    item = None
+    while item is None:
+        possibility = random.random()
+        if possibility >= 0.5:
+            choice = "较大概率选中"
+        elif possibility >= 0.15:
+            choice = "中等概率选中"
+        elif possibility >= 0.0:
+            choice = "较小概率选中"
+        if data[choice] is None:
+            item = None
+        else:
+            name = random.choice(list(data[choice].keys()))
+            item = data[choice][name]
+    return name, item
+
+
+def cancel_probabilities_for_item(d: dict):
+    n = {}
+    for k, v in d.items():
+        try:
+            n.update(v)
+        except TypeError:
+            pass
+    return n
+
+
+def return_keys_list(d: dict):
+    keys_list = list(d.keys())
+    return keys_list
+
+
+def return_source_or_type_list(d: dict):
+    sources = []
+    for name in return_keys_list(d):
+        try:
+            source = d[name]["source"]
+        except KeyError:
+            source = d[name]["type"]
+        if source not in sources:
+            sources.append(source)
+    return sources
+
+
+def return_source_or_type_dict(d: dict):
+    n = {}
+    d = cancel_probabilities_for_item(d)
+    for source in return_source_or_type_list(d):
+        n.update({source: {}})
+
+    for name in return_keys_list(d):
+        try:
+            n[(d[name]["source"])][name] = {"tag": d[name]["tag"]}
+
+        except KeyError:
+            n[(d[name]["type"])][name] = {"tag": d[name]["tag"]}
+
+    return n
+
+
+def return_names_list(d: dict):
+    names_list = return_keys_list(cancel_probabilities_for_item(d))
+    names_list.append("随机")
+    return names_list
+
+
+def update_t2i_nsf_dropdown_list():
+    characters_file = read_yaml("./files/favorites/characters.yaml")
+    actions_file = read_yaml("./files/favorites/actions.yaml")
+    return (
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/artists.yaml")), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/prefixes.yaml")), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/negative.yaml")), visible=True),
+        gr.update(
+            choices=["随机"] + return_source_or_type_list(cancel_probabilities_for_item(characters_file)),
+            visible=True,
+        ),
+        gr.update(choices=return_names_list(characters_file), visible=True),
+        gr.update(
+            choices=["随机"] + return_source_or_type_list(cancel_probabilities_for_item(actions_file)),
+            visible=True,
+        ),
+        gr.update(choices=return_names_list(actions_file), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/emotions.yaml")), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/surroundings.yaml")), visible=True),
+        gr.update(choices=return_names_list(read_yaml("./files/favorites/stains.yaml")), visible=True),
+    )
 
 
 def file_path2name(path) -> str:
@@ -438,9 +554,9 @@ while 1:
     times += 1
     info = "正在生成第 " + str(times) + " 张图片..."
     logger.info(info)
-    t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {}, {})
+    t2i(True, "{}", "{}", "{}", "{}", \"\"\"{}\"\"\", {})
 """.format(
-                    args[0], args[1], args[2], args[3], args[4], args[5], args[6]
+                    args[0], args[1], args[2], args[3], args[4], args[5]
                 )
             )
         elif script_type == "随机图片":

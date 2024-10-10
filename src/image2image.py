@@ -29,7 +29,7 @@ def i2i_by_hand(
 ):
     if open_button:
         main(input_path)
-        return None, "处理完成"
+        return None, "处理完成!"
     else:
         logger.info("正在生成...")
 
@@ -41,8 +41,8 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["steps"] = steps
         json_for_i2i["parameters"]["strength"] = strength
         json_for_i2i["parameters"]["noise"] = noise
-        json_for_i2i["parameters"]["sm"] = sm
-        json_for_i2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
+        json_for_i2i["parameters"]["sm"] = False
+        json_for_i2i["parameters"]["sm_dyn"] = False
         json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
         seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
         json_for_i2i["parameters"]["seed"] = seed
@@ -70,8 +70,8 @@ def prepare_json(imginfo: dict, imgpath):
     json_for_i2i["parameters"]["steps"] = img_comment["steps"]
     json_for_i2i["parameters"]["strength"] = env.hires_strength
     json_for_i2i["parameters"]["noise"] = env.hires_noise
-    json_for_i2i["parameters"]["sm"] = img_comment["sm"]
-    json_for_i2i["parameters"]["sm_dyn"] = img_comment["sm_dyn"]
+    json_for_i2i["parameters"]["sm"] = False
+    json_for_i2i["parameters"]["sm_dyn"] = False
     json_for_i2i["parameters"]["noise_schedule"] = img_comment["noise_schedule"]
     json_for_i2i["parameters"]["seed"] = seed
     json_for_i2i["parameters"]["image"] = img_to_base64(imgpath)
@@ -89,15 +89,15 @@ def main(input_path):
         times = 1
         while times <= 5:
             try:
-                logger.info(f"正在放大: {img}...")
-                info_list = img.replace(".png", "").split("_")
+                logger.info(f"正在图生图: {img}...")
                 img_path = i2i_path / img
                 saved_path = save_image(
                     generate_image(prepare_json(get_img_info(img_path), img_path)),
                     "i2i",
-                    info_list[0],
-                    info_list[1],
-                    info_list[2],
+                    None,
+                    None,
+                    None,
+                    img.replace(".jpg", ""),
                 )
                 if saved_path != "寄":
                     logger.warning("删除小图...")
@@ -111,6 +111,3 @@ def main(input_path):
                 times += 1
                 logger.error(f"出现错误: {e}")
                 logger.warning(f"重试 {times-1}/5...")
-            except KeyboardInterrupt:
-                logger.warning("程序退出...")
-                quit()

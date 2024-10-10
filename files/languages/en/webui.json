@@ -17,7 +17,8 @@
         "noise_schedule": "Noise Schedule",
         "steps": "Sampling Steps",
         "smdyn": "sm_dyn (Enable requires sm to be enabled)",
-        "seed": "Random Seed"
+        "seed": "Random Seed",
+        "update_dropdown_list": "Update list"
     },
     "i2i": {
         "tab": "Img2Img",
@@ -29,7 +30,7 @@
     },
     "random blue picture": {
         "tab": "Random Blue Picture",
-        "description": "> Generates a blue picture by randomly combining tags from ./files/favorite.json",
+        "description": "> Generates a blue picture by randomly combining tags from ./files/favorite",
         "generate_forever": "Generate Infinitely",
         "stop_button": "Stop Generating"
     },
@@ -123,8 +124,7 @@
         "tab": "Configuration Settings",
         "sub_tab": {
             "necessary": "Token",
-            "t2i": "Text-to-Image",
-            "i2i": "Image-to-Image",
+            "t2i": "Image generation",
             "pixiv": "Upload to Pixiv",
             "mosaic": "Mosaic",
             "eraser": "Data Erasure",
@@ -133,7 +133,7 @@
         },
         "description": {
             "token": "Token required for generating images",
-            "img_size": "Resolution of generated images",
+            "img_size": "Resolution of generated images(Large-resolution note point consumption)",
             "scale": "Relevance of prompts",
             "censor": "Whether to mosaic generated images",
             "sampler": "Sampler",
@@ -216,7 +216,6 @@
             "audio_path": "Audio Path (*.mp3)",
             "merge_audio": "Merge Audio"
         }
-        
     },
     "tile": {
         "tab": "Chunked Redrawing",
@@ -240,5 +239,20 @@
         "rating": "Rating",
         "character_res": "Output (characters)",
         "general_res": "Output (tags)"
+    },
+    "director_tools": {
+        "title": "Director Tools",
+        "description": "> Use a variety of AI tools to edit your images.",
+        "remove_bg": "Remove BG",
+        "masked": "Masked",
+        "generated": "Generated",
+        "blend": "Blend",
+        "line_art": "Line Art",
+        "sketch": "Sketch",
+        "colorize": "Colorize",
+        "defry": "Defry",
+        "prompt": "Prompt (Optional)",
+        "emotion": "Emotion",
+        "declutter": "Declutter"
     }
 }

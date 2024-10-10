@@ -5,7 +5,7 @@ from urllib.request import getproxies
 
 from loguru import logger
 
-VERSION = "2.20.6"
+VERSION = "3.0.0"
 
 
 format_ = (
@@ -68,14 +68,16 @@ for dir in need_dir_list:
         os.mkdir(dir)
 
 
+if not os.path.exists("./files/favorites"):
+    shutil.copytree("./files/favorites_example", "./files/favorites")
+
+
 if not os.path.exists("./files/prompt/example.txt") and not os.path.exists("./files/prompt/done/example.txt"):
     with open("./files/prompt/example.txt", "w") as f:
         f.write(
             "[suimya, muririn], artist:ciloranko,[artist:sho_(sho_lwlw)],[[tianliang duohe fangdongye]], [eip (pepai)], [rukako], [[[memmo]]], [[[[[hoshi (snacherubi)]]]]], year 2023, 1girl, cute, loli,"
         )
 
-if not os.path.exists("./files/favorite.json"):
-    shutil.copyfile("./files/favorite_example.json", "./files/favorite.json")
 
 if not os.path.exists("run_stand_alone_scripts.bat"):
     with open("run_stand_alone_scripts.bat", "w") as f:

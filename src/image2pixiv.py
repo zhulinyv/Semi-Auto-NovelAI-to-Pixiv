@@ -17,7 +17,7 @@ from utils.pixivposter import pixiv_upload
 from utils.prepare import logger
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
-from utils.utils import file_path2list, format_str, list_to_str, read_json, sleep_for_cool
+from utils.utils import file_path2list, format_str, list_to_str, sleep_for_cool
 
 
 def upload(image_list, file):
@@ -62,61 +62,22 @@ def upload(image_list, file):
         img_comment = {"prompt": ""}
 
     # 标题
-    data = read_json("./files/favorite.json")
-    name_list = file.replace(".png", "").split("_")
+    name_list = file.replace(".png", "").replace(".jpg", "").split("_")
     name = name_list[2]
-    surrounding_title_list = list(data["title"]["surrounding"].keys())
-    action_title_list = list(data["title"]["action"].keys())
-    for k in surrounding_title_list:
-        if k in img_comment["prompt"]:
-            surrounding_title = random.choice(data["title"]["surrounding"][k])
-            break
-        else:
-            surrounding_title = None
-    for v in action_title_list:
-        if v in img_comment["prompt"]:
-            action_title = random.choice(data["title"]["action"][v])
-            break
-        else:
-            action_title = None
-    if name == "None":
-        title = "无题"
-    else:
-        if action_title:
-            title = f"{name}{action_title}~"
-        elif surrounding_title:
-            title = f"和{name}在{surrounding_title}~"
-        else:
-            title = f"{name}涩涩~"
-    # 标签
-    labels_list = (env.default_tag)[:]
-    try:
-        character_labels_list = list(data["labels"][name_list[1]].keys())
-    except Exception:
-        character_labels_list = []
-    description_labels_list = list(data["labels"]["description"].keys())
-    for i in character_labels_list:
-        for j in data["labels"][name_list[1]][i]:
-            labels_list.append(j) if i in img_comment["prompt"] else ...
-    for m in description_labels_list:
-        for n in data["labels"]["description"][m]:
-            labels_list.append(n) if m in img_comment["prompt"] else ...
-    while len(labels_list) > 10:
-        del labels_list[-1]
+
     # 预览
     logger.info(
         f"""
 图片: {image_list}
-标题: {title}
-描述: {caption}
-标签: {labels_list}"""
+标题: {name}
+描述: {caption}"""
     )
     # 状态
     status = pixiv_upload(
         image_paths=image_list,
-        title=title,
+        title=name,
         caption=caption,
-        labels=labels_list,
+        labels=["女の子"],
         cookie=env.pixiv_cookie,
         x_token=env.pixiv_token,
         allow_tag_edit=env.allow_tag_edit,
