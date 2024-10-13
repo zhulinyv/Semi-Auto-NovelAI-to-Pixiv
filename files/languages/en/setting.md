@@ -24,16 +24,3 @@ For example:
               └---5264942125_GenshinImpact_纳西妲.png
               └---4351819919_GenshinImpact_纳西妲.png
 ```
-
-- For random Blueprints, go to ./files/favorite and add your own configurations:
-
-```py
-actions.yaml: Actions
-artists.yaml: Painting style
-characters.yaml: role
-emotions.yaml: Emoticons
-negative.yaml: Negative
-prefixes.yaml: Quality word
-stains.yaml: stains
-surroundings.yaml: scene
-```
