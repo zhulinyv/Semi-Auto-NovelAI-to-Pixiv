@@ -39,10 +39,13 @@ def main():
     from utils.selector import copy_current_img, del_current_img, move_current_img, show_first_img, show_next_img
     from utils.update import check_update, update
     from utils.utils import (
+        FAVORTES_FILE,
         NOISE_SCHEDULE,
         RESOLUTION,
         SAMPLER,
+        add_item_for_yaml,
         cancel_probabilities_for_item,
+        del_item_for_yaml,
         gen_script,
         open_folder,
         read_json,
@@ -51,6 +54,7 @@ def main():
         return_names_list,
         return_random,
         return_source_or_type_list,
+        update_name_to_del_list,
         update_t2i_nsf_dropdown_list,
     )
 
@@ -185,169 +189,241 @@ def main():
                     outputs=text2image_output_image,
                 )
             with gr.Tab(webui_language["random blue picture"]["tab"]):
-                with gr.Row():
-                    with gr.Column(scale=6):
-                        gr.Markdown(webui_language["random blue picture"]["description"])
+                with gr.Tab(webui_language["random blue picture"]["tab"]):
                     with gr.Row():
-                        open_output_folder_block("t2i")
-                        generate_text2image_nsfw_script_button = gr.Button(webui_language["t2i"]["script_gen"])
-                with gr.Row():
-                    text2image_nsfw_fixed_artist = gr.Dropdown(
-                        choices=return_names_list(read_yaml("./files/favorites/artists.yaml")),
-                        value="随机",
-                        label="固定画风",
+                        with gr.Column(scale=6):
+                            gr.Markdown(webui_language["random blue picture"]["description"])
+                        with gr.Row():
+                            open_output_folder_block("t2i")
+                            generate_text2image_nsfw_script_button = gr.Button(webui_language["t2i"]["script_gen"])
+                    with gr.Row():
+                        text2image_nsfw_fixed_artist = gr.Dropdown(
+                            choices=return_names_list(read_yaml("./files/favorites/artists.yaml")),
+                            value="随机",
+                            label="固定画风",
+                        )
+                        text2image_nsfw_fixed_prefix = gr.Dropdown(
+                            choices=return_names_list(read_yaml("./files/favorites/prefixes.yaml")),
+                            value="随机",
+                            label="固定质量词",
+                        )
+                        text2image_nsfw_fixed_negative = gr.Dropdown(
+                            choices=return_names_list(read_yaml("./files/favorites/negative.yaml")),
+                            value="随机",
+                            label="固定负面",
+                        )
+                    with gr.Row():
+                        text2image_nsfw_fixed_source = gr.Dropdown(
+                            choices=["随机"]
+                            + return_source_or_type_list(
+                                cancel_probabilities_for_item(read_yaml("./files/favorites/characters.yaml"))
+                            ),
+                            value="随机",
+                            label="固定角色出处",
+                        )
+                        text2image_nsfw_fixed_character = gr.Dropdown(
+                            choices=return_names_list(read_yaml("./files/favorites/characters.yaml")),
+                            value="随机",
+                            label="固定角色",
+                        )
+                        text2image_nsfw_fixed_action_type = gr.Dropdown(
+                            choices=["随机"]
+                            + return_source_or_type_list(
+                                cancel_probabilities_for_item(read_yaml("./files/favorites/actions.yaml"))
+                            ),
+                            value="随机",
+                            label="固定动作类型",
+                        )
+                        text2image_nsfw_fixed_action = gr.Dropdown(
+                            choices=return_names_list(read_yaml("./files/favorites/actions.yaml")),
+                            value="随机",
+                            label="固定动作",
+                        )
+                    with gr.Row():
+                        text2image_nsfw_fixed_emotion = gr.Dropdown(
+                            choices=return_names_list(read_yaml("./files/favorites/emotions.yaml")),
+                            value="随机",
+                            label="固定表情",
+                        )
+                        text2image_nsfw_fixed_surrounding = gr.Dropdown(
+                            choices=return_names_list(read_yaml("./files/favorites/surroundings.yaml")),
+                            value="随机",
+                            label="固定场景",
+                        )
+                        text2image_nsfw_fixed_fixed_stains = gr.Dropdown(
+                            choices=return_names_list(read_yaml("./files/favorites/stains.yaml")),
+                            value="随机",
+                            label="固定污渍",
+                        )
+                    with gr.Row():
+                        text2image_nsfw_update_dropdown_list_button = gr.Button(
+                            webui_language["t2i"]["update_dropdown_list"]
+                        )
+                        text2image_nsfw_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
+                        text2image_nsfw_generate_forever_button = gr.Button(
+                            webui_language["random blue picture"]["generate_forever"]
+                        )
+                        text2image_nsfw_stop_button = gr.Button(webui_language["random blue picture"]["stop_button"])
+                    with gr.Row():
+                        text2image_nsfw_output_image = gr.Image()
+                        text2image_nsfw_forever_output_image = gr.Image()
+                    text2image_nsfw_cancel_event = text2image_nsfw_forever_output_image.change(
+                        fn=t2i,
+                        inputs=[
+                            gr.Radio(value=False, visible=False),
+                            text2image_nsfw_fixed_artist,
+                            text2image_nsfw_fixed_prefix,
+                            text2image_nsfw_fixed_negative,
+                            text2image_nsfw_fixed_source,
+                            text2image_nsfw_fixed_character,
+                            text2image_nsfw_fixed_action_type,
+                            text2image_nsfw_fixed_action,
+                            text2image_nsfw_fixed_emotion,
+                            text2image_nsfw_fixed_surrounding,
+                            text2image_nsfw_fixed_fixed_stains,
+                        ],
+                        outputs=text2image_nsfw_forever_output_image,
+                        show_progress="hidden",
                     )
-                    text2image_nsfw_fixed_prefix = gr.Dropdown(
-                        choices=return_names_list(read_yaml("./files/favorites/prefixes.yaml")),
-                        value="随机",
-                        label="固定质量词",
+                    text2image_nsfw_generate_button.click(
+                        fn=t2i,
+                        inputs=[
+                            gr.Radio(value=False, visible=False),
+                            text2image_nsfw_fixed_artist,
+                            text2image_nsfw_fixed_prefix,
+                            text2image_nsfw_fixed_negative,
+                            text2image_nsfw_fixed_source,
+                            text2image_nsfw_fixed_character,
+                            text2image_nsfw_fixed_action_type,
+                            text2image_nsfw_fixed_action,
+                            text2image_nsfw_fixed_emotion,
+                            text2image_nsfw_fixed_surrounding,
+                            text2image_nsfw_fixed_fixed_stains,
+                        ],
+                        outputs=text2image_nsfw_output_image,
                     )
-                    text2image_nsfw_fixed_negative = gr.Dropdown(
-                        choices=return_names_list(read_yaml("./files/favorites/negative.yaml")),
-                        value="随机",
-                        label="固定负面",
+                    text2image_nsfw_generate_forever_button.click(
+                        fn=t2i,
+                        inputs=[
+                            gr.Radio(value=False, visible=False),
+                            text2image_nsfw_fixed_artist,
+                            text2image_nsfw_fixed_prefix,
+                            text2image_nsfw_fixed_negative,
+                            text2image_nsfw_fixed_source,
+                            text2image_nsfw_fixed_character,
+                            text2image_nsfw_fixed_action_type,
+                            text2image_nsfw_fixed_action,
+                            text2image_nsfw_fixed_emotion,
+                            text2image_nsfw_fixed_surrounding,
+                            text2image_nsfw_fixed_fixed_stains,
+                        ],
+                        outputs=text2image_nsfw_forever_output_image,
                     )
-                with gr.Row():
-                    text2image_nsfw_fixed_source = gr.Dropdown(
-                        choices=["随机"]
-                        + return_source_or_type_list(
-                            cancel_probabilities_for_item(read_yaml("./files/favorites/characters.yaml"))
-                        ),
-                        value="随机",
-                        label="固定角色出处",
+                    text2image_nsfw_stop_button.click(None, None, None, cancels=[text2image_nsfw_cancel_event])
+                    generate_text2image_nsfw_script_button.click(
+                        gen_script,
+                        inputs=[
+                            gr.Textbox("随机蓝图", visible=False),
+                            text2image_nsfw_fixed_artist,
+                            text2image_nsfw_fixed_prefix,
+                            text2image_nsfw_fixed_negative,
+                            text2image_nsfw_fixed_source,
+                            text2image_nsfw_fixed_character,
+                            text2image_nsfw_fixed_action_type,
+                            text2image_nsfw_fixed_action,
+                            text2image_nsfw_fixed_emotion,
+                            text2image_nsfw_fixed_surrounding,
+                            text2image_nsfw_fixed_fixed_stains,
+                        ],
+                        outputs=None,
                     )
-                    text2image_nsfw_fixed_character = gr.Dropdown(
-                        choices=return_names_list(read_yaml("./files/favorites/characters.yaml")),
-                        value="随机",
-                        label="固定角色",
+                    text2image_nsfw_update_dropdown_list_button.click(
+                        update_t2i_nsf_dropdown_list,
+                        inputs=None,
+                        outputs=[
+                            text2image_nsfw_fixed_artist,
+                            text2image_nsfw_fixed_prefix,
+                            text2image_nsfw_fixed_negative,
+                            text2image_nsfw_fixed_source,
+                            text2image_nsfw_fixed_character,
+                            text2image_nsfw_fixed_action_type,
+                            text2image_nsfw_fixed_action,
+                            text2image_nsfw_fixed_emotion,
+                            text2image_nsfw_fixed_surrounding,
+                            text2image_nsfw_fixed_fixed_stains,
+                        ],
                     )
-                    text2image_nsfw_fixed_action_type = gr.Dropdown(
-                        choices=["随机"]
-                        + return_source_or_type_list(
-                            cancel_probabilities_for_item(read_yaml("./files/favorites/actions.yaml"))
-                        ),
-                        value="随机",
-                        label="固定动作类型",
+                with gr.Tab("添加提示词"):
+                    item_to_add = gr.Dropdown(
+                        choices=FAVORTES_FILE,
+                        label="想追加什么内容?(必填)",
                     )
-                    text2image_nsfw_fixed_action = gr.Dropdown(
-                        choices=return_names_list(read_yaml("./files/favorites/actions.yaml")),
-                        value="随机",
-                        label="固定动作",
+                    tag_to_add = gr.Textbox("", lines=3, label="提示词(必填)")
+                    with gr.Row():
+                        name_to_add = gr.Textbox(label="名称(必填)")
+                        probability_to_add = gr.Dropdown(
+                            choices=["较大概率选中", "中等概率选中", "较小概率选中"],
+                            value="中等概率选中",
+                            label="概率(必填)",
+                        )
+                        source_to_add = gr.Textbox(label="出处(选择 characters.yaml 时必填)")
+                        type_to_add = gr.Textbox(label="类型(选择 actions.yaml 时必填)")
+                    with gr.Row():
+                        sampler_to_add = gr.Dropdown(
+                            choices=SAMPLER, value="k_euler", label="采样器(选择 artists.yaml 时必填)"
+                        )
+                        noise_schedule_to_add = gr.Dropdown(
+                            choices=NOISE_SCHEDULE, value="native", label="噪声计划表(选择 artists.yaml 时必填)"
+                        )
+                        cfg_to_add = gr.Slider(0, 10, 5, step=0.1, label="cfg(选择 artists.yaml 时必填)")
+                        sm_to_add = gr.Dropdown(
+                            choices=[True, False], value=False, label="sm(选择 artists.yaml 时必填)"
+                        )
+                        sm_dyn_to_add = gr.Dropdown(
+                            choices=[True, False], value=False, label="sm_dyn(选择 artists.yaml 时必填)"
+                        )
+                    add_button = gr.Button("添加")
+                    add_button.click(
+                        add_item_for_yaml,
+                        inputs=[
+                            item_to_add,
+                            tag_to_add,
+                            name_to_add,
+                            probability_to_add,
+                            source_to_add,
+                            type_to_add,
+                            sampler_to_add,
+                            noise_schedule_to_add,
+                            cfg_to_add,
+                            sm_to_add,
+                            sm_dyn_to_add,
+                        ],
+                        outputs=[
+                            item_to_add,
+                            tag_to_add,
+                            name_to_add,
+                            probability_to_add,
+                            source_to_add,
+                            type_to_add,
+                            sampler_to_add,
+                            noise_schedule_to_add,
+                            cfg_to_add,
+                            sm_to_add,
+                            sm_dyn_to_add,
+                        ],
                     )
-                with gr.Row():
-                    text2image_nsfw_fixed_emotion = gr.Dropdown(
-                        choices=return_names_list(read_yaml("./files/favorites/emotions.yaml")),
-                        value="随机",
-                        label="固定表情",
+                with gr.Tab("删除提示词"):
+                    item_to_del = gr.Dropdown(
+                        choices=FAVORTES_FILE,
+                        label="想删除什么内容?(必填)",
                     )
-                    text2image_nsfw_fixed_surrounding = gr.Dropdown(
-                        choices=return_names_list(read_yaml("./files/favorites/surroundings.yaml")),
-                        value="随机",
-                        label="固定场景",
+                    name_to_del = gr.Dropdown(label="名称(必填)")
+                    item_to_del.change(update_name_to_del_list, inputs=item_to_del, outputs=name_to_del)
+                    del_button = gr.Button("删除")
+                    del_button.click(
+                        del_item_for_yaml, inputs=[item_to_del, name_to_del], outputs=[item_to_del, name_to_del]
                     )
-                    text2image_nsfw_fixed_fixed_stains = gr.Dropdown(
-                        choices=return_names_list(read_yaml("./files/favorites/stains.yaml")),
-                        value="随机",
-                        label="固定污渍",
-                    )
-                with gr.Row():
-                    text2image_nsfw_update_dropdown_list_button = gr.Button(
-                        webui_language["t2i"]["update_dropdown_list"]
-                    )
-                    text2image_nsfw_generate_button = gr.Button(webui_language["t2i"]["generate_button"])
-                    text2image_nsfw_generate_forever_button = gr.Button(
-                        webui_language["random blue picture"]["generate_forever"]
-                    )
-                    text2image_nsfw_stop_button = gr.Button(webui_language["random blue picture"]["stop_button"])
-                with gr.Row():
-                    text2image_nsfw_output_image = gr.Image()
-                    text2image_nsfw_forever_output_image = gr.Image()
-                text2image_nsfw_cancel_event = text2image_nsfw_forever_output_image.change(
-                    fn=t2i,
-                    inputs=[
-                        gr.Radio(value=False, visible=False),
-                        text2image_nsfw_fixed_artist,
-                        text2image_nsfw_fixed_prefix,
-                        text2image_nsfw_fixed_negative,
-                        text2image_nsfw_fixed_source,
-                        text2image_nsfw_fixed_character,
-                        text2image_nsfw_fixed_action_type,
-                        text2image_nsfw_fixed_action,
-                        text2image_nsfw_fixed_emotion,
-                        text2image_nsfw_fixed_surrounding,
-                        text2image_nsfw_fixed_fixed_stains,
-                    ],
-                    outputs=text2image_nsfw_forever_output_image,
-                    show_progress="hidden",
-                )
-                text2image_nsfw_generate_button.click(
-                    fn=t2i,
-                    inputs=[
-                        gr.Radio(value=False, visible=False),
-                        text2image_nsfw_fixed_artist,
-                        text2image_nsfw_fixed_prefix,
-                        text2image_nsfw_fixed_negative,
-                        text2image_nsfw_fixed_source,
-                        text2image_nsfw_fixed_character,
-                        text2image_nsfw_fixed_action_type,
-                        text2image_nsfw_fixed_action,
-                        text2image_nsfw_fixed_emotion,
-                        text2image_nsfw_fixed_surrounding,
-                        text2image_nsfw_fixed_fixed_stains,
-                    ],
-                    outputs=text2image_nsfw_output_image,
-                )
-                text2image_nsfw_generate_forever_button.click(
-                    fn=t2i,
-                    inputs=[
-                        gr.Radio(value=False, visible=False),
-                        text2image_nsfw_fixed_artist,
-                        text2image_nsfw_fixed_prefix,
-                        text2image_nsfw_fixed_negative,
-                        text2image_nsfw_fixed_source,
-                        text2image_nsfw_fixed_character,
-                        text2image_nsfw_fixed_action_type,
-                        text2image_nsfw_fixed_action,
-                        text2image_nsfw_fixed_emotion,
-                        text2image_nsfw_fixed_surrounding,
-                        text2image_nsfw_fixed_fixed_stains,
-                    ],
-                    outputs=text2image_nsfw_forever_output_image,
-                )
-                text2image_nsfw_stop_button.click(None, None, None, cancels=[text2image_nsfw_cancel_event])
-                generate_text2image_nsfw_script_button.click(
-                    gen_script,
-                    inputs=[
-                        gr.Textbox("随机蓝图", visible=False),
-                        text2image_nsfw_fixed_artist,
-                        text2image_nsfw_fixed_prefix,
-                        text2image_nsfw_fixed_negative,
-                        text2image_nsfw_fixed_source,
-                        text2image_nsfw_fixed_character,
-                        text2image_nsfw_fixed_action_type,
-                        text2image_nsfw_fixed_action,
-                        text2image_nsfw_fixed_emotion,
-                        text2image_nsfw_fixed_surrounding,
-                        text2image_nsfw_fixed_fixed_stains,
-                    ],
-                    outputs=None,
-                )
-                text2image_nsfw_update_dropdown_list_button.click(
-                    update_t2i_nsf_dropdown_list,
-                    inputs=None,
-                    outputs=[
-                        text2image_nsfw_fixed_artist,
-                        text2image_nsfw_fixed_prefix,
-                        text2image_nsfw_fixed_negative,
-                        text2image_nsfw_fixed_source,
-                        text2image_nsfw_fixed_character,
-                        text2image_nsfw_fixed_action_type,
-                        text2image_nsfw_fixed_action,
-                        text2image_nsfw_fixed_emotion,
-                        text2image_nsfw_fixed_surrounding,
-                        text2image_nsfw_fixed_fixed_stains,
-                    ],
-                )
+
             with gr.Tab(webui_language["random picture"]["tab"]):
                 with gr.Row():
                     with gr.Column(scale=6):
@@ -967,7 +1043,7 @@ def main():
             for plugin_name, plugin_module in inpaint_plugins.items():
                 if hasattr(plugin_module, "plugin"):
                     plugin_module.plugin()
-                    logger.success(f" 成功加载插件: {plugin_name}")
+                    logger.success(f"成功加载插件: {plugin_name}")
                 else:
                     logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
         # ---------- NAI工具箱 ---------- #
