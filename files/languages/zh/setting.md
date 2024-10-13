@@ -24,16 +24,3 @@
               └---5264942125_GenshinImpact_纳西妲.png
               └---4351819919_GenshinImpact_纳西妲.png
 ```
-
-- 关于随机蓝图, 请前往 ./files/favorite 自行添加配置:
-
-```py
-actions.yaml:      动作
-artists.yaml:      画风
-characters.yaml:   角色
-emotions.yaml:     表情
-negative.yaml:     负面
-prefixes.yaml:     质量词
-stains.yaml:       污渍
-surroundings.yaml: 场景
-```
