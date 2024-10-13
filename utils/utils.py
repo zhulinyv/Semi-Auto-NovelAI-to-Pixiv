@@ -45,7 +45,16 @@ SAMPLER = [
     "ddim_v3",
 ]
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
-
+FAVORTES_FILE = [
+    "actions.yaml",
+    "artists.yaml",
+    "characters.yaml",
+    "emotions.yaml",
+    "negative.yaml",
+    "prefixes.yaml",
+    "stains.yaml",
+    "surroundings.yaml",
+]
 
 if env.proxy != "xxx:xxx":
     proxies = {
@@ -433,6 +442,68 @@ def update_t2i_nsf_dropdown_list():
         gr.update(choices=return_names_list(read_yaml("./files/favorites/surroundings.yaml")), visible=True),
         gr.update(choices=return_names_list(read_yaml("./files/favorites/stains.yaml")), visible=True),
     )
+
+
+def update_name_to_del_list(item_to_del):
+    return gr.update(choices=return_names_list(read_yaml(f"./files/favorites/{item_to_del}")), visible=True)
+
+
+def add_item_for_yaml(
+    item_to_add,
+    tag_to_add,
+    name_to_add,
+    probability_to_add,
+    source_to_add,
+    type_to_add,
+    sampler_to_add,
+    noise_schedule_to_add,
+    cfg_to_add,
+    sm_to_add,
+    sm_dyn_to_add,
+):
+    yaml_file = read_yaml(yaml_path := f"./files/favorites/{item_to_add}")
+    if item_to_add == "actions.yaml":
+        yaml_file[probability_to_add][name_to_add] = {"tag": tag_to_add, "type": type_to_add}
+    elif item_to_add == "artists.yaml":
+        yaml_file[probability_to_add][name_to_add] = {
+            "tag": tag_to_add,
+            "cfg": cfg_to_add,
+            "sm": sm_to_add,
+            "sm_dyn": sm_dyn_to_add,
+            "sampler": sampler_to_add,
+            "noise_schedule": noise_schedule_to_add,
+        }
+    elif item_to_add == "characters.yaml":
+        yaml_file[probability_to_add][name_to_add] = {"tag": tag_to_add, "source": source_to_add}
+    else:
+        yaml_file[probability_to_add][name_to_add] = {"tag": tag_to_add}
+    with open(yaml_path, "w", encoding="utf-8") as f:
+        yaml.dump(yaml_file, f, allow_unicode=True)
+    return (
+        None,
+        "已添加",
+        None,
+        probability_to_add,
+        None,
+        None,
+        sampler_to_add,
+        noise_schedule_to_add,
+        cfg_to_add,
+        sm_to_add,
+        sm_dyn_to_add,
+    )
+
+
+def del_item_for_yaml(item_to_del, name_to_del):
+    yaml_file = read_yaml(yaml_path := f"./files/favorites/{item_to_del}")
+    for probability in ["较大概率选中", "中等概率选中", "较小概率选中"]:
+        try:
+            del yaml_file[probability][name_to_del]
+        except KeyError:
+            pass
+    with open(yaml_path, "w", encoding="utf-8") as f:
+        yaml.dump(yaml_file, f, allow_unicode=True)
+    return item_to_del, update_name_to_del_list(item_to_del)
 
 
 def file_path2name(path) -> str:
