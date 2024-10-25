@@ -17,7 +17,14 @@ from utils.pixivposter import pixiv_upload
 from utils.prepare import logger
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
-from utils.utils import file_path2list, format_str, list_to_str, sleep_for_cool
+from utils.utils import (
+    cancel_probabilities_for_item,
+    file_path2list,
+    format_str,
+    list_to_str,
+    read_yaml,
+    sleep_for_cool,
+)
 
 
 def upload(image_list, file):
@@ -65,17 +72,31 @@ def upload(image_list, file):
     name_list = file.replace(".png", "").replace(".jpg", "").split("_")
     name = name_list[2]
 
+    surroundings_data = cancel_probabilities_for_item(read_yaml("./files/favorites/surroundings.yaml"))
+
+    if name == "None":
+        name == "无题"
+    else:
+        for surrounding in list(surroundings_data.keys()):
+            if format_str(surroundings_data[surrounding]["tag"]) in img_comment["prompt"]:
+                new_name = random.choice([f"{name}~", f"和{name}涩涩~", f"和{name}在{surrounding}~"])
+                break
+        try:
+            new_name
+        except Exception:
+            new_name = random.choice([f"{name}~", f"和{name}涩涩~"])
+
     # 预览
     logger.info(
         f"""
 图片: {image_list}
-标题: {name}
+标题: {new_name}
 描述: {caption}"""
     )
     # 状态
     status = pixiv_upload(
         image_paths=image_list,
-        title=name,
+        title=new_name,
         caption=caption,
         labels=["女の子"],
         cookie=env.pixiv_cookie,
@@ -117,7 +138,7 @@ def main(file_path):
                         os.remove(Path(file_path) / file)
                     break
             except Exception:
-                logger.error("出现错误:\n>>>>>")
+                logger.error("出现错误: >>>>>")
                 traceback.print_exc()
                 logger.error("<<<<<")
         sleep_for_cool((env.pixiv_cool_time - 5) * 60, (env.pixiv_cool_time + 5) * 60)

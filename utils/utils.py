@@ -4,6 +4,7 @@ import io
 import os
 import platform
 import random
+import re
 import time
 import zipfile
 from datetime import date
@@ -141,6 +142,54 @@ def inquire_anlas():
         return str(e)
 
 
+def choose_item(data):
+    """按照概率随机选择条目
+
+    Args:
+        data (dict): 读取的 favorites 中的 yaml 文件
+
+    Returns:
+        tuple[str, dict]: 名称, 条目
+    """
+    item = None
+    while item is None:
+        possibility = random.random()
+        if possibility >= 0.5:
+            choice = "较大概率选中"
+        elif possibility >= 0.15:
+            choice = "中等概率选中"
+        elif possibility >= 0.0:
+            choice = "较小概率选中"
+        if data[choice] is None:
+            item = None
+        else:
+            name = random.choice(list(data[choice].keys()))
+            item = data[choice][name]
+    return name, item
+
+
+def find_wild_card_and_replace_tag(text):
+    """查找并替换 wildcard
+
+    Args:
+        text (str): 要执行该操作的字符串
+
+    Returns:
+        str: 替换后的字符串
+    """
+    pattern = r"<([^:]+):([^>]+)>"
+    matchers = re.findall(pattern, text)
+    for wild_card in matchers:
+        if wild_card[1] != "随机":
+            yaml_data = cancel_probabilities_for_item(read_yaml("./files/favorites/{}.yaml".format(wild_card[0])))
+            text = text.replace("<{}:{}>".format(wild_card[0], wild_card[1]), yaml_data[wild_card[1]]["tag"])
+        else:
+            _, yaml_data = choose_item(read_yaml("./files/favorites/{}.yaml".format(wild_card[0])))
+            text = text.replace("<{}:{}>".format(wild_card[0], wild_card[1]), yaml_data["tag"])
+    logger.info(f"发现 {len(matchers)} 个 wildcard, 已完成替换!")
+    return format_str(text)
+
+
 def generate_image(json_data):
     """发送 post 请求
 
@@ -152,6 +201,11 @@ def generate_image(json_data):
     """
     with open("start.json", "w") as f:
         json.dump({"positive": json_data["input"], "negative": json_data["parameters"]["negative_prompt"]}, f)
+
+    json_data["input"] = find_wild_card_and_replace_tag(json_data["input"])
+    json_data["parameters"]["negative_prompt"] = find_wild_card_and_replace_tag(
+        json_data["parameters"]["negative_prompt"]
+    )
 
     try:
         rep = requests.post(
@@ -182,6 +236,11 @@ def generate_image_for_director_tools(json_data):
     Returns:
         (bytes): 二进制图片
     """
+    try:
+        json_data["prompt"] = find_wild_card_and_replace_tag(json_data["prompt"])
+    except KeyError:
+        pass
+
     try:
         rep = requests.post(
             "https://image.novelai.net/ai/augment-image", json=json_data, headers=headers, proxies=proxies
@@ -354,25 +413,15 @@ def read_yaml(path):
         return yaml.load(f, Loader=yaml.FullLoader)
 
 
-def choose_item(data):
-    item = None
-    while item is None:
-        possibility = random.random()
-        if possibility >= 0.5:
-            choice = "较大概率选中"
-        elif possibility >= 0.15:
-            choice = "中等概率选中"
-        elif possibility >= 0.0:
-            choice = "较小概率选中"
-        if data[choice] is None:
-            item = None
-        else:
-            name = random.choice(list(data[choice].keys()))
-            item = data[choice][name]
-    return name, item
-
-
 def cancel_probabilities_for_item(d: dict):
+    """删除读取的 favorites 中的 yaml 文件中的概率键
+
+    Args:
+        d (dict): 读取的 favorites 中的 yaml 文件
+
+    Returns:
+        dict: 新的字典数据
+    """
     n = {}
     for k, v in d.items():
         try:
@@ -383,6 +432,14 @@ def cancel_probabilities_for_item(d: dict):
 
 
 def return_keys_list(d: dict):
+    """返回字典的键
+
+    Args:
+        d (dict): 字典
+
+    Returns:
+        list[str]: 键名列表
+    """
     keys_list = list(d.keys())
     return keys_list
 
@@ -444,7 +501,7 @@ def update_t2i_nsf_dropdown_list():
     )
 
 
-def update_name_to_del_list(item_to_del):
+def update_name_to_dropdown_list(item_to_del):
     return gr.update(choices=return_names_list(read_yaml(f"./files/favorites/{item_to_del}")), visible=True)
 
 
@@ -503,7 +560,20 @@ def del_item_for_yaml(item_to_del, name_to_del):
             pass
     with open(yaml_path, "w", encoding="utf-8") as f:
         yaml.dump(yaml_file, f, allow_unicode=True)
-    return item_to_del, update_name_to_del_list(item_to_del)
+    return item_to_del, update_name_to_dropdown_list(item_to_del)
+
+
+def add_wildcard_to_textbox(
+    text2image_positive_input, text2image_negative_input, text2image_wildcard_file, text2image_wildcard_name
+):
+    if text2image_wildcard_file != "negative.yaml":
+        return (
+            text2image_positive_input
+            + ", <{}:{}>".format(text2image_wildcard_file.replace(".yaml", ""), text2image_wildcard_name),
+            text2image_negative_input,
+        )
+    else:
+        return text2image_positive_input, text2image_negative_input + f", <negative:{text2image_wildcard_name}>"
 
 
 def file_path2name(path) -> str:
