@@ -186,7 +186,7 @@ def find_wild_card_and_replace_tag(text):
         else:
             _, yaml_data = choose_item(read_yaml("./files/favorites/{}.yaml".format(wild_card[0])))
             text = text.replace("<{}:{}>".format(wild_card[0], wild_card[1]), yaml_data["tag"])
-    logger.info(f"发现 {len(matchers)} 个 wildcard, 已完成替换!")
+        logger.info(f"发现 {len(matchers)} 个 wildcard, 已完成替换!")
     return format_str(text)
 
 
