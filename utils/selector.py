@@ -6,7 +6,7 @@ import numpy as np
 import send2trash
 
 from utils.prepare import logger
-from utils.utils import file_path2list
+from utils.utils import PATH, file_path2list
 
 
 def show_first_img(input_path):
@@ -67,12 +67,17 @@ def move_current_img(current_img, output_path):
 
 def del_current_img(current_img):
     try:
-        send2trash.send2trash(current_img)
-        logger.info(f"\n已将 {current_img} 移动到回收站")
-        return show_next_img()
+        if current_img:
+            send2trash.send2trash(current_img)
+            logger.info(f"\n已将 {current_img} 移动到回收站")
+            return show_next_img()
+        else:
+            logger.error("当前未选择图片!")
+            pass
     except Exception:
         logger.error("当前未选择图片!")
         return None, None
+    os.chdir(PATH)
 
 
 def copy_current_img(current_img, output_path):
