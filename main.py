@@ -55,6 +55,7 @@ def main():
         return_names_list,
         return_random,
         return_source_or_type_list,
+        return_wildcard_tag,
         update_name_to_dropdown_list,
         update_t2i_nsf_dropdown_list,
     )
@@ -199,6 +200,12 @@ def main():
                                 ],
                                 outputs=[text2image_positive_input, text2image_negative_input],
                             )
+                        text2image_wildcard_tag = gr.Textbox(label="tag")
+                        text2image_wildcard_name.change(
+                            return_wildcard_tag,
+                            inputs=[text2image_wildcard_file, text2image_wildcard_name],
+                            outputs=text2image_wildcard_tag,
+                        )
                     text2image_generate_button.click(
                         fn=t2i_by_hand,
                         inputs=[
@@ -448,6 +455,12 @@ def main():
                     )
                     name_to_del = gr.Dropdown(label="名称(必填)")
                     item_to_del.change(update_name_to_dropdown_list, inputs=item_to_del, outputs=name_to_del)
+                    tag_to_del = gr.Textbox(label="tag")
+                    name_to_del.change(
+                        return_wildcard_tag,
+                        inputs=[item_to_del, name_to_del],
+                        outputs=tag_to_del,
+                    )
                     del_button = gr.Button("删除")
                     del_button.click(
                         del_item_for_yaml, inputs=[item_to_del, name_to_del], outputs=[item_to_del, name_to_del]
@@ -630,6 +643,12 @@ def main():
                                 ],
                                 outputs=[vibe_transfer_positive_input, vibe_transfer_negative_input],
                             )
+                        vibe_transfer_wildcard_tag = gr.Textbox(label="tag")
+                        vibe_transfer_wildcard_name.change(
+                            return_wildcard_tag,
+                            inputs=[vibe_transfer_wildcard_file, vibe_transfer_wildcard_name],
+                            outputs=vibe_transfer_wildcard_tag,
+                        )
                     vibe_transfer_generate_button.click(
                         fn=vibe_by_hand,
                         inputs=[
@@ -782,6 +801,12 @@ def main():
                                 ],
                                 outputs=[image2image_positive_input, image2image_negative_input],
                             )
+                        image2image_wildcard_tag = gr.Textbox(label="tag")
+                        image2image_wildcard_name.change(
+                            return_wildcard_tag,
+                            inputs=[image2image_wildcard_file, image2image_wildcard_name],
+                            outputs=image2image_wildcard_tag,
+                        )
                     image2image_generate_button.click(
                         fn=i2i_by_hand,
                         inputs=[
@@ -1132,6 +1157,12 @@ def main():
                                 ],
                                 outputs=[inpaint_positive_input, inpaint_negative_input],
                             )
+                        inpaint_wildcard_tag = gr.Textbox(label="tag")
+                        inpaint_wildcard_name.change(
+                            return_wildcard_tag,
+                            inputs=[inpaint_wildcard_file, inpaint_wildcard_name],
+                            outputs=inpaint_wildcard_tag,
+                        )
                 inpaint_generate_button.click(
                     fn=inpaint,
                     inputs=[

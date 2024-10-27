@@ -562,17 +562,21 @@ def del_item_for_yaml(item_to_del, name_to_del):
     return item_to_del, update_name_to_dropdown_list(item_to_del)
 
 
-def add_wildcard_to_textbox(
-    text2image_positive_input, text2image_negative_input, text2image_wildcard_file, text2image_wildcard_name
-):
-    if text2image_wildcard_file != "negative.yaml":
+def add_wildcard_to_textbox(positive_input, negative_input, wildcard_file, wildcard_name):
+    if wildcard_file != "negative.yaml":
         return (
-            text2image_positive_input
-            + ", <{}:{}>".format(text2image_wildcard_file.replace(".yaml", ""), text2image_wildcard_name),
-            text2image_negative_input,
+            format_str(positive_input) + ", <{}:{}>,".format(wildcard_file.replace(".yaml", ""), wildcard_name),
+            negative_input,
         )
     else:
-        return text2image_positive_input, text2image_negative_input + f", <negative:{text2image_wildcard_name}>"
+        return positive_input, format_str(negative_input) + f", <negative:{wildcard_name}>,"
+
+
+def return_wildcard_tag(wildcard_file, wildcard_name):
+    if wildcard_name == "随机":
+        return None
+    else:
+        return cancel_probabilities_for_item(read_yaml(f"./files/favorites/{wildcard_file}"))[wildcard_name]["tag"]
 
 
 def file_path2name(path) -> str:
