@@ -5,7 +5,7 @@ from urllib.request import getproxies
 
 from loguru import logger
 
-VERSION = "3.2.2"
+VERSION = "3.2.3"
 
 
 format_ = (

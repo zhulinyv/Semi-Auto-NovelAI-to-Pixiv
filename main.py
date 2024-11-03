@@ -92,7 +92,7 @@ def main():
         gr.Markdown(webui_language["title"] + "    " + check_update())
         # ---------- 教程说明 ---------- #
         with gr.Tab(webui_language["info"]["tab"]):
-            gr.Markdown(read_txt("./files/languages/SANP-Document/README.md"))
+            gr.Markdown(read_txt("./files/languages/README.md"))
         # ---------- 文生图 ---------- #
         with gr.Tab(webui_language["t2i"]["tab"]):
             with gr.Tab(webui_language["t2i"]["tab"]):
