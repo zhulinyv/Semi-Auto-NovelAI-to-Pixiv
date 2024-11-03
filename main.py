@@ -92,7 +92,7 @@ def main():
         gr.Markdown(webui_language["title"] + "    " + check_update())
         # ---------- 教程说明 ---------- #
         with gr.Tab(webui_language["info"]["tab"]):
-            gr.Markdown(read_txt(f"./files/languages/{env.webui_lang}/help.md"))
+            gr.Markdown(read_txt("./files/languages/SANP-Document/README.md"))
         # ---------- 文生图 ---------- #
         with gr.Tab(webui_language["t2i"]["tab"]):
             with gr.Tab(webui_language["t2i"]["tab"]):
@@ -2489,8 +2489,6 @@ def main():
                 skip_load_g4f = gr.Checkbox(
                     env.skip_load_g4f, label=webui_language["setting"]["description"]["skip_load_g4f"]
                 )
-            with gr.Tab(webui_language["setting"]["sub_tab"]["other"]):
-                gr.Markdown(read_txt(f"./files/languages/{env.webui_lang}/setting.md"))
             with gr.Tab("更新 WebUI(Update WebUI)"):
                 update_button = gr.Button("更新 WebUI(Update WebUI)")
                 output_info = gr.Textbox(label=webui_language["i2i"]["output_info"])
