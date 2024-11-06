@@ -947,8 +947,10 @@ def main():
                         label=webui_language["t2i"]["noise_schedule"],
                     )
                     with gr.Row():
-                        movie2movie_sm = gr.Radio([True, False], value=env.sm, label="sm")
-                        movie2movie_sm_dyn = gr.Radio([True, False], value=False, label="smdyn")
+                        movie2movie_sm = gr.Checkbox(value=False, visible=False)
+                        movie2movie_sm_dyn = gr.Checkbox(value=False, visible=False)
+                        movie2movie_variety = gr.Checkbox(value=env.variety, label="variety")
+                        movie2movie_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                         with gr.Row():
                             movie2movie_seed = gr.Textbox(
                                 value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
@@ -972,6 +974,8 @@ def main():
                             movie2movie_noise,
                             movie2movie_sm,
                             movie2movie_sm_dyn,
+                            movie2movie_variety,
+                            movie2movie_decrisp,
                             movie2movie_seed,
                         ],
                         outputs=movie2movie_output_information,
@@ -1152,9 +1156,9 @@ def main():
                                 )
                             with gr.Row():
                                 with gr.Column():
-                                    inpaint_sm = gr.Radio([True, False], value=env.sm, label="sm", scale=2)
-                                    inpaint_sm_dyn = gr.Radio(
-                                        [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
+                                    inpaint_sm = gr.Checkbox(value=env.sm, label="sm", scale=2)
+                                    inpaint_sm_dyn = gr.Checkbox(
+                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
                                     )
                                 with gr.Column():
                                     inpaint_variety = gr.Checkbox(value=env.variety, label="variety")
