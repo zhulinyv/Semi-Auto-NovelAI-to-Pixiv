@@ -80,6 +80,8 @@ def m2m(
     noise,
     sm,
     sm_dyn,
+    variety,
+    decrisp,
     seed,
 ):
     frame_list: list[str] = os.listdir(frames_save_path)
@@ -87,7 +89,9 @@ def m2m(
         if frame.endswith(".txt"):
             pass
         else:
-            prompt = format_str(read_txt(Path(frames_save_path) / file_path2name(frame).replace(".png", ".txt")))
+            prompt = format_str(
+                read_txt(Path(frames_save_path) / file_path2name(frame).replace(".png", ".txt").replace(".jpg", ".txt"))
+            )
             if position == "最前面(Top)":
                 prompt = f"{format_str(pref)}, {prompt}"
             else:
@@ -111,6 +115,8 @@ def m2m(
                         noise,
                         sm,
                         sm_dyn,
+                        variety,
+                        decrisp,
                         seed,
                     )
                     shutil.move(saved_path, Path(frames_m2m_path) / file_path2name(frame))

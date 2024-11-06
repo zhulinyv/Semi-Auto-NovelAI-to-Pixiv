@@ -25,6 +25,8 @@ def for_webui(
     inpaint_steps,
     inpaint_sm,
     inpaint_sm_dyn,
+    inpaint_variety,
+    inpaint_decrisp,
     inpaint_seed,
 ):
     if open_button:

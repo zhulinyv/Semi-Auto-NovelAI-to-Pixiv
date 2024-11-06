@@ -16,7 +16,7 @@
         "sampler": "Sampler",
         "noise_schedule": "Noise Schedule",
         "steps": "Sampling Steps",
-        "smdyn": "sm_dyn (Enable requires sm to be enabled)",
+        "smdyn": "sm_dyn",
         "seed": "Random Seed",
         "update_dropdown_list": "Update list"
     },

@@ -504,6 +504,11 @@ def update_name_to_dropdown_list(item_to_del):
     return gr.update(choices=return_names_list(read_yaml(f"./files/favorites/{item_to_del}")), visible=True)
 
 
+def update_image_size(d):
+    w, h = (d["layers"][0]).size
+    return gr.update(height=int(h / 1.8), width=int(w / 1.8))
+
+
 def add_item_for_yaml(
     item_to_add,
     tag_to_add,
@@ -516,6 +521,8 @@ def add_item_for_yaml(
     cfg_to_add,
     sm_to_add,
     sm_dyn_to_add,
+    variety_to_add,
+    decrisp_to_add,
 ):
     yaml_file = read_yaml(yaml_path := f"./files/favorites/{item_to_add}")
     if item_to_add == "actions.yaml":
@@ -526,6 +533,8 @@ def add_item_for_yaml(
             "cfg": cfg_to_add,
             "sm": sm_to_add,
             "sm_dyn": sm_dyn_to_add,
+            "variety": variety_to_add,
+            "decrisp": decrisp_to_add,
             "sampler": sampler_to_add,
             "noise_schedule": noise_schedule_to_add,
         }
