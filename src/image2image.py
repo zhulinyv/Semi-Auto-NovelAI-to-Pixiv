@@ -76,8 +76,8 @@ def prepare_json(imginfo: dict, imgpath):
     json_for_i2i["parameters"]["noise"] = env.hires_noise
     json_for_i2i["parameters"]["sm"] = False
     json_for_i2i["parameters"]["sm_dyn"] = False
-    json_for_i2i["parameters"]["sm"] = env.variety
-    json_for_i2i["parameters"]["sm"] = env.decrisp
+    json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if env.variety else None
+    json_for_i2i["parameters"]["dynamic_thresholding"] = env.decrisp
     json_for_i2i["parameters"]["noise_schedule"] = img_comment["noise_schedule"]
     json_for_i2i["parameters"]["seed"] = seed
     json_for_i2i["parameters"]["image"] = img_to_base64(imgpath)

@@ -45,8 +45,8 @@ def vibe_by_hand(
         json_for_vibe["parameters"]["steps"] = steps
         json_for_vibe["parameters"]["sm"] = sm
         json_for_vibe["parameters"]["sm_dyn"] = sm_dyn if sm else False
-        json_for_vibe["parameters"]["variety"] = variety
-        json_for_vibe["parameters"]["decrisp"] = decrisp
+        json_for_vibe["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
+        json_for_vibe["parameters"]["dynamic_thresholding"] = decrisp
         json_for_vibe["parameters"]["noise_schedule"] = noise_schedule
         if isinstance(seed, int):
             seed = random.randint(1000000000, 9999999999)
