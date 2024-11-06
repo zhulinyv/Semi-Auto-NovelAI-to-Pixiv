@@ -15,6 +15,8 @@ class Settings(BaseSettings):
     steps: int = 28
     sm: bool = False
     sm_dyn: bool = False
+    variety: bool = False
+    decrisp: bool = False
     noise_schedule: str = "native"
     seed: int = -1
     t2i_cool_time: int = 9
@@ -68,4 +70,4 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="allow")
 
 
-env = Settings()
+env = Settings(arbitrary_types_allowed=True)

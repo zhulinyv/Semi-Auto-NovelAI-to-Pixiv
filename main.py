@@ -416,11 +416,18 @@ def main():
                             choices=NOISE_SCHEDULE, value="native", label="噪声计划表(选择 artists.yaml 时必填)"
                         )
                         cfg_to_add = gr.Slider(0, 10, 5, step=0.1, label="cfg(选择 artists.yaml 时必填)")
+                    with gr.Row():
                         sm_to_add = gr.Dropdown(
                             choices=[True, False], value=False, label="sm(选择 artists.yaml 时必填)"
                         )
                         sm_dyn_to_add = gr.Dropdown(
                             choices=[True, False], value=False, label="sm_dyn(选择 artists.yaml 时必填)"
+                        )
+                        variety_to_add = gr.Dropdown(
+                            choices=[True, False], value=False, label="variety(选择 artists.yaml 时必填)"
+                        )
+                        decrisp_to_add = gr.Dropdown(
+                            choices=[True, False], value=False, label="decrisp(选择 artists.yaml 时必填)"
                         )
                     add_button = gr.Button("添加")
                     add_button.click(
@@ -617,9 +624,9 @@ def main():
                                     minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                                 )
                                 with gr.Row():
-                                    vibe_transfer_sm = gr.Radio([True, False], value=env.sm, label="sm")
-                                    vibe_transfer_sm_dyn = gr.Radio(
-                                        [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
+                                    vibe_transfer_sm = gr.Checkbox(value=env.sm, label="sm")
+                                    vibe_transfer_sm_dyn = gr.Checkbox(
+                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
                                     )
                                 with gr.Row():
                                     vibe_transfer_variety = gr.Checkbox(value=env.variety, label="variety")
@@ -776,10 +783,14 @@ def main():
                                     minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                                 )
                             with gr.Row():
-                                image2image_sm = gr.Radio([True, False], value=env.sm, label="sm", scale=2)
-                                image2image_sm_dyn = gr.Radio(
-                                    [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
-                                )
+                                with gr.Column():
+                                    image2image_sm = gr.Checkbox(value=env.sm, label="sm", scale=2)
+                                    image2image_sm_dyn = gr.Checkbox(
+                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
+                                    )
+                                with gr.Column():
+                                    image2image_variety = gr.Checkbox(value=env.variety, label="variety")
+                                    image2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                                 with gr.Column(scale=1):
                                     image2image_seed = gr.Textbox(
                                         value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
@@ -1132,10 +1143,14 @@ def main():
                                     minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                                 )
                             with gr.Row():
-                                inpaint_sm = gr.Radio([True, False], value=env.sm, label="sm", scale=2)
-                                inpaint_sm_dyn = gr.Radio(
-                                    [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
-                                )
+                                with gr.Column():
+                                    inpaint_sm = gr.Radio([True, False], value=env.sm, label="sm", scale=2)
+                                    inpaint_sm_dyn = gr.Radio(
+                                        [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
+                                    )
+                                with gr.Column():
+                                    inpaint_variety = gr.Checkbox(value=env.variety, label="variety")
+                                    inpaint_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                                 with gr.Column(scale=1):
                                     inpaint_seed = gr.Textbox(
                                         value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
@@ -2370,6 +2385,8 @@ def main():
                         censor = gr.Checkbox(value=env.censor, label=webui_language["setting"]["description"]["censor"])
                         sm = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
                         sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_language["setting"]["description"]["sm_dyn"])
+                        variety = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
+                        decrisp = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
                     with gr.Row():
                         seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
                         proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
