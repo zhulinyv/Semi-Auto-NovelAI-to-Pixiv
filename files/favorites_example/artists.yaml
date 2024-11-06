@@ -66,7 +66,7 @@
     decrisp: False
   XYTPZ_roll_20:
     tag: "[[artist:suzumi_(ccroquette)]], {{artist:ogata_tei}}, {{artist:kedama_milk}}"
-    fg: 5
+    cfg: 5
     sm: False
     sm_dyn: False
     sampler: "k_euler"
