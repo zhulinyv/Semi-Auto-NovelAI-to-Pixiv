@@ -41,6 +41,8 @@ def t2i_by_hand(
     steps: int,
     sm: bool,
     sm_dyn: bool,
+    variety: bool,
+    decrisp: bool,
     seed: str,
     times: int,
 ):
@@ -58,6 +60,8 @@ def t2i_by_hand(
         json_for_t2i["parameters"]["steps"] = steps
         json_for_t2i["parameters"]["sm"] = sm
         json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
+        json_for_t2i["parameters"]["variety"] = variety
+        json_for_t2i["parameters"]["decrisp"] = decrisp
         json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
         if isinstance(seed, int):
             seed = random.randint(1000000000, 9999999999)
@@ -151,6 +155,8 @@ def prepare_input(
     artist_cfg = artist_data["cfg"]
     artist_sm = artist_data["sm"]
     artist_sm_dyn = artist_data["sm_dyn"]
+    artist_variety = artist_data["variety"]
+    artist_decrisp = artist_data["decrisp"]
     artist_sampler = artist_data["sampler"]
     artist_noise_schedule = artist_data["noise_schedule"]
 
@@ -261,6 +267,8 @@ def prepare_input(
         artist_cfg,
         artist_sm,
         artist_sm_dyn,
+        artist_variety,
+        artist_decrisp,
         artist_sampler,
         artist_noise_schedule,
         character_source,
@@ -269,7 +277,7 @@ def prepare_input(
     )
 
 
-def prepare_json(input_, sm, sm_dyn, scale, sampler, noise_schedule, negative):
+def prepare_json(input_, sm, sm_dyn, variety, decrisp, scale, sampler, noise_schedule, negative):
     json_for_t2i["input"] = input_
     if isinstance(env.img_size, int):
         resolution_list = [[832, 1216], [1024, 1024], [1216, 832]]
@@ -283,6 +291,8 @@ def prepare_json(input_, sm, sm_dyn, scale, sampler, noise_schedule, negative):
     json_for_t2i["parameters"]["steps"] = env.steps
     json_for_t2i["parameters"]["sm"] = sm
     json_for_t2i["parameters"]["sm_dyn"] = sm_dyn
+    json_for_t2i["parameters"]["variety"] = variety
+    json_for_t2i["parameters"]["decrisp"] = decrisp
     json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
     seed = random.randint(1000000000, 9999999999) if env.seed == -1 else env.seed
     json_for_t2i["parameters"]["seed"] = seed
@@ -309,6 +319,8 @@ def t2i(
         artist_cfg,
         artist_sm,
         artist_sm_dyn,
+        artist_variety,
+        artist_decrisp,
         artist_sampler,
         artist_noise_schedule,
         character_source,
@@ -327,7 +339,15 @@ def t2i(
         fixed_stains,
     )
     json_for_t2i, seed = prepare_json(
-        input_, artist_sm, artist_sm_dyn, artist_cfg, artist_sampler, artist_noise_schedule, negative_tag
+        input_,
+        artist_sm,
+        artist_sm_dyn,
+        artist_variety,
+        artist_decrisp,
+        artist_cfg,
+        artist_sampler,
+        artist_noise_schedule,
+        negative_tag,
     )
     saved_path = save_image(generate_image(json_for_t2i), "t2i", seed, character_source, character_name)
     sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
