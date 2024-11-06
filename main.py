@@ -56,6 +56,7 @@ def main():
         return_random,
         return_source_or_type_list,
         return_wildcard_tag,
+        update_image_size,
         update_name_to_dropdown_list,
         update_t2i_nsf_dropdown_list,
     )
@@ -1096,6 +1097,9 @@ def main():
                                 sources=["upload", "clipboard", "webcam"],
                                 type="pil",
                                 label=webui_language["inpaint"]["inpaint_img"],
+                            )
+                            inpaint_input_image.change(
+                                update_image_size, inputs=inpaint_input_image, outputs=inpaint_input_image
                             )
                             with gr.Column():
                                 inpaint_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
