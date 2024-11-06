@@ -45,8 +45,8 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["noise"] = noise
         json_for_i2i["parameters"]["sm"] = False
         json_for_i2i["parameters"]["sm_dyn"] = False
-        json_for_i2i["parameters"]["sm"] = variety
-        json_for_i2i["parameters"]["sm"] = decrisp
+        json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
+        json_for_i2i["parameters"]["dynamic_thresholding"] = decrisp
         json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
         seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
         json_for_i2i["parameters"]["seed"] = seed
@@ -76,7 +76,11 @@ def prepare_json(imginfo: dict, imgpath):
     json_for_i2i["parameters"]["noise"] = env.hires_noise
     json_for_i2i["parameters"]["sm"] = False
     json_for_i2i["parameters"]["sm_dyn"] = False
-    json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if env.variety else None
+    try:
+        variety = img_comment["skip_cfg_above_sigma"]
+    except KeyError:
+        variety = env.variety
+    json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
     json_for_i2i["parameters"]["dynamic_thresholding"] = env.decrisp
     json_for_i2i["parameters"]["noise_schedule"] = img_comment["noise_schedule"]
     json_for_i2i["parameters"]["seed"] = seed
