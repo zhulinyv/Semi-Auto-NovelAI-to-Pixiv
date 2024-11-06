@@ -166,10 +166,14 @@ def main():
                                 text2image_steps = gr.Slider(
                                     minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                                 )
-                                text2image_sm = gr.Radio([True, False], value=env.sm, label="sm")
-                                text2image_sm_dyn = gr.Radio(
-                                    [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
-                                )
+                                with gr.Row():
+                                    text2image_sm = gr.Checkbox(value=env.sm, label="sm")
+                                    text2image_sm_dyn = gr.Checkbox(
+                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
+                                    )
+                                with gr.Row():
+                                    text2image_variety = gr.Checkbox(value=env.variety, label="variety")
+                                    text2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                                 with gr.Row():
                                     text2image_seed = gr.Textbox(
                                         value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
@@ -612,10 +616,14 @@ def main():
                                 vibe_transfer_steps = gr.Slider(
                                     minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                                 )
-                                vibe_transfer_sm = gr.Radio([True, False], value=env.sm, label="sm")
-                                vibe_transfer_sm_dyn = gr.Radio(
-                                    [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
-                                )
+                                with gr.Row():
+                                    vibe_transfer_sm = gr.Radio([True, False], value=env.sm, label="sm")
+                                    vibe_transfer_sm_dyn = gr.Radio(
+                                        [True, False], value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
+                                    )
+                                with gr.Row():
+                                    vibe_transfer_variety = gr.Checkbox(value=env.variety, label="variety")
+                                    vibe_transfer_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                                 vibe_transfer_seed = gr.Textbox(
                                     value=str(env.seed), label=webui_language["t2i"]["seed"]
                                 )
