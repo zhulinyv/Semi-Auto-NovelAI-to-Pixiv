@@ -2107,6 +2107,9 @@ def main():
                         with gr.Row():
                             pnginfo_sm = gr.Checkbox(label="sm")
                             pnginfo_sm_dyn = gr.Checkbox(label="sm_dyn")
+                        with gr.Row():
+                            pnginfo_variety = gr.Checkbox(label="variety")
+                            pnginfo_decrisp = gr.Checkbox(label="decrisp")
                         pnginfo_seed = gr.Textbox(label="种子(Seed)")
                 pnginfo_pnginfo = gr.Textbox(label="Png Info")
                 pnginfo_image.change(
@@ -2123,6 +2126,8 @@ def main():
                         pnginfo_sampler,
                         pnginfo_sm,
                         pnginfo_sm_dyn,
+                        pnginfo_variety,
+                        pnginfo_decrisp,
                         pnginfo_seed,
                         pnginfo_pnginfo,
                     ],
@@ -2140,6 +2145,8 @@ def main():
                         pnginfo_sampler,
                         pnginfo_sm,
                         pnginfo_sm_dyn,
+                        pnginfo_variety,
+                        pnginfo_decrisp,
                         pnginfo_seed,
                     ],
                     outputs=[
@@ -2153,6 +2160,8 @@ def main():
                         text2image_sampler,
                         text2image_sm,
                         text2image_sm_dyn,
+                        text2image_variety,
+                        text2image_decrisp,
                         text2image_seed,
                     ],
                 )
@@ -2169,6 +2178,8 @@ def main():
                         pnginfo_sampler,
                         pnginfo_sm,
                         pnginfo_sm_dyn,
+                        pnginfo_variety,
+                        pnginfo_decrisp,
                         pnginfo_seed,
                         pnginfo_image,
                     ],
@@ -2183,6 +2194,8 @@ def main():
                         image2image_sampler,
                         image2image_sm,
                         image2image_sm_dyn,
+                        image2image_variety,
+                        image2image_decrisp,
                         image2image_seed,
                         image2image_input_image,
                     ],
@@ -2200,6 +2213,8 @@ def main():
                         pnginfo_sampler,
                         pnginfo_sm,
                         pnginfo_sm_dyn,
+                        pnginfo_variety,
+                        pnginfo_decrisp,
                         pnginfo_seed,
                         pnginfo_image,
                     ],
@@ -2214,6 +2229,8 @@ def main():
                         inpaint_sampler,
                         inpaint_sm,
                         inpaint_sm_dyn,
+                        inpaint_variety,
+                        inpaint_decrisp,
                         inpaint_seed,
                         inpaint_input_image,
                     ],

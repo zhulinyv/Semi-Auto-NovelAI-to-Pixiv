@@ -181,7 +181,7 @@ def change_the_mask_color_to_white(image_path):
 
 def return_pnginfo(image):
     if not image:
-        return None, None, None, None, None, None, None, None, None, None, None, None
+        return None, None, None, None, None, None, None, None, None, None, None, None, None, None
     try:
         try:
             comment = json.loads((pnginfo := image.info)["Comment"])
@@ -202,10 +202,17 @@ def return_pnginfo(image):
                 None,
                 None,
                 None,
+                None,
+                None,
                 json.dumps(pnginfo, indent=4, ensure_ascii=False),
             )
         except Exception:
-            return None, None, None, None, None, None, None, None, None, None, None, None
+            return None, None, None, None, None, None, None, None, None, None, None, None, None, None
+    try:
+        skip_cfg_above_sigma = True if comment["skip_cfg_above_sigma"] else False
+    except KeyError:
+        skip_cfg_above_sigma = False
+
     return (
         comment["prompt"],
         comment["uc"],
@@ -217,6 +224,8 @@ def return_pnginfo(image):
         comment["sampler"],
         comment["sm"],
         comment["sm_dyn"],
+        skip_cfg_above_sigma,
+        comment["dynamic_thresholding"],
         comment["seed"],
         json.dumps(pnginfo, indent=4, ensure_ascii=False),
     )
