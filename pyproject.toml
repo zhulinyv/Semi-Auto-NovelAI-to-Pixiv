@@ -10,10 +10,10 @@ packages = [{include = "semi_auto_novelai_to_pixiv"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 setuptools = "^70.0.0"
-pydantic = "^2.7.3"
+pydantic = "2.7.3"
 gradio = "^4.36.1"
-pydantic-settings = "^2.3.1"
-python-dotenv = "^1.0.1"
+pydantic-settings = "2.3.1"
+python-dotenv = "1.0.1"
 pillow = "^10.3.0"
 requests = "^2.32.3"
 loguru = "^0.7.2"
@@ -30,6 +30,7 @@ moviepy = "^1.0.3"
 send2trash = "^1.8.3"
 playsound = "1.2.2"
 curl_cffi = "^0.7.1"
+ultralytics = "8.2.50"
 
 
 [tool.poetry.group.dev.dependencies]
