@@ -1,9 +1,9 @@
 from typing import Union
 
-from pydantic import BaseModel, ConfigDict
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class Settings(BaseModel):
+class Settings(BaseSettings):
     # 必需
     token: Union[str, None] = None
 
@@ -67,15 +67,7 @@ class Settings(BaseModel):
     skip_start_sound: bool = False
     skip_load_g4f: bool = False
 
-    model_config = ConfigDict(env_file=".env", extra="allow", arbitrary_types_allowed=True)
+    model_config = SettingsConfigDict(env_file=".env", extra="allow", arbitrary_types_allowed=True)
 
 
-env = Settings(arbitrary_types_allowed=True)
-
-
-print(
-    f""">>>>>
-{env.meta_data}
-{type(env.meta_data)}
-"""
-)
+env = Settings()
