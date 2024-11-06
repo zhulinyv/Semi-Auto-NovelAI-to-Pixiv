@@ -506,7 +506,7 @@ def update_name_to_dropdown_list(item_to_del):
 
 def update_image_size(d):
     w, h = (d["layers"][0]).size
-    return gr.update(height=int(h / 1.8), width=int(w / 1.8))
+    return gr.update(height=h, width=w)
 
 
 def add_item_for_yaml(
