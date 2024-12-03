@@ -247,6 +247,6 @@
 </p>
 
 <hr>
-<!--img width="500px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34.xxx"></img-->
+<img src="https://count.getloli.com/@zhulinyv?name=zhulinyv&theme=moebooru-h&padding=6&offset=0&align=top&scale=1.5&pixelated=1&darkmode=auto&prefix=769854"></img>
 
-<a href="https://smms.app/image/ydhHvFDw53GCAfj" target="_blank"><img src="https://s2.loli.net/2022/08/28/ydhHvFDw53GCAfj.png" alt="skirt.png"></a>
+<!-- <a href="https://smms.app/image/ydhHvFDw53GCAfj" target="_blank"><img src="https://s2.loli.net/2022/08/28/ydhHvFDw53GCAfj.png" alt="skirt.png"></a> -->
