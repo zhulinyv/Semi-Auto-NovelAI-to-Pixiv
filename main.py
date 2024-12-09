@@ -2028,34 +2028,48 @@ def main():
                 with gr.Column(scale=8):
                     gr.Markdown(webui_language["rm png info"]["description"])
             with gr.Tab(webui_language["rm png info"]["tab_rm"]):
-                remove_pnginfo_generate_button = gr.Button(webui_language["water mark"]["generate_button"])
                 with gr.Row():
-                    remove_pnginfo_choices = gr.CheckboxGroup(
-                        ["Title", "Description", "Software", "Source", "Generation time", "Comment"],
-                        value=["Title", "Description", "Software", "Source", "Generation time", "Comment"],
-                        label=webui_language["rm png info"]["choose_to_rm"],
-                        scale=2,
-                    )
-                    remove_pnginfo_data_cloaking_switch = gr.Checkbox(
-                        False, label=webui_language["rm png info"]["remove_pnginfo_data_cloaking_switch"], scale=1
-                    )
-                remove_pnginfo_metadate = gr.Textbox(
-                    env.meta_data, label=webui_language["rm png info"]["remove_pnginfo_metadate"]
-                )
-                remove_pnginfo_input_path = gr.Textbox(label=webui_language["i2i"]["input_path"])
-                remove_pnginfo_output_path = gr.Textbox(label=webui_language["rm png info"]["save_path"])
-                remove_pnginfo_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
-                remove_pnginfo_generate_button.click(
-                    fn=remove_info,
-                    inputs=[
-                        remove_pnginfo_input_path,
-                        remove_pnginfo_output_path,
-                        remove_pnginfo_choices,
-                        remove_pnginfo_metadate,
-                        remove_pnginfo_data_cloaking_switch,
-                    ],
-                    outputs=[remove_pnginfo_output_information],
-                )
+                    remove_pnginfo_image = gr.Image(type="filepath")
+                    with gr.Column():
+                        remove_pnginfo_generate_button = gr.Button(webui_language["water mark"]["generate_button"])
+                        with gr.Row():
+                            remove_pnginfo_choices = gr.CheckboxGroup(
+                                ["Title", "Description", "Software", "Source", "Generation time", "Comment", "dpi"],
+                                value=[
+                                    "Title",
+                                    "Description",
+                                    "Software",
+                                    "Source",
+                                    "Generation time",
+                                    "Comment",
+                                    "dpi",
+                                ],
+                                label=webui_language["rm png info"]["choose_to_rm"],
+                                scale=2,
+                            )
+                            remove_pnginfo_data_cloaking_switch = gr.Checkbox(
+                                False,
+                                label=webui_language["rm png info"]["remove_pnginfo_data_cloaking_switch"],
+                                scale=1,
+                            )
+                        remove_pnginfo_metadate = gr.Textbox(
+                            env.meta_data, label=webui_language["rm png info"]["remove_pnginfo_metadate"]
+                        )
+                        remove_pnginfo_input_path = gr.Textbox(label=webui_language["i2i"]["input_path"])
+                        remove_pnginfo_output_path = gr.Textbox(label=webui_language["rm png info"]["save_path"])
+                        remove_pnginfo_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
+                        remove_pnginfo_generate_button.click(
+                            fn=remove_info,
+                            inputs=[
+                                remove_pnginfo_image,
+                                remove_pnginfo_input_path,
+                                remove_pnginfo_output_path,
+                                remove_pnginfo_choices,
+                                remove_pnginfo_metadate,
+                                remove_pnginfo_data_cloaking_switch,
+                            ],
+                            outputs=[remove_pnginfo_output_information],
+                        )
             with gr.Tab(webui_language["rm png info"]["tab_re"]):
                 revert_pnginfo_generate_button = gr.Button(webui_language["water mark"]["generate_button"])
                 revert_pnginfo_info_file_path = gr.Textbox(label=webui_language["rm png info"]["info_file_path"])
