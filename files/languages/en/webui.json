@@ -108,7 +108,7 @@
         "save_path": "Saved path",
         "choose_to_rm": "Choose sth to rm",
         "remove_pnginfo_metadate": "Custom metadata after removing the pnginfo",
-        "remove_pnginfo_data_cloaking_switch": "Falsified information (purged in its original format)"
+        "remove_pnginfo_data_cloaking_switch": "Falsified information"
     },
     "maigic analysis": {
         "tab": "Magic Analysis",

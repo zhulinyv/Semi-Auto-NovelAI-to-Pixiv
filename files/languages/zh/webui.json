@@ -108,7 +108,7 @@
         "save_path": "保存目录",
         "choose_to_rm": "选择要清除的内容",
         "remove_pnginfo_metadate": "清除图片数据后自定义添加的元数据",
-        "remove_pnginfo_data_cloaking_switch": "伪造信息(清除时保留原格式)"
+        "remove_pnginfo_data_cloaking_switch": "伪造信息"
     },
     "maigic analysis": {
         "tab": "法术解析",
