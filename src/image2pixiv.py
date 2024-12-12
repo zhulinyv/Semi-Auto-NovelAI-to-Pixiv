@@ -76,6 +76,7 @@ def upload(image_list, file):
 
     if name == "None":
         name == "无题"
+        new_name = name
     else:
         for surrounding in list(surroundings_data.keys()):
             if format_str(surroundings_data[surrounding]["tag"]) in img_comment["prompt"]:
