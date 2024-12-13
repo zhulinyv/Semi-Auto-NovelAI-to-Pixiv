@@ -158,7 +158,7 @@
             "pixiv_cool_time": "Cooling time for uploading to Pixiv (in minutes, fluctuates within 5 minutes)",
             "remove_info": "Remove PNG info when upload",
             "r18": "Is r18 picture or not",
-            "default_tag": "Default tag when upload",
+            "default_tag": "Default tag when upload(Please separate multiple with commas)",
             "neighbor": "Side length of square mosaic relative to image",
             "meta_data": "Information added when clearing meta data",
             "revert_info_": "Whether to restore the picture information after the mosaic, water mark, waifu2x, etc is completed",

@@ -48,6 +48,7 @@ def main():
         cancel_probabilities_for_item,
         del_item_for_yaml,
         gen_script,
+        list_to_str,
         open_folder,
         read_json,
         read_txt,
@@ -2516,7 +2517,8 @@ def main():
                 _remove_info = gr.Checkbox(True, label=webui_language["setting"]["description"]["remove_info"])
                 r18 = gr.Checkbox(env.r18, label=webui_language["setting"]["description"]["r18"])
                 default_tag = gr.Textbox(
-                    value=env.default_tag, label=webui_language["setting"]["description"]["default_tag"]
+                    value=str(list_to_str(env.default_tag)),
+                    label=webui_language["setting"]["description"]["default_tag"],
                 )
             with gr.Tab(webui_language["setting"]["sub_tab"]["mosaic"]):
                 neighbor = gr.Slider(
