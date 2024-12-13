@@ -99,7 +99,7 @@ def upload(image_list, file):
         image_paths=image_list,
         title=new_name,
         caption=caption,
-        labels=["女の子"],
+        labels=env.default_tag,
         cookie=env.pixiv_cookie,
         x_token=env.pixiv_token,
         allow_tag_edit=env.allow_tag_edit,
