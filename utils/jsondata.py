@@ -19,7 +19,7 @@ headers = {
 
 json_for_t2i = {
     "input": str,
-    "model": "nai-diffusion-3",
+    "model": env.model,
     "action": "generate",
     "parameters": {
         "params_version": 3,
@@ -53,7 +53,7 @@ json_for_t2i = {
 
 json_for_i2i = {
     "input": str,
-    "model": "nai-diffusion-3",
+    "model": env.model,
     "action": "img2img",
     "parameters": {
         "width": int,
@@ -130,7 +130,7 @@ json_for_inpaint = {
 
 json_for_vibe = {
     "input": str,
-    "model": "nai-diffusion-3",
+    "model": env.model,
     "action": "generate",
     "parameters": {
         "params_version": 3,
