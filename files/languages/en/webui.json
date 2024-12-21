@@ -171,7 +171,7 @@
             "height": "Height of Magic Parser page",
             "port": "Port for local startup",
             "g4f_port": "Port number for G4F web",
-            "theme": "Theme of WebUI interface",
+            "theme": "Theme of WebUI interface(More: https://huggingface.co/spaces/gradio/theme-gallery)",
             "webui_lang": "Language of WebUI interface",
             "warning": "Detected shared link enabled, some privacy configurations are hidden!",
             "skip_update_check": "Skip the update check",

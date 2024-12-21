@@ -171,7 +171,7 @@
             "height": "法术解析页面的高度",
             "port": "本地启动的端口",
             "g4f_port": "G4F 的网页端口号",
-            "theme": "WebUI 界面主题",
+            "theme": "WebUI 界面主题(更多: https://huggingface.co/spaces/gradio/theme-gallery)",
             "webui_lang": "WebUI界面语言",
             "warning": "检测到已开启分享链接, 隐藏部分隐私配置!",
             "skip_update_check": "跳过更新检查",
