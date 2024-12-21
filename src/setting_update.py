@@ -21,6 +21,7 @@ def modify_env(**kwargs: dict):
 
 def webui(
     token,
+    model,
     img_size,
     scale,
     censor,
@@ -76,6 +77,7 @@ def webui(
         img_size = [int((img_size.split("x"))[0]), int((img_size.split("x"))[1])]
     otp_info = modify_env(
         token=f'"{token}"'.replace("\n", ""),
+        model=model,
         img_size=img_size,
         scale=scale,
         censor=censor,

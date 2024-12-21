@@ -24,6 +24,12 @@ from utils.prepare import logger
 
 PATH = os.getcwd()
 
+MODEL = [
+    "nai-diffusion-3",
+    "nai-diffusion-furry-3",
+    "nai-diffusion-2",
+    # "nai-diffusion-4-curated-preview"
+]
 RESOLUTION = [
     "832x1216",
     "1216x832",
@@ -126,6 +132,14 @@ def generate_random_str(randomlength):
     for i in range(randomlength):
         random_str += base_str[random.randint(0, length)]
     return random_str
+
+
+def position_to_float(position: str):
+    offset = 0.1
+    letter_dict = {chr(65 + i): i * 0.2 + offset for i in range(5)}
+    number_dict = {str(i + 1): i * 0.2 + offset for i in range(5)}
+    letter, number = position
+    return round(letter_dict[letter], 1), round(number_dict[number], 1)
 
 
 def inquire_anlas():

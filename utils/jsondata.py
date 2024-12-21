@@ -208,3 +208,72 @@ json_for_emotion = {
     "height": int,
     "image": str,
 }
+
+
+json_for_t2i_v4 = {
+    "input": str,
+    "model": "nai-diffusion-4-curated-preview",
+    "action": "generate",
+    "parameters": {
+        "params_version": 3,
+        "width": int,
+        "height": int,
+        "scale": float,
+        "sampler": str,
+        "steps": int,
+        "n_samples": 1,
+        "ucPreset": 0,
+        "qualityToggle": True,
+        "dynamic_thresholding": bool,
+        "controlnet_strength": 1,
+        "legacy": False,
+        "add_original_image": True,
+        "cfg_rescale": 0,
+        "noise_schedule": str,
+        "legacy_v3_extend": False,
+        "seed": int,
+        "use_coords": bool,
+        "characterPrompts": [
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+        ],
+        "v4_prompt": {
+            "caption": {
+                "base_caption": str,
+                "char_captions": [
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                ],
+            },
+            "use_coords": bool,
+            "use_order": True,
+        },
+        "v4_negative_prompt": {
+            "caption": {
+                "base_caption": str,
+                "char_captions": [
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                ],
+            }
+        },
+        "negative_prompt": str,
+        "reference_image_multiple": [],
+        "reference_information_extracted_multiple": [],
+        "reference_strength_multiple": [],
+        "deliberate_euler_ancestral_bug": False,
+        "prefer_brownian": True,
+    },
+}

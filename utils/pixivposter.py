@@ -6,8 +6,29 @@ import uuid
 
 import requests
 
+from utils.env import env
 from utils.prepare import logger
 from utils.utils import proxies
+
+headers = {
+    "authority": "www.pixiv.net",
+    "accept": "application/json",
+    "accept-language": "en-GB,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-US;q=0.6",
+    "baggage": "sentry-environment=production,sentry-release=ee80147438af5620fb60719a59dbba99fc3ba8fb,sentry-public_key=ef1dbbb613954e15a50df0190ec0f023,sentry-trace_id=c995c888a6274d2986a078cf2b335936,sentry-sample_rate=0.1,sentry-transaction=%2Fillustration%2Fcreate,sentry-sampled=false",
+    "cookie": env.pixiv_cookie,
+    "dnt": "1",
+    "origin": "https://www.pixiv.net",
+    "referer": "https://www.pixiv.net/illustration/create",
+    "sec-ch-ua": '"Chromium";v="122", "Not(A:Brand";v="24", "Microsoft Edge";v="122"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "sentry-trace": str,
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0",
+    "x-csrf-token": env.pixiv_token,
+}
 
 
 def keep_alive(task_func, max_retries=50, base_delay=1, max_delay=64):
@@ -38,18 +59,13 @@ def pixiv_upload(
     title: str,
     caption: str,
     labels: list,
-    cookie: str,
-    x_token: str,
     allow_tag_edit: bool,
     is_r18: bool,
     title_en: str = "",
     caption_en: str = "",
 ):
-    trace_id = uuid.uuid4().hex  # Generates a random UUID and converts it to a hexadecimal string
-    span_id = uuid.uuid4().hex[:16]  # Generates a new UUID, but only uses the first 16 characters
-    sampled = "0"
-    sentry_trace = f"{trace_id}-{span_id}-{sampled}"
     post_url = "https://www.pixiv.net/ajax/work/create/illustration"
+    headers["sentry-trace"] = f'{uuid.uuid4().hex}-{uuid.uuid4().hex[:16]}-"0"'
 
     def generate_image_order(files, payload):
         image_order = {}
@@ -130,26 +146,6 @@ def pixiv_upload(
     if not is_r18:
         payload["xRestrict"] = "general"
         payload["sexual"] = "false"
-
-    headers = {
-        "authority": "www.pixiv.net",
-        "accept": "application/json",
-        "accept-language": "en-GB,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-US;q=0.6",
-        "baggage": "sentry-environment=production,sentry-release=ee80147438af5620fb60719a59dbba99fc3ba8fb,sentry-public_key=ef1dbbb613954e15a50df0190ec0f023,sentry-trace_id=c995c888a6274d2986a078cf2b335936,sentry-sample_rate=0.1,sentry-transaction=%2Fillustration%2Fcreate,sentry-sampled=false",
-        "cookie": cookie,
-        "dnt": "1",
-        "origin": "https://www.pixiv.net",
-        "referer": "https://www.pixiv.net/illustration/create",
-        "sec-ch-ua": '"Chromium";v="122", "Not(A:Brand";v="24", "Microsoft Edge";v="122"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"Windows"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        "sentry-trace": sentry_trace,
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0",
-        "x-csrf-token": x_token,
-    }
 
     post_response = keep_alive(
         lambda: requests.request("POST", post_url, headers=headers, data=payload, files=files, proxies=proxies)

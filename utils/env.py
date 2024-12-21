@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     token: Union[str, None] = None
 
     # 文生图
+    model: str = "nai-diffusion-3"
     img_size: Union[int, list[int]] = -1
     scale: float = 5.0
     censor: bool = False

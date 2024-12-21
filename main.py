@@ -40,6 +40,7 @@ def main():
     from utils.update import check_update, update
     from utils.utils import (
         FAVORTES_FILE,
+        MODEL,
         NOISE_SCHEDULE,
         RESOLUTION,
         SAMPLER,
@@ -2396,6 +2397,7 @@ def main():
                 )
             with gr.Tab(webui_language["setting"]["sub_tab"]["t2i"]):
                 with gr.Column():
+                    model = gr.Dropdown(MODEL, value="nai-diffusion-3", label="模型(Model)")
                     img_size = gr.Radio(
                         [
                             -1,
@@ -2573,6 +2575,7 @@ def main():
                 setting,
                 inputs=[
                     token,
+                    model,
                     img_size,
                     scale,
                     censor,

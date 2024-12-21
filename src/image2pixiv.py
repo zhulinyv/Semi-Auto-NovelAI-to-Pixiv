@@ -2,8 +2,10 @@ import os
 import random
 import shutil
 import traceback
+import uuid
 from pathlib import Path
 
+import requests
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
@@ -13,13 +15,14 @@ from utils.imgtools import get_img_info
 
 # inject_data 修改自 https://github.com/NovelAI/novelai-image-metadata
 from utils.naimeta import inject_data
-from utils.pixivposter import pixiv_upload
+from utils.pixivposter import headers, pixiv_upload
 from utils.prepare import logger
 
 # pixivposter 直接抄自[小苹果](https://github.com/LittleApple-fp16)
 from utils.utils import (
     cancel_probabilities_for_item,
     file_path2list,
+    file_path2name,
     format_str,
     list_to_str,
     read_yaml,
@@ -69,79 +72,112 @@ def upload(image_list, file):
         img_comment = {"prompt": ""}
 
     # 标题
-    name_list = file.replace(".png", "").replace(".jpg", "").split("_")
-    name = name_list[2]
-
+    characters_data = cancel_probabilities_for_item(read_yaml("./files/favorites/characters.yaml"))
     surroundings_data = cancel_probabilities_for_item(read_yaml("./files/favorites/surroundings.yaml"))
+
+    for k, v in characters_data.items():
+        if (format_str(v["tag"]) in img_comment["prompt"]) or (v["tag"] in img_comment["prompt"]):
+            name = k
+            break
+        else:
+            name = "None"
 
     if name == "None":
         name == "无题"
         new_name = name
     else:
-        for surrounding in list(surroundings_data.keys()):
-            if format_str(surroundings_data[surrounding]["tag"]) in img_comment["prompt"]:
-                new_name = random.choice([f"{name}~", f"和{name}涩涩~", f"和{name}在{surrounding}~"])
+        for k, v in surroundings_data.items():
+            if (format_str(v["tag"]) in img_comment["prompt"]) or (v["tag"] in img_comment["prompt"]):
+                new_name = random.choice([f"{name}~", f"和{name}涩涩~", f"和{name}在{k}~"])
                 break
         try:
             new_name
         except Exception:
             new_name = random.choice([f"{name}~", f"和{name}涩涩~"])
 
+    file = image_list[-1]
+
+    # 标签
+    if str(file)[-4:] == ".png":
+        format_ = "image/png"
+    else:
+        format_ = "image/jpeg"
+
+    with open(file, "rb") as image:
+        image_data = image.read()
+
+    files = {"image": (file_path2name(file), image_data, format_)}
+
+    headers["sentry-trace"] = f'{uuid.uuid4().hex}-{uuid.uuid4().hex[:16]}-"0"'
+    response = requests.post("https://www.pixiv.net/rpc/suggest_tags_by_image.php", files=files, headers=headers)
+
+    if response.status_code == 200:
+        suggest_tags = response.json()["body"]["tags"]
+    else:
+        suggest_tags = []
+
+    labels = env.default_tag + suggest_tags
+
+    while length := len(labels) > 10:
+        labels.pop(random.randint(0, length - 1))
+
     # 预览
     logger.info(
         f"""
 图片: {image_list}
 标题: {new_name}
+标签: {labels}
 描述: {caption}"""
     )
+
     # 状态
-    status = pixiv_upload(
-        image_paths=image_list,
-        title=new_name,
-        caption=caption,
-        labels=env.default_tag,
-        cookie=env.pixiv_cookie,
-        x_token=env.pixiv_token,
-        allow_tag_edit=env.allow_tag_edit,
-        is_r18=env.r18,
-    )
+    times = 0
+    while times <= 5:
+        try:
+            times += 1
+            status = pixiv_upload(
+                image_paths=image_list,
+                title=new_name,
+                caption=caption,
+                labels=labels,
+                allow_tag_edit=env.allow_tag_edit,
+                is_r18=env.r18,
+            )
+            if status == 1:
+                raise UploadError
+            elif status == 2:
+                raise UploadTooFastError
+            else:
+                pass
+            break
+        except Exception:
+            logger.error("出现错误: >>>>>")
+            traceback.print_exc()
+            logger.error("<<<<<")
+            sleep_for_cool(300, 600)
     return status
 
 
 def main(file_path):
     file_list = file_path2list(file_path)
     for file in file_list:
-        times = 0
-        while times <= 5:
-            try:
-                times += 1
-                image_list = []
-                if file[-4:] == ".png":
-                    image_list.append(Path(file_path) / file)
-                    file = file
-                else:
-                    folder_path = Path(file_path) / file
-                    folder_list = file_path2list(folder_path)
-                    for i in folder_list:
-                        image_list.append(folder_path / i)
-                    file = folder_list[-1]
-                status = upload(image_list, file)
-                if status == 1:
-                    raise UploadError
-                elif status == 2:
-                    sleep_for_cool(300, 600)
-                    raise UploadTooFastError
-                else:
-                    logger.warning(f"删除 {Path(file_path) / file}...")
-                    try:
-                        shutil.rmtree(Path(file_path) / file)
-                    except NotADirectoryError:
-                        os.remove(Path(file_path) / file)
-                    break
-            except Exception:
-                logger.error("出现错误: >>>>>")
-                traceback.print_exc()
-                logger.error("<<<<<")
+        image_list = []
+        if file[-4:] == ".png":
+            image_list.append(Path(file_path) / file)
+            file = file
+        else:
+            folder_path = Path(file_path) / file
+            folder_list = file_path2list(folder_path)
+            for i in folder_list:
+                image_list.append(folder_path / i)
+            file = folder_list[-1]
+        status = upload(image_list, file)
+        if status not in [1, 2]:
+            logger.warning(f"删除 {Path(file_path) / file}...")
+        try:
+            shutil.rmtree(Path(file_path) / file)
+        except NotADirectoryError:
+            os.remove(Path(file_path) / file)
         sleep_for_cool((env.pixiv_cool_time - 5) * 60, (env.pixiv_cool_time + 5) * 60)
     logger.success("上传完成!")
 
