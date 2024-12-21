@@ -77,7 +77,7 @@ def webui(
         img_size = [int((img_size.split("x"))[0]), int((img_size.split("x"))[1])]
     otp_info = modify_env(
         token=f'"{token}"'.replace("\n", ""),
-        model=model,
+        model=f'"{model}"',
         img_size=img_size,
         scale=scale,
         censor=censor,
