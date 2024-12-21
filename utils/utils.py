@@ -43,6 +43,7 @@ SAMPLER = [
     "k_dpmpp_2s_ancestral",
     "k_dpmpp_2m",
     "k_dpmpp_sde",
+    "k_dpmpp_2m_sde",
     "ddim_v3",
 ]
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
