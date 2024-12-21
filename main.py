@@ -44,6 +44,7 @@ def main():
         NOISE_SCHEDULE,
         RESOLUTION,
         SAMPLER,
+        THEME_LIST,
         add_item_for_yaml,
         add_wildcard_to_textbox,
         cancel_probabilities_for_item,
@@ -2554,7 +2555,9 @@ def main():
                 )
                 port = gr.Textbox(value=env.port, label=webui_language["setting"]["description"]["port"])
                 g4f_port = gr.Textbox(env.g4f_port, label=webui_language["setting"]["description"]["g4f_port"])
-                theme = gr.Textbox(env.theme, label=webui_language["setting"]["description"]["theme"])
+                theme = gr.Dropdown(
+                    THEME_LIST, value=env.theme, label=webui_language["setting"]["description"]["theme"]
+                )
                 webui_lang = gr.Dropdown(
                     ["zh", "en"], value="zh", label=webui_language["setting"]["description"]["webui_lang"]
                 )
