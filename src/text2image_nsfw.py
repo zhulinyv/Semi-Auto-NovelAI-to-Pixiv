@@ -18,6 +18,7 @@ from utils.utils import (
     choose_item,
     format_str,
     generate_image,
+    position_to_float,
     read_yaml,
     return_source_or_type_dict,
     return_x64,
@@ -49,6 +50,7 @@ def t2i_by_hand(
     decrisp: bool,
     seed: str,
     times: int,
+    *args,
 ):
     imgs_list = []
     for i in range(times):
@@ -76,10 +78,44 @@ def t2i_by_hand(
         json_for_t2i["parameters"]["negative_prompt"] = negative
 
         if env.model == "nai-diffusion-4-curated-preview":
-            json_for_t2i["parameters"]["use_coords"] = True
+            json_for_t2i["parameters"]["use_coords"] = args[0]
             json_for_t2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
-            json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = True
+            json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = args[0]
             json_for_t2i["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = negative
+
+        args = args[1:]
+        components_list = []
+        while args:
+            components_list.append(args[0:4])
+            args = args[4:]
+
+        json_for_t2i["parameters"]["characterPrompts"] = [
+            {
+                "prompt": components[1],
+                "uc": components[2],
+                "center": {"x": position_to_float(components[3])[0], "y": position_to_float(components[3])[1]},
+            }
+            for components in components_list
+            if components[0]
+        ]
+
+        json_for_t2i["parameters"]["v4_prompt"]["caption"]["char_captions"] = [
+            {
+                "char_caption": components[1],
+                "centers": [{"x": position_to_float(components[3])[0], "y": position_to_float(components[3])[1]}],
+            }
+            for components in components_list
+            if components[0]
+        ]
+
+        json_for_t2i["parameters"]["v4_negative_prompt"]["caption"]["char_captions"] = [
+            {
+                "char_caption": components[2],
+                "centers": [{"x": position_to_float(components[3])[0], "y": position_to_float(components[3])[1]}],
+            }
+            for components in components_list
+            if components[0]
+        ]
 
         logger.debug(json_for_t2i)
 

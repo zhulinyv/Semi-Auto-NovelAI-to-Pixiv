@@ -39,6 +39,7 @@ def main():
     from utils.selector import copy_current_img, del_current_img, move_current_img, show_first_img, show_next_img
     from utils.update import check_update, update
     from utils.utils import (
+        CHARACTER_POSITION,
         FAVORTES_FILE,
         MODEL,
         NOISE_SCHEDULE,
@@ -182,7 +183,11 @@ def main():
                                         visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
                                     )
                                 with gr.Row():
-                                    text2image_variety = gr.Checkbox(value=env.variety if env.model != "nai-diffusion-4-curated-preview" else False, label="variety", visible=True if env.model != "nai-diffusion-4-curated-preview" else False)
+                                    text2image_variety = gr.Checkbox(
+                                        value=env.variety if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        label="variety",
+                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
+                                    )
                                     text2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                                 with gr.Row():
                                     text2image_seed = gr.Textbox(
@@ -220,6 +225,24 @@ def main():
                             inputs=[text2image_wildcard_file, text2image_wildcard_name],
                             outputs=text2image_wildcard_tag,
                         )
+                    with gr.Tab("Character", visible=True if env.model == "nai-diffusion-4-curated-preview" else False):
+                        ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
+                        gr.Markdown("<hr>")
+
+                        def character_compents(number):
+                            with gr.Row():
+                                character_position = gr.Dropdown(CHARACTER_POSITION, label="位置(Position)")
+                                character_switch = gr.Checkbox(False, label="启用(Switch)")
+                                gr.Textbox(f"角色{number}", show_label=False)
+                            with gr.Row():
+                                character_positive = gr.Textbox(label="正面提示词(Positive)", lines=3)
+                                character_negative = gr.Textbox(label="负面提示词(Negative)", lines=3)
+                            for _ in range(3):
+                                gr.Markdown("<hr>")
+                            return character_switch, character_positive, character_negative, character_position
+
+                        components_list = [character_compents(num) for num in range(1, 7)]
+                        new_components_list = [component for components in components_list for component in components]
                     text2image_generate_button.click(
                         fn=t2i_by_hand,
                         inputs=[
@@ -237,7 +260,9 @@ def main():
                             text2image_decrisp,
                             text2image_seed,
                             text2image_quantity,
-                        ],
+                        ]
+                        + [ai_choice]
+                        + new_components_list,
                         outputs=text2image_output_image,
                     )
             with gr.Tab(webui_language["random blue picture"]["tab"]):
@@ -2404,7 +2429,7 @@ def main():
                 )
             with gr.Tab(webui_language["setting"]["sub_tab"]["t2i"]):
                 with gr.Column():
-                    model = gr.Dropdown(MODEL, value="nai-diffusion-3", label="模型(Model)")
+                    model = gr.Dropdown(MODEL, value=env.model, label="模型(Model)")
                     img_size = gr.Radio(
                         [
                             -1,
