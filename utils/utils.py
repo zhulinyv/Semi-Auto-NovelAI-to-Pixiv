@@ -28,7 +28,8 @@ MODEL = [
     "nai-diffusion-3",
     "nai-diffusion-furry-3",
     "nai-diffusion-2",
-    # "nai-diffusion-4-curated-preview"
+    "nai-diffusion-4-curated-preview",
+    # "nai-diffusion-4"
 ]
 RESOLUTION = [
     "832x1216",
@@ -52,6 +53,7 @@ SAMPLER = [
     "k_dpmpp_2m_sde",
     "ddim_v3",
 ]
+... if env.model != "nai-diffusion-4-curated-preview" else SAMPLER.remove("ddim_v3")
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
 FAVORTES_FILE = [
     "actions.yaml",

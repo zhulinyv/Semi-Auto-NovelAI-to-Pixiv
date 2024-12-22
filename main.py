@@ -171,12 +171,18 @@ def main():
                                     minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                                 )
                                 with gr.Row():
-                                    text2image_sm = gr.Checkbox(value=env.sm, label="sm")
+                                    text2image_sm = gr.Checkbox(
+                                        value=env.sm if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        label="sm",
+                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
+                                    )
                                     text2image_sm_dyn = gr.Checkbox(
-                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
+                                        value=env.sm_dyn if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        label=webui_language["t2i"]["smdyn"],
+                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
                                     )
                                 with gr.Row():
-                                    text2image_variety = gr.Checkbox(value=env.variety, label="variety")
+                                    text2image_variety = gr.Checkbox(value=env.variety if env.model != "nai-diffusion-4-curated-preview" else False, label="variety", visible=True if env.model != "nai-diffusion-4-curated-preview" else False)
                                     text2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                                 with gr.Row():
                                     text2image_seed = gr.Textbox(

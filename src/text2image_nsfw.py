@@ -7,7 +7,11 @@ from PIL import Image
 
 from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, revert_img_info
-from utils.jsondata import json_for_t2i
+
+if env.model != "nai-diffusion-4-curated-preview":
+    from utils.jsondata import json_for_t2i
+else:
+    from utils.jsondata import json_for_t2i_v4 as json_for_t2i
 from utils.prepare import logger
 from utils.utils import (
     cancel_probabilities_for_item,
@@ -58,9 +62,10 @@ def t2i_by_hand(
         json_for_t2i["parameters"]["scale"] = scale
         json_for_t2i["parameters"]["sampler"] = sampler
         json_for_t2i["parameters"]["steps"] = steps
-        json_for_t2i["parameters"]["sm"] = sm
-        json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
-        json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
+        if env.model != "nai-diffusion-4-curated-preview":
+            json_for_t2i["parameters"]["sm"] = sm
+            json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
+            json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
         json_for_t2i["parameters"]["dynamic_thresholding"] = decrisp
         json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
         if isinstance(seed, int):
@@ -69,6 +74,12 @@ def t2i_by_hand(
             seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
         json_for_t2i["parameters"]["seed"] = seed
         json_for_t2i["parameters"]["negative_prompt"] = negative
+
+        if env.model == "nai-diffusion-4-curated-preview":
+            json_for_t2i["parameters"]["use_coords"] = True
+            json_for_t2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
+            json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = True
+            json_for_t2i["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = negative
 
         logger.debug(json_for_t2i)
 
