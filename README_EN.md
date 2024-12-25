@@ -208,10 +208,11 @@ To unzip and use, modpack users need to run `Modpack launcher.bat`
 + [x] Image compression and categorization
 + [ ] Vibe save style
 + [x] Fallback Vibe random chart
-+ [ ] Simplification of Favorit. Edited by Ethan
++ [x] Simplification of Favorit. Edited by Ethan
 + [ ] Learn to write an autocomplete for Is
 + [ ] Simplify Vibe image uploading
 + [ ] Custom resolution
++ [ ] Connect to stable-diffusion-webui
 + [ ] ...
 
 </details>
