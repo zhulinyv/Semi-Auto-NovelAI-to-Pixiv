@@ -2068,7 +2068,16 @@ def main():
                         remove_pnginfo_generate_button = gr.Button(webui_language["water mark"]["generate_button"])
                         with gr.Row():
                             remove_pnginfo_choices = gr.CheckboxGroup(
-                                ["Title", "Description", "Software", "Source", "Generation time", "Comment", "dpi"],
+                                [
+                                    "Title",
+                                    "Description",
+                                    "Software",
+                                    "Source",
+                                    "Generation time",
+                                    "Comment",
+                                    "dpi",
+                                    "parameters",
+                                ],
                                 value=[
                                     "Title",
                                     "Description",
@@ -2077,6 +2086,7 @@ def main():
                                     "Generation time",
                                     "Comment",
                                     "dpi",
+                                    "parameters",
                                 ],
                                 label=webui_language["rm png info"]["choose_to_rm"],
                                 scale=2,
