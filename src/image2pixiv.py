@@ -57,7 +57,9 @@ def upload(image_list, file):
                 logger.warning(f"正在清除 {image} 的元数据...")
                 with Image.open(image) as img:
                     img = inject_data(
-                        img, metadata, ["Title", "Description ", "Software", "Source", "Generation time", "Comment"]
+                        img,
+                        metadata,
+                        ["Title", "Description ", "Software", "Source", "Generation time", "Comment", "parameters"],
                     )
                     img.save(image)
                 logger.success("清除成功!")
