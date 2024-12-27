@@ -2569,11 +2569,11 @@ def main():
                     label=webui_language["setting"]["description"]["suggest_tag"],
                 )
                 use_file_name_as_title = gr.Checkbox(
-                    value=env.suggest_tag,
+                    value=env.use_file_name_as_title,
                     label="使用文件名作为标题",
                 )
                 use_old_title_rule = gr.Checkbox(
-                    value=env.suggest_tag,
+                    value=env.use_old_title_rule,
                     label="使用旧版标题规则(同时勾选上方复选框时, 优先使用文件名作为标题)",
                 )
             with gr.Tab(webui_language["setting"]["sub_tab"]["mosaic"]):
