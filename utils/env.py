@@ -42,6 +42,9 @@ class Settings(BaseSettings):
     remove_info: bool = True
     r18: bool = True
     default_tag: list[str] = ["女の子", "萝莉"]
+    suggest_tag: bool = True
+    use_file_name_as_title: bool = False
+    use_old_title_rule: bool = False
 
     # 马赛克
     neighbor: float = 0.0085

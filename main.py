@@ -2564,6 +2564,18 @@ def main():
                     value=str(list_to_str(env.default_tag)),
                     label=webui_language["setting"]["description"]["default_tag"],
                 )
+                suggest_tag = gr.Checkbox(
+                    value=env.suggest_tag,
+                    label=webui_language["setting"]["description"]["suggest_tag"],
+                )
+                use_file_name_as_title = gr.Checkbox(
+                    value=env.suggest_tag,
+                    label="使用文件名作为标题",
+                )
+                use_old_title_rule = gr.Checkbox(
+                    value=env.suggest_tag,
+                    label="使用旧版标题规则(同时勾选上方复选框时, 优先使用文件名作为标题)",
+                )
             with gr.Tab(webui_language["setting"]["sub_tab"]["mosaic"]):
                 neighbor = gr.Slider(
                     0, 0.25, env.neighbor, step=0.0001, label=webui_language["setting"]["description"]["neighbor"]
@@ -2649,6 +2661,9 @@ def main():
                     _remove_info,
                     r18,
                     default_tag,
+                    suggest_tag,
+                    use_file_name_as_title,
+                    use_old_title_rule,
                     neighbor,
                     alpha,
                     water_height,

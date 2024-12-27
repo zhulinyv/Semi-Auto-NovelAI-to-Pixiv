@@ -77,44 +77,55 @@ def upload(image_list, file):
     characters_data = cancel_probabilities_for_item(read_yaml("./files/favorites/characters.yaml"))
     surroundings_data = cancel_probabilities_for_item(read_yaml("./files/favorites/surroundings.yaml"))
 
-    for k, v in characters_data.items():
-        if (format_str(v["tag"]) in img_comment["prompt"]) or (v["tag"] in img_comment["prompt"]):
-            name = k
-            break
-        else:
-            name = "None"
+    if env.use_file_name_as_title:
+        name = file_path2name(image).split(".")[0]
+    elif env.use_old_title_rule:
+        name = (file_path2name(image).split("_")[2]).split(".")[0]
+    else:
+        for k, v in characters_data.items():
+            if (format_str(v["tag"]) in img_comment["prompt"]) or (v["tag"] in img_comment["prompt"]):
+                name = k
+                break
+            else:
+                name = "None"
 
     if name == "None":
         name == "无题"
         new_name = name
     else:
-        for k, v in surroundings_data.items():
-            if (format_str(v["tag"]) in img_comment["prompt"]) or (v["tag"] in img_comment["prompt"]):
-                new_name = random.choice([f"{name}~", f"和{name}涩涩~", f"和{name}在{k}~"])
-                break
-        try:
-            new_name
-        except Exception:
-            new_name = random.choice([f"{name}~", f"和{name}涩涩~"])
+        if env.r18:
+            for k, v in surroundings_data.items():
+                if (format_str(v["tag"]) in img_comment["prompt"]) or (v["tag"] in img_comment["prompt"]):
+                    new_name = random.choice([f"{name}~", f"和{name}涩涩~", f"和{name}在{k}~"])
+                    break
+            try:
+                new_name
+            except Exception:
+                new_name = random.choice([f"{name}~", f"和{name}涩涩~"])
+        else:
+            new_name = f"{name}~"
 
     file = image_list[-1]
 
     # 标签
-    if str(file)[-4:] == ".png":
-        format_ = "image/png"
-    else:
-        format_ = "image/jpeg"
+    if env.suggest_tag:
+        if str(file)[-4:] == ".png":
+            format_ = "image/png"
+        else:
+            format_ = "image/jpeg"
 
-    with open(file, "rb") as image:
-        image_data = image.read()
+        with open(file, "rb") as image:
+            image_data = image.read()
 
-    files = {"image": (file_path2name(file), image_data, format_)}
+        files = {"image": (file_path2name(file), image_data, format_)}
 
-    headers["sentry-trace"] = f'{uuid.uuid4().hex}-{uuid.uuid4().hex[:16]}-"0"'
-    response = requests.post("https://www.pixiv.net/rpc/suggest_tags_by_image.php", files=files, headers=headers)
+        headers["sentry-trace"] = f'{uuid.uuid4().hex}-{uuid.uuid4().hex[:16]}-"0"'
+        response = requests.post("https://www.pixiv.net/rpc/suggest_tags_by_image.php", files=files, headers=headers)
 
-    if response.status_code == 200:
-        suggest_tags = response.json()["body"]["tags"]
+        if response.status_code == 200:
+            suggest_tags = response.json()["body"]["tags"]
+        else:
+            suggest_tags = []
     else:
         suggest_tags = []
 
