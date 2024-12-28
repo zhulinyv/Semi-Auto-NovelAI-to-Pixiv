@@ -90,7 +90,7 @@ def upload(image_list, file):
                 name = "None"
 
     if name == "None":
-        name == "无题"
+        name = "无题"
         new_name = name
     else:
         if env.r18:
