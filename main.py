@@ -612,10 +612,14 @@ def main():
                                     value=webui_language["t2i"]["generate_button"], scale=1
                                 )
                                 vibe_transfer_quantity = gr.Slider(
-                                    minimum=1, maximum=999, value=1, step=1, label=webui_language["t2i"]["times"]
+                                    minimum=1,
+                                    maximum=999,
+                                    value=1,
+                                    step=1,
+                                    label=webui_language["t2i"]["times"],
+                                    interactive=True,
                                 )
                     with gr.Tab("生成参数"):
-                        vibe_transfer_input_images = gr.Textbox("", label=webui_language["vibe"]["input_imgs"])
                         with gr.Row():
                             with gr.Column(scale=1):
                                 vibe_transfer_resolution = gr.Dropdown(
@@ -631,10 +635,12 @@ def main():
                                     vibe_transfer_width = gr.Textbox(
                                         value=(env.img_size)[0] if env.img_size != -1 else "832",
                                         label=webui_language["t2i"]["width"],
+                                        interactive=True,
                                     )
                                     vibe_transfer_height = gr.Textbox(
                                         value=(env.img_size)[1] if env.img_size != -1 else "1216",
                                         label=webui_language["t2i"]["height"],
+                                        interactive=True,
                                     )
                                     vibe_transfer_resolution.change(
                                         return_resolution,
@@ -648,19 +654,24 @@ def main():
                                     value=env.scale,
                                     step=0.1,
                                     label=webui_language["t2i"]["scale"],
+                                    interactive=True,
                                 )
                                 vibe_transfer_sampler = gr.Dropdown(
-                                    SAMPLER,
-                                    value=env.sampler,
-                                    label=webui_language["t2i"]["sampler"],
+                                    SAMPLER, value=env.sampler, label=webui_language["t2i"]["sampler"], interactive=True
                                 )
                                 vibe_transfer_noise_schedule = gr.Dropdown(
                                     NOISE_SCHEDULE,
                                     value=env.noise_schedule,
                                     label=webui_language["t2i"]["noise_schedule"],
+                                    interactive=True,
                                 )
                                 vibe_transfer_steps = gr.Slider(
-                                    minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
+                                    minimum=0,
+                                    maximum=50,
+                                    value=env.steps,
+                                    step=1,
+                                    label=webui_language["t2i"]["steps"],
+                                    interactive=True,
                                 )
                                 with gr.Row():
                                     vibe_transfer_sm = gr.Checkbox(value=env.sm, label="sm")
@@ -671,9 +682,60 @@ def main():
                                     vibe_transfer_variety = gr.Checkbox(value=env.variety, label="variety")
                                     vibe_transfer_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                                 vibe_transfer_seed = gr.Textbox(
-                                    value=str(env.seed), label=webui_language["t2i"]["seed"]
+                                    value=str(env.seed), label=webui_language["t2i"]["seed"], interactive=True
                                 )
-                            vibe_transfer_output_image = gr.Image(scale=2)
+                                vibe_transfer_image_count = gr.State(1)
+                                vibe_transfer_add_button = gr.Button("添加图片")
+                                vibe_transfer_del_button = gr.Button("删除图片")
+                                vibe_transfer_add_button.click(
+                                    lambda x: x + 1,
+                                    vibe_transfer_image_count,
+                                    vibe_transfer_image_count,
+                                )
+                                vibe_transfer_del_button.click(
+                                    lambda x: x - 1,
+                                    vibe_transfer_image_count,
+                                    vibe_transfer_image_count,
+                                )
+                                gr.Markdown("<hr>")
+
+                                @gr.render(inputs=vibe_transfer_image_count)
+                                def _(count):
+                                    vibe_transfer_components_list = []
+                                    for _ in range(count):
+                                        with gr.Row():
+                                            vibe_transfer_image = gr.Image(type="filepath")
+                                            with gr.Column():
+                                                reference_information_extracted_multiple = gr.Slider(
+                                                    0, 1, 1.0, step=0.1, label="信息提取强度"
+                                                )
+                                                reference_strength_multiple = gr.Slider(0, 1, 0.6, step=0.1, label="参考强度")
+                                        vibe_transfer_components_list.append(vibe_transfer_image)
+                                        vibe_transfer_components_list.append(reference_information_extracted_multiple)
+                                        vibe_transfer_components_list.append(reference_strength_multiple)
+                                    vibe_transfer_generate_button.click(
+                                        fn=vibe_by_hand,
+                                        inputs=[
+                                            vibe_transfer_positive_input,
+                                            vibe_transfer_negative_input,
+                                            vibe_transfer_width,
+                                            vibe_transfer_height,
+                                            vibe_transfer_scale,
+                                            vibe_transfer_sampler,
+                                            vibe_transfer_noise_schedule,
+                                            vibe_transfer_steps,
+                                            vibe_transfer_sm,
+                                            vibe_transfer_sm_dyn,
+                                            vibe_transfer_variety,
+                                            vibe_transfer_decrisp,
+                                            vibe_transfer_seed,
+                                            vibe_transfer_quantity,
+                                        ]
+                                        + vibe_transfer_components_list,
+                                        outputs=vibe_transfer_output_image,
+                                    )
+
+                            vibe_transfer_output_image = gr.Image(scale=2, interactive=False)
                     with gr.Tab("wildcards"):
                         with gr.Row():
                             vibe_transfer_wildcard_file = gr.Dropdown(
@@ -703,27 +765,6 @@ def main():
                             inputs=[vibe_transfer_wildcard_file, vibe_transfer_wildcard_name],
                             outputs=vibe_transfer_wildcard_tag,
                         )
-                    vibe_transfer_generate_button.click(
-                        fn=vibe_by_hand,
-                        inputs=[
-                            vibe_transfer_positive_input,
-                            vibe_transfer_negative_input,
-                            vibe_transfer_width,
-                            vibe_transfer_height,
-                            vibe_transfer_scale,
-                            vibe_transfer_sampler,
-                            vibe_transfer_noise_schedule,
-                            vibe_transfer_steps,
-                            vibe_transfer_sm,
-                            vibe_transfer_sm_dyn,
-                            vibe_transfer_variety,
-                            vibe_transfer_decrisp,
-                            vibe_transfer_seed,
-                            vibe_transfer_input_images,
-                            vibe_transfer_quantity,
-                        ],
-                        outputs=vibe_transfer_output_image,
-                    )
             # ---------- 文生图插件 ---------- #
             text2image_plugins = load_plugins(Path("./plugins/t2i"))
             for plugin_name, plugin_module in text2image_plugins.items():

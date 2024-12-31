@@ -53,8 +53,8 @@ SAMPLER = [
     "k_dpmpp_2m_sde",
     "ddim_v3",
 ]
-CHARACTER_POSITION = [f"{chr(letter)}{number}" for letter in range(ord("A"), ord("F")) for number in range(1, 6)]
 ... if env.model != "nai-diffusion-4-curated-preview" else SAMPLER.remove("ddim_v3")
+CHARACTER_POSITION = [f"{chr(letter)}{number}" for letter in range(ord("A"), ord("F")) for number in range(1, 6)]
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
 FAVORTES_FILE = [
     "actions.yaml",

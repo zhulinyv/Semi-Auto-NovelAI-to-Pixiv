@@ -1,7 +1,6 @@
 import os
 import random
 import time
-from pathlib import Path
 
 import cv2
 from PIL import Image
@@ -10,7 +9,7 @@ from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, img_to_base64, revert_img_info
 from utils.jsondata import json_for_vibe
 from utils.prepare import logger
-from utils.utils import file_path2list, generate_image, return_x64, save_image, sleep_for_cool
+from utils.utils import file_path2name, generate_image, return_x64, save_image, sleep_for_cool
 
 
 def vibe_by_hand(
@@ -27,8 +26,8 @@ def vibe_by_hand(
     variety: bool,
     decrisp: bool,
     seed: str,
-    input_imgs: str,
     times: int,
+    *args,
 ):
     imgs_list = []
     for i in range(times):
@@ -60,16 +59,23 @@ def vibe_by_hand(
         reference_image_multiple = []
         reference_information_extracted_multiple = []
         reference_strength_multiple = []
-        img_list = file_path2list(Path(input_imgs))
-        for img in img_list:
-            reference_image_multiple.append(img_to_base64(Path(input_imgs) / img))
-            reference_list = img.replace(".jpg", "").replace(".png", "").split("_")
-            reference_information_extracted_multiple.append(float(reference_list[1]))
-            reference_strength_multiple.append(float(reference_list[2]))
+        image_list = []
+
+        components_list = []
+        while args:
+            components_list.append(args[0:3])
+            args = args[3:]
+
+        for components in components_list:
+            reference_image_multiple.append(img_to_base64(components[0]))
+            image_list.append(file_path2name(components[0]))
+            # reference_list = img.replace(".jpg", "").replace(".png", "").split("_")
+            reference_information_extracted_multiple.append(components[1])
+            reference_strength_multiple.append(components[2])
 
         logger.debug(
             f"""
-基底图片: {img_list}
+基底图片: {image_list}
 信息提取: {reference_information_extracted_multiple}
 参考强度: {reference_strength_multiple}"""
         )
