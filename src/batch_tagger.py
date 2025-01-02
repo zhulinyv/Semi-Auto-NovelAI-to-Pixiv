@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from gradio_client import Client, file
+
 from utils.prepare import logger
 from utils.utils import file_namel2pathl, file_path2list, file_path2name
 
@@ -49,12 +51,7 @@ def tagger(
     character_thresh,
     character_mcut_enabled,
 ):
-    from gradio_client import Client, file
-
-    try:
-        client = Client("SmilingWolf/wd-tagger", verbose=False)
-    except Exception:
-        pass
+    client = Client("SmilingWolf/wd-tagger", verbose=False)
 
     if batch:
         imgs_list = file_namel2pathl(file_path2list(path), Path(path))
