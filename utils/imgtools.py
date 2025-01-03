@@ -70,38 +70,49 @@ def img_to_base64(image):
 def revert_img_info(img_path, output_dir, *args):
     if env.revert_info:
         logger.info("正在还原 pnginfo")
-        try:
-            if img_path:
-                if img_path[-4:] == ".png":
-                    with Image.open(img_path) as old_img:
-                        info = old_img.info
-                    software = info["Software"]
-                    comment = info["Comment"]
-                elif img_path[-4:] == ".txt":
-                    with open(img_path) as f:
-                        prompt = f.read()
-                    software = "NovelAI"
-                    comment = json.dumps({"prompt": prompt})
-                else:
-                    logger.error("仅支持从 *.png 和 *.txt 文件中读取元数据!")
-                    return
-            else:
-                software = args[0]["Software"]
-                comment = args[0]["Comment"]
-            metadata = PngInfo()
-            metadata.add_text("Software", software)
-            metadata.add_text("Comment", comment)
-            with Image.open(output_dir) as new_img:
-                new_img.save(output_dir, pnginfo=metadata)
-            logger.success("还原成功!")
-        except Exception:
-            with Image.open(output_dir) as new_img:
-                new_img.save(output_dir)
-            logger.error("还原失败!")
     else:
         with Image.open(output_dir) as new_img:
             new_img.save(output_dir)
         logger.warning("还原图片信息操作已关闭, 如有需要请在配置项中设置 revert_info=True")
+        return
+    try:
+        key_list = ["Software", "Comment", "parameters"]
+        value_list = []
+        if img_path:
+            if img_path[-4:] == ".png":
+                with Image.open(img_path) as old_img:
+                    info = old_img.info
+                for key in key_list:
+                    try:
+                        value_list.append(info[key])
+                    except KeyError:
+                        pass
+            elif img_path[-4:] == ".txt":
+                with open(img_path) as f:
+                    prompt = f.read()
+                value_list = ["NovelAI", json.dumps({"prompt": prompt})]
+            else:
+                logger.error("仅支持从 *.png 和 *.txt 文件中读取元数据!")
+                return
+        else:
+            for key in key_list:
+                try:
+                    value_list.append(args[0][key])
+                except KeyError:
+                    pass
+        metadata = PngInfo()
+        if len(value_list) == 1:
+            metadata.add_text("parameters", value_list[0])
+        else:
+            metadata.add_text("Software", value_list[0])
+            metadata.add_text("Comment", value_list[1])
+        with Image.open(output_dir) as new_img:
+            new_img.save(output_dir, pnginfo=metadata)
+        logger.success("还原成功!")
+    except Exception:
+        with Image.open(output_dir) as new_img:
+            new_img.save(output_dir)
+        logger.error("还原失败!")
 
 
 def get_concat_h(im1, im2):
