@@ -9,6 +9,7 @@ from utils.prepare import logger
 
 def main():
     import os
+    import string
     from pathlib import Path
 
     from src.batch_inpaint import for_webui as inpaint
@@ -709,7 +710,9 @@ def main():
                                                 reference_information_extracted_multiple = gr.Slider(
                                                     0, 1, 1.0, step=0.1, label="信息提取强度"
                                                 )
-                                                reference_strength_multiple = gr.Slider(0, 1, 0.6, step=0.1, label="参考强度")
+                                                reference_strength_multiple = gr.Slider(
+                                                    0, 1, 0.6, step=0.1, label="参考强度"
+                                                )
                                         vibe_transfer_components_list.append(vibe_transfer_image)
                                         vibe_transfer_components_list.append(reference_information_extracted_multiple)
                                         vibe_transfer_components_list.append(reference_strength_multiple)
@@ -2727,7 +2730,13 @@ def main():
             )
             setting_restart_button.click(restart)
 
-    sanp.queue().launch(inbrowser=True, share=env.share, server_port=env.port, favicon_path="./files/webui/logo.png")
+    sanp.queue().launch(
+        inbrowser=True,
+        share=env.share,
+        server_port=env.port,
+        favicon_path="./files/webui/logo.png",
+        allowed_paths=[f"{d}:" for d in string.ascii_uppercase if Path(f"{d}:").exists()],
+    )
 
 
 if __name__ == "__main__":
