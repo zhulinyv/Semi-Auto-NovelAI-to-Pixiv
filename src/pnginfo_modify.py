@@ -26,7 +26,6 @@ from utils.utils import (
 def remove_info(
     remove_pnginfo_image, input_path, output_path, choose_to_rm, remove_pnginfo_metadate, data_cloaking_switch
 ):
-    print(remove_pnginfo_image)
     if remove_pnginfo_image:
         file_list = [remove_pnginfo_image]
     else:
