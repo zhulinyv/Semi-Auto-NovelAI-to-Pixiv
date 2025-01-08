@@ -51,7 +51,7 @@ def for_webui(
                     "sampler": inpaint_sampler,
                     "sm": inpaint_sm,
                     "sm_dyn": inpaint_sm_dyn,
-                    "skip_cfg_above_sigma": (19.343056794463642 if inpaint_variety else None),
+                    "skip_cfg_above_sigma": (19 if inpaint_variety else None),
                     "dynamic_thresholding": inpaint_decrisp,
                     "uc": inpaint_negative_input,
                 }

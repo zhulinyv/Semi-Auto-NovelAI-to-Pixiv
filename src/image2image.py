@@ -45,7 +45,7 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["noise"] = noise
         json_for_i2i["parameters"]["sm"] = False
         json_for_i2i["parameters"]["sm_dyn"] = False
-        json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
+        json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
         json_for_i2i["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
             json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
@@ -81,7 +81,7 @@ def prepare_json(imginfo: dict, imgpath):
         variety = img_comment["skip_cfg_above_sigma"]
     except KeyError:
         variety = env.variety
-    json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
+    json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
     json_for_i2i["parameters"]["dynamic_thresholding"] = env.decrisp
     json_for_i2i["parameters"]["noise_schedule"] = img_comment["noise_schedule"]
     json_for_i2i["parameters"]["seed"] = seed
