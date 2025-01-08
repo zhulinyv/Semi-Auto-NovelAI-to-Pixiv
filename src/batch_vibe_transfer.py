@@ -43,7 +43,7 @@ def vibe_by_hand(
         json_for_vibe["parameters"]["sampler"] = sampler
         json_for_vibe["parameters"]["steps"] = steps
         json_for_vibe["parameters"]["sm"] = sm if sampler != "ddim_v3" else False
-        json_for_vibe["parameters"]["sm_dyn"] = sm_dyn if sm else False
+        json_for_vibe["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
         json_for_vibe["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
         json_for_vibe["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":

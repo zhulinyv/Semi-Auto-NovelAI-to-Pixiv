@@ -66,7 +66,7 @@ def t2i_by_hand(
         json_for_t2i["parameters"]["steps"] = steps
         if env.model != "nai-diffusion-4-curated-preview":
             json_for_t2i["parameters"]["sm"] = sm if sampler != "ddim_v3" else False
-            json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm else False
+            json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
             json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
         json_for_t2i["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
