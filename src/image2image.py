@@ -47,7 +47,8 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["sm_dyn"] = False
         json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
         json_for_i2i["parameters"]["dynamic_thresholding"] = decrisp
-        json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
+        if sampler != "ddim_v3":
+            json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
         seed = random.randint(1000000000, 9999999999) if seed == "-1" else int(seed)
         json_for_i2i["parameters"]["seed"] = seed
         json_for_i2i["parameters"]["image"] = img_to_base64(input_img)
