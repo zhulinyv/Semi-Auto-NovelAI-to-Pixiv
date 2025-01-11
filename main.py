@@ -1171,14 +1171,16 @@ def main():
                                 [True, False], value=False, label=webui_language["i2i"]["open_button"], scale=1
                             )
                         with gr.Row():
-                            inpaint_input_image = gr.Sketchpad(
-                                sources=["upload", "clipboard", "webcam"],
-                                type="pil",
-                                label=webui_language["inpaint"]["inpaint_img"],
-                            )
-                            inpaint_input_image.change(
-                                update_image_size, inputs=inpaint_input_image, outputs=inpaint_input_image
-                            )
+                            with gr.Column():
+                                inpaint_input_image = gr.Sketchpad(
+                                    sources=["upload", "clipboard", "webcam"],
+                                    type="pil",
+                                    label=webui_language["inpaint"]["inpaint_img"],
+                                )
+                                inpaint_input_image.change(
+                                    update_image_size, inputs=inpaint_input_image, outputs=inpaint_input_image
+                                )
+                                inpaint_overlay = gr.Checkbox(False, label="Overlay Original Image")
                             with gr.Column():
                                 inpaint_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
                                 inpaint_output_image = gr.Image()
@@ -1286,6 +1288,7 @@ def main():
                         inpaint_input_path,
                         inpaint_mask_path,
                         inpaint_input_image,
+                        inpaint_overlay,
                         inpaint_batch_switch,
                         inpaint_positive_input,
                         inpaint_negative_input,
