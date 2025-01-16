@@ -11,7 +11,8 @@ except Exception:
     os.environ["PATH"] = os.path.abspath("./Git23921/cmd")
     from git import Git
 
-from utils.update import update
+from utils.env import env
+from utils.update import check_update, update
 from utils.utils import file_path2list, proxies, read_json
 
 
@@ -63,12 +64,28 @@ def plugin_list():
 """
     for plugin in list(plugins.keys()):
         if os.path.exists(
-            "./plugins/{}/{}".format(
+            path := "./plugins/{}/{}".format(
                 plugins[plugin]["type"],
                 plugins[plugin]["name"],
             )
         ):
-            status = "已安装(Installed)"
+            if env.skip_update_check:
+                status = "已安装(Installed)"
+            else:
+                author = (plugins[plugin]["url"]).split("/")[-2]
+                repo = (plugins[plugin]["url"]).split("/")[-1]
+                update_message = check_update(f"{author}/{repo}", path)
+                if update_message not in [
+                    "Version: Error  网络连接失败",
+                    "Version: Error  不是GIT仓库",
+                    "Version: Error  更新检查失败",
+                ]:
+                    if "Older Version | 更新可用" in update_message:
+                        status = "更新可用(Old Version)"
+                    else:
+                        status = "已安装(Installed)"
+                else:
+                    status = "版本检查失败(Error)"
         else:
             status = "未安装(Uninstalled)"
         md += "| {} | {} | {} | [{}]({}) | {} | {} |\n".format(

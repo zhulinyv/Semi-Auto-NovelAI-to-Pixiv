@@ -15,20 +15,18 @@ from utils.prepare import VERSION
 from utils.utils import proxies
 
 
-def check_update():
+def check_update(repo="zhulinyv/Semi-Auto-NovelAI-to-Pixiv", path=Path().absolute()):
     if env.skip_update_check:
         return ""
     try:
-        data = requests.get(
-            "https://api.github.com/repos/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commits", proxies=proxies
-        ).json()
+        data = requests.get(f"https://api.github.com/repos/{repo}/commits", proxies=proxies).json()
     except Exception:
         return "Version: Error  网络连接失败"
     try:
-        repo = git.Repo(Path().absolute())
+        local_repo = git.Repo(path)
     except InvalidGitRepositoryError:
         return "Version: Error  不是GIT仓库"
-    local_commit = repo.head.commit
+    local_commit = local_repo.head.commit
     remote_commit = []
     try:
         for commit in data:
@@ -38,11 +36,9 @@ def check_update():
     except Exception:
         return "Version: Error  更新检查失败"
     if not remote_commit:
-        return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})".format(
-            VERSION, str(local_commit)
-        )
-    return "Version: [{}](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/commit/{})  Older Version | 更新可用".format(
-        str(local_commit)[:7], str(local_commit)
+        return "Version: [{}](https://github.com/{}/commit/{})".format(VERSION, repo, str(local_commit))
+    return "Version: [{}](https://github.com/{}/commit/{})  Older Version | 更新可用".format(
+        str(local_commit)[:7], repo, str(local_commit)
     )
 
 
