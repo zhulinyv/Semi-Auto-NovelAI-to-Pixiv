@@ -13,7 +13,7 @@ except Exception:
 
 from utils.env import env
 from utils.update import check_update, update
-from utils.utils import file_path2list, proxies, read_json
+from utils.utils import file_path2list, logger, proxies, read_json
 
 
 def get_plugin_list():
@@ -42,6 +42,7 @@ def load_plugins(directory):
             location = os.path.join(directory, plugin)
         elif plugin != "__pycache__":
             if os.path.exists(requirements_path := os.path.join(directory, plugin, "requirements.txt")):
+                logger.info("开始安装插件所需依赖...")
                 os.system(f"{sys.executable} -s -m pip install -r {requirements_path}")
             location = os.path.join(directory, plugin, "__init__.py")
         else:
@@ -53,6 +54,9 @@ def load_plugins(directory):
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
             plugins[plugin_name] = module
+            logger.success(f"成功加载插件: {plugin}")
+        else:
+            logger.error(f"插件: {plugin} 没有 plugin 函数!")
     return plugins
 
 

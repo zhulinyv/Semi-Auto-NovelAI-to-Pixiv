@@ -47,5 +47,12 @@
         "description": "适用于 Semi-Auto-NovelAI-to-Pixiv 的文生图插件, 出图逻辑与 NAI_CasRand 一致",
         "url": "https://github.com/zhulinyv/sanp_plugin_casrand",
         "author": "[zhulinyv](https://github.com/zhulinyv)"
+    },
+    "sanp_plugin_stories_to_images": {
+        "name": "sanp_plugin_stories_to_images",
+        "type": "t2i",
+        "description": "根据推文 tag 依次生成指定数量图片",
+        "url": "https://github.com/zhulinyv/sanp_plugin_stories_to_images",
+        "author": "[zhulinyv](https://github.com/zhulinyv)"
     }
 }

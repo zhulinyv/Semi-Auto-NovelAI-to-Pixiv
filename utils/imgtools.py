@@ -12,6 +12,8 @@ from utils.naimeta import extract_data
 from utils.prepare import logger
 from utils.utils import file_path2name
 
+logger.info("正在检查图像检测模型...")
+
 try:
     from ultralytics import YOLO
 

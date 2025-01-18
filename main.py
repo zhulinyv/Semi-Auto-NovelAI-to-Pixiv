@@ -4,7 +4,6 @@ import gradio as gr
 
 from utils.env import env
 from utils.gpt4free import main as g4f
-from utils.prepare import logger
 
 
 def main():
@@ -201,6 +200,7 @@ def main():
                         with gr.Row():
                             text2image_wildcard_file = gr.Dropdown(
                                 choices=FAVORTES_FILE,
+                                value="",
                                 label="wildcard文件",
                             )
                             text2image_wildcard_name = gr.Dropdown(label="名称")
@@ -434,6 +434,7 @@ def main():
                 with gr.Tab("添加提示词"):
                     item_to_add = gr.Dropdown(
                         choices=FAVORTES_FILE,
+                        value="",
                         label="想追加什么内容?(必填)",
                     )
                     tag_to_add = gr.Textbox("", lines=3, label="提示词(必填)")
@@ -502,6 +503,7 @@ def main():
                 with gr.Tab("删除提示词"):
                     item_to_del = gr.Dropdown(
                         choices=FAVORTES_FILE,
+                        value="",
                         label="想删除什么内容?(必填)",
                     )
                     name_to_del = gr.Dropdown(label="名称(必填)")
@@ -743,6 +745,7 @@ def main():
                         with gr.Row():
                             vibe_transfer_wildcard_file = gr.Dropdown(
                                 choices=FAVORTES_FILE,
+                                value="",
                                 label="wildcard文件",
                             )
                             vibe_transfer_wildcard_name = gr.Dropdown(label="名称")
@@ -773,9 +776,6 @@ def main():
             for plugin_name, plugin_module in text2image_plugins.items():
                 if hasattr(plugin_module, "plugin"):
                     plugin_module.plugin()
-                    logger.success(f" 成功加载插件: {plugin_name}")
-                else:
-                    logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
         # ---------- 图生图 ---------- #
         with gr.Tab(webui_language["i2i"]["tab"]):
             with gr.Tab(webui_language["i2i"]["tab"]):
@@ -886,6 +886,7 @@ def main():
                         with gr.Row():
                             image2image_wildcard_file = gr.Dropdown(
                                 choices=FAVORTES_FILE,
+                                value="",
                                 label="wildcard文件",
                             )
                             image2image_wildcard_name = gr.Dropdown(label="名称")
@@ -1134,9 +1135,6 @@ def main():
             for plugin_name, plugin_module in image2image_plugins.items():
                 if hasattr(plugin_module, "plugin"):
                     plugin_module.plugin()
-                    logger.success(f"成功加载插件: {plugin_name}")
-                else:
-                    logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
         # ---------- 局部重绘 ---------- #
         with gr.Tab(webui_language["inpaint"]["tab"]):
             with gr.Tab(webui_language["inpaint"]["tab"]):
@@ -1257,6 +1255,7 @@ def main():
                         with gr.Row():
                             inpaint_wildcard_file = gr.Dropdown(
                                 choices=FAVORTES_FILE,
+                                value="",
                                 label="wildcard文件",
                             )
                             inpaint_wildcard_name = gr.Dropdown(label="名称")
@@ -1313,9 +1312,6 @@ def main():
             for plugin_name, plugin_module in inpaint_plugins.items():
                 if hasattr(plugin_module, "plugin"):
                     plugin_module.plugin()
-                    logger.success(f"成功加载插件: {plugin_name}")
-                else:
-                    logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
         # ---------- NAI工具箱 ---------- #
         with gr.Tab(webui_language["director_tools"]["title"]):
             gr.Markdown(webui_language["director_tools"]["description"])
@@ -2446,9 +2442,6 @@ def main():
         for plugin_name, plugin_module in webui_plugins.items():
             if hasattr(plugin_module, "plugin"):
                 plugin_module.plugin()
-                logger.success(f"成功加载插件: {plugin_name}")
-            else:
-                logger.error(f"插件: {plugin_name} 没有 plugin 函数!")
         # ---------- 插件商店 ---------- #
         with gr.Tab(webui_language["plugin"]["tab"]):
             with gr.Row():

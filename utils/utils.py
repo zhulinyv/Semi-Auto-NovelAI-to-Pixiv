@@ -523,7 +523,7 @@ def return_source_or_type_dict(d: dict):
 
 def return_names_list(d: dict):
     names_list = return_keys_list(cancel_probabilities_for_item(d))
-    names_list.append("随机")
+    names_list = ["随机"] + names_list
     return names_list
 
 
