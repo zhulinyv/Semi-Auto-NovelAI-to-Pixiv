@@ -96,7 +96,7 @@ Learning Gradio, trying to create a WebUI for this project.
 
 #### 5️⃣ Modpack download
 
-If you find it difficult to get started or have problems with the above operations, please join the group to consult or download the modpack [Semi-Auto-NovelAI-to-Pixiv.7z](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/releases/tag/modpack)
+If you find it difficult to get started or have problems with the above operations, please join the group to consult or download the modpack [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/releases/tag/modpack)
 
 To unzip and use, modpack users need to run `Modpack launcher.bat`
 

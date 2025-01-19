@@ -96,7 +96,7 @@
 
 #### 5️⃣ 整合包下载
 
-如果上述操作你觉得难以上手或出现问题, 请加群咨询或下载整合包 [Semi-Auto-NovelAI-to-Pixiv.7z](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/releases/tag/modpack)
+如果上述操作你觉得难以上手或出现问题, 请加群咨询或下载整合包 [Semi-Auto-NovelAI-to-Pixiv](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/releases/tag/modpack)
 
 解压即用, 整合包用户请运行 `整合包启动(Modpack launcher).bat`
 
