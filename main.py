@@ -348,7 +348,7 @@ def main():
                     text2image_nsfw_cancel_event = text2image_nsfw_forever_output_image.change(
                         fn=t2i,
                         inputs=[
-                            gr.Radio(value=False, visible=False),
+                            gr.Checkbox(value=False, visible=False),
                             text2image_nsfw_fixed_artist,
                             text2image_nsfw_fixed_prefix,
                             text2image_nsfw_fixed_negative,
@@ -366,7 +366,7 @@ def main():
                     text2image_nsfw_generate_button.click(
                         fn=t2i,
                         inputs=[
-                            gr.Radio(value=False, visible=False),
+                            gr.Checkbox(value=False, visible=False),
                             text2image_nsfw_fixed_artist,
                             text2image_nsfw_fixed_prefix,
                             text2image_nsfw_fixed_negative,
@@ -383,7 +383,7 @@ def main():
                     text2image_nsfw_generate_forever_button.click(
                         fn=t2i,
                         inputs=[
-                            gr.Radio(value=False, visible=False),
+                            gr.Checkbox(value=False, visible=False),
                             text2image_nsfw_fixed_artist,
                             text2image_nsfw_fixed_prefix,
                             text2image_nsfw_fixed_negative,
