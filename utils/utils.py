@@ -792,7 +792,6 @@ while times + 1 <= env.times_for_scripts:
 
 if not env.skip_finish_sound:
     playsound("./files/webui/download_finish.mp3")
-
 """.format(
                     args[0], args[1], args[2], args[3], args[4]
                 )

@@ -195,7 +195,7 @@ def main():
                                     )
                                     text2image_random_seed = gr.Button(value="♻️", size="sm", scale=1)
                                     text2image_random_seed.click(return_random, inputs=None, outputs=text2image_seed)
-                            text2image_output_image = gr.Image(scale=2)
+                            text2image_output_image = gr.Gallery(preview=True, label="Image", scale=2)
                     with gr.Tab("wildcards"):
                         with gr.Row():
                             text2image_wildcard_file = gr.Dropdown(
@@ -740,7 +740,9 @@ def main():
                                         outputs=vibe_transfer_output_image,
                                     )
 
-                            vibe_transfer_output_image = gr.Image(scale=2, interactive=False)
+                            vibe_transfer_output_image = gr.Gallery(
+                                preview=True, label="Image", scale=2, interactive=False
+                            )
                     with gr.Tab("wildcards"):
                         with gr.Row():
                             vibe_transfer_wildcard_file = gr.Dropdown(
@@ -2525,11 +2527,7 @@ def main():
                         seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
                         proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
                     times_for_scripts = gr.Slider(
-                        0,
-                        9999,
-                        env.times_for_scripts,
-                        step=1,
-                        label="独立脚本生成图片次数(0 为无限生成)"
+                        0, 9999, env.times_for_scripts, step=1, label="独立脚本生成图片次数(0 为无限生成)"
                     )
                     t2i_cool_time = gr.Slider(
                         6,
@@ -2665,7 +2663,7 @@ def main():
                     env.skip_update_check, label=webui_language["setting"]["description"]["skip_update_check"]
                 )
                 skip_start_sound = gr.Checkbox(
-                    env.skip_update_check, label=webui_language["setting"]["description"]["skip_start_sound"]
+                    env.skip_start_sound, label=webui_language["setting"]["description"]["skip_start_sound"]
                 )
                 skip_load_g4f = gr.Checkbox(
                     env.skip_load_g4f, label=webui_language["setting"]["description"]["skip_load_g4f"]

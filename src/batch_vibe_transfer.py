@@ -94,6 +94,7 @@ def vibe_by_hand(
             imgs_list.append(saved_path)
         else:
             pass
+        _imgs_list = imgs_list[:]
 
     for img in imgs_list:
         if not os.path.exists(img):
@@ -130,12 +131,12 @@ def vibe_by_hand(
         merged_img.save("./output/vibe/grids/{}.png".format(time_))
         merged_img.close()
 
-        if env.skip_finish_sound:
+        if not env.skip_finish_sound:
             playsound("./files/webui/download_finish.mp3")
 
         if times <= 10:
             revert_img_info(imgs_list[0], "./output/vibe/grids/{}.png".format(time_))
-            return "./output/vibe/grids/{}.png".format(time_)
+            return ["./output/vibe/grids/{}.png".format(time_)] + _imgs_list
         # except Image.DecompressionBombError:
         else:
             logger.warning("图片过大, 进行压缩...")
@@ -146,6 +147,7 @@ def vibe_by_hand(
             )
             with open("./output/vibe/grids/{}.txt".format(time_), "w") as infofile:
                 infofile.write(get_img_info(imgs_list[0])["Description"])
-            return "./output/vibe/grids/{}.jpg".format(time_)
+            logger.success("压缩完成!")
+            return ["./output/vibe/grids/{}.jpg".format(time_)] + _imgs_list
     else:
         return saved_path
