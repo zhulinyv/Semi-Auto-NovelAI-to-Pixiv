@@ -4,6 +4,7 @@ import time
 
 import cv2
 from PIL import Image
+from playsound import playsound
 
 from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, img_to_base64, revert_img_info
@@ -129,10 +130,14 @@ def vibe_by_hand(
         merged_img.save("./output/vibe/grids/{}.png".format(time_))
         merged_img.close()
 
-        try:
+        if env.skip_finish_sound:
+            playsound("./files/webui/download_finish.mp3")
+
+        if times <= 10:
             revert_img_info(imgs_list[0], "./output/vibe/grids/{}.png".format(time_))
             return "./output/vibe/grids/{}.png".format(time_)
-        except Image.DecompressionBombError:
+        # except Image.DecompressionBombError:
+        else:
             logger.warning("图片过大, 进行压缩...")
             cv2.imwrite(
                 "./output/vibe/grids/{}.jpg".format(time_),

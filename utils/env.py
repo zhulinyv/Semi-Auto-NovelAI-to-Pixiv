@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     t2i_cool_time: int = 9
     save_path: str = "默认(Default)"
     proxy: Union[str, None] = "xxx:xxx"
+    times_for_scripts: int = 0
 
     # 图生图
     magnification: float = 1.5
@@ -70,6 +71,7 @@ class Settings(BaseSettings):
     skip_update_check: bool = False
     skip_start_sound: bool = False
     skip_load_g4f: bool = False
+    skip_finish_sound: bool = True
 
     model_config = SettingsConfigDict(env_file=".env", extra="allow", arbitrary_types_allowed=True)
 

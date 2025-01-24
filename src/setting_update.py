@@ -36,6 +36,7 @@ def webui(
     t2i_cool_time,
     save_path,
     proxy,
+    times_for_scripts,
     magnification,
     hires_strength,
     hires_noise,
@@ -71,6 +72,7 @@ def webui(
     skip_update_check,
     skip_start_sound,
     skip_load_g4f,
+    skip_finish_sound,
 ):
     position = str(water_position)
     position = position.replace("'", '"')
@@ -95,6 +97,7 @@ def webui(
         t2i_cool_time=t2i_cool_time,
         save_path=f'"{save_path}"',
         proxy=f'"{proxy}"',
+        times_for_scripts=times_for_scripts,
         magnification=magnification,
         hires_strength=hires_strength,
         hires_noise=hires_noise,
@@ -130,5 +133,6 @@ def webui(
         skip_update_check=skip_update_check,
         skip_start_sound=skip_start_sound,
         skip_load_g4f=skip_load_g4f,
+        skip_finish_sound=skip_finish_sound,
     )
     return otp_info

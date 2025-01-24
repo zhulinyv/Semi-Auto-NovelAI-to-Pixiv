@@ -2524,6 +2524,13 @@ def main():
                     with gr.Row():
                         seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
                         proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
+                    times_for_scripts = gr.Slider(
+                        0,
+                        9999,
+                        env.times_for_scripts,
+                        step=1,
+                        label="独立脚本生成图片次数(0 为无限生成)"
+                    )
                     t2i_cool_time = gr.Slider(
                         6,
                         120,
@@ -2663,6 +2670,7 @@ def main():
                 skip_load_g4f = gr.Checkbox(
                     env.skip_load_g4f, label=webui_language["setting"]["description"]["skip_load_g4f"]
                 )
+                skip_finish_sound = gr.Checkbox(env.skip_finish_sound, label="取消完成提示音")
             with gr.Tab("更新 WebUI(Update WebUI)"):
                 update_button = gr.Button("更新 WebUI(Update WebUI)")
                 output_info = gr.Textbox(label=webui_language["i2i"]["output_info"])
@@ -2686,6 +2694,7 @@ def main():
                     t2i_cool_time,
                     save_path,
                     proxy,
+                    times_for_scripts,
                     magnification,
                     hires_strength,
                     hires_noise,
@@ -2721,6 +2730,7 @@ def main():
                     skip_update_check,
                     skip_start_sound,
                     skip_load_g4f,
+                    skip_finish_sound,
                 ],
                 outputs=setting_output_information,
             )
