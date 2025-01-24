@@ -3,6 +3,7 @@ import random
 import time
 
 import cv2
+import ujson as json
 from PIL import Image
 from playsound import playsound
 
@@ -20,6 +21,7 @@ from utils.utils import (
     format_str,
     generate_image,
     position_to_float,
+    read_json,
     read_yaml,
     return_source_or_type_dict,
     return_x64,
@@ -53,8 +55,16 @@ def t2i_by_hand(
     times: int,
     *args,
 ):
+    with open("./output/temp.json", "w") as f:
+        json.dump({"break": False}, f)
+
     imgs_list = []
+
     for i in range(times):
+        data = read_json("./output/temp.json")
+        if data["break"]:
+            break
+
         if times != 1:
             logger.info(f"正在生成第 {i+1} 张图片...")
             sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)

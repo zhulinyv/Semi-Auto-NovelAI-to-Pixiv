@@ -60,6 +60,7 @@ def main():
         return_random,
         return_source_or_type_list,
         return_wildcard_tag,
+        stop_generate,
         update_image_size,
         update_name_to_dropdown_list,
         update_t2i_nsf_dropdown_list,
@@ -115,12 +116,14 @@ def main():
                         with gr.Row():
                             text2image_negative_input = gr.Textbox(
                                 value=default_negative_input,
-                                lines=2,
+                                lines=4,
                                 label=webui_language["t2i"]["negative"],
                                 scale=3,
                             )
                             with gr.Column(scale=1):
                                 text2image_generate_button = gr.Button(value=webui_language["t2i"]["generate_button"])
+                                text2image_stop_button = gr.Button("停止生成")
+                                text2image_stop_button.click(stop_generate)
                                 text2image_quantity = gr.Slider(
                                     minimum=1, maximum=999, value=1, step=1, label=webui_language["t2i"]["times"]
                                 )
@@ -606,7 +609,7 @@ def main():
                         with gr.Row():
                             vibe_transfer_negative_input = gr.Textbox(
                                 value=default_negative_input,
-                                lines=2,
+                                lines=4,
                                 label=webui_language["t2i"]["negative"],
                                 scale=3,
                             )
@@ -614,6 +617,8 @@ def main():
                                 vibe_transfer_generate_button = gr.Button(
                                     value=webui_language["t2i"]["generate_button"], scale=1
                                 )
+                                vibe_transfer_stop_button = gr.Button("停止生成")
+                                vibe_transfer_stop_button.click(stop_generate)
                                 vibe_transfer_quantity = gr.Slider(
                                     minimum=1,
                                     maximum=999,

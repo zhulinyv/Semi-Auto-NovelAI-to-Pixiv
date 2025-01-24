@@ -744,6 +744,13 @@ def get_sign(data: str, key: str):
     return sign
 
 
+def stop_generate():
+    logger.warning("正在停止生成...")
+    with open("./output/temp.json", "w") as f:
+        json.dump({"break": True}, f)
+    return
+
+
 def gen_script(script_type, *args):
     with open("stand_alone_scripts.py", "w", encoding="utf-8") as script:
         if script_type == "随机蓝图":

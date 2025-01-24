@@ -3,6 +3,7 @@ import random
 import time
 
 import cv2
+import ujson as json
 from PIL import Image
 from playsound import playsound
 
@@ -10,7 +11,7 @@ from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, img_to_base64, revert_img_info
 from utils.jsondata import json_for_vibe
 from utils.prepare import logger
-from utils.utils import file_path2name, generate_image, return_x64, save_image, sleep_for_cool
+from utils.utils import file_path2name, generate_image, read_json, return_x64, save_image, sleep_for_cool
 
 
 def vibe_by_hand(
@@ -30,8 +31,16 @@ def vibe_by_hand(
     times: int,
     *args,
 ):
+    with open("./output/temp.json", "w") as f:
+        json.dump({"break": False}, f)
+
     imgs_list = []
+
     for i in range(times):
+        data = read_json("./output/temp.json")
+        if data["break"]:
+            break
+
         if times != 1:
             logger.info(f"正在生成第 {i+1} 张图片...")
             sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
