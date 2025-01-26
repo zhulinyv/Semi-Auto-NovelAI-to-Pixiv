@@ -71,7 +71,7 @@ class Settings(BaseSettings):
     skip_update_check: bool = False
     skip_start_sound: bool = False
     skip_load_g4f: bool = False
-    skip_finish_sound: bool = True
+    skip_finish_sound: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", extra="allow", arbitrary_types_allowed=True)
 

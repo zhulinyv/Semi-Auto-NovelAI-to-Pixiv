@@ -194,7 +194,7 @@ def t2i_by_hand(
             return ["./output/t2i/grids/{}.jpg".format(time_)] + _imgs_list
 
     else:
-        return saved_path
+        return [saved_path]
 
 
 def prepare_input(

@@ -159,4 +159,4 @@ def vibe_by_hand(
             logger.success("压缩完成!")
             return ["./output/vibe/grids/{}.jpg".format(time_)] + _imgs_list
     else:
-        return saved_path
+        return [saved_path]
