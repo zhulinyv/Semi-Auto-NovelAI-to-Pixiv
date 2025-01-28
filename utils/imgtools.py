@@ -264,8 +264,9 @@ def _return_pnginfo(
     sampler,
     sm,
     sm_dyn,
+    variety,
+    decrisp,
     seed,
-    pnginfo,
     *image,
 ):
     metadata = (
@@ -279,7 +280,8 @@ def _return_pnginfo(
         sampler,
         sm,
         sm_dyn,
+        variety,
+        decrisp,
         seed,
-        pnginfo,
     )
     return metadata if not image else metadata + (image[0],)
