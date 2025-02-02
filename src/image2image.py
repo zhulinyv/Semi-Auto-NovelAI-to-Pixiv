@@ -51,7 +51,7 @@ def i2i_by_hand(
         if env.model != "nai-diffusion-4-curated-preview":
             json_for_i2i["parameters"]["sm"] = False
             json_for_i2i["parameters"]["sm_dyn"] = False
-            json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
+        json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
         json_for_i2i["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
             json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
@@ -136,17 +136,15 @@ def prepare_json(imginfo: dict, imgpath):
     json_for_i2i["parameters"]["strength"] = env.hires_strength
     json_for_i2i["parameters"]["noise"] = env.hires_noise
     if env.model != "nai-diffusion-4-curated-preview":
-        try:
-            json_for_i2i["parameters"]["sm"] = False
-            json_for_i2i["parameters"]["sm_dyn"] = False
-            try:
-                variety = img_comment["skip_cfg_above_sigma"]
-            except KeyError:
-                variety = env.variety
-            json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
-        except KeyError:
-            logger.warning("NAI4 暂不支持 sm, sm_dyn 等参数")
-    json_for_i2i["parameters"]["dynamic_thresholding"] = env.decrisp
+        json_for_i2i["parameters"]["sm"] = False
+        json_for_i2i["parameters"]["sm_dyn"] = False
+    try:
+        variety = img_comment["skip_cfg_above_sigma"]
+    except KeyError:
+        logger.warning("旧版图片不支持 variety 参数, 将使用配置设置中的 variety 参数")
+        variety = env.variety
+    json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
+    json_for_i2i["parameters"]["dynamic_thresholding"] = img_comment["dynamic_thresholding"]
     try:
         json_for_i2i["parameters"]["noise_schedule"] = img_comment["noise_schedule"]
     except KeyError:

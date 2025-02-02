@@ -78,7 +78,7 @@ def t2i_by_hand(
         if env.model != "nai-diffusion-4-curated-preview":
             json_for_t2i["parameters"]["sm"] = sm if sampler != "ddim_v3" else False
             json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
-            json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
+        json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
         json_for_t2i["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
             json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
@@ -357,7 +357,7 @@ def prepare_json(input_, sm, sm_dyn, variety, decrisp, scale, sampler, noise_sch
     if env.model != "nai-diffusion-4-curated-preview":
         json_for_t2i["parameters"]["sm"] = sm
         json_for_t2i["parameters"]["sm_dyn"] = sm_dyn
-        json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
+    json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
     json_for_t2i["parameters"]["dynamic_thresholding"] = decrisp
     if sampler != "ddim_v3":
         json_for_t2i["parameters"]["noise_schedule"] = noise_schedule

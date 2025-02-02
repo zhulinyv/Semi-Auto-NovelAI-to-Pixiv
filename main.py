@@ -189,7 +189,6 @@ def main():
                                     text2image_variety = gr.Checkbox(
                                         value=env.variety if env.model != "nai-diffusion-4-curated-preview" else False,
                                         label="variety",
-                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
                                     )
                                     text2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
                                 with gr.Row():
@@ -689,9 +688,15 @@ def main():
                                     interactive=True,
                                 )
                                 with gr.Row():
-                                    vibe_transfer_sm = gr.Checkbox(value=env.sm, label="sm")
+                                    vibe_transfer_sm = gr.Checkbox(
+                                        value=env.sm,
+                                        label="sm",
+                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
+                                    )
                                     vibe_transfer_sm_dyn = gr.Checkbox(
-                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"]
+                                        value=env.sm_dyn,
+                                        label=webui_language["t2i"]["smdyn"],
+                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
                                     )
                                 with gr.Row():
                                     vibe_transfer_variety = gr.Checkbox(value=env.variety, label="variety")
@@ -883,18 +888,17 @@ def main():
                                 )
                             with gr.Row():
                                 with gr.Column():
-                                    image2image_sm = gr.Checkbox(value=env.sm, label="sm", scale=2)
+                                    image2image_sm = gr.Checkbox(value=env.sm, label="sm", scale=2, visible=False)
                                     image2image_sm_dyn = gr.Checkbox(
-                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
+                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2, visible=False
                                     )
                                 with gr.Column():
                                     image2image_variety = gr.Checkbox(value=env.variety, label="variety")
                                     image2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
-                                with gr.Column(scale=1):
-                                    image2image_seed = gr.Textbox(
-                                        value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
-                                    )
-                                    image2image_random_button = gr.Button(value="♻️", size="sm", scale=1)
+                                image2image_seed = gr.Textbox(
+                                    value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
+                                )
+                                image2image_random_button = gr.Button(value="♻️", size="sm", scale=1)
                                 image2image_random_button.click(return_random, inputs=None, outputs=image2image_seed)
                     with gr.Tab("wildcards"):
                         with gr.Row():
