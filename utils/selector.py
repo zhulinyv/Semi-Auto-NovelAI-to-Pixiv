@@ -4,6 +4,7 @@ from pathlib import Path
 
 import numpy as np
 import send2trash
+from PIL import Image
 
 from utils.prepare import logger
 from utils.utils import PATH, file_path2list
@@ -18,13 +19,14 @@ def show_first_img(input_path):
                 new_list.append(str(Path(input_path) / file))
         file_list = new_list[:]
         if file_list != []:
-            img = file_list[0]
+            img_path = file_list[0]
         else:
-            img = None
-        file_list.remove(img)
+            img_path = None
+        file_list.remove(img_path)
         array_data = np.array(file_list)
         np.save("./output/array_data.npy", array_data)
-        return [img], img
+        with Image.open(img_path) as img:
+            return [np.array(img)], img_path
     except Exception:
         logger.error("未输入图片目录或输入的目录为空!")
         return None, None
@@ -40,12 +42,13 @@ def show_next_img():
                 new_list.append(str(file))
             file_list = new_list[:]
             try:
-                img = file_list[0]
+                img_path = file_list[0]
                 if file_list != []:
                     file_list.remove(file_list[0])
                     array_data = np.array(file_list)
                     np.save("./output/array_data.npy", array_data)
-                    return [img], img
+                    with Image.open(img_path) as img:
+                        return [np.array(img)], img_path
             except Exception:
                 os.remove("./output/array_data.npy")
         return None, None
