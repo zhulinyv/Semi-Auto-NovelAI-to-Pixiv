@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     sm_dyn: bool = False
     variety: bool = False
     decrisp: bool = False
-    noise_schedule: str = "native"
+    noise_schedule: str = "karras"
     seed: int = -1
     t2i_cool_time: int = 9
     save_path: str = "默认(Default)"
