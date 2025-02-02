@@ -354,14 +354,22 @@ def prepare_json(input_, sm, sm_dyn, variety, decrisp, scale, sampler, noise_sch
     json_for_t2i["parameters"]["scale"] = scale
     json_for_t2i["parameters"]["sampler"] = sampler
     json_for_t2i["parameters"]["steps"] = env.steps
-    json_for_t2i["parameters"]["sm"] = sm
-    json_for_t2i["parameters"]["sm_dyn"] = sm_dyn
-    json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
+    if env.model != "nai-diffusion-4-curated-preview":
+        json_for_t2i["parameters"]["sm"] = sm
+        json_for_t2i["parameters"]["sm_dyn"] = sm_dyn
+        json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
     json_for_t2i["parameters"]["dynamic_thresholding"] = decrisp
-    json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
+    if sampler != "ddim_v3":
+        json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
     seed = random.randint(1000000000, 9999999999) if env.seed == -1 else env.seed
     json_for_t2i["parameters"]["seed"] = seed
     json_for_t2i["parameters"]["negative_prompt"] = negative
+
+    if env.model == "nai-diffusion-4-curated-preview":
+        json_for_t2i["parameters"]["use_coords"] = False
+        json_for_t2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = ""
+        json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = False
+        json_for_t2i["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = ""
 
     return json_for_t2i, seed
 

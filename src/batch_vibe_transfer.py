@@ -31,6 +31,9 @@ def vibe_by_hand(
     times: int,
     *args,
 ):
+    if env.model == "nai-diffusion-4-curated-preview":
+        logger.warning("NAI4 预览版模型不支持 Vibe, 本次 Vibe 仍使用 NAI3")
+
     with open("./output/temp.json", "w") as f:
         json.dump({"break": False}, f)
 

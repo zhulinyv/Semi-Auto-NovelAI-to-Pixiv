@@ -567,7 +567,7 @@ def main():
                 text2image_sfw_cancel_event = text2image_sfw_output_image.change(
                     fn=batchtxt,
                     inputs=[
-                        gr.Radio(value=False, visible=False),
+                        gr.Checkbox(value=False, visible=False),
                         text2image_sfw_prefix,
                         text2image_sfw_position,
                         text2image_sfw_random_artists_top_switch,
@@ -580,7 +580,7 @@ def main():
                 text2image_sfw_generate_forever_button.click(
                     fn=batchtxt,
                     inputs=[
-                        gr.Radio(value=False, visible=False),
+                        gr.Checkbox(value=False, visible=False),
                         text2image_sfw_prefix,
                         text2image_sfw_position,
                         text2image_sfw_random_artists_top_switch,

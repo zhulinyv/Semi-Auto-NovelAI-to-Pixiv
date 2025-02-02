@@ -91,7 +91,11 @@ json_for_i2i = {
 
 json_for_inpaint = {
     "input": str,
-    "model": "nai-diffusion-3-inpainting",
+    "model": (
+        f"{env.model}-inpainting"
+        if env.model not in ["nai-diffusion-2", "nai-diffusion-4-curated-preview"]
+        else "nai-diffusion-3"
+    ),
     "action": "infill",
     "parameters": {
         "width": int,
@@ -130,7 +134,9 @@ json_for_inpaint = {
 
 json_for_vibe = {
     "input": str,
-    "model": env.model,
+    "model": (
+        env.model if env.model not in ["nai-diffusion-2", "nai-diffusion-4-curated-preview"] else "nai-diffusion-3"
+    ),
     "action": "generate",
     "parameters": {
         "params_version": 3,
@@ -229,7 +235,7 @@ json_for_t2i_v4 = {
         "legacy": False,
         "add_original_image": False,
         "cfg_rescale": 0,
-        "noise_schedule": str,
+        # "noise_schedule": str,
         "legacy_v3_extend": False,
         "seed": int,
         "use_coords": bool,

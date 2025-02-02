@@ -78,7 +78,17 @@ def main(
 
     negative_data = read_yaml("./files/favorites/negative.yaml")
 
-    json_for_t2i, seed = prepare_json(prompt, env.sm, env.scale, choose_item(negative_data)["tag"])
+    json_for_t2i, seed = prepare_json(
+        prompt,
+        env.sm,
+        env.scale,
+        env.variety,
+        env.decrisp,
+        env.scale,
+        env.sampler,
+        env.noise_schedule,
+        choose_item(negative_data)[1]["tag"],
+    )
     saved_path = save_image(
         generate_image(json_for_t2i), "t2i", str(seed) + file.replace(".txt", "").replace("_", "-"), "None", "None"
     )
