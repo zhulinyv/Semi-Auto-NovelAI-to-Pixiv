@@ -701,9 +701,12 @@ def main():
                                 with gr.Row():
                                     vibe_transfer_variety = gr.Checkbox(value=env.variety, label="variety")
                                     vibe_transfer_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
-                                vibe_transfer_seed = gr.Textbox(
-                                    value=str(env.seed), label=webui_language["t2i"]["seed"], interactive=True
-                                )
+                                with gr.Row():
+                                    vibe_transfer_seed = gr.Textbox(
+                                        value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
+                                    )
+                                    vibe_transfer_random_seed = gr.Button(value="♻️", size="sm", scale=1)
+                                    vibe_transfer_random_seed.click(return_random, inputs=None, outputs=text2image_seed)
                                 vibe_transfer_image_count = gr.State(1)
                                 vibe_transfer_add_button = gr.Button("添加图片")
                                 vibe_transfer_del_button = gr.Button("删除图片")
