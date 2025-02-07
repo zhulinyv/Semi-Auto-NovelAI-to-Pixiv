@@ -1,4 +1,4 @@
-![](../../assets/images/guide/text2image_sfw.png)
+![](../../../assets/images/guide/t2i/text2image_sfw.png)
 
 ## 1. 追加的提示词
 

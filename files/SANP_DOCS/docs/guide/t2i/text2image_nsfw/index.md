@@ -1,6 +1,6 @@
-![](../../assets/images/guide/text2image_nsfw.png)
-![](../../assets/images/guide/text2image_nsfw_add.png)
-![](../../assets/images/guide/text2image_nsfw_delete.png)
+![](../../../assets/images/guide/t2i/text2image_nsfw.png)
+![](../../../assets/images/guide/t2i/text2image_nsfw_add.png)
+![](../../../assets/images/guide/t2i/text2image_nsfw_delete.png)
 
 ## 1. 提示词的随机与固定
 

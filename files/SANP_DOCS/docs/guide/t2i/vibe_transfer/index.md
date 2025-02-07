@@ -1,5 +1,5 @@
-![](../../assets/images/guide/vibe_transfer.png)
-![](../../assets/images/guide/text2image_wildcard.png)
+![](../../../assets/images/guide/t2i/vibe_transfer.png)
+![](../../../assets/images/guide/t2i/text2image_wildcard.png)
 
 ## 1. 正面提示词
 
@@ -81,7 +81,7 @@ sm_dyn 同理, 但开启 sm_dyn 需要同时开启 sm 才生效.
 
 点击按钮, 将打开文生图的保存目录.
 
-## 18. wildcard
+## 18. wildcards
 
 点击将切换到 wildcard 选项卡.
 
@@ -89,11 +89,11 @@ sm_dyn 同理, 但开启 sm_dyn 需要同时开启 sm 才生效.
 
 wildcard 可以帮助用户更加方便的输入 tag, 输入的 wildcard 将在生成图片时自动替换成 tag.
 
-### 19. wildcard 文件
+### 19. wildcards 文件
 
 SANP 内置了一些 wildcard 文件, 不同的文件对应不同类别的 tag, 选择一个文件后, 右侧名称下拉列表将变为可用.
 
-### 20. wildcard 名称
+### 20. wildcards 名称
 
 选择一个名称后, 下方的 tag 文本框将展示这个当前 wildcard 的 tag.
 

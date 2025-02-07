@@ -165,10 +165,16 @@ nav:
   - "2. 手动部署": deploy/byhand/index.md
 - "各功能使用方法":
   - "前言": guide/index.md
-  - "文生图": guide/text2image/index.md
-  - "随机蓝图": guide/text2image_nsfw/index.md
-  - "随机图片": guide/text2image_sfw/index.md
-  - "Vibe": guide/vibe_transfer/index.md
+  - "文生图":
+    - "文生图": guide/t2i/text2image/index.md
+    - "随机蓝图": guide/t2i/text2image_nsfw/index.md
+    - "随机图片": guide/t2i/text2image_sfw/index.md
+    - "Vibe": guide/t2i/vibe_transfer/index.md
+    - "CasRand": guide/t2i/casrand/index.md
+    - "画风生成": guide/t2i/random_artists/index.md
+    - "推文生图工具": guide/t2i/stories2image/index.md
+  - "图生图":
+    - "图生图": guide/i2i/image2image/index.md
 - "可能出现的问题": help.md
 - "鸣谢列表及待办": appendix.md
 - "关于": about.md
