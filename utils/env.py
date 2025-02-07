@@ -66,12 +66,14 @@ class Settings(BaseSettings):
     height: int = 650
     port: int = 11451
     g4f_port: int = 19198
+    doc_port: int = 13579
     theme: Union[str, None] = None
     webui_lang: str = "zh"
     skip_update_check: bool = False
     skip_start_sound: bool = False
     skip_load_g4f: bool = False
     skip_finish_sound: bool = False
+    skip_else_log: bool = True
 
     model_config = SettingsConfigDict(env_file=".env", extra="allow", arbitrary_types_allowed=True)
 

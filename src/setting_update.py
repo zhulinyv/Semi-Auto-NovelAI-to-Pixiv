@@ -67,12 +67,14 @@ def webui(
     height,
     port,
     g4f_port,
+    doc_port,
     theme,
     webui_lang,
     skip_update_check,
     skip_start_sound,
     skip_load_g4f,
     skip_finish_sound,
+    skip_else_log,
 ):
     position = str(water_position)
     position = position.replace("'", '"')
@@ -128,11 +130,13 @@ def webui(
         height=height,
         port=port,
         g4f_port=g4f_port,
+        doc_port=doc_port,
         theme=f'"{theme}"',
         webui_lang=f'"{webui_lang}"',
         skip_update_check=skip_update_check,
         skip_start_sound=skip_start_sound,
         skip_load_g4f=skip_load_g4f,
         skip_finish_sound=skip_finish_sound,
+        skip_else_log=skip_else_log,
     )
     return otp_info

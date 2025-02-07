@@ -1,13 +1,16 @@
 import multiprocessing as mp
+import os
+import sys
 
 import gradio as gr
 
+from files.SANP_DOCS.launch import main as sanp_docs
 from utils.env import env
 from utils.gpt4free import main as g4f
+from utils.utils import install_requirements, silent_wrapper
 
 
 def main():
-    import os
     import string
     from pathlib import Path
 
@@ -98,7 +101,21 @@ def main():
         gr.Markdown(webui_language["title"] + "    " + check_update())
         # ---------- 教程说明 ---------- #
         with gr.Tab(webui_language["info"]["tab"]):
-            gr.Markdown(read_txt("./files/languages/README.md"))
+            gr.HTML(
+                """
+    <iframe id="myiframe" src="http://127.0.0.1:13579"></iframe>
+    <style>
+        #myiframe {
+            width: 100%;
+            height: 650px;
+        }
+    </style>
+    """.replace(
+                    "650", str(env.height)
+                ).replace(
+                    "13579", str(env.doc_port)
+                )
+            )
         # ---------- 文生图 ---------- #
         with gr.Tab(webui_language["t2i"]["tab"]):
             with gr.Tab(webui_language["t2i"]["tab"]):
@@ -2476,11 +2493,11 @@ def main():
     <style>
         #myiframe {
             width: 100%;
-            height: 600px;
+            height: 650px;
         }
     </style>
     """.replace(
-                    "600", str(env.height + 50)
+                    "650", str(env.height)
                 ).replace(
                     "19198", str(env.g4f_port)
                 )
@@ -2697,24 +2714,29 @@ def main():
                 height = gr.Slider(
                     300, 1200, env.height, step=10, label=webui_language["setting"]["description"]["height"]
                 )
-                port = gr.Textbox(value=env.port, label=webui_language["setting"]["description"]["port"])
-                g4f_port = gr.Textbox(env.g4f_port, label=webui_language["setting"]["description"]["g4f_port"])
-                theme = gr.Dropdown(
-                    THEME_LIST, value=env.theme, label=webui_language["setting"]["description"]["theme"]
-                )
-                webui_lang = gr.Dropdown(
-                    ["zh", "en"], value="zh", label=webui_language["setting"]["description"]["webui_lang"]
-                )
-                skip_update_check = gr.Checkbox(
-                    env.skip_update_check, label=webui_language["setting"]["description"]["skip_update_check"]
-                )
-                skip_start_sound = gr.Checkbox(
-                    env.skip_start_sound, label=webui_language["setting"]["description"]["skip_start_sound"]
-                )
-                skip_load_g4f = gr.Checkbox(
-                    env.skip_load_g4f, label=webui_language["setting"]["description"]["skip_load_g4f"]
-                )
-                skip_finish_sound = gr.Checkbox(env.skip_finish_sound, label="取消完成提示音")
+                with gr.Row():
+                    port = gr.Textbox(value=env.port, label=webui_language["setting"]["description"]["port"])
+                    g4f_port = gr.Textbox(env.g4f_port, label=webui_language["setting"]["description"]["g4f_port"])
+                    doc_port = gr.Textbox(env.doc_port, label="教程说明文档的端口号")
+                with gr.Row():
+                    theme = gr.Dropdown(
+                        THEME_LIST, value=env.theme, label=webui_language["setting"]["description"]["theme"]
+                    )
+                    webui_lang = gr.Dropdown(
+                        ["zh", "en"], value="zh", label=webui_language["setting"]["description"]["webui_lang"]
+                    )
+                with gr.Row():
+                    skip_update_check = gr.Checkbox(
+                        env.skip_update_check, label=webui_language["setting"]["description"]["skip_update_check"]
+                    )
+                    skip_start_sound = gr.Checkbox(
+                        env.skip_start_sound, label=webui_language["setting"]["description"]["skip_start_sound"]
+                    )
+                    skip_load_g4f = gr.Checkbox(
+                        env.skip_load_g4f, label=webui_language["setting"]["description"]["skip_load_g4f"]
+                    )
+                    skip_finish_sound = gr.Checkbox(env.skip_finish_sound, label="取消完成提示音")
+                    skip_else_log = gr.Checkbox(env.skip_else_log, label="不输出其它程序的日志")
             with gr.Tab("更新 WebUI(Update WebUI)"):
                 update_button = gr.Button("更新 WebUI(Update WebUI)")
                 output_info = gr.Textbox(label=webui_language["i2i"]["output_info"])
@@ -2769,12 +2791,14 @@ def main():
                     height,
                     port,
                     g4f_port,
+                    doc_port,
                     theme,
                     webui_lang,
                     skip_update_check,
                     skip_start_sound,
                     skip_load_g4f,
                     skip_finish_sound,
+                    skip_else_log,
                 ],
                 outputs=setting_output_information,
             )
@@ -2790,12 +2814,16 @@ def main():
 
 
 if __name__ == "__main__":
+    silent_wrapper(install_requirements("requirements.txt"))
+    os.system(f"{sys.executable} ./utils/prepare.py")
+
+    processes = []
     if not env.skip_load_g4f:
-        p1 = mp.Process(target=g4f)
-    p2 = mp.Process(target=main)
-    if not env.skip_load_g4f:
-        p1.start()
-    p2.start()
-    if not env.skip_load_g4f:
-        p1.join()
-    p2.join()
+        processes.append(mp.Process(target=g4f))
+    processes.extend([mp.Process(target=main), mp.Process(target=sanp_docs)])
+
+    for p in processes:
+        p.start()
+
+    for p in processes:
+        p.join()

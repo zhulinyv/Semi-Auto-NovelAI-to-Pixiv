@@ -1,7 +1,6 @@
 import importlib.util
 import os
 import shutil
-import sys
 
 import requests
 
@@ -13,7 +12,7 @@ except Exception:
 
 from utils.env import env
 from utils.update import check_update, update
-from utils.utils import file_path2list, logger, proxies, read_json
+from utils.utils import file_path2list, install_requirements, logger, proxies, read_json
 
 
 def get_plugin_list():
@@ -42,8 +41,7 @@ def load_plugins(directory):
             location = os.path.join(directory, plugin)
         elif plugin != "__pycache__":
             if os.path.exists(requirements_path := os.path.join(directory, plugin, "requirements.txt")):
-                logger.info("开始安装插件所需依赖...")
-                os.system(f"{sys.executable} -s -m pip install -r {requirements_path}")
+                install_requirements(requirements_path)
             location = os.path.join(directory, plugin, "__init__.py")
         else:
             location = None

@@ -5,6 +5,8 @@ import os
 import platform
 import random
 import re
+import subprocess
+import sys
 import time
 import zipfile
 from datetime import date
@@ -749,6 +751,27 @@ def stop_generate():
     logger.warning("正在停止生成...")
     with open("./output/temp.json", "w") as f:
         json.dump({"break": True}, f)
+    return
+
+
+def silent_wrapper(func):
+    def wrapped():
+        sys.stdout = open(os.devnull, "w")
+        sys.stderr = open(os.devnull, "w")
+        func()
+
+    return wrapped
+
+
+def install_requirements(path):
+    logger.debug(f"开始安装所需依赖 {path} ...")
+    command = f"{sys.executable} -s -m pip install -r {path}"
+    if env.skip_else_log:
+        devnull = subprocess.DEVNULL
+    else:
+        devnull = None
+    subprocess.call(command, stdout=devnull, stderr=devnull)
+    logger.success("安装完成!")
     return
 
 

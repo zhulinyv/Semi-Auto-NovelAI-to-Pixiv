@@ -5,7 +5,7 @@ from urllib.request import getproxies
 
 from loguru import logger
 
-VERSION = "3.8.0"
+VERSION = "3.9.0"
 
 
 format_ = (
@@ -91,6 +91,13 @@ pause"""
 
 if __name__ == "__main__":
     from env import env
+
+    if env.doc_port != 13579:
+        with open(yaml_path := "./files/SANP_DOCS/mkdocs.yml", "r", encoding="utf-8") as f:
+            yaml_file = f.read()
+        yaml_file = yaml_file.replace("13579", str(env.doc_port))
+        with open(yaml_path, "w", encoding="utf-8") as f:
+            f.write(yaml_file)
 
     logger.opt(colors=True).success(
         f"""<c>
