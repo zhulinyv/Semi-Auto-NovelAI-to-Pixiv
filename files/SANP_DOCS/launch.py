@@ -11,4 +11,4 @@ def main():
         sys.stdout = open(os.devnull, "w")
         sys.stderr = open(os.devnull, "w")
     os.chdir("./files/SANP_DOCS")
-    cli(["serve"])
+    cli(["serve", "--dev-addr", f"127.0.0.1:{env.doc_port}"])
