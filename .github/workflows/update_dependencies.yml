@@ -23,6 +23,9 @@ jobs:
       - name: Set up Poetry
         uses: Gr1N/setup-poetry@v9
 
+      - name: poetry install
+        run: poetry install
+
       - name: lock poetry.lock
         run: poetry lock
 
