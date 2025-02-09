@@ -8,7 +8,7 @@ if not exist venv (
 set PYTHON="venv\Scripts\Python.exe"
 
 : have fun :)
-%PYTHON% .\utils\requirements.py
+%PYTHON% .\_requirements.py
 
 : have fun :)
 %PYTHON% .\main.py
