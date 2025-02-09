@@ -63,7 +63,7 @@ class Settings(BaseSettings):
 
     # WebUI
     share: bool = False
-    height: int = 650
+    height: int = 850
     port: int = 11451
     g4f_port: int = 19198
     doc_port: int = 13579
