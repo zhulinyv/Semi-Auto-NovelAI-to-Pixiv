@@ -175,6 +175,19 @@ nav:
     - "图生图": guide/i2i/image2image/index.md
     - "视频转绘": guide/i2i/movie2movie/index.md
     - "分块重绘": guide/i2i/tiled_upscale/index.md
+    - "Enhance": guide/i2i/enhance/index.md
+  - "局部重绘":
+    - "局部重绘": guide/inp/inpaint/index.md
+    - "涂鸦重绘": guide/inp/draw_inpaint/index.md
+  - "导演工具":
+    - "移除背景": guide/dir/remove_bg/index.md
+    - "线条画": guide/dir/lineart/index.md
+    - "素描": guide/dir/skecth/index.md
+    - "上色": guide/dir/colorize/index.md
+    - "表情": guide/dir/emotion/index.md
+    - "整理": guide/dir/declutter/index.md
+  - "超分降噪": guide/waifu2x.md
+  - "自动打码": guide/mosaic.md
 - "可能出现的问题": help.md
 - "鸣谢列表及待办": appendix.md
 - "关于": about.md
