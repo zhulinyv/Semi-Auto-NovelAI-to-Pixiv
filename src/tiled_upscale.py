@@ -67,7 +67,14 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
                     0,
                     env.sm,
                     env.sm_dyn,
+                    env.variety,
+                    env.decrisp,
                     str(seed),
+                    True,
+                    False,
+                    "",
+                    "",
+                    "A1",
                 )
                 shutil.move(saved_path, i2i_dir / file_path2name(tile))
                 break

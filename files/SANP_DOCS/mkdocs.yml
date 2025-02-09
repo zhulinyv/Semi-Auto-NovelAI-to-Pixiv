@@ -173,6 +173,8 @@ nav:
     - "推文生图工具": guide/t2i/stories2image/index.md
   - "图生图":
     - "图生图": guide/i2i/image2image/index.md
+    - "视频转绘": guide/i2i/movie2movie/index.md
+    - "分块重绘": guide/i2i/tiled_upscale/index.md
 - "可能出现的问题": help.md
 - "鸣谢列表及待办": appendix.md
 - "关于": about.md
