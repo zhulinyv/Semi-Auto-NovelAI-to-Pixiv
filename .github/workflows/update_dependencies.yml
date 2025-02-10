@@ -24,7 +24,7 @@ jobs:
         uses: Gr1N/setup-poetry@v9
 
       - name: poetry install
-        run: poetry install
+        run: poetry add poetry-plugin-export
 
       - name: lock poetry.lock
         run: poetry lock
