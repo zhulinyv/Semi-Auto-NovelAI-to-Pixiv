@@ -182,12 +182,22 @@ nav:
   - "导演工具":
     - "移除背景": guide/dir/remove_bg/index.md
     - "线条画": guide/dir/lineart/index.md
-    - "素描": guide/dir/skecth/index.md
+    - "素描": guide/dir/sketch/index.md
     - "上色": guide/dir/colorize/index.md
     - "表情": guide/dir/emotion/index.md
     - "整理": guide/dir/declutter/index.md
   - "超分降噪": guide/waifu2x.md
   - "自动打码": guide/mosaic.md
+  - "添加水印": guide/watermark.md
+  - "上传Pixiv": guide/pixiv.md
+  - "图片筛选": guide/selector.md
+  - "抹除数据": guide/remove.md
+  - "法术解析": guide/magic.md
+  - "GPT": guide/gpt4free.md
+  - "压缩整理": guide/compression.md
+  - "插件商店": guide/plugin.md
+  - "配置设置": guide/setting.md
+  - "其它": guide/else.md
 - "可能出现的问题": help.md
 - "鸣谢列表及待办": appendix.md
 - "关于": about.md

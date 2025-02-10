@@ -59,16 +59,7 @@ SAMPLER = [
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
 ... if env.model != "nai-diffusion-4-curated-preview" else NOISE_SCHEDULE.remove("native")
 CHARACTER_POSITION = [f"{chr(letter)}{number}" for letter in range(ord("A"), ord("F")) for number in range(1, 6)]
-FAVORTES_FILE = [
-    "actions.yaml",
-    "artists.yaml",
-    "characters.yaml",
-    "emotions.yaml",
-    "negative.yaml",
-    "prefixes.yaml",
-    "stains.yaml",
-    "surroundings.yaml",
-]
+FAVORTES_FILE = os.listdir("./files/favorites")
 THEME_LIST = [""] + [
     "gradio/base",
     "gradio/glass",
@@ -259,6 +250,13 @@ def generate_image(json_data):
     json_data["parameters"]["negative_prompt"] = find_wild_card_and_replace_tag(
         json_data["parameters"]["negative_prompt"]
     )
+    if env.model == "nai-diffusion-4-curated-preview":
+        json_data["parameters"]["v4_prompt"]["caption"]["base_caption"] = find_wild_card_and_replace_tag(
+            json_data["parameters"]["v4_prompt"]["caption"]["base_caption"]
+        )
+        json_data["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = find_wild_card_and_replace_tag(
+            json_data["parameters"]["v4_negative_prompt"]["caption"]["base_caption"]
+        )
 
     try:
         rep = requests.post(

@@ -4,6 +4,7 @@ import sys
 
 import gradio as gr
 
+from files.SANP_DOCS.launch import main as sanp_docs
 from utils.env import env
 from utils.gpt4free import main as g4f
 from utils.utils import install_requirements, silent_wrapper
@@ -524,6 +525,12 @@ def main():
                             sm_to_add,
                             sm_dyn_to_add,
                         ],
+                    )
+                    gr.Markdown(
+                        "目前已经支持手动创建自定义 wildcard, 自定义添加的 wildcard 需要包含概率信息, 名称以及 tag."
+                    )
+                    gr.Markdown(
+                        '例如:\n```\n较大概率选中:\n  提示词1:\n    tag: "TEST"\n\n中等概率选中:\n  提示词2:\n    tag: "test"\n\n较小概率选中:\n  提示词3:\n    tag: "测试"'
                     )
                 with gr.Tab("删除提示词"):
                     item_to_del = gr.Dropdown(
@@ -1916,31 +1923,18 @@ def main():
                         ["noise", "scale", "noise_scale"],
                         value="noise_scale",
                         label=webui_language["super resolution"]["mode"],
-                        scale=4,
                     )
                     waifu2x_caffe_scale = gr.Slider(
-                        minimum=1,
-                        maximum=32,
-                        value=2,
-                        label=webui_language["super resolution"]["waifu2x_scale"],
-                        scale=1,
+                        minimum=1, maximum=32, value=2, label=webui_language["super resolution"]["waifu2x_scale"]
                     )
                     waifu2x_caffe_noise = gr.Slider(
-                        minimum=0,
-                        maximum=3,
-                        step=1,
-                        value=3,
-                        label=webui_language["super resolution"]["waifu2x_noise"],
-                        scale=1,
+                        minimum=0, maximum=3, step=1, value=3, label=webui_language["super resolution"]["waifu2x_noise"]
                     )
                     waifu2x_caffe_process = gr.Radio(
-                        ["cpu", "gpu", "cudnn"],
-                        value="gpu",
-                        label=webui_language["super resolution"]["process"],
-                        scale=3,
+                        ["cpu", "gpu", "cudnn"], value="gpu", label=webui_language["super resolution"]["process"]
                     )
                     waifu2x_caffe_tta = gr.Radio(
-                        [True, False], value=False, label=webui_language["super resolution"]["tta"], scale=2
+                        [True, False], value=False, label=webui_language["super resolution"]["tta"]
                     )
                 waifu2x_caffe_model = gr.Radio(
                     [
@@ -2815,7 +2809,6 @@ def main():
 if __name__ == "__main__":
     silent_wrapper(install_requirements("requirements.txt"))
     os.system(f"{sys.executable} ./utils/prepare.py")
-    from files.SANP_DOCS.launch import main as sanp_docs
 
     processes = []
     if not env.skip_load_g4f:
