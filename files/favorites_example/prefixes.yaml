@@ -7,6 +7,8 @@
 中等概率选中:
   常用质量词:
     tag: "best quality, amazing quality, very aesthetic"
+  默认质量词:
+    tag: "rating:general, best quality, very aesthetic, absurdres"
 
 较小概率选中:
   简单质量词:
