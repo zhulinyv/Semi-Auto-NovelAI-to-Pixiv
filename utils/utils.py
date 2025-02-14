@@ -417,11 +417,7 @@ def save_image_for_director_tools(type_, image_data):
 
 def check_platform():
     """检测运行平台"""
-    if platform.system() == "Windows":
-        pass
-    else:
-        logger.error("仅支持 Window 运行!")
-        return
+    return platform.system()
 
 
 def read_json(path):

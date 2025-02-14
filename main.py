@@ -7,7 +7,7 @@ import gradio as gr
 from files.SANP_DOCS.launch import main as sanp_docs
 from utils.env import env
 from utils.gpt4free import main as g4f
-from utils.utils import install_requirements, silent_wrapper
+from utils.utils import check_platform, install_requirements, silent_wrapper
 
 
 def main():
@@ -2807,8 +2807,9 @@ def main():
 
 
 if __name__ == "__main__":
-    silent_wrapper(install_requirements("requirements.txt"))
-    os.system(f"{sys.executable} ./utils/prepare.py")
+    if check_platform() == "Windows":
+        silent_wrapper(install_requirements("requirements.txt"))
+        os.system(f"{sys.executable} ./utils/prepare.py")
 
     processes = []
     if not env.skip_load_g4f:

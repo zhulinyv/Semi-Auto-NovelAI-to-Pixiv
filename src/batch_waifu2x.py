@@ -21,7 +21,12 @@ def run_cmd_(code):
 
 def run_cmd(file, output_dir, code):
     logger.info(f"正在放大 {file}...")
-    check_platform()
+    platform = check_platform()
+    if platform == "Windows":
+        pass
+    else:
+        logger.error("仅支持 Windows 运行!")
+        return
     logger.debug(code)
 
     result = run_cmd_(code)
