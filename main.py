@@ -59,11 +59,13 @@ def main():
         read_json,
         read_txt,
         read_yaml,
+        return_array_iamge,
         return_names_list,
         return_random,
         return_source_or_type_list,
         return_wildcard_tag,
         stop_generate,
+        tk_asksavefile_asy,
         update_image_size,
         update_name_to_dropdown_list,
         update_t2i_nsf_dropdown_list,
@@ -2164,7 +2166,15 @@ def main():
                     gr.Markdown(webui_language["rm png info"]["description"])
             with gr.Tab(webui_language["rm png info"]["tab_rm"]):
                 with gr.Row():
-                    remove_pnginfo_image = gr.Image(type="filepath")
+                    with gr.Column():
+                        remove_pnginfo_image = gr.Image(type="numpy", interactive=False)
+                        with gr.Row():
+                            norm_input_text = gr.Textbox(visible=False)
+                            norm_input_btn = gr.Button("选择图片")
+                            norm_clear_btn = gr.Button("清除选择")
+                    norm_clear_btn.click(lambda x: x, gr.Textbox(None, visible=False), norm_input_text)
+                    norm_input_btn.click(tk_asksavefile_asy, inputs=[], outputs=[norm_input_text])
+                    norm_input_text.change(return_array_iamge, norm_input_text, remove_pnginfo_image)
                     with gr.Column():
                         remove_pnginfo_generate_button = gr.Button(webui_language["water mark"]["generate_button"])
                         with gr.Row():
@@ -2201,12 +2211,14 @@ def main():
                             env.meta_data, label=webui_language["rm png info"]["remove_pnginfo_metadate"]
                         )
                         remove_pnginfo_input_path = gr.Textbox(label=webui_language["i2i"]["input_path"])
-                        remove_pnginfo_output_path = gr.Textbox(label=webui_language["rm png info"]["save_path"])
+                        remove_pnginfo_output_path = gr.Textbox(
+                            "./output/info_removed", label=webui_language["rm png info"]["save_path"]
+                        )
                         remove_pnginfo_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
                         remove_pnginfo_generate_button.click(
                             fn=remove_info,
                             inputs=[
-                                remove_pnginfo_image,
+                                norm_input_text,
                                 remove_pnginfo_input_path,
                                 remove_pnginfo_output_path,
                                 remove_pnginfo_choices,

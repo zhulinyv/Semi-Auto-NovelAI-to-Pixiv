@@ -1,3 +1,4 @@
+import asyncio
 import base64
 import hmac
 import io
@@ -8,13 +9,16 @@ import re
 import subprocess
 import sys
 import time
+import tkinter as tk
 import zipfile
 from datetime import date
 from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
+from tkinter.filedialog import askopenfilename
 
 import gradio as gr
+import numpy as np
 import requests
 import ujson as json
 import yaml
@@ -767,6 +771,25 @@ def install_requirements(path):
     subprocess.call(command, stdout=devnull, stderr=devnull)
     logger.success("安装完成!")
     return
+
+
+def tk_window_asksavefile(init_dir=os.getcwd(), suffix="") -> str:
+    window = tk.Tk()
+    window.wm_attributes("-topmost", 1)
+    window.withdraw()
+    filename = askopenfilename(initialdir=init_dir, filetypes=[("", suffix)])
+    return filename
+
+
+async def tk_asksavefile_asy(init_dir=os.getcwd(), suffix="") -> str:
+    fname = await asyncio.to_thread(tk_window_asksavefile, init_dir, suffix)
+    return fname
+
+
+def return_array_iamge(path):
+    if path:
+        with Image.open(path) as image:
+            return np.array(image)
 
 
 def gen_script(script_type, *args):
