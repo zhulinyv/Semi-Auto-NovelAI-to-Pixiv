@@ -89,17 +89,19 @@ def t2i_by_hand(
         json_for_t2i["parameters"]["seed"] = seed
         json_for_t2i["parameters"]["negative_prompt"] = negative
 
+        _args = args[:]
+
         if env.model == "nai-diffusion-4-curated-preview":
-            json_for_t2i["parameters"]["use_coords"] = args[0]
+            json_for_t2i["parameters"]["use_coords"] = _args[0]
             json_for_t2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
-            json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = args[0]
+            json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = _args[0]
             json_for_t2i["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = negative
 
-            args = args[1:]
+            _args = _args[1:]
             components_list = []
-            while args:
-                components_list.append(args[0:4])
-                args = args[4:]
+            while _args:
+                components_list.append(_args[0:4])
+                _args = _args[4:]
 
             json_for_t2i["parameters"]["characterPrompts"] = [
                 {
