@@ -7,14 +7,14 @@ ci:
   autoupdate_commit_msg: ":arrow_up: 自动更新"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.8
+    rev: v0.9.9
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
         stages: [commit]
 
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 24.10.0
     hooks:
       - id: black
         stages: [commit]
