@@ -195,18 +195,18 @@ def main():
                                 )
                                 with gr.Row():
                                     text2image_sm = gr.Checkbox(
-                                        value=env.sm if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        value=env.sm if "nai-diffusion-4" not in env.model else False,
                                         label="sm",
-                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        visible=True if "nai-diffusion-4" not in env.model else False,
                                     )
                                     text2image_sm_dyn = gr.Checkbox(
-                                        value=env.sm_dyn if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        value=env.sm_dyn if "nai-diffusion-4" not in env.model else False,
                                         label=webui_language["t2i"]["smdyn"],
-                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        visible=True if "nai-diffusion-4" not in env.model else False,
                                     )
                                 with gr.Row():
                                     text2image_variety = gr.Checkbox(
-                                        value=env.variety if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        value=env.variety if "nai-diffusion-4" not in env.model else False,
                                         label="variety",
                                     )
                                     text2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
@@ -247,7 +247,7 @@ def main():
                             inputs=[text2image_wildcard_file, text2image_wildcard_name],
                             outputs=text2image_wildcard_tag,
                         )
-                    with gr.Tab("Character", visible=True if env.model == "nai-diffusion-4-curated-preview" else False):
+                    with gr.Tab("Character", visible=True if "nai-diffusion-4" in env.model else False):
                         text2image_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
                         gr.Markdown("<hr>")
 
@@ -716,12 +716,12 @@ def main():
                                     vibe_transfer_sm = gr.Checkbox(
                                         value=env.sm,
                                         label="sm",
-                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        visible=True if "nai-diffusion-4" not in env.model else False,
                                     )
                                     vibe_transfer_sm_dyn = gr.Checkbox(
                                         value=env.sm_dyn,
                                         label=webui_language["t2i"]["smdyn"],
-                                        visible=True if env.model != "nai-diffusion-4-curated-preview" else False,
+                                        visible=True if "nai-diffusion-4" not in env.model else False,
                                     )
                                 with gr.Row():
                                     vibe_transfer_variety = gr.Checkbox(value=env.variety, label="variety")
@@ -958,7 +958,7 @@ def main():
                             inputs=[image2image_wildcard_file, image2image_wildcard_name],
                             outputs=image2image_wildcard_tag,
                         )
-                    with gr.Tab("Character", visible=True if env.model == "nai-diffusion-4-curated-preview" else False):
+                    with gr.Tab("Character", visible=True if "nai-diffusion-4" in env.model else False):
                         image2image_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
                         gr.Markdown("<hr>")
 
@@ -1311,9 +1311,9 @@ def main():
                                 )
                             with gr.Row():
                                 with gr.Column():
-                                    inpaint_sm = gr.Checkbox(value=env.sm, label="sm", scale=2)
+                                    inpaint_sm = gr.Checkbox(value=env.sm, label="sm", scale=2, visible=False if "nai-diffusion-4" in env.model else True)
                                     inpaint_sm_dyn = gr.Checkbox(
-                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2
+                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2, visible=False if "nai-diffusion-4" in env.model else True
                                     )
                                 with gr.Column():
                                     inpaint_variety = gr.Checkbox(value=env.variety, label="variety")
@@ -1354,6 +1354,31 @@ def main():
                             inputs=[inpaint_wildcard_file, inpaint_wildcard_name],
                             outputs=inpaint_wildcard_tag,
                         )
+                    with gr.Tab("Character", visible=True if "nai-diffusion-4" in env.model else False):
+                        inpaint_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
+                        gr.Markdown("<hr>")
+
+                        def character_compents(number):
+                            with gr.Row():
+                                inpaint_character_position = gr.Dropdown(CHARACTER_POSITION, label="位置(Position)")
+                                inpaint_character_switch = gr.Checkbox(False, label="启用(Switch)")
+                                gr.Textbox(f"角色{number}", show_label=False)
+                            with gr.Row():
+                                inpaint_character_positive = gr.Textbox(label="正面提示词(Positive)", lines=3)
+                                inpaint_character_negative = gr.Textbox(label="负面提示词(Negative)", lines=3)
+                            for _ in range(3):
+                                gr.Markdown("<hr>")
+                            return (
+                                inpaint_character_switch,
+                                inpaint_character_positive,
+                                inpaint_character_negative,
+                                inpaint_character_position,
+                            )
+
+                        inpaint_components_list = [character_compents(num) for num in range(1, 7)]
+                        inpaint_new_components_list = [
+                            component for components in inpaint_components_list for component in components
+                        ]
                 inpaint_generate_button.click(
                     fn=inpaint,
                     inputs=[
@@ -1377,7 +1402,9 @@ def main():
                         inpaint_variety,
                         inpaint_decrisp,
                         inpaint_seed,
-                    ],
+                    ]
+                    + [inpaint_ai_choice]
+                    + inpaint_new_components_list,
                     outputs=[inpaint_output_image, inpaint_output_information],
                 )
             # ---------- Inpaint插件 ---------- #

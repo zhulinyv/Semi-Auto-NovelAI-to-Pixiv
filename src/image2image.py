@@ -5,7 +5,7 @@ from pathlib import Path
 from utils.env import env
 from utils.imgtools import get_img_info, img_to_base64
 
-if env.model != "nai-diffusion-4-curated-preview":
+if "nai-diffusion-4" not in env.model:
     from utils.jsondata import json_for_i2i
 else:
     from utils.jsondata import json_for_i2i_v4 as json_for_i2i
@@ -48,7 +48,7 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["steps"] = steps
         json_for_i2i["parameters"]["strength"] = strength
         json_for_i2i["parameters"]["noise"] = noise
-        if env.model != "nai-diffusion-4-curated-preview":
+        if "nai-diffusion-4" not in env.model:
             json_for_i2i["parameters"]["sm"] = False
             json_for_i2i["parameters"]["sm_dyn"] = False
         json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
@@ -61,7 +61,7 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["extra_noise_seed"] = seed
         json_for_i2i["parameters"]["negative_prompt"] = negative
 
-        if env.model == "nai-diffusion-4-curated-preview":
+        if "nai-diffusion-4" in env.model:
             json_for_i2i["parameters"]["use_coords"] = args[0]
             json_for_i2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
             json_for_i2i["parameters"]["v4_prompt"]["use_coords"] = args[0]
@@ -135,7 +135,7 @@ def prepare_json(imginfo: dict, imgpath):
     json_for_i2i["parameters"]["steps"] = img_comment["steps"]
     json_for_i2i["parameters"]["strength"] = env.hires_strength
     json_for_i2i["parameters"]["noise"] = env.hires_noise
-    if env.model != "nai-diffusion-4-curated-preview":
+    if "nai-diffusion-4" not in env.model:
         json_for_i2i["parameters"]["sm"] = False
         json_for_i2i["parameters"]["sm_dyn"] = False
     try:
@@ -154,7 +154,7 @@ def prepare_json(imginfo: dict, imgpath):
     json_for_i2i["parameters"]["extra_noise_seed"] = seed
     json_for_i2i["parameters"]["negative_prompt"] = img_comment["uc"]
 
-    if env.model == "nai-diffusion-4-curated-preview":
+    if "nai-diffusion-4" in env.model:
         try:
             json_for_i2i["parameters"]["use_coords"] = img_comment["v4_prompt"]["use_coords"]
             json_for_i2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = img_comment["v4_prompt"]["caption"][
@@ -175,7 +175,7 @@ def prepare_json(imginfo: dict, imgpath):
                 )
                 num += 1
         except KeyError:
-            logger.warning("正在使用 NAI3 生成的图片使用 NAI4 图生图!")
+            logger.warning("正在使用 NAI3 生成的图片使用 NAI4 生图!")
             json_for_i2i["parameters"]["use_coords"] = False
             json_for_i2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = ""
             json_for_i2i["parameters"]["v4_prompt"]["use_coords"] = False

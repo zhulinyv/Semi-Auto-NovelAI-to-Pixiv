@@ -31,11 +31,11 @@ from utils.prepare import logger
 PATH = os.getcwd()
 
 MODEL = [
+    "nai-diffusion-2",
     "nai-diffusion-3",
     "nai-diffusion-furry-3",
-    "nai-diffusion-2",
     "nai-diffusion-4-curated-preview",
-    # "nai-diffusion-4"
+    "nai-diffusion-4-full",
 ]
 RESOLUTION = [
     "832x1216",
@@ -59,9 +59,9 @@ SAMPLER = [
     "k_dpmpp_2m_sde",
     "ddim_v3",
 ]
-... if env.model != "nai-diffusion-4-curated-preview" else SAMPLER.remove("ddim_v3")
+... if "nai-diffusion-4" not in env.model else SAMPLER.remove("ddim_v3")
 NOISE_SCHEDULE = ["native", "karras", "exponential", "polyexponential"]
-... if env.model != "nai-diffusion-4-curated-preview" else NOISE_SCHEDULE.remove("native")
+... if "nai-diffusion-4" not in env.model else NOISE_SCHEDULE.remove("native")
 CHARACTER_POSITION = [f"{chr(letter)}{number}" for letter in range(ord("A"), ord("F")) for number in range(1, 6)]
 FAVORTES_FILE = os.listdir("./files/favorites")
 THEME_LIST = [""] + [
@@ -254,7 +254,7 @@ def generate_image(json_data):
     json_data["parameters"]["negative_prompt"] = find_wild_card_and_replace_tag(
         json_data["parameters"]["negative_prompt"]
     )
-    if env.model == "nai-diffusion-4-curated-preview":
+    if "nai-diffusion-4" in env.model:
         json_data["parameters"]["v4_prompt"]["caption"]["base_caption"] = find_wild_card_and_replace_tag(
             json_data["parameters"]["v4_prompt"]["caption"]["base_caption"]
         )

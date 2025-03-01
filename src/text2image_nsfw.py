@@ -10,7 +10,7 @@ from playsound import playsound
 from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, revert_img_info
 
-if env.model != "nai-diffusion-4-curated-preview":
+if "nai-diffusion-4" not in env.model:
     from utils.jsondata import json_for_t2i
 else:
     from utils.jsondata import json_for_t2i_v4 as json_for_t2i
@@ -75,7 +75,7 @@ def t2i_by_hand(
         json_for_t2i["parameters"]["scale"] = scale
         json_for_t2i["parameters"]["sampler"] = sampler
         json_for_t2i["parameters"]["steps"] = steps
-        if env.model != "nai-diffusion-4-curated-preview":
+        if "nai-diffusion-4" not in env.model:
             json_for_t2i["parameters"]["sm"] = sm if sampler != "ddim_v3" else False
             json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
         json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
@@ -91,7 +91,7 @@ def t2i_by_hand(
 
         _args = args[:]
 
-        if env.model == "nai-diffusion-4-curated-preview":
+        if "nai-diffusion-4" in env.model:
             json_for_t2i["parameters"]["use_coords"] = _args[0]
             json_for_t2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
             json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = _args[0]
@@ -356,7 +356,7 @@ def prepare_json(input_, sm, sm_dyn, variety, decrisp, scale, sampler, noise_sch
     json_for_t2i["parameters"]["scale"] = scale
     json_for_t2i["parameters"]["sampler"] = sampler
     json_for_t2i["parameters"]["steps"] = env.steps
-    if env.model != "nai-diffusion-4-curated-preview":
+    if "nai-diffusion-4" not in env.model:
         json_for_t2i["parameters"]["sm"] = sm
         json_for_t2i["parameters"]["sm_dyn"] = sm_dyn
     json_for_t2i["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
@@ -367,7 +367,7 @@ def prepare_json(input_, sm, sm_dyn, variety, decrisp, scale, sampler, noise_sch
     json_for_t2i["parameters"]["seed"] = seed
     json_for_t2i["parameters"]["negative_prompt"] = negative
 
-    if env.model == "nai-diffusion-4-curated-preview":
+    if "nai-diffusion-4" in env.model:
         json_for_t2i["parameters"]["use_coords"] = False
         json_for_t2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = ""
         json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = False

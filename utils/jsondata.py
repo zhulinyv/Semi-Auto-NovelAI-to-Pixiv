@@ -96,8 +96,8 @@ json_for_inpaint = {
     "input": str,
     "model": (
         f"{env.model}-inpainting"
-        if env.model not in ["nai-diffusion-2", "nai-diffusion-4-curated-preview"]
-        else "nai-diffusion-3"
+        if env.model not in ["nai-diffusion-2", "nai-diffusion-4-curated-preview", "nai-diffusion-4-full"]
+        else "nai-diffusion-3-inpainting"
     ),
     "action": "infill",
     "parameters": {
@@ -221,7 +221,7 @@ json_for_emotion = {
 
 json_for_t2i_v4 = {
     "input": str,
-    "model": "nai-diffusion-4-curated-preview",
+    "model": env.model,
     "action": "generate",
     "parameters": {
         "params_version": 3,
@@ -289,7 +289,7 @@ json_for_t2i_v4 = {
 
 json_for_i2i_v4 = {
     "input": str,
-    "model": "nai-diffusion-4-curated-preview",
+    "model": env.model,
     "action": "img2img",
     "parameters": {
         "params_version": 3,
@@ -314,6 +314,84 @@ json_for_i2i_v4 = {
         "use_coords": bool,
         "seed": int,
         "image": str,
+        "characterPrompts": [
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+            # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
+        ],
+        "extra_noise_seed": int,
+        "v4_prompt": {
+            "caption": {
+                "base_caption": str,
+                "char_captions": [
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                ],
+            },
+            "use_coords": bool,
+            "use_order": True,
+        },
+        "v4_negative_prompt": {
+            "caption": {
+                "base_caption": str,
+                "char_captions": [
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                    # {"char_caption": str, "centers": [{"x": float, "y": float}]},
+                ],
+            }
+        },
+        "negative_prompt": str,
+        "reference_image_multiple": [],
+        "reference_information_extracted_multiple": [],
+        "reference_strength_multiple": [],
+        "deliberate_euler_ancestral_bug": False,
+        "prefer_brownian": True,
+    },
+}
+
+json_for_inpaint_v4 = {
+    "input": str,
+    "model": (
+        "nai-diffusion-4-full-inpainting"
+        if env.model == "nai-diffusion-4-full"
+        else "nai-diffusion-4-curated-inpainting"
+    ),
+    "action": "infill",
+    "parameters": {
+        "params_version": 3,
+        "width": int,
+        "height": int,
+        "scale": float,
+        "sampler": str,
+        "steps": int,
+        "n_samples": 1,
+        "strength": float,
+        "noise": float,
+        "ucPreset": 0,
+        "qualityToggle": True,
+        "dynamic_thresholding": bool,
+        "controlnet_strength": 1,
+        "legacy": False,
+        "add_original_image": bool,
+        "cfg_rescale": 0,
+        "noise_schedule": str,
+        "legacy_v3_extend": False,
+        "skip_cfg_above_sigma": None,
+        "seed": int,
+        "use_coords": bool,
+        "image": str,
+        "mask": str,
         "characterPrompts": [
             # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
             # {"prompt": str, "uc": str, "center": {"x": float, "y": float}},
