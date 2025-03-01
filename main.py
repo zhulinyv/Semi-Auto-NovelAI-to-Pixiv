@@ -1311,9 +1311,17 @@ def main():
                                 )
                             with gr.Row():
                                 with gr.Column():
-                                    inpaint_sm = gr.Checkbox(value=env.sm, label="sm", scale=2, visible=False if "nai-diffusion-4" in env.model else True)
+                                    inpaint_sm = gr.Checkbox(
+                                        value=env.sm,
+                                        label="sm",
+                                        scale=2,
+                                        visible=False if "nai-diffusion-4" in env.model else True,
+                                    )
                                     inpaint_sm_dyn = gr.Checkbox(
-                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2, visible=False if "nai-diffusion-4" in env.model else True
+                                        value=env.sm_dyn,
+                                        label=webui_language["t2i"]["smdyn"],
+                                        scale=2,
+                                        visible=False if "nai-diffusion-4" in env.model else True,
                                     )
                                 with gr.Column():
                                     inpaint_variety = gr.Checkbox(value=env.variety, label="variety")
