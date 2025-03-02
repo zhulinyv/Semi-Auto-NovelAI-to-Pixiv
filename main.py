@@ -1311,9 +1311,17 @@ def main():
                                 )
                             with gr.Row():
                                 with gr.Column():
-                                    inpaint_sm = gr.Checkbox(value=env.sm, label="sm", scale=2, visible=False if "nai-diffusion-4" in env.model else True)
+                                    inpaint_sm = gr.Checkbox(
+                                        value=env.sm,
+                                        label="sm",
+                                        scale=2,
+                                        visible=False if "nai-diffusion-4" in env.model else True,
+                                    )
                                     inpaint_sm_dyn = gr.Checkbox(
-                                        value=env.sm_dyn, label=webui_language["t2i"]["smdyn"], scale=2, visible=False if "nai-diffusion-4" in env.model else True
+                                        value=env.sm_dyn,
+                                        label=webui_language["t2i"]["smdyn"],
+                                        scale=2,
+                                        visible=False if "nai-diffusion-4" in env.model else True,
                                     )
                                 with gr.Column():
                                     inpaint_variety = gr.Checkbox(value=env.variety, label="variety")
@@ -2616,8 +2624,9 @@ def main():
                         censor = gr.Checkbox(value=env.censor, label=webui_language["setting"]["description"]["censor"])
                         sm = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
                         sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_language["setting"]["description"]["sm_dyn"])
-                        variety = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
-                        decrisp = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
+                        variety = gr.Checkbox(env.sm, label="variety")
+                        decrisp = gr.Checkbox(env.sm, label="decrisp")
+                        skip_format_str = gr.Checkbox(env.sm, label="跳过格式化tag")
                     with gr.Row():
                         seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
                         proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
@@ -2787,6 +2796,7 @@ def main():
                     sm_dyn,
                     variety,
                     decrisp,
+                    skip_format_str,
                     noise_schedule,
                     seed,
                     t2i_cool_time,

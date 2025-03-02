@@ -119,6 +119,8 @@ def format_str(str_: str):
     Returns:
         str_: 格式化后的字符串
     """
+    if env.skip_format_str:
+        return str_
     str_ = str_.replace(", ", ",")
     str_ = str_.replace(",,", ",")
     str_ = str_.replace(",,,", ",")

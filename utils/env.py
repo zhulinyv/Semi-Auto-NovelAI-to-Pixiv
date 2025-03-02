@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     sm_dyn: bool = False
     variety: bool = False
     decrisp: bool = False
+    skip_format_str: bool = False
     noise_schedule: str = "karras"
     seed: int = -1
     t2i_cool_time: int = 9
