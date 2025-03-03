@@ -22,6 +22,7 @@ def i2i_by_hand(
     image2image_width: str,
     image2image_height: str,
     scale: float,
+    image2image_rescale: float,
     sampler: str,
     noise_schedule: str,
     steps: int,
@@ -44,6 +45,7 @@ def i2i_by_hand(
         json_for_i2i["parameters"]["width"] = return_x64(int(image2image_width))
         json_for_i2i["parameters"]["height"] = return_x64(int(image2image_height))
         json_for_i2i["parameters"]["scale"] = scale
+        json_for_i2i["parameters"]["cfg_rescale"] = image2image_rescale
         json_for_i2i["parameters"]["sampler"] = sampler
         json_for_i2i["parameters"]["steps"] = steps
         json_for_i2i["parameters"]["strength"] = strength
@@ -102,7 +104,6 @@ def i2i_by_hand(
             ]
 
         saved_path = save_image(generate_image(json_for_i2i), "i2i", seed, "None", "None")
-        sleep_for_cool(2, 4)
 
         return saved_path, None
 

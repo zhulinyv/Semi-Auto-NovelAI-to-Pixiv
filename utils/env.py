@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     save_path: str = "默认(Default)"
     proxy: Union[str, None] = "xxx:xxx"
     times_for_scripts: int = 0
+    rescale: float = 0
 
     # 图生图
     magnification: float = 1.5

@@ -180,6 +180,13 @@ def main():
                                     step=0.1,
                                     label=webui_language["t2i"]["scale"],
                                 )
+                                text2image_rescale = gr.Slider(
+                                    minimum=0,
+                                    maximum=1,
+                                    value=env.rescale,
+                                    step=0.01,
+                                    label="Prompt Guidance Rescale",
+                                )
                                 text2image_sampler = gr.Dropdown(
                                     SAMPLER,
                                     value=env.sampler,
@@ -209,7 +216,11 @@ def main():
                                         value=env.variety if "nai-diffusion-4" not in env.model else False,
                                         label="variety",
                                     )
-                                    text2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
+                                    text2image_decrisp = gr.Checkbox(
+                                        value=env.decrisp if "nai-diffusion-4" not in env.model else False,
+                                        label="decrisp",
+                                        visible=True if "nai-diffusion-4" not in env.model else False,
+                                    )
                                 with gr.Row():
                                     text2image_seed = gr.Textbox(
                                         value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
@@ -280,6 +291,7 @@ def main():
                             text2image_width,
                             text2image_height,
                             text2image_scale,
+                            text2image_rescale,
                             text2image_sampler,
                             text2image_noise_schedule,
                             text2image_steps,
@@ -695,6 +707,13 @@ def main():
                                     label=webui_language["t2i"]["scale"],
                                     interactive=True,
                                 )
+                                vibe_transfer_rescale = gr.Slider(
+                                    minimum=0,
+                                    maximum=1,
+                                    value=env.rescale,
+                                    step=0.01,
+                                    label="Prompt Guidance Rescale",
+                                )
                                 vibe_transfer_sampler = gr.Dropdown(
                                     SAMPLER, value=env.sampler, label=webui_language["t2i"]["sampler"], interactive=True
                                 )
@@ -725,7 +744,11 @@ def main():
                                     )
                                 with gr.Row():
                                     vibe_transfer_variety = gr.Checkbox(value=env.variety, label="variety")
-                                    vibe_transfer_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
+                                    vibe_transfer_decrisp = gr.Checkbox(
+                                        value=env.decrisp if "nai-diffusion-4" not in env.model else False,
+                                        label="decrisp",
+                                        visible=True if "nai-diffusion-4" not in env.model else False,
+                                    )
                                 with gr.Row():
                                     vibe_transfer_seed = gr.Textbox(
                                         value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
@@ -771,6 +794,7 @@ def main():
                                             vibe_transfer_width,
                                             vibe_transfer_height,
                                             vibe_transfer_scale,
+                                            vibe_transfer_rescale,
                                             vibe_transfer_sampler,
                                             vibe_transfer_noise_schedule,
                                             vibe_transfer_steps,
@@ -911,6 +935,13 @@ def main():
                                     step=0.1,
                                     label=webui_language["t2i"]["scale"],
                                 )
+                                image2image_rescale = gr.Slider(
+                                    minimum=0,
+                                    maximum=1,
+                                    value=env.rescale,
+                                    step=0.01,
+                                    label="Prompt Guidance Rescale",
+                                )
                                 image2image_steps = gr.Slider(
                                     minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                                 )
@@ -922,7 +953,11 @@ def main():
                                     )
                                 with gr.Column():
                                     image2image_variety = gr.Checkbox(value=env.variety, label="variety")
-                                    image2image_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
+                                    image2image_decrisp = gr.Checkbox(
+                                        value=env.decrisp if "nai-diffusion-4" not in env.model else False,
+                                        label="decrisp",
+                                        visible=True if "nai-diffusion-4" not in env.model else False,
+                                    )
                                 image2image_seed = gr.Textbox(
                                     value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
                                 )
@@ -994,6 +1029,7 @@ def main():
                             image2image_width,
                             image2image_height,
                             image2image_scale,
+                            image2image_rescale,
                             image2image_sampler,
                             image2image_noise_schedule,
                             image2image_steps,
@@ -1080,6 +1116,9 @@ def main():
                     movie2movie_scale = gr.Slider(
                         minimum=0, maximum=10, value=env.scale, step=0.1, label=webui_language["t2i"]["scale"]
                     )
+                    movie2movie_rescale = gr.Slider(
+                        minimum=0, maximum=1, value=env.rescale, step=0.01, label="Prompt Guidance Rescale"
+                    )
                     movie2movie_steps = gr.Slider(
                         minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                     )
@@ -1103,7 +1142,11 @@ def main():
                         movie2movie_sm = gr.Checkbox(value=False, visible=False)
                         movie2movie_sm_dyn = gr.Checkbox(value=False, visible=False)
                         movie2movie_variety = gr.Checkbox(value=env.variety, label="variety")
-                        movie2movie_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
+                        movie2movie_decrisp = gr.Checkbox(
+                            value=env.decrisp if "nai-diffusion-4" not in env.model else False,
+                            label="decrisp",
+                            visible=True if "nai-diffusion-4" not in env.model else False,
+                        )
                         with gr.Row():
                             movie2movie_seed = gr.Textbox(
                                 value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
@@ -1120,6 +1163,7 @@ def main():
                             movie2movie_position,
                             movie2movie_resolution,
                             movie2movie_scale,
+                            movie2movie_rescale,
                             movie2movie_steps,
                             movie2movie_sampler,
                             movie2movie_noise_schedule,
@@ -1306,6 +1350,13 @@ def main():
                                     step=0.1,
                                     label=webui_language["t2i"]["scale"],
                                 )
+                                inpaint_rescale = gr.Slider(
+                                    minimum=0,
+                                    maximum=1,
+                                    value=env.rescale,
+                                    step=0.01,
+                                    label="Prompt Guidance Rescale",
+                                )
                                 inpaint_steps = gr.Slider(
                                     minimum=0, maximum=50, value=env.steps, step=1, label=webui_language["t2i"]["steps"]
                                 )
@@ -1325,7 +1376,11 @@ def main():
                                     )
                                 with gr.Column():
                                     inpaint_variety = gr.Checkbox(value=env.variety, label="variety")
-                                    inpaint_decrisp = gr.Checkbox(value=env.decrisp, label="decrisp")
+                                    inpaint_decrisp = gr.Checkbox(
+                                        value=env.decrisp if "nai-diffusion-4" not in env.model else False,
+                                        label="decrisp",
+                                        visible=True if "nai-diffusion-4" not in env.model else False,
+                                    )
                                 with gr.Column(scale=1):
                                     inpaint_seed = gr.Textbox(
                                         value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
@@ -1404,6 +1459,7 @@ def main():
                         inpaint_strength,
                         inpaint_noise,
                         inpaint_scale,
+                        inpaint_rescale,
                         inpaint_steps,
                         inpaint_sm,
                         inpaint_sm_dyn,
@@ -2315,7 +2371,9 @@ def main():
                             pnginfo_sm_dyn = gr.Checkbox(label="sm_dyn")
                         with gr.Row():
                             pnginfo_variety = gr.Checkbox(label="variety")
-                            pnginfo_decrisp = gr.Checkbox(label="decrisp")
+                            pnginfo_decrisp = gr.Checkbox(
+                                label="decrisp", visible=True if "nai-diffusion-4" not in env.model else False
+                            )
                         pnginfo_seed = gr.Textbox(label="种子(Seed)")
                 pnginfo_pnginfo = gr.Textbox(label="Png Info")
                 pnginfo_image.change(
@@ -2617,6 +2675,9 @@ def main():
                         scale = gr.Slider(
                             0, 10, env.scale, step=0.1, label=webui_language["setting"]["description"]["scale"]
                         )
+                        rescale= gr.Slider(
+                            0, 1, env.rescale, step=0.01, label="Prompt Guidance Rescale"
+                        )
                         steps = gr.Slider(
                             1, 50, env.steps, step=1, label=webui_language["setting"]["description"]["steps"]
                         )
@@ -2625,7 +2686,9 @@ def main():
                         sm = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
                         sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_language["setting"]["description"]["sm_dyn"])
                         variety = gr.Checkbox(env.sm, label="variety")
-                        decrisp = gr.Checkbox(env.sm, label="decrisp")
+                        decrisp = gr.Checkbox(
+                            env.sm, label="decrisp", visible=True if "nai-diffusion-4" not in env.model else False
+                        )
                         skip_format_str = gr.Checkbox(env.sm, label="跳过格式化tag")
                     with gr.Row():
                         seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
@@ -2789,6 +2852,7 @@ def main():
                     model,
                     img_size,
                     scale,
+                    rescale,
                     censor,
                     sampler,
                     steps,

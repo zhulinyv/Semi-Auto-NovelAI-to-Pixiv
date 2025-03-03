@@ -20,6 +20,7 @@ def vibe_by_hand(
     vibe_transfer_width: str,
     vibe_transfer_height: str,
     scale: float,
+    rescale: float,
     sampler: str,
     noise_schedule: str,
     steps: int,
@@ -53,6 +54,7 @@ def vibe_by_hand(
         json_for_vibe["parameters"]["width"] = return_x64(int(vibe_transfer_width))
         json_for_vibe["parameters"]["height"] = return_x64(int(vibe_transfer_height))
         json_for_vibe["parameters"]["scale"] = scale
+        json_for_vibe["parameters"]["cfg_rescale"] = rescale
         json_for_vibe["parameters"]["sampler"] = sampler
         json_for_vibe["parameters"]["steps"] = steps
         json_for_vibe["parameters"]["sm"] = sm if sampler != "ddim_v3" else False

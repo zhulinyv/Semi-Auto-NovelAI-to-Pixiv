@@ -180,6 +180,10 @@ def cut_img_h(path, otp_path):
 
 
 def change_the_mask_color_to_white(image_path):
+    logger.error("change_the_mask_color_to_white 方法已弃用! 请更新插件!")
+
+
+def change_the_mask_color(image_path):
     with Image.open(image_path) as image:
         image_array = image.load()
         width, height = image.size
@@ -189,6 +193,8 @@ def change_the_mask_color_to_white(image_path):
                 r, g, b, a = rgba
                 if a != 0:
                     image_array[x, y] = (255, 255, 255)
+                elif a == 0:
+                    image_array[x, y] = (0, 0, 0)
         image.save(image_path)
 
 

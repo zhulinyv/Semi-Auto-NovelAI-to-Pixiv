@@ -233,10 +233,13 @@ def find_wild_card_and_replace_tag(text):
         if wild_card[1] != "随机":
             yaml_data = cancel_probabilities_for_item(read_yaml("./files/favorites/{}.yaml".format(wild_card[0])))
             text = text.replace("<{}:{}>".format(wild_card[0], wild_card[1]), yaml_data[wild_card[1]]["tag"])
+            tag = yaml_data[wild_card[1]]["tag"]
         else:
             _, yaml_data = choose_item(read_yaml("./files/favorites/{}.yaml".format(wild_card[0])))
             text = text.replace("<{}:{}>".format(wild_card[0], wild_card[1]), yaml_data["tag"])
-    logger.info(f"发现 {len(matchers)} 个 wildcard, 已完成替换!") if len(matchers) != 0 else ...
+            tag = yaml_data["tag"]
+        logger.debug('已将 <{}:{}> 替换为 "{}"'.format(wild_card[0], wild_card[1], tag))
+    logger.info(f"共发现 {len(matchers)} 个 wildcard, 已完成替换!") if len(matchers) != 0 else ...
     return format_str(text)
 
 
@@ -252,17 +255,14 @@ def generate_image(json_data):
     with open("start.json", "w") as f:
         json.dump({"positive": json_data["input"], "negative": json_data["parameters"]["negative_prompt"]}, f)
 
-    json_data["input"] = find_wild_card_and_replace_tag(json_data["input"])
-    json_data["parameters"]["negative_prompt"] = find_wild_card_and_replace_tag(
-        json_data["parameters"]["negative_prompt"]
-    )
+    positive = find_wild_card_and_replace_tag(json_data["input"])
+    negative = find_wild_card_and_replace_tag(json_data["parameters"]["negative_prompt"])
+
+    json_data["input"] = positive
+    json_data["parameters"]["negative_prompt"] = negative
     if "nai-diffusion-4" in env.model:
-        json_data["parameters"]["v4_prompt"]["caption"]["base_caption"] = find_wild_card_and_replace_tag(
-            json_data["parameters"]["v4_prompt"]["caption"]["base_caption"]
-        )
-        json_data["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = find_wild_card_and_replace_tag(
-            json_data["parameters"]["v4_negative_prompt"]["caption"]["base_caption"]
-        )
+        json_data["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
+        json_data["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = negative
 
     try:
         rep = requests.post(

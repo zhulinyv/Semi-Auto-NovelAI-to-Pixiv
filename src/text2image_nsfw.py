@@ -44,6 +44,7 @@ def t2i_by_hand(
     text2image_width: str,
     text2image_height: str,
     scale: float,
+    text2image_rescale: float,
     sampler: str,
     noise_schedule: str,
     steps: int,
@@ -73,6 +74,7 @@ def t2i_by_hand(
         json_for_t2i["parameters"]["width"] = return_x64(int(text2image_width))
         json_for_t2i["parameters"]["height"] = return_x64(int(text2image_height))
         json_for_t2i["parameters"]["scale"] = scale
+        json_for_t2i["parameters"]["cfg_rescale"] = text2image_rescale
         json_for_t2i["parameters"]["sampler"] = sampler
         json_for_t2i["parameters"]["steps"] = steps
         if "nai-diffusion-4" not in env.model:
