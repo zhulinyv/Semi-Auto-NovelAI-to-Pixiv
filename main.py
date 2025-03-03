@@ -2675,9 +2675,7 @@ def main():
                         scale = gr.Slider(
                             0, 10, env.scale, step=0.1, label=webui_language["setting"]["description"]["scale"]
                         )
-                        rescale= gr.Slider(
-                            0, 1, env.rescale, step=0.01, label="Prompt Guidance Rescale"
-                        )
+                        rescale = gr.Slider(0, 1, env.rescale, step=0.01, label="Prompt Guidance Rescale")
                         steps = gr.Slider(
                             1, 50, env.steps, step=1, label=webui_language["setting"]["description"]["steps"]
                         )
