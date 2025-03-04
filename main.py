@@ -2689,7 +2689,7 @@ def main():
                         decrisp = gr.Checkbox(
                             env.sm, label="decrisp", visible=True if "nai-diffusion-4" not in env.model else False
                         )
-                        skip_format_str = gr.Checkbox(env.sm, label="跳过格式化tag")
+                        skip_format_str = gr.Checkbox(env.skip_format_str, label="跳过格式化tag")
                     with gr.Row():
                         seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
                         proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
