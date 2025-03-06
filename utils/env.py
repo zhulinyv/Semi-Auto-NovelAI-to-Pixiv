@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     proxy: Union[str, None] = "xxx:xxx"
     times_for_scripts: int = 0
     rescale: float = 0
+    skip_save_grid: bool = False
 
     # 图生图
     magnification: float = 1.5

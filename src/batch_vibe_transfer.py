@@ -115,38 +115,44 @@ def vibe_by_hand(
             imgs_list.remove(img)
 
     if times != 1:
-        num_list = []
-        for row in range(3 if len(imgs_list) == 2 else len(imgs_list)):
-            for column in range(3 if len(imgs_list) == 2 else len(imgs_list)):
-                if row * column >= len(imgs_list):
-                    num_list.append([row, column])
-        row, column = num_list[0]
-        for num in num_list[1:]:
-            if abs(num[0] - num[1]) < abs(row - column):
-                row, column = num
+        if not env.skip_save_grid:
+            num_list = []
+            for row in range(3 if len(imgs_list) == 2 else len(imgs_list)):
+                for column in range(3 if len(imgs_list) == 2 else len(imgs_list)):
+                    if row * column >= len(imgs_list):
+                        num_list.append([row, column])
+            row, column = num_list[0]
+            for num in num_list[1:]:
+                if abs(num[0] - num[1]) < abs(row - column):
+                    row, column = num
 
-        imgs_list_list = [imgs_list[i : i + column] for i in range(0, len(imgs_list), column)]
+            imgs_list_list = [imgs_list[i : i + column] for i in range(0, len(imgs_list), column)]
 
-        merged_imgs = []
-        for imgs_list in imgs_list_list:
-            for img in imgs_list:
-                if img == imgs_list[0]:
-                    merged_img = Image.open(img)
+            merged_imgs = []
+            for imgs_list in imgs_list_list:
+                for img in imgs_list:
+                    if img == imgs_list[0]:
+                        merged_img = Image.open(img)
+                    else:
+                        merged_img = get_concat_h(merged_img, Image.open(img))
+                merged_imgs.append(merged_img)
+            for img in merged_imgs:
+                if img == merged_imgs[0]:
+                    merged_img = img
                 else:
-                    merged_img = get_concat_h(merged_img, Image.open(img))
-            merged_imgs.append(merged_img)
-        for img in merged_imgs:
-            if img == merged_imgs[0]:
-                merged_img = img
-            else:
-                merged_img = get_concat_v(merged_img, img)
+                    merged_img = get_concat_v(merged_img, img)
 
-        time_ = int(time.time())
-        merged_img.save("./output/vibe/grids/{}.png".format(time_))
-        merged_img.close()
+            time_ = int(time.time())
+            merged_img.save("./output/vibe/grids/{}.png".format(time_))
+            merged_img.close()
+        else:
+            pass
 
         if not env.skip_finish_sound:
             playsound("./files/webui/download_finish.mp3")
+
+        if env.skip_save_grid:
+            return _imgs_list
 
         if times <= 10:
             revert_img_info(imgs_list[0], "./output/vibe/grids/{}.png".format(time_))

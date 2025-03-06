@@ -2675,9 +2675,7 @@ def main():
                         scale = gr.Slider(
                             0, 10, env.scale, step=0.1, label=webui_language["setting"]["description"]["scale"]
                         )
-                        rescale= gr.Slider(
-                            0, 1, env.rescale, step=0.01, label="Prompt Guidance Rescale"
-                        )
+                        rescale = gr.Slider(0, 1, env.rescale, step=0.01, label="Prompt Guidance Rescale")
                         steps = gr.Slider(
                             1, 50, env.steps, step=1, label=webui_language["setting"]["description"]["steps"]
                         )
@@ -2690,6 +2688,7 @@ def main():
                             env.sm, label="decrisp", visible=True if "nai-diffusion-4" not in env.model else False
                         )
                         skip_format_str = gr.Checkbox(env.skip_format_str, label="跳过格式化tag")
+                        skip_save_grid = gr.Checkbox(env.skip_save_grid, label="跳过保存grid")
                     with gr.Row():
                         seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
                         proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
@@ -2867,6 +2866,7 @@ def main():
                     save_path,
                     proxy,
                     times_for_scripts,
+                    skip_save_grid,
                     magnification,
                     hires_strength,
                     hires_noise,
