@@ -2412,6 +2412,7 @@ def main():
                         pnginfo_variety,
                         pnginfo_decrisp,
                         pnginfo_seed,
+                        pnginfo_pnginfo,
                     ],
                     outputs=[
                         text2image_positive_input,
@@ -2427,7 +2428,9 @@ def main():
                         text2image_variety,
                         text2image_decrisp,
                         text2image_seed,
-                    ],
+                    ]
+                    + [text2image_ai_choice]
+                    + text2image_new_components_list,
                 )
                 pnginfo_send2image2image_button.click(
                     _return_pnginfo,
@@ -2445,6 +2448,7 @@ def main():
                         pnginfo_variety,
                         pnginfo_decrisp,
                         pnginfo_seed,
+                        pnginfo_pnginfo,
                         pnginfo_image,
                     ],
                     outputs=[
@@ -2462,7 +2466,9 @@ def main():
                         image2image_decrisp,
                         image2image_seed,
                         image2image_input_image,
-                    ],
+                    ]
+                    + [image2image_ai_choice]
+                    + image2image_new_components_list,
                 )
                 pnginfo_send2inpaint_button.click(
                     _return_pnginfo,
@@ -2480,6 +2486,7 @@ def main():
                         pnginfo_variety,
                         pnginfo_decrisp,
                         pnginfo_seed,
+                        pnginfo_pnginfo,
                         pnginfo_image,
                     ],
                     outputs=[
@@ -2497,7 +2504,9 @@ def main():
                         inpaint_decrisp,
                         inpaint_seed,
                         inpaint_input_image,
-                    ],
+                    ]
+                    + [inpaint_ai_choice]
+                    + inpaint_new_components_list,
                 )
             with gr.Tab("Tagger"):
                 with gr.Row():

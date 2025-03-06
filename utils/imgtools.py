@@ -10,7 +10,7 @@ from utils.env import env
 # extract_data 修改自 https://github.com/NovelAI/novelai-image-metadata
 from utils.naimeta import extract_data
 from utils.prepare import logger
-from utils.utils import file_path2name
+from utils.utils import file_path2name, float_to_position
 
 logger.info("正在检查图像检测模型...")
 
@@ -273,8 +273,41 @@ def _return_pnginfo(
     variety,
     decrisp,
     seed,
+    pnginfo,
     *image,
 ):
+    try:
+        pnginfo = json.loads(pnginfo)
+        v4_prompt = pnginfo["Comment"]["v4_prompt"]
+        v4_negative_prompt = pnginfo["Comment"]["v4_negative_prompt"]
+
+        use_coords = v4_prompt["use_coords"]
+
+        character_list = []
+        character_num = len(v4_prompt["caption"]["char_captions"])
+        for num in range(character_num):
+            character_list.append(True)
+            character_list.append(v4_prompt["caption"]["char_captions"][num]["char_caption"])
+            character_list.append(v4_negative_prompt["caption"]["char_captions"][num]["char_caption"])
+            character_list.append(
+                float_to_position(
+                    v4_prompt["caption"]["char_captions"][num]["centers"][0]["x"],
+                    v4_prompt["caption"]["char_captions"][num]["centers"][0]["y"],
+                )
+            )
+        for num in range(6 - character_num):
+            character_list.append(False)
+            character_list.append("")
+            character_list.append("")
+            character_list.append("A1")
+    except KeyError:
+        use_coords = True
+        character_list = [True]
+        for i in range(6):
+            character_list.append(False)
+            character_list.append("")
+            character_list.append("")
+            character_list.append("A1")
     metadata = (
         positive_input,
         negative_input,
@@ -290,4 +323,10 @@ def _return_pnginfo(
         decrisp,
         seed,
     )
-    return metadata if not image else metadata + (image[0],)
+
+    metadata = metadata if not image else metadata + (image[0],)
+
+    metadata += (use_coords,)
+    metadata += tuple(character_list)
+
+    return metadata
