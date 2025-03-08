@@ -2279,6 +2279,7 @@ def main():
                                     "Comment",
                                     "dpi",
                                     "parameters",
+                                    "prompt",
                                 ],
                                 value=[
                                     "Title",

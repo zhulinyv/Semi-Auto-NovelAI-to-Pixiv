@@ -78,7 +78,7 @@ def revert_img_info(img_path, output_dir, *args):
         logger.warning("还原图片信息操作已关闭, 如有需要请在配置项中设置 revert_info=True")
         return
     try:
-        key_list = ["Software", "Comment", "parameters"]
+        key_list = ["Software", "Comment", "parameters", "prompt"]
         value_list = []
         if img_path:
             if img_path[-4:] == ".png":
@@ -104,7 +104,10 @@ def revert_img_info(img_path, output_dir, *args):
                     pass
         metadata = PngInfo()
         if len(value_list) == 1:
-            metadata.add_text("parameters", value_list[0])
+            if isinstance(value_list[0], str):
+                metadata.add_text("parameters", value_list[0])
+            elif isinstance(value_list[0], dict):
+                metadata.add_text("prompt", json.dumps(value_list[0]))
         else:
             metadata.add_text("Software", value_list[0])
             metadata.add_text("Comment", value_list[1])
