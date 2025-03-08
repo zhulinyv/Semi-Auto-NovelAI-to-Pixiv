@@ -30,3 +30,4 @@ Python310
 整合包启动(Modpack launcher).bat
 整合包更新(Modpack updater).bat
 *.psd
+.gradio

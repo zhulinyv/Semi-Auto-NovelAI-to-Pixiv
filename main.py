@@ -2290,6 +2290,7 @@ def main():
                                     "Comment",
                                     "dpi",
                                     "parameters",
+                                    "prompt",
                                 ],
                                 label=webui_language["rm png info"]["choose_to_rm"],
                                 scale=2,
@@ -2636,10 +2637,7 @@ def main():
             with gr.Row():
                 setting_modify_button = gr.Button("保存(Save)")
                 setting_restart_button = gr.Button("重启(Restart)")
-            setting_output_information = gr.Textbox(
-                value=webui_language["setting"]["description"] if env.share else None,
-                label=webui_language["i2i"]["output_info"],
-            )
+            setting_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
             with gr.Tab(webui_language["setting"]["sub_tab"]["necessary"]):
                 token = gr.Textbox(
                     value=env.token,
