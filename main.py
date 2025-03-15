@@ -2704,14 +2704,14 @@ def main():
                         0, 9999, env.times_for_scripts, step=1, label="独立脚本生成图片次数(0 为无限生成)"
                     )
                     t2i_cool_time = gr.Slider(
-                        6,
+                        3,
                         120,
                         env.t2i_cool_time,
                         step=1,
                         label=webui_language["setting"]["description"]["t2i_cool_time"],
                     )
                     i2i_cool_time = gr.Slider(
-                        6,
+                        3,
                         120,
                         env.i2i_cool_time,
                         step=1,

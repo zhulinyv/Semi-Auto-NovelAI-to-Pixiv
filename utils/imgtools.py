@@ -242,7 +242,11 @@ def return_pnginfo(image):
         str(comment["height"]),
         comment["steps"],
         comment["scale"],
-        comment["noise_schedule"],
+        (
+            "karras"
+            if "nai-diffusion-4" in env.model and comment["noise_schedule"] == "native"
+            else comment["noise_schedule"]
+        ),
         comment["sampler"],
         comment["sm"],
         comment["sm_dyn"],
@@ -305,8 +309,8 @@ def _return_pnginfo(
             character_list.append("A1")
     except KeyError:
         use_coords = True
-        character_list = [True]
-        for i in range(6):
+        character_list = []
+        for _ in range(6):
             character_list.append(False)
             character_list.append("")
             character_list.append("")
