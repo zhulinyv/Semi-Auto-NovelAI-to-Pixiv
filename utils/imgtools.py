@@ -201,6 +201,20 @@ def change_the_mask_color(image_path):
         image.save(image_path)
 
 
+def check_all_corners_black(image_path):
+    with Image.open(image_path) as img:
+        width, height = img.size
+
+        corners = [
+            (0, 0),
+            (width - 1, 0),
+            (0, height - 1),
+            (width - 1, height - 1),
+        ]
+
+        return all(img.getpixel(pos) == (0, 0, 0) for pos in corners)
+
+
 def return_pnginfo(image):
     if not image:
         return None, None, None, None, None, None, None, None, None, None, None, None, None, None

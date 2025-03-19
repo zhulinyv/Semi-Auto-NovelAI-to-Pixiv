@@ -9,9 +9,17 @@ from src.batch_waifu2x import run_cmd_
 from src.image2image import i2i_by_hand
 from utils.downloader import download, extract
 from utils.env import env
-from utils.imgtools import crop_image, cut_img_h, cut_img_w, get_concat_h, get_concat_v
+from utils.imgtools import check_all_corners_black, crop_image, cut_img_h, cut_img_w, get_concat_h, get_concat_v
 from utils.prepare import logger
-from utils.utils import file_namel2pathl, file_path2abs, file_path2dir, file_path2list, file_path2name
+from utils.utils import (
+    file_namel2pathl,
+    file_path2abs,
+    file_path2dir,
+    file_path2list,
+    file_path2name,
+    generate_random_str,
+    sleep_for_cool,
+)
 
 
 def merge_img(model, img1, img2, otp_path):
@@ -49,6 +57,11 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
         os.mkdir(i2i_dir)
     seed = random.randint(1000000000, 9999999999)
     for tile in file_namel2pathl(file_path2list(tiles_dir), tiles_dir):
+        if check_all_corners_black(tile):
+            img = Image.new("RGBA", (1024, 1024), (0, 0, 0, 255))
+            img.save(i2i_dir / file_path2name(tile))
+            logger.debug("纯黑色图片, 跳过...")
+            continue
         while 1:
             try:
                 saved_path, _ = i2i_by_hand(
@@ -60,6 +73,7 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
                     1024,
                     1024,
                     env.scale,
+                    env.rescale,
                     env.sampler,
                     env.noise_schedule,
                     28,
@@ -77,6 +91,7 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
                     "A1",
                 )
                 shutil.move(saved_path, i2i_dir / file_path2name(tile))
+                sleep_for_cool(1, 2)
                 break
             except Exception as e:
                 logger.error(f"出现错误: {e}")
@@ -160,4 +175,9 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
 
     logger.success("放大完成!")
 
-    return dir / file_path2name(img_path).replace(".png", "_tile_upscale.png")
+    shutil.copy(
+        path := dir / file_path2name(img_path).replace(".png", "_tile_upscale.png"),
+        "./output/upscale/{}.png".format(generate_random_str(10)),
+    )
+
+    return path
