@@ -51,6 +51,7 @@ def main():
         THEME_LIST,
         add_item_for_yaml,
         add_wildcard_to_textbox,
+        auto_complete,
         cancel_probabilities_for_item,
         del_item_for_yaml,
         gen_script,
@@ -132,13 +133,15 @@ def main():
                             lines=2,
                             label=webui_language["t2i"]["positive"],
                         )
+                        auto_complete(text2image_positive_input)
                         with gr.Row():
-                            text2image_negative_input = gr.Textbox(
-                                value=default_negative_input,
-                                lines=4,
-                                label=webui_language["t2i"]["negative"],
-                                scale=3,
-                            )
+                            with gr.Column(scale=3):
+                                text2image_negative_input = gr.Textbox(
+                                    value=default_negative_input,
+                                    lines=4,
+                                    label=webui_language["t2i"]["negative"],
+                                )
+                                auto_complete(text2image_negative_input)
                             with gr.Column(scale=1):
                                 text2image_generate_button = gr.Button(value=webui_language["t2i"]["generate_button"])
                                 text2image_stop_button = gr.Button("停止生成")
@@ -649,13 +652,15 @@ def main():
                             lines=2,
                             label=webui_language["t2i"]["positive"],
                         )
+                        auto_complete(vibe_transfer_positive_input)
                         with gr.Row():
-                            vibe_transfer_negative_input = gr.Textbox(
-                                value=default_negative_input,
-                                lines=4,
-                                label=webui_language["t2i"]["negative"],
-                                scale=3,
-                            )
+                            with gr.Column(scale=3):
+                                vibe_transfer_negative_input = gr.Textbox(
+                                    value=default_negative_input,
+                                    lines=4,
+                                    label=webui_language["t2i"]["negative"],
+                                )
+                                auto_complete(vibe_transfer_negative_input)
                             with gr.Column(scale=1):
                                 vibe_transfer_generate_button = gr.Button(
                                     value=webui_language["t2i"]["generate_button"], scale=1
@@ -861,13 +866,15 @@ def main():
                             lines=2,
                             label=webui_language["t2i"]["positive"],
                         )
+                        auto_complete(image2image_positive_input)
                         with gr.Row():
-                            image2image_negative_input = gr.Textbox(
-                                value=default_negative_input,
-                                lines=3,
-                                label=webui_language["t2i"]["negative"],
-                                scale=3,
-                            )
+                            with gr.Column(scale=3):
+                                image2image_negative_input = gr.Textbox(
+                                    value=default_negative_input,
+                                    lines=3,
+                                    label=webui_language["t2i"]["negative"],
+                                )
+                                auto_complete(image2image_negative_input)
                             image2image_generate_button = gr.Button(
                                 value=webui_language["t2i"]["generate_button"], scale=1
                             )
@@ -1266,13 +1273,15 @@ def main():
                             lines=2,
                             label=webui_language["t2i"]["positive"],
                         )
+                        auto_complete(inpaint_positive_input)
                         with gr.Row():
-                            inpaint_negative_input = gr.Textbox(
-                                value=default_negative_input,
-                                lines=3,
-                                label=webui_language["t2i"]["negative"],
-                                scale=3,
-                            )
+                            with gr.Column(scale=3):
+                                inpaint_negative_input = gr.Textbox(
+                                    value=default_negative_input,
+                                    lines=3,
+                                    label=webui_language["t2i"]["negative"],
+                                )
+                                auto_complete(inpaint_negative_input)
                             inpaint_generate_button = gr.Button(value=webui_language["t2i"]["generate_button"], scale=1)
                     with gr.Tab("生成参数"):
                         with gr.Row():

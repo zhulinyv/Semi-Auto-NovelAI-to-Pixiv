@@ -1,5 +1,6 @@
 import asyncio
 import base64
+import csv
 import hmac
 import io
 import os
@@ -807,6 +808,59 @@ def return_array_iamge(path):
     if path:
         with Image.open(path) as image:
             return np.array(image)
+
+
+def load_tags(csv_filename="./files/webui/danbooru_e621_merged_with_zh.csv"):
+    tags = []
+    with open(csv_filename, "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if len(row) >= 3 and row[0].strip() and row[1].strip():
+                try:
+                    main_tag = row[0].strip()
+                    numerical_value = float(row[1].strip())
+                    description = row[2].strip()
+                    tags.append((main_tag, numerical_value, description))
+                except ValueError:
+                    continue
+    return tags
+
+
+def suggest_tags(input_text: str):
+    input_text = input_text.strip().lower()
+    if input_text != "":
+        input_text = (
+            input_text.strip().lower().split(",")[-1] if input_text[-1] != "," else "qwerty123465...一串神秘小代码"
+        ).strip()
+    else:
+        input_text = "qwerty123465...一串神秘小代码".strip()
+    suggestions = []
+    for main_tag, value, desc in load_tags():
+        if input_text in "{},({})".format(main_tag, desc):
+            display_text = desc if desc else main_tag
+            suggestions.append({"display": display_text, "value": main_tag, "sort_key": value})
+    sorted_suggestions = sorted(suggestions, key=lambda x: x["sort_key"], reverse=True)[:25]
+    suggestions = []
+    for item in sorted_suggestions:
+        suggestions.append("{},({})".format(item["value"], item["display"]))
+    return suggestions
+
+
+def auto_complete(input_box):
+    suggestions_radio = gr.Radio(
+        label="补全建议", choices=[], elem_id="suggestion_list", visible=False, show_label=False
+    )
+    input_box.input(
+        lambda x: gr.Radio(choices=suggest_tags(x), visible=True), inputs=input_box, outputs=suggestions_radio
+    )
+
+    def update_input(origin_tag, tag: str):
+        value = format_str(origin_tag).split(", ")[:-1] + [tag.split(",")[0]]
+        return gr.update(value=list_to_str(value) + ","), gr.update(choices=[], visible=False)
+
+    suggestions_radio.change(
+        update_input, inputs=[input_box, suggestions_radio], outputs=[input_box, suggestions_radio]
+    )
 
 
 def gen_script(script_type, *args):
