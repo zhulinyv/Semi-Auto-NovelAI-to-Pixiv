@@ -833,13 +833,13 @@ def suggest_tags(input_text: str):
             input_text.strip().lower().split(",")[-1] if input_text[-1] != "," else "qwerty123465...一串神秘小代码"
         ).strip()
     else:
-        input_text = "qwerty123465...一串神秘小代码".strip()
+        input_text = "qwerty123465...一串神秘小代码"
     suggestions = []
     for main_tag, value, desc in load_tags():
         if input_text in "{},({})".format(main_tag, desc):
             display_text = desc if desc else main_tag
             suggestions.append({"display": display_text, "value": main_tag, "sort_key": value})
-    sorted_suggestions = sorted(suggestions, key=lambda x: x["sort_key"], reverse=True)[:25]
+    sorted_suggestions = sorted(suggestions, key=lambda x: x["sort_key"], reverse=True)[: env.num_of_suggest_tag]
     suggestions = []
     for item in sorted_suggestions:
         suggestions.append("{},({})".format(item["value"], item["display"]))

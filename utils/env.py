@@ -77,6 +77,7 @@ class Settings(BaseSettings):
     skip_load_g4f: bool = False
     skip_finish_sound: bool = False
     skip_else_log: bool = True
+    num_of_suggest_tag: int = 25
 
     model_config = SettingsConfigDict(env_file=".env", extra="allow", arbitrary_types_allowed=True)
 

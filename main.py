@@ -2857,6 +2857,7 @@ def main():
                     )
                     skip_finish_sound = gr.Checkbox(env.skip_finish_sound, label="取消完成提示音")
                     skip_else_log = gr.Checkbox(env.skip_else_log, label="不输出其它程序的日志")
+                num_of_suggest_tag = gr.Slider(1, 100, 25, label="建议的 tag 的数量")
             with gr.Tab("更新 WebUI(Update WebUI)"):
                 update_button = gr.Button("更新 WebUI(Update WebUI)")
                 output_info = gr.Textbox(label=webui_language["i2i"]["output_info"])
@@ -2922,6 +2923,7 @@ def main():
                     skip_load_g4f,
                     skip_finish_sound,
                     skip_else_log,
+                    num_of_suggest_tag,
                 ],
                 outputs=setting_output_information,
             )

@@ -1,5 +1,6 @@
 from PIL import Image
 
+from utils.env import env
 from utils.imgtools import img_to_base64
 from utils.jsondata import (
     json_for_colorize,
@@ -15,6 +16,7 @@ from utils.utils import (
     file_path2list,
     generate_image_for_director_tools,
     save_image_for_director_tools,
+    sleep_for_cool,
 )
 
 
@@ -38,8 +40,20 @@ def director_tools_remove_bg(
         json_for_remove_bg["width"] = w
         json_for_remove_bg["height"] = h
         json_for_remove_bg["image"] = img_to_base64(image)
-        masked, generated, blend = generate_image_for_director_tools(json_for_remove_bg)
-        saved_paths = save_image_for_director_tools("bg-removal", [masked, generated, blend])
+        times = 1
+        while times <= 5:
+            try:
+                masked, generated, blend = generate_image_for_director_tools(json_for_remove_bg)
+                saved_paths = save_image_for_director_tools("bg-removal", [masked, generated, blend])
+                break
+            except Exception as e:
+                logger.error(f"出现错误: {e}")
+                logger.warning(f"重试 {times}/5...")
+                sleep_for_cool(2, 4)
+                times += 1
+        sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
+    if times == 6:
+        return None, None, None, "处理失败! 请检查控制台输出!"
     return saved_paths[0], saved_paths[1], saved_paths[2], "处理完成! 图片已保存到 ./output/bg-removal"
 
 
@@ -63,7 +77,21 @@ def director_tools_line_art(
         json_for_lineart["width"] = w
         json_for_lineart["height"] = h
         json_for_lineart["image"] = img_to_base64(image)
-        saved_path = save_image_for_director_tools("lineart", generate_image_for_director_tools(json_for_lineart))
+        times = 1
+        while times <= 5:
+            try:
+                saved_path = save_image_for_director_tools(
+                    "lineart", generate_image_for_director_tools(json_for_lineart)
+                )
+                break
+            except Exception as e:
+                logger.error(f"出现错误: {e}")
+                logger.warning(f"重试 {times}/5...")
+                sleep_for_cool(2, 4)
+                times += 1
+        sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
+    if times == 6:
+        return None, "处理失败! 请检查控制台输出!"
     return saved_path, "处理完成! 图片已保存到 ./output/lineart"
 
 
@@ -87,7 +115,19 @@ def director_tools_sketch(
         json_for_sketch["width"] = w
         json_for_sketch["height"] = h
         json_for_sketch["image"] = img_to_base64(image)
-        saved_path = save_image_for_director_tools("sketch", generate_image_for_director_tools(json_for_sketch))
+        times = 1
+        while times <= 5:
+            try:
+                saved_path = save_image_for_director_tools("sketch", generate_image_for_director_tools(json_for_sketch))
+                break
+            except Exception as e:
+                logger.error(f"出现错误: {e}")
+                logger.warning(f"重试 {times}/5...")
+                sleep_for_cool(2, 4)
+                times += 1
+        sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
+    if times == 6:
+        return None, "处理失败! 请检查控制台输出!"
     return saved_path, "处理完成! 图片已保存到 ./output/sketch"
 
 
@@ -111,7 +151,21 @@ def director_tools_declutter(
         json_for_declutter["width"] = w
         json_for_declutter["height"] = h
         json_for_declutter["image"] = img_to_base64(image)
-        saved_path = save_image_for_director_tools("declutter", generate_image_for_director_tools(json_for_declutter))
+        times = 1
+        while times <= 5:
+            try:
+                saved_path = save_image_for_director_tools(
+                    "declutter", generate_image_for_director_tools(json_for_declutter)
+                )
+                break
+            except Exception as e:
+                logger.error(f"出现错误: {e}")
+                logger.warning(f"重试 {times}/5...")
+                sleep_for_cool(2, 4)
+                times += 1
+        sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
+    if times == 6:
+        return None, "处理失败! 请检查控制台输出!"
     return saved_path, "处理完成! 图片已保存到 ./output/declutter"
 
 
@@ -139,7 +193,21 @@ def director_tools_colorize(
         json_for_colorize["defry"] = director_tools_colorize_defry
         json_for_colorize["prompt"] = director_tools_colorize_prompt
         json_for_colorize["image"] = img_to_base64(image)
-        saved_path = save_image_for_director_tools("colorize", generate_image_for_director_tools(json_for_colorize))
+        times = 1
+        while times <= 5:
+            try:
+                saved_path = save_image_for_director_tools(
+                    "colorize", generate_image_for_director_tools(json_for_colorize)
+                )
+                break
+            except Exception as e:
+                logger.error(f"出现错误: {e}")
+                logger.warning(f"重试 {times}/5...")
+                sleep_for_cool(2, 4)
+                times += 1
+        sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
+    if times == 6:
+        return None, "处理失败! 请检查控制台输出!"
     return saved_path, "处理完成! 图片已保存到 ./output/colorize"
 
 
@@ -182,5 +250,19 @@ def director_tools_emotion(
         logger.debug(f"Prompt: {prompt}")
         json_for_emotion["prompt"] = prompt
         json_for_emotion["image"] = img_to_base64(image)
-        saved_path = save_image_for_director_tools("emotion", generate_image_for_director_tools(json_for_emotion))
+        times = 1
+        while times <= 5:
+            try:
+                saved_path = save_image_for_director_tools(
+                    "emotion", generate_image_for_director_tools(json_for_emotion)
+                )
+                break
+            except Exception as e:
+                logger.error(f"出现错误: {e}")
+                logger.warning(f"重试 {times}/5...")
+                sleep_for_cool(2, 4)
+                times += 1
+        sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
+    if times == 6:
+        return None, "处理失败! 请检查控制台输出!"
     return saved_path, "处理完成! 图片已保存到 ./output/emotion"

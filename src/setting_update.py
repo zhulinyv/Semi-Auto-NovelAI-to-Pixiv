@@ -78,6 +78,7 @@ def webui(
     skip_load_g4f,
     skip_finish_sound,
     skip_else_log,
+    num_of_suggest_tag,
 ):
     position = str(water_position)
     position = position.replace("'", '"')
@@ -144,5 +145,6 @@ def webui(
         skip_load_g4f=skip_load_g4f,
         skip_finish_sound=skip_finish_sound,
         skip_else_log=skip_else_log,
+        num_of_suggest_tag=num_of_suggest_tag,
     )
     return otp_info
