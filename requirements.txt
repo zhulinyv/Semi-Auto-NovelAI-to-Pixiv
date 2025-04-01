@@ -131,7 +131,7 @@ starlette==0.45.3 ; python_version >= "3.12" and python_version < "4.0" or pytho
 sympy==1.13.1 ; python_version >= "3.12" and python_version < "4.0" or python_version >= "3.10" and python_version <= "3.11"
 tomlkit==0.13.2 ; python_version >= "3.12" and python_version < "4.0" or python_version >= "3.10" and python_version <= "3.11"
 torch==2.5.1 ; python_version >= "3.12" and python_version < "4.0" or python_version >= "3.10" and python_version <= "3.11"
-torchvision==0.20.1 ; python_version >= "3.12" and python_version < "4.0" or python_version >= "3.10" and python_version <= "3.11"
+torchvision==0.21.0 ; python_version >= "3.12" and python_version < "4.0" or python_version >= "3.10" and python_version <= "3.11"
 tqdm==4.67.1 ; python_version >= "3.12" and python_version < "4.0" or python_version >= "3.10" and python_version <= "3.11"
 triton==3.1.0 ; python_version >= "3.12" and python_version < "3.13" and platform_system == "Linux" and platform_machine == "x86_64" or python_version >= "3.10" and python_version <= "3.11" and platform_system == "Linux" and platform_machine == "x86_64"
 typer==0.15.1 ; python_version >= "3.12" and python_version < "4.0" and sys_platform != "emscripten" or python_version >= "3.10" and python_version <= "3.11" and sys_platform != "emscripten"
