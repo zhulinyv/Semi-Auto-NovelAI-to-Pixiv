@@ -756,7 +756,7 @@ def main():
                                     )
                                 with gr.Row():
                                     vibe_transfer_seed = gr.Textbox(
-                                        value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7
+                                        value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7, interactive=True,
                                     )
                                     vibe_transfer_random_seed = gr.Button(value="♻️", size="sm", scale=1)
                                     vibe_transfer_random_seed.click(return_random, inputs=None, outputs=text2image_seed)

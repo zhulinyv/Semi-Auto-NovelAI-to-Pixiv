@@ -30,7 +30,7 @@ def vibe_by_hand(
     decrisp: bool,
     seed: str,
     times: int,
-    *args,
+    *_args,
 ):
     if "nai-diffusion-4" in env.model:
         logger.warning("NAI4 预览版模型不支持 Vibe, 本次 Vibe 仍使用 NAI3")
@@ -76,6 +76,8 @@ def vibe_by_hand(
         reference_information_extracted_multiple = []
         reference_strength_multiple = []
         image_list = []
+
+        args = _args[:]
 
         components_list = []
         while args:
