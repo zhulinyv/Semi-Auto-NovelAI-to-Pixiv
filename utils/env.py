@@ -27,6 +27,8 @@ class Settings(BaseSettings):
     times_for_scripts: int = 0
     rescale: float = 0
     skip_save_grid: bool = False
+    quality_toggle: bool = False
+    uc_preset: int = 3
 
     # 图生图
     magnification: float = 1.5

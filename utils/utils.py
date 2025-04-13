@@ -274,8 +274,11 @@ def generate_image(json_data):
     json_data["input"] = positive
     json_data["parameters"]["negative_prompt"] = negative
     if "nai-diffusion-4" in env.model:
-        json_data["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
-        json_data["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = negative
+        try:
+            json_data["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
+            json_data["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = negative
+        except KeyError:
+            pass
 
     try:
         rep = requests.post(

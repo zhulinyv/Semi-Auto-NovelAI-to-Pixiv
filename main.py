@@ -762,7 +762,9 @@ def main():
                                         interactive=True,
                                     )
                                     vibe_transfer_random_seed = gr.Button(value="♻️", size="sm", scale=1)
-                                    vibe_transfer_random_seed.click(return_random, inputs=None, outputs=text2image_seed)
+                                    vibe_transfer_random_seed.click(
+                                        return_random, inputs=None, outputs=vibe_transfer_seed
+                                    )
                                 vibe_transfer_image_count = gr.State(1)
                                 vibe_transfer_add_button = gr.Button("添加图片")
                                 vibe_transfer_del_button = gr.Button("删除图片")
@@ -786,10 +788,10 @@ def main():
                                             vibe_transfer_image = gr.Image(type="filepath")
                                             with gr.Column():
                                                 reference_information_extracted_multiple = gr.Slider(
-                                                    0, 1, 1.0, step=0.1, label="信息提取强度"
+                                                    0, 1, 1.0, step=0.01, label="信息提取强度"
                                                 )
                                                 reference_strength_multiple = gr.Slider(
-                                                    0, 1, 0.6, step=0.1, label="参考强度"
+                                                    0, 1, 0.6, step=0.01, label="参考强度"
                                                 )
                                         vibe_transfer_components_list.append(vibe_transfer_image)
                                         vibe_transfer_components_list.append(reference_information_extracted_multiple)
@@ -2664,20 +2666,7 @@ def main():
                 with gr.Column():
                     model = gr.Dropdown(MODEL, value=env.model, label="模型(Model)")
                     img_size = gr.Radio(
-                        [
-                            -1,
-                            "832x1216",
-                            "1216x832",
-                            "1024x1024",
-                            "512x768",
-                            "768x768",
-                            "640x640",
-                            "1024x1536",
-                            "1536x1024",
-                            "1472x1472",
-                            "1088x1920",
-                            "1920x1088",
-                        ],
+                        [-1] + RESOLUTION,
                         value=("{}x{}".format((env.img_size)[0], (env.img_size)[1]) if env.img_size != -1 else -1),
                         label=webui_language["setting"]["description"]["img_size"],
                     )
@@ -2700,18 +2689,24 @@ def main():
                             1, 50, env.steps, step=1, label=webui_language["setting"]["description"]["steps"]
                         )
                     with gr.Row():
-                        censor = gr.Checkbox(value=env.censor, label=webui_language["setting"]["description"]["censor"])
                         sm = gr.Checkbox(env.sm, label=webui_language["setting"]["description"]["sm"])
                         sm_dyn = gr.Checkbox(env.sm_dyn, label=webui_language["setting"]["description"]["sm_dyn"])
                         variety = gr.Checkbox(env.sm, label="variety")
                         decrisp = gr.Checkbox(
                             env.sm, label="decrisp", visible=True if "nai-diffusion-4" not in env.model else False
                         )
+                    with gr.Row():
+                        censor = gr.Checkbox(value=env.censor, label=webui_language["setting"]["description"]["censor"])
                         skip_format_str = gr.Checkbox(env.skip_format_str, label="跳过格式化tag")
                         skip_save_grid = gr.Checkbox(env.skip_save_grid, label="跳过保存grid")
                     with gr.Row():
                         seed = gr.Textbox(env.seed, label=webui_language["setting"]["description"]["seed"])
                         proxy = gr.Textbox(env.proxy, label=webui_language["setting"]["description"]["proxy"])
+                    with gr.Row():
+                        quality_toggle = gr.Checkbox(value=env.quality_toggle, label="Add Quilaty Tags")
+                        uc_preset = gr.Dropdown(
+                            ["Heavy", "Light", "Human Focus", "None"], label="Undesired Content Preset"
+                        )
                     times_for_scripts = gr.Slider(
                         0, 9999, env.times_for_scripts, step=1, label="独立脚本生成图片次数(0 为无限生成)"
                     )
@@ -2888,6 +2883,8 @@ def main():
                     proxy,
                     times_for_scripts,
                     skip_save_grid,
+                    quality_toggle,
+                    uc_preset,
                     magnification,
                     hires_strength,
                     hires_noise,

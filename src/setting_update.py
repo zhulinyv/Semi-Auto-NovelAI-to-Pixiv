@@ -40,6 +40,8 @@ def webui(
     proxy,
     times_for_scripts,
     skip_save_grid,
+    quality_toggle,
+    uc_preset,
     magnification,
     hires_strength,
     hires_noise,
@@ -86,6 +88,8 @@ def webui(
         img_size = -1
     else:
         img_size = [int((img_size.split("x"))[0]), int((img_size.split("x"))[1])]
+    uc_preset_data = {"Heavy": 0, "Light": 1, "Human Focus": 2, "None": 3}
+    uc_preset = uc_preset_data[uc_preset]
     otp_info = modify_env(
         token=f'"{token}"'.replace("\n", ""),
         model=f'"{model}"',
@@ -107,6 +111,8 @@ def webui(
         proxy=f'"{proxy}"',
         times_for_scripts=times_for_scripts,
         skip_save_grid=skip_save_grid,
+        quality_toggle=quality_toggle,
+        uc_preset=uc_preset,
         magnification=magnification,
         hires_strength=hires_strength,
         hires_noise=hires_noise,

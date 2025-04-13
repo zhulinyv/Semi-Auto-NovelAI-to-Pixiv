@@ -9,7 +9,7 @@
         "times": "生成数量",
         "positive": "正面提示词",
         "negative": "负面提示词",
-        "resolution": "分辨率",
+        "resolution": "建议的分辨率(也可以在后面自己输入)",
         "width": "宽",
         "height": "高",
         "scale": "提示词相关性",

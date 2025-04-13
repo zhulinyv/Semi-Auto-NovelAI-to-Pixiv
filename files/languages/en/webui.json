@@ -9,7 +9,7 @@
         "times": "Generation Quantity",
         "positive": "Positive Prompts",
         "negative": "Negative Prompts",
-        "resolution": "Resolution",
+        "resolution": "Suggest Resolution(You can type the resolution by your self)",
         "width": "Width",
         "height": "Height",
         "scale": "Prompt Relevance",
