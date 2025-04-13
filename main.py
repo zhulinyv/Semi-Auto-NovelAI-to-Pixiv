@@ -756,7 +756,10 @@ def main():
                                     )
                                 with gr.Row():
                                     vibe_transfer_seed = gr.Textbox(
-                                        value=str(env.seed), label=webui_language["t2i"]["seed"], scale=7, interactive=True,
+                                        value=str(env.seed),
+                                        label=webui_language["t2i"]["seed"],
+                                        scale=7,
+                                        interactive=True,
                                     )
                                     vibe_transfer_random_seed = gr.Button(value="♻️", size="sm", scale=1)
                                     vibe_transfer_random_seed.click(return_random, inputs=None, outputs=text2image_seed)
@@ -2820,7 +2823,7 @@ def main():
                 water_height = gr.Slider(
                     10, 300, env.water_height, label=webui_language["setting"]["description"]["water_height"]
                 )
-                water_position = gr.Dropdown(
+                water_position = gr.CheckboxGroup(
                     ["左上(Upper Left)", "左下(Lower Left)", "右上(Upper Right)", "右下(Upper Right)"],
                     value=env.position,
                     label=webui_language["setting"]["description"]["position"],
