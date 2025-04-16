@@ -153,7 +153,7 @@ def main():
                         with gr.Row():
                             with gr.Column(scale=1):
                                 text2image_resolution = gr.Dropdown(
-                                    RESOLUTION,
+                                    ["自定义(Custom)"] + RESOLUTION,
                                     value=(
                                         "832x1216"
                                         if env.img_size == -1
@@ -172,7 +172,7 @@ def main():
                                     )
                                     text2image_resolution.change(
                                         return_resolution,
-                                        text2image_resolution,
+                                        [text2image_resolution, text2image_width, text2image_height],
                                         outputs=[text2image_width, text2image_height],
                                         show_progress="hidden",
                                     )
@@ -679,7 +679,7 @@ def main():
                         with gr.Row():
                             with gr.Column(scale=1):
                                 vibe_transfer_resolution = gr.Dropdown(
-                                    RESOLUTION,
+                                    ["自定义(Custom)"] + RESOLUTION,
                                     value=(
                                         "832x1216"
                                         if env.img_size == -1
@@ -700,7 +700,7 @@ def main():
                                     )
                                     vibe_transfer_resolution.change(
                                         return_resolution,
-                                        vibe_transfer_resolution,
+                                        [vibe_transfer_resolution, vibe_transfer_width, vibe_transfer_height],
                                         outputs=[vibe_transfer_width, vibe_transfer_height],
                                         show_progress="hidden",
                                     )
@@ -899,7 +899,7 @@ def main():
                         with gr.Column():
                             with gr.Row():
                                 image2image_resolution = gr.Dropdown(
-                                    RESOLUTION,
+                                    ["自定义(Custom)"] + RESOLUTION,
                                     value=(
                                         "832x1216"
                                         if env.img_size == -1
@@ -911,7 +911,7 @@ def main():
                                 image2image_height = gr.Textbox(value="1216", label=webui_language["t2i"]["height"])
                                 image2image_resolution.change(
                                     return_resolution,
-                                    image2image_resolution,
+                                    [image2image_resolution, image2image_width, image2image_height],
                                     outputs=[image2image_width, image2image_height],
                                     show_progress="hidden",
                                 )
@@ -1316,7 +1316,7 @@ def main():
                         with gr.Column():
                             with gr.Row():
                                 inpaint_resolution = gr.Dropdown(
-                                    RESOLUTION,
+                                    ["自定义(Custom)"] + RESOLUTION,
                                     value=(
                                         "832x1216"
                                         if env.img_size == -1
@@ -1328,7 +1328,7 @@ def main():
                                 inpaint_height = gr.Textbox(value="1216", label=webui_language["t2i"]["height"])
                                 inpaint_resolution.change(
                                     return_resolution,
-                                    inpaint_resolution,
+                                    [inpaint_resolution, inpaint_width, inpaint_height],
                                     outputs=[inpaint_width, inpaint_height],
                                     show_progress="hidden",
                                 )
