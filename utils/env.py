@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     skip_save_grid: bool = False
     quality_toggle: bool = False
     uc_preset: int = 3
+    legacy_uc: bool = False
 
     # 图生图
     magnification: float = 1.5

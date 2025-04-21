@@ -95,6 +95,27 @@ def main():
             open_folder, inputs=gr.Textbox(Path(f"./output/{output_folder}"), visible=False)
         )
 
+    def character_compents(number):
+        with gr.Row():
+            character_position = gr.Dropdown(
+                CHARACTER_POSITION,
+                label="位置(Position)",
+                interactive=False if env.model == "nai-diffusion-4-full" else True,
+            )
+            character_switch = gr.Checkbox(False, label="启用(Switch)")
+            gr.Textbox(f"角色{number}", show_label=False)
+        with gr.Row():
+            character_positive = gr.Textbox(label="正面提示词(Positive)", lines=3)
+            character_negative = gr.Textbox(label="负面提示词(Negative)", lines=3)
+        for _ in range(3):
+            gr.Markdown("<hr>")
+        return (
+            character_switch,
+            character_positive,
+            character_negative,
+            character_position,
+        )
+
     # ------------------------------ #
 
     with gr.Blocks(
@@ -264,24 +285,6 @@ def main():
                     with gr.Tab("Character", visible=True if "nai-diffusion-4" in env.model else False):
                         text2image_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
                         gr.Markdown("<hr>")
-
-                        def character_compents(number):
-                            with gr.Row():
-                                text2image_character_position = gr.Dropdown(CHARACTER_POSITION, label="位置(Position)")
-                                text2image_character_switch = gr.Checkbox(False, label="启用(Switch)")
-                                gr.Textbox(f"角色{number}", show_label=False)
-                            with gr.Row():
-                                text2image_character_positive = gr.Textbox(label="正面提示词(Positive)", lines=3)
-                                text2image_character_negative = gr.Textbox(label="负面提示词(Negative)", lines=3)
-                            for _ in range(3):
-                                gr.Markdown("<hr>")
-                            return (
-                                text2image_character_switch,
-                                text2image_character_positive,
-                                text2image_character_negative,
-                                text2image_character_position,
-                            )
-
                         text2image_components_list = [character_compents(num) for num in range(1, 7)]
                         text2image_new_components_list = [
                             component for components in text2image_components_list for component in components
@@ -765,59 +768,78 @@ def main():
                                     vibe_transfer_random_seed.click(
                                         return_random, inputs=None, outputs=vibe_transfer_seed
                                     )
-                                vibe_transfer_image_count = gr.State(1)
-                                vibe_transfer_add_button = gr.Button("添加图片")
-                                vibe_transfer_del_button = gr.Button("删除图片")
-                                vibe_transfer_add_button.click(
-                                    lambda x: x + 1,
-                                    vibe_transfer_image_count,
-                                    vibe_transfer_image_count,
+                                naiv4vibebundle_file = gr.File(
+                                    type="filepath",
+                                    label="nai4 vibe 文件",
+                                    visible=True if "nai-diffusion-4" in env.model else False,
                                 )
-                                vibe_transfer_del_button.click(
-                                    lambda x: x - 1,
-                                    vibe_transfer_image_count,
-                                    vibe_transfer_image_count,
+                                normalize_reference_strength_multiple = gr.Checkbox(
+                                    True,
+                                    label="Normalize Reference Strength Values",
+                                    interactive=True,
+                                    visible=True if "nai-diffusion-4" in env.model else False,
                                 )
-                                gr.Markdown("<hr>")
-
-                                @gr.render(inputs=vibe_transfer_image_count)
-                                def _(count):
-                                    vibe_transfer_components_list = []
-                                    for _ in range(count):
-                                        with gr.Row():
-                                            vibe_transfer_image = gr.Image(type="filepath")
-                                            with gr.Column():
-                                                reference_information_extracted_multiple = gr.Slider(
-                                                    0, 1, 1.0, step=0.01, label="信息提取强度"
-                                                )
-                                                reference_strength_multiple = gr.Slider(
-                                                    0, 1, 0.6, step=0.01, label="参考强度"
-                                                )
-                                        vibe_transfer_components_list.append(vibe_transfer_image)
-                                        vibe_transfer_components_list.append(reference_information_extracted_multiple)
-                                        vibe_transfer_components_list.append(reference_strength_multiple)
-                                    vibe_transfer_generate_button.click(
-                                        fn=vibe_by_hand,
-                                        inputs=[
-                                            vibe_transfer_positive_input,
-                                            vibe_transfer_negative_input,
-                                            vibe_transfer_width,
-                                            vibe_transfer_height,
-                                            vibe_transfer_scale,
-                                            vibe_transfer_rescale,
-                                            vibe_transfer_sampler,
-                                            vibe_transfer_noise_schedule,
-                                            vibe_transfer_steps,
-                                            vibe_transfer_sm,
-                                            vibe_transfer_sm_dyn,
-                                            vibe_transfer_variety,
-                                            vibe_transfer_decrisp,
-                                            vibe_transfer_seed,
-                                            vibe_transfer_quantity,
-                                        ]
-                                        + vibe_transfer_components_list,
-                                        outputs=vibe_transfer_output_image,
+                                with gr.Column(visible=False if "nai-diffusion-4" in env.model else True):
+                                    vibe_transfer_image_count = gr.State(1)
+                                    vibe_transfer_add_button = gr.Button("添加图片")
+                                    vibe_transfer_del_button = gr.Button("删除图片")
+                                    vibe_transfer_add_button.click(
+                                        lambda x: x + 1,
+                                        vibe_transfer_image_count,
+                                        vibe_transfer_image_count,
                                     )
+                                    vibe_transfer_del_button.click(
+                                        lambda x: x - 1,
+                                        vibe_transfer_image_count,
+                                        vibe_transfer_image_count,
+                                    )
+                                    gr.Markdown("<hr>")
+
+                                    @gr.render(inputs=vibe_transfer_image_count)
+                                    def _(count):
+                                        vibe_transfer_components_list = []
+                                        for _ in range(count):
+                                            with gr.Row():
+                                                vibe_transfer_image = gr.Image(type="filepath")
+                                                with gr.Column():
+                                                    reference_information_extracted_multiple = gr.Slider(
+                                                        0, 1, 1.0, step=0.01, label="信息提取强度"
+                                                    )
+                                                    reference_strength_multiple = gr.Slider(
+                                                        0, 1, 0.6, step=0.01, label="参考强度"
+                                                    )
+                                            vibe_transfer_components_list.append(vibe_transfer_image)
+                                            vibe_transfer_components_list.append(
+                                                reference_information_extracted_multiple
+                                            )
+                                            vibe_transfer_components_list.append(reference_strength_multiple)
+
+                                        vibe_transfer_generate_button.click(
+                                            fn=vibe_by_hand,
+                                            inputs=[
+                                                vibe_transfer_positive_input,
+                                                vibe_transfer_negative_input,
+                                                vibe_transfer_width,
+                                                vibe_transfer_height,
+                                                vibe_transfer_scale,
+                                                vibe_transfer_rescale,
+                                                vibe_transfer_sampler,
+                                                vibe_transfer_noise_schedule,
+                                                vibe_transfer_steps,
+                                                vibe_transfer_sm,
+                                                vibe_transfer_sm_dyn,
+                                                vibe_transfer_variety,
+                                                vibe_transfer_decrisp,
+                                                vibe_transfer_seed,
+                                                vibe_transfer_quantity,
+                                                normalize_reference_strength_multiple,
+                                                naiv4vibebundle_file,
+                                            ]
+                                            + [vibe_transfer_ai_choice]
+                                            + vibe_transfer_new_components_list
+                                            + vibe_transfer_components_list,
+                                            outputs=vibe_transfer_output_image,
+                                        )
 
                             vibe_transfer_output_image = gr.Gallery(
                                 preview=True, label="Image", scale=2, interactive=False
@@ -852,6 +874,17 @@ def main():
                             inputs=[vibe_transfer_wildcard_file, vibe_transfer_wildcard_name],
                             outputs=vibe_transfer_wildcard_tag,
                         )
+                    with gr.Tab("Character", visible=True if "nai-diffusion-4" in env.model else False):
+                        vibe_transfer_ai_choice = gr.Checkbox(
+                            True,
+                            label="AI 选择位置(AI's choice)",
+                            interactive=False if env.model == "nai-diffusion-4-full" else True,
+                        )
+                        gr.Markdown("<hr>")
+                        vibe_transfer_components_list = [character_compents(num) for num in range(1, 7)]
+                        vibe_transfer_new_components_list = [
+                            component for components in vibe_transfer_components_list for component in components
+                        ]
             # ---------- 文生图插件 ---------- #
             text2image_plugins = load_plugins(Path("./plugins/t2i"))
             for plugin_name, plugin_module in text2image_plugins.items():
@@ -1008,24 +1041,6 @@ def main():
                     with gr.Tab("Character", visible=True if "nai-diffusion-4" in env.model else False):
                         image2image_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
                         gr.Markdown("<hr>")
-
-                        def character_compents(number):
-                            with gr.Row():
-                                image2image_character_position = gr.Dropdown(CHARACTER_POSITION, label="位置(Position)")
-                                image2image_character_switch = gr.Checkbox(False, label="启用(Switch)")
-                                gr.Textbox(f"角色{number}", show_label=False)
-                            with gr.Row():
-                                image2image_character_positive = gr.Textbox(label="正面提示词(Positive)", lines=3)
-                                image2image_character_negative = gr.Textbox(label="负面提示词(Negative)", lines=3)
-                            for _ in range(3):
-                                gr.Markdown("<hr>")
-                            return (
-                                image2image_character_switch,
-                                image2image_character_positive,
-                                image2image_character_negative,
-                                image2image_character_position,
-                            )
-
                         image2image_components_list = [character_compents(num) for num in range(1, 7)]
                         image2image_new_components_list = [
                             component for components in image2image_components_list for component in components
@@ -1434,24 +1449,6 @@ def main():
                     with gr.Tab("Character", visible=True if "nai-diffusion-4" in env.model else False):
                         inpaint_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
                         gr.Markdown("<hr>")
-
-                        def character_compents(number):
-                            with gr.Row():
-                                inpaint_character_position = gr.Dropdown(CHARACTER_POSITION, label="位置(Position)")
-                                inpaint_character_switch = gr.Checkbox(False, label="启用(Switch)")
-                                gr.Textbox(f"角色{number}", show_label=False)
-                            with gr.Row():
-                                inpaint_character_positive = gr.Textbox(label="正面提示词(Positive)", lines=3)
-                                inpaint_character_negative = gr.Textbox(label="负面提示词(Negative)", lines=3)
-                            for _ in range(3):
-                                gr.Markdown("<hr>")
-                            return (
-                                inpaint_character_switch,
-                                inpaint_character_positive,
-                                inpaint_character_negative,
-                                inpaint_character_position,
-                            )
-
                         inpaint_components_list = [character_compents(num) for num in range(1, 7)]
                         inpaint_new_components_list = [
                             component for components in inpaint_components_list for component in components
@@ -2695,6 +2692,7 @@ def main():
                         decrisp = gr.Checkbox(
                             env.sm, label="decrisp", visible=True if "nai-diffusion-4" not in env.model else False
                         )
+                        legacy_uc = gr.Checkbox(env.legacy_uc, label="Legacy Prompt Conditioning Mode(不建议)")
                     with gr.Row():
                         censor = gr.Checkbox(value=env.censor, label=webui_language["setting"]["description"]["censor"])
                         skip_format_str = gr.Checkbox(env.skip_format_str, label="跳过格式化tag")
@@ -2873,6 +2871,7 @@ def main():
                     steps,
                     sm,
                     sm_dyn,
+                    legacy_uc,
                     variety,
                     decrisp,
                     skip_format_str,

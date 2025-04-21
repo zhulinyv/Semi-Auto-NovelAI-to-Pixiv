@@ -9,9 +9,21 @@ from playsound import playsound
 
 from utils.env import env
 from utils.imgtools import get_concat_h, get_concat_v, get_img_info, img_to_base64, revert_img_info
-from utils.jsondata import json_for_vibe
+
+if "nai-diffusion-4" not in env.model:
+    from utils.jsondata import json_for_vibe
+else:
+    from utils.jsondata import json_for_vibe_v4 as json_for_vibe
 from utils.prepare import logger
-from utils.utils import file_path2name, generate_image, read_json, return_x64, save_image, sleep_for_cool
+from utils.utils import (
+    file_path2name,
+    generate_image,
+    position_to_float,
+    read_json,
+    return_x64,
+    save_image,
+    sleep_for_cool,
+)
 
 
 def vibe_by_hand(
@@ -30,11 +42,10 @@ def vibe_by_hand(
     decrisp: bool,
     seed: str,
     times: int,
+    normalize_reference_strength_multiple: bool,
+    naiv4vibebundle_file: str,
     *_args,
 ):
-    if "nai-diffusion-4" in env.model:
-        logger.warning("NAI4 预览版模型不支持 Vibe, 本次 Vibe 仍使用 NAI3")
-
     with open("./output/temp.json", "w") as f:
         json.dump({"break": False}, f)
 
@@ -57,10 +68,12 @@ def vibe_by_hand(
         json_for_vibe["parameters"]["cfg_rescale"] = rescale
         json_for_vibe["parameters"]["sampler"] = sampler
         json_for_vibe["parameters"]["steps"] = steps
-        json_for_vibe["parameters"]["sm"] = sm if sampler != "ddim_v3" else False
-        json_for_vibe["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
+        if "nai-diffusion-4" not in env.model:
+            json_for_vibe["parameters"]["sm"] = sm if sampler != "ddim_v3" else False
+            json_for_vibe["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
         json_for_vibe["parameters"]["skip_cfg_above_sigma"] = 19 if variety else None
-        json_for_vibe["parameters"]["dynamic_thresholding"] = decrisp
+        if "nai-diffusion-4" not in env.model:
+            json_for_vibe["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
             json_for_vibe["parameters"]["noise_schedule"] = noise_schedule
         if isinstance(seed, int):
@@ -78,31 +91,94 @@ def vibe_by_hand(
         image_list = []
 
         args = _args[:]
+        character_args = args[:25]
+        vibe_args = args[25:]
 
-        components_list = []
-        while args:
-            components_list.append(args[0:3])
-            args = args[3:]
+        if "nai-diffusion-4" in env.model:
+            json_for_vibe["parameters"]["normalize_reference_strength_multiple"] = normalize_reference_strength_multiple
+            json_for_vibe["parameters"]["use_coords"] = not character_args[0]
+            json_for_vibe["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
+            json_for_vibe["parameters"]["v4_prompt"]["use_coords"] = not character_args[0]
+            json_for_vibe["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = negative
 
-        for components in components_list:
-            reference_image_multiple.append(img_to_base64(components[0]))
-            image_list.append(file_path2name(components[0]))
-            # reference_list = img.replace(".jpg", "").replace(".png", "").split("_")
-            reference_information_extracted_multiple.append(components[1])
-            reference_strength_multiple.append(components[2])
+            character_args = character_args[1:]
+            components_list = []
+            while character_args:
+                components_list.append(character_args[0:4])
+                character_args = character_args[4:]
+
+            json_for_vibe["parameters"]["characterPrompts"] = [
+                {
+                    "prompt": components[1],
+                    "uc": components[2],
+                    "center": {"x": position_to_float(components[3])[0], "y": position_to_float(components[3])[1]},
+                    "enabled": True,
+                }
+                for components in components_list
+                if components[0]
+            ]
+
+            json_for_vibe["parameters"]["v4_prompt"]["caption"]["char_captions"] = [
+                {
+                    "char_caption": components[1],
+                    "centers": [{"x": position_to_float(components[3])[0], "y": position_to_float(components[3])[1]}],
+                }
+                for components in components_list
+                if components[0]
+            ]
+
+            json_for_vibe["parameters"]["v4_negative_prompt"]["caption"]["char_captions"] = [
+                {
+                    "char_caption": components[2],
+                    "centers": [{"x": position_to_float(components[3])[0], "y": position_to_float(components[3])[1]}],
+                }
+                for components in components_list
+                if components[0]
+            ]
+
+        if "nai-diffusion-4" in env.model:
+            naiv4vibebundle = read_json(naiv4vibebundle_file)
+            for naiv4vibe in naiv4vibebundle["vibes"]:
+                encoding = naiv4vibe["encodings"]["v4full"][list((naiv4vibe["encodings"]["v4full"]).keys())[0]][
+                    "encoding"
+                ]
+                reference_image_multiple.append(encoding)
+                information_extracted = naiv4vibe["importInfo"]["information_extracted"]
+                reference_information_extracted_multiple.append(information_extracted)
+                strength = naiv4vibe["importInfo"]["strength"]
+                reference_strength_multiple.append(strength)
+                image = naiv4vibe["id"]
+                image_list.append(image)
+        else:
+            components_list = []
+            while vibe_args:
+                components_list.append(vibe_args[0:3])
+                vibe_args = vibe_args[3:]
+            for components in components_list:
+                # base64 = read_json("test.json")["parameters"]["reference_image_multiple"][0]
+                reference_image_multiple.append(img_to_base64(components[0]))
+                # reference_image_multiple.append(base64)
+                image_list.append(file_path2name(components[0]))
+                # reference_list = img.replace(".jpg", "").replace(".png", "").split("_")
+                reference_information_extracted_multiple.append(components[1])
+                reference_strength_multiple.append(components[2])
 
         logger.debug(
             f"""
 基底图片: {image_list}
-信息提取: {reference_information_extracted_multiple}
+信息提取: {reference_information_extracted_multiple if "nai-diffusion-4" not in env.model else []}
 参考强度: {reference_strength_multiple}"""
         )
 
         json_for_vibe["parameters"]["reference_image_multiple"] = reference_image_multiple
-        json_for_vibe["parameters"][
-            "reference_information_extracted_multiple"
-        ] = reference_information_extracted_multiple
+        if "nai-diffusion-4" not in env.model:
+            json_for_vibe["parameters"][
+                "reference_information_extracted_multiple"
+            ] = reference_information_extracted_multiple
         json_for_vibe["parameters"]["reference_strength_multiple"] = reference_strength_multiple
+
+        with open("test.json", "w") as file:
+            json.dump(json_for_vibe, file)
 
         saved_path = save_image(generate_image(json_for_vibe), "vibe", seed, "None", "None")
 

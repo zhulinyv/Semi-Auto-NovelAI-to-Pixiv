@@ -94,9 +94,9 @@ def t2i_by_hand(
         _args = args[:]
 
         if "nai-diffusion-4" in env.model:
-            json_for_t2i["parameters"]["use_coords"] = _args[0]
+            json_for_t2i["parameters"]["use_coords"] = not _args[0]
             json_for_t2i["parameters"]["v4_prompt"]["caption"]["base_caption"] = positive
-            json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = _args[0]
+            json_for_t2i["parameters"]["v4_prompt"]["use_coords"] = not _args[0]
             json_for_t2i["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = negative
 
             _args = _args[1:]
@@ -110,6 +110,7 @@ def t2i_by_hand(
                     "prompt": components[1],
                     "uc": components[2],
                     "center": {"x": position_to_float(components[3])[0], "y": position_to_float(components[3])[1]},
+                    "enabled": True,
                 }
                 for components in components_list
                 if components[0]

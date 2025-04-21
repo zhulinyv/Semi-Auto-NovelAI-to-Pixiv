@@ -78,9 +78,9 @@ def for_webui(
         json_for_inpaint["parameters"]["mask"] = img_to_base64("./output/temp_inpaint_mask.png")
 
         if "nai-diffusion-4" in env.model:
-            json_for_inpaint["parameters"]["use_coords"] = args[0]
+            json_for_inpaint["parameters"]["use_coords"] = not args[0]
             json_for_inpaint["parameters"]["v4_prompt"]["caption"]["base_caption"] = inpaint_positive_input
-            json_for_inpaint["parameters"]["v4_prompt"]["use_coords"] = args[0]
+            json_for_inpaint["parameters"]["v4_prompt"]["use_coords"] = not args[0]
             json_for_inpaint["parameters"]["v4_negative_prompt"]["caption"]["base_caption"] = inpaint_negative_input
 
             args = args[1:]
@@ -94,6 +94,7 @@ def for_webui(
                     "prompt": components[1],
                     "uc": components[2],
                     "center": {"x": position_to_float(components[3])[0], "y": position_to_float(components[3])[1]},
+                    "enabled": True,
                 }
                 for components in components_list
                 if components[0]
