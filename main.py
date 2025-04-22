@@ -88,8 +88,10 @@ def main():
         if not os.path.exists("start.json")
         else read_json("start.json")["negative"]
     )
-    custom_resolution = read_json("start.json")["resolution"] if os.path.exists("start.json") else []
-
+    try:
+        custom_resolution = read_json("start.json")["resolution"] if os.path.exists("start.json") else []
+    except KeyError:
+        custom_resolution = []
     # ------------------------------ #
 
     def open_output_folder_block(output_folder):
