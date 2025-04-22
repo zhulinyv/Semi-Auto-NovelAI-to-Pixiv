@@ -265,8 +265,19 @@ def generate_image(json_data):
     Returns:
         (bytes): 二进制图片
     """
+    try:
+        data = read_json("start.json")
+        data["positive"] = json_data["input"]
+        data["negative"] = json_data["parameters"]["negative_prompt"]
+    except FileNotFoundError:
+        data = {
+            "positive": json_data["input"],
+            "negative": json_data["parameters"]["negative_prompt"],
+            "resolution": [],
+        }
+
     with open("start.json", "w") as f:
-        json.dump({"positive": json_data["input"], "negative": json_data["parameters"]["negative_prompt"]}, f)
+        json.dump(data, f)
 
     positive = find_wild_card_and_replace_tag(json_data["input"])
     negative = find_wild_card_and_replace_tag(json_data["parameters"]["negative_prompt"])
@@ -864,6 +875,52 @@ def auto_complete(input_box):
     suggestions_radio.change(
         update_input, inputs=[input_box, suggestions_radio], outputs=[input_box, suggestions_radio]
     )
+
+
+def add_custom_resolution(width, height):
+    try:
+        data = read_json("start.json")
+        try:
+            data["resolution"] = data["resolution"] + [f"{width}x{height}"]
+        except KeyError:
+            data["resolution"] = [f"{width}x{height}"]
+    except FileNotFoundError:
+        data = {
+            "positive": "",
+            "negative": "",
+            "resolution": [f"{width}x{height}"],
+        }
+
+    with open("start.json", "w") as f:
+        json.dump(data, f)
+
+    return gr.update(choices=["自定义(Custom)"] + RESOLUTION + data["resolution"])
+
+
+def del_custom_resolution(width, height):
+    try:
+        data = read_json("start.json")
+        try:
+            data["resolution"] = data["resolution"].remove(f"{width}x{height}")
+            if data["resolution"]:
+                pass
+            else:
+                data["resolution"] = []
+        except KeyError:
+            data["resolution"] = []
+        except ValueError:
+            pass
+    except FileNotFoundError:
+        data = {
+            "positive": "",
+            "negative": "",
+            "resolution": [],
+        }
+
+    with open("start.json", "w") as f:
+        json.dump(data, f)
+
+    return gr.update(choices=["自定义(Custom)"] + RESOLUTION + data["resolution"])
 
 
 def gen_script(script_type, *args):

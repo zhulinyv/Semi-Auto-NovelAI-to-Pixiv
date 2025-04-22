@@ -49,10 +49,12 @@ def main():
         RESOLUTION,
         SAMPLER,
         THEME_LIST,
+        add_custom_resolution,
         add_item_for_yaml,
         add_wildcard_to_textbox,
         auto_complete,
         cancel_probabilities_for_item,
+        del_custom_resolution,
         del_item_for_yaml,
         gen_script,
         list_to_str,
@@ -86,6 +88,7 @@ def main():
         if not os.path.exists("start.json")
         else read_json("start.json")["negative"]
     )
+    custom_resolution = read_json("start.json")["resolution"] if os.path.exists("start.json") else []
 
     # ------------------------------ #
 
@@ -174,7 +177,7 @@ def main():
                         with gr.Row():
                             with gr.Column(scale=1):
                                 text2image_resolution = gr.Dropdown(
-                                    ["自定义(Custom)"] + RESOLUTION,
+                                    ["自定义(Custom)"] + RESOLUTION + custom_resolution,
                                     value=(
                                         "832x1216"
                                         if env.img_size == -1
@@ -191,6 +194,19 @@ def main():
                                         value=(env.img_size)[1] if env.img_size != -1 else "1216",
                                         label=webui_language["t2i"]["height"],
                                     )
+                                    with gr.Column():
+                                        text2image_add_resolution = gr.Button("添加到预设")
+                                        text2image_del_resolution = gr.Button("从预设删除")
+                                        text2image_add_resolution.click(
+                                            add_custom_resolution,
+                                            inputs=[text2image_width, text2image_height],
+                                            outputs=text2image_resolution,
+                                        )
+                                        text2image_del_resolution.click(
+                                            del_custom_resolution,
+                                            inputs=[text2image_width, text2image_height],
+                                            outputs=text2image_resolution,
+                                        )
                                     text2image_resolution.change(
                                         return_resolution,
                                         [text2image_resolution, text2image_width, text2image_height],
@@ -682,7 +698,7 @@ def main():
                         with gr.Row():
                             with gr.Column(scale=1):
                                 vibe_transfer_resolution = gr.Dropdown(
-                                    ["自定义(Custom)"] + RESOLUTION,
+                                    ["自定义(Custom)"] + RESOLUTION + custom_resolution,
                                     value=(
                                         "832x1216"
                                         if env.img_size == -1
@@ -701,6 +717,19 @@ def main():
                                         label=webui_language["t2i"]["height"],
                                         interactive=True,
                                     )
+                                    with gr.Column():
+                                        vibe_transfer_add_resolution = gr.Button("添加到预设")
+                                        vibe_transfer_del_resolution = gr.Button("从预设删除")
+                                        vibe_transfer_add_resolution.click(
+                                            add_custom_resolution,
+                                            inputs=[vibe_transfer_width, vibe_transfer_height],
+                                            outputs=vibe_transfer_resolution,
+                                        )
+                                        vibe_transfer_del_resolution.click(
+                                            del_custom_resolution,
+                                            inputs=[vibe_transfer_width, vibe_transfer_height],
+                                            outputs=vibe_transfer_resolution,
+                                        )
                                     vibe_transfer_resolution.change(
                                         return_resolution,
                                         [vibe_transfer_resolution, vibe_transfer_width, vibe_transfer_height],
@@ -932,7 +961,7 @@ def main():
                         with gr.Column():
                             with gr.Row():
                                 image2image_resolution = gr.Dropdown(
-                                    ["自定义(Custom)"] + RESOLUTION,
+                                    ["自定义(Custom)"] + RESOLUTION + custom_resolution,
                                     value=(
                                         "832x1216"
                                         if env.img_size == -1
@@ -948,6 +977,19 @@ def main():
                                     outputs=[image2image_width, image2image_height],
                                     show_progress="hidden",
                                 )
+                                image2image_add_resolution = gr.Button("添加到预设")
+                                image2image_del_resolution = gr.Button("从预设删除")
+                                image2image_add_resolution.click(
+                                    add_custom_resolution,
+                                    inputs=[image2image_width, image2image_height],
+                                    outputs=image2image_resolution,
+                                )
+                                image2image_del_resolution.click(
+                                    del_custom_resolution,
+                                    inputs=[image2image_width, image2image_height],
+                                    outputs=image2image_resolution,
+                                )
+                            with gr.Row():
                                 image2image_sampler = gr.Dropdown(
                                     SAMPLER,
                                     value=env.sampler,
@@ -1331,7 +1373,7 @@ def main():
                         with gr.Column():
                             with gr.Row():
                                 inpaint_resolution = gr.Dropdown(
-                                    ["自定义(Custom)"] + RESOLUTION,
+                                    ["自定义(Custom)"] + RESOLUTION + custom_resolution,
                                     value=(
                                         "832x1216"
                                         if env.img_size == -1
@@ -1347,6 +1389,19 @@ def main():
                                     outputs=[inpaint_width, inpaint_height],
                                     show_progress="hidden",
                                 )
+                                inpaint_add_resolution = gr.Button("添加到预设")
+                                inpaint_del_resolution = gr.Button("从预设删除")
+                                inpaint_add_resolution.click(
+                                    add_custom_resolution,
+                                    inputs=[inpaint_width, inpaint_height],
+                                    outputs=inpaint_resolution,
+                                )
+                                inpaint_del_resolution.click(
+                                    del_custom_resolution,
+                                    inputs=[inpaint_width, inpaint_height],
+                                    outputs=inpaint_resolution,
+                                )
+                            with gr.Row():
                                 inpaint_sampler = gr.Dropdown(
                                     SAMPLER,
                                     value=env.sampler,
