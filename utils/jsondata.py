@@ -285,8 +285,8 @@ json_for_t2i_v4 = {
         "reference_image_multiple": [],
         "reference_information_extracted_multiple": [],
         "reference_strength_multiple": [],
-        "deliberate_euler_ancestral_bug": False,
-        "prefer_brownian": True,
+        "deliberate_euler_ancestral_bug": True,
+        "prefer_brownian": False,
     },
 }
 
@@ -361,8 +361,8 @@ json_for_i2i_v4 = {
         "reference_image_multiple": [],
         "reference_information_extracted_multiple": [],
         "reference_strength_multiple": [],
-        "deliberate_euler_ancestral_bug": False,
-        "prefer_brownian": True,
+        "deliberate_euler_ancestral_bug": True,
+        "prefer_brownian": False,
     },
 }
 
@@ -442,8 +442,8 @@ json_for_inpaint_v4 = {
         "reference_image_multiple": [],
         "reference_information_extracted_multiple": [],
         "reference_strength_multiple": [],
-        "deliberate_euler_ancestral_bug": False,
-        "prefer_brownian": True,
+        "deliberate_euler_ancestral_bug": True,
+        "prefer_brownian": False,
     },
 }
 
@@ -508,7 +508,7 @@ json_for_vibe_v4 = {
             "legacy_uc": env.legacy_uc,
         },
         "negative_prompt": str,
-        "deliberate_euler_ancestral_bug": False,
-        "prefer_brownian": True,
+        "deliberate_euler_ancestral_bug": True,
+        "prefer_brownian": False,
     },
 }

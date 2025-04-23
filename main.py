@@ -105,7 +105,7 @@ def main():
             character_position = gr.Dropdown(
                 CHARACTER_POSITION,
                 label="位置(Position)",
-                interactive=False if env.model == "nai-diffusion-4-full" else True,
+                interactive=True,
             )
             character_switch = gr.Checkbox(False, label="启用(Switch)")
             gr.Textbox(f"角色{number}", show_label=False)
@@ -909,7 +909,7 @@ def main():
                         vibe_transfer_ai_choice = gr.Checkbox(
                             True,
                             label="AI 选择位置(AI's choice)",
-                            interactive=False if env.model == "nai-diffusion-4-full" else True,
+                            interactive=True,
                         )
                         gr.Markdown("<hr>")
                         vibe_transfer_components_list = [character_compents(num) for num in range(1, 7)]
