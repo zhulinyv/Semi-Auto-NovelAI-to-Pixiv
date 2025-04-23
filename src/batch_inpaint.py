@@ -68,7 +68,9 @@ def for_webui(
         if "nai-diffusion-4" not in env.model:
             json_for_inpaint["parameters"]["sm"] = False
             json_for_inpaint["parameters"]["sm_dyn"] = False
-        json_for_inpaint["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if inpaint_variety else None
+        json_for_inpaint["parameters"]["skip_cfg_above_sigma"] = (
+            19.343056794463642 if "nai-diffusion-4" in env.model else 19 if inpaint_variety else None
+        )
         json_for_inpaint["parameters"]["dynamic_thresholding"] = inpaint_decrisp
         seed = random.randint(1000000000, 9999999999) if inpaint_seed == "-1" else int(inpaint_seed)
         json_for_inpaint["parameters"]["seed"] = seed

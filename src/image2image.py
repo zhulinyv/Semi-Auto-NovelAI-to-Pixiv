@@ -53,7 +53,9 @@ def i2i_by_hand(
         if "nai-diffusion-4" not in env.model:
             json_for_i2i["parameters"]["sm"] = False
             json_for_i2i["parameters"]["sm_dyn"] = False
-        json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
+        json_for_i2i["parameters"]["skip_cfg_above_sigma"] = (
+            19.343056794463642 if "nai-diffusion-4" in env.model else 19 if variety else None
+        )
         json_for_i2i["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
             json_for_i2i["parameters"]["noise_schedule"] = noise_schedule
@@ -145,7 +147,9 @@ def prepare_json(imginfo: dict, imgpath):
     except KeyError:
         logger.warning("旧版图片不支持 variety 参数, 将使用配置设置中的 variety 参数")
         variety = env.variety
-    json_for_i2i["parameters"]["skip_cfg_above_sigma"] = 19.343056794463642 if variety else None
+    json_for_i2i["parameters"]["skip_cfg_above_sigma"] = (
+        19.343056794463642 if "nai-diffusion-4" in env.model else 19 if variety else None
+    )
     json_for_i2i["parameters"]["dynamic_thresholding"] = img_comment["dynamic_thresholding"]
     try:
         json_for_i2i["parameters"]["noise_schedule"] = img_comment["noise_schedule"]
