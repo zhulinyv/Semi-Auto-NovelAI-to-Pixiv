@@ -51,6 +51,9 @@ def vibe_by_hand(
 
     imgs_list = []
 
+    if env.model == "nai-diffusion-4-5-curated":
+        logger.warning("nai-diffusion-4-5-curated 目前不支持 vibe, 本次 vibe 使用 nai-diffusion-4-full")
+
     for i in range(times):
         data = read_json("./output/temp.json")
         if data["break"]:
@@ -72,7 +75,9 @@ def vibe_by_hand(
             json_for_vibe["parameters"]["sm"] = sm if sampler != "ddim_v3" else False
             json_for_vibe["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
         json_for_vibe["parameters"]["skip_cfg_above_sigma"] = (
-            19.343056794463642 if "nai-diffusion-4" in env.model else 19 if variety else None
+            19.343056794463642
+            if "nai-diffusion-4" in env.model and env.model != "nai-diffusion-4-5-curated"
+            else 19 if env.model != "nai-diffusion-4-5-curated" else 58 if variety else None
         )
         if "nai-diffusion-4" not in env.model:
             json_for_vibe["parameters"]["dynamic_thresholding"] = decrisp

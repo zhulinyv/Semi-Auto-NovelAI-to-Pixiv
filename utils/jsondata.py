@@ -366,11 +366,14 @@ json_for_i2i_v4 = {
     },
 }
 
+# "nai-diffusion-4-5-curated-inpainting"
+
+
 json_for_inpaint_v4 = {
     "input": str,
     "model": (
-        "nai-diffusion-4-full-inpainting"
-        if env.model == "nai-diffusion-4-full"
+        f"{env.model}-inpainting"
+        if env.model in ["nai-diffusion-4-full", "nai-diffusion-4-5-curated"]
         else "nai-diffusion-4-curated-inpainting"
     ),
     "action": "infill",
@@ -450,7 +453,7 @@ json_for_inpaint_v4 = {
 
 json_for_vibe_v4 = {
     "input": str,
-    "model": env.model,
+    "model": env.model if env.model != "nai-diffusion-4-5-curated" else "nai-diffusion-4-full",
     "action": "generate",
     "parameters": {
         "params_version": 3,
