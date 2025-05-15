@@ -378,6 +378,7 @@ def prepare_json(input_, sm, sm_dyn, variety, decrisp, scale, sampler, noise_sch
         else 19 if env.model != "nai-diffusion-4-5-curated" else 58 if variety else None
     )
     json_for_t2i["parameters"]["dynamic_thresholding"] = decrisp
+    json_for_t2i["parameters"]["cfg_rescale"] = env.rescale
     if sampler != "ddim_v3":
         json_for_t2i["parameters"]["noise_schedule"] = noise_schedule
     seed = random.randint(1000000000, 9999999999) if env.seed == -1 else env.seed

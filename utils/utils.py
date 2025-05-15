@@ -934,8 +934,8 @@ from src.text2image_nsfw import t2i
 from utils.env import env
 from utils.prepare import logger
 
-times = 0
-_times = 0
+times = -1
+_times = -1
 while times + 1 <= env.times_for_scripts:
     if env.times_for_scripts == 0:
         _times += 1
@@ -959,8 +959,8 @@ from src.text2image_sfw import main
 from utils.env import env
 from utils.prepare import logger
 
-times = 0
-_times = 0
+times = -1
+_times = -1
 while times + 1 <= env.times_for_scripts:
     if env.times_for_scripts == 0:
         _times += 1
@@ -968,7 +968,7 @@ while times + 1 <= env.times_for_scripts:
         times += 1
     info = "正在生成第 " + str(_times if env.times_for_scripts == 0 else times) + " 张图片..."
     logger.info(info)
-    main(True, \"\"\"{}\"\"\", "{}", "{}", "{}", "{}")
+    main(True, \"\"\"{}\"\"\", "{}", {}, {}, {})
 
 if not env.skip_finish_sound:
     playsound("./files/webui/download_finish.mp3")
