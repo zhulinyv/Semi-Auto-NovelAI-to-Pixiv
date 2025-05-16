@@ -77,6 +77,8 @@ def upload(image_list, file):
     characters_data = cancel_probabilities_for_item(read_yaml("./files/favorites/characters.yaml"))
     surroundings_data = cancel_probabilities_for_item(read_yaml("./files/favorites/surroundings.yaml"))
 
+    image = str(image_list[-1])
+
     if env.use_file_name_as_title:
         name = file_path2name(image).split(".")[0]
     elif env.use_old_title_rule:
