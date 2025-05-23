@@ -7,14 +7,12 @@ license = "AGPL-3.0"
 readme = "README.md"
 packages = [{include = "semi_auto_novelai_to_pixiv"}]
 
-[tool.poetry.requires-plugins]
-poetry-plugin-export = ">=1.8"
 
 [tool.poetry.dependencies]
 python = "^3.10"
 setuptools = "^70.0.0"
 pydantic = "^2.7.3"
-gradio = "^5.9.1"
+gradio = "5.29.0"
 pydantic-settings = "^2.3.1"
 python-dotenv = "^1.0.1"
 pillow = "^10.3.0"
@@ -42,6 +40,8 @@ mkdocs-glightbox = "^0.4.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.1"
+poetry-plugin-export = ">=1.8"
+
 
 # https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html
 [tool.black]
