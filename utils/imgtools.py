@@ -217,7 +217,7 @@ def check_all_corners_black(image_path):
 
 def return_pnginfo(image):
     if not image:
-        return None, None, None, None, None, None, None, None, None, None, None, None, None, None
+        return None, None, None, None, None, None, None, None, None, None, None, None, None, None, None
     try:
         try:
             comment = json.loads((pnginfo := image.info)["Comment"])
@@ -240,10 +240,11 @@ def return_pnginfo(image):
                 None,
                 None,
                 None,
+                None,
                 json.dumps(pnginfo, indent=4, ensure_ascii=False),
             )
         except Exception:
-            return None, None, None, None, None, None, None, None, None, None, None, None, None, None
+            return None, None, None, None, None, None, None, None, None, None, None, None, None, None, None
     try:
         skip_cfg_above_sigma = True if comment["skip_cfg_above_sigma"] else False
     except KeyError:
@@ -256,6 +257,7 @@ def return_pnginfo(image):
         str(comment["height"]),
         comment["steps"],
         comment["scale"],
+        comment["cfg_rescale"],
         (
             "karras"
             if "nai-diffusion-4" in env.model and comment["noise_schedule"] == "native"
@@ -287,6 +289,7 @@ def _return_pnginfo(
     height,
     steps,
     scale,
+    cfg_rescale,
     noise_schedule,
     sampler,
     sm,
@@ -336,6 +339,7 @@ def _return_pnginfo(
         height,
         steps,
         scale,
+        cfg_rescale,
         noise_schedule,
         sampler,
         sm,

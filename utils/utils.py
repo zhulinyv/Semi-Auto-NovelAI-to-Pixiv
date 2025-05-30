@@ -38,6 +38,7 @@ MODEL = [
     "nai-diffusion-4-curated-preview",
     "nai-diffusion-4-full",
     "nai-diffusion-4-5-curated",
+    "nai-diffusion-4-5-full",
 ]
 RESOLUTION = [
     "832x1216",
@@ -127,6 +128,7 @@ def format_str(str_: str):
     str_ = str_.replace(",,", ",")
     str_ = str_.replace(",,,", ",")
     str_ = str_.replace(",", ", ")
+    str_ = str_.replace(", ::,", ",::,")
     str_ = str_[:-2] if str_[-2:] == ", " else str_
     return str_
 

@@ -76,8 +76,8 @@ def vibe_by_hand(
             json_for_vibe["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
         json_for_vibe["parameters"]["skip_cfg_above_sigma"] = (
             19.343056794463642
-            if "nai-diffusion-4" in env.model and env.model != "nai-diffusion-4-5-curated"
-            else 19 if env.model != "nai-diffusion-4-5-curated" else 58 if variety else None
+            if "nai-diffusion-4" in env.model and "nai-diffusion-4-5" not in env.model
+            else 19 if "nai-diffusion-4-5" not in env.model else 58 if variety else None
         )
         if "nai-diffusion-4" not in env.model:
             json_for_vibe["parameters"]["dynamic_thresholding"] = decrisp

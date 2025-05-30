@@ -82,8 +82,8 @@ def t2i_by_hand(
             json_for_t2i["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
         json_for_t2i["parameters"]["skip_cfg_above_sigma"] = (
             19.343056794463642
-            if "nai-diffusion-4" in env.model and env.model != "nai-diffusion-4-5-curated"
-            else 19 if env.model != "nai-diffusion-4-5-curated" else 58 if variety else None
+            if "nai-diffusion-4" in env.model and "nai-diffusion-4-5" not in env.model
+            else 19 if "nai-diffusion-4-5" not in env.model else 58 if variety else None
         )
         json_for_t2i["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
@@ -374,8 +374,8 @@ def prepare_json(input_, sm, sm_dyn, variety, decrisp, scale, sampler, noise_sch
         json_for_t2i["parameters"]["sm_dyn"] = sm_dyn
     json_for_t2i["parameters"]["skip_cfg_above_sigma"] = (
         19.343056794463642
-        if "nai-diffusion-4" in env.model and env.model != "nai-diffusion-4-5-curated"
-        else 19 if env.model != "nai-diffusion-4-5-curated" else 58 if variety else None
+        if "nai-diffusion-4" in env.model and "nai-diffusion-4-5" not in env.model
+        else 19 if "nai-diffusion-4-5" not in env.model else 58 if variety else None
     )
     json_for_t2i["parameters"]["dynamic_thresholding"] = decrisp
     json_for_t2i["parameters"]["cfg_rescale"] = env.rescale

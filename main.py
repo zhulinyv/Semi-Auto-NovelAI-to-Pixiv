@@ -2431,6 +2431,7 @@ def main():
                             pnginfo_height = gr.Textbox(label="高(Height)")
                         pnginfo_steps = gr.Slider(0, 50, step=1, label="采样步数(Steps)")
                         pnginfo_scale = gr.Slider(0, 10, step=0.1, label="提示词相关性(Scale)")
+                        pnginfo_rescale = gr.Slider(0, 10, step=0.1, label="Prompt Guidance Rescale")
                         with gr.Row():
                             pnginfo_noise_schedule = gr.Dropdown(
                                 choices=NOISE_SCHEDULE, label="噪声计划表(Noise Schedule)"
@@ -2456,6 +2457,7 @@ def main():
                         pnginfo_height,
                         pnginfo_steps,
                         pnginfo_scale,
+                        pnginfo_rescale,
                         pnginfo_noise_schedule,
                         pnginfo_sampler,
                         pnginfo_sm,
@@ -2475,6 +2477,7 @@ def main():
                         pnginfo_height,
                         pnginfo_steps,
                         pnginfo_scale,
+                        pnginfo_rescale,
                         pnginfo_noise_schedule,
                         pnginfo_sampler,
                         pnginfo_sm,
@@ -2491,6 +2494,7 @@ def main():
                         text2image_height,
                         text2image_steps,
                         text2image_scale,
+                        text2image_rescale,
                         text2image_noise_schedule,
                         text2image_sampler,
                         text2image_sm,
@@ -2511,6 +2515,7 @@ def main():
                         pnginfo_height,
                         pnginfo_steps,
                         pnginfo_scale,
+                        pnginfo_rescale,
                         pnginfo_noise_schedule,
                         pnginfo_sampler,
                         pnginfo_sm,
@@ -2528,6 +2533,7 @@ def main():
                         image2image_height,
                         image2image_steps,
                         image2image_scale,
+                        image2image_rescale,
                         image2image_noise_schedule,
                         image2image_sampler,
                         image2image_sm,
@@ -2549,6 +2555,7 @@ def main():
                         pnginfo_height,
                         pnginfo_steps,
                         pnginfo_scale,
+                        pnginfo_rescale,
                         pnginfo_noise_schedule,
                         pnginfo_sampler,
                         pnginfo_sm,
@@ -2566,6 +2573,7 @@ def main():
                         inpaint_height,
                         inpaint_steps,
                         inpaint_scale,
+                        inpaint_rescale,
                         inpaint_noise_schedule,
                         inpaint_sampler,
                         inpaint_sm,
