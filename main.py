@@ -2877,19 +2877,9 @@ def main():
                     label=webui_language["setting"]["description"]["revert_info_"],
                 )
             with gr.Tab(webui_language["setting"]["sub_tab"]["water"]):
-                alpha = gr.Slider(0, 1, env.alpha, label=webui_language["setting"]["description"]["alpha"])
-                water_height = gr.Slider(
-                    10, 300, env.water_height, label=webui_language["setting"]["description"]["water_height"]
-                )
-                water_position = gr.CheckboxGroup(
-                    ["左上(Upper Left)", "左下(Lower Left)", "右上(Upper Right)", "右下(Upper Right)"],
-                    value=env.position,
-                    label=webui_language["setting"]["description"]["position"],
-                )
                 water_num = gr.Slider(
                     1, 10, env.water_num, step=1, label=webui_language["setting"]["description"]["water_num"]
                 )
-                rotate = gr.Slider(0, 360, 45, step=1, label=webui_language["setting"]["description"]["rotate"])
             with gr.Tab("WebUI"):
                 share = gr.Checkbox(env.share, label=webui_language["setting"]["description"]["share"])
                 height = gr.Slider(
@@ -2968,11 +2958,7 @@ def main():
                     use_file_name_as_title,
                     use_old_title_rule,
                     neighbor,
-                    alpha,
-                    water_height,
-                    water_position,
                     water_num,
-                    rotate,
                     meta_data,
                     revert_info_,
                     share,

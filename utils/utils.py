@@ -29,6 +29,22 @@ from utils.env import env
 from utils.jsondata import headers
 from utils.prepare import logger
 
+
+def return_skip_cfg_above_sigma(variety):
+    if variety:
+        if "nai-diffusion-4" in env.model and "nai-diffusion-4-5" not in env.model:
+            value = 19.343056794463642
+        elif "nai-diffusion-4-5" not in env.model:
+            value = 19
+        elif env.model == "nai-diffusion-4-5-curated":
+            value = 58
+        elif env.model == "nai-diffusion-4-5-full":
+            value = 61.7530670942469
+    else:
+        value = None
+    return value
+
+
 PATH = os.getcwd()
 
 MODEL = [

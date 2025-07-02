@@ -1,7 +1,8 @@
+import os
 import random
 from pathlib import Path
 
-from PIL import Image, ImageFilter
+from PIL import Image
 
 from utils.env import env
 from utils.imgtools import revert_img_info
@@ -9,52 +10,55 @@ from utils.prepare import logger
 from utils.utils import file_path2list
 
 
-def water(img_path, otp_path):
-    # 打开图片和水印
-    water_list = file_path2list("./files/watermarks")
-    water_img = random.choice(water_list)
-    with Image.open(img_path) as img, Image.open(f"./files/watermarks/{water_img}") as water:
-        img = img.convert("RGBA")
-        water = water.convert("RGBA")
+def water(img_path, otp_path, watermark_dir="./files/watermarks"):
+    # 打开原始图片
+    base_img = Image.open(img_path).convert("RGBA")
+    base_width, base_height = base_img.size
 
-        # 随机水印旋转度数
-        water = water.rotate(random.randint(-env.rotate, env.rotate), expand=True)
+    # 随机选择一个水印文件
+    watermarks = [f for f in os.listdir(watermark_dir) if f.lower().endswith(("png", "jpg", "jpeg"))]
+    if not watermarks:
+        raise FileNotFoundError("水印文件夹中没有有效的图片。")
+    watermark_path = os.path.join(watermark_dir, random.choice(watermarks))
+    watermark = Image.open(watermark_path).convert("RGBA")
 
-        # 随机水印透明度
-        new_png = water.copy()
-        layer = Image.new("RGBA", water.size, color=(0, 0, 0, 0))
-        new_png = Image.blend(new_png, layer, env.alpha + random.uniform(-0.15, 0.15))
+    # 随机旋转
+    angle = random.uniform(0, 360)
+    watermark = watermark.rotate(angle, expand=True)
 
-        # 随机水印大小
-        w, h = img.size
-        w_, h_ = new_png.size
-        new_height = env.water_height + random.randint(-20, 20)
-        new_width = int(new_height / h_ * w_)
-        new_png.resize((new_width, new_height))
+    # 随机调整透明度
+    alpha = random.uniform(0.2, 0.8)
+    alpha_mask = watermark.split()[3].point(lambda p: int(p * alpha))
+    watermark.putalpha(alpha_mask)
 
-        # 随机水印位置
-        position = random.choice(env.position)
-        if position == "左上(Upper Left)":
-            box = (100 + random.randint(-20, 20), 100 + random.randint(-20, 20))
-        elif position == "右上(Upper Right)":
-            box = (w - new_width - 100 + random.randint(-20, 20), 100 + random.randint(-20, 20))
-        elif position == "左下(Lower Left)":
-            box = (100 + random.randint(-20, 20), h - new_height - 100 + random.randint(-20, 20))
-        elif position == "右下(Upper Right)":
-            box = (w - new_width - 100 + random.randint(-20, 20), h - new_height - 100 + random.randint(-20, 20))
+    # 调整大小（使水印宽高小于原图的一定比例）
+    scale_factor = random.uniform(0.1, 0.5)  # 比例范围可调
+    new_width = int(base_width * scale_factor)
+    aspect_ratio = watermark.width / watermark.height
+    new_height = int(new_width / aspect_ratio)
+    watermark = watermark.resize((new_width, new_height), Image.LANCZOS)
 
-        img = img.filter(ImageFilter.SMOOTH)
-        img.paste(new_png, box, new_png)
-        img = img.convert("RGBA")
-        img.save(otp_path)
-        revert_img_info(str(img_path), otp_path)
+    # 随机位置（确保水印不会超出边界）
+    max_x = base_width - new_width
+    max_y = base_height - new_height
+    position = (random.randint(0, max_x), random.randint(0, max_y))
+
+    # 合并图像
+    combined = base_img.copy()
+    combined.paste(watermark, position, watermark)
+
+    # 保存结果
+    combined.convert("RGB").save(otp_path)
 
 
 def main(input_path, output_path):
     file_list = file_path2list(input_path)
     for file in file_list:
-        for i in range(env.water_num):
-            logger.info(f"正在对 {file} 添加第 {i + 1} 个水印...")
-            water(Path(input_path) / file, f"{output_path}/{file}")
-            logger.success("处理完成!")
+        logger.info(f"正在对 {file} 添加第 1 个水印...")
+        water(Path(input_path) / file, f"{output_path}/{file}")
+        for i in range(env.water_num - 1):
+            logger.info(f"正在对 {file} 添加第 {i + 2} 个水印...")
+            water(f"{output_path}/{file}", f"{output_path}/{file}")
+        logger.success("处理完成!")
+        revert_img_info(str(Path(input_path) / file), f"{output_path}/{file}")
     return "处理完成! 图片已保存到 ./output/water..."

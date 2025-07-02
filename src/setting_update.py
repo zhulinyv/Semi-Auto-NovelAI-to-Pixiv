@@ -62,11 +62,7 @@ def webui(
     use_file_name_as_title,
     use_old_title_rule,
     neighbor,
-    alpha,
-    water_height,
-    water_position,
     water_num,
-    rotate,
     meta_data,
     revert_info,
     share,
@@ -83,8 +79,6 @@ def webui(
     skip_else_log,
     num_of_suggest_tag,
 ):
-    position = str(water_position)
-    position = position.replace("'", '"')
     if img_size == -1:
         img_size = -1
     else:
@@ -134,11 +128,7 @@ def webui(
         use_file_name_as_title=use_file_name_as_title,
         use_old_title_rule=use_old_title_rule,
         neighbor=neighbor,
-        alpha=alpha,
-        water_height=water_height,
-        position=position,
         water_num=water_num,
-        rotate=rotate,
         meta_data=f'"{meta_data}"',
         revert_info=revert_info,
         share=share,

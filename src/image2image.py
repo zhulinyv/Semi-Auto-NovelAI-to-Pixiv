@@ -10,7 +10,15 @@ if "nai-diffusion-4" not in env.model:
 else:
     from utils.jsondata import json_for_i2i_v4 as json_for_i2i
 from utils.prepare import logger
-from utils.utils import file_path2list, generate_image, position_to_float, return_x64, save_image, sleep_for_cool
+from utils.utils import (
+    file_path2list,
+    generate_image,
+    position_to_float,
+    return_skip_cfg_above_sigma,
+    return_x64,
+    save_image,
+    sleep_for_cool,
+)
 
 
 def i2i_by_hand(
@@ -53,11 +61,7 @@ def i2i_by_hand(
         if "nai-diffusion-4" not in env.model:
             json_for_i2i["parameters"]["sm"] = False
             json_for_i2i["parameters"]["sm_dyn"] = False
-        json_for_i2i["parameters"]["skip_cfg_above_sigma"] = (
-            19.343056794463642
-            if "nai-diffusion-4" in env.model and "nai-diffusion-4-5" not in env.model
-            else 19 if "nai-diffusion-4-5" not in env.model else 58 if variety else None
-        )
+        json_for_i2i["parameters"]["skip_cfg_above_sigma"] = return_skip_cfg_above_sigma(variety)
         json_for_i2i["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
             json_for_i2i["parameters"]["noise_schedule"] = noise_schedule

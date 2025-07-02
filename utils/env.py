@@ -57,11 +57,7 @@ class Settings(BaseSettings):
     neighbor: float = 0.0085
 
     # 水印
-    alpha: float = 0.65
-    water_height: int = 135
-    position: list = ["左上(Upper Left)", "左下(Lower Left)", "右上(Upper Right)", "右下(Upper Right)"]
     water_num: int = 1
-    rotate: int = 45
 
     # 抹除信息
     meta_data: str = "杂鱼~杂鱼~"

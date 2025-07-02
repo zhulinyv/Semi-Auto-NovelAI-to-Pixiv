@@ -20,6 +20,7 @@ from utils.utils import (
     generate_image,
     position_to_float,
     read_json,
+    return_skip_cfg_above_sigma,
     return_x64,
     save_image,
     sleep_for_cool,
@@ -74,11 +75,7 @@ def vibe_by_hand(
         if "nai-diffusion-4" not in env.model:
             json_for_vibe["parameters"]["sm"] = sm if sampler != "ddim_v3" else False
             json_for_vibe["parameters"]["sm_dyn"] = sm_dyn if sm and sampler != "ddim_v3" else False
-        json_for_vibe["parameters"]["skip_cfg_above_sigma"] = (
-            19.343056794463642
-            if "nai-diffusion-4" in env.model and "nai-diffusion-4-5" not in env.model
-            else 19 if "nai-diffusion-4-5" not in env.model else 58 if variety else None
-        )
+        json_for_vibe["parameters"]["skip_cfg_above_sigma"] = return_skip_cfg_above_sigma(variety)
         if "nai-diffusion-4" not in env.model:
             json_for_vibe["parameters"]["dynamic_thresholding"] = decrisp
         if sampler != "ddim_v3":
@@ -146,7 +143,11 @@ def vibe_by_hand(
         if "nai-diffusion-4" in env.model:
             naiv4vibebundle = read_json(naiv4vibebundle_file)
             for naiv4vibe in naiv4vibebundle["vibes"]:
-                encoding = naiv4vibe["encodings"]["v4full"][list((naiv4vibe["encodings"]["v4full"]).keys())[0]][
+                if "4-5" in env.model:
+                    encoding_key = "v4-5full"
+                else:
+                    encoding_key = "v4full"
+                encoding = naiv4vibe["encodings"][encoding_key][list((naiv4vibe["encodings"][encoding_key]).keys())[0]][
                     "encoding"
                 ]
                 reference_image_multiple.append(encoding)
