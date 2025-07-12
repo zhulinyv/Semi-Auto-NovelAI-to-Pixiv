@@ -315,6 +315,9 @@ def generate_image(json_data):
             "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
         )
         while rep.status_code == 429:
+            data = read_json("./output/temp.json")
+            if data["break"]:
+                break
             sleep_for_cool(3, 9)
             rep = requests.post(
                 "https://image.novelai.net/ai/generate-image", json=json_data, headers=headers, proxies=proxies
