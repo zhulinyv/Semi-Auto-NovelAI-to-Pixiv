@@ -123,8 +123,22 @@ def main():
 
     # ------------------------------ #
 
+    # 定义一个 CSS 字符串，用于控制特定容器的高度和滚动
+    custom_css = """
+    #character-wildcards-container {
+        height: 400px !important;
+        overflow-y: auto !important;
+        border: 1px solid #444;
+        border-radius: 8px;
+        padding: 10px;
+    }
+    """
+
     with gr.Blocks(
-        theme=env.theme, title="Semi-Auto-NovelAI-to-Pixiv", head=read_txt("./files/webui/select_by_hot_key.html")
+        theme=env.theme,
+        title="Semi-Auto-NovelAI-to-Pixiv",
+        head=read_txt("./files/webui/select_by_hot_key.html"),
+        css=custom_css,  # <-- 在这里添加 CSS
     ) as sanp:
         # ---------- 标题 ---------- #
         gr.Markdown(webui_language["title"] + "    " + check_update())
@@ -147,37 +161,82 @@ def main():
             )
         # ---------- 文生图 ---------- #
         with gr.Tab(webui_language["t2i"]["tab"]):
+
+            # “文生图”界面的第一个子选项卡，使用 CSS 实现滚动
             with gr.Tab(webui_language["t2i"]["tab"]):
+
                 with gr.Row():
-                    with gr.Column(scale=5):
-                        gr.Markdown(webui_language["t2i"]["description"])
-                    open_output_folder_block("t2i")
-                with gr.Column():
-                    with gr.Column(scale=3):
-                        text2image_positive_input = gr.Textbox(
-                            value=default_positive_input,
-                            lines=2,
-                            label=webui_language["t2i"]["positive"],
-                        )
-                        auto_complete(text2image_positive_input)
-                        with gr.Row():
-                            with gr.Column(scale=3):
+
+                    # --- 【左侧控制区】 ---
+                    with gr.Column(scale=2):
+                        with gr.Tabs():
+                            with gr.TabItem("正面提示词 (Positive)"):
+                                text2image_positive_input = gr.Textbox(
+                                    value=default_positive_input, lines=8, label="Positive Prompt"
+                                )
+                                auto_complete(text2image_positive_input)
+
+                            with gr.TabItem("负面提示词 (Negative)"):
                                 text2image_negative_input = gr.Textbox(
-                                    value=default_negative_input,
-                                    lines=4,
-                                    label=webui_language["t2i"]["negative"],
+                                    value=default_negative_input, lines=8, label="Negative Prompt"
                                 )
                                 auto_complete(text2image_negative_input)
-                            with gr.Column(scale=1):
-                                text2image_generate_button = gr.Button(value=webui_language["t2i"]["generate_button"])
-                                text2image_stop_button = gr.Button("停止生成")
-                                text2image_stop_button.click(stop_generate)
-                                text2image_quantity = gr.Slider(
-                                    minimum=1, maximum=999, value=1, step=1, label=webui_language["t2i"]["times"]
-                                )
-                    with gr.Tab("生成参数"):
-                        with gr.Row():
-                            with gr.Column(scale=1):
+
+                        with gr.Column():
+                            text2image_generate_button = gr.Button(
+                                value=webui_language["t2i"]["generate_button"], variant="primary"
+                            )
+                            text2image_stop_button = gr.Button("停止生成")
+                            text2image_quantity = gr.Slider(
+                                minimum=1, maximum=999, value=1, step=1, label=webui_language["t2i"]["times"]
+                            )
+                            text2image_stop_button.click(stop_generate)
+                            open_output_folder_block("t2i")
+
+                        # --- 【区域 5】: 使用带 ID 的 Column 包装 Tabs 以实现滚动 <<< 关键修改
+                        with gr.Column(elem_id="character-wildcards-container"):
+                            with gr.Tabs():  # 这里的 Tabs 不再需要 height 参数
+                                with gr.TabItem("Character"):
+                                    text2image_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
+                                    gr.Markdown("<hr>")
+                                    text2image_components_list = [character_compents(num) for num in range(1, 7)]
+                                    text2image_new_components_list = [
+                                        component
+                                        for components in text2image_components_list
+                                        for component in components
+                                    ]
+
+                                with gr.TabItem("Wildcards"):
+                                    with gr.Row():
+                                        text2image_wildcard_file = gr.Dropdown(
+                                            choices=FAVORTES_FILE, value="", label="wildcard文件"
+                                        )
+                                        text2image_wildcard_name = gr.Dropdown(label="名称")
+                                        text2image_wildcard_file.change(
+                                            update_name_to_dropdown_list,
+                                            inputs=text2image_wildcard_file,
+                                            outputs=text2image_wildcard_name,
+                                        )
+                                    text2image_add_wildcard_button = gr.Button("添加到文本框")
+                                    text2image_add_wildcard_button.click(
+                                        add_wildcard_to_textbox,
+                                        inputs=[
+                                            text2image_positive_input,
+                                            text2image_negative_input,
+                                            text2image_wildcard_file,
+                                            text2image_wildcard_name,
+                                        ],
+                                        outputs=[text2image_positive_input, text2image_negative_input],
+                                    )
+                                    text2image_wildcard_tag = gr.Textbox(label="tag")
+                                    text2image_wildcard_name.change(
+                                        return_wildcard_tag,
+                                        inputs=[text2image_wildcard_file, text2image_wildcard_name],
+                                        outputs=text2image_wildcard_tag,
+                                    )
+
+                        with gr.Tab("生成参数 (Parameters)"):
+                            with gr.Column():
                                 text2image_resolution = gr.Dropdown(
                                     ["自定义(Custom)"] + RESOLUTION + custom_resolution,
                                     value=(
@@ -196,25 +255,13 @@ def main():
                                         value=(env.img_size)[1] if env.img_size != -1 else "1216",
                                         label=webui_language["t2i"]["height"],
                                     )
-                                    with gr.Column():
-                                        text2image_add_resolution = gr.Button("添加到预设")
-                                        text2image_del_resolution = gr.Button("从预设删除")
-                                        text2image_add_resolution.click(
-                                            add_custom_resolution,
-                                            inputs=[text2image_width, text2image_height],
-                                            outputs=text2image_resolution,
-                                        )
-                                        text2image_del_resolution.click(
-                                            del_custom_resolution,
-                                            inputs=[text2image_width, text2image_height],
-                                            outputs=text2image_resolution,
-                                        )
-                                    text2image_resolution.change(
-                                        return_resolution,
-                                        [text2image_resolution, text2image_width, text2image_height],
-                                        outputs=[text2image_width, text2image_height],
-                                        show_progress="hidden",
-                                    )
+
+                                text2image_resolution.change(
+                                    return_resolution,
+                                    [text2image_resolution, text2image_width, text2image_height],
+                                    outputs=[text2image_width, text2image_height],
+                                    show_progress="hidden",
+                                )
                                 text2image_scale = gr.Slider(
                                     minimum=0,
                                     maximum=10,
@@ -223,16 +270,10 @@ def main():
                                     label=webui_language["t2i"]["scale"],
                                 )
                                 text2image_rescale = gr.Slider(
-                                    minimum=0,
-                                    maximum=1,
-                                    value=env.rescale,
-                                    step=0.01,
-                                    label="Prompt Guidance Rescale",
+                                    minimum=0, maximum=1, value=env.rescale, step=0.01, label="Prompt Guidance Rescale"
                                 )
                                 text2image_sampler = gr.Dropdown(
-                                    SAMPLER,
-                                    value=env.sampler,
-                                    label=webui_language["t2i"]["sampler"],
+                                    SAMPLER, value=env.sampler, label=webui_language["t2i"]["sampler"]
                                 )
                                 text2image_noise_schedule = gr.Dropdown(
                                     NOISE_SCHEDULE,
@@ -269,67 +310,34 @@ def main():
                                     )
                                     text2image_random_seed = gr.Button(value="♻️", size="sm", scale=1)
                                     text2image_random_seed.click(return_random, inputs=None, outputs=text2image_seed)
-                            text2image_output_image = gr.Gallery(preview=True, label="Image", scale=2)
-                    with gr.Tab("wildcards"):
-                        with gr.Row():
-                            text2image_wildcard_file = gr.Dropdown(
-                                choices=FAVORTES_FILE,
-                                value="",
-                                label="wildcard文件",
-                            )
-                            text2image_wildcard_name = gr.Dropdown(label="名称")
-                            text2image_wildcard_file.change(
-                                update_name_to_dropdown_list,
-                                inputs=text2image_wildcard_file,
-                                outputs=text2image_wildcard_name,
-                            )
-                            text2image_add_wildcard_button = gr.Button("添加到文本框")
-                            text2image_add_wildcard_button.click(
-                                add_wildcard_to_textbox,
-                                inputs=[
-                                    text2image_positive_input,
-                                    text2image_negative_input,
-                                    text2image_wildcard_file,
-                                    text2image_wildcard_name,
-                                ],
-                                outputs=[text2image_positive_input, text2image_negative_input],
-                            )
-                        text2image_wildcard_tag = gr.Textbox(label="tag")
-                        text2image_wildcard_name.change(
-                            return_wildcard_tag,
-                            inputs=[text2image_wildcard_file, text2image_wildcard_name],
-                            outputs=text2image_wildcard_tag,
-                        )
-                    with gr.Tab("Character", visible=True if "nai-diffusion-4" in env.model else False):
-                        text2image_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
-                        gr.Markdown("<hr>")
-                        text2image_components_list = [character_compents(num) for num in range(1, 7)]
-                        text2image_new_components_list = [
-                            component for components in text2image_components_list for component in components
-                        ]
-                    text2image_generate_button.click(
-                        fn=t2i_by_hand,
-                        inputs=[
-                            text2image_positive_input,
-                            text2image_negative_input,
-                            text2image_width,
-                            text2image_height,
-                            text2image_scale,
-                            text2image_rescale,
-                            text2image_sampler,
-                            text2image_noise_schedule,
-                            text2image_steps,
-                            text2image_sm,
-                            text2image_sm_dyn,
-                            text2image_variety,
-                            text2image_decrisp,
-                            text2image_seed,
-                            text2image_quantity,
-                        ]
-                        + [text2image_ai_choice]
-                        + text2image_new_components_list,
-                        outputs=text2image_output_image,
-                    )
+
+                    # --- 【右侧显示区】 ---
+                    with gr.Column(scale=3):
+                        text2image_output_image = gr.Gallery(preview=True, label="Image", height=1000)
+                # --- 核心逻辑绑定 (这部分不需要改变) ---
+                text2image_generate_button.click(
+                    fn=t2i_by_hand,
+                    inputs=[
+                        text2image_positive_input,
+                        text2image_negative_input,
+                        text2image_width,
+                        text2image_height,
+                        text2image_scale,
+                        text2image_rescale,
+                        text2image_sampler,
+                        text2image_noise_schedule,
+                        text2image_steps,
+                        text2image_sm,
+                        text2image_sm_dyn,
+                        text2image_variety,
+                        text2image_decrisp,
+                        text2image_seed,
+                        text2image_quantity,
+                    ]
+                    + [text2image_ai_choice]
+                    + text2image_new_components_list,
+                    outputs=text2image_output_image,
+                )
             with gr.Tab(webui_language["random blue picture"]["tab"]):
                 with gr.Tab(webui_language["random blue picture"]["tab"]):
                     with gr.Row():
@@ -2881,7 +2889,9 @@ def main():
                     1, 10, env.water_num, step=1, label=webui_language["setting"]["description"]["water_num"]
                 )
             with gr.Tab("WebUI"):
-                share = gr.Checkbox(env.share, label=webui_language["setting"]["description"]["share"])
+                with gr.Row():
+                    share = gr.Checkbox(env.share, label=webui_language["setting"]["description"]["share"])
+                    new_interface = gr.Checkbox(env.new_interface, label="使用新文生图界面(修改此项后需关闭脚本后手动打开重启)")
                 height = gr.Slider(
                     300, 1200, env.height, step=10, label=webui_language["setting"]["description"]["height"]
                 )
@@ -2973,6 +2983,7 @@ def main():
                     skip_load_g4f,
                     skip_finish_sound,
                     skip_else_log,
+                    new_interface,
                     num_of_suggest_tag,
                 ],
                 outputs=setting_output_information,

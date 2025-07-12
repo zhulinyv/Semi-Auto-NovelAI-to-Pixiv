@@ -77,6 +77,7 @@ class Settings(BaseSettings):
     skip_finish_sound: bool = False
     skip_else_log: bool = True
     num_of_suggest_tag: int = 25
+    new_interface: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", extra="allow", arbitrary_types_allowed=True)
 

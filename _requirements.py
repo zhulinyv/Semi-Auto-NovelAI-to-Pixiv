@@ -1,5 +1,20 @@
+import os
+import shutil
 import subprocess
 import sys
+
+from utils.env import env
+
+try:
+    os.remove("main.py")
+except FileNotFoundError:
+    pass
+
+if env.new_interface:
+    shutil.copyfile("./files/webui/main_new.py", "main.py")
+else:
+    shutil.copyfile("./files/webui/main_bak.py", "main.py")
+
 
 try:
     import main  # noqa

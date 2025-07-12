@@ -77,6 +77,7 @@ def webui(
     skip_load_g4f,
     skip_finish_sound,
     skip_else_log,
+    new_interface,
     num_of_suggest_tag,
 ):
     if img_size == -1:
@@ -143,6 +144,7 @@ def webui(
         skip_load_g4f=skip_load_g4f,
         skip_finish_sound=skip_finish_sound,
         skip_else_log=skip_else_log,
+        new_interface=new_interface,
         num_of_suggest_tag=num_of_suggest_tag,
     )
     return otp_info
