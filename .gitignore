@@ -27,7 +27,8 @@ run_stand_alone_scripts.bat
 start.json
 Git23921
 Python310
-整合包启动(Modpack launcher).bat
-整合包更新(Modpack updater).bat
+Aa整合包启动(Modpack launcher).bat
+Aa整合包更新(Modpack updater).bat
 *.psd
 .gradio
+main.py
