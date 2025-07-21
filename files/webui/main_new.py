@@ -2891,7 +2891,7 @@ def main():
             with gr.Tab("WebUI"):
                 with gr.Row():
                     share = gr.Checkbox(env.share, label=webui_language["setting"]["description"]["share"])
-                    new_interface = gr.Checkbox(env.new_interface, label="使用新文生图界面(修改此项后需关闭脚本后手动打开重启)")
+                    new_interface = gr.Checkbox(env.new_interface, label="使用新文生图界面(修改此项保存后需关闭脚本手动重启)")
                 height = gr.Slider(
                     300, 1200, env.height, step=10, label=webui_language["setting"]["description"]["height"]
                 )

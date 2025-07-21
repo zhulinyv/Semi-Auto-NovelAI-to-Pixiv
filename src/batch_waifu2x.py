@@ -56,7 +56,7 @@ def main(engine, file, file_path, open_button, *options):
         otp = "./output/upscale/" + j.replace(file_path, "").replace("/", "")
 
         if engine == "waifu2x-ncnn-vulkan":
-            code = r".\files\waifu2x-ncnn-vulkan\waifu2x-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(
+            code = '.\\files\\waifu2x-ncnn-vulkan\\waifu2x-ncnn-vulkan.exe -i "{}" -o "{}" -n {} -s {}'.format(
                 j, otp, options[0], options[1]
             )
             if options[2]:
@@ -72,7 +72,7 @@ def main(engine, file, file_path, open_button, *options):
                 extract("./files/temp.zip", "./files/else_upscale_engine")
 
             if engine == "Anime4K":
-                code = r".\files\else_upscale_engine\Anime4K\Anime4KCPP_CLI.exe -i {} -o {} -z {}".format(
+                code = '.\\files\\else_upscale_engine\\Anime4K\\Anime4KCPP_CLI.exe -i "{}" -o "{}" -z {}'.format(
                     j, otp, options[0]
                 )
                 if options[1]:
@@ -83,21 +83,21 @@ def main(engine, file, file_path, open_button, *options):
                         code += " -H -L {}".format(options[4])
 
             elif engine == "realcugan-ncnn-vulkan":
-                code = r".\files\else_upscale_engine\realcugan-ncnn-vulkan\realcugan-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(
+                code = '.\\files\\else_upscale_engine\\realcugan-ncnn-vulkan\\realcugan-ncnn-vulkan.exe -i "{}" -o "{}" -n {} -s {}'.format(
                     j, otp, options[0], options[1]
                 )
                 if options[2] != "models-se":
                     code += " -m {}".format(options[2])
 
             elif engine == "realesrgan-ncnn-vulkan":
-                code = r".\files\else_upscale_engine\realesrgan-ncnn-vulkan\realesrgan-ncnn-vulkan.exe -i {} -o {} -s {} -n {}".format(
+                code = '.\\files\\else_upscale_engine\\realesrgan-ncnn-vulkan\\realesrgan-ncnn-vulkan.exe -i "{}" -o "{}" -s {} -n {}'.format(
                     j, otp, options[0], options[1]
                 )
                 if options[2]:
                     code += " -x"
 
             elif engine == "realsr-ncnn-vulkan":
-                code = rf".\files\else_upscale_engine\realsr-ncnn-vulkan\realsr-ncnn-vulkan.exe -i {j} -o {otp}"
+                code = f'.\\files\\else_upscale_engine\\realsr-ncnn-vulkan\\realsr-ncnn-vulkan.exe -i "{j}" -o "{otp}"'
                 if options[0] != "models-DF2K_JPEG":
                     code += " -m {}".format(options[0])
                 if options[1]:
@@ -118,15 +118,13 @@ def main(engine, file, file_path, open_button, *options):
                         logger.error("仅支持 RTX 和 GTX 系列显卡")
                 except VideoCardError:
                     logger.error("仅支持 RTX 和 GTX 系列显卡")
-                code = r".\files\else_upscale_engine\srmd-cuda\{} -i {} -o {} -n {} -s {}".format(
+                code = '.\\files\\else_upscale_engine\\srmd-cuda\\{} -i "{}" -o "{}" -n {} -s {}'.format(
                     software, j, otp, options[0], options[1]
                 )
 
             elif engine == "srmd-ncnn-vulkan":
-                code = (
-                    r".\files\else_upscale_engine\srmd-ncnn-vulkan\srmd-ncnn-vulkan.exe -i {} -o {} -n {} -s {}".format(
-                        j, otp, options[0], options[1]
-                    )
+                code = '.\\files\\else_upscale_engine\\srmd-ncnn-vulkan\\srmd-ncnn-vulkan.exe -i "{}" -o "{}" -n {} -s {}'.format(
+                    j, otp, options[0], options[1]
                 )
                 if options[2]:
                     code += " -x"
@@ -147,7 +145,7 @@ def main(engine, file, file_path, open_button, *options):
                 elif engine == "waifu2x-converter":
                     code = "cd ./files/else_upscale_engine/waifu2x-converter\n"
                     code += file_path2abs("./files/else_upscale_engine/waifu2x-converter/waifu2x-converter-cpp.exe")
-                    code += " -i {} -o {} --scale-ratio {} --noise-level {} -m {} -j {}".format(
+                    code += ' -i "{}" -o "{}" --scale-ratio {} --noise-level {} -m {} -j {}'.format(
                         file_path2abs(j), file_path2abs(otp), options[0], options[1], options[2], options[3]
                     )
 
