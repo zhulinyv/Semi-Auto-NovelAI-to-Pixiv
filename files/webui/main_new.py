@@ -69,6 +69,8 @@ def main():
         return_wildcard_tag,
         stop_generate,
         tk_asksavefile_asy,
+        uc_preset_dropdown,
+        uc_preset_value,
         update_image_size,
         update_name_to_dropdown_list,
         update_t2i_nsf_dropdown_list,
@@ -2776,7 +2778,9 @@ def main():
                     with gr.Row():
                         quality_toggle = gr.Checkbox(value=env.quality_toggle, label="Add Quilaty Tags")
                         uc_preset = gr.Dropdown(
-                            ["Heavy", "Light", "Human Focus", "None"], label="Undesired Content Preset"
+                            value=uc_preset_value,
+                            choices=uc_preset_dropdown,
+                            label="Undesired Content Preset",
                         )
                     times_for_scripts = gr.Slider(
                         0, 9999, env.times_for_scripts, step=1, label="独立脚本生成图片次数(0 为无限生成)"
@@ -2891,7 +2895,9 @@ def main():
             with gr.Tab("WebUI"):
                 with gr.Row():
                     share = gr.Checkbox(env.share, label=webui_language["setting"]["description"]["share"])
-                    new_interface = gr.Checkbox(env.new_interface, label="使用新文生图界面(修改此项保存后需关闭脚本手动重启)")
+                    new_interface = gr.Checkbox(
+                        env.new_interface, label="使用新文生图界面(修改此项保存后需关闭脚本手动重启)"
+                    )
                 height = gr.Slider(
                     300, 1200, env.height, step=10, label=webui_language["setting"]["description"]["height"]
                 )

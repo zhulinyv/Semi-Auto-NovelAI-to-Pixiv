@@ -1,3 +1,6 @@
+from utils.env import env
+
+
 def modify_env(**kwargs: dict):
     keys = list(kwargs.keys())
     for target_key in keys:
@@ -84,7 +87,12 @@ def webui(
         img_size = -1
     else:
         img_size = [int((img_size.split("x"))[0]), int((img_size.split("x"))[1])]
-    uc_preset_data = {"Heavy": 0, "Light": 1, "Human Focus": 2, "None": 3}
+    if env.model == "nai-diffusion-4-5-full":
+        uc_preset_data = {"Heavy": 0, "Light": 1, "Furry Focus": 2, "Human Focus": 3, "None": 4}
+    elif env.model in ["nai-diffusion-4-5-curated", "nai-diffusion-3"]:
+        uc_preset_data = {"Heavy": 0, "Light": 1, "Human Focus": 2, "None": 3}
+    else:
+        uc_preset_data = {"Heavy": 0, "Light": 1, "None": 2}
     uc_preset = uc_preset_data[uc_preset]
     otp_info = modify_env(
         token=f'"{token}"'.replace("\n", ""),

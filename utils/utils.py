@@ -25,6 +25,7 @@ import ujson as json
 import yaml
 from PIL import Image
 
+from src.setting_update import modify_env
 from utils.env import env
 from utils.jsondata import headers
 from utils.prepare import logger
@@ -36,10 +37,8 @@ def return_skip_cfg_above_sigma(variety):
             value = 19.343056794463642
         elif "nai-diffusion-4-5" not in env.model:
             value = 19
-        elif env.model == "nai-diffusion-4-5-curated":
+        elif "nai-diffusion-4-5" in env.model:
             value = 58
-        elif env.model == "nai-diffusion-4-5-full":
-            value = 61.7530670942469
     else:
         value = None
     return value
@@ -127,6 +126,24 @@ else:
 if env.proxy != "xxx:xxx":
     os.environ["http_proxy"] = env.proxy
     os.environ["https_proxy"] = env.proxy
+
+
+uc_preset_dropdown = ["Heavy", "Light", "Furry Focus", "Human Focus", "None"]
+if env.model == "nai-diffusion-4-5-full":
+    pass
+elif env.model in ["nai-diffusion-4-5-curated", "nai-diffusion-3"]:
+    uc_preset_dropdown.remove("Furry Focus")
+else:
+    uc_preset_dropdown.remove("Furry Focus")
+    uc_preset_dropdown.remove("Human Focus")
+try:
+    uc_preset_value = uc_preset_dropdown[env.uc_preset]
+except IndexError:
+    uc_preset_value = "None"
+
+if env.uc_preset > len(uc_preset_dropdown) - 1:
+    uc_preset = len(uc_preset_dropdown) - 1
+    modify_env(uc_preset=uc_preset)
 
 
 def format_str(str_: str):
