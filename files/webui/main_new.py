@@ -198,16 +198,6 @@ def main():
                         # --- 【区域 5】: 使用带 ID 的 Column 包装 Tabs 以实现滚动 <<< 关键修改
                         with gr.Column(elem_id="character-wildcards-container"):
                             with gr.Tabs():  # 这里的 Tabs 不再需要 height 参数
-                                with gr.TabItem("Character"):
-                                    text2image_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
-                                    gr.Markdown("<hr>")
-                                    text2image_components_list = [character_compents(num) for num in range(1, 7)]
-                                    text2image_new_components_list = [
-                                        component
-                                        for components in text2image_components_list
-                                        for component in components
-                                    ]
-
                                 with gr.TabItem("Wildcards"):
                                     with gr.Row():
                                         text2image_wildcard_file = gr.Dropdown(
@@ -236,6 +226,16 @@ def main():
                                         inputs=[text2image_wildcard_file, text2image_wildcard_name],
                                         outputs=text2image_wildcard_tag,
                                     )
+
+                                with gr.TabItem("Character", visible=True if "nai-diffusion-4" in env.model else False):
+                                    text2image_ai_choice = gr.Checkbox(True, label="AI 选择位置(AI's choice)")
+                                    gr.Markdown("<hr>")
+                                    text2image_components_list = [character_compents(num) for num in range(1, 7)]
+                                    text2image_new_components_list = [
+                                        component
+                                        for components in text2image_components_list
+                                        for component in components
+                                    ]
 
                         with gr.Tab("生成参数 (Parameters)"):
                             with gr.Column():
