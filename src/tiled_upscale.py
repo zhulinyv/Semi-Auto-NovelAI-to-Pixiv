@@ -84,6 +84,7 @@ def tile_upscale(image, img_path, positive, negative, strength, engine):
                     env.variety,
                     env.decrisp,
                     str(seed),
+                    1,
                     True,
                     False,
                     "",

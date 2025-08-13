@@ -70,8 +70,8 @@ def t2i_by_hand(
         if times != 1:
             logger.info(f"正在生成第 {i+1} 张图片...")
             sleep_for_cool(env.t2i_cool_time - 3, env.t2i_cool_time + 3)
-        json_for_t2i["input"] = positive
 
+        json_for_t2i["input"] = positive
         json_for_t2i["parameters"]["width"] = return_x64(int(text2image_width))
         json_for_t2i["parameters"]["height"] = return_x64(int(text2image_height))
         json_for_t2i["parameters"]["scale"] = scale
@@ -192,7 +192,6 @@ def t2i_by_hand(
         if times <= 10:
             revert_img_info(imgs_list[0], "./output/t2i/grids/{}.png".format(time_))
             return ["./output/t2i/grids/{}.png".format(time_)] + _imgs_list
-        # except Image.DecompressionBombError:
         else:
             logger.warning("图片过大, 进行压缩...")
             cv2.imwrite(

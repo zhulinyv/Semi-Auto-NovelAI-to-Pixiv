@@ -946,9 +946,11 @@ def main():
                                     label=webui_language["t2i"]["negative"],
                                 )
                                 auto_complete(image2image_negative_input)
-                            image2image_generate_button = gr.Button(
-                                value=webui_language["t2i"]["generate_button"], scale=1
-                            )
+                            with gr.Column():
+                                image2image_generate_button = gr.Button(
+                                    value=webui_language["t2i"]["generate_button"], scale=1
+                                )
+                                image2image_times = gr.Slider(1, 999, 1, step=1, label="生成数量")
                     with gr.Tab("生成参数"):
                         with gr.Row():
                             image2image_input_path = gr.Textbox(
@@ -961,7 +963,7 @@ def main():
                             image2image_input_image = gr.Image(type="pil")
                             with gr.Column():
                                 image2image_output_information = gr.Textbox(label=webui_language["i2i"]["output_info"])
-                                image2image_output_image = gr.Image()
+                                image2image_output_image = gr.Gallery(preview=True, label="Image")
                         with gr.Column():
                             with gr.Row():
                                 image2image_resolution = gr.Dropdown(
@@ -1113,6 +1115,7 @@ def main():
                             image2image_variety,
                             image2image_decrisp,
                             image2image_seed,
+                            image2image_times,
                         ]
                         + [image2image_ai_choice]
                         + image2image_new_components_list,

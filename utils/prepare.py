@@ -5,7 +5,7 @@ from urllib.request import getproxies
 
 from loguru import logger
 
-VERSION = "3.15.3"
+VERSION = "3.16.0"
 
 
 format_ = (
@@ -36,6 +36,7 @@ need_dir_list = [
     "./output/vibe",
     "./output/vibe/grids",
     "./output/i2i",
+    "./output/i2i/grids",
     "./output/enhance",
     "./output/inpaint",
     "./output/inpaint/img",

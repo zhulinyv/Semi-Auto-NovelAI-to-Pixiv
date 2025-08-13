@@ -23,7 +23,7 @@
     "i2i": {
         "tab": "Img2Img",
         "input_path": "Batch Processing Path (Effective only on the computer where this program runs)",
-        "open_button": "Enable Batch Processing",
+        "open_button": "Enable Path Batch Processing",
         "output_info": "Output Information",
         "strength": "Redraw Strength",
         "noise": "Add noise"

@@ -120,6 +120,12 @@ def m2m(
                         variety,
                         decrisp,
                         seed,
+                        1,
+                        True,
+                        False,
+                        "",
+                        "",
+                        "A1",
                     )
                     shutil.move(saved_path, Path(frames_m2m_path) / file_path2name(frame))
                     break

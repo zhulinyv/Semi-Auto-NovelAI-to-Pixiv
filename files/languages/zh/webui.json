@@ -23,7 +23,7 @@
     "i2i": {
         "tab": "图生图",
         "input_path": "批量处理路径(仅在本程序运行的电脑生效)",
-        "open_button": "是否启用批处理",
+        "open_button": "是否启用路径批处理",
         "output_info": "输出信息",
         "strength": "重绘幅度",
         "noise": "添加噪声"
