@@ -132,7 +132,7 @@ def main(engine, file, file_path, open_button, *options):
             else:
                 if engine == "waifu2x-caffe":
                     code = file_path2abs("./files/else_upscale_engine/waifu2x-caffe/waifu2x-caffe-cui.exe")
-                    code += " -i {} -o {} -m {} -s {} -n {}".format(
+                    code += ' -i "{}" -o "{}" -m {} -s {} -n {}'.format(
                         file_path2abs(j), file_path2abs(otp), options[0], options[1], options[2]
                     )
                     if options[3] != "gpu":
