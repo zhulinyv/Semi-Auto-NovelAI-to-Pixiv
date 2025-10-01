@@ -18,6 +18,7 @@ else:
 
 try:
     import main  # noqa
+
     from files.SANP_DOCS import launch  # noqa
     from src import *  # noqa
     from utils import *  # noqa
