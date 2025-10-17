@@ -4,6 +4,8 @@
 
 <img decoding="async" align=right src="https://i.postimg.cc/0jSHMMJm/kb.png" width="35%">
 
+**经过一段长时间的更新和维护, SANP 的功能逐渐完善, 但面对用户日益增长的功能需求, 目前的代码并不方便更新和维护, 所以准备在未来一段时间中进行重构, 所以 SANP 可能会将仓库归档, 重构的项目将以 [ANR(Auto-NovelAI-Refactor)](https://github.com/zhulinyv/Auto-NovelAI-Refactor) 命名, 感谢大家一直以来的喜欢与支持！❤️❤️❤️**
+
 ## 💬 介绍
 
 **English document: [README_EN.md](https://github.com/zhulinyv/Semi-Auto-NovelAI-to-Pixiv/blob/main/README_EN.md)**
